@@ -3,58 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Family Reunion 2026</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        header, nav, section, footer { padding: 20px; }
-    </style>
+    <title>Sazon 2027 - Grand Family Reunion</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Welcome to the Family Reunion 2026!</h1>
-        <img src="banner.jpg" alt="Family Reunion Banner" />
-    </header>
-    
-    <nav>
-        <ul>
-            <li><a href="#event-details">Event Details</a></li>
-            <li><a href="#registration">Register</a></li>
-            <li><a href="#admin-dashboard">Admin Dashboard</a></li>
-        </ul>
-    </nav>
-    
-    <section id="event-details">
-        <h2>Event Details</h2>
-        <p>Date: April 29, 2026</p>
-        <p>Location: Family Park</p>
-    </section>
-    
-    <section id="registration">
-        <h2>Registration Form</h2>
-        <form>
-            <input type="text" placeholder="Your Name" required />
-            <input type="email" placeholder="Your Email" required />
-            <input type="submit" value="Register" />
-        </form>
-        <div id="qrcode"></div>
-    </section>
-    
-    <section id="admin-dashboard">
-        <h2>Admin Dashboard</h2>
-        <p>Admin functionality will be added later.</p>
-    </section>
-    
-    <audio controls>
-        <source src="jingle.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-    
-    <script>
-        document.getElementById('qrcode').innerText = "QR Code Functionality TBD";
-    </script>
-    
-    <footer>
-        <p>&copy; 2026 Family Reunion. All Rights Reserved.</p>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loader"></div>
+        <p>Welcome to Sazon 2027...</p>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header with Banner -->
+        <div class="header">
+            <div class="banner-container">
+                <img src="images/banner.jpg" alt="Sazon 2027" class="banner" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%221200%22 height=%22300%22%3E%3Crect fill=%22%230066cc%22 width=%221200%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22white%22 font-size=%2224%22%3ESazon 2027%3C/text%3E%3C/svg%3E'">
+                <div class="banner-overlay">
+                    <h1>🏝️ SAZON 2027 🏝️</h1>
+                    <p class="tagline">1st Edition Grand Family Reunion</p>
+                    <p class="tagline">"Gikan sa Gamut, Tubtob sa Langit"</p>
+                    <p class="tagline">From the Roots, Towards the Sky</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="navbar">
+            <ul>
+                <li><a href="#home">🏠 Home</a></li>
+                <li><a href="#event-details">📅 Event Details</a></li>
+                <li><a href="#attend">✍️ Register</a></li>
+                <li><a href="#share">📤 Share</a></li>
+            </ul>
+        </nav>
+
+        <!-- Home Section -->
+        <section id="home" class="section">
+            <div class="content-box">
+                <img src="images/logo.png" alt="Sazon 2027 Logo" class="logo" onerror="this.style.display='none'">
+                <h2>Welcome to Sazon 2027</h2>
+                <p class="intro-text">🎉 Join us for the 1st Edition Grand Family Reunion!</p>
+                <p>We are excited to welcome you to celebrate with us. This historic event brings together our Ilonggo family to strengthen bonds and create lasting memories.</p>
+                <p><strong>"Gikan sa Gamut, Tubtob sa Langit" - From the Roots, Towards the Sky</strong></p>
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn btn-secondary" onclick="playJingle()" title="Click to play our official jingle">🎵 Play Jingle</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Event Details Section -->
+        <section id="event-details" class="section">
+            <div class="content-box">
+                <h2>📅 Event Details</h2>
+                <div class="event-info">
+                    <div class="info-item">
+                        <div class="icon">📆</div>
+                        <div>
+                            <h3>Dates</h3>
+                            <p><strong>July 22-23, 2027</strong></p>
+                            <p>Two unforgettable days of celebration</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="icon">📍</div>
+                        <div>
+                            <h3>Venue</h3>
+                            <p><strong>Marzon Resort</strong></p>
+                            <p>Kalibo, Aklan, Philippines</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="icon">🌊</div>
+                        <div>
+                            <h3>Location</h3>
+                            <p>Close to beautiful Boracay</p>
+                            <p>Stunning beach setting</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="icon">👨‍👩‍👧‍👦</div>
+                        <div>
+                            <h3>Family Gathering</h3>
+                            <p>All family members welcome</p>
+                            <p>Celebrate our Ilonggo heritage</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Registration Section -->
+        <section id="attend" class="section">
+            <div class="content-box">
+                <h2>✍️ Register Your Attendance</h2>
+                <p style="text-align: center; margin-bottom: 30px;">We would love to have you at Sazon 2027! Fill out the form to register. Your registration will be reviewed for approval.</p>
+                
+                <form id="attendanceForm" class="form" onsubmit="submitAttendanceRequest(event)">
+                    <input type="text" id="attendeeName" placeholder="Full Name" required>
+                    <input type="email" id="attendeeEmail" placeholder="Email Address" required>
+                    <input type="tel" id="attendeeContact" placeholder="Contact Number" required>
+                    <select id="familyBranch" required>
+                        <option value="">Select Your Family Branch</option>
+                        <option value="Main Family">Main Family</option>
+                        <option value="Northern Branch">Northern Branch</option>
+                        <option value="Southern Branch">Southern Branch</option>
+                        <option value="Eastern Branch">Eastern Branch</option>
+                        <option value="Western Branch">Western Branch</option>
+                        <option value="Other/Extended">Other/Extended Family</option>
+                    </select>
+                    <input type="number" id="numGuests" placeholder="Number of Additional Guests" min="0" value="0">
+                    <textarea id="attendeeMessage" placeholder="Any special requests or messages?" rows="4"></textarea>
+                    <button type="submit" class="btn btn-primary">Submit Registration Request</button>
+                </form>
+                
+                <div id="pendingNotice" class="pending-notice" style="display: none;">
+                    ✅ <strong>Thank you!</strong> Your attendance request has been submitted and is pending approval.
+                </div>
+            </div>
+        </section>
+
+        <!-- Share Section -->
+        <section id="share" class="section">
+            <div class="content-box">
+                <h2>📤 Share & Invite</h2>
+                <p style="text-align: center; margin-bottom: 30px;">Help us spread the word! Share this website with your family and friends.</p>
+                
+                <div style="text-align: center;">
+                    <button class="btn btn-primary" onclick="shareWebsite()">📤 Share Website</button>
+                    <button class="btn btn-secondary" onclick="downloadQRCode()">⬇️ Download QR Code</button>
+                </div>
+                
+                <h3 style="text-align: center; margin-top: 30px; color: #0066cc;">QR Code</h3>
+                <p style="text-align: center; font-size: 14px; color: #999;">Scan with your phone to access this website</p>
+                <div class="qrcode-container">
+                    <div id="qrcodeContainer"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Section -->
+        <section class="section" style="margin-top: 60px;">
+            <div class="content-box">
+                <div style="text-align: center;">
+                    <button class="btn btn-secondary" onclick="toggleAdminPanel()">⚙️ Admin Access</button>
+                </div>
+                
+                <div id="adminPanel" style="display: none; margin-top: 30px;">
+                    <!-- Admin Login -->
+                    <div id="adminLoginForm" style="background: #fff3cd; padding: 20px; border-radius: 8px; text-align: center;">
+                        <h3>🔐 Admin Login</h3>
+                        <p style="margin: 15px 0;">Enter password to access the admin dashboard:</p>
+                        <form onsubmit="adminLogin(event)" style="display: flex; gap: 10px; justify-content: center; align-items: center; flex-wrap: wrap;">
+                            <input type="password" id="adminPassword" placeholder="Enter Admin Password" required style="padding: 10px; border: 2px solid #0066cc; border-radius: 5px;">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </form>
+                    </div>
+                    
+                    <!-- Admin Dashboard -->
+                    <div id="adminDashboard" style="display: none; margin-top: 20px;">
+                        <div style="background: #28a745; color: white; padding: 15px; border-radius: 5px; text-align: right;">
+                            <button class="btn" style="background: white; color: #28a745; padding: 8px 15px; cursor: pointer;" onclick="adminLogout()">Logout</button>
+                        </div>
+                        
+                        <h3 style="margin-top: 20px; color: #0066cc;">📋 Pending Attendance Requests</h3>
+                        <div id="pendingRequestsList" style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                            Loading...
+                        </div>
+                        
+                        <h3 style="color: #0066cc;">✅ Approved Attendees</h3>
+                        <div id="approvedAttendeesList" style="background: #f8f9fa; padding: 15px; border-radius: 5px;">
+                            Loading...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p><strong>Sazon 2027 - Grand Family Reunion</strong></p>
+        <p>"Gikan sa Gamut, Tubtob sa Langit" - From the Roots, Towards the Sky</p>
+        <p>July 22-23, 2027 • Marzon Resort, Kalibo, Aklan</p>
+        <p style="margin-top: 15px; font-size: 12px;">Developer: erishmacadagumcpu | For Approved Attendees Only</p>
     </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
 </body>
 </html>
