@@ -9,14 +9,14 @@
 window.addEventListener('load', () => \{\
     setTimeout(() => \{\
         const loadingScreen = document.querySelector('.loading-screen');\
-        if (loadingScreen) \{\
+        if (loadingScreen) \{\const ADMIN_PASSWORD = 'SAZON2027';
             loadingScreen.style.display = 'none';\
         \}\
     \}, 2000);\
 \});\
 \
 // Admin Password - CHANGE THIS!\
-const ADMIN_PASSWORD = 'SAZON2027';\
+const ADMIN_PASSWORD = 'SAZON2027';\const ADMIN_PASSWORD = 'MyFamilyReunion2027!Sazon';
 \
 // Generate QR Code\
 function generateQRCode() \{\
