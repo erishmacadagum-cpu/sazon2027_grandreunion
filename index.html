@@ -4,22 +4,370 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sazon 2027 - Grand Family Reunion</title>
-    <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: linear-gradient(135deg, #e6f2ff 0%, #f0f8ff 100%);
+            min-height: 100vh;
+        }
+
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0066cc 0%, #003d99 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loader {
+            border: 4px solid #e6f2ff;
+            border-top: 4px solid #ffd700;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-screen p {
+            color: white;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            position: relative;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+        }
+
+        .banner-container {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0066cc 0%, #003d99 100%);
+        }
+
+        .banner {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 61, 153, 0.6);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .banner-overlay h1 {
+            font-size: 48px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 24px;
+            font-style: italic;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, #0066cc 0%, #0099ff 100%);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 102, 204, 0.3);
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .navbar a:hover {
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        .section {
+            margin-bottom: 40px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-box {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 102, 204, 0.15);
+            border-top: 4px solid #0066cc;
+        }
+
+        section h2 {
+            color: #0066cc;
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: #ffd700;
+        }
+
+        section h3 {
+            color: #0099ff;
+            margin-bottom: 15px;
+        }
+
+        section p {
+            color: #666666;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .logo {
+            max-width: 150px;
+            height: auto;
+            display: block;
+            margin: 0 auto 20px;
+            border-radius: 10px;
+        }
+
+        .intro-text {
+            font-size: 18px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .event-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .info-item {
+            padding: 20px;
+            background: #e6f2ff;
+            border-radius: 8px;
+            border-left: 4px solid #0066cc;
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 102, 204, 0.2);
+        }
+
+        .info-item .icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .info-item h3 {
+            color: #0066cc;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin: 10px 5px;
+        }
+
+        .btn-primary {
+            background: #0066cc;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #003d99;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 102, 204, 0.3);
+        }
+
+        .btn-secondary {
+            background: #0099ff;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #0066cc;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .form input,
+        .form textarea,
+        .form select {
+            padding: 12px;
+            border: 2px solid #e6f2ff;
+            border-radius: 5px;
+            font-size: 16px;
+            font-family: inherit;
+        }
+
+        .form input:focus,
+        .form textarea:focus,
+        .form select:focus {
+            outline: none;
+            border-color: #0066cc;
+            box-shadow: 0 0 10px rgba(0, 102, 204, 0.2);
+        }
+
+        .pending-notice {
+            padding: 15px;
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            border-radius: 5px;
+            color: #856404;
+            margin-top: 20px;
+        }
+
+        .qrcode-container {
+            display: flex;
+            justify-content: center;
+            padding: 30px;
+            background: #e6f2ff;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .footer {
+            background: linear-gradient(90deg, #0066cc 0%, #003d99 100%);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .footer p {
+            margin: 5px 0;
+        }
+
+        @media (max-width: 768px) {
+            .banner-overlay h1 {
+                font-size: 32px;
+            }
+            .content-box {
+                padding: 20px;
+            }
+            .event-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Loading Screen -->
     <div class="loading-screen">
         <div class="loader"></div>
         <p>Welcome to Sazon 2027...</p>
     </div>
 
-    <!-- Main Container -->
     <div class="container">
-        <!-- Header with Banner -->
         <div class="header">
             <div class="banner-container">
-                <img src="images/banner.jpg" alt="Sazon 2027" class="banner" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%221200%22 height=%22300%22%3E%3Crect fill=%22%230066cc%22 width=%221200%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22white%22 font-size=%2224%22%3ESazon 2027%3C/text%3E%3C/svg%3E'">
                 <div class="banner-overlay">
                     <h1>🏝️ SAZON 2027 🏝️</h1>
                     <p class="tagline">1st Edition Grand Family Reunion</p>
@@ -29,7 +377,6 @@
             </div>
         </div>
 
-        <!-- Navigation -->
         <nav class="navbar">
             <ul>
                 <li><a href="#home">🏠 Home</a></li>
@@ -39,7 +386,6 @@
             </ul>
         </nav>
 
-        <!-- Home Section -->
         <section id="home" class="section">
             <div class="content-box">
                 <img src="images/logo.png" alt="Sazon 2027 Logo" class="logo" onerror="this.style.display='none'">
@@ -48,57 +394,41 @@
                 <p>We are excited to welcome you to celebrate with us. This historic event brings together our Ilonggo family to strengthen bonds and create lasting memories.</p>
                 <p><strong>"Gikan sa Gamut, Tubtob sa Langit" - From the Roots, Towards the Sky</strong></p>
                 <div style="text-align: center; margin-top: 30px;">
-                    <button class="btn btn-secondary" onclick="playJingle()" title="Click to play our official jingle">🎵 Play Jingle</button>
+                    <button class="btn btn-secondary" onclick="playJingle()">🎵 Play Jingle</button>
                 </div>
             </div>
         </section>
 
-        <!-- Event Details Section -->
         <section id="event-details" class="section">
             <div class="content-box">
                 <h2>📅 Event Details</h2>
                 <div class="event-info">
                     <div class="info-item">
                         <div class="icon">📆</div>
-                        <div>
-                            <h3>Dates</h3>
-                            <p><strong>July 22-23, 2027</strong></p>
-                            <p>Two unforgettable days of celebration</p>
-                        </div>
+                        <h3>Dates</h3>
+                        <p><strong>July 22-23, 2027</strong></p>
+                        <p>Two unforgettable days of celebration</p>
                     </div>
                     <div class="info-item">
                         <div class="icon">📍</div>
-                        <div>
-                            <h3>Venue</h3>
-                            <p><strong>Marzon Resort</strong></p>
-                            <p>Kalibo, Aklan, Philippines</p>
-                        </div>
+                        <h3>Venue</h3>
+                        <p><strong>Marzon Resort</strong></p>
+                        <p>Kalibo, Aklan, Philippines</p>
                     </div>
                     <div class="info-item">
                         <div class="icon">🌊</div>
-                        <div>
-                            <h3>Location</h3>
-                            <p>Close to beautiful Boracay</p>
-                            <p>Stunning beach setting</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="icon">👨‍👩‍👧‍👦</div>
-                        <div>
-                            <h3>Family Gathering</h3>
-                            <p>All family members welcome</p>
-                            <p>Celebrate our Ilonggo heritage</p>
-                        </div>
+                        <h3>Location</h3>
+                        <p>Close to beautiful Boracay</p>
+                        <p>Stunning beach setting</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Registration Section -->
         <section id="attend" class="section">
             <div class="content-box">
                 <h2>✍️ Register Your Attendance</h2>
-                <p style="text-align: center; margin-bottom: 30px;">We would love to have you at Sazon 2027! Fill out the form to register. Your registration will be reviewed for approval.</p>
+                <p style="text-align: center; margin-bottom: 30px;">We would love to have you at Sazon 2027! Fill out the form to register.</p>
                 
                 <form id="attendanceForm" class="form" onsubmit="submitAttendanceRequest(event)">
                     <input type="text" id="attendeeName" placeholder="Full Name" required>
@@ -111,39 +441,33 @@
                         <option value="Southern Branch">Southern Branch</option>
                         <option value="Eastern Branch">Eastern Branch</option>
                         <option value="Western Branch">Western Branch</option>
-                        <option value="Other/Extended">Other/Extended Family</option>
                     </select>
                     <input type="number" id="numGuests" placeholder="Number of Additional Guests" min="0" value="0">
-                    <textarea id="attendeeMessage" placeholder="Any special requests or messages?" rows="4"></textarea>
-                    <button type="submit" class="btn btn-primary">Submit Registration Request</button>
+                    <textarea id="attendeeMessage" placeholder="Any special requests?" rows="4"></textarea>
+                    <button type="submit" class="btn btn-primary">Submit Registration</button>
                 </form>
                 
                 <div id="pendingNotice" class="pending-notice" style="display: none;">
-                    ✅ <strong>Thank you!</strong> Your attendance request has been submitted and is pending approval.
+                    ✅ Thank you! Your registration is pending approval.
                 </div>
             </div>
         </section>
 
-        <!-- Share Section -->
         <section id="share" class="section">
             <div class="content-box">
                 <h2>📤 Share & Invite</h2>
-                <p style="text-align: center; margin-bottom: 30px;">Help us spread the word! Share this website with your family and friends.</p>
-                
-                <div style="text-align: center;">
+                <div style="text-align: center; margin-bottom: 30px;">
                     <button class="btn btn-primary" onclick="shareWebsite()">📤 Share Website</button>
                     <button class="btn btn-secondary" onclick="downloadQRCode()">⬇️ Download QR Code</button>
                 </div>
                 
-                <h3 style="text-align: center; margin-top: 30px; color: #0066cc;">QR Code</h3>
-                <p style="text-align: center; font-size: 14px; color: #999;">Scan with your phone to access this website</p>
+                <h3 style="text-align: center; color: #0066cc; margin-top: 30px;">QR Code</h3>
                 <div class="qrcode-container">
                     <div id="qrcodeContainer"></div>
                 </div>
             </div>
         </section>
 
-        <!-- Admin Section -->
         <section class="section" style="margin-top: 60px;">
             <div class="content-box">
                 <div style="text-align: center;">
@@ -151,46 +475,33 @@
                 </div>
                 
                 <div id="adminPanel" style="display: none; margin-top: 30px;">
-                    <!-- Admin Login -->
                     <div id="adminLoginForm" style="background: #fff3cd; padding: 20px; border-radius: 8px; text-align: center;">
                         <h3>🔐 Admin Login</h3>
-                        <p style="margin: 15px 0;">Enter password to access the admin dashboard:</p>
-                        <form onsubmit="adminLogin(event)" style="display: flex; gap: 10px; justify-content: center; align-items: center; flex-wrap: wrap;">
-                            <input type="password" id="adminPassword" placeholder="Enter Admin Password" required style="padding: 10px; border: 2px solid #0066cc; border-radius: 5px;">
+                        <form onsubmit="adminLogin(event)" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                            <input type="password" id="adminPassword" placeholder="Enter Password" required style="padding: 10px; border: 2px solid #0066cc; border-radius: 5px;">
                             <button type="submit" class="btn btn-primary">Login</button>
                         </form>
                     </div>
                     
-                    <!-- Admin Dashboard -->
                     <div id="adminDashboard" style="display: none; margin-top: 20px;">
-                        <div style="background: #28a745; color: white; padding: 15px; border-radius: 5px; text-align: right;">
-                            <button class="btn" style="background: white; color: #28a745; padding: 8px 15px; cursor: pointer;" onclick="adminLogout()">Logout</button>
-                        </div>
-                        
-                        <h3 style="margin-top: 20px; color: #0066cc;">📋 Pending Attendance Requests</h3>
-                        <div id="pendingRequestsList" style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-                            Loading...
-                        </div>
+                        <button class="btn btn-danger" onclick="adminLogout()" style="float: right;">Logout</button>
+                        <h3 style="color: #0066cc;">📋 Pending Requests</h3>
+                        <div id="pendingRequestsList" style="background: #f8f9fa; padding: 15px; margin-bottom: 20px;"></div>
                         
                         <h3 style="color: #0066cc;">✅ Approved Attendees</h3>
-                        <div id="approvedAttendeesList" style="background: #f8f9fa; padding: 15px; border-radius: 5px;">
-                            Loading...
-                        </div>
+                        <div id="approvedAttendeesList" style="background: #f8f9fa; padding: 15px;"></div>
                     </div>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- Footer -->
     <footer class="footer">
         <p><strong>Sazon 2027 - Grand Family Reunion</strong></p>
         <p>"Gikan sa Gamut, Tubtob sa Langit" - From the Roots, Towards the Sky</p>
         <p>July 22-23, 2027 • Marzon Resort, Kalibo, Aklan</p>
-        <p style="margin-top: 15px; font-size: 12px;">Developer: erishmacadagumcpu | For Approved Attendees Only</p>
     </footer>
 
-    <!-- Scripts -->
     <script src="script.js"></script>
 </body>
 </html>
