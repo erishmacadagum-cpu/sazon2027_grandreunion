@@ -1,5 +1,5 @@
 // Admin Password
-const ADMIN_PASSWORD = 'SAZON2027';
+const ADMIN_PASSWORD = 'Sazon2027Family!!!';
 
 // Generate QR Code
 function generateQRCode() {
