@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sazon 2027 - Grand Family Reunion</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Sazon 2027 - Official Family Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --luminous-blue: #0047AB; 
@@ -15,77 +15,62 @@
         body {
             margin: 0;
             font-family: 'Montserrat', sans-serif;
-            background-color: #f8fafc;
+            background-color: #ffffff;
             color: #1a202c;
         }
 
-        /* Banner Section - Adjusted to show the TOP of your artwork */
+        /* Banner Section - The Art is the Hero */
         .header {
             position: relative;
-            height: 90vh; /* Slightly taller to show more art */
-            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.4)), 
-                        url('images/banner.jpg') top center/cover no-repeat; /* "top center" fix */
+            height: 95vh;
+            background: url('images/banner.jpg') top center/cover no-repeat;
             display: flex;
             flex-direction: column;
-            justify-content: center; 
+            justify-content: space-between; /* Pushes content to top and bottom */
+            border-bottom: 10px solid var(--luminous-blue);
+        }
+
+        /* Elegant Top Navigation */
+        .top-nav {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            text-align: center;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), transparent);
+        }
+
+        .nav-logo {
+            max-width: 80px;
+            background: white;
+            padding: 8px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-text {
             color: white;
-            border-bottom: 8px solid var(--luminous-blue);
-        }
-
-        /* Sophisticated Typography */
-        .main-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 10vw, 5.5rem);
-            margin: 0;
-            text-shadow: 4px 4px 15px rgba(0,0,0,0.8);
-            letter-spacing: 2px;
-        }
-
-        .slogan {
-            font-family: 'Montserrat', sans-serif;
-            font-size: clamp(0.9rem, 2.5vw, 1.3rem);
-            font-weight: 300;
-            font-style: italic;
-            letter-spacing: 5px;
-            margin-top: 10px;
             text-transform: uppercase;
-            text-shadow: 2px 2px 10px rgba(0,0,0,1);
+            letter-spacing: 5px;
+            font-weight: 200;
+            font-size: 0.8rem;
         }
 
-        /* Logo Lower Left */
-        .logo-container {
-            position: absolute;
-            bottom: 40px;
-            left: 40px;
-        }
-
-        .logo {
-            max-width: 100px;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 10px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-        }
-
-        /* Countdown Lower Right */
+        /* Sophisticated Timer Box - Bottom Right */
         .timer-container {
-            position: absolute;
-            bottom: 40px;
-            right: 40px;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 20px 30px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            align-self: flex-end;
+            margin: 0 40px 40px 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 20px 35px;
+            border-radius: 2px; /* Sharp edges for a "Gallery" feel */
+            border-left: 4px solid var(--gold);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
         }
 
         #timer {
             display: flex;
-            gap: 20px;
+            gap: 25px;
         }
 
         .timer-unit {
@@ -93,9 +78,6 @@
             flex-direction: column;
             text-align: center;
             color: white;
-            text-transform: uppercase;
-            font-size: 0.65rem;
-            letter-spacing: 1.5px;
         }
 
         .timer-number {
@@ -103,75 +85,100 @@
             font-weight: 600;
             color: var(--gold);
             line-height: 1;
-            margin-bottom: 5px;
         }
 
-        /* Content Box - Clean & Architectural */
-        .container { max-width: 900px; margin: -60px auto 80px; padding: 0 20px; position: relative; z-index: 5; }
+        .timer-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+
+        /* Content Area */
+        .container { 
+            max-width: 1000px; 
+            margin: -80px auto 100px; 
+            padding: 0 20px; 
+            position: relative; 
+            z-index: 10; 
+        }
 
         .content-box {
             background: white;
-            padding: 60px 40px;
-            border-radius: 4px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+            padding: 70px 50px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.15);
             text-align: center;
-            border-top: 12px solid var(--luminous-blue);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--luminous-blue);
+            margin-bottom: 10px;
+        }
+
+        .date-location {
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #718096;
+            font-size: 0.9rem;
+            margin-bottom: 40px;
         }
 
         .btn-play {
-            background: var(--luminous-blue);
-            color: white;
-            padding: 18px 50px;
-            border: 2px solid var(--luminous-blue);
+            background: transparent;
+            color: var(--luminous-blue);
+            padding: 15px 45px;
+            border: 1px solid var(--luminous-blue);
             text-transform: uppercase;
-            letter-spacing: 3px;
-            font-size: 0.85rem;
+            letter-spacing: 4px;
+            font-size: 0.8rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.4s ease;
-            margin-top: 30px;
+            transition: all 0.5s ease;
         }
 
         .btn-play:hover {
-            background: white;
-            color: var(--luminous-blue);
-            transform: translateY(-2px);
+            background: var(--luminous-blue);
+            color: white;
+            letter-spacing: 6px;
         }
 
-        /* Mobile Adjustments */
-        @media (max-width: 800px) {
-            .logo-container, .timer-container {
-                position: static;
-                margin: 20px auto;
-                display: inline-block;
-            }
-            .header { height: auto; padding: 80px 20px; }
-            #timer { gap: 10px; }
+        /* Mobile Fix */
+        @media (max-width: 768px) {
+            .header { height: 70vh; }
+            .top-nav { padding: 20px; }
+            .timer-container { align-self: center; margin: 0 0 40px 0; }
+            h2 { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h1 class="main-title">SAZON 2027</h1>
-        <p class="slogan">Gikan sa Gamut, Tubtob sa Langit</p>
-
-        <div class="logo-container">
-            <img src="images/logo.png" alt="Sazon Logo" class="logo">
+        <div class="top-nav">
+            <img src="images/logo.png" alt="Sazon Logo" class="nav-logo">
+            <div class="nav-text">July 2027 • Kalibo</div>
         </div>
 
         <div class="timer-container">
-            <div id="timer">Loading...</div>
+            <div id="timer">Loading Countdown...</div>
         </div>
     </div>
 
     <div class="container">
         <div class="content-box">
-            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 10px;">1st Edition Grand Family Reunion</h2>
-            <p style="text-transform: uppercase; letter-spacing: 2px; color: #718096; font-size: 0.9rem;">July 22nd – 23rd, 2027 • Kalibo, Aklan</p>
+            <h2>The Grand Reunion</h2>
+            <p class="date-location">Marzon Hotel & Resort • Aklan, Philippines</p>
             
             <audio id="jingleAudio" src="audio/jingle.mp3"></audio>
-            <button class="btn-play" onclick="toggleJingle()">🎵 Play Family Jingle</button>
+            <button class="btn-play" onclick="toggleJingle()">🎵 Play Theme</button>
+            
+            <p style="margin-top: 50px; font-style: italic; color: #a0aec0; font-weight: 200;">
+                "Gikan sa Gamut, Tubtob sa Langit"
+            </p>
         </div>
     </div>
 
@@ -188,10 +195,10 @@
             const s = Math.floor((diff % (1000 * 60)) / 1000);
             
             document.getElementById("timer").innerHTML = `
-                <div class="timer-unit"><span class="timer-number">${d}</span>days</div>
-                <div class="timer-unit"><span class="timer-number">${h}</span>hrs</div>
-                <div class="timer-unit"><span class="timer-number">${m}</span>mins</div>
-                <div class="timer-unit"><span class="timer-number">${s}</span>secs</div>
+                <div class="timer-unit"><span class="timer-number">${d}</span><span class="timer-label">Days</span></div>
+                <div class="timer-unit"><span class="timer-number">${h}</span><span class="timer-label">Hrs</span></div>
+                <div class="timer-unit"><span class="timer-number">${m}</span><span class="timer-label">Mins</span></div>
+                <div class="timer-unit"><span class="timer-number">${s}</span><span class="timer-label">Secs</span></div>
             `;
         }
 
@@ -202,10 +209,10 @@
             const audio = document.getElementById("jingleAudio");
             const btn = event.currentTarget;
             if (audio.paused) {
-                audio.play().then(() => { btn.innerHTML = "⏸️ Pause Jingle"; });
+                audio.play().then(() => { btn.innerHTML = "⏸️ Pause Theme"; });
             } else {
                 audio.pause();
-                btn.innerHTML = "🎵 Play Family Jingle";
+                btn.innerHTML = "🎵 Play Theme";
             }
         }
     </script>
