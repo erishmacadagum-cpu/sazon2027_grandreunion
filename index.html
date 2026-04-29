@@ -22,7 +22,6 @@
             overflow-x: hidden;
         }
 
-        /* Hero Section */
         .header {
             position: relative;
             height: 90vh;
@@ -119,6 +118,7 @@
             align-items: center;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
+            outline: none;
         }
 
         .hub-btn:hover {
@@ -155,11 +155,9 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             transition: 0.3s;
         }
-        .qr-image:hover { transform: scale(1.05); }
 
         .slogan-footer { font-style: italic; color: #cbd5e0; font-size: 1rem; margin-top: 40px; letter-spacing: 1px; }
 
-        /* Animations */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp { 
             from { opacity: 0; transform: translateY(40px); } 
@@ -172,7 +170,11 @@
         }
     </style>
 </head>
-<body>
+<body onclick="playEntrySound()">
+
+    <audio id="entrySound" src="audio/open.mp3"></audio>
+    <audio id="clickSound" src="audio/click.mp3"></audio>
+    <audio id="jingleAudio" src="audio/jingle.mp3"></audio>
 
     <div class="header">
         <div class="top-nav">
@@ -191,25 +193,24 @@
             <p style="color: var(--luminous-blue); text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem; font-weight: 600;">Marzon Hotel & Resort</p>
 
             <div class="hub-grid">
-                <a href="#" class="hub-btn">
+                <a href="#" class="hub-btn" onclick="playClick()">
                     <span class="icon">📝</span>
                     <span class="text">Register</span>
                 </a>
                 <button class="hub-btn" onclick="toggleJingle()">
                     <span class="icon">🎵</span>
                     <span class="text">Theme Song</span>
-                </button>
-                <a href="https://maps.app.goo.gl/MarzonHotelLink" target="_blank" class="hub-btn">
+                </a>
+                <a href="https://maps.app.goo.gl/vS1U74DkY4U7S1U74" target="_blank" class="hub-btn" onclick="playClick()">
                     <span class="icon">📍</span>
                     <span class="text">Venue Map</span>
                 </a>
-                <a href="#countdown-section" class="hub-btn">
+                <a href="#countdown-section" class="hub-btn" onclick="playClick()">
                     <span class="icon">⏳</span>
                     <span class="text">Countdown</span>
                 </a>
             </div>
 
-            <audio id="jingleAudio" src="audio/jingle.mp3"></audio>
             <p class="slogan-footer">"Gikan sa Gamut, Tubtob sa Langit"</p>
 
             <div class="qr-section">
@@ -224,6 +225,32 @@
     </div>
 
     <script>
+        let hasPlayedEntry = false;
+        function playEntrySound() {
+            if (!hasPlayedEntry) {
+                const entry = document.getElementById('entrySound');
+                entry.volume = 0.5; // Set volume to 50% for a classy feel
+                entry.play().catch(e => console.log("Waiting for user interaction..."));
+                hasPlayedEntry = true;
+            }
+        }
+
+        function playClick() {
+            const click = document.getElementById('clickSound');
+            click.currentTime = 0;
+            click.play();
+        }
+
+        function toggleJingle() {
+            playClick();
+            const audio = document.getElementById("jingleAudio");
+            if (audio.paused) { 
+                audio.play(); 
+            } else { 
+                audio.pause(); 
+            }
+        }
+
         const eventDate = new Date("July 22, 2027 08:00:00").getTime();
         function updateTimer() {
             const now = new Date().getTime();
@@ -241,11 +268,6 @@
         }
         setInterval(updateTimer, 1000);
         updateTimer();
-
-        function toggleJingle() {
-            const audio = document.getElementById("jingleAudio");
-            if (audio.paused) { audio.play(); } else { audio.pause(); }
-        }
     </script>
 </body>
 </html>
