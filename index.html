@@ -7,9 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --luminous-blue: #003380; /* Darkened for better contrast */
-            --gold: #ccac00; /* Darkened gold for readability on white */
-            --text-main: #1a202c;
+            --luminous-blue: #003380; 
+            --gold: #ccac00;
         }
 
         html { scroll-behavior: smooth; }
@@ -18,7 +17,7 @@
             margin: 0;
             font-family: 'Montserrat', sans-serif;
             background-color: #ffffff;
-            color: var(--text-main);
+            color: #000000;
             overflow-x: hidden;
             line-height: 1.6;
         }
@@ -60,7 +59,7 @@
         .timer-container {
             align-self: center;
             margin-bottom: 40px;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.7);
             padding: 20px 30px;
             border-radius: 15px;
         }
@@ -72,7 +71,7 @@
 
         .container { 
             max-width: 900px; 
-            margin: 0 auto 100px; 
+            margin: 0 auto 50px; 
             padding: 0 20px; 
         }
 
@@ -83,13 +82,14 @@
             text-align: center;
             border-radius: 12px;
             margin-top: -60px;
+            position: relative;
         }
 
         h2 {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2.5rem, 8vw, 4rem);
             color: var(--luminous-blue);
-            margin-bottom: 10px;
+            margin: 0 0 10px 0;
         }
 
         .hub-grid {
@@ -109,27 +109,23 @@
             flex-direction: column;
             align-items: center;
             transition: 0.3s;
+            cursor: pointer;
         }
 
         .hub-btn:hover {
             border-color: var(--luminous-blue);
-            background: white;
+            background: #fff;
             transform: translateY(-5px);
         }
 
         .hub-btn .icon { font-size: 2.5rem; margin-bottom: 10px; }
-        .hub-btn .text { 
-            font-size: 0.9rem; 
-            font-weight: 700; 
-            text-transform: uppercase; 
-            color: var(--luminous-blue);
-        }
+        .hub-btn .text { font-size: 0.9rem; font-weight: 700; color: var(--luminous-blue); text-transform: uppercase; }
 
-        /* ACCESSIBLE LYRICS CARD */
+        /* LYRICS - MAXIMUM READABILITY */
         .lyrics-card {
             background: #f1f5f9;
             border-radius: 20px;
-            padding: 50px 30px;
+            padding: 40px 20px;
             margin: 40px 0;
             border: 2px solid var(--luminous-blue);
         }
@@ -137,48 +133,36 @@
         .lyrics-header {
             font-family: 'Playfair Display', serif;
             color: var(--luminous-blue);
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 30px;
-            text-decoration: underline;
-        }
-
-        .verse-label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            font-weight: 700;
-            color: #4a5568;
-            display: block;
-            margin: 25px 0 10px;
-            border-bottom: 1px solid #cbd5e0;
         }
 
         .lyrics-line {
-            font-size: 1.3rem; /* Increased for better visibility */
-            color: #000000; /* Pure black for maximum contrast */
-            margin: 8px 0;
-            font-weight: 500;
+            font-size: 1.4rem; /* Ultra Large for Eyesight */
+            color: #000000;
+            margin: 12px 0;
+            font-weight: 600;
         }
 
         .chorus-box {
             background: white;
-            border: 3px dashed var(--luminous-blue);
-            padding: 25px;
-            margin-top: 40px;
+            border: 4px solid var(--luminous-blue);
+            padding: 30px 15px;
+            margin: 40px 0;
             border-radius: 15px;
         }
 
         .chorus-line {
-            font-weight: 700;
+            font-weight: 800;
             color: var(--luminous-blue);
-            font-size: 1.5rem; /* Larger for the slogan */
+            font-size: 1.6rem;
             margin: 10px 0;
-            line-height: 1.4;
+            line-height: 1.3;
         }
 
         .guide-section {
             text-align: left;
             margin-top: 60px;
-            padding-top: 40px;
         }
 
         .guide-title {
@@ -193,23 +177,26 @@
             background: #ffffff;
             padding: 25px;
             border-radius: 12px;
-            border: 1px solid #e2e8f0;
+            border: 2px solid #e2e8f0;
             margin-bottom: 20px;
-            border-left: 8px solid var(--luminous-blue);
+            border-left: 10px solid var(--luminous-blue);
         }
 
-        .guide-card h4 { margin: 0 0 10px 0; color: #000; font-size: 1.1rem; }
-        .guide-card p { margin: 0; font-size: 1rem; color: #4a5568; }
+        .guide-card h4 { margin: 0 0 5px 0; color: #000; font-size: 1.2rem; }
+        .guide-card p { margin: 0; font-size: 1.1rem; color: #333; }
 
+        /* SLOGAN FOOTER - CANNOT BE MISSED */
         .slogan-footer { 
-            font-weight: 700; 
-            color: var(--luminous-blue); 
-            font-size: 1.4rem; 
+            font-weight: 800; 
+            color: white; 
+            font-size: 1.5rem; 
             margin-top: 60px; 
-            padding: 20px;
-            background: #fff;
-            border: 2px solid var(--luminous-blue);
-            display: inline-block;
+            padding: 30px;
+            background: var(--luminous-blue);
+            border-radius: 10px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
     </style>
@@ -233,7 +220,7 @@
     <div class="container">
         <div class="content-box">
             <h2>Sazon 2027 Hub</h2>
-            <p style="color: var(--luminous-blue); text-transform: uppercase; letter-spacing: 2px; font-weight: 700;">Marzon Hotel & Resort</p>
+            <p style="color: var(--luminous-blue); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 1.1rem;">Marzon Hotel & Resort</p>
 
             <div class="hub-grid">
                 <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" target="_blank" class="hub-btn" onclick="playClick()">
@@ -241,30 +228,72 @@
                     <span class="text">Register</span>
                 </a>
                 
-                <button class="hub-btn" onclick="toggleJingle()">
+                <div class="hub-btn" onclick="toggleJingle()">
                     <span class="icon">🎵</span>
                     <span class="text">Theme Song</span>
-                </button>
+                </div>
 
-                <a href="https://maps.google.com/?cid=17882922861255564933&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ3" target="_blank" class="hub-btn" onclick="playClick()">
+                <a href="https://maps.google.com" target="_blank" class="hub-btn" onclick="playClick()">
                     <span class="icon">📍</span>
                     <span class="text">Venue Map</span>
                 </a>
 
-                <a href="#countdown-section" class="hub-btn" onclick="playClick()">
+                <a href="#timer" class="hub-btn" onclick="playClick()">
                     <span class="icon">⏳</span>
                     <span class="text">Countdown</span>
                 </a>
             </div>
 
             <div class="lyrics-card">
-                <div class="lyrics-header">Sazon Clan Anthem</div>
+                <div class="lyrics-header">Save the Date Teaser</div>
                 
-                <span class="verse-label">Verse 1</span>
                 <p class="lyrics-line">Miles unfolding, ink on the page,</p>
                 <p class="lyrics-line">A story rewritten, turning the age.</p>
                 <p class="lyrics-line">July 2027, the compass aligns,</p>
                 <p class="lyrics-line">Marzon Hotel, Kalibo, where the heritage shines.</p>
 
                 <div class="chorus-box">
-                    <span class
+                    <p class="chorus-line">"Gikan sa gamut, tubtob sa langit,"</p>
+                    <p class="chorus-line">Seasoned with love, let the future ignite.</p>
+                    <p class="chorus-line">Sazon 2027, (Every path) leads us back to the gate.</p>
+                </div>
+
+                <p class="lyrics-line" style="font-weight: 800; margin-top: 30px; color: var(--luminous-blue);">"We are Sazon. See you in Kalibo!"</p>
+            </div>
+
+            <div class="guide-section">
+                <h3 class="guide-title">Explore Aklan</h3>
+                <div class="guide-card">
+                    <h4>🍽️ Ramboy's</h4>
+                    <p>Famous for the best Liempo in town.</p>
+                </div>
+                <div class="guide-card">
+                    <h4>🌿 Bakhawan Ecopark</h4>
+                    <p>A beautiful mangrove forest walk.</p>
+                </div>
+            </div>
+
+            <div class="slogan-footer">
+                Gikan sa Gamut, Tubtob sa Langit
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let hasPlayedEntry = false;
+
+        function playEntrySound() {
+            const entry = document.getElementById('entrySound');
+            if (!hasPlayedEntry) {
+                entry.play().catch(e => console.log("Waiting for interaction"));
+                hasPlayedEntry = true;
+            }
+        }
+
+        function playClick() {
+            const click = document.getElementById('clickSound');
+            click.currentTime = 0;
+            click.play();
+        }
+
+        function toggleJingle
