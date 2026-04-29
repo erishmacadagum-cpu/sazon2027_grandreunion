@@ -8,7 +8,6 @@
     <style>
         :root {
             --luminous-blue: #0047AB; 
-            --champagne-silver: #E5E4E2;
             --gold: #ffd700;
         }
 
@@ -67,12 +66,11 @@
             padding: 20px 40px;
             border-radius: 15px;
             border: 1px solid rgba(255,255,255,0.3);
-            animation: fadeIn 1.5s ease-out;
         }
 
         #timer { display: flex; gap: 25px; }
         .timer-unit { display: flex; flex-direction: column; text-align: center; color: white; }
-        .timer-number { font-size: 2.2rem; font-weight: 600; color: var(--gold); line-height: 1; text-shadow: 0 0 10px rgba(255,215,0,0.3); }
+        .timer-number { font-size: 2.2rem; font-weight: 600; color: var(--gold); line-height: 1; }
         .timer-label { font-size: 0.65rem; text-transform: uppercase; margin-top: 8px; letter-spacing: 1px; }
 
         .container { 
@@ -81,7 +79,6 @@
             padding: 0 20px; 
             position: relative; 
             z-index: 10; 
-            animation: slideUp 1s ease-out;
         }
 
         .content-box {
@@ -118,7 +115,6 @@
             align-items: center;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
-            outline: none;
         }
 
         .hub-btn:hover {
@@ -127,9 +123,7 @@
             box-shadow: 0 15px 35px rgba(0, 71, 171, 0.12);
         }
 
-        .hub-btn .icon { font-size: 2rem; margin-bottom: 15px; filter: grayscale(1); transition: 0.3s; }
-        .hub-btn:hover .icon { filter: grayscale(0); transform: scale(1.2); }
-        
+        .hub-btn .icon { font-size: 2rem; margin-bottom: 15px; transition: 0.3s; }
         .hub-btn .text { 
             font-size: 0.75rem; 
             font-weight: 600; 
@@ -138,57 +132,46 @@
             letter-spacing: 2px; 
         }
 
-        /* NEW LYRICS SECTION */
+        /* UPDATED LYRICS CARD */
         .lyrics-card {
-            background: linear-gradient(145deg, #ffffff, #f1f5f9);
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
             border-radius: 25px;
-            padding: 50px 20px;
+            padding: 40px 20px;
             margin: 40px 0;
             border: 1px solid #e2e8f0;
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
         }
 
         .lyrics-header {
             font-family: 'Playfair Display', serif;
             color: var(--luminous-blue);
-            font-size: 1.6rem;
-            margin-bottom: 30px;
-            letter-spacing: 1px;
-        }
-
-        .verse {
-            margin-bottom: 35px;
-            position: relative;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            font-style: italic;
         }
 
         .verse-label {
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: #a0aec0;
             display: block;
-            margin-bottom: 8px;
+            margin: 20px 0 10px;
         }
 
         .lyrics-line {
             font-size: 1.1rem;
-            line-height: 1.8;
+            line-height: 1.6;
             color: #2d3748;
-            margin: 0;
-            font-weight: 400;
+            margin: 5px 0;
         }
 
-        .chorus {
+        .chorus-line {
             font-weight: 600;
             color: var(--luminous-blue);
-            font-size: 1.25rem;
-            border-top: 1px solid #e2e8f0;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 20px 0;
-            margin: 40px 0;
+            font-size: 1.2rem;
+            margin: 10px 0;
         }
 
-        /* GUIDE SECTION */
         .guide-section {
             text-align: left;
             margin-top: 80px;
@@ -217,24 +200,17 @@
             border-left: 4px solid var(--luminous-blue);
         }
 
-        .guide-card h4 { margin: 0 0 10px 0; color: #2d3748; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; }
+        .guide-card h4 { margin: 0 0 10px 0; color: #2d3748; text-transform: uppercase; font-size: 0.9rem; }
         .guide-card p { margin: 0; font-size: 0.85rem; color: #718096; line-height: 1.6; }
 
         .slogan-footer { font-style: italic; color: #cbd5e0; font-size: 1rem; margin-top: 40px; letter-spacing: 1px; }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { 
-            from { opacity: 0; transform: translateY(40px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
-
         @media (min-width: 1024px) {
-            .header { height: 95vh; }
             .timer-container { align-self: flex-end; margin-right: 80px; }
         }
     </style>
 </head>
-<body onpointerdown="playEntrySound()">
+<body onclick="playEntrySound()">
 
     <audio id="entrySound" src="audio/open.mp3" preload="auto"></audio>
     <audio id="clickSound" src="audio/click.mp3" preload="auto"></audio>
@@ -245,8 +221,7 @@
             <img src="images/logo.png" alt="Sazon Logo" class="nav-logo">
             <div class="nav-text">22-23 JULY 2027<br>KALIBO, AKLAN</div>
         </div>
-
-        <div class="timer-container" id="countdown-section">
+        <div class="timer-container">
             <div id="timer">Loading...</div>
         </div>
     </div>
@@ -267,7 +242,7 @@
                     <span class="text">Theme Song</span>
                 </button>
 
-                <a href="https://maps.google.com/?cid=17882922861255564933&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="hub-btn" onclick="playClick()">
+                <a href="https://www.google.com/maps/search/?api=1&query=Marzon+Hotel+Kalibo" target="_blank" class="hub-btn" onclick="playClick()">
                     <span class="icon">📍</span>
                     <span class="text">Venue Map</span>
                 </a>
@@ -279,15 +254,89 @@
             </div>
 
             <div class="lyrics-card">
-                <div class="lyrics-header">Sazon Clan Anthem</div>
+                <div class="lyrics-header">Save the Date Teaser</div>
                 
-                <div class="verse">
-                    <span class="verse-label">Verse 1 (English & Tagalog)</span>
-                    <p class="lyrics-line">From our roots we grow so strong,</p>
-                    <p class="lyrics-line">Sa pagkakaisa, dito tayo laging magkasama,</p>
-                    <p class="lyrics-line">One family, one heart, where we all belong.</p>
-                </div>
+                <span class="verse-label">Modern Beat (0:00-0:15)</span>
+                <p class="lyrics-line">Miles unfolding, ink on the page,</p>
+                <p class="lyrics-line">A story rewritten, turning the age.</p>
+                <p class="lyrics-line">July 2027, the compass aligns,</p>
+                <p class="lyrics-line">Marzon Hotel, Kalibo, where the heritage shines.</p>
 
-                <div class="verse">
-                    <span class="verse-label">Verse 2 (Cebuano)</span>
-                    <p class="lyrics-line">Mag-uban ta sa kalipay ug gugma,</
+                <span class="verse-label">Chorus - High Energy (0:15-0:25)</span>
+                <p class="chorus-line">"Gikan sa gamut, tubtob sa langit,"</p>
+                <p class="chorus-line">Seasoned with love, let the future ignite.</p>
+                <p class="chorus-line">Sazon 2027, (Every path) leads us back to the gate.</p>
+
+                <span class="verse-label">Outro (0:25-0:30)</span>
+                <p class="lyrics-line">"We are Sazon. See you in Kalibo!"</p>
+            </div>
+
+            <div class="guide-section">
+                <h3 class="guide-title">Explore Aklan</h3>
+                <div class="guide-grid">
+                    <div class="guide-card">
+                        <h4>🍽️ Local Favorites</h4>
+                        <p>Try <b>Ramboy's</b> for legendary Liempo or <b>Peking House</b> for classic Filipino-Chinese dishes.</p>
+                    </div>
+                    <div class="guide-card">
+                        <h4>🌿 Nature & Culture</h4>
+                        <p>Explore the <b>Bakhawan Ecopark</b> mangroves or visit the <b>St. John the Baptist Cathedral</b>.</p>
+                    </div>
+                    <div class="guide-card">
+                        <h4>🏝️ Boracay Day Trip</h4>
+                        <p>Only 1.5 hours away. Use <b>Southwest Tours</b> for a seamless family chartered transfer.</p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="slogan-footer">"Gikan sa Gamut, Tubtob sa Langit"</p>
+        </div>
+    </div>
+
+    <script>
+        let hasPlayedEntry = false;
+        function playEntrySound() {
+            if (!hasPlayedEntry) {
+                const entry = document.getElementById('entrySound');
+                entry.play().catch(e => console.log("Audio blocked by browser."));
+                hasPlayedEntry = true;
+            }
+        }
+
+        function playClick() {
+            const click = document.getElementById('clickSound');
+            click.volume = 0.5;
+            click.currentTime = 0;
+            click.play();
+        }
+
+        function toggleJingle() {
+            const jingle = document.getElementById("jingleAudio");
+            playClick();
+            if (jingle.paused) {
+                jingle.play();
+            } else {
+                jingle.pause();
+            }
+        }
+
+        const eventDate = new Date("July 22, 2027 08:00:00").getTime();
+        function updateTimer() {
+            const now = new Date().getTime();
+            const diff = eventDate - now;
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById("timer").innerHTML = `
+                <div class="timer-unit"><span class="timer-number">${d}</span><span class="timer-label">Days</span></div>
+                <div class="timer-unit"><span class="timer-number">${h}</span><span class="timer-label">Hrs</span></div>
+                <div class="timer-unit"><span class="timer-number">${m}</span><span class="timer-label">Mins</span></div>
+                <div class="timer-unit"><span class="timer-number">${s}</span><span class="timer-label">Secs</span></div>
+            `;
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
