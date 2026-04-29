@@ -170,11 +170,11 @@
         }
     </style>
 </head>
-<body onclick="playEntrySound()">
+<body onpointerdown="playEntrySound()">
 
-    <audio id="entrySound" src="audio/open.mp3"></audio>
-    <audio id="clickSound" src="audio/click.mp3"></audio>
-    <audio id="jingleAudio" src="audio/jingle.mp3"></audio>
+    <audio id="entrySound" src="audio/open.mp3" preload="auto"></audio>
+    <audio id="clickSound" src="audio/click.mp3" preload="auto"></audio>
+    <audio id="jingleAudio" src="audio/jingle.mp3" preload="auto"></audio>
 
     <div class="header">
         <div class="top-nav">
@@ -200,8 +200,8 @@
                 <button class="hub-btn" onclick="toggleJingle()">
                     <span class="icon">🎵</span>
                     <span class="text">Theme Song</span>
-                </a>
-                <a href="https://maps.app.goo.gl/vS1U74DkY4U7S1U74" target="_blank" class="hub-btn" onclick="playClick()">
+                </button>
+                <a href="http://googleusercontent.com/maps.google.com/4" target="_blank" class="hub-btn" onclick="playClick()">
                     <span class="icon">📍</span>
                     <span class="text">Venue Map</span>
                 </a>
@@ -219,38 +219,43 @@
                 <p style="font-size: 1rem; font-weight: 600; color: var(--luminous-blue); margin-top: 25px; letter-spacing: 1px;">
                     tinyurl.com/SazonGrandReunion
                 </p>
-                <p style="font-size: 0.6rem; color: #cbd5e0; margin-top: 8px; text-transform: uppercase; letter-spacing: 1px;">Manual Entry Link</p>
             </div>
         </div>
     </div>
 
     <script>
         let hasPlayedEntry = false;
+
+        // Plays on the very first touch/click anywhere on the screen
         function playEntrySound() {
             if (!hasPlayedEntry) {
                 const entry = document.getElementById('entrySound');
-                entry.volume = 0.5; // Set volume to 50% for a classy feel
-                entry.play().catch(e => console.log("Waiting for user interaction..."));
+                entry.play().catch(e => console.log("Audio blocked by browser."));
                 hasPlayedEntry = true;
             }
         }
 
         function playClick() {
             const click = document.getElementById('clickSound');
-            click.currentTime = 0;
+            click.currentTime = 0; // Rewind to start
             click.play();
         }
 
         function toggleJingle() {
-            playClick();
-            const audio = document.getElementById("jingleAudio");
-            if (audio.paused) { 
-                audio.play(); 
-            } else { 
-                audio.pause(); 
+            const jingle = document.getElementById("jingleAudio");
+            const click = document.getElementById("clickSound");
+
+            if (jingle.paused) {
+                // To prevent overlap, we skip the click sound for the jingle
+                jingle.play();
+            } else {
+                jingle.pause();
+                // Play a click sound only when turning it OFF
+                click.play();
             }
         }
 
+        // Timer logic
         const eventDate = new Date("July 22, 2027 08:00:00").getTime();
         function updateTimer() {
             const now = new Date().getTime();
