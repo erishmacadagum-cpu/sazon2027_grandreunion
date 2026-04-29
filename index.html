@@ -8,6 +8,7 @@
     <style>
         :root {
             --luminous-blue: #0047AB; 
+            --champagne-silver: #E5E4E2;
             --gold: #ffd700;
         }
 
@@ -19,7 +20,6 @@
             overflow-x: hidden;
         }
 
-        /* Banner Section */
         .header {
             position: relative;
             height: 90vh;
@@ -30,7 +30,6 @@
             border-bottom: 8px solid var(--luminous-blue);
         }
 
-        /* Top Navigation */
         .top-nav {
             padding: 25px 30px;
             display: flex;
@@ -57,7 +56,6 @@
             text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
         }
 
-        /* Timer Box */
         .timer-container {
             align-self: center;
             margin-bottom: 40px;
@@ -67,36 +65,13 @@
             padding: 15px 30px;
             border-radius: 10px;
             border: 1px solid rgba(255,255,255,0.2);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
         }
 
-        #timer {
-            display: flex;
-            gap: 20px;
-        }
+        #timer { display: flex; gap: 20px; }
+        .timer-unit { display: flex; flex-direction: column; text-align: center; color: white; }
+        .timer-number { font-size: 2rem; font-weight: 600; color: var(--gold); line-height: 1; }
+        .timer-label { font-size: 0.6rem; text-transform: uppercase; margin-top: 6px; }
 
-        .timer-unit {
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-            color: white;
-        }
-
-        .timer-number {
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--gold);
-            line-height: 1;
-        }
-
-        .timer-label {
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 6px;
-        }
-
-        /* Content Area */
         .container { 
             max-width: 900px; 
             margin: 0 auto 80px; 
@@ -117,42 +92,54 @@
             font-family: 'Playfair Display', serif;
             font-size: clamp(2rem, 6vw, 3rem);
             color: var(--luminous-blue);
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
-        .date-location {
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #718096;
-            font-size: 0.85rem;
-            margin-bottom: 45px;
+        .hub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 15px;
+            margin: 40px 0;
         }
 
-        .btn-play {
+        .hub-btn {
             background: white;
-            color: var(--luminous-blue);
-            padding: 16px 45px;
             border: 2px solid var(--luminous-blue);
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            border-radius: 8px;
+            padding: 20px 10px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
             cursor: pointer;
-            transition: all 0.4s ease;
         }
 
-        .btn-play:hover {
+        .hub-btn:hover {
             background: var(--luminous-blue);
-            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 71, 171, 0.1);
         }
 
-        .slogan-footer {
-            margin-top: 60px;
-            font-style: italic;
-            color: #a0aec0;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
+        .hub-btn .icon { font-size: 1.5rem; margin-bottom: 10px; }
+        .hub-btn .text { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; color: var(--luminous-blue); letter-spacing: 1px; }
+        .hub-btn:hover .text { color: white; }
+
+        .qr-section {
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 1px solid #edf2f7;
         }
+
+        .qr-image {
+            width: 140px;
+            height: 140px;
+            padding: 8px;
+            border: 1px solid var(--champagne-silver);
+            border-radius: 12px;
+        }
+
+        .slogan-footer { font-style: italic; color: #a0aec0; font-size: 0.9rem; margin-top: 30px; }
 
         @media (min-width: 1024px) {
             .header { height: 95vh; }
@@ -176,28 +163,47 @@
 
     <div class="container">
         <div class="content-box">
-            <h2>The Grand Reunion</h2>
-            <p class="date-location">Marzon Hotel & Resort • Aklan, Philippines</p>
-            
+            <h2>Sazon 2027 Hub</h2>
+            <p style="color: #718096; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;">Marzon Hotel & Resort</p>
+
+            <div class="hub-grid">
+                <a href="#" class="hub-btn">
+                    <span class="icon">📝</span>
+                    <span class="text">Register</span>
+                </a>
+                <button class="hub-btn" onclick="toggleJingle()">
+                    <span class="icon">🎵</span>
+                    <span class="text">Theme Song</span>
+                </button>
+                <a href="http://googleusercontent.com/maps.google.com/2" target="_blank" class="hub-btn">
+                    <span class="icon">📍</span>
+                    <span class="text">Venue Map</span>
+                </a>
+                <a href="#" class="hub-btn">
+                    <span class="icon">👕</span>
+                    <span class="text">Apparel</span>
+                </a>
+            </div>
+
             <audio id="jingleAudio" src="audio/jingle.mp3"></audio>
-            <button class="btn-play" onclick="toggleJingle()">🎵 Play Theme</button>
-            
             <p class="slogan-footer">"Gikan sa Gamut, Tubtob sa Langit"</p>
+
+            <div class="qr-section">
+                <p style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #a0aec0; margin-bottom: 15px;">Official Clan QR Code</p>
+                <img src="images/qr-code.png" alt="Scan for Access" class="qr-image">
+            </div>
         </div>
     </div>
 
     <script>
         const eventDate = new Date("July 22, 2027 08:00:00").getTime();
-        
         function updateTimer() {
             const now = new Date().getTime();
             const diff = eventDate - now;
-            
             const d = Math.floor(diff / (1000 * 60 * 60 * 24));
             const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const s = Math.floor((diff % (1000 * 60)) / 1000);
-            
             document.getElementById("timer").innerHTML = `
                 <div class="timer-unit"><span class="timer-number">${d}</span><span class="timer-label">Days</span></div>
                 <div class="timer-unit"><span class="timer-number">${h}</span><span class="timer-label">Hrs</span></div>
@@ -205,19 +211,12 @@
                 <div class="timer-unit"><span class="timer-number">${s}</span><span class="timer-label">Secs</span></div>
             `;
         }
-
         setInterval(updateTimer, 1000);
         updateTimer();
 
         function toggleJingle() {
             const audio = document.getElementById("jingleAudio");
-            const btn = event.currentTarget;
-            if (audio.paused) {
-                audio.play().then(() => { btn.innerHTML = "⏸️ Pause Theme"; });
-            } else {
-                audio.pause();
-                btn.innerHTML = "🎵 Play Theme";
-            }
+            if (audio.paused) { audio.play(); } else { audio.pause(); }
         }
     </script>
 </body>
