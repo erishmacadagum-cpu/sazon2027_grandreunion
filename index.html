@@ -139,6 +139,39 @@
         }
         .hub-btn:hover .text { color: var(--luminous-blue); }
 
+        /* GUIDE STYLES */
+        .guide-section {
+            text-align: left;
+            margin-top: 60px;
+            border-top: 1px solid #edf2f7;
+            padding-top: 40px;
+        }
+
+        .guide-title {
+            font-family: 'Playfair Display', serif;
+            color: var(--luminous-blue);
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .guide-card {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid var(--luminous-blue);
+        }
+
+        .guide-card h4 { margin: 0 0 10px 0; color: #2d3748; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; }
+        .guide-card p { margin: 0; font-size: 0.85rem; color: #718096; line-height: 1.6; }
+        .guide-link { color: var(--luminous-blue); text-decoration: none; font-weight: 600; font-size: 0.8rem; display: block; margin-top: 10px; }
+
         .qr-section {
             margin-top: 80px;
             padding-top: 60px;
@@ -203,7 +236,7 @@
                     <span class="text">Theme Song</span>
                 </button>
 
-                <a href="https://maps.app.goo.gl/uXv7p9jJ7p5p5p5p5" target="_blank" class="hub-btn" onclick="playClick()">
+                <a href="https://maps.google.com/?cid=11713442290938606363&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="hub-btn" onclick="playClick()">
                     <span class="icon">📍</span>
                     <span class="text">Venue Map</span>
                 </a>
@@ -212,6 +245,24 @@
                     <span class="icon">⏳</span>
                     <span class="text">Countdown</span>
                 </a>
+            </div>
+
+            <div class="guide-section">
+                <h3 class="guide-title">Explore Aklan</h3>
+                <div class="guide-grid">
+                    <div class="guide-card">
+                        <h4>🍽️ Local Favorites</h4>
+                        <p>Enjoy Kalibo's best: <b>Ramboy's</b> for the legendary Liempo or <b>Peking House</b> for classic Filipino-Chinese comfort food.</p>
+                    </div>
+                    <div class="guide-card">
+                        <h4>🌿 Nature & Culture</h4>
+                        <p>Walk the mangroves at <b>Bakhawan Ecopark</b> or visit <b>St. John the Baptist Cathedral</b>, home of the Sto. Niño.</p>
+                    </div>
+                    <div class="guide-card">
+                        <h4>🏝️ Boracay Day Trip</h4>
+                        <p>Just 1.5 hours away. We recommend booking a private van through <b>Southwest Tours</b> for a seamless family trip.</p>
+                    </div>
+                </div>
             </div>
 
             <p class="slogan-footer">"Gikan sa Gamut, Tubtob sa Langit"</p>
