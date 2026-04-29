@@ -137,9 +137,43 @@
             color: #4a5568; 
             letter-spacing: 2px; 
         }
-        .hub-btn:hover .text { color: var(--luminous-blue); }
 
-        /* GUIDE STYLES */
+        /* LYRICS SECTION */
+        .lyrics-container {
+            background: #f1f5f9;
+            border-radius: 20px;
+            padding: 40px 20px;
+            margin: 40px 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        .lyrics-title {
+            font-family: 'Playfair Display', serif;
+            color: var(--luminous-blue);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .lyrics-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #4a5568;
+            white-space: pre-line;
+            font-weight: 400;
+        }
+
+        .dialect-tag {
+            font-size: 0.65rem;
+            color: var(--luminous-blue);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-top: 15px;
+        }
+
+        /* GUIDE SECTION */
         .guide-section {
             text-align: left;
             margin-top: 60px;
@@ -170,24 +204,6 @@
 
         .guide-card h4 { margin: 0 0 10px 0; color: #2d3748; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; }
         .guide-card p { margin: 0; font-size: 0.85rem; color: #718096; line-height: 1.6; }
-        .guide-link { color: var(--luminous-blue); text-decoration: none; font-weight: 600; font-size: 0.8rem; display: block; margin-top: 10px; }
-
-        .qr-section {
-            margin-top: 80px;
-            padding-top: 60px;
-            border-top: 1px solid #f1f5f9;
-        }
-
-        .qr-image {
-            width: 160px;
-            height: 160px;
-            padding: 12px;
-            background: white;
-            border: 1px solid #edf2f7;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            transition: 0.3s;
-        }
 
         .slogan-footer { font-style: italic; color: #cbd5e0; font-size: 1rem; margin-top: 40px; letter-spacing: 1px; }
 
@@ -236,7 +252,7 @@
                     <span class="text">Theme Song</span>
                 </button>
 
-                <a href="https://maps.google.com/?cid=11713442290938606363&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="hub-btn" onclick="playClick()">
+                <a href="https://maps.google.com/?cid=14533268538176467409&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="hub-btn" onclick="playClick()">
                     <span class="icon">📍</span>
                     <span class="text">Venue Map</span>
                 </a>
@@ -245,6 +261,27 @@
                     <span class="icon">⏳</span>
                     <span class="text">Countdown</span>
                 </a>
+            </div>
+
+            <div class="lyrics-container">
+                <h3 class="lyrics-title">The Sazon Jingle</h3>
+                <div class="lyrics-text">
+                    <span class="dialect-tag">English & Tagalog</span>
+                    From our roots we grow so strong,
+                    Sa pagkakaisa, dito tayo laging magkasama,
+                    One family, one heart, where we all belong.
+
+                    <span class="dialect-tag">Cebuano</span>
+                    Mag-uban ta sa kalipay ug gugma,
+                    Dili malimtan ang atong gigikanan.
+
+                    <span class="dialect-tag">Ilonggo</span>
+                    Mag-upod kita sa daku nga selebrasyon,
+                    Sazon Clan, bugal sang aton nasyon!
+                    
+                    <span class="dialect-tag">Chorus</span>
+                    <b>Sazon 2027: Gikan sa Gamut, Tubtob sa Langit!</b>
+                </div>
             </div>
 
             <div class="guide-section">
