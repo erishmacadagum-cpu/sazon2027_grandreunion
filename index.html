@@ -4,464 +4,147 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sazon 2027 - Grand Family Reunion</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
+        :root {
+            --luminous-blue: #0047AB; 
+            --champagne-silver: #E5E4E2;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #1a1a1a;
-            background: linear-gradient(135deg, #e6f2ff 0%, #f0f8ff 100%);
-            min-height: 100vh;
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f5f7fa;
+            color: #2c3e50;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
+        /* Banner Section */
         .header {
-            position: relative;
-            margin-bottom: 30px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
-        }
-
-        .banner-container {
-            position: relative;
-            height: 300px;
-            overflow: hidden;
-            background: linear-gradient(135deg, #0066cc 0%, #003d99 100%);
-        }
-
-        .banner {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .banner-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 61, 153, 0.6);
+            height: 65vh;
+            background: linear-gradient(rgba(0, 71, 171, 0.5), rgba(0, 71, 171, 0.5)), 
+                        url('images/banner.jpg') center/cover no-repeat;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: white;
             text-align: center;
-        }
-
-        .banner-overlay h1 {
-            font-size: 48px;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            margin-bottom: 10px;
-        }
-
-        .tagline {
-            font-size: 24px;
-            font-style: italic;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-        }
-
-        .navbar {
-            background: linear-gradient(90deg, #0066cc 0%, #0099ff 100%);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 102, 204, 0.3);
-            border-radius: 5px;
-            margin-bottom: 30px;
-        }
-
-        .navbar ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .navbar a {
             color: white;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-block;
+            border-bottom: 5px solid var(--champagne-silver);
+            padding: 20px;
         }
 
-        .navbar a:hover {
+        .logo {
+            max-width: 140px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+
+        h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin: 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+
+        /* Countdown Style */
+        #timer {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-top: 20px;
             color: #ffd700;
-            transform: translateY(-2px);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+            letter-spacing: 2px;
         }
 
-        .section {
-            margin-bottom: 40px;
-            animation: fadeIn 0.5s ease-in;
-        }
+        .tagline-sub { font-style: italic; font-size: 1.2rem; margin-top: 10px; opacity: 0.9; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .container { max-width: 800px; margin: -40px auto 50px; padding: 0 20px; }
 
         .content-box {
             background: white;
             padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 102, 204, 0.15);
-            border-top: 4px solid #0066cc;
-        }
-
-        section h2 {
-            color: #0066cc;
-            font-size: 36px;
-            margin-bottom: 20px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             text-align: center;
-            position: relative;
-            padding-bottom: 15px;
+            border-top: 6px solid var(--luminous-blue);
         }
 
-        section h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: #ffd700;
-        }
-
-        section h3 {
-            color: #0099ff;
-            margin-bottom: 15px;
-        }
-
-        section p {
-            color: #666666;
-            margin-bottom: 15px;
-            font-size: 16px;
-        }
-
-        .logo {
-            max-width: 150px;
-            height: auto;
-            display: block;
-            margin: 0 auto 20px;
-            border-radius: 10px;
-        }
-
-        .intro-text {
-            font-size: 18px;
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .event-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin: 30px 0;
-        }
-
-        .info-item {
-            padding: 20px;
-            background: #e6f2ff;
-            border-radius: 8px;
-            border-left: 4px solid #0066cc;
-            transition: all 0.3s ease;
-        }
-
-        .info-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 102, 204, 0.2);
-        }
-
-        .info-item .icon {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-
-        .info-item h3 {
-            color: #0066cc;
-            margin-bottom: 10px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
+        .btn-play {
+            background: var(--luminous-blue);
+            color: white;
+            padding: 18px 35px;
             border: none;
-            border-radius: 5px;
-            font-size: 16px;
+            border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
-            text-decoration: none;
-            margin: 10px 5px;
-        }
-
-        .btn-primary {
-            background: #0066cc;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #003d99;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 102, 204, 0.3);
-        }
-
-        .btn-secondary {
-            background: #0099ff;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: #0066cc;
-            transform: translateY(-2px);
-        }
-
-        .btn-success {
-            background: #28a745;
-            color: white;
-        }
-
-        .btn-danger {
-            background: #dc3545;
-            color: white;
-        }
-
-        .form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .form input,
-        .form textarea,
-        .form select {
-            padding: 12px;
-            border: 2px solid #e6f2ff;
-            border-radius: 5px;
-            font-size: 16px;
-            font-family: inherit;
-        }
-
-        .form input:focus,
-        .form textarea:focus,
-        .form select:focus {
-            outline: none;
-            border-color: #0066cc;
-            box-shadow: 0 0 10px rgba(0, 102, 204, 0.2);
-        }
-
-        .pending-notice {
-            padding: 15px;
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            border-radius: 5px;
-            color: #856404;
+            box-shadow: 0 4px 15px rgba(0, 71, 171, 0.3);
             margin-top: 20px;
         }
 
-        .qrcode-container {
-            display: flex;
-            justify-content: center;
-            padding: 30px;
-            background: #e6f2ff;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
+        .btn-play:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0, 71, 171, 0.4); }
 
-        .footer {
-            background: linear-gradient(90deg, #0066cc 0%, #003d99 100%);
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: 50px;
-            border-radius: 10px 10px 0 0;
-        }
-
-        .footer p {
-            margin: 5px 0;
-        }
-
-        @media (max-width: 768px) {
-            .banner-overlay h1 {
-                font-size: 32px;
-            }
-            .content-box {
-                padding: 20px;
-            }
-            .event-info {
-                grid-template-columns: 1fr;
-            }
+        @media (max-width: 600px) {
+            h1 { font-size: 2.2rem; }
+            #timer { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="banner-container">
-                <div class="banner-overlay">
-                    <h1>🏝️ SAZON 2027 🏝️</h1>
-                    <p class="tagline">1st Edition Grand Family Reunion</p>
-                    <p class="tagline">"Gikan sa Gamut, Tubtob sa Langit"</p>
-                    <p class="tagline">From the Roots, Towards the Sky</p>
-                </div>
-            </div>
-        </div>
 
-        <nav class="navbar">
-            <ul>
-                <li><a href="#home">🏠 Home</a></li>
-                <li><a href="#event-details">📅 Event Details</a></li>
-                <li><a href="#attend">✍️ Register</a></li>
-                <li><a href="#share">📤 Share</a></li>
-            </ul>
-        </nav>
-
-        <section id="home" class="section">
-            <div class="content-box">
-                <h2>Welcome to Sazon 2027</h2>
-                <p class="intro-text">🎉 Join us for the 1st Edition Grand Family Reunion!</p>
-                <p>We are excited to welcome you to celebrate with us. This historic event brings together our Ilonggo family to strengthen bonds and create lasting memories.</p>
-                <p><strong>"Gikan sa Gamut, Tubtob sa Langit" - From the Roots, Towards the Sky</strong></p>
-  <audio id="jingleAudio" src="https://google.com"></audio>
-
-
-
-<div style="text-align: center; margin-top: 30px;">
-    <button class="btn btn-secondary" onclick="playJingle()">🎵 Play Jingle</button>
-</div>
-
-
-
-
-
-        </section>
-
-        <section id="event-details" class="section">
-            <div class="content-box">
-                <h2>📅 Event Details</h2>
-                <div class="event-info">
-                    <div class="info-item">
-                        <div class="icon">📆</div>
-                        <h3>Dates</h3>
-                        <p><strong>July 22-23, 2027</strong></p>
-                        <p>Two unforgettable days of celebration</p>
-                    </div>
-                    <div class="info-item">
-                        <div class="icon">📍</div>
-                        <h3>Venue</h3>
-                        <p><strong>Marzon Resort</strong></p>
-                        <p>Kalibo, Aklan, Philippines</p>
-                    </div>
-                    <div class="info-item">
-                        <div class="icon">🌊</div>
-                        <h3>Location</h3>
-                        <p>Close to beautiful Boracay</p>
-                        <p>Stunning beach setting</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="attend" class="section">
-            <div class="content-box">
-                <h2>✍️ Register Your Attendance</h2>
-                <p style="text-align: center; margin-bottom: 30px;">Fill out the form to register for Sazon 2027.</p>
-                
-                <form id="attendanceForm" class="form" onsubmit="submitAttendanceRequest(event)">
-                    <input type="text" id="attendeeName" placeholder="Full Name" required>
-                    <input type="email" id="attendeeEmail" placeholder="Email Address" required>
-                    <input type="tel" id="attendeeContact" placeholder="Contact Number" required>
-                    <select id="familyBranch" required>
-                        <option value="">Select Your Family Branch</option>
-                        <option value="Main Family">Main Family</option>
-                        <option value="Northern Branch">Northern Branch</option>
-                        <option value="Southern Branch">Southern Branch</option>
-                        <option value="Eastern Branch">Eastern Branch</option>
-                        <option value="Western Branch">Western Branch</option>
-                    </select>
-                    <input type="number" id="numGuests" placeholder="Number of Additional Guests" min="0" value="0">
-                    <textarea id="attendeeMessage" placeholder="Any special requests?" rows="4"></textarea>
-                    <button type="submit" class="btn btn-primary">Submit Registration</button>
-                </form>
-                
-                <div id="pendingNotice" class="pending-notice" style="display: none;">
-                    ✅ Thank you! Your registration is pending approval.
-                </div>
-            </div>
-        </section>
-
-        <section id="share" class="section">
-            <div class="content-box">
-                <h2>📤 Share & Invite</h2>
-                <div style="text-align: center; margin-bottom: 30px;">
-                    <button class="btn btn-primary" onclick="shareWebsite()">📤 Share Website</button>
-                    <button class="btn btn-secondary" onclick="downloadQRCode()">⬇️ Download QR Code</button>
-                </div>
-                
-                <h3 style="text-align: center; color: #0066cc; margin-top: 30px;">QR Code</h3>
-                <div class="qrcode-container">
-                    <div id="qrcodeContainer"></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" style="margin-top: 60px;">
-            <div class="content-box">
-                <div style="text-align: center;">
-                    <button class="btn btn-secondary" onclick="toggleAdminPanel()">⚙️ Admin Access</button>
-                </div>
-                
-                <div id="adminPanel" style="display: none; margin-top: 30px;">
-                    <div id="adminLoginForm" style="background: #fff3cd; padding: 20px; border-radius: 8px; text-align: center;">
-                        <h3>🔐 Admin Login</h3>
-                        <form onsubmit="adminLogin(event)" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-                            <input type="password" id="adminPassword" placeholder="Enter Password" required style="padding: 10px; border: 2px solid #0066cc; border-radius: 5px;">
-                            <button type="submit" class="btn btn-primary">Login</button>
-                        </form>
-                    </div>
-                    
-                    <div id="adminDashboard" style="display: none; margin-top: 20px;">
-                        <button class="btn btn-danger" onclick="adminLogout()" style="float: right;">Logout</button>
-                        <h3 style="color: #0066cc;">📋 Pending Requests</h3>
-                        <div id="pendingRequestsList" style="background: #f8f9fa; padding: 15px; margin-bottom: 20px;"></div>
-                        
-                        <h3 style="color: #0066cc;">✅ Approved Attendees</h3>
-                        <div id="approvedAttendeesList" style="background: #f8f9fa; padding: 15px;"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <div class="header">
+        <img src="images/logo.png" alt="Sazon Logo" class="logo">
+        <h1>🏝️ SAZON 2027 🏝️</h1>
+        <p class="tagline-sub">"Gikan sa Gamut, Tubtob sa Langit"</p>
+        <div id="timer">Calculating...</div>
     </div>
 
-    <footer class="footer">
-        <p><strong>Sazon 2027 - Grand Family Reunion</strong></p>
-        <p>"Gikan sa Gamut, Tubtob sa Langit" - From the Roots, Towards the Sky</p>
-        <p>July 22-23, 2027 • Marzon Resort, Kalibo, Aklan</p>
-    </footer>
+    <div class="container">
+        <div class="content-box">
+            <h2 style="color: var(--luminous-blue);">1st Edition Grand Family Reunion</h2>
+            <p style="font-size: 1.1rem;">July 22-23, 2027 • Marzon Resort, Kalibo, Aklan</p>
+            <hr style="width: 50px; border: 2px solid var(--champagne-silver); margin: 20px auto;">
+            
+            <audio id="jingleAudio" src="audio/jingle.mp3"></audio>
+            <button class="btn-play" onclick="toggleJingle()">🎵 Play Family Jingle</button>
+            <p style="font-size: 0.9rem; color: #7f8c8d; margin-top: 15px;">Tap to hear our reunion theme</p>
+        </div>
+    </div>
 
-    <script src="script.js"></script>
+    <script>
+        // Countdown Logic
+        const eventDate = new Date("July 22, 2027 08:00:00").getTime();
+        
+        function updateTimer() {
+            const now = new Date().getTime();
+            const diff = eventDate - now;
+            
+            if (diff < 0) {
+                document.getElementById("timer").innerHTML = "THE REUNION HAS BEGUN!";
+                return;
+            }
+
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById("timer").innerHTML = d + "d " + h + "h " + m + "m " + s + "s";
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // Jingle Logic
+        function toggleJingle() {
+            const audio = document.getElementById("jingleAudio");
+            const btn = event.currentTarget;
+            
+            if (audio.paused) {
+                audio.play()
+                    .then(() => { btn.innerHTML = "⏸️ Pause Jingle"; })
+                    .catch(() => { alert("Please tap the screen first to enable audio."); });
+            } else {
+                audio.pause();
+                btn.innerHTML = "🎵 Play Family Jingle";
+            }
+        }
+    </script>
 </body>
 </html>
