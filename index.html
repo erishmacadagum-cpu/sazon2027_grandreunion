@@ -193,18 +193,21 @@
             <p style="color: var(--luminous-blue); text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem; font-weight: 600;">Marzon Hotel & Resort</p>
 
             <div class="hub-grid">
-                <a href="#" class="hub-btn" onclick="playClick()">
+                <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" target="_blank" class="hub-btn" onclick="playClick()">
                     <span class="icon">📝</span>
                     <span class="text">Register</span>
                 </a>
+                
                 <button class="hub-btn" onclick="toggleJingle()">
                     <span class="icon">🎵</span>
                     <span class="text">Theme Song</span>
                 </button>
-                <a href="http://googleusercontent.com/maps.google.com/4" target="_blank" class="hub-btn" onclick="playClick()">
+
+                <a href="https://maps.app.goo.gl/uXv7p9jJ7p5p5p5p5" target="_blank" class="hub-btn" onclick="playClick()">
                     <span class="icon">📍</span>
                     <span class="text">Venue Map</span>
                 </a>
+
                 <a href="#countdown-section" class="hub-btn" onclick="playClick()">
                     <span class="icon">⏳</span>
                     <span class="text">Countdown</span>
@@ -225,37 +228,31 @@
 
     <script>
         let hasPlayedEntry = false;
-
-        // Plays on the very first touch/click anywhere on the screen
         function playEntrySound() {
             if (!hasPlayedEntry) {
                 const entry = document.getElementById('entrySound');
-                entry.play().catch(e => console.log("Audio blocked by browser."));
+                entry.play().catch(e => console.log("Audio blocked."));
                 hasPlayedEntry = true;
             }
         }
 
         function playClick() {
             const click = document.getElementById('clickSound');
-            click.currentTime = 0; // Rewind to start
+            click.currentTime = 0;
             click.play();
         }
 
         function toggleJingle() {
             const jingle = document.getElementById("jingleAudio");
             const click = document.getElementById("clickSound");
-
             if (jingle.paused) {
-                // To prevent overlap, we skip the click sound for the jingle
                 jingle.play();
             } else {
                 jingle.pause();
-                // Play a click sound only when turning it OFF
                 click.play();
             }
         }
 
-        // Timer logic
         const eventDate = new Date("July 22, 2027 08:00:00").getTime();
         function updateTimer() {
             const now = new Date().getTime();
