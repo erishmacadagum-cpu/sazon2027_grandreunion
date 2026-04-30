@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sazon 2027 | Master Hub</title>
+    <title>Sazon 2027 | Gikan sa Gamut</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root { 
@@ -13,13 +13,14 @@
             --champagne-silver: #E5E4E2;
         }
         
-        body { margin: 0; font-family: 'Montserrat', sans-serif; background: #fff; color: var(--deep-navy); }
+        body { margin: 0; font-family: 'Montserrat', sans-serif; background: #fff; color: var(--deep-navy); overflow-x: hidden; }
 
-        /* BANNER: Priority on visibility of the Slogan and Top Artwork */
+        /* Banner Setup */
         .hero-banner {
             position: relative;
-            height: 85vh; /* Increased height to show more of the image */
+            height: 85vh;
             background: url('images/banner.jpg') top center/cover no-repeat;
+            border-bottom: 10px solid var(--luminous-blue);
         }
 
         .nav-overlay { 
@@ -41,12 +42,13 @@
             font-weight: 600; 
             letter-spacing: 2px; 
             text-shadow: 2px 2px 15px rgba(0,0,0,1); 
+            line-height: 1.5;
         }
 
-        /* MAIN CONTAINER: Pushed lower to reveal the ROOTS and Ground Details */
+        /* Main Content Container */
         .main-container { 
             max-width: 950px; 
-            margin: 20px auto 100px; /* Moved down significantly from the image overlap */
+            margin: -100px auto 100px; 
             position: relative; 
             z-index: 10; 
         }
@@ -55,12 +57,11 @@
             background: white; 
             padding: 80px 50px; 
             border-radius: 20px; 
-            box-shadow: 0 -20px 60px rgba(0,0,0,0.05), 0 40px 120px rgba(0,0,0,0.15); 
+            box-shadow: 0 40px 120px rgba(0,0,0,0.15); 
             text-align: center; 
-            border-top: 8px solid var(--luminous-blue);
         }
 
-        /* SALIENT COUNTDOWN: High Impact Design */
+        /* Countdown Timer */
         .timer-hub {
             display: flex;
             justify-content: center;
@@ -74,67 +75,56 @@
             border-radius: 12px;
             min-width: 90px;
             box-shadow: 0 15px 35px rgba(0,71,171,0.3);
-            border-bottom: 4px solid var(--champagne-silver);
         }
         .time-val { font-size: 2.8rem; font-family: 'Playfair Display', serif; display: block; font-weight: 700; }
         .time-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 3px; color: var(--champagne-silver); }
 
         .reunion-title { 
             font-family: 'Playfair Display', serif; 
-            font-size: 4.5rem; 
+            font-size: 4rem; 
             color: var(--deep-navy); 
-            margin: 0 0 40px 0;
+            margin: 0 0 10px 0;
             letter-spacing: 2px;
         }
+        .slogan { font-weight: 300; letter-spacing: 8px; text-transform: uppercase; color: var(--luminous-blue); margin-bottom: 50px; display: block; }
 
+        /* Luxury Action Buttons */
         .action-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; margin: 40px 0; }
         .btn-luxury { 
             border: 1px solid #eee; padding: 40px 20px; text-decoration: none; color: var(--deep-navy); 
             transition: 0.4s; display: flex; flex-direction: column; align-items: center; border-radius: 12px;
-            background: #fff;
+            background: #fff; cursor: pointer;
         }
         .btn-luxury:hover { background: var(--luminous-blue); color: white !important; transform: translateY(-5px); }
         .btn-luxury span { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 4px; font-weight: 600; margin-top: 20px; }
 
-        /* LYRICS SECTION */
+        /* Lyrics Display */
         .lyrics-section { text-align: left; padding: 40px; background: #fafafa; border-radius: 12px; margin-top: 40px; border: 1px solid #eee; }
-        .timestamp { color: var(--luminous-blue); font-weight: 600; font-size: 0.8rem; margin-bottom: 5px; display: block; }
-        .lyric-block { margin-bottom: 25px; font-family: 'Playfair Display', serif; font-size: 1.3rem; line-height: 1.8; color: #333; }
+        .lyric-block { margin-bottom: 25px; font-family: 'Playfair Display', serif; font-size: 1.2rem; line-height: 1.8; color: #333; }
         .chorus-text { font-weight: 700; font-style: italic; border-left: 4px solid var(--luminous-blue); padding-left: 20px; }
 
-        /* QR CODE: Visible & Well Placed */
-        .qr-anchor { margin-top: 80px; padding-top: 40px; border-top: 2px solid var(--champagne-silver); }
-        .qr-wrapper { 
-            display: inline-block; 
-            padding: 20px; 
-            background: white; 
-            border: 2px solid var(--luminous-blue); 
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        .qr-img { width: 180px; display: block; }
-        .qr-link { margin-top: 15px; font-weight: 600; color: var(--luminous-blue); letter-spacing: 2px; }
+        /* Admin Gate */
+        .login-gate { position: fixed; bottom: 20px; right: 20px; opacity: 0.2; cursor: pointer; font-size: 0.7rem; color: #888; }
+        .login-gate:hover { opacity: 1; color: var(--luminous-blue); }
 
         @media (max-width: 768px) { .timer-hub { gap: 8px; } .time-segment { min-width: 60px; padding: 15px; } .time-val { font-size: 1.8rem; } }
     </style>
 </head>
-<body onclick="playWelcome()">
+<body>
 
-    <audio id="openSnd" src="audio/open.mp3"></audio>
-    <audio id="clickSnd" src="audio/click.mp3"></audio>
+    <!-- Audio Assets -->
     <audio id="jingle" src="audio/jingle.mp3"></audio>
 
     <div class="hero-banner">
         <div class="nav-overlay">
             <div class="logo-frame"><img src="images/logo.png" class="nav-logo"></div>
-            <div class="date-badge">JULY 22-23, 2027<br>KALIBO, AKLAN</div>
+            <div class="date-badge">JULY 23-24, 2027<br>KALIBO, AKLAN</div>
         </div>
     </div>
 
     <div class="main-container">
         <div class="glass-card">
             
-            <!-- High-Impact Salient Timer -->
             <div class="timer-hub">
                 <div class="time-segment"><span id="days" class="time-val">00</span><span class="time-label">Days</span></div>
                 <div class="time-segment"><span id="hours" class="time-val">00</span><span class="time-label">Hrs</span></div>
@@ -143,67 +133,77 @@
             </div>
 
             <h2 class="reunion-title">SAZON 2027</h2>
+            <span class="slogan">Gikan sa Gamut</span>
 
             <div class="action-grid">
-                <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" target="_blank" class="btn-luxury" onclick="playClick()">
+                <!-- Register Button -->
+                <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" target="_blank" class="btn-luxury">
                     <img src="https://img.icons8.com/ios/100/0047AB/edit-property.png" width="40">
                     <span>Register</span>
                 </a>
+                <!-- Theme Song Toggle -->
                 <div class="btn-luxury" onclick="toggleJingle()">
                     <img src="https://img.icons8.com/ios/100/0047AB/audio-wave.png" width="40">
-                    <span>Theme Song</span>
+                    <span id="jingleStatus">Play Theme Song</span>
                 </div>
-                <a href="https://www.google.com/maps/search/?api=1&query=Marzon+Hotel+Kalibo" target="_blank" class="btn-luxury" onclick="playClick()">
+                <!-- Venue Map Button -->
+                <a href="https://www.google.com/maps/search/?api=1&query=Marzon+Hotel+Kalibo+Aklan" target="_blank" class="btn-luxury">
                     <img src="https://img.icons8.com/ios/100/0047AB/marker.png" width="40">
                     <span>Venue Map</span>
                 </a>
             </div>
 
+            <!-- Thematic Lyrics -->
             <div class="lyrics-section">
                 <div class="lyric-block">
-                    <span class="timestamp">(0:00-0:15) English/Modern Beat:</span>
                     "Miles unfolding, ink on the page, A story rewritten, turning the age. July 2027, the compass aligns, Marzon Hotel, Kalibo, where the heritage shines."
                 </div>
                 <div class="lyric-block chorus-text">
-                    <span class="timestamp">(0:15-0:25) Chorus - High Energy:</span>
                     "Gikan sa gamut, tubtob sa langit, Seasoned with love, let the future ignite. Sazon 2027, (Every path) leads us back to the gate."
                 </div>
-                <div class="lyric-block">
-                    <span class="timestamp">(0:25-0:30) Outro:</span>
-                    "We are Sazon. See you in Kalibo!"
-                </div>
-            </div>
-
-            <!-- QR Code: Prominent & Framed -->
-            <div class="qr-anchor">
-                <div class="qr-wrapper">
-                    <img src="images/qr-code.png" class="qr-img" alt="Reunion QR Code">
-                </div>
-                <div class="qr-link">tinyurl.com/SazonGrandReunion</div>
             </div>
 
         </div>
     </div>
 
+    <!-- Hidden Admin Access -->
+    <div class="login-gate" onclick="adminChallenge()">🔒 Moderator Access</div>
+
     <script>
-        let init = false;
-        function playWelcome() { if(!init) { document.getElementById('openSnd').play(); init = true; } }
-        function playClick() { const c = document.getElementById('clickSnd'); c.currentTime=0; c.play(); }
-        function toggleJingle() { 
-            playClick();
-            const j = document.getElementById('jingle');
-            if(j.paused) j.play(); else j.pause();
+        // Theme Song Control
+        function toggleJingle() {
+            const jingle = document.getElementById('jingle');
+            const statusText = document.getElementById('jingleStatus');
+            if (jingle.paused) {
+                jingle.play();
+                statusText.innerText = "Pause Theme Song";
+            } else {
+                jingle.pause();
+                statusText.innerText = "Play Theme Song";
+            }
         }
 
-        const target = new Date("July 22, 2027 08:00:00").getTime();
+        // Countdown Logic for July 23, 2027
+        const targetDate = new Date("July 23, 2027 08:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
-            const d = target - now;
-            document.getElementById('days').innerText = Math.floor(d / (1000 * 60 * 60 * 24));
-            document.getElementById('hours').innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            document.getElementById('mins').innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById('secs').innerText = Math.floor((d % (1000 * 60)) / 1000);
+            const gap = targetDate - now;
+            document.getElementById('days').innerText = Math.floor(gap / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('mins').innerText = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('secs').innerText = Math.floor((gap % (1000 * 60)) / 1000);
         }, 1000);
+
+        // Admin Security
+        function adminChallenge() {
+            const pass = prompt("Enter Administrative Secure Key:");
+            if (pass === "SazonAdmin2027") {
+                alert("Master Hub Access Granted.");
+                window.open("https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE", "_blank");
+            } else {
+                alert("Unauthorized.");
+            }
+        }
     </script>
 </body>
 </html>
