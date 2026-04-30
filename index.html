@@ -75,7 +75,7 @@
         .time-val { font-size: 3rem; font-family: 'Playfair Display', serif; display: block; font-weight: 700; text-shadow: 0 4px 10px rgba(0,0,0,0.3); }
         .time-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 4px; color: rgba(255,255,255,0.8); }
 
-        /* Unified Header */
+        /* Unified Header Branding */
         .header-group { margin-bottom: 50px; }
         .reunion-title { 
             font-family: 'Playfair Display', serif; font-size: 4.5rem; color: var(--deep-navy); 
@@ -87,7 +87,7 @@
         }
         .slogan-sub { display: block; font-size: 0.75rem; letter-spacing: 2px; color: #888; margin-top: 4px; font-style: italic; }
 
-        /* Travel Section Styles */
+        /* Travel Section */
         .travel-card { text-align: left; padding: 40px; background: #fafafa; border-radius: 12px; margin-top: 40px; border: 1px solid #eee; }
         .travel-header { font-family: 'Playfair Display'; color: var(--luminous-blue); letter-spacing: 2px; margin-bottom: 15px; border-bottom: 2px solid var(--ice-blue); display: inline-block; padding-bottom: 5px; }
         
@@ -138,6 +138,7 @@
     <div class="main-container">
         <div class="glass-card">
             
+            <!-- Working Countdown Timer -->
             <div class="timer-hub">
                 <div class="time-segment"><span id="days" class="time-val">00</span><span class="time-label">Days</span></div>
                 <div class="time-segment"><span id="hours" class="time-val">00</span><span class="time-label">Hrs</span></div>
@@ -145,6 +146,7 @@
                 <div class="time-segment"><span id="secs" class="time-val">00</span><span class="time-label">Secs</span></div>
             </div>
 
+            <!-- Header and Slogan -->
             <div class="header-group">
                 <h2 class="reunion-title">SAZON 2027</h2>
                 <span class="slogan">Gikan sa Gamut, Tubtob sa Langit</span>
@@ -166,13 +168,14 @@
                 </a>
             </div>
 
+            <!-- Travel and Accommodation Guide -->
             <div class="travel-card">
                 <h3 class="travel-header">Accommodation Details</h3>
                 <p style="font-size: 0.9rem; line-height: 1.8;">
                     📍 <strong>Address:</strong> Jaime Cardinal Sin Ave., Andagao, Kalibo, Aklan<br>
                     📞 <strong>Contact:</strong> +63 999 221 1863 | 🌐 <strong>Web:</strong> marzonhotelkalibo.com<br>
                     🕐 <strong>Check-in:</strong> 2:00 PM | <strong>Check-out:</strong> 12:00 PM<br>
-                    🍳 <strong>Buffet Breakfast:</strong> 6:00 AM – 10:00 AM | 🏊 <strong>Pool:</strong> Available until 7:00 PM
+                    🍳 <strong>Buffet Breakfast:</strong> 6:00 AM – 10:00 AM | 🏊 <strong>Pool:</strong> Until 7:00 PM
                 </p>
 
                 <h3 class="travel-header" style="margin-top: 30px;">Travel Guide by Origin</h3>
@@ -188,10 +191,11 @@
                     </tbody>
                 </table>
                 <p style="font-size: 0.8rem; color: #666; font-style: italic;">
-                    ✈️ <strong>Note:</strong> Kalibo International Airport (KLO) is only 5 minutes away. Airport transfer is available at ₱250/trip via the hotel.
+                    ✈️ <strong>KLO Airport:</strong> 5 mins away | 🚗 <strong>Hotel Transfer:</strong> ₱250/trip
                 </p>
             </div>
 
+            <!-- Complete Lyrics Section -->
             <div class="lyrics-section">
                 <span class="lyric-title">THEME SONG LYRICS</span>
                 <div class="lyric-block">
@@ -220,16 +224,39 @@
 
     <script>
         let init = false;
-        function playWelcome() { if(!init) { document.getElementById('openSnd').play(); init = true; } }
-        function playClick() { const c = document.getElementById('clickSnd'); c.currentTime = 0; c.play(); }
+        function playWelcome() { 
+            if(!init) { 
+                const open = document.getElementById('openSnd');
+                open.currentTime = 0;
+                open.play(); 
+                init = true; 
+            } 
+        }
 
+        function playClick() { 
+            const click = document.getElementById('clickSnd'); 
+            click.currentTime = 0; 
+            click.play(); 
+        }
+
+        // Corrected Jingle Logic to prevent overlapping
         function toggleJingle() {
             const jingle = document.getElementById('jingle');
             const statusText = document.getElementById('jingleStatus');
-            if (jingle.paused) { jingle.play(); statusText.innerText = "Pause Theme Song"; } 
-            else { playClick(); jingle.pause(); statusText.innerText = "Play Theme Song"; }
+            
+            if (jingle.paused) { 
+                // Ensure audio starts from the beginning if it was finished
+                if (jingle.ended) jingle.currentTime = 0; 
+                jingle.play(); 
+                statusText.innerText = "Pause Theme Song"; 
+            } else { 
+                playClick(); 
+                jingle.pause(); 
+                statusText.innerText = "Play Theme Song"; 
+            }
         }
 
+        // Countdown Timer Logic
         const targetDate = new Date("July 23, 2027 08:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
