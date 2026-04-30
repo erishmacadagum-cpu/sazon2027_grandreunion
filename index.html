@@ -3,22 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sazon 2027 | Professional Master Hub</title>
+    <title>Sazon 2027 | The Master Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root { 
             --deep-navy: #002366; 
             --luminous-blue: #0047AB; 
+            --ice-blue: #0077be;
             --gold-accent: #D4AF37;
-            --white: #FFFFFF; 
+            --glass: rgba(255, 255, 255, 0.95);
         }
 
-        body { margin: 0; font-family: 'Montserrat', sans-serif; background: #f0f2f5; color: var(--deep-navy); overflow-x: hidden; }
+        body { 
+            margin: 0; 
+            font-family: 'Montserrat', sans-serif; 
+            background: #fdfdfd; 
+            color: var(--deep-navy); 
+            overflow-x: hidden; 
+        }
 
-        /* HERO COVER WITH LOGO */
-        .hero-section {
-            height: 70vh;
-            background: linear-gradient(rgba(0,35,102,0.8), rgba(0,35,102,0.6)), url('images/banner.jpg') center/cover no-repeat;
+        /* PREMIUM HERO SECTION */
+        .hero {
+            height: 75vh;
+            background: linear-gradient(rgba(0,35,102,0.8), rgba(0,35,102,0.5)), url('images/banner.jpg') center/cover no-repeat;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -26,131 +33,241 @@
             color: white;
             text-align: center;
             border-bottom: 10px solid var(--luminous-blue);
+            position: relative;
         }
 
-        .main-logo { width: 180px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4)); margin-bottom: 20px; }
-        
-        /* COUNTDOWN TIMER */
-        .timer-wrap { display: flex; gap: 20px; margin-top: 40px; }
-        .timer-unit { 
-            background: rgba(255, 255, 255, 0.15); 
-            backdrop-filter: blur(12px); 
-            padding: 20px; border-radius: 15px; min-width: 90px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        .timer-unit span { display: block; font-family: 'Playfair Display'; font-size: 2.8rem; font-weight: 700; }
-        .timer-label { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; opacity: 0.8; }
-
-        /* MAIN GLASS CARD */
-        .hub-container { 
-            max-width: 1100px; margin: -100px auto 100px; background: rgba(255, 255, 255, 0.95); 
-            padding: 80px 50px; border-radius: 30px; box-shadow: 0 50px 150px rgba(0,0,0,0.2);
-            position: relative; overflow: hidden;
+        .hero-logo { 
+            width: 180px; 
+            margin-bottom: 20px; 
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5)); 
         }
 
-        /* QR CODE POSITIONING */
-        .qr-anchor { position: absolute; top: 50px; right: 50px; text-align: center; }
-        .qr-img { width: 100px; border: 1px solid #ddd; padding: 5px; border-radius: 10px; background: #fff; }
-
-        .slogan-heading { font-weight: 600; letter-spacing: 5px; color: var(--luminous-blue); font-size: 1.4rem; margin-bottom: 50px; }
-
-        /* INTERACTIVE GRID */
-        .nav-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin: 60px 0; }
-        .nav-card { 
-            padding: 40px 20px; border: 1px solid #eee; border-radius: 20px; text-decoration: none; 
-            color: var(--deep-navy); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            background: #fff; font-weight: 600; font-size: 1.1rem;
+        .hero h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 5rem; 
+            margin: 0; 
+            letter-spacing: -1px; 
         }
-        .nav-card:hover { background: var(--deep-navy); color: #fff; transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,35,102,0.2); }
 
-        /* LOGISTICS & LYRICS */
-        .data-block { text-align: left; background: #f8f9fa; padding: 40px; border-radius: 20px; border-left: 6px solid var(--luminous-blue); margin-top: 40px; }
-        .logistics-table { width: 100%; border-collapse: collapse; margin-top: 25px; background: #fff; border-radius: 12px; overflow: hidden; }
-        .logistics-table th { background: var(--ice-blue); color: #fff; padding: 18px; text-align: left; font-size: 0.9rem; }
-        .logistics-table td { padding: 18px; border: 1px solid #eee; font-size: 1rem; }
+        .hero p { 
+            letter-spacing: 10px; 
+            font-weight: 300; 
+            text-transform: uppercase; 
+            margin-top: 15px;
+            opacity: 0.9;
+        }
 
-        .chorus-glow { font-weight: 700; font-style: italic; color: var(--luminous-blue); border-left: 4px solid var(--gold-accent); padding-left: 25px; margin: 30px 0; font-size: 1.2rem; }
+        /* GLASS COUNTDOWN TIMER */
+        .timer-row { display: flex; gap: 20px; margin-top: 50px; }
+        .timer-block { 
+            background: rgba(255, 255, 255, 0.12); 
+            backdrop-filter: blur(15px); 
+            padding: 20px 30px; 
+            border-radius: 15px; 
+            min-width: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .timer-val { display: block; font-family: 'Playfair Display'; font-size: 3rem; font-weight: 700; color: #fff; }
+        .timer-label { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold-accent); }
+
+        /* CONTENT MASTER CARD */
+        .master-container { 
+            max-width: 1100px; 
+            margin: -120px auto 100px; 
+            background: var(--glass); 
+            padding: 80px 60px; 
+            border-radius: 30px; 
+            box-shadow: 0 60px 150px rgba(0,35,102,0.15);
+            position: relative; 
+            z-index: 10;
+        }
+
+        /* BRANDING ASSETS (QR & SLOGAN) */
+        .qr-wrapper { 
+            position: absolute; 
+            top: 50px; 
+            right: 60px; 
+            text-align: center; 
+        }
+        .qr-code { 
+            width: 110px; 
+            border: 1px solid #eee; 
+            padding: 8px; 
+            border-radius: 12px; 
+            background: #fff; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .slogan-banner { 
+            font-weight: 600; 
+            letter-spacing: 6px; 
+            color: var(--luminous-blue); 
+            font-size: 1.5rem; 
+            margin-bottom: 60px; 
+            display: block; 
+            text-align: center;
+        }
+
+        /* INTERACTIVE DASHBOARD */
+        .dashboard-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 30px; 
+            margin-bottom: 60px; 
+        }
+        .dash-card { 
+            padding: 45px 30px; 
+            background: #fff; 
+            border: 1px solid #f0f0f0; 
+            border-radius: 20px; 
+            text-decoration: none; 
+            color: var(--deep-navy); 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+        }
+        .dash-card:hover { 
+            background: var(--deep-navy); 
+            color: #fff; 
+            transform: translateY(-12px); 
+            box-shadow: 0 25px 50px rgba(0,35,102,0.15); 
+        }
+        .dash-card h4 { margin: 0; font-size: 1.2rem; letter-spacing: 1px; }
+
+        /* DATA BLOCKS */
+        .info-block { 
+            text-align: left; 
+            background: #f8fbff; 
+            padding: 40px; 
+            border-radius: 25px; 
+            border-left: 8px solid var(--luminous-blue); 
+            margin-top: 40px; 
+        }
+        .info-block h3 { font-family: 'Playfair Display'; font-size: 1.8rem; margin-top: 0; color: var(--luminous-blue); }
+
+        .logistics-table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 25px; 
+            background: #fff; 
+            border-radius: 15px; 
+            overflow: hidden; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+        .logistics-table th { background: var(--ice-blue); color: #fff; padding: 20px; text-align: left; font-size: 0.9rem; }
+        .logistics-table td { padding: 20px; border: 1px solid #f4f4f4; }
+
+        .chorus-glow { 
+            font-weight: 700; 
+            font-style: italic; 
+            color: var(--luminous-blue); 
+            border-left: 4px solid var(--gold-accent); 
+            padding-left: 30px; 
+            margin: 40px 0; 
+            font-size: 1.3rem; 
+            line-height: 1.8;
+        }
+
+        .portal-access { text-align: center; margin-top: 80px; padding-top: 40px; border-top: 1px solid #eee; }
+        .portal-btn { font-size: 0.75rem; letter-spacing: 3px; color: #bbb; text-decoration: none; text-transform: uppercase; cursor: pointer; }
+
     </style>
 </head>
-<body onclick="handleAudio()">
+<body onclick="engageExperience()">
 
-    <!-- Restored Audio Engine -->
-    <audio id="sndWelcome" src="audio/open.mp3"></audio>
-    <audio id="sndClick" src="audio/click.mp3"></audio>
-    <audio id="sndJingle" src="audio/jingle.mp3"></audio>
+    <!-- Audio Engine Components -->
+    <audio id="audioEnter" src="audio/open.mp3"></audio>
+    <audio id="audioClick" src="audio/click.mp3"></audio>
+    <audio id="audioJingle" src="audio/jingle.mp3"></audio>
 
-    <div class="hero-section">
-        <img src="images/logo.png" alt="Sazon Clan Logo" class="main-logo">
-        <h1 style="font-family: 'Playfair Display'; font-size: 5rem; margin: 0; letter-spacing: -1px;">SAZON 2027</h1>
-        <p style="letter-spacing: 8px; font-weight: 300; text-transform: uppercase;">The Grand Family Reunion</p>
+    <div class="hero">
+        <img src="images/logo.png" alt="Sazon Clan" class="hero-logo">
+        <h1>SAZON 2027</h1>
+        <p>Gikan sa Gamut, Tubtob sa Langit</p>
 
-        <div class="timer-wrap">
-            <div class="timer-unit"><span id="days">00</span><div class="timer-label">Days</div></div>
-            <div class="timer-unit"><span id="hours">00</span><div class="timer-label">Hours</div></div>
-            <div class="timer-unit"><span id="mins">00</span><div class="timer-label">Mins</div></div>
-            <div class="timer-unit"><span id="secs">00</span><div class="timer-label">Secs</div></div>
+        <div class="timer-row">
+            <div class="timer-block"><span id="d" class="timer-val">00</span><span class="timer-label">Days</span></div>
+            <div class="timer-block"><span id="h" class="timer-val">00</span><span class="timer-label">Hours</span></div>
+            <div class="timer-block"><span id="m" class="timer-val">00</span><span class="timer-label">Mins</span></div>
+            <div class="timer-block"><span id="s" class="timer-val">00</span><span class="timer-label">Secs</span></div>
         </div>
     </div>
 
-    <div class="hub-container">
-        <div class="qr-anchor">
-            <img src="images/qr-code.png" class="qr-img" alt="QR Code">
-            <small style="display:block; margin-top: 8px; letter-spacing: 1px; color: #888;">SCAN TO JOIN</small>
+    <div class="master-container">
+        <div class="qr-wrapper">
+            <img src="images/qr-code.png" class="qr-code">
+            <small style="display:block; margin-top: 10px; color: #999; font-size: 0.6rem; letter-spacing: 1px;">JOIN THE HUB</small>
         </div>
 
-        <div class="slogan-heading">GIKAN SA GAMUT, TUBTOB SA LANGIT</div>
+        <span class="slogan-banner">THE OFFICIAL DIGITAL RESOURCE CENTER</span>
 
-        <div class="nav-grid">
-            <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" target="_blank" class="nav-card" onclick="playTap()">OFFICIAL REGISTRATION</a>
-            <div class="nav-card" style="cursor:pointer;" onclick="toggleMusic()">PLAY REUNION JINGLE</div>
-            <a href="#" class="nav-card" onclick="playTap()">JOB APPLICATION TRACKER</a>
+        <div class="dashboard-grid">
+            <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" target="_blank" class="dash-card" onclick="tapSnd()">
+                <h4>REUNION REGISTRATION</h4>
+            </a>
+            <div class="dash-card" style="cursor:pointer;" onclick="toggleMusic()">
+                <h4>PLAY THEME SONG</h4>
+            </div>
+            <a href="#" class="dash-card" onclick="tapSnd()">
+                <h4>MANAGEMENT PORTAL</h4>
+            </a>
         </div>
 
-        <div class="data-block">
-            <h2 style="font-family: 'Playfair Display'; margin-top: 0;">Venue & Logistics</h2>
+        <div class="info-block">
+            <h3>Accommodation & Logistics</h3>
             <p>
                 📍 <strong>Marzon Hotel Kalibo</strong><br>
                 Jaime Cardinal Sin Ave., Andagao, Kalibo, Aklan<br>
                 📞 +63 999 221 1863 | 🕐 Check-in: 2:00 PM | 🌐 marzonhotelkalibo.com
             </p>
             <table class="logistics-table">
-                <thead><tr><th>Origin</th><th>Arrival Instructions</th></tr></thead>
+                <thead><tr><th>Origin</th><th>Official Travel Route</th></tr></thead>
                 <tbody>
-                    <tr><td><strong>Davao/Cebu/Manila</strong></td><td>Direct Flight to Kalibo International Airport (KLO)</td></tr>
-                    <tr><td><strong>Boracay/Iloilo</strong></td><td>Ferry or Land Transfer (Approx. 1.5 - 3 hours)</td></tr>
+                    <tr><td><strong>Davao/Cebu/Manila</strong></td><td>Flight to Kalibo International Airport (KLO)</td></tr>
+                    <tr><td><strong>Boracay/Iloilo</strong></td><td>Direct Land Transfer or Ferry to Kalibo Center</td></tr>
                 </tbody>
             </table>
         </div>
 
-        <div class="data-block" style="margin-top: 30px;">
-            <h2 style="font-family: 'Playfair Display'; margin-top: 0;">The Sazon Theme</h2>
+        <div class="info-block" style="margin-top: 30px;">
+            <h3>The Sazon Theme</h3>
             <p><strong>(Intro)</strong> Miles unfolding, ink on the page... From the heart of the Sazon line, To Marzon Hotel, Kalibo, where the heritage shines.</p>
             <div class="chorus-glow">
                 <strong>(Chorus)</strong> Gikan sa gamut, tubtob sa langit... (From the roots, toward the sky). Seasoned with love, let the future ignite, Sazon 2027—our guiding light.
             </div>
             <p><strong>(Outro)</strong> We are Sazon. See you in Kalibo!</p>
         </div>
+
+        <div class="portal-access">
+            <span class="portal-btn" onclick="openStaffPortal()">Administrator Access Only</span>
+        </div>
     </div>
 
     <script>
-        let init = false;
-        function handleAudio() { if(!init) { document.getElementById('sndWelcome').play(); init = true; } }
-        function playTap() { document.getElementById('sndClick').play(); }
+        let hasStarted = false;
+        function engageExperience() { if(!hasStarted) { document.getElementById('audioEnter').play(); hasStarted = true; } }
+        function tapSnd() { document.getElementById('audioClick').play(); }
         function toggleMusic() {
-            const m = document.getElementById('sndJingle');
-            m.paused ? m.play() : m.pause();
+            const track = document.getElementById('audioJingle');
+            track.paused ? track.play() : track.pause();
         }
 
-        // Live Countdown Logic
-        const eventDate = new Date("July 23, 2027 08:00:00").getTime();
+        // Countdown Logic
+        const launch = new Date("July 23, 2027 08:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
-            const gap = eventDate - now;
-            document.getElementById('days').innerText = Math.floor(gap / 86400000);
-            document.getElementById('hours').innerText = Math.floor((gap % 86400000) / 3600000);
-            document.getElementById('mins').innerText = Math.floor((gap % 3600000) / 60000);
-            document.getElementById('secs').innerText = Math.floor((gap % 60000) / 1000);
+            const gap = launch - now;
+            document.getElementById('d').innerText = Math.floor(gap / 86400000);
+            document.getElementById('h').innerText = Math.floor((gap % 86400000) / 3600000);
+            document.getElementById('m').innerText = Math.floor((gap % 3600000) / 60000);
+            document.getElementById('s').innerText = Math.floor((gap % 60000) / 1000);
         }, 1000);
+
+        function openStaffPortal() {
+            const key = prompt("Enter Access Key:");
+            if (key === "SAZON_OWNER") { window.open("YOUR_LINK_HERE", "_blank"); }
+            else { alert("Unauthorized access restricted."); }
+        }
     </script>
 </body>
 </html>
