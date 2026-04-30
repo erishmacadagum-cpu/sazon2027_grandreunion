@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sazon 2027 | Gikan sa Gamut</title>
+    <title>Sazon 2027 | Master Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root { 
@@ -13,7 +13,6 @@
             --champagne-silver: #E5E4E2;
         }
         
-        /* Seamless Animation Setup */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -43,7 +42,7 @@
 
         .main-container { 
             max-width: 950px; margin: -100px auto 100px; position: relative; z-index: 10; 
-            animation: fadeInUp 1s ease-out forwards; /* Entry Animation */
+            animation: fadeInUp 1s ease-out forwards;
         }
 
         .glass-card { 
@@ -77,13 +76,18 @@
         .lyric-block { margin-bottom: 25px; font-family: 'Playfair Display', serif; font-size: 1.2rem; line-height: 1.8; color: #333; }
         .chorus-text { font-weight: 700; font-style: italic; border-left: 4px solid var(--luminous-blue); padding-left: 20px; }
 
+        /* Restored QR Styling */
+        .qr-anchor { margin-top: 60px; padding-top: 40px; border-top: 2px solid var(--champagne-silver); }
+        .qr-wrapper { display: inline-block; padding: 20px; background: white; border: 2px solid var(--luminous-blue); border-radius: 15px; }
+        .qr-img { width: 150px; display: block; }
+        .qr-link { margin-top: 15px; font-weight: 600; color: var(--luminous-blue); letter-spacing: 2px; font-size: 0.8rem; }
+
         .login-gate { position: fixed; bottom: 20px; right: 20px; opacity: 0.2; cursor: pointer; font-size: 0.7rem; color: #888; }
         @media (max-width: 768px) { .timer-hub { gap: 8px; } .time-segment { min-width: 60px; padding: 15px; } .time-val { font-size: 1.8rem; } }
     </style>
 </head>
 <body onclick="playWelcome()">
 
-    <!-- Restored Sound Effects & Jingle -->
     <audio id="openSnd" src="audio/open.mp3"></audio>
     <audio id="clickSnd" src="audio/click.mp3"></audio>
     <audio id="jingle" src="audio/jingle.mp3"></audio>
@@ -109,7 +113,7 @@
             <span class="slogan">Gikan sa Gamut</span>
 
             <div class="action-grid">
-                <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" target="_blank" class="btn-luxury" onclick="handleInteraction()">
+                <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" target="_blank" class="btn-luxury" onclick="playClick()">
                     <img src="https://img.icons8.com/ios/100/0047AB/edit-property.png" width="40">
                     <span>Register</span>
                 </a>
@@ -117,16 +121,15 @@
                     <img src="https://img.icons8.com/ios/100/0047AB/audio-wave.png" width="40">
                     <span id="jingleStatus">Play Theme Song</span>
                 </div>
-                <a href="https://www.google.com/maps/search/?api=1&query=Marzon+Hotel+Kalibo+Aklan" target="_blank" class="btn-luxury" onclick="handleInteraction()">
+                <a href="https://www.google.com/maps/search/?api=1&query=Marzon+Hotel+Kalibo+Aklan" target="_blank" class="btn-luxury" onclick="playClick()">
                     <img src="https://img.icons8.com/ios/100/0047AB/marker.png" width="40">
                     <span>Venue Map</span>
                 </a>
             </div>
 
-            <!-- Full Multilingual Lyrics -->
             <div class="lyrics-section">
                 <div class="lyric-block">
-                    <span class="timestamp">(0:00-0:15) English:</span>
+                    <span class="timestamp">(0:00-0:15) Intro:</span>
                     "Miles unfolding, ink on the page, A story rewritten, turning the age. July 2027, the compass aligns, Marzon Hotel, Kalibo, where the heritage shines."
                 </div>
                 <div class="lyric-block chorus-text">
@@ -135,8 +138,16 @@
                 </div>
                 <div class="lyric-block">
                     <span class="timestamp">(0:25-0:30) Outro:</span>
-                    "Kita an Sazon. See you in Kalibo!"
+                    "We are Sazon. See you in Kalibo!"
                 </div>
+            </div>
+
+            <!-- RESTORED QR CODE SECTION -->
+            <div class="qr-anchor">
+                <div class="qr-wrapper">
+                    <img src="images/qr-code.png" class="qr-img" alt="QR Code">
+                </div>
+                <div class="qr-link">tinyurl.com/SazonGrandReunion</div>
             </div>
 
         </div>
@@ -146,7 +157,6 @@
 
     <script>
         let init = false;
-        // Restored Welcome Sound (First Click Anywhere)
         function playWelcome() { 
             if(!init) { 
                 document.getElementById('openSnd').play(); 
@@ -154,27 +164,27 @@
             } 
         }
 
-        // Restored Click Sound for Buttons
-        function handleInteraction() {
+        function playClick() {
             const c = document.getElementById('clickSnd');
             c.currentTime = 0;
             c.play();
         }
 
         function toggleJingle() {
-            handleInteraction();
             const jingle = document.getElementById('jingle');
             const statusText = document.getElementById('jingleStatus');
+            
+            // Logic to prevent click-sound overlap with music start
             if (jingle.paused) {
                 jingle.play();
                 statusText.innerText = "Pause Theme Song";
             } else {
+                playClick(); // Only play click sound on pause
                 jingle.pause();
                 statusText.innerText = "Play Theme Song";
             }
         }
 
-        // Countdown Logic for July 23, 2027
         const targetDate = new Date("July 23, 2027 08:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
@@ -187,11 +197,7 @@
 
         function adminChallenge() {
             const pass = prompt("Enter Administrative Secure Key:");
-            if (pass === "SazonAdmin2027") {
-                alert("Master Hub Access Granted.");
-            } else {
-                alert("Unauthorized.");
-            }
+            if (pass === "SazonAdmin2027") { alert("Access Granted."); }
         }
     </script>
 </body>
