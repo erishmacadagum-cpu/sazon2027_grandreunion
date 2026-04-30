@@ -1,130 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sazon 2027 | Master Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        :root { --luminous-blue: #0047AB; --deep-navy: #002366; --white: #FFFFFF; }
-        body { margin: 0; font-family: 'Montserrat', sans-serif; background: #fff; color: var(--deep-navy); }
+<style>
+    /* This pushes the text down to clear your artwork */
+    .hero-banner {
+        position: relative;
+        height: 85vh;
+        background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.5)), url('images/banner.jpg') center/cover no-repeat;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end; /* Pushes content to the bottom */
+        align-items: center;
+        padding-bottom: 50px;
+        box-sizing: border-box;
+    }
 
-        /* THE FIX: Pushing content down to clear the artwork */
-        .hero-banner {
-            position: relative;
-            height: 95vh;
-            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url('images/banner.jpg') center/cover no-repeat;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end; /* Moves text to the bottom */
-            align-items: center;
-            padding-bottom: 80px; /* Space from the bottom edge */
-        }
+    .header-content h2 {
+        font-family: 'Playfair Display', serif;
+        color: white;
+        font-size: clamp(2.5rem, 8vw, 5.5rem);
+        margin: 0;
+        /* Stronger shadow so white text is readable against the tree */
+        text-shadow: 0 4px 15px rgba(0,0,0,0.9); 
+        letter-spacing: 5px;
+        font-weight: 700;
+    }
 
-        .nav-overlay {
-            position: absolute;
-            top: 30px;
-            width: 90%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .countdown-wrap {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        padding: 20px 40px;
+        border-radius: 100px;
+        border: 1px solid rgba(255,255,255,0.3);
+        display: flex;
+        gap: 30px;
+        margin-top: 15px;
+    }
+</style>
 
-        .logo-frame { background: white; padding: 10px; border-radius: 50%; width: 60px; }
-        .date-badge { color: white; text-align: right; font-weight: 600; text-shadow: 2px 2px 8px rgba(0,0,0,0.8); }
-
-        .header-content { text-align: center; width: 100%; }
-        
-        /* High-contrast Title */
-        .header-content h2 {
-            font-family: 'Playfair Display', serif;
-            color: white;
-            font-size: clamp(3rem, 10vw, 6.5rem);
-            margin: 0;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.9); /* Heavy shadow for visibility */
-            letter-spacing: 4px;
-        }
-
-        /* Glassmorphism Countdown */
-        .countdown-wrap {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            padding: 20px 40px;
-            border-radius: 50px;
-            border: 1px solid rgba(255,255,255,0.2);
-            display: inline-flex;
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-        .time-box { text-align: center; color: white; }
-        .time-val { font-size: 2rem; font-weight: 200; display: block; }
-        .time-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; }
-
-        .main-container { max-width: 900px; margin: -50px auto 50px; position: relative; }
-        .glass-card { background: white; padding: 60px 30px; border-radius: 15px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); text-align: center; }
-        
-        .action-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 40px; }
-        .btn-luxury { 
-            border: 1px solid #eee; padding: 30px; text-decoration: none; color: var(--deep-navy); 
-            display: flex; flex-direction: column; align-items: center; border-radius: 10px;
-        }
-        .btn-luxury:hover { background: var(--luminous-blue); color: white; }
-
-        .qr-section { margin-top: 50px; border-top: 1px solid #eee; padding-top: 30px; }
-        .qr-image { width: 150px; border: 1px solid #ddd; padding: 10px; }
-    </style>
-</head>
-<body onclick="initAudio()">
-
-    <audio id="openSnd" src="audio/open.mp3"></audio>
-    <audio id="clickSnd" src="audio/click.mp3"></audio>
-
-    <div class="hero-banner">
-        <div class="nav-overlay">
-            <img src="images/logo.png" class="logo-frame">
-            <div class="date-badge">JULY 22-23, 2027<br>KALIBO, AKLAN</div>
-        </div>
-
-        <div class="header-content">
-            <h2>SAZON 2027</h2>
-            <div class="countdown-wrap">
-                <div class="time-box"><span id="days" class="time-val">00</span><span class="time-label">Days</span></div>
-                <div class="time-box"><span id="hours" class="time-val">00</span><span class="time-label">Hrs</span></div>
-                <div class="time-box"><span id="mins" class="time-val">00</span><span class="time-label">Mins</span></div>
-                <div class="time-box"><span id="secs" class="time-val">00</span><span class="time-label">Secs</span></div>
-            </div>
+<div class="hero-banner">
+    <div class="header-content">
+        <h2>SAZON 2027</h2>
+        <div class="countdown-wrap">
+            <div class="time-box"><span id="days" class="time-val">00</span><span class="time-label">Days</span></div>
+            <div class="time-box"><span id="hours" class="time-val">00</span><span class="time-label">Hrs</span></div>
+            <div class="time-box"><span id="mins" class="time-val">00</span><span class="time-label">Mins</span></div>
+            <div class="time-box"><span id="secs" class="time-val">00</span><span class="time-label">Secs</span></div>
         </div>
     </div>
-
-    <div class="main-container">
-        <div class="glass-card">
-            <div class="action-grid">
-                <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" class="btn-luxury" onclick="playClick()"><span>Register</span></a>
-                <a href="https://www.google.com/maps/search/?api=1&query=Marzon+Hotel+Kalibo" class="btn-luxury" onclick="playClick()"><span>Venue Map</span></a>
-            </div>
-
-            <div class="qr-section">
-                <img src="images/qr-code.png" class="qr-image">
-                <p>tinyurl.com/SazonGrandReunion</p>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function initAudio() { document.getElementById('openSnd').play(); }
-        function playClick() { document.getElementById('clickSnd').play(); }
-
-        const reunionDate = new Date("July 22, 2027 08:00:00").getTime();
-        setInterval(() => {
-            const now = new Date().getTime();
-            const d = reunionDate - now;
-            document.getElementById('days').innerText = Math.floor(d / (1000 * 60 * 60 * 24));
-            document.getElementById('hours').innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            document.getElementById('mins').innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById('secs').innerText = Math.floor((d % (1000 * 60)) / 1000);
-        }, 1000);
-    </script>
-</body>
-</html>
+</div>
