@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAZON 2027 | The Grand Opening</title>
+    <title>SAZON 2027 | Grand Family Legacy</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
     <style>
         :root { 
@@ -12,7 +12,7 @@
             --white-glass: rgba(255, 255, 255, 0.05);
         }
 
-        body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; }
+        body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; cursor: pointer; }
 
         /* THE CINEMATIC STAGE */
         .stage {
@@ -25,16 +25,19 @@
             overflow: hidden;
         }
 
-        /* BACKGROUND WITH SLOW-ZOOM MAGIC */
+        /* DYNAMIC BACKGROUND WITH TRIGGERED ANIMATION */
         .cinematic-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background: 
                 linear-gradient(to bottom, rgba(0,26,77,0.85), rgba(0,26,77,0.1) 50%, #000 100%),
                 url('images/banner.jpg') center/cover no-repeat;
-            animation: masterSlowZoom 25s infinite alternate ease-in-out;
             z-index: 1;
+            transition: transform 25s cubic-bezier(0.45, 0.05, 0.55, 0.95);
         }
+
+        /* Activating the Zoom Class */
+        .bg-zoom-active { transform: scale(1.15); }
 
         /* LUMINOUS LOGO ANCHOR */
         .logo-anchor {
@@ -44,7 +47,8 @@
             transform: translateX(-50%);
             z-index: 20;
             text-align: center;
-            animation: fadeIn 3s ease-in;
+            opacity: 0;
+            transition: opacity 3s ease-in;
         }
 
         .logo-img {
@@ -67,9 +71,9 @@
             justify-content: space-between;
             align-items: flex-end;
             padding-bottom: 5vh;
+            opacity: 0;
+            transition: opacity 2.5s ease-in 0.5s;
         }
-
-        .center-brand { text-align: center; opacity: 0; animation: scaleReveal 2.5s forwards 0.5s; }
 
         .main-title {
             font-family: 'Playfair Display', serif;
@@ -81,7 +85,7 @@
             filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8));
         }
 
-        /* PROFESSIONAL TIMER PLACEMENT */
+        /* IMPACTFUL TIMER PLACEMENT */
         .timer-portal {
             position: relative;
             z-index: 10;
@@ -89,8 +93,11 @@
             display: flex;
             gap: 20px;
             opacity: 0;
-            animation: revealUp 2s forwards 2.5s;
+            transition: all 2s ease-out 1s;
+            transform: translateY(20px);
         }
+
+        .timer-active { opacity: 1; transform: translateY(0); }
 
         .timer-unit {
             background: var(--white-glass);
@@ -104,50 +111,57 @@
         .t-val { display: block; font-family: 'Playfair Display'; font-size: 3.5rem; font-weight: 700; color: #fff; }
         .t-lbl { font-size: 0.6rem; letter-spacing: 5px; color: var(--sazon-gold); text-transform: uppercase; }
 
-        /* ANIMATIONS */
-        @keyframes masterSlowZoom { from { transform: scale(1); } to { transform: scale(1.1); } }
-        @keyframes scaleReveal { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-        @keyframes revealUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        /* THE DASHBOARD HUB */
+        /* THE HUB DASHBOARD */
         .hub-section { background: white; padding: 120px 0; color: var(--sazon-navy); }
         .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
         .hub-link { 
             padding: 60px; border: 1px solid #f0f0f0; text-decoration: none; color: inherit; 
             text-align: center; transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
         }
-        .hub-link:hover { background: var(--sazon-navy); color: white; transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .hub-link:hover { background: var(--sazon-navy); color: white; transform: translateY(-10px); }
+
+        /* "CLICK TO ENTER" OVERLAY */
+        #overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 100;
+            display: flex; justify-content: center; align-items: center;
+            transition: opacity 1s;
+        }
     </style>
 </head>
-<body onclick="executeOpening()">
+<body>
 
-    <!-- CINEMATIC AUDIO -->
-    <audio id="openingSfx" src="audio/open.mp3"></audio>
+    <!-- OVERLAY TO TRIGGER AUDIO -->
+    <div id="overlay" onclick="startLegacy()">
+        <p style="letter-spacing: 8px; font-weight: 200; font-size: 0.9rem; text-transform: uppercase;">Click to Enter the Sazon Hub</p>
+    </div>
 
-    <div class="logo-anchor">
-        <img src="images/logo.png" class="logo-img" alt="Sazon Official Logo">
+    <!-- AUDIO CORE -->
+    <audio id="openSfx" src="audio/open.mp3" preload="auto"></audio>
+
+    <div class="logo-anchor" id="mainLogo">
+        <img src="images/logo.png" class="logo-img" alt="Sazon Logo">
     </div>
 
     <div class="stage">
-        <div class="cinematic-bg"></div>
+        <div class="cinematic-bg" id="bg"></div>
 
-        <div class="credits-wrapper">
-            <div style="width: 25%; text-align: left; opacity: 0; animation: fadeIn 2s forwards 1.5s;">
-                <p style="font-size: 0.6rem; letter-spacing: 4px;">THE SAZON CLAN<br>LEGACY SERIES</p>
+        <div class="credits-wrapper" id="credits">
+            <div style="width: 25%; text-align: left;">
+                <p style="font-size: 0.6rem; letter-spacing: 4px;">A SAZON CLAN<br>PRODUCTION</p>
             </div>
 
-            <div class="center-brand">
+            <div style="text-align: center;">
                 <h1 class="main-title">SAZON 2027</h1>
                 <p style="color: var(--sazon-gold); letter-spacing: 12px; font-weight: 300; margin-top: 10px;">GIKAN SA GAMUT, TUBTOB SA LANGIT</p>
             </div>
 
-            <div style="width: 25%; text-align: right; opacity: 0; animation: fadeIn 2s forwards 1.5s;">
+            <div style="width: 25%; text-align: right;">
                 <p style="font-family: 'Playfair Display'; font-size: 1.2rem;">MARZON HOTEL<br><span style="font-size: 0.6rem; font-family: 'Montserrat'; letter-spacing: 3px;">KALIBO, AKLAN</span></p>
             </div>
         </div>
 
-        <div class="timer-portal">
+        <div class="timer-portal" id="timer">
             <div class="timer-unit"><span id="d" class="t-val">00</span><span class="t-lbl">Days</span></div>
             <div class="timer-unit"><span id="h" class="t-val">00</span><span class="t-lbl">Hrs</span></div>
             <div class="timer-unit"><span id="m" class="t-val">00</span><span class="t-lbl">Mins</span></div>
@@ -161,7 +175,7 @@
                 <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem;">Registration</h3>
                 <p style="font-size: 0.7rem; letter-spacing: 3px; opacity: 0.5;">Secure Your Seat</p>
             </a>
-            <div class="hub-link" style="cursor:pointer;" onclick="alert('Playing Anthem...')">
+            <div class="hub-link" style="cursor:pointer;" onclick="alert('Anthem feature coming soon!')">
                 <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem;">Family Anthem</h3>
                 <p style="font-size: 0.7rem; letter-spacing: 3px; opacity: 0.5;">Roots & Aspirations</p>
             </div>
@@ -173,17 +187,28 @@
     </div>
 
     <script>
-        function executeOpening() {
-            const sfx = document.getElementById('openingSfx');
-            sfx.volume = 0.6;
-            sfx.play();
+        function startLegacy() {
+            // Play sound immediately on interaction
+            const audio = document.getElementById('openSfx');
+            audio.volume = 0.7;
+            audio.play().catch(e => console.log("Audio failed to play:", e));
+
+            // Remove overlay and trigger visuals
+            document.getElementById('overlay').style.opacity = '0';
+            setTimeout(() => { document.getElementById('overlay').style.display = 'none'; }, 1000);
+
+            // Activate visual sequence
+            document.getElementById('bg').classList.add('bg-zoom-active');
+            document.getElementById('mainLogo').style.opacity = '1';
+            document.getElementById('credits').style.opacity = '1';
+            document.getElementById('timer').classList.add('timer-active');
         }
 
-        // Live Countdown to July 23, 2027
-        const eventDate = new Date("July 23, 2027 08:00:00").getTime();
+        // Countdown Logic
+        const target = new Date("July 23, 2027 08:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
-            const gap = eventDate - now;
+            const gap = target - now;
             document.getElementById('d').innerText = Math.floor(gap / 86400000);
             document.getElementById('h').innerText = Math.floor((gap % 86400000) / 3600000);
             document.getElementById('m').innerText = Math.floor((gap % 3600000) / 60000);
