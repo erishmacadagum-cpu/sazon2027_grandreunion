@@ -3,67 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sazon 2027 | Master Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Sazon 2027 | Reunion Digital Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root { 
-            --luminous-blue: #0047AB; 
             --deep-navy: #002366; 
+            --luminous-blue: #0047AB; 
             --ice-blue: #0077be;
-            --white: #FFFFFF; 
+            --soft-gray: #fafafa;
         }
-        body { margin: 0; font-family: 'Montserrat', sans-serif; background: #fff; color: var(--deep-navy); }
-        .hero-banner { height: 60vh; background: #002366; border-bottom: 8px solid var(--luminous-blue); display: flex; align-items: center; justify-content: center; color: white; text-align: center; }
-        .main-container { max-width: 950px; margin: -100px auto 100px; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 40px 120px rgba(0,0,0,0.1); }
-        .header-group { text-align: center; margin-bottom: 40px; }
-        .reunion-title { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin: 0; }
-        .slogan { font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--luminous-blue); display: block; }
-        .travel-card { margin-top: 40px; padding: 30px; background: #fafafa; border-radius: 12px; border: 1px solid #eee; }
-        .travel-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        .travel-table th { background: var(--ice-blue); color: white; padding: 12px; text-align: left; }
-        .travel-table td { padding: 12px; border: 1px solid #eee; }
-        .lyrics-section { margin-top: 40px; padding: 30px; background: #f0f4f8; border-radius: 12px; }
-        .chorus-text { font-weight: 700; font-style: italic; border-left: 4px solid var(--luminous-blue); padding-left: 20px; margin: 20px 0; }
+        
+        body { margin: 0; font-family: 'Montserrat', sans-serif; background-color: #f4f7f9; color: var(--deep-navy); }
+
+        /* Sophisticated Hero Header */
+        .hero {
+            background-color: var(--deep-navy);
+            height: 45vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 4rem; 
+            margin: 0; 
+            letter-spacing: 3px; 
+            text-transform: uppercase;
+        }
+
+        .hero p { font-weight: 300; letter-spacing: 6px; margin-top: 10px; opacity: 0.9; }
+
+        /* Content Container */
+        .container { 
+            max-width: 900px; 
+            margin: -80px auto 60px; 
+            background: white; 
+            border-radius: 15px; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            overflow: hidden;
+            padding-bottom: 40px;
+        }
+
+        .slogan-box {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .slogan-main { color: var(--luminous-blue); font-weight: 600; letter-spacing: 2px; display: block; font-size: 1.2rem; }
+        .slogan-sub { color: #666; font-style: italic; font-size: 0.9rem; margin-top: 5px; display: block; }
+
+        /* Logistics Section */
+        .section { padding: 40px; }
+        .section-title { font-weight: 600; font-size: 1.4rem; margin-bottom: 25px; border-left: 5px solid var(--luminous-blue); padding-left: 15px; }
+
+        .contact-info { line-height: 1.8; margin-bottom: 30px; font-size: 0.95rem; }
+
+        .travel-table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            border-radius: 8px; 
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .travel-table th { background-color: var(--ice-blue); color: white; padding: 15px; text-align: left; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+        .travel-table td { padding: 15px; border-bottom: 1px solid #eee; font-size: 0.9rem; }
+        .travel-table tr:last-child td { border-bottom: none; }
+
+        /* Lyrics Section */
+        .lyrics-box {
+            background-color: var(--soft-gray);
+            margin: 0 40px;
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 4px solid var(--ice-blue);
+        }
+
+        .lyrics-title { font-family: 'Playfair Display'; font-size: 1.2rem; color: var(--luminous-blue); margin-bottom: 15px; display: block; }
+        .lyric-text { line-height: 1.8; font-style: italic; color: #444; }
+        .chorus { font-weight: 700; color: var(--deep-navy); display: block; margin: 15px 0; }
+
     </style>
 </head>
 <body>
 
-    <div class="hero-banner">
-        <div>
-            <h1 style="font-family: 'Playfair Display'; font-size: 4rem; margin: 0;">SAZON 2027</h1>
-            <p style="letter-spacing: 5px;">REUNION DIGITAL HUB</p>
-        </div>
+    <div class="hero">
+        <h1>Sazon 2027</h1>
+        <p>REUNION DIGITAL HUB</p>
     </div>
 
-    <div class="main-container">
-        <div class="header-group">
-            <span class="slogan">Gikan sa Gamut, Tubtob sa Langit</span>
-            <small>(From the Roots, Toward the Sky)</small>
+    <div class="container">
+        <div class="slogan-box">
+            <span class="slogan-main">GIKAN SA GAMUT, TUBTOB SA LANGIT</span>
+            <span class="slogan-sub">(From the Roots, Toward the Sky)</span>
         </div>
 
-        <div class="travel-card">
-            <h3>Accommodation & Logistics</h3>
-            <p>
-                📍 Marzon Hotel Kalibo, Jaime Cardinal Sin Ave., Andagao, Kalibo, Aklan<br>
+        <div class="section">
+            <div class="section-title">Accommodation & Logistics</div>
+            <div class="contact-info">
+                📍 Jaime Cardinal Sin Ave., Andagao, Kalibo, Aklan<br>
                 📞 +63 999 221 1863 | 🌐 marzonhotelkalibo.com<br>
-                🕐 Check-in: 2:00 PM | 🍳 Breakfast: 6:00 AM – 10:00 AM
-            </p>
+                🕒 Check-in: 2:00 PM | 🍳 Breakfast: 6:00 AM – 10:00 AM
+            </div>
+
             <table class="travel-table">
-                <thead><tr><th>Origin</th><th>How to get there</th></tr></thead>
+                <thead>
+                    <tr>
+                        <th>Origin</th>
+                        <th>How to get there</th>
+                    </tr>
+                </thead>
                 <tbody>
-                    <tr><td><strong>Davao/Cebu/Manila</strong></td><td>Fly to Kalibo (KLO)</td></tr>
-                    <tr><td><strong>Boracay</strong></td><td>Ferry + 1.5hr Van to Kalibo</td></tr>
+                    <tr>
+                        <td><strong>Davao/Cebu/Manila</strong></td>
+                        <td>Fly to Kalibo (KLO)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Boracay</strong></td>
+                        <td>Ferry + 1.5hr Van to Kalibo</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
 
-        <div class="lyrics-section">
-            <h3 style="text-align: center; font-family: 'Playfair Display';">THEME SONG LYRICS</h3>
-            <p><strong>(Intro)</strong> Miles unfolding, ink on the page... From the heart of the Sazon line, To Marzon Hotel, Kalibo, where the heritage shines.</p>
-            <div class="chorus-text">
-                <strong>(Chorus)</strong> Gikan sa gamut, tubtob sa langit... (From the roots, toward the sky). Seasoned with love, let the future ignite, Sazon 2027—our guiding light.
+        <div class="lyrics-box">
+            <span class="lyrics-title">THEME SONG LYRICS</span>
+            <div class="lyric-text">
+                <strong>(Intro)</strong> Miles unfolding, ink on the page... From the heart of the Sazon line, To Marzon Hotel, Kalibo, where the heritage shines.
+                <span class="chorus"><strong>(Chorus)</strong> Gikan sa gamut, tubtob sa langit... (From the roots, toward the sky). Seasoned with love, let the future ignite, Sazon 2027—our guiding light.</span>
+                <strong>(Outro)</strong> We are Sazon. See you in Kalibo!
             </div>
-            <p><strong>(Outro)</strong> We are Sazon. See you in Kalibo!</p>
         </div>
     </div>
 
