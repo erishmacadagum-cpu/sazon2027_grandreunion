@@ -13,9 +13,14 @@
             --champagne-silver: #E5E4E2;
         }
         
+        /* Seamless Animation Setup */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         body { margin: 0; font-family: 'Montserrat', sans-serif; background: #fff; color: var(--deep-navy); overflow-x: hidden; }
 
-        /* Banner Setup */
         .hero-banner {
             position: relative;
             height: 85vh;
@@ -24,71 +29,40 @@
         }
 
         .nav-overlay { 
-            position: absolute; 
-            top: 30px; 
-            width: 90%; 
-            left: 5%;
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
+            position: absolute; top: 30px; width: 90%; left: 5%;
+            display: flex; justify-content: space-between; align-items: center; 
         }
         
         .logo-frame { background: white; padding: 15px; border-radius: 50%; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
         .nav-logo { width: 110px; display: block; } 
 
         .date-badge { 
-            color: white; 
-            text-align: right; 
-            font-weight: 600; 
-            letter-spacing: 2px; 
-            text-shadow: 2px 2px 15px rgba(0,0,0,1); 
-            line-height: 1.5;
+            color: white; text-align: right; font-weight: 600; letter-spacing: 2px; 
+            text-shadow: 2px 2px 15px rgba(0,0,0,1); line-height: 1.5;
         }
 
-        /* Main Content Container */
         .main-container { 
-            max-width: 950px; 
-            margin: -100px auto 100px; 
-            position: relative; 
-            z-index: 10; 
+            max-width: 950px; margin: -100px auto 100px; position: relative; z-index: 10; 
+            animation: fadeInUp 1s ease-out forwards; /* Entry Animation */
         }
 
         .glass-card { 
-            background: white; 
-            padding: 80px 50px; 
-            border-radius: 20px; 
-            box-shadow: 0 40px 120px rgba(0,0,0,0.15); 
-            text-align: center; 
+            background: white; padding: 80px 50px; border-radius: 20px; 
+            box-shadow: 0 40px 120px rgba(0,0,0,0.15); text-align: center; 
         }
 
-        /* Countdown Timer */
-        .timer-hub {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 60px;
-        }
+        .timer-hub { display: flex; justify-content: center; gap: 15px; margin-bottom: 60px; }
         .time-segment {
             background: linear-gradient(145deg, var(--deep-navy), var(--luminous-blue));
-            color: white;
-            padding: 25px;
-            border-radius: 12px;
-            min-width: 90px;
+            color: white; padding: 25px; border-radius: 12px; min-width: 90px;
             box-shadow: 0 15px 35px rgba(0,71,171,0.3);
         }
         .time-val { font-size: 2.8rem; font-family: 'Playfair Display', serif; display: block; font-weight: 700; }
         .time-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 3px; color: var(--champagne-silver); }
 
-        .reunion-title { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 4rem; 
-            color: var(--deep-navy); 
-            margin: 0 0 10px 0;
-            letter-spacing: 2px;
-        }
+        .reunion-title { font-family: 'Playfair Display', serif; font-size: 4rem; color: var(--deep-navy); margin: 0; letter-spacing: 2px; }
         .slogan { font-weight: 300; letter-spacing: 8px; text-transform: uppercase; color: var(--luminous-blue); margin-bottom: 50px; display: block; }
 
-        /* Luxury Action Buttons */
         .action-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; margin: 40px 0; }
         .btn-luxury { 
             border: 1px solid #eee; padding: 40px 20px; text-decoration: none; color: var(--deep-navy); 
@@ -98,21 +72,20 @@
         .btn-luxury:hover { background: var(--luminous-blue); color: white !important; transform: translateY(-5px); }
         .btn-luxury span { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 4px; font-weight: 600; margin-top: 20px; }
 
-        /* Lyrics Display */
         .lyrics-section { text-align: left; padding: 40px; background: #fafafa; border-radius: 12px; margin-top: 40px; border: 1px solid #eee; }
+        .timestamp { color: var(--luminous-blue); font-weight: 600; font-size: 0.8rem; margin-bottom: 5px; display: block; }
         .lyric-block { margin-bottom: 25px; font-family: 'Playfair Display', serif; font-size: 1.2rem; line-height: 1.8; color: #333; }
         .chorus-text { font-weight: 700; font-style: italic; border-left: 4px solid var(--luminous-blue); padding-left: 20px; }
 
-        /* Admin Gate */
         .login-gate { position: fixed; bottom: 20px; right: 20px; opacity: 0.2; cursor: pointer; font-size: 0.7rem; color: #888; }
-        .login-gate:hover { opacity: 1; color: var(--luminous-blue); }
-
         @media (max-width: 768px) { .timer-hub { gap: 8px; } .time-segment { min-width: 60px; padding: 15px; } .time-val { font-size: 1.8rem; } }
     </style>
 </head>
-<body>
+<body onclick="playWelcome()">
 
-    <!-- Audio Assets -->
+    <!-- Restored Sound Effects & Jingle -->
+    <audio id="openSnd" src="audio/open.mp3"></audio>
+    <audio id="clickSnd" src="audio/click.mp3"></audio>
     <audio id="jingle" src="audio/jingle.mp3"></audio>
 
     <div class="hero-banner">
@@ -136,42 +109,60 @@
             <span class="slogan">Gikan sa Gamut</span>
 
             <div class="action-grid">
-                <!-- Register Button -->
-                <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" target="_blank" class="btn-luxury">
+                <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" target="_blank" class="btn-luxury" onclick="handleInteraction()">
                     <img src="https://img.icons8.com/ios/100/0047AB/edit-property.png" width="40">
                     <span>Register</span>
                 </a>
-                <!-- Theme Song Toggle -->
                 <div class="btn-luxury" onclick="toggleJingle()">
                     <img src="https://img.icons8.com/ios/100/0047AB/audio-wave.png" width="40">
                     <span id="jingleStatus">Play Theme Song</span>
                 </div>
-                <!-- Venue Map Button -->
-                <a href="https://www.google.com/maps/search/?api=1&query=Marzon+Hotel+Kalibo+Aklan" target="_blank" class="btn-luxury">
+                <a href="https://www.google.com/maps/search/?api=1&query=Marzon+Hotel+Kalibo+Aklan" target="_blank" class="btn-luxury" onclick="handleInteraction()">
                     <img src="https://img.icons8.com/ios/100/0047AB/marker.png" width="40">
                     <span>Venue Map</span>
                 </a>
             </div>
 
-            <!-- Thematic Lyrics -->
+            <!-- Full Multilingual Lyrics -->
             <div class="lyrics-section">
                 <div class="lyric-block">
+                    <span class="timestamp">(0:00-0:15) English:</span>
                     "Miles unfolding, ink on the page, A story rewritten, turning the age. July 2027, the compass aligns, Marzon Hotel, Kalibo, where the heritage shines."
                 </div>
                 <div class="lyric-block chorus-text">
+                    <span class="timestamp">(0:15-0:25) Chorus:</span>
                     "Gikan sa gamut, tubtob sa langit, Seasoned with love, let the future ignite. Sazon 2027, (Every path) leads us back to the gate."
+                </div>
+                <div class="lyric-block">
+                    <span class="timestamp">(0:25-0:30) Outro:</span>
+                    "Kita an Sazon. See you in Kalibo!"
                 </div>
             </div>
 
         </div>
     </div>
 
-    <!-- Hidden Admin Access -->
     <div class="login-gate" onclick="adminChallenge()">🔒 Moderator Access</div>
 
     <script>
-        // Theme Song Control
+        let init = false;
+        // Restored Welcome Sound (First Click Anywhere)
+        function playWelcome() { 
+            if(!init) { 
+                document.getElementById('openSnd').play(); 
+                init = true; 
+            } 
+        }
+
+        // Restored Click Sound for Buttons
+        function handleInteraction() {
+            const c = document.getElementById('clickSnd');
+            c.currentTime = 0;
+            c.play();
+        }
+
         function toggleJingle() {
+            handleInteraction();
             const jingle = document.getElementById('jingle');
             const statusText = document.getElementById('jingleStatus');
             if (jingle.paused) {
@@ -194,12 +185,10 @@
             document.getElementById('secs').innerText = Math.floor((gap % (1000 * 60)) / 1000);
         }, 1000);
 
-        // Admin Security
         function adminChallenge() {
             const pass = prompt("Enter Administrative Secure Key:");
             if (pass === "SazonAdmin2027") {
                 alert("Master Hub Access Granted.");
-                window.open("https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE", "_blank");
             } else {
                 alert("Unauthorized.");
             }
