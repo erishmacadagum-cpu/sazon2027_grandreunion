@@ -58,7 +58,7 @@
             box-shadow: 0 40px 120px rgba(0,0,0,0.1); text-align: center; 
         }
 
-        /* Ice & Water Countdown Style */
+        /* Ice & Water Countdown */
         .timer-hub { display: flex; justify-content: center; gap: 20px; margin-bottom: 50px; }
         .time-segment {
             background: linear-gradient(135deg, var(--ice-blue), var(--deep-navy));
@@ -75,35 +75,25 @@
         .time-val { font-size: 3rem; font-family: 'Playfair Display', serif; display: block; font-weight: 700; text-shadow: 0 4px 10px rgba(0,0,0,0.3); }
         .time-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 4px; color: rgba(255,255,255,0.8); }
 
-        /* UNIFIED & PROPORTIONAL TITLE */
+        /* Unified Header */
         .header-group { margin-bottom: 50px; }
         .reunion-title { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 4.5rem; 
-            color: var(--deep-navy); 
-            margin: 0; 
-            letter-spacing: 2px; 
-            display: block; 
-            line-height: 1.1;
-            font-weight: 700;
+            font-family: 'Playfair Display', serif; font-size: 4.5rem; color: var(--deep-navy); 
+            margin: 0; letter-spacing: 2px; display: block; line-height: 1.1; font-weight: 700;
         }
         .slogan { 
-            font-weight: 400; 
-            letter-spacing: 4px; 
-            text-transform: uppercase; 
-            color: var(--luminous-blue); 
-            margin-top: 5px; 
-            display: block; 
-            font-size: 0.95rem;
+            font-weight: 400; letter-spacing: 4px; text-transform: uppercase; 
+            color: var(--luminous-blue); margin-top: 5px; display: block; font-size: 0.95rem;
         }
-        .slogan-sub {
-            display: block;
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            color: #888;
-            margin-top: 4px;
-            font-style: italic;
-        }
+        .slogan-sub { display: block; font-size: 0.75rem; letter-spacing: 2px; color: #888; margin-top: 4px; font-style: italic; }
+
+        /* Travel Section Styles */
+        .travel-card { text-align: left; padding: 40px; background: #fafafa; border-radius: 12px; margin-top: 40px; border: 1px solid #eee; }
+        .travel-header { font-family: 'Playfair Display'; color: var(--luminous-blue); letter-spacing: 2px; margin-bottom: 15px; border-bottom: 2px solid var(--ice-blue); display: inline-block; padding-bottom: 5px; }
+        
+        .travel-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.85rem; background: white; }
+        .travel-table th { background: var(--ice-blue); color: white; padding: 12px; text-align: left; }
+        .travel-table td { padding: 12px; border: 1px solid #eee; }
 
         .action-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; margin: 40px 0; }
         .btn-luxury { 
@@ -115,23 +105,17 @@
         .btn-luxury span { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 4px; font-weight: 600; margin-top: 20px; }
 
         .lyrics-section { text-align: left; padding: 40px; background: #fafafa; border-radius: 12px; margin-top: 40px; border: 1px solid #eee; }
-        .timestamp { color: var(--luminous-blue); font-weight: 600; font-size: 0.8rem; margin-bottom: 5px; display: block; }
         .lyric-block { margin-bottom: 25px; font-family: 'Playfair Display', serif; font-size: 1.2rem; line-height: 1.8; color: #333; }
         .chorus-text { font-weight: 700; font-style: italic; border-left: 4px solid var(--luminous-blue); padding-left: 20px; }
 
-        .qr-anchor { margin-top: 60px; padding-top: 40px; border-top: 2px solid var(--champagne-silver); }
+        .qr-anchor { margin-top: 60px; padding-top: 40px; border-top: 2px solid var(--champagne-silver); text-align: center;}
         .qr-wrapper { display: inline-block; padding: 20px; background: white; border: 2px solid var(--luminous-blue); border-radius: 15px; }
         .qr-img { width: 140px; display: block; }
         .qr-link { margin-top: 15px; font-weight: 600; color: var(--luminous-blue); letter-spacing: 2px; font-size: 0.8rem; }
 
-        .login-gate { position: fixed; bottom: 20px; right: 20px; opacity: 0.2; cursor: pointer; font-size: 0.7rem; color: #888; }
-        
         @media (max-width: 768px) { 
             .reunion-title { font-size: 2.8rem; }
-            .timer-hub { gap: 10px; } 
-            .time-segment { min-width: 75px; padding: 15px 5px; } 
-            .time-val { font-size: 1.8rem; } 
-            .slogan { letter-spacing: 2px; font-size: 0.8rem; }
+            .timer-hub { gap: 10px; } .time-segment { min-width: 75px; padding: 15px 5px; } .time-val { font-size: 1.8rem; } 
         }
     </style>
 </head>
@@ -151,7 +135,6 @@
     <div class="main-container">
         <div class="glass-card">
             
-            <!-- TIMER FIRST -->
             <div class="timer-hub">
                 <div class="time-segment"><span id="days" class="time-val">00</span><span class="time-label">Days</span></div>
                 <div class="time-segment"><span id="hours" class="time-val">00</span><span class="time-label">Hrs</span></div>
@@ -159,7 +142,6 @@
                 <div class="time-segment"><span id="secs" class="time-val">00</span><span class="time-label">Secs</span></div>
             </div>
 
-            <!-- UNIFIED TITLE GROUP -->
             <div class="header-group">
                 <h2 class="reunion-title">SAZON 2027</h2>
                 <span class="slogan">Gikan sa Gamut, Tubtob sa Langit</span>
@@ -181,18 +163,39 @@
                 </a>
             </div>
 
+            <!-- TRAVEL & ACCOMMODATION SECTION -->
+            <div class="travel-card">
+                <h3 class="travel-header">Accommodation Details</h3>
+                <p style="font-size: 0.9rem; line-height: 1.8;">
+                    📍 <strong>Address:</strong> Jaime Cardinal Sin Ave., Andagao, Kalibo, Aklan<br>
+                    📞 <strong>Contact:</strong> +63 999 221 1863 | 🌐 <strong>Web:</strong> marzonhotelkalibo.com<br>
+                    🕐 <strong>Check-in:</strong> 2:00 PM | <strong>Check-out:</strong> 12:00 PM<br>
+                    🍳 <strong>Buffet Breakfast:</strong> 6:00 AM – 10:00 AM | 🏊 <strong>Pool:</strong> Available until 7:00 PM
+                </p>
+
+                <h3 class="travel-header" style="margin-top: 30px;">Travel Guide by Origin</h3>
+                <table class="travel-table">
+                    <thead>
+                        <tr><th>Origin</th><th>How to get there</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Davao</strong></td><td>Fly Davao → Kalibo (KLO) direct or via Cebu</td></tr>
+                        <tr><td><strong>Manila</strong></td><td>Fly NAIA → Kalibo (KLO) — multiple daily flights</td></tr>
+                        <tr><td><strong>Cebu</strong></td><td>Fly Mactan → Kalibo (KLO)</td></tr>
+                        <tr><td><strong>Boracay</strong></td><td>Ferry from Caticlan + van to Kalibo (~1.5 hrs)</td></tr>
+                    </tbody>
+                </table>
+                <p style="font-size: 0.8rem; color: #666; font-style: italic;">
+                    ✈️ <strong>Note:</strong> Kalibo International Airport (KLO) is only 5 minutes away. Airport transfer is available at ₱250/trip via the hotel.
+                </p>
+            </div>
+
             <div class="lyrics-section">
                 <div class="lyric-block">
-                    <span class="timestamp">(0:00-0:15) Intro:</span>
                     "Miles unfolding, ink on the page, A story rewritten, turning the age. July 2027, the compass aligns, Marzon Hotel, Kalibo, where the heritage shines."
                 </div>
                 <div class="lyric-block chorus-text">
-                    <span class="timestamp">(0:15-0:25) Chorus:</span>
                     "Gikan sa gamut, tubtob sa langit, Seasoned with love, let the future ignite. Sazon 2027, (Every path) leads us back to the gate."
-                </div>
-                <div class="lyric-block">
-                    <span class="timestamp">(0:25-0:30) Outro:</span>
-                    "We are Sazon. See you in Kalibo!"
                 </div>
             </div>
 
@@ -206,35 +209,16 @@
         </div>
     </div>
 
-    <div class="login-gate" onclick="adminChallenge()">🔒 Moderator Access</div>
-
     <script>
         let init = false;
-        function playWelcome() { 
-            if(!init) { 
-                document.getElementById('openSnd').play(); 
-                init = true; 
-            } 
-        }
-
-        function playClick() {
-            const c = document.getElementById('clickSnd');
-            c.currentTime = 0;
-            c.play();
-        }
+        function playWelcome() { if(!init) { document.getElementById('openSnd').play(); init = true; } }
+        function playClick() { const c = document.getElementById('clickSnd'); c.currentTime = 0; c.play(); }
 
         function toggleJingle() {
             const jingle = document.getElementById('jingle');
             const statusText = document.getElementById('jingleStatus');
-            
-            if (jingle.paused) {
-                jingle.play();
-                statusText.innerText = "Pause Theme Song";
-            } else {
-                playClick();
-                jingle.pause();
-                statusText.innerText = "Play Theme Song";
-            }
+            if (jingle.paused) { jingle.play(); statusText.innerText = "Pause Theme Song"; } 
+            else { playClick(); jingle.pause(); statusText.innerText = "Play Theme Song"; }
         }
 
         const targetDate = new Date("July 23, 2027 08:00:00").getTime();
@@ -246,11 +230,6 @@
             document.getElementById('mins').innerText = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
             document.getElementById('secs').innerText = Math.floor((gap % (1000 * 60)) / 1000);
         }, 1000);
-
-        function adminChallenge() {
-            const pass = prompt("Enter Administrative Secure Key:");
-            if (pass === "SazonAdmin2027") { alert("Access Granted."); }
-        }
     </script>
 </body>
 </html>
