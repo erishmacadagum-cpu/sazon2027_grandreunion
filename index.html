@@ -3,144 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sazon 2027 | Reunion Digital Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Sazon 2027 | Master Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root { 
-            --deep-navy: #002366; 
             --luminous-blue: #0047AB; 
+            --deep-navy: #002366; 
             --ice-blue: #0077be;
-            --soft-gray: #fafafa;
+            --water-glow: rgba(0, 119, 190, 0.4);
+            --white: #FFFFFF; 
         }
         
-        body { margin: 0; font-family: 'Montserrat', sans-serif; background-color: #f4f7f9; color: var(--deep-navy); }
+        @keyframes waterRipple {
+            0% { box-shadow: 0 10px 30px var(--water-glow); }
+            50% { box-shadow: 0 15px 45px rgba(0, 119, 190, 0.6); }
+            100% { box-shadow: 0 10px 30px var(--water-glow); }
+        }
 
-        /* Sophisticated Hero Header */
-        .hero {
-            background-color: var(--deep-navy);
-            height: 45vh;
+        body { margin: 0; font-family: 'Montserrat', sans-serif; background: #fff; color: var(--deep-navy); overflow-x: hidden; }
+
+        .hero-banner {
+            position: relative;
+            height: 60vh;
+            background: var(--deep-navy);
+            border-bottom: 8px solid var(--luminous-blue);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             color: white;
             text-align: center;
-            padding: 0 20px;
         }
 
-        .hero h1 { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 4rem; 
-            margin: 0; 
-            letter-spacing: 3px; 
-            text-transform: uppercase;
+        .main-container { 
+            max-width: 950px; margin: -100px auto 100px; position: relative; z-index: 10; 
+            background: white; padding: 60px 40px; border-radius: 20px; 
+            box-shadow: 0 40px 120px rgba(0,0,0,0.1); text-align: center; 
         }
 
-        .hero p { font-weight: 300; letter-spacing: 6px; margin-top: 10px; opacity: 0.9; }
-
-        /* Content Container */
-        .container { 
-            max-width: 900px; 
-            margin: -80px auto 60px; 
-            background: white; 
-            border-radius: 15px; 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-            overflow: hidden;
-            padding-bottom: 40px;
+        /* Countdown Style */
+        .timer-hub { display: flex; justify-content: center; gap: 20px; margin-bottom: 50px; }
+        .time-segment {
+            background: linear-gradient(135deg, var(--ice-blue), var(--deep-navy));
+            color: white; padding: 20px; border-radius: 15px; min-width: 80px;
+            animation: waterRipple 4s infinite ease-in-out;
         }
+        .time-val { font-size: 2.5rem; font-family: 'Playfair Display', serif; display: block; font-weight: 700; }
+        .time-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; }
 
-        .slogan-box {
-            text-align: center;
-            padding: 40px 20px;
-            border-bottom: 1px solid #eee;
-        }
+        .slogan { font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--luminous-blue); display: block; font-size: 1.1rem; }
+        
+        .action-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 40px 0; }
+        .btn-luxury { border: 1px solid #eee; padding: 30px 15px; text-decoration: none; color: var(--deep-navy); border-radius: 12px; cursor: pointer; transition: 0.3s; display: block; }
+        .btn-luxury:hover { background: var(--luminous-blue); color: white; }
 
-        .slogan-main { color: var(--luminous-blue); font-weight: 600; letter-spacing: 2px; display: block; font-size: 1.2rem; }
-        .slogan-sub { color: #666; font-style: italic; font-size: 0.9rem; margin-top: 5px; display: block; }
+        .travel-card { text-align: left; padding: 30px; background: #fafafa; border-radius: 12px; border: 1px solid #eee; margin-top: 30px; }
+        .travel-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .travel-table th { background: var(--ice-blue); color: white; padding: 12px; text-align: left; }
+        .travel-table td { padding: 12px; border-bottom: 1px solid #eee; }
 
-        /* Logistics Section */
-        .section { padding: 40px; }
-        .section-title { font-weight: 600; font-size: 1.4rem; margin-bottom: 25px; border-left: 5px solid var(--luminous-blue); padding-left: 15px; }
+        .lyrics-section { text-align: left; padding: 30px; background: #f9f9f9; border-radius: 12px; margin-top: 30px; border-left: 5px solid var(--luminous-blue); }
+        .chorus-text { font-weight: 700; font-style: italic; margin: 15px 0; padding-left: 15px; border-left: 2px solid var(--ice-blue); }
 
-        .contact-info { line-height: 1.8; margin-bottom: 30px; font-size: 0.95rem; }
-
-        .travel-table { 
-            width: 100%; 
-            border-collapse: collapse; 
-            border-radius: 8px; 
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-
-        .travel-table th { background-color: var(--ice-blue); color: white; padding: 15px; text-align: left; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
-        .travel-table td { padding: 15px; border-bottom: 1px solid #eee; font-size: 0.9rem; }
-        .travel-table tr:last-child td { border-bottom: none; }
-
-        /* Lyrics Section */
-        .lyrics-box {
-            background-color: var(--soft-gray);
-            margin: 0 40px;
-            padding: 30px;
-            border-radius: 10px;
-            border-left: 4px solid var(--ice-blue);
-        }
-
-        .lyrics-title { font-family: 'Playfair Display'; font-size: 1.2rem; color: var(--luminous-blue); margin-bottom: 15px; display: block; }
-        .lyric-text { line-height: 1.8; font-style: italic; color: #444; }
-        .chorus { font-weight: 700; color: var(--deep-navy); display: block; margin: 15px 0; }
-
+        .portal-btn { background:none; border:1px solid #ccc; padding: 10px 20px; cursor:pointer; color:#888; font-size:0.6rem; letter-spacing:2px; text-transform:uppercase; border-radius: 50px; margin-top: 50px; }
     </style>
 </head>
-<body>
+<body onclick="playWelcome()">
 
-    <div class="hero">
-        <h1>Sazon 2027</h1>
-        <p>REUNION DIGITAL HUB</p>
+    <!-- Audio Engine -->
+    <audio id="openSnd" src="audio/open.mp3"></audio>
+    <audio id="clickSnd" src="audio/click.mp3"></audio>
+    <audio id="jingle" src="audio/jingle.mp3"></audio>
+
+    <div class="hero-banner">
+        <h1 style="font-family: 'Playfair Display'; font-size: 4rem; margin: 0;">SAZON 2027</h1>
+        <p style="letter-spacing: 6px;">REUNION DIGITAL HUB</p>
     </div>
 
-    <div class="container">
-        <div class="slogan-box">
-            <span class="slogan-main">GIKAN SA GAMUT, TUBTOB SA LANGIT</span>
-            <span class="slogan-sub">(From the Roots, Toward the Sky)</span>
+    <div class="main-container">
+        <!-- Live Countdown Timer -->
+        <div class="timer-hub">
+            <div class="time-segment"><span id="days" class="time-val">00</span><span class="time-label">Days</span></div>
+            <div class="time-segment"><span id="hours" class="time-val">00</span><span class="time-label">Hrs</span></div>
+            <div class="time-segment"><span id="mins" class="time-val">00</span><span class="time-label">Mins</span></div>
+            <div class="time-segment"><span id="secs" class="time-val">00</span><span class="time-label">Secs</span></div>
         </div>
 
-        <div class="section">
-            <div class="section-title">Accommodation & Logistics</div>
-            <div class="contact-info">
+        <span class="slogan">GIKAN SA GAMUT, TUBTOB SA LANGIT</span>
+        <small style="color: #666; font-style: italic;">(From the Roots, Toward the Sky)</small>
+
+        <div class="action-grid">
+            <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" target="_blank" class="btn-luxury" onclick="playClick()">REGISTER</a>
+            <div class="btn-luxury" onclick="toggleJingle()">PLAY THEME SONG</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Marzon+Hotel+Kalibo+Aklan" target="_blank" class="btn-luxury" onclick="playClick()">VENUE MAP</a>
+        </div>
+
+        <div class="travel-card">
+            <h3>Accommodation & Logistics</h3>
+            <p>
                 📍 Jaime Cardinal Sin Ave., Andagao, Kalibo, Aklan<br>
                 📞 +63 999 221 1863 | 🌐 marzonhotelkalibo.com<br>
-                🕒 Check-in: 2:00 PM | 🍳 Breakfast: 6:00 AM – 10:00 AM
-            </div>
-
+                🕐 Check-in: 2:00 PM | 🍳 Breakfast: 6:00 AM – 10:00 AM
+            </p>
             <table class="travel-table">
-                <thead>
-                    <tr>
-                        <th>Origin</th>
-                        <th>How to get there</th>
-                    </tr>
-                </thead>
+                <thead><tr><th>Origin</th><th>How to get there</th></tr></thead>
                 <tbody>
-                    <tr>
-                        <td><strong>Davao/Cebu/Manila</strong></td>
-                        <td>Fly to Kalibo (KLO)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Boracay</strong></td>
-                        <td>Ferry + 1.5hr Van to Kalibo</td>
-                    </tr>
+                    <tr><td><strong>Davao/Cebu/Manila</strong></td><td>Fly to Kalibo (KLO)</td></tr>
+                    <tr><td><strong>Boracay</strong></td><td>Ferry + 1.5hr Van to Kalibo</td></tr>
                 </tbody>
             </table>
         </div>
 
-        <div class="lyrics-box">
-            <span class="lyrics-title">THEME SONG LYRICS</span>
-            <div class="lyric-text">
-                <strong>(Intro)</strong> Miles unfolding, ink on the page... From the heart of the Sazon line, To Marzon Hotel, Kalibo, where the heritage shines.
-                <span class="chorus"><strong>(Chorus)</strong> Gikan sa gamut, tubtob sa langit... (From the roots, toward the sky). Seasoned with love, let the future ignite, Sazon 2027—our guiding light.</span>
-                <strong>(Outro)</strong> We are Sazon. See you in Kalibo!
+        <div class="lyrics-section">
+            <h4 style="color: var(--luminous-blue); margin-top: 0;">THEME SONG LYRICS</h4>
+            <p><strong>(Intro)</strong> Miles unfolding, ink on the page... From the heart of the Sazon line, To Marzon Hotel, Kalibo, where the heritage shines.</p>
+            <div class="chorus-text">
+                <strong>(Chorus)</strong> Gikan sa gamut, tubtob sa langit... (From the roots, toward the sky). Seasoned with love, let the future ignite, Sazon 2027—our guiding light.
             </div>
+            <p><strong>(Outro)</strong> We are Sazon. See you in Kalibo!</p>
         </div>
+
+        <!-- Two-Tier Portal Access -->
+        <button onclick="staffPortal()" class="portal-btn">Portal Access</button>
     </div>
 
+    <script>
+        let init = false;
+        function playWelcome() { if(!init) { document.getElementById('openSnd').play(); init = true; } }
+        function playClick() { const c = document.getElementById('clickSnd'); c.currentTime = 0; c.play(); }
+
+        function toggleJingle() {
+            const jingle = document.getElementById('jingle');
+            if (jingle.paused) { jingle.play(); } 
+            else { jingle.pause(); }
+        }
+
+        // Access Credentials: SAZON_OWNER and MOD_2027
+        function staffPortal() {
+            const code = prompt("Enter Access ID:");
+            if (code === "SAZON_OWNER") {
+                window.open("YOUR_MASTER_TRACKER_LINK", "_blank");
+            } else if (code === "MOD_2027") {
+                window.open("YOUR_VIEWER_ONLY_LINK", "_blank");
+            } else {
+                alert("Unauthorized Access.");
+            }
+        }
+
+        const targetDate = new Date("July 23, 2027 08:00:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const gap = targetDate - now;
+            document.getElementById('days').innerText = Math.floor(gap / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('mins').innerText = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('secs').innerText = Math.floor((gap % (1000 * 60)) / 1000);
+        }, 1000);
+    </script>
 </body>
 </html>
