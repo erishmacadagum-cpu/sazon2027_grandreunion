@@ -14,7 +14,7 @@
 
         body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; }
 
-        /* THE STAGE */
+        /* THE CINEMATIC STAGE */
         .stage {
             position: relative;
             height: 100vh;
@@ -25,18 +25,18 @@
             overflow: hidden;
         }
 
-        /* BACKGROUND WITH SYNCED ZOOM */
+        /* BACKGROUND WITH SLOW-ZOOM MAGIC */
         .cinematic-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background: 
                 linear-gradient(to bottom, rgba(0,26,77,0.85), rgba(0,26,77,0.1) 50%, #000 100%),
                 url('images/banner.jpg') center/cover no-repeat;
-            animation: cinematicMasterZoom 25s infinite alternate ease-in-out;
+            animation: masterSlowZoom 25s infinite alternate ease-in-out;
             z-index: 1;
         }
 
-        /* CLEAR LOGO ANCHOR */
+        /* LUMINOUS LOGO ANCHOR */
         .logo-anchor {
             position: absolute;
             top: 40px;
@@ -48,12 +48,13 @@
         }
 
         .logo-img {
-            width: 130px;
-            filter: drop-shadow(0 0 15px rgba(255,255,255,0.4)) brightness(1.1);
-            background: rgba(255, 255, 255, 0.05);
+            width: 140px;
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.3));
+            background: rgba(255, 255, 255, 0.08);
             padding: 15px;
             border-radius: 50%;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         /* OPENING CREDITS SYSTEM */
@@ -68,7 +69,7 @@
             padding-bottom: 5vh;
         }
 
-        .center-brand { text-align: center; opacity: 0; animation: scaleReveal 2s forwards 0.5s; }
+        .center-brand { text-align: center; opacity: 0; animation: scaleReveal 2.5s forwards 0.5s; }
 
         .main-title {
             font-family: 'Playfair Display', serif;
@@ -80,11 +81,11 @@
             filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8));
         }
 
-        /* POSITIONED TIMER */
+        /* PROFESSIONAL TIMER PLACEMENT */
         .timer-portal {
             position: relative;
             z-index: 10;
-            margin-bottom: 12vh; /* Shifted lower for better visibility of artwork */
+            margin-bottom: 12vh;
             display: flex;
             gap: 20px;
             opacity: 0;
@@ -104,25 +105,25 @@
         .t-lbl { font-size: 0.6rem; letter-spacing: 5px; color: var(--sazon-gold); text-transform: uppercase; }
 
         /* ANIMATIONS */
-        @keyframes cinematicMasterZoom { from { transform: scale(1); } to { transform: scale(1.1); } }
+        @keyframes masterSlowZoom { from { transform: scale(1); } to { transform: scale(1.1); } }
         @keyframes scaleReveal { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
         @keyframes revealUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* THE HUB DASHBOARD */
-        .hub-section { background: white; padding: 100px 0; color: var(--sazon-navy); }
+        /* THE DASHBOARD HUB */
+        .hub-section { background: white; padding: 120px 0; color: var(--sazon-navy); }
         .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
         .hub-link { 
-            padding: 60px; border: 1px solid #eee; text-decoration: none; color: inherit; 
-            text-align: center; transition: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            padding: 60px; border: 1px solid #f0f0f0; text-decoration: none; color: inherit; 
+            text-align: center; transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
         }
-        .hub-link:hover { background: var(--sazon-navy); color: white; transform: translateY(-10px); }
+        .hub-link:hover { background: var(--sazon-navy); color: white; transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
     </style>
 </head>
-<body onclick="playOpening()">
+<body onclick="executeOpening()">
 
     <!-- CINEMATIC AUDIO -->
-    <audio id="openingSfx" src="audio/magical-sweep.mp3"></audio>
+    <audio id="openingSfx" src="audio/open.mp3"></audio>
 
     <div class="logo-anchor">
         <img src="images/logo.png" class="logo-img" alt="Sazon Official Logo">
@@ -133,12 +134,12 @@
 
         <div class="credits-wrapper">
             <div style="width: 25%; text-align: left; opacity: 0; animation: fadeIn 2s forwards 1.5s;">
-                <p style="font-size: 0.6rem; letter-spacing: 4px;">A SAZON FAMILY<br>TRADITION</p>
+                <p style="font-size: 0.6rem; letter-spacing: 4px;">THE SAZON CLAN<br>LEGACY SERIES</p>
             </div>
 
             <div class="center-brand">
                 <h1 class="main-title">SAZON 2027</h1>
-                <p style="color: var(--sazon-gold); letter-spacing: 10px; font-weight: 300; margin-top: 10px;">GIKAN SA GAMUT, TUBTOB SA LANGIT</p>
+                <p style="color: var(--sazon-gold); letter-spacing: 12px; font-weight: 300; margin-top: 10px;">GIKAN SA GAMUT, TUBTOB SA LANGIT</p>
             </div>
 
             <div style="width: 25%; text-align: right; opacity: 0; animation: fadeIn 2s forwards 1.5s;">
@@ -157,31 +158,32 @@
     <div class="hub-section">
         <div class="hub-grid">
             <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" target="_blank" class="hub-link">
-                <h3 style="font-family: 'Playfair Display'; font-size: 1.6rem;">Registration</h3>
-                <p style="font-size: 0.7rem; letter-spacing: 3px; opacity: 0.6;">Secure Your Attendance</p>
+                <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem;">Registration</h3>
+                <p style="font-size: 0.7rem; letter-spacing: 3px; opacity: 0.5;">Secure Your Seat</p>
             </a>
             <div class="hub-link" style="cursor:pointer;" onclick="alert('Playing Anthem...')">
-                <h3 style="font-family: 'Playfair Display'; font-size: 1.6rem;">Theme Song</h3>
-                <p style="font-size: 0.7rem; letter-spacing: 3px; opacity: 0.6;">Listen to the Sazon Jingle</p>
+                <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem;">Family Anthem</h3>
+                <p style="font-size: 0.7rem; letter-spacing: 3px; opacity: 0.5;">Roots & Aspirations</p>
             </div>
             <a href="#" class="hub-link">
-                <h3 style="font-family: 'Playfair Display'; font-size: 1.6rem;">Digital Hub</h3>
-                <p style="font-size: 0.7rem; letter-spacing: 3px; opacity: 0.6;">Logistics & Resources</p>
+                <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem;">Digital Hub</h3>
+                <p style="font-size: 0.7rem; letter-spacing: 3px; opacity: 0.5;">Resource Archive</p>
             </a>
         </div>
     </div>
 
     <script>
-        function playOpening() {
+        function executeOpening() {
             const sfx = document.getElementById('openingSfx');
-            sfx.volume = 0.5;
+            sfx.volume = 0.6;
             sfx.play();
         }
 
-        const eventTime = new Date("July 23, 2027 08:00:00").getTime();
+        // Live Countdown to July 23, 2027
+        const eventDate = new Date("July 23, 2027 08:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
-            const gap = eventTime - now;
+            const gap = eventDate - now;
             document.getElementById('d').innerText = Math.floor(gap / 86400000);
             document.getElementById('h').innerText = Math.floor((gap % 86400000) / 3600000);
             document.getElementById('m').innerText = Math.floor((gap % 3600000) / 60000);
