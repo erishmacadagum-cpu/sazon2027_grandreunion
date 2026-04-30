@@ -3,173 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sazon 2027 | Author's Master Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Sazon 2027 | Master Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --luminous-blue: #0047AB;
-            --deep-navy: #002366;
-            --white: #FFFFFF;
-            --champagne-silver: #E5E4E2;
-        }
+        :root { --luminous-blue: #0047AB; --deep-navy: #002366; --white: #FFFFFF; }
+        body { margin: 0; font-family: 'Montserrat', sans-serif; background: #fff; color: var(--deep-navy); }
 
-        html { scroll-behavior: smooth; }
-        body {
-            margin: 0;
-            font-family: 'Montserrat', sans-serif;
-            background-color: #ffffff;
-            color: var(--deep-navy);
-            overflow-x: hidden;
-        }
-
-        /* BANNER CALIBRATION - Fixed for Desktop Visibility */
+        /* THE FIX: Pushing content down to clear the artwork */
         .hero-banner {
             position: relative;
-            min-height: 85vh;
-            background: linear-gradient(rgba(0,35,102,0.3), rgba(0,35,102,0.5)), url('images/banner.jpg') center/cover no-repeat;
+            height: 95vh;
+            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url('images/banner.jpg') center/cover no-repeat;
             display: flex;
             flex-direction: column;
+            justify-content: flex-end; /* Moves text to the bottom */
             align-items: center;
-            justify-content: center;
-            border-bottom: 8px solid var(--luminous-blue);
-            padding: 20px;
-            box-sizing: border-box;
+            padding-bottom: 80px; /* Space from the bottom edge */
         }
 
         .nav-overlay {
             position: absolute;
-            top: 40px;
+            top: 30px;
             width: 90%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 20;
         }
 
-        .logo-frame { background: white; padding: 15px; border-radius: 50%; box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
-        .nav-logo { width: 80px; display: block; }
+        .logo-frame { background: white; padding: 10px; border-radius: 50%; width: 60px; }
+        .date-badge { color: white; text-align: right; font-weight: 600; text-shadow: 2px 2px 8px rgba(0,0,0,0.8); }
 
-        .date-badge {
-            color: white;
-            text-align: right;
-            border-right: 4px solid var(--luminous-blue);
-            padding-right: 20px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-        }
-
-        /* Desktop-Optimized Header Content */
-        .header-content {
-            text-align: center;
-            z-index: 10;
-            margin-top: 40px;
-        }
-
+        .header-content { text-align: center; width: 100%; }
+        
+        /* High-contrast Title */
         .header-content h2 {
             font-family: 'Playfair Display', serif;
             color: white;
-            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            font-size: clamp(3rem, 10vw, 6.5rem);
             margin: 0;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            letter-spacing: 2px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.9); /* Heavy shadow for visibility */
+            letter-spacing: 4px;
         }
 
+        /* Glassmorphism Countdown */
         .countdown-wrap {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            padding: 25px 40px;
-            border-radius: 100px;
-            border: 1px solid rgba(255,255,255,0.3);
-            display: flex;
+            padding: 20px 40px;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.2);
+            display: inline-flex;
             gap: 30px;
-            margin-top: 40px;
+            margin-top: 20px;
         }
 
         .time-box { text-align: center; color: white; }
-        .time-val { font-size: 2.2rem; font-weight: 200; display: block; color: var(--white); }
-        .time-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 3px; }
+        .time-val { font-size: 2rem; font-weight: 200; display: block; }
+        .time-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* Main Hub Card */
-        .main-container {
-            max-width: 950px;
-            margin: -80px auto 100px;
-            position: relative;
-            z-index: 30;
+        .main-container { max-width: 900px; margin: -50px auto 50px; position: relative; }
+        .glass-card { background: white; padding: 60px 30px; border-radius: 15px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); text-align: center; }
+        
+        .action-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 40px; }
+        .btn-luxury { 
+            border: 1px solid #eee; padding: 30px; text-decoration: none; color: var(--deep-navy); 
+            display: flex; flex-direction: column; align-items: center; border-radius: 10px;
         }
+        .btn-luxury:hover { background: var(--luminous-blue); color: white; }
 
-        .glass-card {
-            background: white;
-            padding: 80px 50px;
-            border-radius: 8px;
-            box-shadow: 0 50px 120px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .subtitle { text-transform: uppercase; letter-spacing: 8px; font-size: 0.85rem; color: #b1b1b1; margin-bottom: 60px; display: block; }
-
-        /* Action Buttons */
-        .action-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin-bottom: 80px; }
-        .btn-luxury {
-            border: 1px solid #f0f0f0;
-            padding: 45px 25px;
-            text-decoration: none;
-            color: var(--deep-navy);
-            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: #ffffff;
-            cursor: pointer;
-        }
-
-        .btn-luxury:hover { background: var(--luminous-blue); color: white !important; transform: translateY(-12px); box-shadow: 0 20px 40px rgba(0, 71, 171, 0.2); }
-        .btn-luxury span { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; font-weight: 600; margin-top: 20px; }
-
-        /* Lyrics Section */
-        .lyrics-section { padding: 80px 40px; background: #fcfcfc; border-top: 1px solid #eee; margin: 60px 0; }
-        .lyrics-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2.2rem; color: var(--luminous-blue); margin-bottom: 50px; }
-        .lyric-text { font-family: 'Playfair Display', serif; font-size: 1.5rem; line-height: 2.2; color: #222; max-width: 700px; margin: 0 auto; }
-        .chorus-highlight { font-weight: 700; color: var(--luminous-blue); font-size: 1.7rem; margin: 50px 0; padding: 30px; border-top: 1px solid var(--luminous-blue); border-bottom: 1px solid var(--luminous-blue); background: white; }
-
-        /* QR HUB - Restored */
-        .qr-section { margin-top: 80px; padding-top: 50px; border-top: 1px solid #eee; }
-        .qr-frame {
-            display: inline-block;
-            padding: 15px;
-            background: white;
-            border: 1px solid var(--champagne-silver);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
-        }
-        .qr-image { width: 150px; height: 150px; display: block; }
-
-        .footer-slogan { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--deep-navy); margin-top: 60px; font-weight: 700; }
-        .slogan-sub { display: block; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 10px; font-size: 0.7rem; color: var(--luminous-blue); margin-top: 15px; opacity: 0.6; }
-
-        @media (max-width: 768px) {
-            .hero-banner { min-height: 70vh; }
-            .header-content { margin-top: 80px; }
-            .countdown-wrap { gap: 15px; padding: 20px; border-radius: 20px; margin-top: 30px; }
-            .time-val { font-size: 1.6rem; }
-            .main-container { margin-top: -40px; }
-            .glass-card { padding: 40px 20px; }
-        }
+        .qr-section { margin-top: 50px; border-top: 1px solid #eee; padding-top: 30px; }
+        .qr-image { width: 150px; border: 1px solid #ddd; padding: 10px; }
     </style>
 </head>
-<body onclick="initAudioEngine()">
+<body onclick="initAudio()">
 
-    <audio id="openSnd" src="audio/open.mp3" preload="auto"></audio>
-    <audio id="clickSnd" src="audio/click.mp3" preload="auto"></audio>
-    <audio id="jingle" src="audio/jingle.mp3" preload="auto"></audio>
+    <audio id="openSnd" src="audio/open.mp3"></audio>
+    <audio id="clickSnd" src="audio/click.mp3"></audio>
 
     <div class="hero-banner">
         <div class="nav-overlay">
-            <div class="logo-frame"><img src="images/logo.png" class="nav-logo"></div>
-            <div class="date-badge">July 22-23, 2027<br>Kalibo, Aklan</div>
+            <img src="images/logo.png" class="logo-frame">
+            <div class="date-badge">JULY 22-23, 2027<br>KALIBO, AKLAN</div>
         </div>
 
         <div class="header-content">
@@ -185,98 +100,31 @@
 
     <div class="main-container">
         <div class="glass-card">
-            <span class="subtitle">The Grand Family Reunion</span>
-
             <div class="action-grid">
-                <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" target="_blank" class="btn-luxury" onclick="playClickEffect()">
-                    <img src="https://img.icons8.com/ios/100/0047AB/edit-property.png" width="40">
-                    <span>Register</span>
-                </a>
-                <div class="btn-luxury" onclick="handleJingleToggle()">
-                    <img src="https://img.icons8.com/ios/100/0047AB/audio-wave.png" width="40">
-                    <span>Theme Song</span>
-                </div>
-                <a href="https://www.google.com/maps/search/?api=1&query=Marzon+Hotel+Kalibo" target="_blank" class="btn-luxury" onclick="playClickEffect()">
-                    <img src="https://img.icons8.com/ios/100/0047AB/marker.png" width="40">
-                    <span>Venue Map</span>
-                </a>
+                <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" class="btn-luxury" onclick="playClick()"><span>Register</span></a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Marzon+Hotel+Kalibo" class="btn-luxury" onclick="playClick()"><span>Venue Map</span></a>
             </div>
 
-            <div class="lyrics-section">
-                <div class="lyrics-title">Save the Date Anthem</div>
-                <div class="lyric-text">
-                    Miles unfolding, ink on the page,<br>
-                    A story rewritten, turning the age.<br>
-                    July 2027, the compass aligns,<br>
-                    Marzon Hotel, Kalibo, where the heritage shines.
-                    
-                    <div class="chorus-highlight">
-                        "Gikan sa gamut, tubtob sa langit,"<br>
-                        Seasoned with love, let the future ignite.
-                    </div>
-                    
-                    Sazon 2027, (Every path)<br>leads us back to the gate.<br>
-                    <br>
-                    <strong style="color:var(--luminous-blue)">"We are Sazon. See you in Kalibo!"</strong>
-                </div>
-            </div>
-
-            <!-- QR SECTION RESTORED -->
             <div class="qr-section">
-                <div class="qr-frame">
-                    <img src="images/qr-code.png" class="qr-image" alt="Reunion QR Code">
-                </div>
-                <p style="text-transform:uppercase; letter-spacing:4px; font-size:0.7rem; color:var(--luminous-blue); font-weight:600;">tinyurl.com/SazonGrandReunion</p>
-            </div>
-
-            <div class="footer-slogan">
-                Gikan sa Gamut, Tubtob sa Langit
-                <span class="slogan-sub">The Sazon Legacy 2027</span>
+                <img src="images/qr-code.png" class="qr-image">
+                <p>tinyurl.com/SazonGrandReunion</p>
             </div>
         </div>
     </div>
 
     <script>
-        let isEngineReady = false;
-        const openAudio = document.getElementById('openSnd');
-        const clickAudio = document.getElementById('clickSnd');
-        const jingleAudio = document.getElementById('jingle');
-
-        function initAudioEngine() {
-            if (!isEngineReady) {
-                openAudio.volume = 0.6;
-                openAudio.play().catch(e => {});
-                isEngineReady = true;
-            }
-        }
-
-        function playClickEffect() {
-            clickAudio.currentTime = 0;
-            clickAudio.volume = 0.5;
-            clickAudio.play();
-        }
-
-        function handleJingleToggle() {
-            playClickEffect();
-            if (jingleAudio.paused) {
-                jingleAudio.volume = 0.8;
-                jingleAudio.play();
-            } else {
-                jingleAudio.pause();
-            }
-        }
+        function initAudio() { document.getElementById('openSnd').play(); }
+        function playClick() { document.getElementById('clickSnd').play(); }
 
         const reunionDate = new Date("July 22, 2027 08:00:00").getTime();
-        function updateTimer() {
+        setInterval(() => {
             const now = new Date().getTime();
-            const distance = reunionDate - now;
-            document.getElementById('days').innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-            document.getElementById('hours').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            document.getElementById('mins').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById('secs').innerText = Math.floor((distance % (1000 * 60)) / 1000);
-        }
-        setInterval(updateTimer, 1000);
-        updateTimer();
+            const d = reunionDate - now;
+            document.getElementById('days').innerText = Math.floor(d / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('mins').innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('secs').innerText = Math.floor((d % (1000 * 60)) / 1000);
+        }, 1000);
     </script>
 </body>
 </html>
