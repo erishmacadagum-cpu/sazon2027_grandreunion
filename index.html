@@ -10,6 +10,7 @@
             --luminous-blue: #0047AB;
             --deep-navy: #002366;
             --white: #FFFFFF;
+            --champagne-silver: #E5E4E2;
         }
 
         html { scroll-behavior: smooth; }
@@ -21,16 +22,18 @@
             overflow-x: hidden;
         }
 
-        /* Banner Calibration */
+        /* BANNER CALIBRATION - Fixed for Desktop Visibility */
         .hero-banner {
             position: relative;
-            height: 80vh;
-            background: linear-gradient(rgba(0,35,102,0.1), rgba(0,35,102,0.4)), url('images/banner.jpg') center/cover no-repeat;
+            min-height: 85vh;
+            background: linear-gradient(rgba(0,35,102,0.3), rgba(0,35,102,0.5)), url('images/banner.jpg') center/cover no-repeat;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             border-bottom: 8px solid var(--luminous-blue);
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .nav-overlay {
@@ -58,26 +61,42 @@
             text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
         }
 
+        /* Desktop-Optimized Header Content */
+        .header-content {
+            text-align: center;
+            z-index: 10;
+            margin-top: 40px;
+        }
+
+        .header-content h2 {
+            font-family: 'Playfair Display', serif;
+            color: white;
+            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            margin: 0;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            letter-spacing: 2px;
+        }
+
         .countdown-wrap {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 30px 45px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 25px 40px;
             border-radius: 100px;
-            border: 1px solid rgba(255,255,255,0.4);
+            border: 1px solid rgba(255,255,255,0.3);
             display: flex;
-            gap: 40px;
-            margin-top: 100px;
+            gap: 30px;
+            margin-top: 40px;
         }
 
         .time-box { text-align: center; color: white; }
-        .time-val { font-size: 2.5rem; font-weight: 200; display: block; color: var(--white); }
+        .time-val { font-size: 2.2rem; font-weight: 200; display: block; color: var(--white); }
         .time-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 3px; }
 
-        /* Main Container */
+        /* Main Hub Card */
         .main-container {
             max-width: 950px;
-            margin: -60px auto 100px;
+            margin: -80px auto 100px;
             position: relative;
             z-index: 30;
         }
@@ -85,14 +104,14 @@
         .glass-card {
             background: white;
             padding: 80px 50px;
-            border-radius: 4px;
+            border-radius: 8px;
             box-shadow: 0 50px 120px rgba(0,0,0,0.1);
             text-align: center;
         }
 
-        .title-gold { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 10vw, 4.5rem); color: var(--luminous-blue); margin: 0; font-weight: 700; }
         .subtitle { text-transform: uppercase; letter-spacing: 8px; font-size: 0.85rem; color: #b1b1b1; margin-bottom: 60px; display: block; }
 
+        /* Action Buttons */
         .action-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin-bottom: 80px; }
         .btn-luxury {
             border: 1px solid #f0f0f0;
@@ -113,22 +132,36 @@
         /* Lyrics Section */
         .lyrics-section { padding: 80px 40px; background: #fcfcfc; border-top: 1px solid #eee; margin: 60px 0; }
         .lyrics-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2.2rem; color: var(--luminous-blue); margin-bottom: 50px; }
-        .lyric-text { font-family: 'Playfair Display', serif; font-size: 1.6rem; line-height: 2.2; color: #222; max-width: 700px; margin: 0 auto; }
-        .chorus-highlight { font-weight: 700; color: var(--luminous-blue); font-size: 1.8rem; margin: 50px 0; padding: 30px; border-top: 1px solid var(--luminous-blue); border-bottom: 1px solid var(--luminous-blue); background: white; }
+        .lyric-text { font-family: 'Playfair Display', serif; font-size: 1.5rem; line-height: 2.2; color: #222; max-width: 700px; margin: 0 auto; }
+        .chorus-highlight { font-weight: 700; color: var(--luminous-blue); font-size: 1.7rem; margin: 50px 0; padding: 30px; border-top: 1px solid var(--luminous-blue); border-bottom: 1px solid var(--luminous-blue); background: white; }
 
-        .footer-slogan { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--deep-navy); margin-top: 60px; font-weight: 700; }
+        /* QR HUB - Restored */
+        .qr-section { margin-top: 80px; padding-top: 50px; border-top: 1px solid #eee; }
+        .qr-frame {
+            display: inline-block;
+            padding: 15px;
+            background: white;
+            border: 1px solid var(--champagne-silver);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        .qr-image { width: 150px; height: 150px; display: block; }
+
+        .footer-slogan { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--deep-navy); margin-top: 60px; font-weight: 700; }
         .slogan-sub { display: block; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 10px; font-size: 0.7rem; color: var(--luminous-blue); margin-top: 15px; opacity: 0.6; }
 
         @media (max-width: 768px) {
-            .countdown-wrap { gap: 20px; padding: 25px; border-radius: 20px; }
-            .time-val { font-size: 1.8rem; }
-            .hero-banner { height: 70vh; }
+            .hero-banner { min-height: 70vh; }
+            .header-content { margin-top: 80px; }
+            .countdown-wrap { gap: 15px; padding: 20px; border-radius: 20px; margin-top: 30px; }
+            .time-val { font-size: 1.6rem; }
+            .main-container { margin-top: -40px; }
+            .glass-card { padding: 40px 20px; }
         }
     </style>
 </head>
 <body onclick="initAudioEngine()">
 
-    <!-- CALIBRATED AUDIO ASSETS -->
     <audio id="openSnd" src="audio/open.mp3" preload="auto"></audio>
     <audio id="clickSnd" src="audio/click.mp3" preload="auto"></audio>
     <audio id="jingle" src="audio/jingle.mp3" preload="auto"></audio>
@@ -139,17 +172,19 @@
             <div class="date-badge">July 22-23, 2027<br>Kalibo, Aklan</div>
         </div>
 
-        <div class="countdown-wrap">
-            <div class="time-box"><span id="days" class="time-val">00</span><span class="time-label">Days</span></div>
-            <div class="time-box"><span id="hours" class="time-val">00</span><span class="time-label">Hrs</span></div>
-            <div class="time-box"><span id="mins" class="time-val">00</span><span class="time-label">Mins</span></div>
-            <div class="time-box"><span id="secs" class="time-val">00</span><span class="time-label">Secs</span></div>
+        <div class="header-content">
+            <h2>SAZON 2027</h2>
+            <div class="countdown-wrap">
+                <div class="time-box"><span id="days" class="time-val">00</span><span class="time-label">Days</span></div>
+                <div class="time-box"><span id="hours" class="time-val">00</span><span class="time-label">Hrs</span></div>
+                <div class="time-box"><span id="mins" class="time-val">00</span><span class="time-label">Mins</span></div>
+                <div class="time-box"><span id="secs" class="time-val">00</span><span class="time-label">Secs</span></div>
+            </div>
         </div>
     </div>
 
     <div class="main-container">
         <div class="glass-card">
-            <h1 class="title-gold">Sazon 2027</h1>
             <span class="subtitle">The Grand Family Reunion</span>
 
             <div class="action-grid">
@@ -186,6 +221,14 @@
                 </div>
             </div>
 
+            <!-- QR SECTION RESTORED -->
+            <div class="qr-section">
+                <div class="qr-frame">
+                    <img src="images/qr-code.png" class="qr-image" alt="Reunion QR Code">
+                </div>
+                <p style="text-transform:uppercase; letter-spacing:4px; font-size:0.7rem; color:var(--luminous-blue); font-weight:600;">tinyurl.com/SazonGrandReunion</p>
+            </div>
+
             <div class="footer-slogan">
                 Gikan sa Gamut, Tubtob sa Langit
                 <span class="slogan-sub">The Sazon Legacy 2027</span>
@@ -199,7 +242,6 @@
         const clickAudio = document.getElementById('clickSnd');
         const jingleAudio = document.getElementById('jingle');
 
-        // Logic to fix sound clashing
         function initAudioEngine() {
             if (!isEngineReady) {
                 openAudio.volume = 0.6;
@@ -209,17 +251,14 @@
         }
 
         function playClickEffect() {
-            // Re-assigning click behavior
             clickAudio.currentTime = 0;
             clickAudio.volume = 0.5;
             clickAudio.play();
         }
 
         function handleJingleToggle() {
-            playClickEffect(); // Play click feedback
-            
+            playClickEffect();
             if (jingleAudio.paused) {
-                // Dim other sounds if they were playing
                 jingleAudio.volume = 0.8;
                 jingleAudio.play();
             } else {
@@ -227,7 +266,6 @@
             }
         }
 
-        // Live Countdown Engine
         const reunionDate = new Date("July 22, 2027 08:00:00").getTime();
         function updateTimer() {
             const now = new Date().getTime();
