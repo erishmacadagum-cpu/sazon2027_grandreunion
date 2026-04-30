@@ -10,6 +10,7 @@
             --luminous-blue: #0047AB;
             --deep-navy: #002366;
             --white: #FFFFFF;
+            --champagne-silver: #E5E4E2;
         }
 
         html { scroll-behavior: smooth; }
@@ -21,16 +22,15 @@
             overflow-x: hidden;
         }
 
-        /* BANNER CALIBRATION */
+        /* BANNER CALIBRATION - Fixed for visibility and elegance */
         .hero-banner {
             position: relative;
-            height: 85vh;
-            background: linear-gradient(rgba(0,35,102,0.2), rgba(0,35,102,0.4)), url('images/banner.jpg') center/cover no-repeat;
+            height: 80vh;
+            background: linear-gradient(rgba(0,35,102,0.1), rgba(0,35,102,0.4)), url('images/banner.jpg') center/cover no-repeat;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-end; 
-            padding-bottom: 100px;
+            justify-content: center;
             border-bottom: 8px solid var(--luminous-blue);
         }
 
@@ -65,26 +65,27 @@
             text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
         }
 
-        /* Countdown */
+        /* Countdown Glassmorphism */
         .countdown-wrap {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            padding: 30px 50px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 30px 45px;
             border-radius: 100px;
             border: 1px solid rgba(255,255,255,0.4);
             display: flex;
             gap: 40px;
+            margin-top: 100px;
         }
 
         .time-box { text-align: center; color: white; }
-        .time-val { font-size: 2.8rem; font-weight: 200; display: block; color: var(--white); }
+        .time-val { font-size: 2.5rem; font-weight: 200; display: block; color: var(--white); }
         .time-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 3px; }
 
-        /* Main Hub */
+        /* Main Hub Card */
         .main-container {
             max-width: 950px;
-            margin: -70px auto 100px;
+            margin: -60px auto 100px;
             position: relative;
             z-index: 30;
         }
@@ -114,7 +115,7 @@
             display: block;
         }
 
-        /* Grid & Buttons */
+        /* Action Buttons */
         .action-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -144,10 +145,10 @@
 
         .btn-luxury span { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; font-weight: 600; margin-top: 20px; }
 
-        /* FABULOUS LYRICS SECTION */
+        /* SOPHISTICATED ANTHEM SECTION */
         .lyrics-section {
             padding: 80px 40px;
-            background: #f9f9f9;
+            background: #fcfcfc;
             border-top: 1px solid #eee;
             margin: 60px 0;
         }
@@ -175,31 +176,32 @@
             font-size: 1.8rem;
             margin: 50px 0;
             padding: 30px;
-            border: 1px solid var(--luminous-blue);
+            border-top: 1px solid var(--luminous-blue);
+            border-bottom: 1px solid var(--luminous-blue);
             background: white;
         }
 
-        /* QR Access */
-        .qr-access {
+        /* QR & Venue Hub */
+        .hub-footer {
             margin: 80px 0;
             padding-top: 40px;
             border-top: 1px solid #eee;
         }
 
-        .qr-box {
+        .qr-frame {
             display: inline-block;
             padding: 15px;
             background: white;
-            border: 1px solid #eee;
+            border: 1px solid var(--champagne-silver);
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
         }
 
-        /* Footer Slogan */
         .footer-slogan {
             font-family: 'Playfair Display', serif;
             font-size: 2.8rem;
             color: var(--deep-navy);
-            margin-top: 80px;
+            margin-top: 60px;
             font-weight: 700;
         }
 
@@ -217,13 +219,13 @@
         @media (max-width: 768px) {
             .countdown-wrap { gap: 20px; padding: 25px; border-radius: 20px; }
             .time-val { font-size: 1.8rem; }
-            .hero-banner { height: 75vh; }
+            .hero-banner { height: 70vh; }
         }
     </style>
 </head>
-<body onclick="unlockAudio()">
+<body onclick="activateAudio()">
 
-    <!-- CRITICAL AUDIO ENGINE -->
+    <!-- RELIABLE AUDIO ENGINE -->
     <audio id="openSnd" src="audio/open.mp3" preload="auto"></audio>
     <audio id="clickSnd" src="audio/click.mp3" preload="auto"></audio>
     <audio id="jingle" src="audio/jingle.mp3" preload="auto"></audio>
@@ -245,14 +247,14 @@
     <div class="main-container">
         <div class="glass-card">
             <h1 class="title-gold">Sazon 2027</h1>
-            <span class="subtitle">The Grand Family Hub</span>
+            <span class="subtitle">The Grand Family Reunion</span>
 
             <div class="action-grid">
                 <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" target="_blank" class="btn-luxury" onclick="playClick()">
                     <img src="https://img.icons8.com/ios/100/0047AB/edit-property.png" width="40">
                     <span>Register</span>
                 </a>
-                <div class="btn-luxury" onclick="toggleJingle()">
+                <div class="btn-luxury" onclick="toggleMusic()">
                     <img src="https://img.icons8.com/ios/100/0047AB/audio-wave.png" width="40">
                     <span>Theme Song</span>
                 </div>
@@ -281,28 +283,28 @@
                 </div>
             </div>
 
-            <div class="qr-access">
-                <div class="qr-box">
-                    <img src="images/qr-code.png" alt="Sazon Access" width="160">
+            <div class="hub-footer">
+                <div class="qr-frame">
+                    <img src="images/qr-code.png" alt="Reunion Access" width="160">
                 </div>
-                <p style="text-transform:uppercase; letter-spacing:4px; font-size:0.7rem; color:var(--luminous-blue); margin-top:15px; font-weight:600;">tinyurl.com/SazonGrandReunion</p>
-            </div>
-
-            <div class="footer-slogan">
-                Gikan sa Gamut, Tubtob sa Langit
-                <span class="slogan-sub">The Sazon Legacy 2027</span>
+                <p style="text-transform:uppercase; letter-spacing:4px; font-size:0.75rem; color:var(--luminous-blue); font-weight:600;">tinyurl.com/SazonGrandReunion</p>
+                
+                <div class="footer-slogan">
+                    Gikan sa Gamut, Tubtob sa Langit
+                    <span class="slogan-sub">The Sazon Legacy 2027</span>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        let isAudioUnlocked = false;
+        let audioUnlocked = false;
 
-        function unlockAudio() {
-            if (!isAudioUnlocked) {
+        function activateAudio() {
+            if (!audioUnlocked) {
                 const open = document.getElementById('openSnd');
-                open.play().catch(e => console.log("Audio ready"));
-                isAudioUnlocked = true;
+                open.play().catch(e => {});
+                audioUnlocked = true;
             }
         }
 
@@ -312,22 +314,26 @@
             click.play();
         }
 
-        function toggleJingle() {
+        function toggleMusic() {
             playClick();
             const song = document.getElementById('jingle');
             if (song.paused) song.play();
             else song.pause();
         }
 
-        const target = new Date("July 22, 2027 08:00:00").getTime();
-        setInterval(() => {
+        // Live Countdown Engine
+        const reunionDate = new Date("July 22, 2027 08:00:00").getTime();
+        function updateTimer() {
             const now = new Date().getTime();
-            const d = target - now;
-            document.getElementById('days').innerText = Math.floor(d / (1000 * 60 * 60 * 24));
-            document.getElementById('hours').innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            document.getElementById('mins').innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById('secs').innerText = Math.floor((d % (1000 * 60)) / 1000);
-        }, 1000);
+            const distance = reunionDate - now;
+            
+            document.getElementById('days').innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('mins').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('secs').innerText = Math.floor((distance % (1000 * 60)) / 1000);
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
     </script>
 </body>
 </html>
