@@ -3,31 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAZON 2027 | The Grand Family Legacy</title>
+    <title>SAZON 2027 | SOON</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; --white-glass: rgba(255, 255, 255, 0.08); }
         body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; cursor: pointer; line-height: 1.6; }
-        .stage { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; overflow: hidden; }
+        .stage { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; }
         .cinematic-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,26,77,0.92), rgba(0,26,77,0.4) 50%, #000 100%), url('images/banner.jpg') center/cover no-repeat; z-index: 1; transition: transform 25s cubic-bezier(0.45, 0.05, 0.55, 0.95); }
         .bg-zoom-active { transform: scale(1.15); }
         
-        /* CELESTIAL LOGO */
-        .logo-anchor { position: absolute; top: 30px; left: 50%; transform: translate(-50%, 20px); z-index: 20; opacity: 0; transition: all 3s ease-out; }
-        .logo-active { opacity: 1 !important; transform: translate(-50%, 0) !important; }
-        .logo-img { width: 160px; padding: 15px; border-radius: 50%; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); }
-        .logo-sun { filter: drop-shadow(0 0 30px rgba(255, 200, 50, 0.6)); background: rgba(255, 255, 255, 0.15); }
-        .logo-moon { filter: drop-shadow(0 0 30px rgba(200, 230, 255, 0.5)); background: rgba(255, 255, 255, 0.1); }
+        /* THE SOON - INTEGRATED LOGO CONCEPT */
+        .soon-container { position: relative; z-index: 20; display: flex; align-items: center; justify-content: center; gap: 20px; opacity: 0; transform: scale(0.9); transition: all 3s cubic-bezier(0.21, 1, 0.36, 1); }
+        .soon-active { opacity: 1 !important; transform: scale(1) !important; }
         
-        .credits-wrapper { position: relative; z-index: 10; width: 90%; max-width: 1300px; display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 5vh; opacity: 0; transition: opacity 2.5s ease-in 0.5s; }
-        .main-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 6rem); margin: 0; background: linear-gradient(180deg, #ffffff 50%, var(--sazon-gold) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .dynamic-tag { font-size: 0.8rem; letter-spacing: 12px; color: var(--sazon-gold); display: block; margin-bottom: -10px; font-weight: 400; text-transform: uppercase; }
-
-        .timer-portal { position: relative; z-index: 10; margin-bottom: 10vh; display: flex; gap: 15px; opacity: 0; transition: all 2s ease-out 1s; transform: translateY(20px); }
+        .soon-letter { font-family: 'Playfair Display', serif; font-size: clamp(5rem, 15vw, 12rem); font-weight: 700; background: linear-gradient(180deg, #ffffff 40%, var(--sazon-gold) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5)); }
+        
+        .logo-o { position: relative; width: clamp(120px, 18vw, 220px); height: clamp(120px, 18vw, 220px); border-radius: 50%; padding: 10px; backdrop-filter: blur(15px); border: 2px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; transition: all 2s ease; }
+        .logo-img { width: 85%; filter: drop-shadow(0 0 20px rgba(255,255,255,0.4)); }
+        
+        /* DYNAMIC CELESTIAL GLOW */
+        .logo-sun { filter: drop-shadow(0 0 40px rgba(255, 200, 50, 0.7)); background: rgba(255, 255, 255, 0.15); }
+        .logo-moon { filter: drop-shadow(0 0 40px rgba(200, 230, 255, 0.6)); background: rgba(255, 255, 255, 0.1); }
+        
+        .info-footer { position: absolute; bottom: 5vh; width: 90%; display: flex; justify-content: space-between; align-items: flex-end; z-index: 10; opacity: 0; transition: opacity 2s ease 1.5s; }
+        .timer-portal { display: flex; gap: 15px; opacity: 0; transition: all 2s ease-out 2s; transform: translateY(20px); }
         .timer-active { opacity: 1; transform: translateY(0); }
-        .timer-unit { background: var(--white-glass); backdrop-filter: blur(30px); padding: 25px; border: 1px solid rgba(255,255,255,0.2); text-align: center; min-width: 90px; }
-        .t-val { display: block; font-family: 'Playfair Display'; font-size: 3rem; font-weight: 700; color: #fff; }
-        .t-lbl { font-size: 0.7rem; letter-spacing: 3px; color: var(--sazon-gold); text-transform: uppercase; font-weight: 600; }
+        .timer-unit { background: var(--white-glass); backdrop-filter: blur(20px); padding: 15px; border: 1px solid rgba(255,255,255,0.1); text-align: center; min-width: 70px; }
+        .t-val { display: block; font-family: 'Playfair Display'; font-size: 2rem; font-weight: 700; }
+        .t-lbl { font-size: 0.6rem; color: var(--sazon-gold); text-transform: uppercase; letter-spacing: 2px; }
 
         .hub-section { background: white; padding: 80px 0; color: var(--sazon-navy); }
         .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto; padding: 0 25px; }
@@ -35,49 +38,56 @@
         .register-card { border: 2px solid var(--sazon-gold); background: linear-gradient(145deg, #fffcf5, #fff); position: relative; overflow: hidden; }
         .register-card::after { content: 'GOLDEN TICKET'; position: absolute; top: 10px; right: -30px; background: var(--sazon-gold); color: white; padding: 5px 40px; transform: rotate(45deg); font-size: 0.6rem; font-weight: 700; }
         
-        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.94); z-index: 100; display: flex; justify-content: center; align-items: center; transition: opacity 1s; }
+        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); z-index: 100; display: flex; justify-content: center; align-items: center; transition: opacity 1.5s; }
     </style>
 </head>
 <body>
     <div id="overlay" onclick="launchHub()">
-        <p style="letter-spacing: 6px; font-weight: 400; font-size: 1.2rem; text-transform: uppercase; text-align: center; padding: 30px; border: 2px solid var(--sazon-gold); color: white;">Tap to Enter the Sazon Hub</p>
+        <p style="letter-spacing: 8px; font-weight: 300; font-size: 1rem; text-transform: uppercase; text-align: center; padding: 30px; border: 1px solid var(--sazon-gold); color: white;">Tap to Experience the Legacy</p>
     </div>
+    
     <audio id="openSfx" src="audio/open.mp3" preload="auto"></audio>
-    <div class="logo-anchor" id="mainLogo">
-        <img src="images/logo.png" class="logo-img" id="logoVisual" alt="Sazon Official Logo">
-    </div>
+
     <div class="stage">
         <div class="cinematic-bg" id="bg"></div>
-        <div class="credits-wrapper" id="credits">
-            <div style="width: 30%; text-align: left;"><p style="font-size: 0.85rem; letter-spacing: 3px; font-weight: 600;">SAZON FAMILY<br>TRADITION</p></div>
-            <div style="text-align: center;">
-                <span id="eventTag" class="dynamic-tag">SOON</span>
-                <h1 class="main-title">SAZON 2027</h1>
-                <p style="color: var(--sazon-gold); letter-spacing: 8px; font-weight: 400; margin-top: 5px; font-size: 1rem;">GIKAN SA GAMUT, TUBTOB SA LANGIT</p>
+        
+        <div class="soon-container" id="soonBrand">
+            <span class="soon-letter">S</span>
+            <div class="logo-o" id="logoCircle">
+                <img src="images/logo.png" class="logo-img" alt="Sazon Logo">
             </div>
-            <div style="width: 30%; text-align: right;">
-                <p style="font-family: 'Playfair Display'; font-size: 1.4rem; font-weight: 700;">MARZON HOTEL<br>
-                <span style="font-size: 0.75rem; font-family: 'Montserrat'; letter-spacing: 2px; font-weight: 600;">JULY 23-24, 2027</span><br>
-                <span style="font-size: 0.65rem; font-family: 'Montserrat'; letter-spacing: 2px; font-weight: 400;">KALIBO, AKLAN</span></p>
-            </div>
+            <span class="soon-letter">N</span>
         </div>
-        <div class="timer-portal" id="timer">
-            <div class="timer-unit"><span id="d" class="t-val">00</span><span class="t-lbl">Days</span></div>
-            <div class="timer-unit"><span id="h" class="t-val">00</span><span class="t-lbl">Hrs</span></div>
-            <div class="timer-unit"><span id="m" class="t-val">00</span><span class="t-lbl">Mins</span></div>
-            <div class="timer-unit"><span id="s" class="t-val">00</span><span class="t-lbl">Secs</span></div>
+
+        <div class="info-footer" id="footer">
+            <div style="text-align: left;">
+                <p style="font-size: 0.8rem; letter-spacing: 4px; color: var(--sazon-gold); margin:0;">THE GRAND REUNION</p>
+                <p style="font-family: 'Playfair Display'; font-size: 1.5rem; margin:0;">JULY 23-24, 2027</p>
+            </div>
+            
+            <div class="timer-portal" id="timer">
+                <div class="timer-unit"><span id="d" class="t-val">00</span><span class="t-lbl">Days</span></div>
+                <div class="timer-unit"><span id="h" class="t-val">00</span><span class="t-lbl">Hrs</span></div>
+                <div class="timer-unit"><span id="m" class="t-val">00</span><span class="t-lbl">Mins</span></div>
+                <div class="timer-unit"><span id="s" class="t-val">00</span><span class="t-lbl">Secs</span></div>
+            </div>
+
+            <div style="text-align: right;">
+                <p style="font-size: 0.8rem; letter-spacing: 4px; color: var(--sazon-gold); margin:0;">MARZON HOTEL</p>
+                <p style="font-family: 'Playfair Display'; font-size: 1.5rem; margin:0;">KALIBO, AKLAN</p>
+            </div>
         </div>
     </div>
     
-    <div class="hub-section">
+    <div class="hub-section" style="background: #fdfdfd;">
         <div style="text-align:center; margin-bottom: 40px; padding: 0 20px;">
             <h2 style="font-family: 'Playfair Display'; font-size: 3rem; margin-bottom: 10px;">Wall of Generations</h2>
             <p style="letter-spacing: 2px; color: var(--sazon-gold); font-size: 1.1rem; font-weight: 600; text-transform: uppercase;">Email photos to: maemiliapalma@yahoo.com</p>
         </div>
         <div class="hub-grid">
-            <div style="background: #f0f0f0; height: 350px; border: 1px solid #e0e0e0;"></div>
-            <div style="background: #e8e8e8; height: 350px; border: 1px solid #e0e0e0;"></div>
-            <div style="background: #f0f0f0; height: 350px; border: 1px solid #e0e0e0;"></div>
+            <div style="background: #f0f0f0; height: 350px;"></div>
+            <div style="background: #e8e8e8; height: 350px;"></div>
+            <div style="background: #f0f0f0; height: 350px;"></div>
         </div>
     </div>
 
@@ -85,53 +95,36 @@
         <div class="hub-grid">
             <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" target="_blank" class="hub-link register-card">
                 <h3>Register</h3>
-                <p>Secure your Golden Ticket for the Grand Reunion</p>
+                <p>Secure your Golden Ticket</p>
             </a>
-            <div class="hub-link" style="cursor:pointer;" onclick="alert('The Sazon Anthem is being tuned!')">
+            <div class="hub-link" style="cursor:pointer;" onclick="alert('The Sazon Anthem is coming soon!')">
                 <h3>The Anthem</h3>
-                <p>Listen to our roots and history</p>
+                <p>Listen to our roots</p>
             </div>
-            <a href="#" class="hub-link"><h3>Resources</h3><p>Event schedules and hotel information</p></a>
+            <a href="#" class="hub-link"><h3>Resources</h3><p>Schedules & Info</p></a>
         </div>
     </div>
 
     <script>
-        const targetDate = new Date("July 23, 2027 08:00:00").getTime();
-
-        function updateCelestialAndText() {
-            const now = new Date();
-            const hour = now.getHours();
-            const logo = document.getElementById('logoVisual');
-            const eventTag = document.getElementById('eventTag');
-            const distance = targetDate - now.getTime();
-
-            // 1. Theme Check
-            logo.className = (hour >= 6 && hour < 18) ? 'logo-img logo-sun' : 'logo-img logo-moon';
-
-            // 2. Transformation Check
-            if (distance < 0) {
-                eventTag.innerText = "CELEBRATING OUR LEGACY";
-                document.getElementById('timer').style.display = 'none';
-            } else if (distance < 2592000000) { // Less than 30 days
-                eventTag.innerText = "WELCOME HOME";
-            } else {
-                eventTag.innerText = "SOON";
-            }
-        }
-
         function launchHub() {
-            updateCelestialAndText();
+            const hour = new Date().getHours();
+            const logoBox = document.getElementById('logoCircle');
+            logoBox.className = (hour >= 6 && hour < 18) ? 'logo-o logo-sun' : 'logo-o logo-moon';
+
             const audio = document.getElementById('openSfx');
-            audio.volume = 0.6;
-            audio.play().catch(e => console.log("Audio play blocked", e));
+            audio.volume = 0.5;
+            audio.play().catch(e => {});
+
             document.getElementById('overlay').style.opacity = '0';
-            setTimeout(() => { document.getElementById('overlay').style.display = 'none'; }, 1000);
+            setTimeout(() => { document.getElementById('overlay').style.display = 'none'; }, 1500);
+            
             document.getElementById('bg').classList.add('bg-zoom-active');
-            document.getElementById('mainLogo').classList.add('logo-active');
-            document.getElementById('credits').style.opacity = '1';
+            document.getElementById('soonBrand').classList.add('soon-active');
+            document.getElementById('footer').style.opacity = '1';
             document.getElementById('timer').classList.add('timer-active');
         }
 
+        const targetDate = new Date("July 23, 2027 08:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
             const distance = targetDate - now;
