@@ -6,10 +6,10 @@
     <title>SAZON 2027 | The Grand Family Legacy</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; --glass: rgba(255, 255, 255, 0.05); }
+        :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; --glass: rgba(255, 255, 255, 0.05); --ticket-bg: #fffdf5; }
         body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; scroll-behavior: smooth; }
         
-        /* LAUNCH OVERLAY */
+        /* OVERLAY */
         #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 99999; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: opacity 1s, visibility 1s; }
         .tap-box { padding: 25px 50px; border: 1px solid var(--sazon-gold); letter-spacing: 5px; text-transform: uppercase; font-size: 0.8rem; }
 
@@ -25,30 +25,37 @@
         .credits { position: relative; z-index: 10; width: 90%; max-width: 1300px; display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 5vh; opacity: 0; transition: 2.5s 0.5s; }
         .main-title { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 8vw, 6rem); margin: 0; background: linear-gradient(180deg, #fff 50%, var(--sazon-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        /* MOVING WALL OF GENERATIONS */
-        .hub-section { background: #fff; padding: 120px 0; color: var(--sazon-navy); overflow: hidden; }
-        .marquee-wrapper { display: flex; width: 200%; gap: 30px; animation: scroll 40s linear infinite; margin-top: 50px; }
+        /* MOVING WALL */
+        .hub-section { background: #fff; padding: 100px 0; color: var(--sazon-navy); overflow: hidden; }
+        .marquee-wrapper { display: flex; width: 200%; gap: 30px; animation: scroll 45s linear infinite; margin-top: 50px; }
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         
         .photo-card { width: 350px; height: 500px; background: #eee; position: relative; flex-shrink: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         .photo-card img { width: 100%; height: 100%; object-fit: cover; }
         .photo-caption { position: absolute; bottom: 0; width: 100%; padding: 30px 20px; background: linear-gradient(to top, var(--sazon-navy), transparent); color: white; box-sizing: border-box; }
 
-        /* LYRIC CENTER & ANTHEM */
-        .anthem-section { background: #001233; padding: 100px 0; text-align: center; color: #fff; }
-        .lyrics-box { max-width: 700px; margin: 40px auto; padding: 40px; background: var(--glass); border: 1px solid rgba(197, 160, 89, 0.3); font-style: italic; font-size: 1.1rem; max-height: 400px; overflow-y: auto; line-height: 2; }
+        /* ANTHEM SECTION */
+        .anthem-section { background: #000c24; padding: 100px 0; text-align: center; color: #fff; border-top: 1px solid rgba(197, 160, 89, 0.2); }
+        .lyrics-box { max-width: 800px; margin: 40px auto; padding: 50px; background: var(--glass); border: 1px solid rgba(197, 160, 89, 0.3); font-size: 1.15rem; line-height: 2.2; position: relative; }
+        .lyrics-box p { margin-bottom: 25px; }
+        .play-btn { background: var(--sazon-gold); border: none; color: white; padding: 18px 45px; cursor: pointer; letter-spacing: 4px; font-weight: 600; font-size: 0.8rem; transition: 0.3s; }
+        .play-btn:hover { background: #b08d4a; transform: scale(1.05); }
 
-        /* HUB TILES */
-        .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 80px auto; padding: 0 25px; }
-        .tile { padding: 60px 40px; background: #fff; border: 1px solid #eee; text-align: center; text-decoration: none; color: inherit; transition: 0.4s; cursor: pointer; }
+        /* ENHANCED GOLDEN TICKET BOX */
+        .ticket-container { max-width: 1000px; margin: 80px auto; background: var(--ticket-bg); border: 3px double var(--sazon-gold); padding: 50px; color: var(--sazon-navy); position: relative; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.1); }
+        .ticket-header { font-family: 'Playfair Display'; font-size: 2.5rem; color: var(--sazon-navy); margin-bottom: 10px; }
+        .qr-frame { width: 200px; height: 200px; margin: 30px auto; border: 5px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); background: #fff; }
+        .qr-frame img { width: 100%; height: 100%; }
+        .tiny-url { font-weight: 600; color: var(--sazon-gold); text-decoration: none; font-size: 1.2rem; letter-spacing: 1px; }
+
+        /* TRAVEL TILES */
+        .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto 100px; padding: 0 25px; }
+        .tile { padding: 60px 40px; background: #fff; border: 1px solid #eee; text-align: center; text-decoration: none; color: inherit; transition: 0.4s; }
         .tile:hover { border-color: var(--sazon-gold); transform: translateY(-10px); }
-        .gold-tile { border: 2px solid var(--sazon-gold); background: #fffcf5; }
 
-        /* RESOURCE MODAL */
+        /* MODAL */
         #resModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 99999; backdrop-filter: blur(20px); overflow-y: auto; }
         .res-container { background: white; width: 95%; max-width: 1100px; margin: 2% auto; padding: 60px; color: var(--sazon-navy); border-left: 10px solid var(--sazon-gold); }
-        .guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px; }
-        .guide-item h4 { color: var(--sazon-gold); border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; letter-spacing: 2px; }
     </style>
 </head>
 <body>
@@ -61,21 +68,20 @@
         <div class="cinematic-bg" id="bg"></div>
         <div class="logo-anchor" id="logo"><img src="images/logo.png" class="logo-img" alt="Sazon Logo"></div>
         <div class="credits" id="credits">
-            <div style="width:30%"><p style="font-size:0.7rem; letter-spacing:4px;">EST. GENERATIONS<br>OF EXCELLENCE</p></div>
+            <div style="width:30%"><p style="font-size:0.7rem; letter-spacing:4px; font-weight:600;">EST. GENERATIONS<br>OF EXCELLENCE</p></div>
             <div style="text-align:center;">
                 <h1 class="main-title">SAZON 2027</h1>
-                <p style="color:var(--sazon-gold); letter-spacing:10px; font-size:0.8rem;">GIKAN SA GAMUT, TUBTOB SA LANGIT</p>
+                <p style="color:var(--sazon-gold); letter-spacing:10px; font-size:0.8rem; font-weight:600;">GIKAN SA GAMUT, TUBTOB SA LANGIT</p>
             </div>
-            <div style="width:30%; text-align:right;"><p style="font-family:'Playfair Display'; font-size:1.2rem;">MARZON HOTEL<br><span style="font-size:0.7rem; font-family:'Montserrat';">JULY 23-24, 2027</span></p></div>
+            <div style="width:30%; text-align:right;"><p style="font-family:'Playfair Display'; font-size:1.2rem; font-weight:700;">MARZON HOTEL<br><span style="font-size:0.7rem; font-family:'Montserrat'; letter-spacing:2px;">JULY 23-24, 2027</span></p></div>
         </div>
     </div>
 
     <div class="hub-section">
         <div style="text-align:center;">
             <h2 style="font-family:'Playfair Display'; font-size:3.5rem; margin:0;">Wall of Generations</h2>
-            <p style="color:var(--sazon-gold); letter-spacing:3px; font-weight:600; margin-top:15px;">SUBMIT PHOTOS TO: <span style="text-decoration:underline;">maemiliapalma@yahoo.com</span></p>
+            <p style="color:var(--sazon-gold); letter-spacing:3px; font-weight:600; margin-top:15px; text-transform:uppercase;">Submission Portal: maemiliapalma@yahoo.com</p>
         </div>
-        
         <div class="marquee-wrapper">
             <div class="photo-card"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800"><div class="photo-caption"><h4>The Roots</h4><p>Generation I</p></div></div>
             <div class="photo-card"><img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800"><div class="photo-caption"><h4>Unity</h4><p>Sazon Legacy</p></div></div>
@@ -87,24 +93,51 @@
     </div>
 
     <div class="anthem-section">
-        <h2 style="font-family:'Playfair Display'; font-size:3rem; color:var(--sazon-gold);">The Family Anthem</h2>
-        <button onclick="toggleJingle()" id="jBtn" style="background:none; border:1px solid #fff; color:#fff; padding:15px 30px; cursor:pointer; letter-spacing:3px;">PLAY ANTHEM</button>
+        <h2 style="font-family:'Playfair Display'; font-size:3rem; color:var(--sazon-gold); margin-bottom:10px;">The Family Anthem</h2>
+        <p style="letter-spacing:5px; font-size:0.7rem; margin-bottom:40px; color:rgba(255,255,255,0.6);">EST. 2027 REUNION OFFICIAL JINGLE</p>
+        <button onclick="toggleJingle()" id="jBtn" class="play-btn">PLAY ANTHEM</button>
+        
         <div class="lyrics-box" id="lyrics">
-            <p><strong>[Verse 1]</strong><br>From the roots of our fathers, strong and deep<br>Promises made that our hearts will keep<br>Across the oceans, through trials and years<br>Bound by our laughter, bound by our tears.</p>
-            <p><strong>[Chorus]</strong><br>Sazon! Together we stand as one<br>Gikan sa Gamut, the journey's begun<br>Tubtob sa Langit, we reach for the stars<br>No matter the distance, we know who we are.</p>
-            <p><strong>[Verse 2]</strong><br>A legacy written in gold and in light<br>Through every shadow, we shine so bright<br>From Kalibo’s heart to the world and beyond<br>Nothing can break this eternal bond.</p>
-            <p><strong>[Outro]</strong><br>One blood. One heart. One Sazon.<br>Always and forever.</p>
+            <p><strong>[0:00-0:15] English/Modern Beat:</strong><br>
+            "Miles unfolding, ink on the page, A story rewritten, turning<br>the age. July 2027, the compass aligns, Marzon Hotel,<br>Kalibo, where the heritage shines."</p>
+            
+            <p style="color:var(--sazon-gold); font-weight:600;"><strong>[0:15-0:25] Chorus - High Energy:</strong><br>
+            "Gikan sa gamut, tubtob sa langit, Seasoned with love, let<br>the future ignite. Sazon 2027, (Every path) leads us<br>back to the gate."</p>
+            
+            <p><strong>[0:25-0:30] Outro:</strong><br>
+            "We are Sazon. See you in Kalibo!"</p>
+        </div>
+    </div>
+
+    <div class="hub-section" style="background:#f9f9f9; padding:60px 0;">
+        <div class="ticket-container">
+            <p style="letter-spacing:5px; font-weight:600; font-size:0.7rem; color:var(--sazon-gold);">OFFICIAL REGISTRATION</p>
+            <h2 class="ticket-header">The Golden Ticket</h2>
+            <div style="width:50px; height:2px; background:var(--sazon-gold); margin:20px auto;"></div>
+            <p style="max-width:600px; margin:0 auto; font-size:1.1rem;">Secure your place in our history. Scan the QR code or use the official link below to register for the Sazon 2027 Grand Reunion.</p>
+            
+            <div class="qr-frame">
+                <img src="images/qr-code.png" alt="Sazon Reunion QR Code">
+            </div>
+            
+            <p style="margin-top:20px;">
+                <a href="https://tinyurl.com/sazon2027reunion" target="_blank" class="tiny-url">tinyurl.com/sazon2027reunion</a>
+            </p>
+            
+            <div style="margin-top:40px;">
+                <a href="https://tinyurl.com/sazon2027reunion" target="_blank" style="background:var(--sazon-navy); color:white; padding:15px 40px; text-decoration:none; font-weight:600; letter-spacing:2px; font-size:0.8rem;">REGISTER NOW →</a>
+            </div>
         </div>
     </div>
 
     <div class="hub-grid">
-        <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" target="_blank" class="tile gold-tile">
-            <h3 style="font-family:'Playfair Display'; font-size:1.8rem; margin:0;">Registration</h3>
-            <p style="color:var(--sazon-gold); letter-spacing:2px; font-size:0.7rem; font-weight:600;">CLAIM YOUR GOLDEN TICKET</p>
-        </a>
         <div class="tile" onclick="openRes()">
             <h3 style="font-family:'Playfair Display'; font-size:1.8rem; margin:0;">Travel Guide</h3>
             <p>EXPLORE KALIBO & BEYOND</p>
+        </div>
+        <div class="tile" style="display:flex; flex-direction:column; justify-content:center;">
+            <p><strong>Official Contact</strong></p>
+            <p style="font-size:0.9rem;">Committee Support:<br>maemiliapalma@yahoo.com</p>
         </div>
     </div>
 
@@ -112,30 +145,23 @@
         <div class="res-container">
             <span style="position:absolute; right:40px; top:30px; font-size:3rem; cursor:pointer;" onclick="closeRes()">×</span>
             <h2 style="font-family:'Playfair Display'; font-size:3rem;">Sazon Reunion Travel Guide</h2>
-            
-            <div class="guide-grid">
-                <div class="guide-item">
-                    <h4>The Venue: Marzon Hotel</h4>
-                    <p>Experience world-class hospitality in the heart of Aklan. For real-time room availability and rates, view the active map below.</p>
-                    <a href="https://www.google.com/maps/dir//Marzon+Hotel+Kalibo,+Jaime+Cardinal+Sin+Ave,+Andagao,+Kalibo,+5600+Aklan" target="_blank" style="color:var(--sazon-navy); font-weight:600;">Open Live Map & Book Room →</a>
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:40px; margin-top:40px;">
+                <div>
+                    <h4 style="color:var(--sazon-gold); border-bottom:1px solid #eee; padding-bottom:10px;">The Venue</h4>
+                    <p><strong>Marzon Hotel Kalibo</strong><br>Experience the heart of Aklan. Close to local amenities and the airport.</p>
+                    <a href="https://www.google.com/maps/dir//Marzon+Hotel+Kalibo,+Jaime+Cardinal+Sin+Ave,+Andagao,+Kalibo,+5600+Aklan" target="_blank" style="color:var(--sazon-navy); font-weight:600;">View Live Map & Rates →</a>
                 </div>
-                <div class="guide-item">
-                    <h4>Dining Near Marzon</h4>
-                    <p>• <strong>Saylo Cuisine:</strong> Heritage Filipino dishes (3 min drive)</p>
-                    <p>• <strong>Latitud:</strong> Best local coffee & breakfast</p>
-                    <p>• <strong>Ramboy's:</strong> Famous Liempo & Chicken (A must-try!)</p>
+                <div>
+                    <h4 style="color:var(--sazon-gold); border-bottom:1px solid #eee; padding-bottom:10px;">Dining & Restos</h4>
+                    <p>• <strong>Saylo Cuisine:</strong> Traditional flavors.</p>
+                    <p>• <strong>Ramboy's:</strong> Essential Liempo stop.</p>
+                    <p>• <strong>Latitud:</strong> Premier Coffee.</p>
                 </div>
-                <div class="guide-item">
-                    <h4>Aklan Adventures</h4>
-                    <p>• <strong>Bakhawan Eco-Park:</strong> Stunning 220-hectare mangrove forest (10 mins away).</p>
-                    <p>• <strong>Boracay Island:</strong> Only 1.5 hours to the world's best white sand beach.</p>
-                    <p>• <strong>Sampaguita Gardens:</strong> Beautiful gardens & Christmas-themed museum.</p>
-                </div>
-                <div class="guide-item">
-                    <h4>Logistics</h4>
-                    <p><strong>Dress Code:</strong> (To be announced)</p>
-                    <p><strong>Airport:</strong> Kalibo Intl Airport (KLO) - 5 mins drive.</p>
-                    <p><strong>Official Photo Portal:</strong> maemiliapalma@yahoo.com</p>
+                <div>
+                    <h4 style="color:var(--sazon-gold); border-bottom:1px solid #eee; padding-bottom:10px;">Attractions</h4>
+                    <p>• <strong>Bakhawan Eco-Park</strong> (Mangrove Sanctuary)</p>
+                    <p>• <strong>Sampaguita Gardens</strong></p>
+                    <p>• <strong>Boracay Island</strong> (1.5 hrs away)</p>
                 </div>
             </div>
         </div>
