@@ -6,17 +6,26 @@
     <title>SAZON 2027 | The Grand Family Legacy</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; --glass: rgba(255, 255, 255, 0.05); --ticket-bg: #fffdf5; }
-        body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; scroll-behavior: smooth; }
+        :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; --ticket-bg: #fffdf5; }
         
-        /* THE CRITICAL FIX: Ensure overlay is at the very top, then GONE */
+        /* THE ULTIMATE FIX: The overlay starts visible, then becomes completely non-existent */
         #overlay { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: #000; z-index: 999999; display: flex; 
+            background: #000; z-index: 1000000; display: flex; 
             justify-content: center; align-items: center; cursor: pointer; 
-            transition: opacity 0.8s ease; 
+            transition: opacity 0.6s ease, visibility 0.6s ease;
         }
-        .tap-box { padding: 25px 50px; border: 1px solid var(--sazon-gold); letter-spacing: 5px; text-transform: uppercase; font-size: 0.8rem; pointer-events: none; }
+        
+        /* This class is added via JS to physically stop the overlay from blocking clicks */
+        .unlock-screen { 
+            opacity: 0 !important; 
+            visibility: hidden !important; 
+            pointer-events: none !important; 
+        }
+
+        body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; scroll-behavior: smooth; }
+        
+        .tap-box { padding: 20px 40px; border: 1px solid var(--sazon-gold); letter-spacing: 5px; text-transform: uppercase; font-size: 0.8rem; }
 
         /* HERO STAGE */
         .stage { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; overflow: hidden; }
@@ -30,38 +39,114 @@
         .credits { position: relative; z-index: 10; width: 90%; max-width: 1300px; display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 5vh; opacity: 0; transition: 2.5s 0.5s; }
         .main-title { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 8vw, 6rem); margin: 0; background: linear-gradient(180deg, #fff 50%, var(--sazon-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        /* MOVING WALL */
+        /* CONTENT SECTIONS */
         .hub-section { background: #fff; padding: 100px 0; color: var(--sazon-navy); overflow: hidden; }
-        .marquee-wrapper { display: flex; width: 200%; gap: 30px; animation: scroll 45s linear infinite; margin-top: 50px; }
+        .marquee-wrapper { display: flex; width: 200%; gap: 30px; animation: scroll 45s linear infinite; }
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         
-        .photo-card { width: 350px; height: 500px; background: #eee; position: relative; flex-shrink: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .photo-card { width: 350px; height: 500px; background: #eee; flex-shrink: 0; }
         .photo-card img { width: 100%; height: 100%; object-fit: cover; }
-        .photo-caption { position: absolute; bottom: 0; width: 100%; padding: 30px 20px; background: linear-gradient(to top, var(--sazon-navy), transparent); color: white; box-sizing: border-box; }
 
-        /* ANTHEM SECTION */
-        .anthem-section { background: #000c24; padding: 100px 0; text-align: center; color: #fff; border-top: 1px solid rgba(197, 160, 89, 0.2); }
-        .lyrics-box { max-width: 800px; margin: 40px auto; padding: 50px; background: var(--glass); border: 1px solid rgba(197, 160, 89, 0.3); font-size: 1.15rem; line-height: 2.2; }
-        .play-btn { background: var(--sazon-gold); border: none; color: white; padding: 18px 45px; cursor: pointer; letter-spacing: 4px; font-weight: 600; font-size: 0.8rem; }
+        .anthem-section { background: #000c24; padding: 100px 0; text-align: center; color: #fff; }
+        .lyrics-box { max-width: 800px; margin: 40px auto; padding: 40px; background: rgba(255,255,255,0.05); border: 1px solid rgba(197, 160, 89, 0.3); line-height: 2; }
 
-        /* TICKET BOX */
-        .ticket-container { max-width: 1000px; margin: 80px auto; background: var(--ticket-bg); border: 3px double var(--sazon-gold); padding: 50px; color: var(--sazon-navy); text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.1); }
-        .qr-frame { width: 200px; height: 200px; margin: 30px auto; border: 5px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); background: #fff; }
+        /* TICKET BOX - PRECISION LINKS */
+        .ticket-container { max-width: 800px; margin: 60px auto; background: var(--ticket-bg); border: 2px solid var(--sazon-gold); padding: 40px; color: var(--sazon-navy); text-align: center; }
+        .qr-frame { width: 180px; height: 180px; margin: 20px auto; background: #fff; border: 1px solid #ddd; padding: 10px; }
         .qr-frame img { width: 100%; height: 100%; }
-        .tiny-url { font-weight: 700; color: var(--sazon-gold); text-decoration: none; font-size: 1.2rem; display: inline-block; margin-top: 15px; }
-        .reg-btn { display: inline-block; background: var(--sazon-navy); color: white; padding: 18px 50px; text-decoration: none; font-weight: 600; letter-spacing: 2px; margin-top: 30px; }
+        .reg-btn { display: inline-block; background: var(--sazon-navy); color: white; padding: 15px 40px; text-decoration: none; font-weight: 600; margin-top: 20px; transition: 0.3s; }
+        .reg-btn:hover { background: var(--sazon-gold); }
 
-        /* MODAL */
-        #resModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 8000; backdrop-filter: blur(20px); overflow-y: auto; }
-        .res-container { background: white; width: 95%; max-width: 1100px; margin: 2% auto; padding: 60px; color: var(--sazon-navy); border-left: 10px solid var(--sazon-gold); position: relative; }
+        #resModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 9999; color: var(--sazon-navy); padding: 50px; box-sizing: border-box; overflow-y: auto; }
     </style>
 </head>
 <body>
 
     <div id="overlay" onclick="launchHub()">
-        <div class="tap-box">Tap to Begin the Experience</div>
+        <div class="tap-box">Tap to Enter</div>
     </div>
 
     <div class="stage">
         <div class="cinematic-bg" id="bg"></div>
-        <div class="logo-anchor" id="logo"><img src="images/logo.png" class="logo-img" alt="S
+        <div class="logo-anchor" id="logo"><img src="images/logo.png" class="logo-img"></div>
+        <div class="credits" id="credits">
+            <div style="text-align:center; width: 100%;">
+                <h1 class="main-title">SAZON 2027</h1>
+                <p style="color:var(--sazon-gold); letter-spacing:10px; font-size:0.8rem;">GIKAN SA GAMUT, TUBTOB SA LANGIT</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="hub-section">
+        <h2 style="text-align:center; font-family:'Playfair Display'; font-size: 3rem;">Wall of Generations</h2>
+        <p style="text-align:center; color: var(--sazon-gold);">Portal: maemiliapalma@yahoo.com</p>
+        <div class="marquee-wrapper">
+            <div class="photo-card"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800"></div>
+            <div class="photo-card"><img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800"></div>
+            <div class="photo-card"><img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?auto=format&fit=crop&w=800"></div>
+            <div class="photo-card"><img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=800"></div>
+            <div class="photo-card"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800"></div>
+        </div>
+    </div>
+
+    <div class="anthem-section">
+        <h2 style="font-family:'Playfair Display'; font-size:2.5rem; color:var(--sazon-gold);">The Family Anthem</h2>
+        <button onclick="toggleJingle()" id="jBtn" style="background:none; border:1px solid #fff; color:#fff; padding:10px 30px; cursor:pointer;">PLAY ANTHEM</button>
+        <div class="lyrics-box">
+            <p><strong>[0:00-0:15]</strong><br>"Miles unfolding, ink on the page, A story rewritten, turning the age. July 2027, the compass aligns, Marzon Hotel, Kalibo, where the heritage shines."</p>
+            <p style="color:var(--sazon-gold);"><strong>[Chorus]</strong><br>"Gikan sa gamut, tubtob sa langit, Seasoned with love, let the future ignite. Sazon 2027, (Every path) leads us back to the gate."</p>
+        </div>
+    </div>
+
+    <div class="hub-section" style="background:#f4f4f4;">
+        <div class="ticket-container">
+            <h2 style="font-family:'Playfair Display';">The Golden Ticket</h2>
+            <div class="qr-frame"><img src="images/qr-code.png"></div>
+            <p><a href="https://tinyurl.com/SazonGrandReunion" target="_blank" style="color:var(--sazon-gold); font-weight:700;">tinyurl.com/SazonGrandReunion</a></p>
+            <a href="https://tinyurl.com/SazonGrandReunion" target="_blank" class="reg-btn">REGISTER NOW →</a>
+        </div>
+    </div>
+
+    <div style="background:#fff; padding: 50px; text-align:center;">
+        <button onclick="openRes()" style="padding:15px 30px; cursor:pointer;">TRAVEL GUIDE</button>
+    </div>
+
+    <div id="resModal">
+        <span style="float:right; font-size:2rem; cursor:pointer;" onclick="closeRes()">× CLOSE</span>
+        <h2 style="font-family:'Playfair Display'; font-size: 2.5rem;">Travel Guide</h2>
+        <p><strong>Venue:</strong> Marzon Hotel Kalibo</p>
+        <p><strong>Must Try:</strong> Ramboy's Liempo, Saylo Cuisine</p>
+        <a href="https://www.google.com/maps/dir//Marzon+Hotel+Kalibo,+Jaime+Cardinal+Sin+Ave,+Andagao,+Kalibo,+5600+Aklan" target="_blank">View Live Map & Rates</a>
+    </div>
+
+    <audio id="sfx" src="audio/open.mp3"></audio>
+    <audio id="jingle" src="audio/jingle.mp3"></audio>
+
+    <script>
+        function launchHub() {
+            const ov = document.getElementById('overlay');
+            // Force the removal of interactions immediately
+            ov.classList.add('unlock-screen');
+            
+            // Clean up the DOM after transition
+            setTimeout(() => { 
+                ov.remove(); 
+            }, 600);
+            
+            document.getElementById('bg').classList.add('bg-active');
+            document.getElementById('logo').classList.add('active-logo');
+            document.getElementById('credits').style.opacity = '1';
+            document.getElementById('sfx').play().catch(e => {});
+        }
+
+        let jPlaying = false;
+        function toggleJingle() {
+            const j = document.getElementById('jingle');
+            if(!jPlaying) { j.play(); document.getElementById('jBtn').innerText = "PAUSE"; jPlaying = true; }
+            else { j.pause(); document.getElementById('jBtn').innerText = "PLAY"; jPlaying = false; }
+        }
+        function openRes() { document.getElementById('resModal').style.display = 'block'; }
+        function closeRes() { document.getElementById('resModal').style.display = 'none'; }
+    </script>
+</body>
+</html>
