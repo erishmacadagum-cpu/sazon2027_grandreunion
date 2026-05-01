@@ -12,15 +12,14 @@
         .cinematic-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,26,77,0.92), rgba(0,26,77,0.3) 50%, #000 100%), url('images/banner.jpg') center/cover no-repeat; z-index: 1; transition: transform 25s cubic-bezier(0.45, 0.05, 0.55, 0.95); }
         .bg-zoom-active { transform: scale(1.15); }
         
-        /* CELESTIAL LOGO GLOW */
+        /* CELESTIAL LOGO */
         .logo-anchor { position: absolute; top: 30px; left: 50%; transform: translate(-50%, 20px); z-index: 20; opacity: 0; transition: all 3s ease-out; }
         .logo-active { opacity: 1 !important; transform: translate(-50%, 0) !important; }
-        .logo-img { width: 160px; padding: 15px; border-radius: 50%; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); transition: filter 2s ease-in-out; }
-        
+        .logo-img { width: 160px; padding: 15px; border-radius: 50%; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); }
         .logo-sun { filter: drop-shadow(0 0 30px rgba(255, 200, 50, 0.6)); background: rgba(255, 255, 255, 0.15); }
         .logo-moon { filter: drop-shadow(0 0 30px rgba(200, 230, 255, 0.5)); background: rgba(255, 255, 255, 0.1); }
         
-        .credits-wrapper { position: relative; z-index: 10; width: 90%; max-width: 1300px; display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 5vh; opacity: 0; transition: opacity 2.5s ease-in 0.5s; text-shadow: 0 2px 15px rgba(0,0,0,0.9); }
+        .credits-wrapper { position: relative; z-index: 10; width: 90%; max-width: 1300px; display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 5vh; opacity: 0; transition: opacity 2.5s ease-in 0.5s; }
         .main-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 6rem); margin: 0; background: linear-gradient(180deg, #ffffff 50%, var(--sazon-gold) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
         .timer-portal { position: relative; z-index: 10; margin-bottom: 10vh; display: flex; gap: 15px; opacity: 0; transition: all 2s ease-out 1s; transform: translateY(20px); }
@@ -29,8 +28,16 @@
         .t-val { display: block; font-family: 'Playfair Display'; font-size: 3rem; font-weight: 700; color: #fff; }
         .t-lbl { font-size: 0.7rem; letter-spacing: 3px; color: var(--sazon-gold); text-transform: uppercase; font-weight: 600; }
 
-        .hub-section { background: white; padding: 80px 0; color: var(--sazon-navy); }
-        .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto; padding: 0 25px; }
+        /* UPDATED PHOTO WALL */
+        .hub-section { background: #fff; padding: 100px 0; color: var(--sazon-navy); }
+        .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .photo-card { position: relative; height: 400px; overflow: hidden; background: #eee; border-bottom: 4px solid var(--sazon-gold); transition: 0.4s; }
+        .photo-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; filter: grayscale(30%); }
+        .photo-card:hover img { transform: scale(1.1); filter: grayscale(0%); }
+        .photo-caption { position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px; background: linear-gradient(to top, rgba(0,26,77,0.9), transparent); color: white; }
+        .photo-caption h4 { margin: 0; font-family: 'Playfair Display'; font-size: 1.4rem; }
+
+        .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 50px auto; padding: 0 25px; }
         .hub-link { padding: 50px 30px; border: 2px solid #f0f0f0; text-decoration: none; color: inherit; text-align: center; transition: 0.5s; display: block; background: #fff; }
         .register-card { border: 2px solid var(--sazon-gold); background: linear-gradient(145deg, #fffcf5, #fff); position: relative; overflow: hidden; }
         .register-card::after { content: 'GOLDEN TICKET'; position: absolute; top: 10px; right: -30px; background: var(--sazon-gold); color: white; padding: 5px 40px; transform: rotate(45deg); font-size: 0.6rem; font-weight: 700; }
@@ -42,10 +49,11 @@
     <div id="overlay" onclick="launchHub()">
         <p style="letter-spacing: 6px; font-weight: 400; font-size: 1.2rem; text-transform: uppercase; text-align: center; padding: 30px; border: 2px solid var(--sazon-gold); color: white;">Tap to Enter the Sazon Hub</p>
     </div>
-    <audio id="openSfx" src="audio/open.mp3" preload="auto"></audio>
+    
     <div class="logo-anchor" id="mainLogo">
         <img src="images/logo.png" class="logo-img" id="logoVisual" alt="Sazon Official Logo">
     </div>
+
     <div class="stage">
         <div class="cinematic-bg" id="bg"></div>
         <div class="credits-wrapper" id="credits">
@@ -68,44 +76,45 @@
         </div>
     </div>
     
-    <div class="hub-section" style="background: #fdfdfd;">
-        <div style="text-align:center; margin-bottom: 40px; padding: 0 20px;">
-            <h2 style="font-family: 'Playfair Display'; font-size: 3rem; margin-bottom: 10px;">Wall of Generations</h2>
-            <p style="letter-spacing: 2px; color: var(--sazon-gold); font-size: 1.1rem; font-weight: 600; text-transform: uppercase;">Email photos to: maemiliapalma@yahoo.com</p>
-        </div>
-        <div class="hub-grid">
-            <div style="background: #f0f0f0; height: 350px;"></div>
-            <div style="background: #e8e8e8; height: 350px;"></div>
-            <div style="background: #f0f0f0; height: 350px;"></div>
-        </div>
-    </div>
-
     <div class="hub-section">
+        <div style="text-align:center; margin-bottom: 60px;">
+            <h2 style="font-family: 'Playfair Display'; font-size: 3.5rem; margin-bottom: 10px;">Wall of Generations</h2>
+            <p style="letter-spacing: 3px; color: var(--sazon-gold); font-weight: 600; text-transform: uppercase;">A Visual History of our Roots</p>
+        </div>
+        
+        <div class="photo-grid">
+            <div class="photo-card">
+                <img src="images/generation1.jpg" alt="Sazon Roots">
+                <div class="photo-caption"><h4>The Elders</h4><p>Where it all began</p></div>
+            </div>
+            <div class="photo-card">
+                <img src="images/generation2.jpg" alt="Sazon Legacy">
+                <div class="photo-caption"><h4>Family Reunion 1990s</h4><p>Captured memories</p></div>
+            </div>
+            <div class="photo-card">
+                <img src="images/generation3.jpg" alt="Sazon Future">
+                <div class="photo-caption"><h4>The New Generation</h4><p>The legacy continues</p></div>
+            </div>
+        </div>
+
         <div class="hub-grid">
             <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" target="_blank" class="hub-link register-card">
                 <h3>Register</h3>
-                <p>Secure your Golden Ticket for the Grand Reunion</p>
+                <p>Secure your Golden Ticket</p>
             </a>
-            <div class="hub-link" style="cursor:pointer;" onclick="alert('The Sazon Anthem is being tuned!')">
-                <h3>The Anthem</h3>
-                <p>Listen to our roots and history</p>
+            <div class="hub-link" style="cursor:pointer;" onclick="alert('The Jingle is coming soon!')">
+                <h3>The Jingle</h3>
+                <p>Listen to our family anthem</p>
             </div>
-            <a href="#" class="hub-link"><h3>Resources</h3><p>Event schedules and hotel information</p></a>
+            <a href="#" class="hub-link"><h3>Resources</h3><p>Event schedules and hotel info</p></a>
         </div>
     </div>
 
     <script>
-        function updateCelestialTheme() {
+        function launchHub() {
             const hour = new Date().getHours();
             const logo = document.getElementById('logoVisual');
             logo.className = (hour >= 6 && hour < 18) ? 'logo-img logo-sun' : 'logo-img logo-moon';
-        }
-
-        function launchHub() {
-            updateCelestialTheme();
-            const audio = document.getElementById('openSfx');
-            audio.volume = 0.6;
-            audio.play().catch(e => {});
             document.getElementById('overlay').style.opacity = '0';
             setTimeout(() => { document.getElementById('overlay').style.display = 'none'; }, 1000);
             document.getElementById('bg').classList.add('bg-zoom-active');
