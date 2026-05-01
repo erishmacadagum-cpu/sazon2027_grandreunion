@@ -4,141 +4,400 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAZON 2027 | The Grand Family Legacy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
-        :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; }
-        body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; scroll-behavior: smooth; }
-
-        /* CEREMONIAL ENTRANCE */
-        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 100000; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: opacity 1.5s; }
-        .tap-box { padding: 25px 50px; border: 1px solid var(--sazon-gold); letter-spacing: 8px; text-transform: uppercase; font-size: 0.7rem; text-align: center; background: rgba(197, 160, 89, 0.05); }
-
-        /* CINEMATIC STAGE */
-        .stage { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; padding: 20px; box-sizing: border-box; }
-        .cinematic-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,26,77,0.6), transparent 50%, #000 100%), url('images/banner.jpg') center/cover no-repeat; z-index: 1; transition: transform 20s ease-out; }
-        .bg-active { transform: scale(1.15); }
-
-        /* THE "SOON" GLOSSY TITLE */
-        .soon-container { position: relative; z-index: 10; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(20px); transition: 3s 0.5s; }
-        .active-ui.soon-container { opacity: 1; transform: translateY(0); }
-
-        .gold-letter { 
-            font-family: 'Playfair Display', serif; 
-            font-size: clamp(3.8rem, 18vw, 10rem); 
-            background: linear-gradient(135deg, #fff 20%, var(--sazon-gold) 50%, #fff 80%);
-            background-size: 200% auto;
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            line-height: 1;
-            animation: shine 6s linear infinite;
+        /* Countdown Timer Styles */
+        .countdown-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 0 20px;
         }
-
-        @keyframes shine { to { background-position: 200% center; } }
-
-        /* THE CELESTIAL LOGO "O" - CIRCULAR CROP & PULSE */
-        .logo-circle-o {
-            width: clamp(3.2rem, 15vw, 8.5rem);
-            height: clamp(3.2rem, 15vw, 8.5rem);
-            margin: 0 8px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 1.5px solid rgba(197, 160, 89, 0.6);
-            box-shadow: 0 0 40px rgba(197, 160, 89, 0.4);
-            position: relative;
-            background: #000;
-            animation: pulse-glow 4s ease-in-out infinite;
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(197, 160, 89, 0.3); transform: scale(1); }
-            50% { box-shadow: 0 0 50px rgba(197, 160, 89, 0.6); transform: scale(1.02); }
-        }
-
-        .logo-circle-o img { width: 100%; height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-
-        /* TEXTUAL ELEMENTS */
-        .tagline { color: var(--sazon-gold); letter-spacing: clamp(6px, 3vw, 12px); text-transform: uppercase; font-size: 0.65rem; font-weight: 600; margin: 25px 0; opacity: 0; transition: 2s 1.5s; z-index: 10; text-align: center; }
         
-        .timer-container { display: flex; gap: clamp(10px, 4vw, 20px); opacity: 0; transition: 2s 2.2s; z-index: 10; }
-        .timer-box { text-align: center; min-width: 60px; }
-        .timer-val { display: block; font-size: clamp(1.5rem, 6vw, 2.2rem); font-weight: 600; color: #fff; font-family: 'Playfair Display', serif; }
-        .timer-label { font-size: 0.5rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; }
+        .countdown-box {
+            padding: 30px 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .countdown-box:hover {
+            transform: translateY(-5px);
+        }
+        
+        .countdown-box:nth-child(1) {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .countdown-box:nth-child(2) {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .countdown-box:nth-child(3) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .countdown-box:nth-child(4) {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        
+        .countdown-number {
+            font-size: 56px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-family: 'Arial Black', sans-serif;
+        }
+        
+        .countdown-label {
+            color: rgba(255,255,255,0.9);
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        @media (max-width: 768px) {
+            .countdown-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .countdown-number {
+                font-size: 42px;
+            }
+            
+            .countdown-box {
+                padding: 20px 15px;
+            }
+        }
 
-        /* REGISTRATION AREA */
-        .ticket-section { background: #fff; padding: 100px 20px; text-align: center; color: var(--sazon-navy); }
-        .ticket-container { max-width: 800px; margin: 0 auto; background: #fffdf5; border: 1px solid var(--sazon-gold); padding: 50px 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.1); border-radius: 4px; }
-        .btn-gold { display: inline-block; background: var(--sazon-navy); color: #fff !important; padding: 20px 50px; text-decoration: none !important; font-weight: 700; letter-spacing: 4px; margin-top: 30px; font-size: 0.75rem; text-transform: uppercase; transition: 0.4s; border-radius: 2px; }
-        .btn-gold:hover { background: var(--sazon-gold); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        /* Landing Page Styles */
+        .landing-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
 
-        /* FOOTER */
-        .credits-bar { position: absolute; bottom: 30px; width: 90%; display: flex; justify-content: space-between; opacity: 0; transition: 2s 2.5s; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; z-index: 10; }
-        @media (max-width: 600px) { .credits-bar { flex-direction: column; text-align: center; gap: 10px; align-items: center; } }
+        .landing-page.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .landing-content {
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .landing-logo {
+            max-width: 200px;
+            margin-bottom: 30px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .landing-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        }
+
+        .landing-subtitle {
+            font-size: 24px;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .landing-tagline {
+            font-size: 18px;
+            font-style: italic;
+            margin-bottom: 50px;
+            opacity: 0.8;
+        }
+
+        .enter-button {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 20px 60px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .enter-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        @media (max-width: 768px) {
+            .landing-title {
+                font-size: 32px;
+            }
+            .landing-subtitle {
+                font-size: 18px;
+            }
+            .enter-button {
+                padding: 15px 40px;
+                font-size: 16px;
+            }
+        }
     </style>
 </head>
 <body>
-
-    <div id="overlay" onclick="launchHub()">
-        <div class="tap-box">SAZON 2027<br><br><span style="font-size:0.5rem; letter-spacing:4px; opacity:0.8;">THE LEGACY AWAITS</span></div>
+    <!-- Landing Page -->
+    <div id="landingPage" class="landing-page">
+        <div class="landing-content">
+            <img src="images/logo.png" alt="SAZON 2027 Logo" class="landing-logo" onerror="this.style.display='none'">
+            <h1 class="landing-title">🏝️ SAZON 2027 🏝️</h1>
+            <p class="landing-subtitle">The Grand Family Legacy</p>
+            <p class="landing-tagline">"Gikan sa gamut, tubtob sa langit"</p>
+            <button class="enter-button" onclick="enterWebsite()">TAP TO ENTER THE EXPERIENCE</button>
+        </div>
     </div>
 
-    <div class="stage">
-        <div class="cinematic-bg" id="bg"></div>
-        
-        <div class="soon-container" id="soon-ui">
-            <span class="gold-letter">S</span>
-            <span class="gold-letter">O</span>
-            <div class="logo-circle-o">
-                <img src="images/logo.png" alt="Sazon Logo">
+    <!-- Main Content -->
+    <div id="mainContent" style="display: none;">
+        <div class="container">
+            <div class="header">
+                <div class="banner-container">
+                    <img src="images/banner.jpg" alt="Sazon 2027" class="banner" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%221200%22 height=%22300%22%3E%3Crect fill=%22%230066cc%22 width=%221200%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22white%22 font-size=%2224%22%3EBanner Placeholder%3C/text%3E%3C/svg%3E'">
+                    <div class="banner-overlay">
+                        <h1>🏝️ SAZON 2027 🏝️</h1>
+                        <p class="tagline">1st Edition Grand Family Reunion</p>
+                        <p class="tagline">"Gikan sa Gamut, Tubtob sa Langit"</p>
+                        <p class="tagline">From the Roots, Towards the Sky</p>
+                    </div>
+                </div>
             </div>
-            <span class="gold-letter">N</span>
+
+            <nav class="navbar">
+                <ul>
+                    <li><a href="#home">🏠 Home</a></li>
+                    <li><a href="#details">📅 Details</a></li>
+                    <li><a href="#attend">✍️ Register</a></li>
+                    <li><a href="#share">📤 Share</a></li>
+                </ul>
+            </nav>
+
+            <section id="home" class="section">
+                <div class="content-box">
+                    <img src="images/logo.png" alt="Logo" class="logo" onerror="this.style.display='none'">
+                    <h2>Welcome to Sazon 2027</h2>
+                    <p class="intro-text">🎉 Join us for the 1st Edition Grand Family Reunion!</p>
+                    <p>We invite you to celebrate with us. This historic event brings together our Ilonggo family to strengthen bonds and create lasting memories.</p>
+                    <p><strong>"Gikan sa Gamut, Tubtob sa Langit" - From the Roots, Towards the Sky</strong></p>
+                    
+                    <!-- COUNTDOWN TIMER -->
+                    <div class="countdown-container">
+                        <div class="countdown-box">
+                            <div id="days" class="countdown-number">00</div>
+                            <div class="countdown-label">Days</div>
+                        </div>
+                        <div class="countdown-box">
+                            <div id="hours" class="countdown-number">00</div>
+                            <div class="countdown-label">Hours</div>
+                        </div>
+                        <div class="countdown-box">
+                            <div id="minutes" class="countdown-number">00</div>
+                            <div class="countdown-label">Minutes</div>
+                        </div>
+                        <div class="countdown-box">
+                            <div id="seconds" class="countdown-number">00</div>
+                            <div class="countdown-label">Seconds</div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 30px;">
+                        <button class="btn btn-secondary" onclick="playJingle()">🎵 Play Jingle</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="details" class="section">
+                <div class="content-box">
+                    <h2>📅 Event Details</h2>
+                    <div class="event-info">
+                        <div class="info-item">
+                            <div class="icon">📆</div>
+                            <div>
+                                <h3>Dates</h3>
+                                <p><strong>July 23-24, 2027</strong></p>
+                                <p>Two unforgettable days of celebration</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="icon">📍</div>
+                            <div>
+                                <h3>Venue</h3>
+                                <p><strong>Marzon Hotel</strong></p>
+                                <p>Kalibo, Aklan, Philippines</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="icon">🌊</div>
+                            <div>
+                                <h3>Location</h3>
+                                <p>Near beautiful Boracay</p>
+                                <p>Stunning beach setting</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="attend" class="section">
+                <div class="content-box">
+                    <h2>✍️ Register Your Attendance</h2>
+                    <p style="text-align: center; margin-bottom: 30px;">Fill out the form to register. Your registration will be reviewed for approval.</p>
+                    
+                    <form id="attendanceForm" class="form" onsubmit="submitAttendanceRequest(event)">
+                        <input type="text" id="attendeeName" placeholder="Full Name" required>
+                        <input type="email" id="attendeeEmail" placeholder="Email Address" required>
+                        <input type="tel" id="attendeeContact" placeholder="Contact Number" required>
+                        <select id="familyBranch" required>
+                            <option value="">Select Your Family Branch</option>
+                            <option value="Main Family">Main Family</option>
+                            <option value="Northern Branch">Northern Branch</option>
+                            <option value="Southern Branch">Southern Branch</option>
+                            <option value="Eastern Branch">Eastern Branch</option>
+                            <option value="Western Branch">Western Branch</option>
+                        </select>
+                        <input type="number" id="numGuests" placeholder="Number of Additional Guests" min="0" value="0">
+                        <textarea id="attendeeMessage" placeholder="Any special requests or messages?" rows="4"></textarea>
+                        <button type="submit" class="btn btn-primary">Submit Registration Request</button>
+                    </form>
+                    
+                    <div id="pendingNotice" class="pending-notice" style="display: none;">
+                        ✅ <strong>Thank you!</strong> Your registration is pending approval.
+                    </div>
+                </div>
+            </section>
+
+            <section id="share" class="section">
+                <div class="content-box">
+                    <h2>📤 Share & Invite</h2>
+                    <p style="text-align: center; margin-bottom: 30px;">Help spread the word! Share with family and friends.</p>
+                    
+                    <div style="text-align: center;">
+                        <button class="btn btn-primary" onclick="shareWebsite()">📤 Share Website</button>
+                        <button class="btn btn-secondary" onclick="downloadQRCode()">⬇️ Download QR Code</button>
+                    </div>
+                    
+                    <h3 style="text-align: center; margin-top: 30px; color: #0066cc;">QR Code</h3>
+                    <p style="text-align: center; font-size: 14px; color: #999;">Scan with your phone to access this website</p>
+                    <div class="qrcode-container">
+                        <div id="qrcodeContainer"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" style="margin-top: 60px;">
+                <div class="content-box">
+                    <div style="text-align: center;">
+                        <button class="btn btn-secondary" onclick="toggleAdminPanel()">⚙️ Admin Access</button>
+                    </div>
+                    
+                    <div id="adminPanel" style="display: none; margin-top: 30px;">
+                        <div id="adminLoginForm" style="background: #fff3cd; padding: 20px; border-radius: 8px; text-align: center;">
+                            <h3>🔐 Admin Login</h3>
+                            <p style="margin: 15px 0;">Enter password to access the admin dashboard:</p>
+                            <form onsubmit="adminLogin(event)" style="display: flex; gap: 10px; justify-content: center; align-items: center; flex-wrap: wrap;">
+                                <input type="password" id="adminPassword" placeholder="Enter Admin Password" required style="padding: 10px; border: 2px solid #0066cc; border-radius: 5px;">
+                                <button type="submit" class="btn btn-primary">Login</button>
+                            </form>
+                        </div>
+                        
+                        <div id="adminDashboard" style="display: none; margin-top: 20px;">
+                            <div style="background: #28a745; color: white; padding: 15px; border-radius: 5px; text-align: right;">
+                                <button class="btn" style="background: white; color: #28a745; padding: 8px 15px; cursor: pointer;" onclick="adminLogout()">Logout</button>
+                            </div>
+                            
+                            <h3 style="margin-top: 20px; color: #0066cc;">📋 Pending Attendance Requests</h3>
+                            <div id="pendingRequestsList" style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                                Loading...
+                            </div>
+                            
+                            <h3 style="color: #0066cc;">✅ Approved Attendees</h3>
+                            <div id="approvedAttendeesList" style="background: #f8f9fa; padding: 15px; border-radius: 5px;">
+                                Loading...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
 
-        <p class="tagline" id="tag-ui">Gikan sa gamut, tubtob sa langit</p>
-
-        <div class="timer-container" id="timer-ui">
-            <div class="timer-box"><span class="timer-val" id="days">00</span><span class="timer-label">Days</span></div>
-            <div class="timer-box"><span class="timer-val" id="hours">00</span><span class="timer-label">Hrs</span></div>
-            <div class="timer-box"><span class="timer-val" id="mins">00</span><span class="timer-label">Min</span></div>
-            <div class="timer-box"><span class="timer-val" id="secs">00</span><span class="timer-label">Sec</span></div>
-        </div>
-
-        <div class="credits-bar" id="credits-ui">
-            <div style="font-size:0.55rem; letter-spacing:3px;">A SAZON PRODUCTION</div>
-            <div style="font-size:0.55rem; letter-spacing:3px; text-align:right;">JULY 23-24, 2027<br>MARZON HOTEL, KALIBO</div>
-        </div>
+        <footer class="footer">
+            <p><strong>Sazon 2027 - Grand Family Reunion</strong></p>
+            <p>"Gikan sa Gamut, Tubtob sa Langit" - From the Roots, Towards the Sky</p>
+            <p>July 23-24, 2027 • Marzon Hotel, Kalibo, Aklan</p>
+            <p style="margin-top: 15px; font-size: 12px;">Developer: erishmacadagumcpu | For Approved Attendees Only</p>
+        </footer>
     </div>
 
-    <div class="ticket-section">
-        <div class="ticket-container">
-            <h2 style="font-family:'Playfair Display'; font-size:2.2rem; margin:0; letter-spacing:2px;">The Golden Ticket</h2>
-            <p style="text-transform:uppercase; letter-spacing:4px; font-size:0.7rem; color:var(--sazon-gold); margin-top:10px;">Official Guest Registry</p>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-gold">SECURE YOUR SPOT →</a>
-        </div>
-    </div>
-
-    <audio id="sfx" src="audio/open.mp3"></audio>
-
+    <script src="script.js"></script>
+    
+    <!-- Countdown Timer Script -->
     <script>
-        const targetDate = new Date("July 23, 2027 00:00:00").getTime();
-        function updateTimer() {
+        function updateCountdown() {
+            // Event date: July 23, 2027, 8:00 AM Philippine Time (GMT+8)
+            const eventDate = new Date('2027-07-23T08:00:00+08:00').getTime();
             const now = new Date().getTime();
-            const diff = targetDate - now;
-            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-            document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-            document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-            document.getElementById('secs').innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+            const distance = eventDate - now;
+            
+            if (distance < 0) {
+                document.getElementById('days').innerHTML = '00';
+                document.getElementById('hours').innerHTML = '00';
+                document.getElementById('minutes').innerHTML = '00';
+                document.getElementById('seconds').innerHTML = '00';
+                return;
+            }
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').innerHTML = days.toString().padStart(2, '0');
+            document.getElementById('hours').innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerHTML = seconds.toString().padStart(2, '0');
         }
-        setInterval(updateTimer, 1000); updateTimer();
 
-        function launchHub() {
-            document.getElementById('overlay').style.opacity = '0';
-            setTimeout(() => { document.getElementById('overlay').remove(); }, 1200);
-            document.getElementById('bg').classList.add('bg-active');
-            document.getElementById('soon-ui').classList.add('active-ui');
-            setTimeout(() => { document.getElementById('tag-ui').style.opacity = '1'; }, 1000);
-            setTimeout(() => { document.getElementById('timer-ui').style.opacity = '1'; }, 1800);
-            setTimeout(() => { document.getElementById('credits-ui').style.opacity = '1'; }, 2500);
-            document.getElementById('sfx').play().catch(e => {});
+        // Start countdown
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Landing page enter function
+        function enterWebsite() {
+            document.getElementById('landingPage').classList.add('hidden');
+            document.getElementById('mainContent').style.display = 'block';
         }
     </script>
 </body>
