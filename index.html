@@ -9,9 +9,9 @@
         :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; --glass: rgba(255, 255, 255, 0.05); --ticket-bg: #fffdf5; }
         body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; scroll-behavior: smooth; }
         
-        /* OVERLAY */
+        /* OVERLAY - FIXED Z-INDEX & DISMISSAL */
         #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 99999; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: opacity 1s, visibility 1s; }
-        .tap-box { padding: 25px 50px; border: 1px solid var(--sazon-gold); letter-spacing: 5px; text-transform: uppercase; font-size: 0.8rem; }
+        .tap-box { padding: 25px 50px; border: 1px solid var(--sazon-gold); letter-spacing: 5px; text-transform: uppercase; font-size: 0.8rem; pointer-events: none; }
 
         /* HERO STAGE */
         .stage { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; overflow: hidden; }
@@ -38,19 +38,20 @@
         .anthem-section { background: #000c24; padding: 100px 0; text-align: center; color: #fff; border-top: 1px solid rgba(197, 160, 89, 0.2); }
         .lyrics-box { max-width: 800px; margin: 40px auto; padding: 50px; background: var(--glass); border: 1px solid rgba(197, 160, 89, 0.3); font-size: 1.15rem; line-height: 2.2; position: relative; }
         .play-btn { background: var(--sazon-gold); border: none; color: white; padding: 18px 45px; cursor: pointer; letter-spacing: 4px; font-weight: 600; font-size: 0.8rem; transition: 0.3s; }
-        .play-btn:hover { background: #b08d4a; transform: scale(1.05); }
 
-        /* GOLDEN TICKET BOX */
+        /* GOLDEN TICKET BOX - PRECISION FIXED */
         .ticket-container { max-width: 1000px; margin: 80px auto; background: var(--ticket-bg); border: 3px double var(--sazon-gold); padding: 50px; color: var(--sazon-navy); position: relative; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.1); }
         .ticket-header { font-family: 'Playfair Display'; font-size: 2.5rem; color: var(--sazon-navy); margin-bottom: 10px; }
         .qr-frame { width: 200px; height: 200px; margin: 30px auto; border: 5px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); background: #fff; }
         .qr-frame img { width: 100%; height: 100%; }
-        .tiny-url { font-weight: 600; color: var(--sazon-gold); text-decoration: none; font-size: 1.2rem; letter-spacing: 1px; transition: 0.3s; }
-        .tiny-url:hover { color: var(--sazon-navy); }
+        .tiny-url { font-weight: 700; color: var(--sazon-gold); text-decoration: none; font-size: 1.2rem; letter-spacing: 1px; display: inline-block; margin-top: 15px; }
+        .tiny-url:hover { text-decoration: underline; color: var(--sazon-navy); }
+        .reg-btn { display: inline-block; background: var(--sazon-navy); color: white; padding: 18px 50px; text-decoration: none; font-weight: 600; letter-spacing: 2px; font-size: 0.9rem; margin-top: 30px; border-radius: 0; transition: 0.3s; }
+        .reg-btn:hover { background: var(--sazon-gold); transform: translateY(-3px); }
 
         /* MODAL */
-        #resModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 99999; backdrop-filter: blur(20px); overflow-y: auto; }
-        .res-container { background: white; width: 95%; max-width: 1100px; margin: 2% auto; padding: 60px; color: var(--sazon-navy); border-left: 10px solid var(--sazon-gold); }
+        #resModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 88888; backdrop-filter: blur(20px); overflow-y: auto; }
+        .res-container { background: white; width: 95%; max-width: 1100px; margin: 2% auto; padding: 60px; color: var(--sazon-navy); border-left: 10px solid var(--sazon-gold); position: relative;}
     </style>
 </head>
 <body>
@@ -74,102 +75,4 @@
 
     <div class="hub-section">
         <div style="text-align:center;">
-            <h2 style="font-family:'Playfair Display'; font-size:3.5rem; margin:0;">Wall of Generations</h2>
-            <p style="color:var(--sazon-gold); letter-spacing:3px; font-weight:600; margin-top:15px; text-transform:uppercase;">Submission Portal: maemiliapalma@yahoo.com</p>
-        </div>
-        <div class="marquee-wrapper">
-            <div class="photo-card"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800"><div class="photo-caption"><h4>The Roots</h4><p>Generation I</p></div></div>
-            <div class="photo-card"><img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800"><div class="photo-caption"><h4>Unity</h4><p>Sazon Legacy</p></div></div>
-            <div class="photo-card"><img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?auto=format&fit=crop&w=800"><div class="photo-caption"><h4>The Future</h4><p>Generation III</p></div></div>
-            <div class="photo-card"><img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=800"><div class="photo-caption"><h4>Celebration</h4><p>Family Gatherings</p></div></div>
-            <div class="photo-card"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800"><div class="photo-caption"><h4>The Roots</h4><p>Generation I</p></div></div>
-        </div>
-    </div>
-
-    <div class="anthem-section">
-        <h2 style="font-family:'Playfair Display'; font-size:3rem; color:var(--sazon-gold); margin-bottom:10px;">The Family Anthem</h2>
-        <p style="letter-spacing:5px; font-size:0.7rem; margin-bottom:40px; color:rgba(255,255,255,0.6);">EST. 2027 REUNION OFFICIAL JINGLE</p>
-        <button onclick="toggleJingle()" id="jBtn" class="play-btn">PLAY ANTHEM</button>
-        
-        <div class="lyrics-box" id="lyrics">
-            <p><strong>[0:00-0:15] English/Modern Beat:</strong><br>
-            "Miles unfolding, ink on the page, A story rewritten, turning<br>the age. July 2027, the compass aligns, Marzon Hotel,<br>Kalibo, where the heritage shines."</p>
-            
-            <p style="color:var(--sazon-gold); font-weight:600;"><strong>[0:15-0:25] Chorus - High Energy:</strong><br>
-            "Gikan sa gamut, tubtob sa langit, Seasoned with love, let<br>the future ignite. Sazon 2027, (Every path) leads us<br>back to the gate."</p>
-            
-            <p><strong>[0:25-0:30] Outro:</strong><br>
-            "We are Sazon. See you in Kalibo!"</p>
-        </div>
-    </div>
-
-    <div class="hub-section" style="background:#f9f9f9; padding:60px 0;">
-        <div class="ticket-container">
-            <p style="letter-spacing:5px; font-weight:600; font-size:0.7rem; color:var(--sazon-gold);">OFFICIAL REGISTRATION</p>
-            <h2 class="ticket-header">The Golden Ticket</h2>
-            <div style="width:50px; height:2px; background:var(--sazon-gold); margin:20px auto;"></div>
-            <p style="max-width:600px; margin:0 auto; font-size:1.1rem;">Secure your place in our history. Scan the QR code or use the official link below to register for the Sazon 2027 Grand Reunion.</p>
-            
-            <div class="qr-frame">
-                <img src="images/qr-code.png" alt="Sazon Reunion QR Code">
-            </div>
-            
-            <p style="margin-top:20px;">
-                <a href="https://tinyurl.com/SazonGrandReunion" target="_blank" class="tiny-url">tinyurl.com/SazonGrandReunion</a>
-            </p>
-            
-            <div style="margin-top:40px;">
-                <a href="https://tinyurl.com/SazonGrandReunion" target="_blank" style="background:var(--sazon-navy); color:white; padding:15px 40px; text-decoration:none; font-weight:600; letter-spacing:2px; font-size:0.8rem;">REGISTER NOW →</a>
-            </div>
-        </div>
-    </div>
-
-    <div style="background:#fff; padding-bottom:100px; text-align:center;">
-        <button onclick="openRes()" style="background:none; border:1px solid #ccc; color:var(--sazon-navy); padding:15px 40px; cursor:pointer; font-weight:600; letter-spacing:2px;">OPEN TRAVEL GUIDE</button>
-    </div>
-
-    <div id="resModal">
-        <div class="res-container">
-            <span style="position:absolute; right:40px; top:30px; font-size:3rem; cursor:pointer;" onclick="closeRes()">×</span>
-            <h2 style="font-family:'Playfair Display'; font-size:3rem;">Travel Guide</h2>
-            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:40px; margin-top:40px;">
-                <div>
-                    <h4 style="color:var(--sazon-gold); border-bottom:1px solid #eee; padding-bottom:10px;">The Venue</h4>
-                    <p><strong>Marzon Hotel Kalibo</strong></p>
-                    <a href="https://www.google.com/maps/dir//Marzon+Hotel+Kalibo,+Jaime+Cardinal+Sin+Ave,+Andagao,+Kalibo,+5600+Aklan" target="_blank" style="color:var(--sazon-navy); font-weight:600;">View Live Map & Rates →</a>
-                </div>
-                <div>
-                    <h4 style="color:var(--sazon-gold); border-bottom:1px solid #eee; padding-bottom:10px;">Dining</h4>
-                    <p>• Saylo Cuisine<br>• Ramboy's Liempo<br>• Latitud Coffee</p>
-                </div>
-                <div>
-                    <h4 style="color:var(--sazon-gold); border-bottom:1px solid #eee; padding-bottom:10px;">Attractions</h4>
-                    <p>• Bakhawan Eco-Park<br>• Boracay Island</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <audio id="sfx" src="audio/open.mp3"></audio>
-    <audio id="jingle" src="audio/jingle.mp3"></audio>
-
-    <script>
-        function launchHub() {
-            document.getElementById('overlay').style.opacity = '0';
-            setTimeout(() => { document.getElementById('overlay').style.display = 'none'; }, 1000);
-            document.getElementById('bg').classList.add('bg-active');
-            document.getElementById('logo').classList.add('active-logo');
-            document.getElementById('credits').style.opacity = '1';
-            document.getElementById('sfx').play().catch(e => {});
-        }
-        let jPlaying = false;
-        function toggleJingle() {
-            const j = document.getElementById('jingle');
-            if(!jPlaying) { j.play(); document.getElementById('jBtn').innerText = "PAUSE ANTHEM"; jPlaying = true; }
-            else { j.pause(); document.getElementById('jBtn').innerText = "PLAY ANTHEM"; jPlaying = false; }
-        }
-        function openRes() { document.getElementById('resModal').style.display = 'block'; }
-        function closeRes() { document.getElementById('resModal').style.display = 'none'; }
-    </script>
-</body>
-</html>
+            <h2 style="font-family:'Playfair Display'; font-size:3.5rem; margin:
