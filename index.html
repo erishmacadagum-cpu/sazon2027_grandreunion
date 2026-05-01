@@ -8,16 +8,15 @@
     <style>
         :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; --white-glass: rgba(255, 255, 255, 0.08); }
         body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; cursor: pointer; line-height: 1.6; }
+        
+        /* BANNER */
         .stage { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; overflow: hidden; }
         .cinematic-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,26,77,0.92), rgba(0,26,77,0.3) 50%, #000 100%), url('images/banner.jpg') center/cover no-repeat; z-index: 1; transition: transform 25s cubic-bezier(0.45, 0.05, 0.55, 0.95); }
         .bg-zoom-active { transform: scale(1.15); }
         
-        /* CELESTIAL LOGO */
         .logo-anchor { position: absolute; top: 30px; left: 50%; transform: translate(-50%, 20px); z-index: 20; opacity: 0; transition: all 3s ease-out; }
         .logo-active { opacity: 1 !important; transform: translate(-50%, 0) !important; }
         .logo-img { width: 160px; padding: 15px; border-radius: 50%; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); background: rgba(255, 255, 255, 0.1); }
-        .logo-sun { filter: drop-shadow(0 0 30px rgba(255, 200, 50, 0.6)); background: rgba(255, 255, 255, 0.15); }
-        .logo-moon { filter: drop-shadow(0 0 30px rgba(200, 230, 255, 0.5)); background: rgba(255, 255, 255, 0.1); }
         
         .credits-wrapper { position: relative; z-index: 10; width: 90%; max-width: 1300px; display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 5vh; opacity: 0; transition: opacity 2.5s ease-in 0.5s; }
         .main-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 6rem); margin: 0; background: linear-gradient(180deg, #ffffff 50%, var(--sazon-gold) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -28,32 +27,30 @@
         .t-val { display: block; font-family: 'Playfair Display'; font-size: 3rem; font-weight: 700; color: #fff; }
         .t-lbl { font-size: 0.7rem; letter-spacing: 3px; color: var(--sazon-gold); text-transform: uppercase; font-weight: 600; }
 
-        /* THE HISTORICAL STORYTELLING ENHANCEMENT */
+        /* PHOTO WALL */
         .hub-section { background: #fff; padding: 120px 0; color: var(--sazon-navy); }
-        .wall-container { max-width: 1200px; margin: 0 auto; padding: 0 40px; position: relative; }
-        .photo-grid { display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; perspective: 1000px; /* Crucial for 3D flip */ }
+        .wall-container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+        .photo-grid { display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; perspective: 1000px; }
         
         .photo-card { position: relative; width: 320px; height: 480px; overflow: hidden; background: #f8f8f8; box-shadow: 0 20px 50px rgba(0,0,0,0.1); border: 1px solid #eee; transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1); transform-style: preserve-3d; }
         .photo-card.featured { height: 540px; width: 360px; margin-top: -30px; z-index: 2; border: 1px solid var(--sazon-gold); }
-
-        /* FLIP INTERACTION */
         .photo-card:hover { transform: rotateY(180deg); }
+        
         .card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; top: 0; left: 0; }
         .card-back { background: linear-gradient(135deg, var(--sazon-navy), #000); color: white; transform: rotateY(180deg); display: flex; flex-direction: column; justify-content: center; padding: 40px; border: 2px solid var(--sazon-gold); box-sizing: border-box; }
 
-        .photo-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; filter: sepia(20%); }
+        .photo-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; }
         .photo-caption { position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px 20px; background: linear-gradient(to top, rgba(0,26,77,0.95), transparent); color: white; }
-        .photo-caption h4 { margin: 0; font-family: 'Playfair Display'; font-size: 1.6rem; letter-spacing: 1px; }
-        .photo-caption p { margin: 5px 0 0; font-size: 0.75rem; color: var(--sazon-gold); text-transform: uppercase; letter-spacing: 2px; }
+        .photo-caption h4 { margin: 0; font-family: 'Playfair Display'; font-size: 1.6rem; }
 
-        .story-text { font-family: 'Montserrat'; font-weight: 300; font-size: 1rem; line-height: 1.8; opacity: 0; transition: opacity 0.5s ease 0.3s; }
-        .photo-card:hover .story-text { opacity: 1; }
+        /* RESOURCES MODAL */
+        #resourceModal { display: none; position: fixed; z-index: 200; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); }
+        .modal-content { background: white; margin: 5% auto; padding: 50px; width: 80%; max-width: 800px; color: var(--sazon-navy); position: relative; }
+        .close-btn { position: absolute; right: 20px; top: 20px; font-size: 2rem; cursor: pointer; color: var(--sazon-gold); }
 
-        /* LINKS SECTION */
         .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 80px auto 0; padding: 0 25px; }
-        .hub-link { padding: 50px 30px; border: 1px solid #f0f0f0; text-decoration: none; color: inherit; text-align: center; transition: 0.4s; display: block; background: #fff; }
-        .hub-link:hover { border-color: var(--sazon-gold); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .register-card { border: 2px solid var(--sazon-gold); background: linear-gradient(145deg, #fffcf5, #fff); position: relative; overflow: hidden; }
+        .hub-link { padding: 50px 30px; border: 1px solid #f0f0f0; text-decoration: none; color: inherit; text-align: center; transition: 0.4s; cursor: pointer; background: #fff; }
+        .register-card { border: 2px solid var(--sazon-gold); background: linear-gradient(145deg, #fffcf5, #fff); }
         
         #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); z-index: 100; display: flex; justify-content: center; align-items: center; transition: opacity 1.5s; }
     </style>
@@ -61,6 +58,28 @@
 <body>
     <div id="overlay" onclick="launchHub()">
         <p style="letter-spacing: 6px; font-weight: 400; font-size: 1.1rem; text-transform: uppercase; text-align: center; padding: 30px; border: 1px solid var(--sazon-gold); color: white;">Tap to Experience the Legacy</p>
+    </div>
+
+    <div id="resourceModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="toggleResources()">&times;</span>
+            <h2 style="font-family: 'Playfair Display'; color: var(--sazon-navy);">Event Resources</h2>
+            <hr style="border: 1px solid var(--sazon-gold); margin-bottom: 30px;">
+            <div style="display: flex; gap: 40px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 250px;">
+                    <h4 style="color: var(--sazon-gold);">Venue & Stay</h4>
+                    <p><strong>Marzon Hotel Kalibo</strong><br>Sta. Monica, Kalibo, Aklan<br>Phone: (036) 268 2188</p>
+                    <a href="https://maps.app.goo.gl/9yqyfMtXBCt3X9Dn6" target="_blank" style="color: var(--sazon-navy); font-weight: 600;">View on Google Maps &rarr;</a>
+                </div>
+                <div style="flex: 1; min-width: 250px;">
+                    <h4 style="color: var(--sazon-gold);">Schedule Outline</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><strong>July 23:</strong> Arrival & Welcome Dinner</li>
+                        <li><strong>July 24:</strong> Grand Night & Gala</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     
     <audio id="openSfx" src="audio/open.mp3" preload="auto"></audio>
@@ -80,8 +99,7 @@
             </div>
             <div style="width: 30%; text-align: right;">
                 <p style="font-family: 'Playfair Display'; font-size: 1.4rem; font-weight: 700;">MARZON HOTEL<br>
-                <span style="font-size: 0.75rem; font-family: 'Montserrat'; letter-spacing: 2px; font-weight: 600;">JULY 23-24, 2027</span><br>
-                <span style="font-size: 0.65rem; font-family: 'Montserrat'; letter-spacing: 2px; font-weight: 400;">KALIBO, AKLAN</span></p>
+                <span style="font-size: 0.75rem; font-family: 'Montserrat'; letter-spacing: 2px; font-weight: 600;">JULY 23-24, 2027</span></p>
             </div>
         </div>
         <div class="timer-portal" id="timer">
@@ -96,83 +114,57 @@
         <div class="wall-container">
             <div style="text-align:center; margin-bottom: 80px;">
                 <h2 style="font-family: 'Playfair Display'; font-size: 3.5rem; margin-bottom: 10px;">Wall of Generations</h2>
-                <div style="width: 60px; height: 3px; background: var(--sazon-gold); margin: 20px auto;"></div>
-                <p style="letter-spacing: 3px; color: var(--sazon-gold); font-weight: 600; text-transform: uppercase; font-size: 0.8rem;">Submit photos and stories to: maemiliapalma@yahoo.com</p>
+                <p style="letter-spacing: 3px; color: var(--sazon-gold); font-weight: 600; text-transform: uppercase;">Submit photos to: maemiliapalma@yahoo.com</p>
             </div>
-            
             <div class="photo-grid">
                 <div class="photo-card">
                     <div class="card-front">
-                        <img src="images/generation1.jpg" alt="Sazon Roots">
+                        <img src="http://googleusercontent.com/image_collection/image_retrieval/16430835364846025374_0" alt="The Roots">
                         <div class="photo-caption"><h4>The Roots</h4><p>Generation I</p></div>
                     </div>
-                    <div class="card-back">
-                        <h3 style="font-family: 'Playfair Display'; margin-bottom: 10px; color: var(--sazon-gold);">Where It All Began</h3>
-                        <p class="story-text">This generation laid the absolute foundation of the Sazon Clan. Their values, hard work, and love form the deep roots (Gamut) that nourish our family's growth today. This card is a tribute to their enduring memory.</p>
-                    </div>
+                    <div class="card-back"><p>The foundation of the Sazon Clan. Their values and hard work nourish our growth today.</p></div>
                 </div>
-                
                 <div class="photo-card featured">
                     <div class="card-front">
-                        <img src="images/generation2.jpg" alt="Sazon Legacy">
-                        <div class="photo-caption"><h4>The Legacy</h4><p>Our Grand Gatherings</p></div>
+                        <img src="http://googleusercontent.com/image_collection/image_retrieval/816700297719611698_0" alt="The Legacy">
+                        <div class="photo-caption"><h4>The Legacy</h4><p>Gatherings & Bonds</p></div>
                     </div>
-                    <div class="card-back">
-                        <h3 style="font-family: 'Playfair Display'; margin-bottom: 10px; color: var(--sazon-gold);">A History of Reunion</h3>
-                        <p class="story-text">From the largest gatherings to the most intimate family dinners, this generation established the tradition of coming together. Their dedication ensures that the bonds formed between siblings and cousins are never broken. They teach us the power of clan unity.</p>
-                    </div>
+                    <div class="card-back"><p>The generation that established the tradition of coming together and staying united.</p></div>
                 </div>
-                
                 <div class="photo-card">
                     <div class="card-front">
-                        <img src="images/generation3.jpg" alt="Sazon Future">
+                        <img src="http://googleusercontent.com/image_collection/image_retrieval/4093730168397858969_0" alt="The Future">
                         <div class="photo-caption"><h4>The Future</h4><p>Gen III & Beyond</p></div>
                     </div>
-                    <div class="card-back">
-                        <h3 style="font-family: 'Playfair Display'; margin-bottom: 10px; color: var(--sazon-gold);">Tubtob Sa Langit</h3>
-                        <p class="story-text">The Sazon legacy continues through our youngest generations. They are the realization of our ancestors' dreams, soaring toward the sky (Langit). It is our duty to share our history with them, ensuring they carry the torch forward with pride.</p>
-                    </div>
+                    <div class="card-back"><p>The Sazon legacy continues through our youngest members, reaching for the sky.</p></div>
                 </div>
             </div>
         </div>
 
         <div class="hub-grid">
-            <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" target="_blank" class="hub-link register-card">
-                <h3>Register</h3>
-                <p>Secure your Golden Ticket</p>
-            </a>
-            <div class="hub-link" style="cursor:pointer;" onclick="toggleJingle()">
-                <h3 id="jingleStatus">The Jingle</h3>
-                <p>Click to play or pause anthem</p>
-            </div>
-            <a href="#" class="hub-link"><h3>Resources</h3><p>Schedules & Info</p></a>
+            <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" target="_blank" class="hub-link register-card"><h3>Register</h3><p>Secure your Golden Ticket</p></a>
+            <div class="hub-link" onclick="toggleJingle()"><h3 id="jingleStatus">The Jingle</h3><p>Play family anthem</p></div>
+            <div class="hub-link" onclick="toggleResources()"><h3>Resources</h3><p>Hotel & Schedules</p></div>
         </div>
     </div>
 
     <script>
         let isPlaying = false;
-        const jingle = document.getElementById('familyJingle');
-
         function toggleJingle() {
-            if (!isPlaying) {
-                jingle.play();
-                document.getElementById('jingleStatus').innerText = "Playing Anthem...";
-                isPlaying = true;
-            } else {
-                jingle.pause();
-                document.getElementById('jingleStatus').innerText = "The Jingle";
-                isPlaying = false;
-            }
+            const jingle = document.getElementById('familyJingle');
+            if (!isPlaying) { jingle.play(); document.getElementById('jingleStatus').innerText = "Playing..."; isPlaying = true; }
+            else { jingle.pause(); document.getElementById('jingleStatus').innerText = "The Jingle"; isPlaying = false; }
+        }
+
+        function toggleResources() {
+            const modal = document.getElementById('resourceModal');
+            modal.style.display = (modal.style.display === "block") ? "none" : "block";
         }
 
         function launchHub() {
-            const audio = document.getElementById('openSfx');
-            audio.volume = 0.7;
-            audio.play().catch(e => console.log("Sound failed", e));
-            
+            document.getElementById('openSfx').play().catch(e => console.log(e));
             document.getElementById('overlay').style.opacity = '0';
             setTimeout(() => { document.getElementById('overlay').style.display = 'none'; }, 1500);
-            
             document.getElementById('bg').classList.add('bg-zoom-active');
             document.getElementById('mainLogo').classList.add('logo-active');
             document.getElementById('credits').style.opacity = '1';
