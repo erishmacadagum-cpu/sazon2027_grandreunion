@@ -2,108 +2,107 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAZON 2027 | The Grand Family Legacy</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; --ticket-bg: #fffdf5; }
-        
-        /* OVERLAY */
-        #overlay { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: #000; z-index: 10000; display: flex; 
-            justify-content: center; align-items: center; cursor: pointer; 
-            transition: opacity 0.8s ease;
-        }
-        .tap-box { padding: 20px 40px; border: 1px solid var(--sazon-gold); color: white; letter-spacing: 5px; text-transform: uppercase; font-size: 0.7rem; }
-
+        :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; --glass: rgba(255, 255, 255, 0.05); --ticket-bg: #fffdf5; }
         body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; scroll-behavior: smooth; }
         
-        /* HERO STAGE: THE GOLDEN MOMENT */
-        .stage { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: space-between; align-items: center; overflow: hidden; padding: 40px 0; box-sizing: border-box; }
+        /* THE ENTRY OVERLAY */
+        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 99999; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: opacity 1.2s; }
+        .tap-box { padding: 30px 60px; border: 1px solid var(--sazon-gold); letter-spacing: 8px; text-transform: uppercase; font-size: 0.8rem; pointer-events: none; }
+
+        /* CINEMATIC HERO STAGE */
+        .stage { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: space-between; align-items: center; overflow: hidden; padding: 60px 0; box-sizing: border-box; }
+        .cinematic-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,26,77,0.6), transparent 40%, #000 100%), url('images/banner.jpg') center/cover no-repeat; z-index: 1; transition: transform 12s ease-out; }
+        .bg-active { transform: scale(1.15); }
         
-        .cinematic-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,26,77,0.4), #000), url('images/banner.jpg') center/cover no-repeat; z-index: 1; transition: transform 10s ease-out; }
-        .bg-active { transform: scale(1.1); }
-        
-        /* BRANDING ELEMENTS */
-        .logo-wrap { z-index: 20; opacity: 0; transition: 2s; transform: translateY(-20px); }
-        .logo-img { width: 140px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6)); }
-        
-        .credits-wrap { z-index: 20; text-align: center; opacity: 0; transition: 2.5s 0.5s; width: 90%; }
-        .main-title { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 10vw, 6rem); margin: 0; background: linear-gradient(180deg, #fff 40%, var(--sazon-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
-        .sub-tagline { color: var(--sazon-gold); letter-spacing: 8px; font-weight: 600; text-transform: uppercase; font-size: clamp(0.6rem, 2vw, 0.9rem); margin: 15px 0; }
-        
-        .production-info { display: flex; justify-content: space-between; width: 100%; max-width: 1200px; margin-top: 20px; font-size: 0.7rem; letter-spacing: 3px; font-weight: 600; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; }
+        /* TOP LOGO */
+        .logo-anchor { position: relative; z-index: 20; opacity: 0; transform: translateY(-20px); transition: 2.5s; }
+        .logo-img { width: 160px; padding: 20px; border-radius: 50%; backdrop-filter: blur(10px); background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
+
+        /* MAIN TITLES */
+        .hero-center { position: relative; z-index: 10; text-align: center; opacity: 0; transition: 2.5s 0.5s; }
+        .main-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 12vw, 7rem); margin: 0; background: linear-gradient(180deg, #fff 50%, var(--sazon-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5)); }
+        .sub-tagline { color: var(--sazon-gold); letter-spacing: 12px; font-weight: 600; text-transform: uppercase; font-size: 0.9rem; margin-top: 10px; }
+
+        /* BOTTOM CREDITS */
+        .credits-bar { position: relative; z-index: 10; width: 90%; max-width: 1400px; display: flex; justify-content: space-between; align-items: flex-end; opacity: 0; transition: 2.5s 1s; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; }
+        .credit-item { font-size: 0.75rem; letter-spacing: 4px; font-weight: 600; line-height: 2; }
+
         .active-ui { opacity: 1 !important; transform: translateY(0) !important; }
 
-        /* CONTENT SECTIONS */
-        .hub-section { background: #fff; padding: 80px 0; color: var(--sazon-navy); text-align: center; }
-        .marquee { display: flex; width: 200%; gap: 15px; animation: scroll 40s linear infinite; margin: 40px 0; }
+        /* GALLERY & CONTENT */
+        .hub-section { background: #fff; padding: 120px 0; color: var(--sazon-navy); overflow: hidden; }
+        .marquee-wrapper { display: flex; width: 200%; gap: 40px; animation: scroll 50s linear infinite; margin-top: 60px; }
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .photo { width: 300px; height: 400px; background: #eee; flex-shrink: 0; }
-        .photo img { width: 100%; height: 100%; object-fit: cover; }
+        .photo-card { width: 380px; height: 520px; background: #eee; position: relative; flex-shrink: 0; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 8px solid #fff; }
+        .photo-card img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* ANTHEM BOX */
-        .anthem-section { background: #000c24; padding: 100px 20px; text-align: center; }
-        .lyrics-box { max-width: 750px; margin: 40px auto; padding: 40px; background: rgba(255,255,255,0.02); border: 1px solid rgba(197, 160, 89, 0.2); font-size: 1.1rem; line-height: 1.8; }
-        .chorus { color: var(--sazon-gold); font-weight: 700; margin: 30px 0; border-left: 2px solid var(--sazon-gold); border-right: 2px solid var(--sazon-gold); padding: 0 20px; }
+        /* ANTHEM BOX - STYLIZED */
+        .anthem-section { background: #000c24; padding: 120px 0; text-align: center; border-top: 1px solid rgba(197, 160, 89, 0.2); }
+        .lyrics-box { max-width: 850px; margin: 50px auto; padding: 60px; background: var(--glass); border: 1px solid rgba(197, 160, 89, 0.3); line-height: 2.2; font-size: 1.15rem; }
+        .chorus { color: var(--sazon-gold); font-weight: 700; font-style: italic; margin: 30px 0; font-size: 1.3rem; }
 
-        /* TICKET BOX - DIRECT PATH FIX */
-        .ticket-area { background: #fdfdfd; padding: 100px 20px; }
-        .ticket-box { max-width: 700px; margin: 0 auto; background: var(--ticket-bg); border: 4px double var(--sazon-gold); padding: 60px 40px; color: var(--sazon-navy); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
-        .qr-frame { width: 200px; height: 200px; margin: 30px auto; background: #fff; border: 1px solid #ddd; padding: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        /* THE GOLDEN TICKET - QUALITY DESIGN */
+        .ticket-container { max-width: 900px; margin: 100px auto; background: var(--ticket-bg); border: 2px solid var(--sazon-gold); padding: 80px 40px; color: var(--sazon-navy); text-align: center; position: relative; box-shadow: 0 40px 80px rgba(0,0,0,0.2); }
+        .ticket-container::before { content: ''; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px; border: 1px solid var(--sazon-gold); pointer-events: none; }
+        .qr-frame { width: 220px; height: 220px; margin: 40px auto; background: #fff; padding: 15px; border: 1px solid #eee; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
         .qr-frame img { width: 100%; height: 100%; }
         
-        .btn-gold { display: inline-block; background: var(--sazon-navy); color: #fff; padding: 18px 50px; text-decoration: none; font-weight: 700; letter-spacing: 3px; margin-top: 30px; border: none; transition: 0.4s; cursor: pointer; }
-        .btn-gold:hover { background: var(--sazon-gold); transform: scale(1.05); }
+        .btn-reg { display: inline-block; background: var(--sazon-navy); color: #fff; padding: 22px 60px; text-decoration: none; font-weight: 700; letter-spacing: 4px; margin-top: 40px; transition: 0.4s; font-size: 0.9rem; }
+        .btn-reg:hover { background: var(--sazon-gold); transform: translateY(-5px); box-shadow: 0 15px 30px rgba(197, 160, 89, 0.3); }
+
+        #resModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 999999; padding: 80px; box-sizing: border-box; overflow-y: auto; color: var(--sazon-navy); }
     </style>
 </head>
 <body>
 
     <div id="overlay" onclick="launchHub()">
-        <div class="tap-box">Tap to Begin Experience</div>
+        <div class="tap-box">Tap to Begin the Experience</div>
     </div>
 
     <div class="stage">
         <div class="cinematic-bg" id="bg"></div>
         
-        <div class="logo-wrap" id="logo-ui">
+        <div class="logo-anchor" id="logo-ui">
             <img src="images/logo.png" class="logo-img" alt="Sazon Logo">
         </div>
 
-        <div class="credits-wrap" id="credits-ui">
+        <div class="hero-center" id="title-ui">
             <h1 class="main-title">SAZON 2027</h1>
             <p class="sub-tagline">Gikan sa gamut, tubtob sa langit</p>
-            
-            <div class="production-info">
-                <div style="text-align: left;">
-                    A SAZON PRODUCTION<br>
-                    <span style="color:var(--sazon-gold)">EST. 2027 REUNION</span>
-                </div>
-                <div style="text-align: right;">
-                    MARZON HOTEL, KALIBO<br>
-                    <span style="color:var(--sazon-gold)">JULY 23-24, 2027</span>
-                </div>
+        </div>
+
+        <div class="credits-bar" id="credits-ui">
+            <div class="credit-item">
+                A SAZON PRODUCTION<br>
+                <span style="color:var(--sazon-gold)">FAMILY HERITAGE HUB</span>
+            </div>
+            <div class="credit-item" style="text-align: right;">
+                MARZON HOTEL, KALIBO<br>
+                <span style="color:var(--sazon-gold)">JULY 23-24, 2027</span>
             </div>
         </div>
     </div>
 
     <div class="hub-section">
-        <h2 style="font-family:'Playfair Display'; font-size: 3rem; margin: 0;">Wall of Generations</h2>
-        <p style="letter-spacing: 2px; font-weight: 600;">SUBMISSIONS: maemiliapalma@yahoo.com</p>
-        <div class="marquee">
-            <div class="photo"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800"></div>
-            <div class="photo"><img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800"></div>
-            <div class="photo"><img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?auto=format&fit=crop&w=800"></div>
-            <div class="photo"><img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=800"></div>
-            <div class="photo"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800"></div>
+        <div style="text-align:center;">
+            <h2 style="font-family:'Playfair Display'; font-size:4rem; margin:0;">Wall of Generations</h2>
+            <p style="color:var(--sazon-gold); letter-spacing:4px; font-weight:600; margin-top:15px;">PORTAL: maemiliapalma@yahoo.com</p>
+        </div>
+        <div class="marquee-wrapper">
+            <div class="photo-card"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800"></div>
+            <div class="photo-card"><img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800"></div>
+            <div class="photo-card"><img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?auto=format&fit=crop&w=800"></div>
+            <div class="photo-card"><img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=800"></div>
         </div>
     </div>
 
     <div class="anthem-section">
-        <h2 style="font-family:'Playfair Display'; color:var(--sazon-gold); font-size: 2.5rem;">The Family Anthem</h2>
-        <button onclick="toggleAudio()" id="play-btn" class="btn-gold" style="background:transparent; border: 1px solid #fff; margin-bottom: 30px;">PLAY ANTHEM</button>
-        
+        <h2 style="font-family:'Playfair Display'; font-size:3.5rem; color:var(--sazon-gold);">The Family Anthem</h2>
+        <button onclick="toggleJingle()" id="jBtn" class="btn-reg" style="background:transparent; border: 1px solid #fff; margin-bottom: 40px;">PLAY ANTHEM</button>
         <div class="lyrics-box">
             <p><strong>[0:00-0:15] English / Modern Beat:</strong><br>
             "Miles unfolding, ink on the page,<br>A story rewritten, turning the age.<br>July 2027, the compass aligns,<br>Marzon Hotel, Kalibo, where the heritage shines."</p>
@@ -116,52 +115,49 @@
         </div>
     </div>
 
-    <div class="ticket-area">
-        <div class="ticket-box">
-            <p style="letter-spacing: 4px; font-weight: 600; font-size: 0.8rem; color: var(--sazon-gold);">OFFICIAL REGISTRATION</p>
-            <h2 style="font-family:'Playfair Display'; font-size: 2.5rem; margin: 10px 0;">The Golden Ticket</h2>
-            <div class="qr-frame">
-                <img src="images/qr-code.png" alt="Sazon QR">
-            </div>
-            <p style="margin: 20px 0;">
-                <a href="https://tinyurl.com/SazonGrandReunion" target="_blank" style="color:var(--sazon-navy); font-weight:700; text-decoration:underline;">tinyurl.com/SazonGrandReunion</a>
-            </p>
-            <a href="https://tinyurl.com/SazonGrandReunion" target="_blank" class="btn-gold">REGISTER FOR REUNION →</a>
-            <p style="font-size: 0.7rem; margin-top: 20px; opacity: 0.6;">Link opens in a new tab to prevent site refresh.</p>
+    <div class="hub-section" style="background:#fdfdfd;">
+        <div class="ticket-container">
+            <p style="letter-spacing:6px; font-weight:600; font-size:0.8rem; color:var(--sazon-gold); margin-bottom:20px;">OFFICIAL REGISTRATION</p>
+            <h2 style="font-family:'Playfair Display'; font-size:3.5rem; margin:0;">The Golden Ticket</h2>
+            <div class="qr-frame"><img src="images/qr-code.png"></div>
+            <p style="font-size:1.2rem; font-weight:600; color:var(--sazon-gold); margin: 20px 0;">tinyurl.com/SazonGrandReunion</p>
+            <a href="https://tinyurl.com/SazonGrandReunion" target="_blank" class="btn-reg">SECURE YOUR SPOT →</a>
         </div>
     </div>
 
-    <audio id="click-sfx" src="audio/open.mp3"></audio>
-    <audio id="anthem-audio" src="audio/jingle.mp3"></audio>
+    <div style="background:#fff; padding: 100px 0; text-align:center;">
+        <button onclick="document.getElementById('resModal').style.display='block'" class="btn-reg" style="background:#eee; color:var(--sazon-navy);">TRAVEL RESOURCES</button>
+    </div>
+
+    <div id="resModal">
+        <span style="float:right; cursor:pointer; font-weight:700; font-size:1.5rem;" onclick="this.parentElement.style.display='none'">[ CLOSE ]</span>
+        <h2 style="font-family:'Playfair Display'; font-size:3rem;">Travel Guide</h2>
+        <p><strong>Primary Venue:</strong> Marzon Hotel Kalibo</p>
+        <p><strong>Dining:</strong> Ramboy's, Saylo Cuisine, Latitud Coffee</p>
+        <a href="https://www.google.com/maps/dir//Marzon+Hotel+Kalibo,+Jaime+Cardinal+Sin+Ave,+Andagao,+Kalibo,+5600+Aklan" target="_blank" style="color:var(--sazon-gold); font-weight:700;">Open Map & Directions →</a>
+    </div>
+
+    <audio id="sfx" src="audio/open.mp3"></audio>
+    <audio id="jingle" src="audio/jingle.mp3"></audio>
 
     <script>
         function launchHub() {
-            const overlay = document.getElementById('overlay');
-            overlay.style.opacity = '0';
+            const ov = document.getElementById('overlay');
+            ov.style.opacity = '0';
+            setTimeout(() => { ov.remove(); }, 1200);
             
-            setTimeout(() => { 
-                overlay.remove(); 
-            }, 800);
-
             document.getElementById('bg').classList.add('bg-active');
             document.getElementById('logo-ui').classList.add('active-ui');
+            document.getElementById('title-ui').classList.add('active-ui');
             document.getElementById('credits-ui').classList.add('active-ui');
-            document.getElementById('click-sfx').play().catch(e => {});
+            document.getElementById('sfx').play().catch(e => {});
         }
 
-        let isPlaying = false;
-        function toggleAudio() {
-            const audio = document.getElementById('anthem-audio');
-            const btn = document.getElementById('play-btn');
-            if(!isPlaying) {
-                audio.play();
-                btn.innerText = "PAUSE ANTHEM";
-                isPlaying = true;
-            } else {
-                audio.pause();
-                btn.innerText = "PLAY ANTHEM";
-                isPlaying = false;
-            }
+        let playing = false;
+        function toggleJingle() {
+            const j = document.getElementById('jingle');
+            if(!playing) { j.play(); document.getElementById('jBtn').innerText = "PAUSE ANTHEM"; playing = true; }
+            else { j.pause(); document.getElementById('jBtn').innerText = "PLAY ANTHEM"; playing = false; }
         }
     </script>
 </body>
