@@ -1,36 +1,124 @@
-<script>
-    let isPlaying = false;
-    const jingle = document.getElementById('familyJingle');
-
-    function toggleJingle() {
-        if (!isPlaying) {
-            jingle.play().catch(e => console.log("Jingle blocked"));
-            document.getElementById('jingleStatus').innerText = "Playing...";
-            isPlaying = true;
-        } else {
-            jingle.pause();
-            document.getElementById('jingleStatus').innerText = "The Jingle";
-            isPlaying = false;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAZON 2027 | The Grand Family Legacy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; }
+        body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; }
+        
+        /* OPENING SCREEN */
+        #overlay { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: #000; z-index: 1000; display: flex; justify-content: center; 
+            align-items: center; cursor: pointer; transition: opacity 1s; 
         }
-    }
+        .tap-box { padding: 30px; border: 1px solid var(--sazon-gold); letter-spacing: 5px; text-transform: uppercase; }
 
-    // THE CRITICAL FIX: INSTANT REVEAL
-    function launchHub() {
-        // 1. Hide the overlay immediately
-        const overlay = document.getElementById('overlay');
-        overlay.style.opacity = '0';
-        setTimeout(() => { overlay.style.display = 'none'; }, 800);
+        /* HERO SECTION */
+        .stage { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; overflow: hidden; }
+        .cinematic-bg { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            background: linear-gradient(to bottom, rgba(0,26,77,0.8), #000), url('images/banner.jpg') center/cover no-repeat; 
+            z-index: 1; transition: transform 20s linear; 
+        }
+        .bg-zoom { transform: scale(1.1); }
         
-        // 2. Try to play the opening sound (but don't stop if it fails)
-        const sfx = document.getElementById('openSfx');
-        sfx.play().catch(e => console.log("SFX blocked by browser - moving on..."));
-        
-        // 3. Trigger all animations
-        document.getElementById('bg').classList.add('bg-zoom-active');
-        document.getElementById('mainLogo').classList.add('logo-active');
-        document.getElementById('credits').style.opacity = '1';
-        document.getElementById('timer').classList.add('timer-active');
-    }
+        .logo-anchor { position: absolute; top: 50px; z-index: 20; opacity: 0; transition: 2s; transform: translateY(20px); }
+        .logo-img { width: 150px; }
+        .active { opacity: 1; transform: translateY(0); }
 
-    // ... (Keep the Timer Logic from before) ...
-</script>
+        .content-box { position: relative; z-index: 10; width: 90%; max-width: 1200px; padding-bottom: 5vh; text-align: center; opacity: 0; transition: 2s; }
+        .main-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 10vw, 6rem); margin: 0; color: #fff; }
+
+        /* PHOTO WALL */
+        .hub-section { background: #fff; padding: 100px 0; color: var(--sazon-navy); text-align: center; }
+        .photo-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; padding: 20px; }
+        .photo-card { width: 300px; height: 450px; background: #eee; position: relative; overflow: hidden; border-bottom: 4px solid var(--sazon-gold); }
+        .photo-card img { width: 100%; height: 100%; object-fit: cover; }
+        .caption { position: absolute; bottom: 0; width: 100%; padding: 20px; background: rgba(0,26,77,0.8); color: #fff; box-sizing: border-box; }
+
+        /* MODAL */
+        #resModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; }
+        .res-content { background: white; width: 90%; max-width: 600px; margin: 10% auto; padding: 40px; color: #000; position: relative; }
+        
+        .btn-grid { display: flex; justify-content: center; gap: 20px; margin-top: 50px; flex-wrap: wrap; }
+        .btn { padding: 20px 40px; border: 1px solid #ddd; text-decoration: none; color: inherit; cursor: pointer; background: #fff; }
+    </style>
+</head>
+<body>
+
+    <div id="overlay" onclick="startApp()">
+        <div class="tap-box">Tap to Enter Sazon 2027</div>
+    </div>
+
+    <div class="stage">
+        <div class="cinematic-bg" id="bg"></div>
+        
+        <div class="logo-anchor" id="logo">
+            <img src="images/logo.png" class="logo-img" alt="Sazon Logo">
+        </div>
+
+        <div class="content-box" id="mainUI">
+            <h1 class="main-title">SAZON 2027</h1>
+            <p style="color: var(--sazon-gold); letter-spacing: 5px;">THE FIRST GRAND FAMILY REUNION</p>
+            <p>JULY 23-24, 2027 | MARZON HOTEL KALIBO</p>
+        </div>
+    </div>
+
+    <div class="hub-section">
+        <h2 style="font-family: 'Playfair Display'; font-size: 3rem;">Wall of Generations</h2>
+        <div class="photo-grid">
+            <div class="photo-card">
+                <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800" alt="Roots">
+                <div class="caption"><h4>The Roots</h4><p>Generation I</p></div>
+            </div>
+            <div class="photo-card">
+                <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800" alt="Legacy">
+                <div class="caption"><h4>The Legacy</h4><p>Grand Gatherings</p></div>
+            </div>
+            <div class="photo-card">
+                <img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?auto=format&fit=crop&w=800" alt="Future">
+                <div class="caption"><h4>The Future</h4><p>Next Generations</p></div>
+            </div>
+        </div>
+
+        <div class="btn-grid">
+            <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" target="_blank" class="btn" style="border-color: var(--sazon-gold);">Register Now</a>
+            <div class="btn" onclick="openRes()">Resources</div>
+        </div>
+    </div>
+
+    <div id="resModal">
+        <div class="res-content">
+            <span style="position:absolute; right:20px; top:10px; cursor:pointer; font-size:2rem;" onclick="closeRes()">×</span>
+            <h3>Family Resources</h3>
+            <p><strong>Venue:</strong> Marzon Hotel Kalibo</p>
+            <p><strong>Address:</strong> Jaime Cardinal Sin Ave, Andagao, Kalibo, Aklan</p>
+            <p><strong>Dress Code:</strong> Modern Filipiniana (Gold & Navy)</p>
+            <p><strong>Contact:</strong> maemiliapalma@yahoo.com</p>
+        </div>
+    </div>
+
+    <audio id="sfx" src="audio/open.mp3"></audio>
+
+    <script>
+        function startApp() {
+            document.getElementById('overlay').style.opacity = '0';
+            setTimeout(() => { document.getElementById('overlay').style.display = 'none'; }, 1000);
+            
+            document.getElementById('bg').classList.add('bg-zoom');
+            document.getElementById('logo').classList.add('active');
+            document.getElementById('mainUI').classList.add('active');
+            
+            const audio = document.getElementById('sfx');
+            audio.play().catch(e => console.log("Audio blocked"));
+        }
+
+        function openRes() { document.getElementById('resModal').style.display = 'block'; }
+        function closeRes() { document.getElementById('resModal').style.display = 'none'; }
+    </script>
+</body>
+</html>
