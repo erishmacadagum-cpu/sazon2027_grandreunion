@@ -3,8 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>SAZON 2027 | The Grand Family Legacy</title>
+    <meta name="description" content="Gikan sa gamut, tubtob sa langit. Secure your spot for the Sazon 2027 Grand Family Reunion.">
+    
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="apple-touch-icon" href="images/logo.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="SAZON 2027 | The Legacy Awaits">
+    <meta property="og:description" content="A cinematic countdown to our first Grand Family Reunion. Tap to enter the Hub.">
+    <meta property="og:image" content="images/banner.jpg">
+    <meta property="og:url" content="https://your-github-username.github.io/your-repo-name/">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <style>
         :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; }
         body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; scroll-behavior: smooth; }
@@ -124,28 +140,20 @@
             document.getElementById('overlay').style.opacity = '0';
             setTimeout(() => { document.getElementById('overlay').remove(); }, 1200);
             
-            // Audio Sequence
             const openSfx = document.getElementById('sfx-open');
             const jingle = document.getElementById('sfx-jingle');
-            
             openSfx.play();
             
-            // Fade-in Jingle
             setTimeout(() => {
                 jingle.volume = 0;
                 jingle.play();
                 let vol = 0;
                 const fadeIn = setInterval(() => {
-                    if (vol < 0.5) {
-                        vol += 0.05;
-                        jingle.volume = vol;
-                    } else {
-                        clearInterval(fadeIn);
-                    }
+                    if (vol < 0.5) { vol += 0.05; jingle.volume = vol; } 
+                    else { clearInterval(fadeIn); }
                 }, 200);
             }, 1000);
 
-            // UI Reveals
             document.getElementById('bg').classList.add('bg-active');
             document.getElementById('soon-ui').classList.add('active-ui');
             document.getElementById('mute-btn').classList.add('active-ui');
