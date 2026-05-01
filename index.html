@@ -9,8 +9,13 @@
         :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; --glass: rgba(255, 255, 255, 0.05); --ticket-bg: #fffdf5; }
         body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; scroll-behavior: smooth; }
         
-        /* OVERLAY - FIXED Z-INDEX & DISMISSAL */
-        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 99999; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: opacity 1s, visibility 1s; }
+        /* THE CRITICAL FIX: Ensure overlay is at the very top, then GONE */
+        #overlay { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: #000; z-index: 999999; display: flex; 
+            justify-content: center; align-items: center; cursor: pointer; 
+            transition: opacity 0.8s ease; 
+        }
         .tap-box { padding: 25px 50px; border: 1px solid var(--sazon-gold); letter-spacing: 5px; text-transform: uppercase; font-size: 0.8rem; pointer-events: none; }
 
         /* HERO STAGE */
@@ -36,22 +41,19 @@
 
         /* ANTHEM SECTION */
         .anthem-section { background: #000c24; padding: 100px 0; text-align: center; color: #fff; border-top: 1px solid rgba(197, 160, 89, 0.2); }
-        .lyrics-box { max-width: 800px; margin: 40px auto; padding: 50px; background: var(--glass); border: 1px solid rgba(197, 160, 89, 0.3); font-size: 1.15rem; line-height: 2.2; position: relative; }
-        .play-btn { background: var(--sazon-gold); border: none; color: white; padding: 18px 45px; cursor: pointer; letter-spacing: 4px; font-weight: 600; font-size: 0.8rem; transition: 0.3s; }
+        .lyrics-box { max-width: 800px; margin: 40px auto; padding: 50px; background: var(--glass); border: 1px solid rgba(197, 160, 89, 0.3); font-size: 1.15rem; line-height: 2.2; }
+        .play-btn { background: var(--sazon-gold); border: none; color: white; padding: 18px 45px; cursor: pointer; letter-spacing: 4px; font-weight: 600; font-size: 0.8rem; }
 
-        /* GOLDEN TICKET BOX - PRECISION FIXED */
-        .ticket-container { max-width: 1000px; margin: 80px auto; background: var(--ticket-bg); border: 3px double var(--sazon-gold); padding: 50px; color: var(--sazon-navy); position: relative; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.1); }
-        .ticket-header { font-family: 'Playfair Display'; font-size: 2.5rem; color: var(--sazon-navy); margin-bottom: 10px; }
+        /* TICKET BOX */
+        .ticket-container { max-width: 1000px; margin: 80px auto; background: var(--ticket-bg); border: 3px double var(--sazon-gold); padding: 50px; color: var(--sazon-navy); text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.1); }
         .qr-frame { width: 200px; height: 200px; margin: 30px auto; border: 5px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); background: #fff; }
         .qr-frame img { width: 100%; height: 100%; }
-        .tiny-url { font-weight: 700; color: var(--sazon-gold); text-decoration: none; font-size: 1.2rem; letter-spacing: 1px; display: inline-block; margin-top: 15px; }
-        .tiny-url:hover { text-decoration: underline; color: var(--sazon-navy); }
-        .reg-btn { display: inline-block; background: var(--sazon-navy); color: white; padding: 18px 50px; text-decoration: none; font-weight: 600; letter-spacing: 2px; font-size: 0.9rem; margin-top: 30px; border-radius: 0; transition: 0.3s; }
-        .reg-btn:hover { background: var(--sazon-gold); transform: translateY(-3px); }
+        .tiny-url { font-weight: 700; color: var(--sazon-gold); text-decoration: none; font-size: 1.2rem; display: inline-block; margin-top: 15px; }
+        .reg-btn { display: inline-block; background: var(--sazon-navy); color: white; padding: 18px 50px; text-decoration: none; font-weight: 600; letter-spacing: 2px; margin-top: 30px; }
 
         /* MODAL */
-        #resModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 88888; backdrop-filter: blur(20px); overflow-y: auto; }
-        .res-container { background: white; width: 95%; max-width: 1100px; margin: 2% auto; padding: 60px; color: var(--sazon-navy); border-left: 10px solid var(--sazon-gold); position: relative;}
+        #resModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 8000; backdrop-filter: blur(20px); overflow-y: auto; }
+        .res-container { background: white; width: 95%; max-width: 1100px; margin: 2% auto; padding: 60px; color: var(--sazon-navy); border-left: 10px solid var(--sazon-gold); position: relative; }
     </style>
 </head>
 <body>
@@ -62,17 +64,4 @@
 
     <div class="stage">
         <div class="cinematic-bg" id="bg"></div>
-        <div class="logo-anchor" id="logo"><img src="images/logo.png" class="logo-img" alt="Sazon Logo"></div>
-        <div class="credits" id="credits">
-            <div style="width:30%"><p style="font-size:0.7rem; letter-spacing:4px; font-weight:600;">EST. GENERATIONS<br>OF EXCELLENCE</p></div>
-            <div style="text-align:center;">
-                <h1 class="main-title">SAZON 2027</h1>
-                <p style="color:var(--sazon-gold); letter-spacing:10px; font-size:0.8rem; font-weight:600;">GIKAN SA GAMUT, TUBTOB SA LANGIT</p>
-            </div>
-            <div style="width:30%; text-align:right;"><p style="font-family:'Playfair Display'; font-size:1.2rem; font-weight:700;">MARZON HOTEL<br><span style="font-size:0.7rem; font-family:'Montserrat'; letter-spacing:2px;">JULY 23-24, 2027</span></p></div>
-        </div>
-    </div>
-
-    <div class="hub-section">
-        <div style="text-align:center;">
-            <h2 style="font-family:'Playfair Display'; font-size:3.5rem; margin:
+        <div class="logo-anchor" id="logo"><img src="images/logo.png" class="logo-img" alt="S
