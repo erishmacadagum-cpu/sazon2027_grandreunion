@@ -9,9 +9,18 @@
         :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; --white-glass: rgba(255, 255, 255, 0.1); }
         body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; line-height: 1.6; }
         
-        /* LAUNCH OVERLAY */
-        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: opacity 1s; }
-        .tap-box { padding: 25px 50px; border: 1px solid var(--sazon-gold); letter-spacing: 5px; text-transform: uppercase; font-size: 0.9rem; color: white; }
+        /* THE CRITICAL FIX: Z-INDEX 99999 ensures this is ALWAYS on top */
+        #overlay { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: #000; z-index: 99999; display: flex; 
+            justify-content: center; align-items: center; cursor: pointer; 
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
+        .tap-box { 
+            padding: 25px 50px; border: 1px solid var(--sazon-gold); 
+            letter-spacing: 5px; text-transform: uppercase; font-size: 0.9rem; 
+            color: white; pointer-events: none; /* Let the click pass to the overlay */
+        }
 
         /* HERO SECTION */
         .stage { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; overflow: hidden; }
@@ -30,7 +39,7 @@
         .t-val { display: block; font-family: 'Playfair Display'; font-size: 2.5rem; color: #fff; }
         .t-lbl { font-size: 0.6rem; letter-spacing: 2px; color: var(--sazon-gold); text-transform: uppercase; }
 
-        /* PHOTO WALL */
+        /* HUB SECTION */
         .hub-section { background: #fff; padding: 100px 0; color: var(--sazon-navy); }
         .wall-container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
         .photo-grid { display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; margin-top: 50px; }
@@ -46,7 +55,7 @@
         .register-card { border: 2px solid var(--sazon-gold); background: linear-gradient(145deg, #fffcf5, #fff); }
 
         /* RESOURCES MODAL */
-        #resModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.97); z-index: 9999; backdrop-filter: blur(15px); }
+        #resModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.97); z-index: 8888; backdrop-filter: blur(15px); }
         .res-box { background: white; width: 90%; max-width: 950px; margin: 3% auto; padding: 50px; color: var(--sazon-navy); position: relative; border-left: 10px solid var(--sazon-gold); box-sizing: border-box; overflow-y: auto; max-height: 90vh; }
         .res-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 35px; margin-top: 30px; }
         .res-item h4 { color: var(--sazon-gold); text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
@@ -117,4 +126,81 @@
             </div>
             <div class="hub-link" onclick="openRes()">
                 <h3 style="font-family:'Playfair Display'; font-size:1.8rem;">Resources</h3>
-                <p>Full Information Hub</
+                <p>Full Information Hub</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="resModal">
+        <div class="res-box">
+            <span style="position:absolute; right:30px; top:20px; font-size:2.5rem; cursor:pointer;" onclick="closeRes()">×</span>
+            <h2 style="font-family:'Playfair Display'; font-size:2.5rem; margin-bottom:5px;">Logistics & Information</h2>
+            <p style="letter-spacing:2px; font-size:0.7rem; text-transform:uppercase; color:var(--sazon-gold); font-weight:600; margin-bottom:30px;">Proactive Details for July 2027</p>
+            
+            <div class="res-grid">
+                <div class="res-item">
+                    <h4>The Venue</h4>
+                    <p><strong>Marzon Hotel Kalibo</strong><br>Jaime Cardinal Sin Ave, Andagao<br>Kalibo, Aklan 5600</p>
+                    <p style="margin-top:10px;"><strong>Distances:</strong><br>• Kalibo Airport: 1.8 km (5 mins)<br>• Town Center: 1.1 km (4 mins)</p>
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=Marzon+Hotel+Kalibo" target="_blank" class="nav-btn">START GPS NAVIGATION →</a>
+                </div>
+                <div class="res-item">
+                    <h4>Est. 2027 Rates</h4>
+                    <p><em>(Per Night, Incl. Taxes)</em></p>
+                    <p>• <strong>Standard Double:</strong> ₱2,200 - ₱2,400</p>
+                    <p>• <strong>Deluxe Room:</strong> ₱2,800 - ₱3,100</p>
+                    <p>• <strong>Family Suite:</strong> ₱4,500+</p>
+                    <p style="font-size:0.8rem; color:#666; margin-top:10px;">*Rates reflect 2027 projections. Early booking recommended.</p>
+                </div>
+                <div class="res-item">
+                    <h4>Travel Notes</h4>
+                    <p><strong>Airport Shuttle:</strong> ₱350 per vehicle (Max 8 pax). Book 48h in advance.</p>
+                    <p><strong>Dress Code:</strong> (To be announced)</p>
+                    <p><strong>Inquiries:</strong> maemiliapalma@yahoo.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="sfx" src="audio/open.mp3" preload="auto"></audio>
+    <audio id="jingle" src="audio/jingle.mp3" preload="auto"></audio>
+
+    <script>
+        let jPlaying = false;
+        function toggleJingle() {
+            const j = document.getElementById('jingle');
+            if(!jPlaying) { j.play().catch(e => {}); document.getElementById('jStatus').innerText = "Playing Anthem..."; jPlaying = true; }
+            else { j.pause(); document.getElementById('jStatus').innerText = "The Jingle"; jPlaying = false; }
+        }
+
+        // CRITICAL FIX: Ensure visibility is handled
+        function launchHub() {
+            const overlay = document.getElementById('overlay');
+            overlay.style.opacity = '0';
+            overlay.style.visibility = 'hidden'; // Ensure it's totally gone
+            
+            document.getElementById('bg').classList.add('bg-active');
+            document.getElementById('logo').classList.add('active-logo');
+            document.getElementById('credits').style.opacity = '1';
+            document.getElementById('timer').style.opacity = '1';
+            document.getElementById('timer').style.transform = 'translateY(0)';
+            
+            const sound = document.getElementById('sfx');
+            sound.play().catch(e => console.log("Audio skipped by browser"));
+        }
+
+        function openRes() { document.getElementById('resModal').style.display = 'block'; }
+        function closeRes() { document.getElementById('resModal').style.display = 'none'; }
+        
+        const target = new Date("July 23, 2027 08:00:00").getTime();
+        setInterval(() => {
+            const d = target - new Date().getTime();
+            if (d < 0) return;
+            document.getElementById('d').innerText = Math.floor(d / 86400000);
+            document.getElementById('h').innerText = Math.floor((d % 86400000) / 3600000);
+            document.getElementById('m').innerText = Math.floor((d % 3600000) / 60000);
+            document.getElementById('s').innerText = Math.floor((d % 60000) / 1000);
+        }, 1000);
+    </script>
+</body>
+</html>
