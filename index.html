@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SAZON 2027 | The Grand Family Legacy</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; --glass: rgba(255, 255, 255, 0.05); --ticket-bg: #fffdf5; }
         body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; scroll-behavior: smooth; }
         
-        /* ENTRY OVERLAY */
+        /* OVERLAY */
         #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 99999; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: opacity 1.2s; }
         .tap-box { padding: 30px 60px; border: 1px solid var(--sazon-gold); letter-spacing: 8px; text-transform: uppercase; font-size: 0.8rem; }
 
-        /* CINEMATIC HERO */
+        /* HERO STAGE */
         .stage { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: space-between; align-items: center; overflow: hidden; padding: 60px 0; box-sizing: border-box; }
         .cinematic-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,26,77,0.6), transparent 40%, #000 100%), url('images/banner.jpg') center/cover no-repeat; z-index: 1; transition: transform 12s ease-out; }
         .bg-active { transform: scale(1.15); }
@@ -37,15 +37,17 @@
         .photo-card img { width: 100%; height: 100%; object-fit: cover; }
 
         /* ANTHEM */
-        .anthem-section { background: #000c24; padding: 120px 0; text-align: center; }
-        .lyrics-box { max-width: 850px; margin: 40px auto; padding: 60px; background: var(--glass); border: 1px solid rgba(197, 160, 89, 0.3); line-height: 2.2; font-size: 1.15rem; }
-        .chorus { color: var(--sazon-gold); font-weight: 700; margin: 30px 0; font-size: 1.3rem; }
+        .anthem-section { background: #000c24; padding: 120px 20px; text-align: center; }
+        .lyrics-box { max-width: 850px; margin: 40px auto; padding: 60px; background: var(--glass); border: 1px solid rgba(197, 160, 89, 0.3); line-height: 2.2; font-size: 1.1rem; }
+        .chorus { color: var(--sazon-gold); font-weight: 700; margin: 30px 0; font-size: 1.3rem; border-left: 2px solid var(--sazon-gold); border-right: 2px solid var(--sazon-gold); padding: 0 20px; }
 
-        /* THE GOLDEN TICKET - HARD WIRED */
-        .ticket-container { max-width: 900px; margin: 100px auto; background: var(--ticket-bg); border: 2px solid var(--sazon-gold); padding: 80px 40px; color: var(--sazon-navy); position: relative; box-shadow: 0 40px 80px rgba(0,0,0,0.2); }
-        .qr-frame { width: 220px; height: 220px; margin: 40px auto; background: #fff; padding: 15px; border: 1px solid #eee; }
-        .btn-reg { display: inline-block; background: var(--sazon-navy); color: #fff; padding: 22px 60px; text-decoration: none; font-weight: 700; letter-spacing: 4px; margin-top: 40px; cursor: pointer; border: none; font-size: 1rem; }
-        .btn-reg:hover { background: var(--sazon-gold); }
+        /* THE GOLDEN TICKET - HARD WIRED FIX */
+        .ticket-container { max-width: 900px; margin: 100px auto; background: var(--ticket-bg); border: 4px double var(--sazon-gold); padding: 80px 40px; color: var(--sazon-navy); position: relative; box-shadow: 0 40px 80px rgba(0,0,0,0.2); }
+        .qr-frame { width: 220px; height: 220px; margin: 40px auto; background: #fff; padding: 15px; border: 1px solid #eee; cursor: pointer; }
+        .qr-frame img { width: 100%; height: 100%; display: block; }
+        
+        .btn-reg { display: inline-block; background: var(--sazon-navy); color: #fff; padding: 22px 60px; text-decoration: none; font-weight: 700; letter-spacing: 4px; margin-top: 40px; cursor: pointer; border: none; font-size: 1rem; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: 0.3s; }
+        .btn-reg:hover { background: var(--sazon-gold); transform: scale(1.05); }
     </style>
 </head>
 <body>
@@ -68,7 +70,7 @@
     </div>
 
     <div class="hub-section">
-        <h2 style="font-family:'Playfair Display'; font-size:4rem; margin:0;">Wall of Generations</h2>
+        <h2 style="font-family:'Playfair Display'; font-size:3.5rem; margin:0;">Wall of Generations</h2>
         <div class="marquee">
             <div class="photo-card"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800"></div>
             <div class="photo-card"><img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800"></div>
@@ -78,13 +80,13 @@
     </div>
 
     <div class="anthem-section">
-        <h2 style="font-family:'Playfair Display'; font-size:3.5rem; color:var(--sazon-gold);">The Family Anthem</h2>
+        <h2 style="font-family:'Playfair Display'; font-size:3rem; color:var(--sazon-gold);">The Family Anthem</h2>
         <button onclick="toggleJingle()" id="jBtn" class="btn-reg" style="background:transparent; border: 1px solid #fff;">PLAY ANTHEM</button>
         <div class="lyrics-box">
             <p><strong>[0:00-0:15] English / Modern Beat:</strong><br>
-            "Miles unfolding, ink on the page, A story rewritten, turning the age. July 2027, the compass aligns, Marzon Hotel, Kalibo, where the heritage shines."</p>
+            "Miles unfolding, ink on the page,<br>A story rewritten, turning the age.<br>July 2027, the compass aligns,<br>Marzon Hotel, Kalibo, where the heritage shines."</p>
             <p class="chorus"><strong>[0:15-0:25] Chorus - High Energy:</strong><br>
-            "Gikan sa gamut, tubtob sa langit, Seasoned with love, let the future ignite. Sazon 2027, (Every path) leads us back to the gate."</p>
+            "Gikan sa gamut, tubtob sa langit,<br>Seasoned with love, let the future ignite.<br>Sazon 2027, (Every path) leads us back to the gate."</p>
             <p><strong>[0:25-0:30] Outro:</strong><br>
             "We are Sazon. See you in Kalibo!"</p>
         </div>
@@ -92,11 +94,15 @@
 
     <div class="hub-section" style="background:#fdfdfd;">
         <div class="ticket-container">
-            <h2 style="font-family:'Playfair Display'; font-size:3.5rem; margin:0;">The Golden Ticket</h2>
-            <div class="qr-frame"><img src="images/qr-code.png"></div>
-            <p style="font-size:1.2rem; font-weight:600; color:var(--sazon-gold);">tinyurl.com/SazonGrandReunion</p>
+            <h2 style="font-family:'Playfair Display'; font-size:3rem; margin:0;">The Golden Ticket</h2>
             
-            <button onclick="goToForm()" class="btn-reg">SECURE YOUR SPOT →</button>
+            <div class="qr-frame" onclick="goToForm()">
+                <img src="images/qr-code.png">
+            </div>
+            
+            <p style="font-size:1.1rem; font-weight:600; color:var(--sazon-gold); letter-spacing: 2px;">tinyurl.com/SazonGrandReunion</p>
+            
+            <button type="button" onclick="goToForm()" class="btn-reg">SECURE YOUR SPOT →</button>
         </div>
     </div>
 
@@ -115,7 +121,7 @@
             document.getElementById('sfx').play().catch(e => {});
         }
 
-        // FORCED NAVIGATION: This bypasses all link glitches
+        // THE ABSOLUTE FIX: Forces the browser to treat this as a direct user action
         function goToForm() {
             window.open("https://tinyurl.com/SazonGrandReunion", "_blank");
         }
