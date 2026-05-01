@@ -5,36 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>SAZON 2027 | The Grand Family Legacy</title>
-    <meta name="description" content="Gikan sa gamut, tubtob sa langit. Secure your spot for the Sazon 2027 Grand Family Reunion.">
     
     <link rel="icon" type="image/png" href="images/logo.png">
-    <link rel="apple-touch-icon" href="images/logo.png">
-
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="SAZON 2027 | The Legacy Awaits">
-    <meta property="og:description" content="A cinematic countdown to our first Grand Family Reunion. Tap to enter the Hub.">
-    <meta property="og:image" content="images/banner.jpg">
-    <meta property="og:url" content="https://your-github-username.github.io/your-repo-name/">
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
-        :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; }
+        :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; --glass: rgba(255, 255, 255, 0.03); }
         body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* CEREMONIAL ENTRANCE */
+        /* CEREMONIAL ENTRANCE (Overlay) */
         #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 100000; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: opacity 1.5s; }
         .tap-box { padding: 25px 50px; border: 1px solid var(--sazon-gold); letter-spacing: 8px; text-transform: uppercase; font-size: 0.7rem; text-align: center; background: rgba(197, 160, 89, 0.05); }
 
-        /* CINEMATIC STAGE */
-        .stage { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; padding: 20px; box-sizing: border-box; }
+        /* CINEMATIC NAVIGATION (Navbar) */
+        #main-nav { position: fixed; top: 0; width: 100%; height: 80px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 999; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; border-bottom: 1px solid rgba(197, 160, 89, 0.2); box-sizing: border-box; transform: translateY(-100%); transition: 1s ease-out; }
+        #main-nav.active { transform: translateY(0); }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { color: #fff; text-decoration: none; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 3px; position: relative; padding-bottom: 5px; opacity: 0.8; }
+        .nav-links a:after { content: ''; position: absolute; width: 0; height: 1px; bottom: 0; left: 0; background: var(--sazon-gold); transition: 0.3s; }
+        .nav-links a:hover { opacity: 1; color: var(--sazon-gold); }
+        .nav-links a:hover:after { width: 100%; }
+
+        /* THE "SOON" STAGE */
+        .stage { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; padding: 20px; box-sizing: border-box; margin-top: 80px; }
         .cinematic-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,26,77,0.6), transparent 50%, #000 100%), url('images/banner.jpg') center/cover no-repeat; z-index: 1; transition: transform 20s ease-out; }
         .bg-active { transform: scale(1.15); }
 
-        /* THE "SOON" GLOSSY TITLE */
+        /* THE "SOON" GOLD TITLE */
         .soon-container { position: relative; z-index: 10; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(20px); transition: 3s 0.5s; }
         .active-ui.soon-container { opacity: 1; transform: translateY(0); }
         .gold-letter { font-family: 'Playfair Display', serif; font-size: clamp(3.8rem, 18vw, 10rem); background: linear-gradient(135deg, #fff 20%, var(--sazon-gold) 50%, #fff 80%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; animation: shine 6s linear infinite; }
@@ -47,7 +45,7 @@
 
         .tagline { color: var(--sazon-gold); letter-spacing: clamp(6px, 3vw, 12px); text-transform: uppercase; font-size: 0.65rem; font-weight: 600; margin: 25px 0 35px 0; opacity: 0; transition: 2s 1.5s; z-index: 10; text-align: center; }
 
-        /* POLISHED COUNTDOWN TIMER */
+        /* COUNTDOWN TIMER */
         .timer-wrapper { position: relative; z-index: 10; background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(197, 160, 89, 0.2); padding: 20px 40px; border-radius: 2px; opacity: 0; transition: 2.5s 2.2s; }
         .timer-container { display: flex; gap: 25px; align-items: center; }
         .timer-box { text-align: center; min-width: 75px; }
@@ -55,16 +53,21 @@
         .timer-label { font-size: 0.55rem; letter-spacing: 3px; text-transform: uppercase; color: #fff; opacity: 0.6; margin-top: 5px; display: block; }
         .timer-divider { font-size: 1.5rem; color: var(--sazon-gold); opacity: 0.5; font-family: 'Playfair Display', serif; padding-bottom: 20px; }
 
-        /* ELEGANT AUDIO CONTROL */
+        /* AUDIO CONTROL */
         .audio-control { position: fixed; bottom: 30px; right: 30px; z-index: 1000; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(197, 160, 89, 0.3); padding: 12px; border-radius: 50%; cursor: pointer; opacity: 0; transition: 2s 3s; }
         .active-ui.audio-control { opacity: 1; }
 
-        .ticket-section { background: #fff; padding: 100px 20px; text-align: center; color: var(--sazon-navy); }
-        .ticket-container { max-width: 800px; margin: 0 auto; background: #fffdf5; border: 1px solid var(--sazon-gold); padding: 50px 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
-        .btn-gold { display: inline-block; background: var(--sazon-navy); color: #fff !important; padding: 20px 50px; text-decoration: none; font-weight: 700; letter-spacing: 4px; margin-top: 30px; font-size: 0.75rem; text-transform: uppercase; transition: 0.4s; cursor: pointer; }
+        /* GENERAL SECTIONING (for the new features) */
+        .section-navy { background: #fff; padding: 100px 20px; color: var(--sazon-navy); position: relative; z-index: 10; }
+        .sazon-frame { max-width: 1000px; margin: 0 auto; background: #fffdf5; border: 1px solid var(--sazon-gold); padding: 50px 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-family: 'Playfair Display'; font-size: 2.2rem; margin: 0; letter-spacing: 2px; }
+        .section-header p { text-transform: uppercase; letter-spacing: 4px; font-size: 0.7rem; color: var(--sazon-gold); margin-top: 10px; }
+
+        /* FOOTER */
         .credits-bar { position: absolute; bottom: 30px; width: 90%; display: flex; justify-content: space-between; opacity: 0; transition: 2s 2.5s; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; z-index: 10; }
-        
-        @media (max-width: 600px) { .timer-wrapper { padding: 15px 10px; } .timer-container { gap: 10px; } .timer-box { min-width: 45px; } .timer-divider { display: none; } .credits-bar { flex-direction: column; text-align: center; gap: 10px; align-items: center; } }
+
+        @media (max-width: 600px) { #main-nav { padding: 0 20px; height: 60px; } .stage { margin-top: 60px; } .nav-links { display: none; } .timer-wrapper { padding: 15px 10px; } .timer-container { gap: 10px; } .timer-box { min-width: 45px; } .timer-divider { display: none; } .credits-bar { flex-direction: column; text-align: center; gap: 10px; align-items: center; } }
     </style>
 </head>
 <body>
@@ -73,14 +76,30 @@
         <div class="tap-box">SAZON 2027<br><br><span style="font-size:0.5rem; letter-spacing:4px;">ENTER THE LEGACY</span></div>
     </div>
 
-    <div class="stage">
+    <nav id="main-nav">
+        <img src="images/logo.png" alt="Sazon Logo" style="height:40px;">
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#register">Register</a>
+            <a href="#travel">Travel</a>
+            <a href="#gallery">Gallery</a>
+        </div>
+    </nav>
+
+    <div class="stage" id="home">
         <div class="cinematic-bg" id="bg"></div>
+        
         <div class="soon-container" id="soon-ui">
-            <span class="gold-letter">S</span><span class="gold-letter">O</span>
-            <div class="logo-circle-o"><img src="images/logo.png" alt="Sazon Logo"></div>
+            <span class="gold-letter">S</span>
+            <span class="gold-letter">O</span>
+            <div class="logo-circle-o">
+                <img src="images/logo.png" alt="Sazon Logo">
+            </div>
             <span class="gold-letter">N</span>
         </div>
+
         <p class="tagline" id="tag-ui">Gikan sa gamut, tubtob sa langit</p>
+
         <div class="timer-wrapper" id="timer-ui">
             <div class="timer-container">
                 <div class="timer-box"><span class="timer-val" id="days">00</span><span class="timer-label">Days</span></div>
@@ -98,20 +117,21 @@
         </div>
     </div>
 
-    <div class="ticket-section">
-        <div class="ticket-container">
-            <h2 style="font-family:'Playfair Display'; font-size:2.2rem; margin:0;">The Golden Ticket</h2>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="btn-gold" id="ticket-btn">SECURE YOUR SPOT →</a>
+    <div class="section-navy" id="register">
+        <div class="sazon-frame">
+            <div class="section-header">
+                <h2>The Golden Ticket</h2>
+                <p>Official Guest Registry</p>
+            </div>
+            <p style="text-align:center; font-weight: 300;">Our official registry will open shortly. <br>Please prepare your travel dates and family head counts.</p>
         </div>
     </div>
 
     <div class="audio-control" id="mute-btn" onclick="toggleMute()">
         <span id="audio-icon" style="color:var(--sazon-gold); font-size: 1.2rem;">🔊</span>
     </div>
-
     <audio id="sfx-open" src="audio/open.mp3"></audio>
     <audio id="sfx-jingle" src="audio/jingle.mp3" loop></audio>
-    <audio id="sfx-click" src="audio/click.mp3"></audio>
 
     <script>
         const targetDate = new Date("July 23, 2027 00:00:00").getTime();
@@ -128,13 +148,8 @@
         function toggleMute() {
             const jingle = document.getElementById('sfx-jingle');
             const icon = document.getElementById('audio-icon');
-            jingle.muted = !jingle.muted;
-            icon.innerText = jingle.muted ? "🔇" : "🔊";
+            jingle.muted = !jingle.muted; icon.innerText = jingle.muted ? "🔇" : "🔊";
         }
-
-        document.getElementById('ticket-btn').addEventListener('click', () => {
-            document.getElementById('sfx-click').play();
-        });
 
         function launchHub() {
             document.getElementById('overlay').style.opacity = '0';
@@ -145,15 +160,13 @@
             openSfx.play();
             
             setTimeout(() => {
-                jingle.volume = 0;
-                jingle.play();
+                jingle.volume = 0; jingle.play();
                 let vol = 0;
-                const fadeIn = setInterval(() => {
-                    if (vol < 0.5) { vol += 0.05; jingle.volume = vol; } 
-                    else { clearInterval(fadeIn); }
-                }, 200);
+                const fadeIn = setInterval(() => { if (vol < 0.5) { vol += 0.05; jingle.volume = vol; } else { clearInterval(fadeIn); } }, 200);
             }, 1000);
 
+            // Active UI Elements
+            document.getElementById('main-nav').classList.add('active');
             document.getElementById('bg').classList.add('bg-active');
             document.getElementById('soon-ui').classList.add('active-ui');
             document.getElementById('mute-btn').classList.add('active-ui');
