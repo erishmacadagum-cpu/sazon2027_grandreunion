@@ -21,64 +21,64 @@
         /* THE "SOON" GLOSSY TITLE */
         .soon-container { position: relative; z-index: 10; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(20px); transition: 3s 0.5s; }
         .active-ui.soon-container { opacity: 1; transform: translateY(0); }
-
-        .gold-letter { 
-            font-family: 'Playfair Display', serif; 
-            font-size: clamp(3.8rem, 18vw, 10rem); 
-            background: linear-gradient(135deg, #fff 20%, var(--sazon-gold) 50%, #fff 80%);
-            background-size: 200% auto;
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            line-height: 1;
-            animation: shine 6s linear infinite;
-        }
-
+        .gold-letter { font-family: 'Playfair Display', serif; font-size: clamp(3.8rem, 18vw, 10rem); background: linear-gradient(135deg, #fff 20%, var(--sazon-gold) 50%, #fff 80%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; animation: shine 6s linear infinite; }
         @keyframes shine { to { background-position: 200% center; } }
 
-        /* THE CELESTIAL LOGO "O" - CIRCULAR CROP & PULSE */
-        .logo-circle-o {
-            width: clamp(3.2rem, 15vw, 8.5rem);
-            height: clamp(3.2rem, 15vw, 8.5rem);
-            margin: 0 8px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 1.5px solid rgba(197, 160, 89, 0.6);
-            box-shadow: 0 0 40px rgba(197, 160, 89, 0.4);
-            position: relative;
-            background: #000;
-            animation: pulse-glow 4s ease-in-out infinite;
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(197, 160, 89, 0.3); transform: scale(1); }
-            50% { box-shadow: 0 0 50px rgba(197, 160, 89, 0.6); transform: scale(1.02); }
-        }
-
+        /* THE CELESTIAL LOGO "O" */
+        .logo-circle-o { width: clamp(3.2rem, 15vw, 8.5rem); height: clamp(3.2rem, 15vw, 8.5rem); margin: 0 8px; border-radius: 50%; overflow: hidden; border: 1.5px solid rgba(197, 160, 89, 0.6); box-shadow: 0 0 40px rgba(197, 160, 89, 0.4); position: relative; background: #000; animation: pulse-glow 4s ease-in-out infinite; }
+        @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 20px rgba(197, 160, 89, 0.3); transform: scale(1); } 50% { box-shadow: 0 0 50px rgba(197, 160, 89, 0.6); transform: scale(1.02); } }
         .logo-circle-o img { width: 100%; height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
 
-        /* TEXTUAL ELEMENTS */
-        .tagline { color: var(--sazon-gold); letter-spacing: clamp(6px, 3vw, 12px); text-transform: uppercase; font-size: 0.65rem; font-weight: 600; margin: 25px 0; opacity: 0; transition: 2s 1.5s; z-index: 10; text-align: center; }
+        .tagline { color: var(--sazon-gold); letter-spacing: clamp(6px, 3vw, 12px); text-transform: uppercase; font-size: 0.65rem; font-weight: 600; margin: 25px 0 35px 0; opacity: 0; transition: 2s 1.5s; z-index: 10; text-align: center; }
+
+        /* POLISHED COUNTDOWN TIMER */
+        .timer-wrapper {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            padding: 20px 40px;
+            border-radius: 2px;
+            opacity: 0;
+            transition: 2.5s 2.2s;
+        }
+        .timer-container { display: flex; gap: 25px; align-items: center; }
+        .timer-box { text-align: center; min-width: 75px; }
+        .timer-val { 
+            display: block; 
+            font-size: clamp(2rem, 7vw, 2.8rem); 
+            font-weight: 700; 
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(180deg, #fff 40%, var(--sazon-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .timer-label { font-size: 0.55rem; letter-spacing: 3px; text-transform: uppercase; color: #fff; opacity: 0.6; margin-top: 5px; display: block; }
         
-        .timer-container { display: flex; gap: clamp(10px, 4vw, 20px); opacity: 0; transition: 2s 2.2s; z-index: 10; }
-        .timer-box { text-align: center; min-width: 60px; }
-        .timer-val { display: block; font-size: clamp(1.5rem, 6vw, 2.2rem); font-weight: 600; color: #fff; font-family: 'Playfair Display', serif; }
-        .timer-label { font-size: 0.5rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; }
+        /* Divider Dots */
+        .timer-divider { font-size: 1.5rem; color: var(--sazon-gold); opacity: 0.5; font-family: 'Playfair Display', serif; padding-bottom: 20px; }
 
-        /* REGISTRATION AREA */
+        /* REGISTRATION & FOOTER */
         .ticket-section { background: #fff; padding: 100px 20px; text-align: center; color: var(--sazon-navy); }
-        .ticket-container { max-width: 800px; margin: 0 auto; background: #fffdf5; border: 1px solid var(--sazon-gold); padding: 50px 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.1); border-radius: 4px; }
-        .btn-gold { display: inline-block; background: var(--sazon-navy); color: #fff !important; padding: 20px 50px; text-decoration: none !important; font-weight: 700; letter-spacing: 4px; margin-top: 30px; font-size: 0.75rem; text-transform: uppercase; transition: 0.4s; border-radius: 2px; }
-        .btn-gold:hover { background: var(--sazon-gold); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-
-        /* FOOTER */
+        .ticket-container { max-width: 800px; margin: 0 auto; background: #fffdf5; border: 1px solid var(--sazon-gold); padding: 50px 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
+        .btn-gold { display: inline-block; background: var(--sazon-navy); color: #fff !important; padding: 20px 50px; text-decoration: none; font-weight: 700; letter-spacing: 4px; margin-top: 30px; font-size: 0.75rem; text-transform: uppercase; transition: 0.4s; }
         .credits-bar { position: absolute; bottom: 30px; width: 90%; display: flex; justify-content: space-between; opacity: 0; transition: 2s 2.5s; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; z-index: 10; }
-        @media (max-width: 600px) { .credits-bar { flex-direction: column; text-align: center; gap: 10px; align-items: center; } }
+        
+        @media (max-width: 600px) { 
+            .timer-wrapper { padding: 15px 20px; }
+            .timer-container { gap: 10px; }
+            .timer-box { min-width: 50px; }
+            .timer-divider { display: none; }
+            .credits-bar { flex-direction: column; text-align: center; gap: 10px; align-items: center; } 
+        }
     </style>
 </head>
 <body>
 
     <div id="overlay" onclick="launchHub()">
-        <div class="tap-box">SAZON 2027<br><br><span style="font-size:0.5rem; letter-spacing:4px; opacity:0.8;">THE LEGACY AWAITS</span></div>
+        <div class="tap-box">SAZON 2027<br><br><span style="font-size:0.5rem; letter-spacing:4px;">ENTER THE LEGACY</span></div>
     </div>
 
     <div class="stage">
@@ -95,11 +95,16 @@
 
         <p class="tagline" id="tag-ui">Gikan sa gamut, tubtob sa langit</p>
 
-        <div class="timer-container" id="timer-ui">
-            <div class="timer-box"><span class="timer-val" id="days">00</span><span class="timer-label">Days</span></div>
-            <div class="timer-box"><span class="timer-val" id="hours">00</span><span class="timer-label">Hrs</span></div>
-            <div class="timer-box"><span class="timer-val" id="mins">00</span><span class="timer-label">Min</span></div>
-            <div class="timer-box"><span class="timer-val" id="secs">00</span><span class="timer-label">Sec</span></div>
+        <div class="timer-wrapper" id="timer-ui">
+            <div class="timer-container">
+                <div class="timer-box"><span class="timer-val" id="days">00</span><span class="timer-label">Days</span></div>
+                <div class="timer-divider">:</div>
+                <div class="timer-box"><span class="timer-val" id="hours">00</span><span class="timer-label">Hours</span></div>
+                <div class="timer-divider">:</div>
+                <div class="timer-box"><span class="timer-val" id="mins">00</span><span class="timer-label">Mins</span></div>
+                <div class="timer-divider">:</div>
+                <div class="timer-box"><span class="timer-val" id="secs">00</span><span class="timer-label">Secs</span></div>
+            </div>
         </div>
 
         <div class="credits-bar" id="credits-ui">
@@ -110,9 +115,9 @@
 
     <div class="ticket-section">
         <div class="ticket-container">
-            <h2 style="font-family:'Playfair Display'; font-size:2.2rem; margin:0; letter-spacing:2px;">The Golden Ticket</h2>
+            <h2 style="font-family:'Playfair Display'; font-size:2.2rem; margin:0;">The Golden Ticket</h2>
             <p style="text-transform:uppercase; letter-spacing:4px; font-size:0.7rem; color:var(--sazon-gold); margin-top:10px;">Official Guest Registry</p>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-gold">SECURE YOUR SPOT →</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="btn-gold">SECURE YOUR SPOT →</a>
         </div>
     </div>
 
@@ -123,7 +128,7 @@
         function updateTimer() {
             const now = new Date().getTime();
             const diff = targetDate - now;
-            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
             document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
             document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
             document.getElementById('secs').innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
