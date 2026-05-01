@@ -37,21 +37,16 @@
         /* ANTHEM SECTION */
         .anthem-section { background: #000c24; padding: 100px 0; text-align: center; color: #fff; border-top: 1px solid rgba(197, 160, 89, 0.2); }
         .lyrics-box { max-width: 800px; margin: 40px auto; padding: 50px; background: var(--glass); border: 1px solid rgba(197, 160, 89, 0.3); font-size: 1.15rem; line-height: 2.2; position: relative; }
-        .lyrics-box p { margin-bottom: 25px; }
         .play-btn { background: var(--sazon-gold); border: none; color: white; padding: 18px 45px; cursor: pointer; letter-spacing: 4px; font-weight: 600; font-size: 0.8rem; transition: 0.3s; }
         .play-btn:hover { background: #b08d4a; transform: scale(1.05); }
 
-        /* ENHANCED GOLDEN TICKET BOX */
+        /* GOLDEN TICKET BOX */
         .ticket-container { max-width: 1000px; margin: 80px auto; background: var(--ticket-bg); border: 3px double var(--sazon-gold); padding: 50px; color: var(--sazon-navy); position: relative; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.1); }
         .ticket-header { font-family: 'Playfair Display'; font-size: 2.5rem; color: var(--sazon-navy); margin-bottom: 10px; }
         .qr-frame { width: 200px; height: 200px; margin: 30px auto; border: 5px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); background: #fff; }
         .qr-frame img { width: 100%; height: 100%; }
-        .tiny-url { font-weight: 600; color: var(--sazon-gold); text-decoration: none; font-size: 1.2rem; letter-spacing: 1px; }
-
-        /* TRAVEL TILES */
-        .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto 100px; padding: 0 25px; }
-        .tile { padding: 60px 40px; background: #fff; border: 1px solid #eee; text-align: center; text-decoration: none; color: inherit; transition: 0.4s; }
-        .tile:hover { border-color: var(--sazon-gold); transform: translateY(-10px); }
+        .tiny-url { font-weight: 600; color: var(--sazon-gold); text-decoration: none; font-size: 1.2rem; letter-spacing: 1px; transition: 0.3s; }
+        .tiny-url:hover { color: var(--sazon-navy); }
 
         /* MODAL */
         #resModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 99999; backdrop-filter: blur(20px); overflow-y: auto; }
@@ -88,7 +83,6 @@
             <div class="photo-card"><img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?auto=format&fit=crop&w=800"><div class="photo-caption"><h4>The Future</h4><p>Generation III</p></div></div>
             <div class="photo-card"><img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=800"><div class="photo-caption"><h4>Celebration</h4><p>Family Gatherings</p></div></div>
             <div class="photo-card"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800"><div class="photo-caption"><h4>The Roots</h4><p>Generation I</p></div></div>
-            <div class="photo-card"><img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800"><div class="photo-caption"><h4>Unity</h4><p>Sazon Legacy</p></div></div>
         </div>
     </div>
 
@@ -121,47 +115,36 @@
             </div>
             
             <p style="margin-top:20px;">
-                <a href="https://tinyurl.com/sazon2027reunion" target="_blank" class="tiny-url">tinyurl.com/sazon2027reunion</a>
+                <a href="https://tinyurl.com/SazonGrandReunion" target="_blank" class="tiny-url">tinyurl.com/SazonGrandReunion</a>
             </p>
             
             <div style="margin-top:40px;">
-                <a href="https://tinyurl.com/sazon2027reunion" target="_blank" style="background:var(--sazon-navy); color:white; padding:15px 40px; text-decoration:none; font-weight:600; letter-spacing:2px; font-size:0.8rem;">REGISTER NOW →</a>
+                <a href="https://tinyurl.com/SazonGrandReunion" target="_blank" style="background:var(--sazon-navy); color:white; padding:15px 40px; text-decoration:none; font-weight:600; letter-spacing:2px; font-size:0.8rem;">REGISTER NOW →</a>
             </div>
         </div>
     </div>
 
-    <div class="hub-grid">
-        <div class="tile" onclick="openRes()">
-            <h3 style="font-family:'Playfair Display'; font-size:1.8rem; margin:0;">Travel Guide</h3>
-            <p>EXPLORE KALIBO & BEYOND</p>
-        </div>
-        <div class="tile" style="display:flex; flex-direction:column; justify-content:center;">
-            <p><strong>Official Contact</strong></p>
-            <p style="font-size:0.9rem;">Committee Support:<br>maemiliapalma@yahoo.com</p>
-        </div>
+    <div style="background:#fff; padding-bottom:100px; text-align:center;">
+        <button onclick="openRes()" style="background:none; border:1px solid #ccc; color:var(--sazon-navy); padding:15px 40px; cursor:pointer; font-weight:600; letter-spacing:2px;">OPEN TRAVEL GUIDE</button>
     </div>
 
     <div id="resModal">
         <div class="res-container">
             <span style="position:absolute; right:40px; top:30px; font-size:3rem; cursor:pointer;" onclick="closeRes()">×</span>
-            <h2 style="font-family:'Playfair Display'; font-size:3rem;">Sazon Reunion Travel Guide</h2>
+            <h2 style="font-family:'Playfair Display'; font-size:3rem;">Travel Guide</h2>
             <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:40px; margin-top:40px;">
                 <div>
                     <h4 style="color:var(--sazon-gold); border-bottom:1px solid #eee; padding-bottom:10px;">The Venue</h4>
-                    <p><strong>Marzon Hotel Kalibo</strong><br>Experience the heart of Aklan. Close to local amenities and the airport.</p>
+                    <p><strong>Marzon Hotel Kalibo</strong></p>
                     <a href="https://www.google.com/maps/dir//Marzon+Hotel+Kalibo,+Jaime+Cardinal+Sin+Ave,+Andagao,+Kalibo,+5600+Aklan" target="_blank" style="color:var(--sazon-navy); font-weight:600;">View Live Map & Rates →</a>
                 </div>
                 <div>
-                    <h4 style="color:var(--sazon-gold); border-bottom:1px solid #eee; padding-bottom:10px;">Dining & Restos</h4>
-                    <p>• <strong>Saylo Cuisine:</strong> Traditional flavors.</p>
-                    <p>• <strong>Ramboy's:</strong> Essential Liempo stop.</p>
-                    <p>• <strong>Latitud:</strong> Premier Coffee.</p>
+                    <h4 style="color:var(--sazon-gold); border-bottom:1px solid #eee; padding-bottom:10px;">Dining</h4>
+                    <p>• Saylo Cuisine<br>• Ramboy's Liempo<br>• Latitud Coffee</p>
                 </div>
                 <div>
                     <h4 style="color:var(--sazon-gold); border-bottom:1px solid #eee; padding-bottom:10px;">Attractions</h4>
-                    <p>• <strong>Bakhawan Eco-Park</strong> (Mangrove Sanctuary)</p>
-                    <p>• <strong>Sampaguita Gardens</strong></p>
-                    <p>• <strong>Boracay Island</strong> (1.5 hrs away)</p>
+                    <p>• Bakhawan Eco-Park<br>• Boracay Island</p>
                 </div>
             </div>
         </div>
@@ -179,14 +162,12 @@
             document.getElementById('credits').style.opacity = '1';
             document.getElementById('sfx').play().catch(e => {});
         }
-
         let jPlaying = false;
         function toggleJingle() {
             const j = document.getElementById('jingle');
             if(!jPlaying) { j.play(); document.getElementById('jBtn').innerText = "PAUSE ANTHEM"; jPlaying = true; }
             else { j.pause(); document.getElementById('jBtn').innerText = "PLAY ANTHEM"; jPlaying = false; }
         }
-
         function openRes() { document.getElementById('resModal').style.display = 'block'; }
         function closeRes() { document.getElementById('resModal').style.display = 'none'; }
     </script>
