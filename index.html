@@ -1,139 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAZON 2027 | The Grand Family Legacy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; --white-glass: rgba(255, 255, 255, 0.08); }
-        body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; cursor: pointer; line-height: 1.6; }
+<script>
+    let isPlaying = false;
+    const jingle = document.getElementById('familyJingle');
+
+    function toggleJingle() {
+        if (!isPlaying) {
+            jingle.play().catch(e => console.log("Jingle blocked"));
+            document.getElementById('jingleStatus').innerText = "Playing...";
+            isPlaying = true;
+        } else {
+            jingle.pause();
+            document.getElementById('jingleStatus').innerText = "The Jingle";
+            isPlaying = false;
+        }
+    }
+
+    // THE CRITICAL FIX: INSTANT REVEAL
+    function launchHub() {
+        // 1. Hide the overlay immediately
+        const overlay = document.getElementById('overlay');
+        overlay.style.opacity = '0';
+        setTimeout(() => { overlay.style.display = 'none'; }, 800);
         
-        /* BANNER */
-        .stage { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; overflow: hidden; }
-        .cinematic-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,26,77,0.92), rgba(0,26,77,0.3) 50%, #000 100%), url('images/banner.jpg') center/cover no-repeat; z-index: 1; transition: transform 25s cubic-bezier(0.45, 0.05, 0.55, 0.95); }
-        .bg-zoom-active { transform: scale(1.15); }
+        // 2. Try to play the opening sound (but don't stop if it fails)
+        const sfx = document.getElementById('openSfx');
+        sfx.play().catch(e => console.log("SFX blocked by browser - moving on..."));
         
-        .logo-anchor { position: absolute; top: 30px; left: 50%; transform: translate(-50%, 20px); z-index: 20; opacity: 0; transition: all 3s ease-out; }
-        .logo-active { opacity: 1 !important; transform: translate(-50%, 0) !important; }
-        .logo-img { width: 160px; padding: 15px; border-radius: 50%; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); background: rgba(255, 255, 255, 0.1); }
-        
-        .credits-wrapper { position: relative; z-index: 10; width: 90%; max-width: 1300px; display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 5vh; opacity: 0; transition: opacity 2.5s ease-in 0.5s; }
-        .main-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 6rem); margin: 0; background: linear-gradient(180deg, #ffffff 50%, var(--sazon-gold) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        .timer-portal { position: relative; z-index: 10; margin-bottom: 10vh; display: flex; gap: 15px; opacity: 0; transition: all 2s ease-out 1s; transform: translateY(20px); }
-        .timer-active { opacity: 1; transform: translateY(0); }
-        .timer-unit { background: var(--white-glass); backdrop-filter: blur(30px); padding: 25px; border: 1px solid rgba(255,255,255,0.2); text-align: center; min-width: 90px; }
-        .t-val { display: block; font-family: 'Playfair Display'; font-size: 3rem; font-weight: 700; color: #fff; }
-        .t-lbl { font-size: 0.7rem; letter-spacing: 3px; color: var(--sazon-gold); text-transform: uppercase; font-weight: 600; }
+        // 3. Trigger all animations
+        document.getElementById('bg').classList.add('bg-zoom-active');
+        document.getElementById('mainLogo').classList.add('logo-active');
+        document.getElementById('credits').style.opacity = '1';
+        document.getElementById('timer').classList.add('timer-active');
+    }
 
-        /* PHOTO WALL */
-        .hub-section { background: #fff; padding: 120px 0; color: var(--sazon-navy); }
-        .wall-container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
-        .photo-grid { display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; perspective: 1000px; }
-        
-        .photo-card { position: relative; width: 320px; height: 480px; overflow: hidden; background: #f8f8f8; box-shadow: 0 20px 50px rgba(0,0,0,0.1); border: 1px solid #eee; transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1); transform-style: preserve-3d; }
-        .photo-card.featured { height: 540px; width: 360px; margin-top: -30px; z-index: 2; border: 1px solid var(--sazon-gold); }
-        .photo-card:hover { transform: rotateY(180deg); }
-        
-        .card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; top: 0; left: 0; }
-        .card-back { background: linear-gradient(135deg, var(--sazon-navy), #000); color: white; transform: rotateY(180deg); display: flex; flex-direction: column; justify-content: center; padding: 40px; border: 2px solid var(--sazon-gold); box-sizing: border-box; }
-
-        .photo-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; }
-        .photo-caption { position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px 20px; background: linear-gradient(to top, rgba(0,26,77,0.95), transparent); color: white; }
-        .photo-caption h4 { margin: 0; font-family: 'Playfair Display'; font-size: 1.6rem; }
-
-        /* RESOURCES MODAL - ENHANCED */
-        #resourceModal { display: none; position: fixed; z-index: 200; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(5px); }
-        .modal-content { background: white; margin: 5% auto; padding: 60px; width: 85%; max-width: 900px; color: var(--sazon-navy); position: relative; border-left: 8px solid var(--sazon-gold); }
-        .close-btn { position: absolute; right: 30px; top: 20px; font-size: 2.5rem; cursor: pointer; color: #ccc; transition: 0.3s; }
-        .close-btn:hover { color: var(--sazon-gold); }
-
-        .resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-top: 40px; }
-        .resource-item h4 { color: var(--sazon-gold); text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
-        .resource-item p { font-size: 0.95rem; margin-bottom: 10px; }
-
-        .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 80px auto 0; padding: 0 25px; }
-        .hub-link { padding: 50px 30px; border: 1px solid #f0f0f0; text-decoration: none; color: inherit; text-align: center; transition: 0.4s; cursor: pointer; background: #fff; }
-        .register-card { border: 2px solid var(--sazon-gold); background: linear-gradient(145deg, #fffcf5, #fff); }
-        
-        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); z-index: 100; display: flex; justify-content: center; align-items: center; transition: opacity 1.5s; }
-    </style>
-</head>
-<body>
-    <div id="overlay" onclick="launchHub()">
-        <p style="letter-spacing: 6px; font-weight: 400; font-size: 1.1rem; text-transform: uppercase; text-align: center; padding: 30px; border: 1px solid var(--sazon-gold); color: white;">Tap to Experience the Legacy</p>
-    </div>
-
-    <div id="resourceModal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="toggleResources()">×</span>
-            <h2 style="font-family: 'Playfair Display'; font-size: 2.5rem; margin-bottom: 5px;">Family Resources</h2>
-            <p style="letter-spacing: 3px; font-size: 0.7rem; text-transform: uppercase; color: var(--sazon-gold); font-weight: 600;">Everything you need for Sazon 2027</p>
-            
-            <div class="resource-grid">
-                <div class="resource-item">
-                    <h4>The Venue</h4>
-                    <p><strong>Marzon Hotel Kalibo</strong><br>
-                    Jaime Cardinal Sin Ave, Andagao<br>
-                    Kalibo, Aklan 5600, Philippines</p>
-                    <p><em>Contact: +63 36 268 2188</em></p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Marzon+Hotel+Kalibo" target="_blank" style="color: var(--sazon-navy); font-weight: 600; text-decoration: none;">View Map & Directions →</a>
-                </div>
-
-                <div class="resource-item">
-                    <h4>Dress Code</h4>
-                    <p><strong>Grand Night:</strong> Modern Filipiniana / Barong (Sazon Gold & Navy Blue Accents)</p>
-                    <p><strong>Welcome Dinner:</strong> Casual / Smart Casual</p>
-                </div>
-
-                <div class="resource-item">
-                    <h4>Need Help?</h4>
-                    <p>For flight assistance or local transportation inquiries, please contact the organizing committee.</p>
-                    <p><strong>Email:</strong> maemiliapalma@yahoo.com</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <audio id="openSfx" src="audio/open.mp3" preload="auto"></audio>
-    <audio id="familyJingle" src="audio/jingle.mp3" preload="auto"></audio>
-
-    <div class="logo-anchor" id="mainLogo">
-        <img src="images/logo.png" class="logo-img" id="logoVisual" alt="Sazon Official Logo">
-    </div>
-
-    <div class="stage">
-        <div class="cinematic-bg" id="bg"></div>
-        <div class="credits-wrapper" id="credits">
-            <div style="width: 30%; text-align: left;"><p style="font-size: 0.85rem; letter-spacing: 3px; font-weight: 600;">SAZON FAMILY<br>TRADITION</p></div>
-            <div style="text-align: center;">
-                <h1 class="main-title">SAZON 2027</h1>
-                <p style="color: var(--sazon-gold); letter-spacing: 8px; font-weight: 400; margin-top: 5px; font-size: 1rem;">GIKAN SA GAMUT, TUBTOB SA LANGIT</p>
-            </div>
-            <div style="width: 30%; text-align: right;">
-                <p style="font-family: 'Playfair Display'; font-size: 1.4rem; font-weight: 700;">MARZON HOTEL<br>
-                <span style="font-size: 0.75rem; font-family: 'Montserrat'; letter-spacing: 2px; font-weight: 600;">JULY 23-24, 2027</span></p>
-            </div>
-        </div>
-        <div class="timer-portal" id="timer">
-            <div class="timer-unit"><span id="d" class="t-val">00</span><span class="t-lbl">Days</span></div>
-            <div class="timer-unit"><span id="h" class="t-val">00</span><span class="t-lbl">Hrs</span></div>
-            <div class="timer-unit"><span id="m" class="t-val">00</span><span class="t-lbl">Mins</span></div>
-            <div class="timer-unit"><span id="s" class="t-val">00</span><span class="t-lbl">Secs</span></div>
-        </div>
-    </div>
-    
-    <div class="hub-section">
-        <div class="wall-container">
-            <div style="text-align:center; margin-bottom: 80px;">
-                <h2 style="font-family: 'Playfair Display'; font-size: 3.5rem; margin-bottom: 10px;">Wall of Generations</h2>
-                <p style="letter-spacing: 3px; color: var(--sazon-gold); font-weight: 600; text-transform: uppercase;">Submit photos to: maemiliapalma@yahoo.com</p>
-            </div>
-            <div class="photo-grid">
-                <div class="photo-card">
-                    <div class="card-front">
-                        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=3432&auto=format&fit=crop" alt="The Roots">
-                        <div class="photo-caption"><h4>The Roots</h4><p>Generation I</p></div>
-                    </div>
-                    <div class="card-back"><p>The
+    // ... (Keep the Timer Logic from before) ...
+</script>
