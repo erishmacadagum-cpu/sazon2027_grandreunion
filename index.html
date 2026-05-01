@@ -9,21 +9,20 @@
         :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; --white-glass: rgba(255, 255, 255, 0.08); }
         body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; cursor: pointer; line-height: 1.6; }
         .stage { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; overflow: hidden; }
-        .cinematic-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,26,77,0.92), rgba(0,26,77,0.3) 50%, #000 100%), url('images/banner.jpg') center/cover no-repeat; z-index: 1; transition: transform 25s cubic-bezier(0.45, 0.05, 0.55, 0.95); }
+        .cinematic-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,26,77,0.92), rgba(0,26,77,0.4) 50%, #000 100%), url('images/banner.jpg') center/cover no-repeat; z-index: 1; transition: transform 25s cubic-bezier(0.45, 0.05, 0.55, 0.95); }
         .bg-zoom-active { transform: scale(1.15); }
         
-        /* DYNAMIC LOGO GLOW */
+        /* CELESTIAL LOGO */
         .logo-anchor { position: absolute; top: 30px; left: 50%; transform: translate(-50%, 20px); z-index: 20; opacity: 0; transition: all 3s ease-out; }
         .logo-active { opacity: 1 !important; transform: translate(-50%, 0) !important; }
-        .logo-img { width: 160px; padding: 15px; border-radius: 50%; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); transition: filter 2s ease-in-out; }
-        
-        /* DAY/NIGHT LOGO CLASSES */
+        .logo-img { width: 160px; padding: 15px; border-radius: 50%; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); }
         .logo-sun { filter: drop-shadow(0 0 30px rgba(255, 200, 50, 0.6)); background: rgba(255, 255, 255, 0.15); }
         .logo-moon { filter: drop-shadow(0 0 30px rgba(200, 230, 255, 0.5)); background: rgba(255, 255, 255, 0.1); }
         
-        .credits-wrapper { position: relative; z-index: 10; width: 90%; max-width: 1300px; display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 5vh; opacity: 0; transition: opacity 2.5s ease-in 0.5s; text-shadow: 0 2px 15px rgba(0,0,0,0.9); }
+        .credits-wrapper { position: relative; z-index: 10; width: 90%; max-width: 1300px; display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 5vh; opacity: 0; transition: opacity 2.5s ease-in 0.5s; }
         .main-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 6rem); margin: 0; background: linear-gradient(180deg, #ffffff 50%, var(--sazon-gold) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
+        .dynamic-tag { font-size: 0.8rem; letter-spacing: 12px; color: var(--sazon-gold); display: block; margin-bottom: -10px; font-weight: 400; text-transform: uppercase; }
+
         .timer-portal { position: relative; z-index: 10; margin-bottom: 10vh; display: flex; gap: 15px; opacity: 0; transition: all 2s ease-out 1s; transform: translateY(20px); }
         .timer-active { opacity: 1; transform: translateY(0); }
         .timer-unit { background: var(--white-glass); backdrop-filter: blur(30px); padding: 25px; border: 1px solid rgba(255,255,255,0.2); text-align: center; min-width: 90px; }
@@ -32,14 +31,10 @@
 
         .hub-section { background: white; padding: 80px 0; color: var(--sazon-navy); }
         .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto; padding: 0 25px; }
-        
         .hub-link { padding: 50px 30px; border: 2px solid #f0f0f0; text-decoration: none; color: inherit; text-align: center; transition: 0.5s; display: block; background: #fff; }
         .register-card { border: 2px solid var(--sazon-gold); background: linear-gradient(145deg, #fffcf5, #fff); position: relative; overflow: hidden; }
         .register-card::after { content: 'GOLDEN TICKET'; position: absolute; top: 10px; right: -30px; background: var(--sazon-gold); color: white; padding: 5px 40px; transform: rotate(45deg); font-size: 0.6rem; font-weight: 700; }
-        .hub-link h3 { font-family: 'Playfair Display'; font-size: 2.2rem; margin-bottom: 10px; color: var(--sazon-navy); }
-        .hub-link p { font-size: 1.1rem; color: #444; font-weight: 400; }
-        .hub-link:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
-
+        
         #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.94); z-index: 100; display: flex; justify-content: center; align-items: center; transition: opacity 1s; }
     </style>
 </head>
@@ -56,6 +51,7 @@
         <div class="credits-wrapper" id="credits">
             <div style="width: 30%; text-align: left;"><p style="font-size: 0.85rem; letter-spacing: 3px; font-weight: 600;">SAZON FAMILY<br>TRADITION</p></div>
             <div style="text-align: center;">
+                <span id="eventTag" class="dynamic-tag">SOON</span>
                 <h1 class="main-title">SAZON 2027</h1>
                 <p style="color: var(--sazon-gold); letter-spacing: 8px; font-weight: 400; margin-top: 5px; font-size: 1rem;">GIKAN SA GAMUT, TUBTOB SA LANGIT</p>
             </div>
@@ -73,7 +69,7 @@
         </div>
     </div>
     
-    <div class="hub-section" style="background: #fdfdfd;">
+    <div class="hub-section">
         <div style="text-align:center; margin-bottom: 40px; padding: 0 20px;">
             <h2 style="font-family: 'Playfair Display'; font-size: 3rem; margin-bottom: 10px;">Wall of Generations</h2>
             <p style="letter-spacing: 2px; color: var(--sazon-gold); font-size: 1.1rem; font-weight: 600; text-transform: uppercase;">Email photos to: maemiliapalma@yahoo.com</p>
@@ -100,18 +96,31 @@
     </div>
 
     <script>
-        function updateCelestialTheme() {
-            const hour = new Date().getHours();
+        const targetDate = new Date("July 23, 2027 08:00:00").getTime();
+
+        function updateCelestialAndText() {
+            const now = new Date();
+            const hour = now.getHours();
             const logo = document.getElementById('logoVisual');
-            if (hour >= 6 && hour < 18) {
-                logo.className = 'logo-img logo-sun';
+            const eventTag = document.getElementById('eventTag');
+            const distance = targetDate - now.getTime();
+
+            // 1. Theme Check
+            logo.className = (hour >= 6 && hour < 18) ? 'logo-img logo-sun' : 'logo-img logo-moon';
+
+            // 2. Transformation Check
+            if (distance < 0) {
+                eventTag.innerText = "CELEBRATING OUR LEGACY";
+                document.getElementById('timer').style.display = 'none';
+            } else if (distance < 2592000000) { // Less than 30 days
+                eventTag.innerText = "WELCOME HOME";
             } else {
-                logo.className = 'logo-img logo-moon';
+                eventTag.innerText = "SOON";
             }
         }
 
         function launchHub() {
-            updateCelestialTheme();
+            updateCelestialAndText();
             const audio = document.getElementById('openSfx');
             audio.volume = 0.6;
             audio.play().catch(e => console.log("Audio play blocked", e));
@@ -123,7 +132,6 @@
             document.getElementById('timer').classList.add('timer-active');
         }
 
-        const targetDate = new Date("July 23, 2027 08:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
             const distance = targetDate - now;
