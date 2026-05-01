@@ -6,13 +6,12 @@
     <title>SAZON 2027 | The Grand Family Legacy</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; --white-glass: rgba(255, 255, 255, 0.08); }
+        :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; --white-glass: rgba(255, 255, 255, 0.1); }
         body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; line-height: 1.6; }
         
         /* LAUNCH OVERLAY */
         #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: opacity 1s; }
-        .tap-box { padding: 25px 50px; border: 1px solid var(--sazon-gold); letter-spacing: 5px; text-transform: uppercase; font-size: 0.9rem; color: white; transition: 0.3s; }
-        .tap-box:hover { background: rgba(197, 160, 89, 0.1); }
+        .tap-box { padding: 25px 50px; border: 1px solid var(--sazon-gold); letter-spacing: 5px; text-transform: uppercase; font-size: 0.9rem; color: white; }
 
         /* HERO SECTION */
         .stage { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; overflow: hidden; }
@@ -32,28 +31,26 @@
         .t-lbl { font-size: 0.6rem; letter-spacing: 2px; color: var(--sazon-gold); text-transform: uppercase; }
 
         /* PHOTO WALL */
-        .hub-section { background: #fff; padding: 120px 0; color: var(--sazon-navy); }
+        .hub-section { background: #fff; padding: 100px 0; color: var(--sazon-navy); }
         .wall-container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
-        .photo-grid { display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; margin-top: 50px; perspective: 1000px; }
-        
-        .photo-card { position: relative; width: 320px; height: 480px; background: #eee; overflow: hidden; box-shadow: 0 15px 45px rgba(0,0,0,0.1); transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); transform-style: preserve-3d; }
+        .photo-grid { display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; margin-top: 50px; }
+        .photo-card { position: relative; width: 320px; height: 480px; background: #eee; overflow: hidden; box-shadow: 0 15px 45px rgba(0,0,0,0.1); }
         .photo-card.featured { height: 540px; width: 360px; margin-top: -30px; border: 1px solid var(--sazon-gold); z-index: 5; }
-        .photo-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .photo-card:hover { transform: translateY(-10px) rotateY(5deg); }
+        .photo-card img { width: 100%; height: 100%; object-fit: cover; }
         .photo-caption { position: absolute; bottom: 0; width: 100%; padding: 30px 20px; background: linear-gradient(to top, var(--sazon-navy), transparent); color: white; box-sizing: border-box; }
 
         /* BUTTON HUB */
         .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 80px auto 0; padding: 0 25px; }
         .hub-link { padding: 50px 30px; border: 1px solid #eee; text-decoration: none; color: inherit; text-align: center; transition: 0.4s; background: #fff; cursor: pointer; }
-        .hub-link:hover { border-color: var(--sazon-gold); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .hub-link:hover { border-color: var(--sazon-gold); }
         .register-card { border: 2px solid var(--sazon-gold); background: linear-gradient(145deg, #fffcf5, #fff); }
 
         /* RESOURCES MODAL */
-        #resModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); z-index: 9999; backdrop-filter: blur(15px); }
-        .res-box { background: white; width: 90%; max-width: 900px; margin: 5% auto; padding: 60px; color: var(--sazon-navy); position: relative; border-left: 10px solid var(--sazon-gold); box-sizing: border-box; }
-        .res-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-top: 30px; }
+        #resModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.97); z-index: 9999; backdrop-filter: blur(15px); }
+        .res-box { background: white; width: 90%; max-width: 950px; margin: 3% auto; padding: 50px; color: var(--sazon-navy); position: relative; border-left: 10px solid var(--sazon-gold); box-sizing: border-box; overflow-y: auto; max-height: 90vh; }
+        .res-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 35px; margin-top: 30px; }
         .res-item h4 { color: var(--sazon-gold); text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
-        .res-item p { margin: 5px 0; font-size: 0.95rem; }
+        .nav-btn { display: inline-block; margin-top: 15px; background: var(--sazon-navy); color: #fff; padding: 12px 25px; text-decoration: none; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; }
     </style>
 </head>
 <body>
@@ -64,16 +61,13 @@
 
     <div class="stage">
         <div class="cinematic-bg" id="bg"></div>
-        
-        <div class="logo-anchor" id="logo">
-            <img src="images/logo.png" class="logo-img" alt="Sazon Official Logo">
-        </div>
+        <div class="logo-anchor" id="logo"><img src="images/logo.png" class="logo-img" alt="Logo"></div>
 
         <div class="credits-wrapper" id="credits">
             <div style="width:30%"><p style="font-size:0.8rem; letter-spacing:3px; font-weight:600;">SAZON FAMILY<br>TRADITION</p></div>
             <div style="text-align:center;">
                 <h1 class="main-title">SAZON 2027</h1>
-                <p style="color:var(--sazon-gold); letter-spacing:8px; font-size:0.9rem; margin-top:5px; font-weight:400;">GIKAN SA GAMUT, TUBTOB SA LANGIT</p>
+                <p style="color:var(--sazon-gold); letter-spacing:8px; font-size:0.9rem; margin-top:5px;">GIKAN SA GAMUT, TUBTOB SA LANGIT</p>
             </div>
             <div style="width:30%; text-align:right;">
                 <p style="font-family:'Playfair Display'; font-size:1.3rem; font-weight:700;">MARZON HOTEL<br>
@@ -96,7 +90,6 @@
                 <div style="width:60px; height:3px; background:var(--sazon-gold); margin:15px auto;"></div>
                 <p style="letter-spacing:3px; color:var(--sazon-gold); font-weight:600; text-transform:uppercase; font-size:0.8rem;">Submit photos to: maemiliapalma@yahoo.com</p>
             </div>
-            
             <div class="photo-grid">
                 <div class="photo-card">
                     <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800" alt="Roots">
@@ -124,88 +117,4 @@
             </div>
             <div class="hub-link" onclick="openRes()">
                 <h3 style="font-family:'Playfair Display'; font-size:1.8rem;">Resources</h3>
-                <p>Full Information Hub</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="resModal">
-        <div class="res-box">
-            <span style="position:absolute; right:30px; top:20px; font-size:2.5rem; cursor:pointer;" onclick="closeRes()">×</span>
-            <h2 style="font-family:'Playfair Display'; font-size:2.5rem; margin-bottom:5px;">Family Resources</h2>
-            <p style="letter-spacing:2px; font-size:0.7rem; text-transform:uppercase; color:var(--sazon-gold); font-weight:600; margin-bottom:30px;">Information & Navigation</p>
-            
-            <div class="res-grid">
-                <div class="res-item">
-                    <h4>The Venue</h4>
-                    <p><strong>Marzon Hotel Kalibo</strong></p>
-                    <p>Jaime Cardinal Sin Ave, Andagao<br>Kalibo, Aklan 5600</p>
-                    <p><strong>Contact:</strong> +63 36 268 2188</p>
-                    <a href="https://www.google.com/maps/dir//Marzon+Hotel+Kalibo,+Jaime+Cardinal+Sin+Ave,+Andagao,+Kalibo,+5600+Aklan" target="_blank" style="display:inline-block; margin-top:15px; color:var(--sazon-navy); font-weight:600; text-decoration:none; border-bottom:1px solid var(--sazon-gold);">View Map & Directions →</a>
-                </div>
-                <div class="res-item">
-                    <h4>Travel Info</h4>
-                    <p>• 1.5 km from Kalibo Airport</p>
-                    <p>• Airport Shuttle available upon request</p>
-                    <p>• Free Guest Parking on-site</p>
-                </div>
-                <div class="res-item">
-                    <h4>Dress Code</h4>
-                    <p><em>(To be announced)</em></p>
-                    <p style="margin-top:15px;"><strong>Inquiries:</strong><br>maemiliapalma@yahoo.com</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <audio id="sfx" src="audio/open.mp3" preload="auto"></audio>
-    <audio id="jingle" src="audio/jingle.mp3" preload="auto"></audio>
-
-    <script>
-        let jPlaying = false;
-        function toggleJingle() {
-            const j = document.getElementById('jingle');
-            if(!jPlaying) { 
-                j.play().catch(e => console.log("Jingle blocked")); 
-                document.getElementById('jStatus').innerText = "Playing Anthem..."; 
-                jPlaying = true; 
-            } else { 
-                j.pause(); 
-                document.getElementById('jStatus').innerText = "The Jingle"; 
-                jPlaying = false; 
-            }
-        }
-
-        function launchHub() {
-            // Instant hide overlay to prevent "stuck" screen
-            document.getElementById('overlay').style.opacity = '0';
-            setTimeout(() => { document.getElementById('overlay').style.display = 'none'; }, 1000);
-            
-            // Trigger visual transitions
-            document.getElementById('bg').classList.add('bg-active');
-            document.getElementById('logo').classList.add('active-logo');
-            document.getElementById('credits').style.opacity = '1';
-            document.getElementById('timer').style.opacity = '1';
-            document.getElementById('timer').style.transform = 'translateY(0)';
-            
-            // Attempt opening sound
-            document.getElementById('sfx').play().catch(e => console.log("SFX blocked"));
-        }
-
-        function openRes() { document.getElementById('resModal').style.display = 'block'; }
-        function closeRes() { document.getElementById('resModal').style.display = 'none'; }
-
-        // Countdown Timer Logic
-        const target = new Date("July 23, 2027 08:00:00").getTime();
-        setInterval(() => {
-            const now = new Date().getTime();
-            const d = target - now;
-            if (d < 0) return;
-            document.getElementById('d').innerText = Math.floor(d / 86400000);
-            document.getElementById('h').innerText = Math.floor((d % 86400000) / 3600000);
-            document.getElementById('m').innerText = Math.floor((d % 3600000) / 60000);
-            document.getElementById('s').innerText = Math.floor((d % 60000) / 1000);
-        }, 1000);
-    </script>
-</body>
-</html>
+                <p>Full Information Hub</
