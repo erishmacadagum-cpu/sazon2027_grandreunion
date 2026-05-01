@@ -9,110 +9,105 @@
     
     <style>
         :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; }
-        body, html { margin: 0; padding: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; height: 100%; overflow-x: hidden; }
+        * { box-sizing: border-box; }
+        body, html { margin: 0; padding: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; scroll-behavior: smooth; }
 
-        /* THE EMERGENCY OVERLAY - Forces the click */
-        #overlay { 
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
-            background: #000; z-index: 999999; 
-            display: flex; justify-content: center; align-items: center; 
-            cursor: pointer; opacity: 1; visibility: visible; transition: 0.8s;
-        }
-        .enter-text { 
-            border: 1px solid var(--sazon-gold); padding: 20px 40px; 
-            text-transform: uppercase; letter-spacing: 5px; font-size: 0.8rem;
-            color: var(--sazon-gold); text-align: center;
-        }
-
-        /* CONTENT (Hidden until click) */
-        #main-content { opacity: 0; transition: 1.5s; }
-        
         /* NAVIGATION */
-        nav { position: fixed; top: 0; width: 100%; height: 70px; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: space-between; padding: 0 30px; box-sizing: border-box; border-bottom: 1px solid rgba(197,160,89,0.3); z-index: 100; }
-        .nav-links a { color: #fff; text-decoration: none; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-left: 20px; }
+        nav { position: fixed; top: 0; width: 100%; height: 70px; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; border-bottom: 1px solid rgba(197,160,89,0.3); z-index: 1000; }
+        .nav-links a { color: #fff; text-decoration: none; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; margin-left: 15px; font-weight: 600; }
 
-        /* HERO STAGE */
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; background: linear-gradient(to bottom, rgba(0,26,77,0.8), #000), url('images/banner.jpg') center/cover; }
-        .title-gold { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 15vw, 8rem); color: var(--sazon-gold); margin: 0; }
+        /* HERO STAGE - Load Immediately */
+        .hero { 
+            height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            background: linear-gradient(to bottom, rgba(0,26,77,0.8), #000), url('images/banner.jpg') center/cover no-repeat;
+            text-align: center; padding: 20px;
+        }
+        .title-gold { 
+            font-family: 'Playfair Display', serif; font-size: clamp(4rem, 20vw, 10rem); 
+            background: linear-gradient(to bottom, #fff, var(--sazon-gold));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin: 0; line-height: 1;
+        }
+        .tagline { color: var(--sazon-gold); letter-spacing: 8px; text-transform: uppercase; font-size: 0.7rem; margin-top: 15px; }
         
-        /* GALLERY */
-        .section { padding: 80px 20px; background: #fff; color: var(--sazon-navy); text-align: center; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; max-width: 1100px; margin: 40px auto; }
-        .item { height: 300px; position: relative; overflow: hidden; background: #eee; border: 1px solid #ddd; }
+        /* GALLERY SECTION */
+        .section { padding: 100px 20px; background: #fff; color: var(--sazon-navy); text-align: center; }
+        .section-title { font-family: 'Playfair Display'; font-size: 2.5rem; margin-bottom: 10px; }
+        .section-subtitle { text-transform: uppercase; letter-spacing: 4px; font-size: 0.7rem; color: var(--sazon-gold); margin-bottom: 50px; display: block; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
+        .item { height: 350px; position: relative; overflow: hidden; border: 1px solid #eee; background: #111; }
         .item img { width: 100%; height: 100%; object-fit: cover; }
-        .label { position: absolute; bottom: 0; width: 100%; background: var(--sazon-navy); color: #fff; padding: 10px; font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; }
+        .label { position: absolute; bottom: 0; width: 100%; background: var(--sazon-navy); color: #fff; padding: 15px; font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; }
 
-        /* REGISTRY */
-        .reg-btn { display: inline-block; background: var(--sazon-navy); color: #fff; padding: 20px 50px; text-decoration: none; letter-spacing: 3px; font-weight: 600; margin-top: 30px; }
+        /* REGISTRY SECTION */
+        .registry-section { padding: 100px 20px; background: #f9f6f0; color: var(--sazon-navy); text-align: center; }
+        .reg-btn { 
+            display: inline-block; background: var(--sazon-navy); color: #fff; padding: 20px 50px; 
+            text-decoration: none; letter-spacing: 3px; font-weight: 600; font-size: 0.8rem;
+            transition: 0.3s; border: 1px solid var(--sazon-navy);
+        }
+        .reg-btn:hover { background: transparent; color: var(--sazon-navy); }
 
-        /* TIMER */
-        .timer { margin-top: 20px; display: flex; gap: 20px; font-family: 'Playfair Display'; color: var(--sazon-gold); font-size: 2rem; }
-        .timer span { font-size: 0.6rem; font-family: 'Montserrat'; color: #fff; text-transform: uppercase; display: block; }
+        /* SIMPLE TIMER */
+        .timer { margin-top: 40px; display: flex; gap: 30px; }
+        .timer-part { font-family: 'Playfair Display'; color: var(--sazon-gold); font-size: 2.5rem; font-weight: 700; line-height: 1; }
+        .timer-part span { font-size: 0.6rem; font-family: 'Montserrat'; color: #fff; text-transform: uppercase; display: block; margin-top: 5px; letter-spacing: 2px; }
+
+        @media (max-width: 600px) { .nav-links { display: none; } .title-gold { font-size: 5rem; } }
     </style>
 </head>
 <body>
 
-    <div id="overlay" onclick="startApp()">
-        <div class="enter-text">SAZON 2027<br><br>TAP TO ENTER</div>
-    </div>
-
-    <div id="main-content">
-        <nav>
-            <div style="font-weight:600; letter-spacing:2px; color:var(--sazon-gold);">SAZON</div>
-            <div class="nav-links">
-                <a href="#gallery">Gallery</a>
-                <a href="#registry">Registry</a>
-            </div>
-        </nav>
-
-        <div class="hero">
-            <h1 class="title-gold">SOON</h1>
-            <div class="timer">
-                <div id="d">00<span>Days</span></div>
-                <div id="h">00<span>Hours</span></div>
-                <div id="m">00<span>Mins</span></div>
-            </div>
+    <nav>
+        <div style="font-weight:600; letter-spacing:3px; color:var(--sazon-gold); font-size: 0.9rem;">SAZON 2027</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#registry">Registry</a>
         </div>
+    </nav>
 
-        <section class="section" id="gallery">
-            <h2 style="font-family:'Playfair Display';">Family & Venue</h2>
-            <div class="grid">
-                <div class="item"><img src="https://images.unsplash.com/photo-1509395176047-4a66953fd231?w=600" alt="Roots"><div class="label">The Roots</div></div>
-                <div class="item"><img src="https://images.lucidcentral.org/Marzon%20Hotel/Marzon%20Hotel%20pool%20with%20palm%20trees%20and%20overcast%20sky.jpg" alt="Venue"><div class="label">Marzon Hotel</div></div>
-                <div class="item"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600" alt="Memories"><div class="label">Memories</div></div>
-                <div class="item"><img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600" alt="Next Gen"><div class="label">Second Gen</div></div>
-            </div>
-        </section>
-
-        <section class="section" style="background:#f9f6f0;" id="registry">
-            <h2 style="font-family:'Playfair Display';">Official Registry</h2>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="reg-btn">REGISTER NOW</a>
-        </section>
+    <div class="hero" id="home">
+        <h1 class="title-gold">SOON</h1>
+        <p class="tagline">The First Grand Reunion</p>
+        
+        <div class="timer">
+            <div class="timer-part"><span id="d">00</span><span>Days</span></div>
+            <div class="timer-part"><span id="h">00</span><span>Hours</span></div>
+            <div class="timer-part"><span id="m">00</span><span>Mins</span></div>
+        </div>
     </div>
 
-    <audio id="openSfx" src="audio/open.mp3"></audio>
-    <audio id="jingle" src="audio/jingle.mp3" loop></audio>
+    <section class="section" id="gallery">
+        <span class="section-subtitle">Visual Legacy</span>
+        <h2 class="section-title">The Roots & The Venue</h2>
+        <div class="grid">
+            <div class="item"><img src="https://images.unsplash.com/photo-1509395176047-4a66953fd231?w=600" alt="Roots"><div class="label">The Roots</div></div>
+            <div class="item"><img src="https://images.lucidcentral.org/Marzon%20Hotel/Marzon%20Hotel%20pool%20with%20palm%20trees%20and%20overcast%20sky.jpg" alt="Venue"><div class="label">Marzon Hotel</div></div>
+            <div class="item"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600" alt="Memories"><div class="label">A Century of Memories</div></div>
+            <div class="item"><img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600" alt="Next Gen"><div class="label">The Second Generation</div></div>
+        </div>
+    </section>
+
+    <section class="registry-section" id="registry">
+        <h2 class="section-title">The Golden Ticket</h2>
+        <p style="max-width: 600px; margin: 0 auto 40px; line-height: 1.6;">Please secure your spot at the table by completing the official guest registry.</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="reg-btn">REGISTER HERE →</a>
+    </section>
 
     <script>
-        function startApp() {
-            // Audio
-            document.getElementById('openSfx').play().catch(e => {});
-            setTimeout(() => { document.getElementById('jingle').play().catch(e => {}); }, 1000);
-
-            // Transition
-            document.getElementById('overlay').style.opacity = '0';
-            setTimeout(() => { 
-                document.getElementById('overlay').style.display = 'none'; 
-                document.getElementById('main-content').style.opacity = '1';
-            }, 800);
-        }
-
-        // Timer
+        // Timer logic - simplest possible version
         const target = new Date("July 23, 2027 00:00:00").getTime();
-        setInterval(() => {
+        function update() {
             const now = new Date().getTime();
             const diff = target - now;
-            document.getElementById('d').innerHTML = Math.floor(diff / (86400000)) + "<span>Days</span>";
-            document.getElementById('h').innerHTML = Math.floor((diff % 86400000) / 3600000) + "<span>Hours</span>";
-            document.getElementById('m').innerHTML = Math.floor((diff % 3600000) / 60000) + "<span>Mins</span>";
-        }, 100
+            document.getElementById('d').innerText = Math.floor(diff / 86400000);
+            document.getElementById('h').innerText = Math.floor((diff % 86400000) / 3600000);
+            document.getElementById('m').innerText = Math.floor((diff % 3600000) / 60000);
+        }
+        setInterval(update, 1000);
+        update();
+    </script>
+</body>
+</html>
