@@ -4,32 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAZON 2027 | The Grand Family Legacy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; --white-glass: rgba(255, 255, 255, 0.05); }
-        body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; cursor: pointer; }
+        :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; --white-glass: rgba(255, 255, 255, 0.08); }
+        body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; cursor: pointer; line-height: 1.6; }
         .stage { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; overflow: hidden; }
-        .cinematic-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,26,77,0.85), rgba(0,26,77,0.1) 50%, #000 100%), url('images/banner.jpg') center/cover no-repeat; z-index: 1; transition: transform 25s cubic-bezier(0.45, 0.05, 0.55, 0.95); }
+        .cinematic-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,26,77,0.9), rgba(0,26,77,0.2) 50%, #000 100%), url('images/banner.jpg') center/cover no-repeat; z-index: 1; transition: transform 25s cubic-bezier(0.45, 0.05, 0.55, 0.95); }
         .bg-zoom-active { transform: scale(1.15); }
-        .logo-anchor { position: absolute; top: 40px; left: 50%; transform: translateX(-50%); z-index: 20; opacity: 0; transition: opacity 3s ease-in; }
-        .logo-img { width: 140px; filter: drop-shadow(0 0 15px rgba(255,255,255,0.3)); background: rgba(255, 255, 255, 0.08); padding: 15px; border-radius: 50%; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
-        .credits-wrapper { position: relative; z-index: 10; width: 85%; max-width: 1300px; display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 5vh; opacity: 0; transition: opacity 2.5s ease-in 0.5s; }
-        .main-title { font-family: 'Playfair Display', serif; font-size: clamp(3.5rem, 10vw, 7rem); margin: 0; background: linear-gradient(180deg, #ffffff 40%, var(--sazon-gold) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8)); }
-        .timer-portal { position: relative; z-index: 10; margin-bottom: 12vh; display: flex; gap: 20px; opacity: 0; transition: all 2s ease-out 1s; transform: translateY(20px); }
+        
+        /* LOGO & TEXT VISIBILITY */
+        .logo-anchor { position: absolute; top: 30px; left: 50%; transform: translate(-50%, 20px); z-index: 20; opacity: 0; transition: all 3s ease-out; }
+        .logo-active { opacity: 1 !important; transform: translate(-50%, 0) !important; }
+        .logo-img { width: 150px; filter: drop-shadow(0 0 20px rgba(255,255,255,0.4)); background: rgba(255, 255, 255, 0.12); padding: 15px; border-radius: 50%; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); }
+        
+        .credits-wrapper { position: relative; z-index: 10; width: 90%; max-width: 1300px; display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 5vh; opacity: 0; transition: opacity 2.5s ease-in 0.5s; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        .main-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 6rem); margin: 0; background: linear-gradient(180deg, #ffffff 50%, var(--sazon-gold) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* IMPROVED TIMER FOR ADULTS */
+        .timer-portal { position: relative; z-index: 10; margin-bottom: 10vh; display: flex; gap: 15px; opacity: 0; transition: all 2s ease-out 1s; transform: translateY(20px); }
         .timer-active { opacity: 1; transform: translateY(0); }
-        .timer-unit { background: var(--white-glass); backdrop-filter: blur(30px); padding: 30px; border: 1px solid rgba(255,255,255,0.1); text-align: center; min-width: 100px; }
-        .t-val { display: block; font-family: 'Playfair Display'; font-size: 3.5rem; font-weight: 700; color: #fff; }
-        .t-lbl { font-size: 0.6rem; letter-spacing: 5px; color: var(--sazon-gold); text-transform: uppercase; }
-        .hub-section { background: white; padding: 100px 0; color: var(--sazon-navy); }
-        .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .hub-link { padding: 60px; border: 1px solid #f0f0f0; text-decoration: none; color: inherit; text-align: center; transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1); }
-        .hub-link:hover { background: var(--sazon-navy); color: white; transform: translateY(-10px); }
-        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 100; display: flex; justify-content: center; align-items: center; transition: opacity 1s; }
+        .timer-unit { background: var(--white-glass); backdrop-filter: blur(30px); padding: 25px; border: 1px solid rgba(255,255,255,0.2); text-align: center; min-width: 90px; }
+        .t-val { display: block; font-family: 'Playfair Display'; font-size: 3rem; font-weight: 700; color: #fff; }
+        .t-lbl { font-size: 0.7rem; letter-spacing: 3px; color: var(--sazon-gold); text-transform: uppercase; font-weight: 600; }
+
+        /* HUB SECTIONS */
+        .hub-section { background: white; padding: 80px 0; color: var(--sazon-navy); }
+        .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto; padding: 0 25px; }
+        
+        /* THE "GOLDEN TICKET" REGISTRATION CARD */
+        .hub-link { padding: 50px 30px; border: 2px solid #f0f0f0; text-decoration: none; color: inherit; text-align: center; transition: 0.5s; display: block; background: #fff; }
+        .register-card { border: 2px solid var(--sazon-gold); background: linear-gradient(145deg, #fffcf5, #fff); position: relative; overflow: hidden; }
+        .register-card::after { content: 'GOLDEN TICKET'; position: absolute; top: 10px; right: -30px; background: var(--sazon-gold); color: white; padding: 5px 40px; transform: rotate(45deg); font-size: 0.6rem; font-weight: 700; }
+        .hub-link h3 { font-family: 'Playfair Display'; font-size: 2rem; margin-bottom: 10px; color: var(--sazon-navy); }
+        .hub-link p { font-size: 1.1rem; color: #555; }
+        .hub-link:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+
+        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 100; display: flex; justify-content: center; align-items: center; transition: opacity 1s; }
     </style>
 </head>
 <body>
     <div id="overlay" onclick="launchHub()">
-        <p style="letter-spacing: 10px; font-weight: 200; font-size: 0.9rem; text-transform: uppercase; text-align: center; padding: 20px; border: 1px solid var(--sazon-gold);">Click to Enter the Sazon Hub</p>
+        <p style="letter-spacing: 6px; font-weight: 400; font-size: 1.1rem; text-transform: uppercase; text-align: center; padding: 30px; border: 2px solid var(--sazon-gold); color: white;">Tap to Enter the Sazon Hub</p>
     </div>
     <audio id="openSfx" src="audio/open.mp3" preload="auto"></audio>
     <div class="logo-anchor" id="mainLogo">
@@ -38,9 +53,9 @@
     <div class="stage">
         <div class="cinematic-bg" id="bg"></div>
         <div class="credits-wrapper" id="credits">
-            <div style="width: 25%; text-align: left;"><p style="font-size: 0.6rem; letter-spacing: 4px;">A SAZON FAMILY<br>TRADITION</p></div>
-            <div style="text-align: center;"><h1 class="main-title">SAZON 2027</h1><p style="color: var(--sazon-gold); letter-spacing: 12px; font-weight: 300; margin-top: 10px;">GIKAN SA GAMUT, TUBTOB SA LANGIT</p></div>
-            <div style="width: 25%; text-align: right;"><p style="font-family: 'Playfair Display'; font-size: 1.2rem;">MARZON HOTEL<br><span style="font-size: 0.6rem; font-family: 'Montserrat'; letter-spacing: 3px;">KALIBO, AKLAN</span></p></div>
+            <div style="width: 30%; text-align: left;"><p style="font-size: 0.8rem; letter-spacing: 3px; font-weight: 600;">SAZON FAMILY<br>TRADITION</p></div>
+            <div style="text-align: center;"><h1 class="main-title">SAZON 2027</h1><p style="color: var(--sazon-gold); letter-spacing: 8px; font-weight: 400; margin-top: 5px; font-size: 0.9rem;">GIKAN SA GAMUT, TUBTOB SA LANGIT</p></div>
+            <div style="width: 30%; text-align: right;"><p style="font-family: 'Playfair Display'; font-size: 1.3rem; font-weight: 700;">MARZON HOTEL<br><span style="font-size: 0.7rem; font-family: 'Montserrat'; letter-spacing: 2px; font-weight: 400;">KALIBO, AKLAN</span></p></div>
         </div>
         <div class="timer-portal" id="timer">
             <div class="timer-unit"><span id="d" class="t-val">00</span><span class="t-lbl">Days</span></div>
@@ -49,30 +64,45 @@
             <div class="timer-unit"><span id="s" class="t-val">00</span><span class="t-lbl">Secs</span></div>
         </div>
     </div>
-    <div class="hub-section" style="background: #fafafa;">
-        <div style="text-align:center; margin-bottom: 50px;"><h2 style="font-family: 'Playfair Display'; font-size: 2.5rem;">Wall of Generations</h2><p style="letter-spacing: 4px; color: var(--sazon-gold); font-size: 0.7rem; text-transform: uppercase;">Submit photos to sazonclan@gmail.com</p></div>
+    
+    <div class="hub-section" style="background: #fdfdfd;">
+        <div style="text-align:center; margin-bottom: 40px; padding: 0 20px;">
+            <h2 style="font-family: 'Playfair Display'; font-size: 2.8rem; margin-bottom: 10px;">Wall of Generations</h2>
+            <p style="letter-spacing: 2px; color: var(--sazon-gold); font-size: 1rem; font-weight: 600; text-transform: uppercase;">Email photos to: maemiliapalma@yahoo.com</p>
+        </div>
         <div class="hub-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-            <div class="hub-link" style="background: #eee; height: 300px; padding: 0;"></div>
-            <div class="hub-link" style="background: #ddd; height: 300px; padding: 0;"></div>
-            <div class="hub-link" style="background: #eee; height: 300px; padding: 0;"></div>
+            <div style="background: #f0f0f0; height: 350px; border: 1px solid #e0e0e0;"></div>
+            <div style="background: #e8e8e8; height: 350px; border: 1px solid #e0e0e0;"></div>
+            <div style="background: #f0f0f0; height: 350px; border: 1px solid #e0e0e0;"></div>
         </div>
     </div>
+
     <div class="hub-section">
         <div class="hub-grid">
-            <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" target="_blank" class="hub-link"><h3>Register</h3><p>Get Your Golden Ticket</p></a>
-            <div class="hub-link" style="cursor:pointer;" onclick="alert('Anthem coming soon!')"><h3>The Anthem</h3><p>Listen to our Roots</p></div>
-            <a href="#" class="hub-link"><h3>Resources</h3><p>Schedules & Info</p></a>
+            <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" target="_blank" class="hub-link register-card">
+                <h3>Register</h3>
+                <p>Secure your Golden Ticket for the Grand Reunion</p>
+            </a>
+            <div class="hub-link" style="cursor:pointer;" onclick="alert('The Sazon Anthem is being tuned!')">
+                <h3>The Anthem</h3>
+                <p>Listen to our roots and history</p>
+            </div>
+            <a href="#" class="hub-link">
+                <h3>Resources</h3>
+                <p>Event schedules and hotel information</p>
+            </a>
         </div>
     </div>
+
     <script>
         function launchHub() {
             const audio = document.getElementById('openSfx');
-            audio.volume = 0.7;
-            audio.play().catch(e => console.log("Sound failed", e));
+            audio.volume = 0.6;
+            audio.play().catch(e => console.log("Audio play blocked", e));
             document.getElementById('overlay').style.opacity = '0';
             setTimeout(() => { document.getElementById('overlay').style.display = 'none'; }, 1000);
             document.getElementById('bg').classList.add('bg-zoom-active');
-            document.getElementById('mainLogo').style.opacity = '1';
+            document.getElementById('mainLogo').classList.add('logo-active');
             document.getElementById('credits').style.opacity = '1';
             document.getElementById('timer').classList.add('timer-active');
         }
@@ -80,6 +110,7 @@
         setInterval(() => {
             const now = new Date().getTime();
             const distance = targetDate - now;
+            if (distance < 0) return;
             document.getElementById('d').innerText = Math.floor(distance / 86400000);
             document.getElementById('h').innerText = Math.floor((distance % 86400000) / 3600000);
             document.getElementById('m').innerText = Math.floor((distance % 3600000) / 60000);
