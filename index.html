@@ -3,164 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAZON 2027 | Grand Family Legacy</title>
+    <title>SAZON 2027 | The Grand Family Legacy</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --sazon-navy: #001a4d; 
-            --sazon-gold: #c5a059; 
-            --white-glass: rgba(255, 255, 255, 0.05);
-        }
-
+        :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; --white-glass: rgba(255, 255, 255, 0.05); }
         body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; cursor: pointer; }
-
-        /* THE CINEMATIC STAGE */
-        .stage {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        /* DYNAMIC BACKGROUND WITH TRIGGERED ANIMATION */
-        .cinematic-bg {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                linear-gradient(to bottom, rgba(0,26,77,0.85), rgba(0,26,77,0.1) 50%, #000 100%),
-                url('images/banner.jpg') center/cover no-repeat;
-            z-index: 1;
-            transition: transform 25s cubic-bezier(0.45, 0.05, 0.55, 0.95);
-        }
-
-        /* Activating the Zoom Class */
+        .stage { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; overflow: hidden; }
+        .cinematic-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,26,77,0.85), rgba(0,26,77,0.1) 50%, #000 100%), url('images/banner.jpg') center/cover no-repeat; z-index: 1; transition: transform 25s cubic-bezier(0.45, 0.05, 0.55, 0.95); }
         .bg-zoom-active { transform: scale(1.15); }
-
-        /* LUMINOUS LOGO ANCHOR */
-        .logo-anchor {
-            position: absolute;
-            top: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 20;
-            text-align: center;
-            opacity: 0;
-            transition: opacity 3s ease-in;
-        }
-
-        .logo-img {
-            width: 140px;
-            filter: drop-shadow(0 0 15px rgba(255,255,255,0.3));
-            background: rgba(255, 255, 255, 0.08);
-            padding: 15px;
-            border-radius: 50%;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        /* OPENING CREDITS SYSTEM */
-        .credits-wrapper {
-            position: relative;
-            z-index: 10;
-            width: 85%;
-            max-width: 1300px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            padding-bottom: 5vh;
-            opacity: 0;
-            transition: opacity 2.5s ease-in 0.5s;
-        }
-
-        .main-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3.5rem, 10vw, 7rem);
-            margin: 0;
-            background: linear-gradient(180deg, #ffffff 40%, var(--sazon-gold) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8));
-        }
-
-        /* IMPACTFUL TIMER PLACEMENT */
-        .timer-portal {
-            position: relative;
-            z-index: 10;
-            margin-bottom: 12vh;
-            display: flex;
-            gap: 20px;
-            opacity: 0;
-            transition: all 2s ease-out 1s;
-            transform: translateY(20px);
-        }
-
+        .logo-anchor { position: absolute; top: 40px; left: 50%; transform: translateX(-50%); z-index: 20; opacity: 0; transition: opacity 3s ease-in; }
+        .logo-img { width: 140px; filter: drop-shadow(0 0 15px rgba(255,255,255,0.3)); background: rgba(255, 255, 255, 0.08); padding: 15px; border-radius: 50%; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .credits-wrapper { position: relative; z-index: 10; width: 85%; max-width: 1300px; display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 5vh; opacity: 0; transition: opacity 2.5s ease-in 0.5s; }
+        .main-title { font-family: 'Playfair Display', serif; font-size: clamp(3.5rem, 10vw, 7rem); margin: 0; background: linear-gradient(180deg, #ffffff 40%, var(--sazon-gold) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8)); }
+        .timer-portal { position: relative; z-index: 10; margin-bottom: 12vh; display: flex; gap: 20px; opacity: 0; transition: all 2s ease-out 1s; transform: translateY(20px); }
         .timer-active { opacity: 1; transform: translateY(0); }
-
-        .timer-unit {
-            background: var(--white-glass);
-            backdrop-filter: blur(30px);
-            padding: 30px;
-            border: 1px solid rgba(255,255,255,0.1);
-            text-align: center;
-            min-width: 100px;
-        }
-
+        .timer-unit { background: var(--white-glass); backdrop-filter: blur(30px); padding: 30px; border: 1px solid rgba(255,255,255,0.1); text-align: center; min-width: 100px; }
         .t-val { display: block; font-family: 'Playfair Display'; font-size: 3.5rem; font-weight: 700; color: #fff; }
         .t-lbl { font-size: 0.6rem; letter-spacing: 5px; color: var(--sazon-gold); text-transform: uppercase; }
-
-        /* THE HUB DASHBOARD */
-        .hub-section { background: white; padding: 120px 0; color: var(--sazon-navy); }
-        .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-        .hub-link { 
-            padding: 60px; border: 1px solid #f0f0f0; text-decoration: none; color: inherit; 
-            text-align: center; transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-        }
+        .hub-section { background: white; padding: 100px 0; color: var(--sazon-navy); }
+        .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .hub-link { padding: 60px; border: 1px solid #f0f0f0; text-decoration: none; color: inherit; text-align: center; transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1); }
         .hub-link:hover { background: var(--sazon-navy); color: white; transform: translateY(-10px); }
-
-        /* "CLICK TO ENTER" OVERLAY */
-        #overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); z-index: 100;
-            display: flex; justify-content: center; align-items: center;
-            transition: opacity 1s;
-        }
+        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 100; display: flex; justify-content: center; align-items: center; transition: opacity 1s; }
     </style>
 </head>
 <body>
-
-    <!-- OVERLAY TO TRIGGER AUDIO -->
-    <div id="overlay" onclick="startLegacy()">
-        <p style="letter-spacing: 8px; font-weight: 200; font-size: 0.9rem; text-transform: uppercase;">Click to Enter the Sazon Hub</p>
+    <div id="overlay" onclick="launchHub()">
+        <p style="letter-spacing: 10px; font-weight: 200; font-size: 0.9rem; text-transform: uppercase; text-align: center; padding: 20px; border: 1px solid var(--sazon-gold);">Click to Enter the Sazon Hub</p>
     </div>
-
-    <!-- AUDIO CORE -->
     <audio id="openSfx" src="audio/open.mp3" preload="auto"></audio>
-
     <div class="logo-anchor" id="mainLogo">
-        <img src="images/logo.png" class="logo-img" alt="Sazon Logo">
+        <img src="images/logo.png" class="logo-img" alt="Sazon Official Logo">
     </div>
-
     <div class="stage">
         <div class="cinematic-bg" id="bg"></div>
-
         <div class="credits-wrapper" id="credits">
-            <div style="width: 25%; text-align: left;">
-                <p style="font-size: 0.6rem; letter-spacing: 4px;">A SAZON CLAN<br>PRODUCTION</p>
-            </div>
-
-            <div style="text-align: center;">
-                <h1 class="main-title">SAZON 2027</h1>
-                <p style="color: var(--sazon-gold); letter-spacing: 12px; font-weight: 300; margin-top: 10px;">GIKAN SA GAMUT, TUBTOB SA LANGIT</p>
-            </div>
-
-            <div style="width: 25%; text-align: right;">
-                <p style="font-family: 'Playfair Display'; font-size: 1.2rem;">MARZON HOTEL<br><span style="font-size: 0.6rem; font-family: 'Montserrat'; letter-spacing: 3px;">KALIBO, AKLAN</span></p>
-            </div>
+            <div style="width: 25%; text-align: left;"><p style="font-size: 0.6rem; letter-spacing: 4px;">A SAZON FAMILY<br>TRADITION</p></div>
+            <div style="text-align: center;"><h1 class="main-title">SAZON 2027</h1><p style="color: var(--sazon-gold); letter-spacing: 12px; font-weight: 300; margin-top: 10px;">GIKAN SA GAMUT, TUBTOB SA LANGIT</p></div>
+            <div style="width: 25%; text-align: right;"><p style="font-family: 'Playfair Display'; font-size: 1.2rem;">MARZON HOTEL<br><span style="font-size: 0.6rem; font-family: 'Montserrat'; letter-spacing: 3px;">KALIBO, AKLAN</span></p></div>
         </div>
-
         <div class="timer-portal" id="timer">
             <div class="timer-unit"><span id="d" class="t-val">00</span><span class="t-lbl">Days</span></div>
             <div class="timer-unit"><span id="h" class="t-val">00</span><span class="t-lbl">Hrs</span></div>
@@ -168,51 +49,41 @@
             <div class="timer-unit"><span id="s" class="t-val">00</span><span class="t-lbl">Secs</span></div>
         </div>
     </div>
-
-    <div class="hub-section">
-        <div class="hub-grid">
-            <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" target="_blank" class="hub-link">
-                <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem;">Registration</h3>
-                <p style="font-size: 0.7rem; letter-spacing: 3px; opacity: 0.5;">Secure Your Seat</p>
-            </a>
-            <div class="hub-link" style="cursor:pointer;" onclick="alert('Anthem feature coming soon!')">
-                <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem;">Family Anthem</h3>
-                <p style="font-size: 0.7rem; letter-spacing: 3px; opacity: 0.5;">Roots & Aspirations</p>
-            </div>
-            <a href="#" class="hub-link">
-                <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem;">Digital Hub</h3>
-                <p style="font-size: 0.7rem; letter-spacing: 3px; opacity: 0.5;">Resource Archive</p>
-            </a>
+    <div class="hub-section" style="background: #fafafa;">
+        <div style="text-align:center; margin-bottom: 50px;"><h2 style="font-family: 'Playfair Display'; font-size: 2.5rem;">Wall of Generations</h2><p style="letter-spacing: 4px; color: var(--sazon-gold); font-size: 0.7rem; text-transform: uppercase;">Submit photos to sazonclan@gmail.com</p></div>
+        <div class="hub-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+            <div class="hub-link" style="background: #eee; height: 300px; padding: 0;"></div>
+            <div class="hub-link" style="background: #ddd; height: 300px; padding: 0;"></div>
+            <div class="hub-link" style="background: #eee; height: 300px; padding: 0;"></div>
         </div>
     </div>
-
+    <div class="hub-section">
+        <div class="hub-grid">
+            <a href="https://forms.gle/1yqyfMtXBCt3X9Dn6" target="_blank" class="hub-link"><h3>Register</h3><p>Get Your Golden Ticket</p></a>
+            <div class="hub-link" style="cursor:pointer;" onclick="alert('Anthem coming soon!')"><h3>The Anthem</h3><p>Listen to our Roots</p></div>
+            <a href="#" class="hub-link"><h3>Resources</h3><p>Schedules & Info</p></a>
+        </div>
+    </div>
     <script>
-        function startLegacy() {
-            // Play sound immediately on interaction
+        function launchHub() {
             const audio = document.getElementById('openSfx');
             audio.volume = 0.7;
-            audio.play().catch(e => console.log("Audio failed to play:", e));
-
-            // Remove overlay and trigger visuals
+            audio.play().catch(e => console.log("Sound failed", e));
             document.getElementById('overlay').style.opacity = '0';
             setTimeout(() => { document.getElementById('overlay').style.display = 'none'; }, 1000);
-
-            // Activate visual sequence
             document.getElementById('bg').classList.add('bg-zoom-active');
             document.getElementById('mainLogo').style.opacity = '1';
             document.getElementById('credits').style.opacity = '1';
             document.getElementById('timer').classList.add('timer-active');
         }
-
-        // Countdown Logic
-        const target = new Date("July 23, 2027 08:00:00").getTime();
+        const targetDate = new Date("July 23, 2027 08:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
-            const gap = target - now;
-            document.getElementById('d').innerText = Math.floor(gap / 86400000);
-            document.getElementById('h').innerText = Math.floor((gap % 86400000) / 3600000);
-            document.getElementById('m').innerText = Math.floor((gap % 3600000) / 60000);
-            document.getElementById('s').innerText = Math.floor((gap % 60000) / 1000);
+            const distance = targetDate - now;
+            document.getElementById('d').innerText = Math.floor(distance / 86400000);
+            document.getElementById('h').innerText = Math.floor((distance % 86400000) / 3600000);
+            document.getElementById('m').innerText = Math.floor((distance % 3600000) / 60000);
+            document.getElementById('s').innerText = Math.floor((distance % 60000) / 1000);
         }, 1000);
     </script>
 </body>
