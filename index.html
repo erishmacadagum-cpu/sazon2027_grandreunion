@@ -4,101 +4,255 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAZON 2027 | The Grand Family Legacy</title>
+    
     <link rel="icon" type="image/png" href="images/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
+    
     <style>
-        :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; }
+        :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; --sazon-accent: #e5c07b; }
+        * { box-sizing: border-box; }
         body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; scroll-behavior: smooth; }
-        .gold-txt { color: var(--sazon-gold); }
-        /* INTRO OVERLAY */
-        #overlay { position: fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:9999; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer; transition: opacity 1.5s; }
-        .credit { font-family:'Cinzel'; color:var(--sazon-gold); font-size:1.5rem; letter-spacing:8px; opacity:0; transform:translateY(20px); transition:0.8s; margin:10px 0; }
-        .reveal { opacity:1; transform:translateY(0); }
-        /* HERO */
-        .stage { height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; position:relative; background: linear-gradient(to bottom, rgba(0,26,77,0.7), #000); }
-        .timer-box { background:rgba(0,0,0,0.6); backdrop-filter:blur(10px); padding:30px; border:1px solid var(--sazon-gold); display:flex; gap:20px; }
-        /* CONTENT */
-        .section { padding:100px 20px; text-align:center; }
-        .tree-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:20px; max-width:1200px; margin:50px auto; }
-        .branch-card { background:#fff; color:#333; padding:20px; border-top:4px solid var(--sazon-gold); }
-        .apparel-grid { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; }
-        .apparel-card { width:350px; background:#fff; padding:20px; color:#333; }
-        .nav { position:fixed; top:0; width:100%; background:rgba(0,0,0,0.9); padding:20px; z-index:1000; text-align:center; transform:translateY(-100%); transition:1s; }
-        .nav.active { transform:translateY(0); }
+        h1, h2, h3, h4, .gold-letter, .branch-name, .nav-links a { font-family: 'Cinzel', serif !important; letter-spacing: 2px; }
+
+        /* CINEMATIC OVERLAY */
+        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 100000; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: opacity 1.5s ease; text-align: center;}
+        .credits-text { color: var(--sazon-gold); font-size: clamp(0.7rem, 2vw, 1.2rem); text-transform: uppercase; letter-spacing: 8px; margin: 8px; opacity: 0; transform: translateY(20px); transition: 0.8s; }
+        .reveal { opacity: 1; transform: translateY(0); }
+        .tap-box { padding: 15px 40px; border: 1px solid var(--sazon-gold); letter-spacing: 6px; text-transform: uppercase; font-size: 0.7rem; color: #fff; opacity: 0; transition: 1s; margin-top: 40px; }
+        .tap-reveal { opacity: 1; }
+
+        /* NAVIGATION */
+        #main-nav { position: fixed; top: 0; width: 100%; height: 80px; background: rgba(0,0,0,0.9); backdrop-filter: blur(15px); z-index: 999; display: flex; align-items: center; justify-content: space-between; padding: 0 50px; border-bottom: 1px solid rgba(197,160,89,0.2); transform: translateY(-100%); transition: 1s cubic-bezier(0.4, 0, 0.2, 1); }
+        #main-nav.active { transform: translateY(0); }
+        .nav-links a { color: #fff; text-decoration: none; font-size: 0.7rem; text-transform: uppercase; margin-left: 25px; opacity: 0.7; transition: 0.3s; }
+        .nav-links a:hover { color: var(--sazon-gold); opacity: 1; }
+
+        /* HERO SECTION */
+        .stage { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: hidden; }
+        .cinematic-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,26,77,0.6), #000), url('images/banner.jpg') center/cover no-repeat; z-index: 1; transition: 15s ease-out; background-color: #001a4d;}
+        .bg-active { transform: scale(1.1); }
+        
+        .soon-container { position: relative; z-index: 10; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 2s; }
+        .active-ui.soon-container { opacity: 1; }
+        .gold-letter { font-size: clamp(4rem, 18vw, 12rem); background: linear-gradient(135deg, #fff 20%, var(--sazon-gold) 50%, #fff 80%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 6s linear infinite; }
+        @keyframes shine { to { background-position: 200% center; } }
+        
+        .logo-circle-o { width: clamp(3rem, 14vw, 10rem); height: clamp(3rem, 14vw, 10rem); margin: 0 10px; border-radius: 50%; border: 2px solid var(--sazon-gold); background: #000; overflow: hidden; position: relative; box-shadow: 0 0 30px rgba(197,160,89,0.3); }
+        .logo-circle-o img { width: 100%; height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+        /* TIMER */
+        .timer-wrapper { position: relative; z-index: 10; background: rgba(0,0,0,0.4); backdrop-filter: blur(10px); border: 1px solid rgba(197, 160, 89, 0.3); padding: 25px 50px; opacity: 0; transition: 1.5s 1.2s; margin-top: 40px; }
+        .timer-container { display: flex; gap: 30px; }
+        .timer-val { font-size: clamp(2rem, 5vw, 3.5rem); color: var(--sazon-gold); font-weight: 700; display: block; }
+        .timer-label { font-size: 0.6rem; text-transform: uppercase; color: #fff; letter-spacing: 3px; }
+
+        /* SECTIONS */
+        .section { padding: 120px 20px; text-align: center; }
+        .white-bg { background: #fff; color: #333; }
+        .navy-bg { background: var(--sazon-navy); color: #fff; }
+
+        /* JINGLE */
+        .jingle-box { max-width: 900px; margin: 0 auto; border-left: 1px solid var(--sazon-gold); border-right: 1px solid var(--sazon-gold); padding: 50px; position: relative; }
+        .lyrics-text { font-style: italic; color: #fff; line-height: 2.2; font-size: 1.2rem; }
+        .chorus { color: var(--sazon-gold); font-weight: 600; margin: 30px 0; font-size: 1.4rem; }
+
+        /* LEGACY TREE */
+        .tree-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1400px; margin: 0 auto; }
+        .branch-card { background: #fff; border: 1px solid #f0f0f0; border-top: 5px solid var(--sazon-gold); padding: 30px 20px; transition: 0.4s; flex: 1 1 240px; max-width: 280px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .branch-card:hover { transform: translateY(-10px); border-top-color: var(--sazon-navy); }
+        .nickname { color: var(--sazon-gold); font-size: 0.75rem; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 8px; }
+
+        /* LOGISTICS */
+        .venue-grid { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; max-width: 1200px; margin: 50px auto; text-align: left; }
+        .info-pane { flex: 1 1 450px; }
+        .map-pane { flex: 1 1 450px; height: 450px; border: 2px solid var(--sazon-gold); }
+        
+        /* QR & FORMS */
+        .qr-section { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 50px; }
+        .qr-card { background: #fff; padding: 25px; border-radius: 8px; color: #333; width: 220px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .qr-card img { width: 100%; height: auto; }
+
+        /* APPAREL */
+        .apparel-grid { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; }
+        .apparel-card { background: #fff; padding: 25px; border: 1px solid #eee; width: 400px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .apparel-label { color: var(--sazon-navy); font-weight: 700; font-size: 0.8rem; margin-top: 20px; text-transform: uppercase; border-left: 4px solid var(--sazon-gold); padding-left: 15px; text-align: left; }
+
+        /* AUDIO UI */
+        .audio-ui { position: fixed; bottom: 40px; right: 40px; z-index: 1000; background: rgba(0,0,0,0.7); border: 1px solid var(--sazon-gold); padding: 15px; border-radius: 50%; cursor: pointer; opacity: 0; transition: 1s; }
+        .active-ui.audio-ui { opacity: 1; }
     </style>
 </head>
-<body onload="init()">
-    <div id="overlay" onclick="enter()">
-        <h1 class="credit" id="c1">SAZON PRODUCTION</h1>
-        <h1 class="credit" id="c2">MARZON HOTEL KALIBO</h1>
-        <h1 class="credit" id="c3">JULY 2027</h1>
-        <div class="credit" id="c4" style="border:1px solid var(--sazon-gold); padding:10px 30px;">TAP TO ENTER</div>
+<body onload="startCinematic()">
+
+    <div id="overlay" onclick="launchExperience()">
+        <h4 class="credits-text" id="creds-1">Sazon Production</h4>
+        <h4 class="credits-text" id="creds-2">Marzon Hotel Kalibo</h4>
+        <h4 class="credits-text" id="creds-3">Aklan</h4>
+        <h4 class="credits-text" id="creds-4" style="border-top: 1px solid var(--sazon-gold); padding-top: 15px; margin-top: 20px;">July 2027</h4>
+        <div class="tap-box" id="tap-to-reveal">TAP TO ENTER</div>
     </div>
 
-    <nav class="nav" id="nav">
-        <a href="#tree" style="color:white; margin:0 20px; text-decoration:none;">LEGACY</a>
-        <a href="#venue" style="color:white; margin:0 20px; text-decoration:none;">VENUE</a>
-        <a href="#apparel" style="color:white; margin:0 20px; text-decoration:none;">APPAREL</a>
+    <nav id="main-nav">
+        <img src="images/logo.png" height="40" onerror="this.style.display='none'">
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#lyrics">Jingle</a>
+            <a href="#tree">Legacy Tree</a>
+            <a href="#venue">Travel</a>
+            <a href="#apparel">Apparel</a>
+        </div>
     </nav>
 
-    <section class="stage" id="home">
-        <h1 style="font-family:'Cinzel'; font-size:5rem;">SAZON</h1>
-        <div class="timer-box" id="timer"></div>
-    </section>
+    <div class="stage" id="home">
+        <div class="cinematic-bg" id="bg"></div>
+        <div class="soon-container" id="soon-ui">
+            <span class="gold-letter">S</span><span class="gold-letter">O</span>
+            <div class="logo-circle-o"><img src="images/logo.png" alt="Logo" onerror="this.style.display='none'"></div>
+            <span class="gold-letter">N</span>
+        </div>
+        <div class="timer-wrapper" id="timer-ui">
+            <div class="timer-container" id="countdown-display">
+                </div>
+        </div>
+    </div>
 
-    <section class="section" id="tree">
-        <h2>THE 13 BRANCHES</h2>
-        <div class="tree-grid" id="grid"></div>
-    </section>
-
-    <section class="section" id="venue" style="background:var(--sazon-navy)">
-        <h2>VENUE: MARZON HOTEL KALIBO</h2>
-        <p>Aklan's Premier Heritage Destination</p>
-        <div class="qr-card" style="margin-top:40px; background:#fff; display:inline-block; padding:20px;">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform">
-            <p style="color:#000; font-size:0.7rem;">SCAN TO REGISTER</p>
+    <section class="section" id="lyrics" style="background:#000;">
+        <h2 style="color:var(--sazon-gold); margin-bottom:50px;">The Family Jingle</h2>
+        <div class="jingle-box">
+            <div class="lyrics-text">
+                "Miles unfolding, ink on the page,<br>
+                A story rewritten, turning the age.<br>
+                July 2027, the compass aligns,<br>
+                Marzon Hotel, Kalibo, where the heritage shines."<br>
+                <div class="chorus">
+                    "Gikan sa gamut, tubtob sa langit,<br>
+                    Seasoned with love, let the future ignite.<br>
+                    Sazon 2027, (Every path) leads us back to the gate."
+                </div>
+                "We are Sazon. See you in Kalibo!"
+            </div>
         </div>
     </section>
 
-    <section class="section" id="apparel" style="background:#f4f4f4; color:#000;">
-        <h2>OFFICIAL APPAREL</h2>
+    <section class="section white-bg" id="tree">
+        <div style="margin-bottom:60px;">
+            <h2 class="p-name" style="font-size: 3rem; color: var(--sazon-navy); margin: 0;">Tereso & Teofista Sazon</h2>
+            <p style="text-transform:uppercase; letter-spacing:5px; font-size:0.8rem; color:var(--sazon-gold); margin-top: 10px;">The 13 Branches of Our Heritage</p>
+        </div>
+        <div class="tree-grid" id="branch-engine">
+            </div>
+    </section>
+
+    <section class="section navy-bg" id="venue">
+        <h2 style="color:var(--sazon-gold); margin-bottom: 40px;">Travel & Venue</h2>
+        <div class="venue-grid">
+            <div class="info-pane">
+                <h3 style="color:var(--sazon-gold)">Marzon Hotel Kalibo</h3>
+                <p>Jaime Cardinal Sin Avenue, Andagao, Kalibo, Aklan 5600</p>
+                <p style="font-size:0.9rem; opacity:0.8; line-height:1.8;">
+                    Our primary hub in the heart of Aklan. Located just 10 minutes from Kalibo International Airport. 
+                    Nearby landmarks: Bakhawan Eco-Park and Gaisano Capital.
+                </p>
+                <h4 style="margin-top:30px;">How to get there:</h4>
+                <ul style="font-size:0.85rem; line-height:2;">
+                    <li><b>From Abroad:</b> Fly to Manila (MNL) or Cebu (CEB), then a 1-hour flight to Kalibo (KLO).</li>
+                    <li><b>Regional:</b> Direct flights available via PAL, Cebu Pacific, and AirAsia.</li>
+                </ul>
+            </div>
+            <div class="map-pane">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3905.804825945112!2d122.3732446758368!3d11.691353388517228!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33b00085a815a519%3A0xc39f88c74375b47a!2sMarzon%20Hotel%20Kalibo!5e0!3m2!1sen!2sph!4v1714650000000!5m2!1sen!2sph" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+
+        <div class="qr-section">
+            <div class="qr-card">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://tinyurl.com/SazonGrandReunion" alt="QR Web">
+                <p style="font-size:0.7rem; font-weight:700; margin-top:15px;">WEBSITE PORTAL</p>
+            </div>
+            <div class="qr-card">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" alt="QR Form">
+                <p style="font-size:0.7rem; font-weight:700; margin-top:15px;">OFFICIAL REGISTRATION</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section white-bg" id="apparel" style="background:#f9f9f9;">
+        <h2 style="color:var(--sazon-navy); margin-bottom:50px;">Commemorative Apparel</h2>
         <div class="apparel-grid">
             <div class="apparel-card">
-                <div style="height:300px; background:#ddd; margin-bottom:10px;"></div>
-                <div style="font-weight:700; border-left:4px solid var(--sazon-gold); padding-left:10px; text-align:left;">T-SHIRT BACK (NUTRITION FACTS)</div>
+                <img src="images/apparel_back.jpg" alt="Back" onerror="this.src='https://via.placeholder.com/400x500?text=Nutrition+Facts+Design'">
+                <div class="apparel-label">T-SHIRT BACK (Nutrition Facts)</div>
             </div>
             <div class="apparel-card">
-                <div style="height:300px; background:#ddd; margin-bottom:10px;"></div>
-                <div style="font-weight:700; border-left:4px solid var(--sazon-gold); padding-left:10px; text-align:left;">T-SHIRT/HOODIE FRONT (LOGO TREE)</div>
+                <img src="images/apparel_front.jpg" alt="Front" onerror="this.src='https://via.placeholder.com/400x500?text=Sazon+Tree+Logo'">
+                <div class="apparel-label">T-SHIRT / HOODIE FRONT (Logo Tree)</div>
             </div>
         </div>
     </section>
 
+    <section class="section navy-bg" style="padding: 60px 20px; border-top: 4px solid var(--sazon-gold);">
+        <p style="text-transform:uppercase; letter-spacing:4px; font-size:0.7rem;">Submit Legacy Photos to:</p>
+        <a href="mailto:maemiliapalma@yahoo.com" style="color:var(--sazon-gold); text-decoration:none; font-weight:700; font-size: 1.5rem;">maemiliapalma@yahoo.com</a>
+    </section>
+
+    <div class="audio-ui" id="audio-btn" onclick="toggleMute()">🔊</div>
+    <audio id="sfx-jingle" src="audio/jingle.mp3" loop></audio>
+
     <script>
-        function init() {
-            const branches = [
-                {n:"Serafin",k:"Lolo Apin"}, {n:"Monserat",k:"Lola Monching"}, {n:"Felomina",k:"Lola Mening"},
-                {n:"Estrella",k:"Lola Estring"}, {n:"Gregorio",k:"Lolo Gorio"}, {n:"Regino",k:"Lolo Taba"},
-                {n:"Maria",k:"Lola Maria"}, {n:"Concepcion",k:"Lola Moret"}, {n:"Cezar",k:"Lolo Cezar"},
-                {n:"Priscilla",k:"Lola Mamay"}, {n:"Gloria",k:"Lola Goly"}, {n:"Reynaldo",k:"Lolo Lope"}, {n:"Nilda",k:"Lola Nilda"}
-            ];
-            const g = document.getElementById('grid');
-            branches.forEach(b => g.innerHTML += `<div class="branch-card"><small style="color:var(--sazon-gold)">(${b.k})</small><h3>${b.n}</h3></div>`);
+        const branches = [
+            {n: "Serafin", k: "Lolo Apin"}, {n: "Monserat", k: "Lola Monching"}, {n: "Felomina", k: "Lola Mening"},
+            {n: "Estrella", k: "Lola Estring"}, {n: "Gregorio", k: "Lolo Gorio"}, {n: "Regino", k: "Lolo Taba"},
+            {n: "Maria", k: "Lola Maria"}, {n: "Concepcion", k: "Lola Moret"}, {n: "Cezar", k: "Lolo Cezar"},
+            {n: "Priscilla", k: "Lola Mamay"}, {n: "Gloria", k: "Lola Goly"}, {n: "Reynaldo", k: "Lolo Lope"}, {n: "Nilda", k: "Lola Nilda"}
+        ];
+
+        function startCinematic() {
+            setTimeout(() => document.getElementById('creds-1').classList.add('reveal'), 400);
+            setTimeout(() => document.getElementById('creds-2').classList.add('reveal'), 1200);
+            setTimeout(() => document.getElementById('creds-3').classList.add('reveal'), 2000);
+            setTimeout(() => document.getElementById('creds-4').classList.add('reveal'), 2800);
+            setTimeout(() => document.getElementById('tap-to-reveal').classList.add('tap-reveal'), 3800);
             
-            setTimeout(() => document.getElementById('c1').classList.add('reveal'), 300);
-            setTimeout(() => document.getElementById('c2').classList.add('reveal'), 1100);
-            setTimeout(() => document.getElementById('c3').classList.add('reveal'), 1900);
-            setTimeout(() => document.getElementById('c4').classList.add('reveal'), 2700);
+            // Build Tree
+            const container = document.getElementById('branch-engine');
+            branches.forEach(b => {
+                container.innerHTML += `
+                    <div class="branch-card">
+                        <span class="nickname">(${b.k})</span>
+                        <h3 class="branch-name" style="margin:0; color:var(--sazon-navy);">${b.n}</h3>
+                    </div>`;
+            });
         }
-        function enter() {
+
+        function launchExperience() {
+            document.getElementById('sfx-jingle').play().catch(e => {});
             document.getElementById('overlay').style.opacity = '0';
-            setTimeout(() => { document.getElementById('overlay').style.display='none'; document.getElementById('nav').classList.add('active'); }, 1000);
+            setTimeout(() => { 
+                document.getElementById('overlay').style.display = 'none'; 
+                document.getElementById('main-nav').classList.add('active');
+                document.getElementById('bg').classList.add('bg-active');
+                document.getElementById('soon-ui').classList.add('active-ui');
+                document.getElementById('timer-ui').style.opacity = '1';
+                document.getElementById('audio-btn').classList.add('active-ui');
+            }, 1000);
         }
+
+        function toggleMute() {
+            const j = document.getElementById('sfx-jingle');
+            j.muted = !j.muted;
+            document.getElementById('audio-btn').innerText = j.muted ? "🔇" : "🔊";
+        }
+
+        // TIMER LOGIC
+        const targetDate = new Date("July 23, 2027 00:00:00").getTime();
         setInterval(() => {
-            const d = new Date("July 23, 2027");
-            const diff = d - new Date();
-            document.getElementById('timer').innerHTML = `<div>${Math.floor(diff/86400000)}<br><small>DAYS</small></div><div>${Math.floor((diff%86400000)/3600000)}<br><small>HRS</small></div>`;
-        }, 1000);
-    </script>
-</body>
-</html>
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('countdown-display').innerHTML = `
+                <div class="timer-unit"><span class="timer-val">${d}</span><span class="timer-label">Days</span></div>
+                <div class="timer-unit"><span class="timer-val">${h}</span><span class="timer-label">
