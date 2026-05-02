@@ -36,7 +36,6 @@
         .logo-circle-o { width: clamp(2.5rem, 12vw, 8.5rem); height: clamp(2.5rem, 12vw, 8.5rem); margin: 0 5px; border-radius: 50%; overflow: hidden; border: 1.5px solid var(--sazon-gold); box-shadow: 0 0 30px rgba(197, 160, 89, 0.3); position: relative; }
         .logo-circle-o img { width: 100%; height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
 
-        /* LIVE TIMER */
         .timer-wrapper { position: relative; z-index: 10; background: rgba(0,0,0,0.5); backdrop-filter: blur(12px); border: 1px solid rgba(197, 160, 89, 0.4); padding: 30px; opacity: 0; transition: 2s 2s; margin-top: 30px; }
         .timer-container { display: flex; gap: 20px; align-items: center; }
         .timer-unit { text-align: center; min-width: 60px; }
@@ -58,20 +57,15 @@
         .branch-name { font-size: 1.2rem; color: var(--sazon-navy); font-weight: 700; margin-bottom: 5px; }
         .nickname { font-size: 0.65rem; color: var(--sazon-gold); text-transform: uppercase; letter-spacing: 2px; }
 
-        /* APPAREL SECTION */
-        .apparel-grid { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; max-width: 1200px; margin: 0 auto; }
-        .apparel-card { background: #fff; padding: 25px; border: 1px solid #eee; flex: 1 1 350px; max-width: 450px; cursor: pointer; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .apparel-card:hover { border-color: var(--sazon-gold); transform: translateY(-10px); }
-        .apparel-card img { width: 100%; height: auto; margin-bottom: 20px; }
-
-        /* REGISTRY & ACCESS */
+        /* ACCESS & REGISTRY - PRECISION UPDATE */
         .access-section { background: #f9f9f9; padding: 100px 20px; color: #333; }
         .access-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px; max-width: 1100px; margin: 0 auto; align-items: center; }
         .qr-card { background: #fff; padding: 40px; border: 1px solid #ddd; text-align: center; box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
+        /* Points directly to your TinyURL */
         .qr-card img { width: 220px; height: 220px; margin-bottom: 20px; border: 1px solid #eee; padding: 10px; }
         
         .btn-gold { display: inline-block; background: var(--sazon-navy); color: #fff; padding: 20px 40px; text-decoration: none; font-weight: 700; letter-spacing: 3px; font-size: 0.7rem; text-transform: uppercase; border: 1px solid transparent; transition: 0.3s; }
-        .btn-gold:hover { background: transparent; color: var(--sazon-navy); border-color: var(--sazon-navy); }
+        .btn-gold:hover { background: transparent; color: var(--sazon-navy); border-color: var(--sazon-navy); transform: scale(1.05); }
 
         .email-banner { background: var(--sazon-navy); color: #fff; padding: 80px 20px; text-align: center; border-top: 4px solid var(--sazon-gold); }
         .email-link { color: var(--sazon-gold); text-decoration: none; font-size: 1.5rem; transition: 0.3s; border-bottom: 1px solid transparent; }
@@ -94,8 +88,8 @@
         <div class="nav-links">
             <a href="#home" onclick="playClick()">Home</a>
             <a href="#lineage" onclick="playClick()">Lineage</a>
-            <a href="#apparel" onclick="playClick()">Apparel</a>
-            <a href="#register" onclick="playClick()">Register</a>
+            <a href="#register" onclick="playClick()">Registry</a>
+            <a href="#contact" onclick="playClick()">Contact</a>
         </div>
     </nav>
 
@@ -143,48 +137,27 @@
         </div>
     </section>
 
-    <section class="section" style="background:#fafafa;" id="apparel">
-        <span class="header-sub">Official Reunion Collection</span>
-        <h2 class="header-title">Heritage Apparel</h2>
-        <div class="apparel-grid">
-            <div class="apparel-card" onclick="playClick()">
-                <img src="images/apparel_front.jpg" alt="Nutrition Facts Design">
-                <div style="text-align:left; border-top:1px solid #f0f0f0; padding-top:15px;">
-                    <h4 style="margin:0; color:var(--sazon-navy);">"Sazon Recipe" Tee</h4>
-                    <p style="color:var(--sazon-gold); font-size:0.7rem; font-weight:600; margin-top:5px; text-transform:uppercase;">Luminous Blue Edition</p>
-                </div>
-            </div>
-            <div class="apparel-card" onclick="playClick()">
-                <img src="images/apparel_back.jpg" alt="Legacy Tree Design">
-                <div style="text-align:left; border-top:1px solid #f0f0f0; padding-top:15px;">
-                    <h4 style="margin:0; color:var(--sazon-navy);">Legacy Branch Hoodie</h4>
-                    <p style="color:var(--sazon-gold); font-size:0.7rem; font-weight:600; margin-top:5px; text-transform:uppercase;">2027 Signature Series</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section class="access-section" id="register">
         <div class="access-grid">
             <div class="qr-card">
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://tinyurl.com/SazonGrandReunion" alt="Scan to Register">
                 <h3 style="margin-bottom:10px;">Scan to Register</h3>
-                <p style="font-size:0.75rem; color:#666;">Scan with your phone to access the official registry.</p>
+                <p style="font-size:0.75rem; color:#666;">Scan this code with your phone to access the official registry form.</p>
             </div>
             <div style="text-align:left;">
-                <h2 style="color:var(--sazon-navy); margin-bottom:20px;">Official Registration</h2>
-                <p style="line-height:1.8; font-size:0.9rem; margin-bottom:30px;">Secure your place at the 2027 Grand Reunion. Early registration helps our committee coordinate with Marzon Hotel for a seamless experience.</p>
+                <h2 style="color:var(--sazon-navy); margin-bottom:20px;">Secure Your Spot</h2>
+                <p style="line-height:1.8; font-size:0.9rem; margin-bottom:30px;">Registration is essential for coordination. Please use the button below or visit the TinyURL to confirm your attendance for the 2027 Grand Reunion.</p>
                 
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="btn-gold" onclick="playClick()">Open Google Form</a>
+                <a href="https://tinyurl.com/SazonGrandReunion" target="_blank" class="btn-gold" onclick="playClick()">Access Official Registry</a>
                 
-                <p style="margin-top:25px; font-size:0.7rem; color:#999; text-transform:uppercase; letter-spacing:2px;">Quick Link:</p>
+                <p style="margin-top:25px; font-size:0.7rem; color:#999; text-transform:uppercase; letter-spacing:2px;">Direct Shortcut:</p>
                 <a href="https://tinyurl.com/SazonGrandReunion" target="_blank" style="color:var(--sazon-gold); text-decoration:none; font-weight:700; font-size:0.8rem;" onclick="playClick()">tinyurl.com/SazonGrandReunion</a>
             </div>
         </div>
     </section>
 
-    <section class="email-banner">
-        <p style="text-transform:uppercase; letter-spacing:3px; font-size:0.7rem; margin-bottom:20px;">For Photo Submissions & Inquiries</p>
+    <section class="email-banner" id="contact">
+        <p style="text-transform:uppercase; letter-spacing:3px; font-size:0.7rem; margin-bottom:20px;">Photos & Submissions</p>
         <a href="mailto:maemiliapalma@yahoo.com" class="email-link" onclick="playClick()">maemiliapalma@yahoo.com</a>
     </section>
 
