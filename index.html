@@ -42,28 +42,28 @@
         .timer-val { font-size: clamp(1.8rem, 4vw, 3rem); color: var(--sazon-gold); font-weight: 700; display: block; }
         .timer-label { font-size: 0.55rem; text-transform: uppercase; color: #fff; letter-spacing: 2px; }
 
-        /* THE LEGACY TREE ENGINE */
+        /* LEGACY TREE */
         .section { padding: 100px 20px; text-align: center; }
         .white-bg { background: #fff; color: #333; }
         .patriarch-box { max-width: 800px; margin: 0 auto 60px; padding: 40px; border: 1px solid var(--sazon-gold); position: relative; }
         .p-name { font-size: clamp(1.5rem, 4vw, 2.5rem); color: var(--sazon-navy); margin: 0; }
         .tree-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1400px; margin: 0 auto; }
-        .branch-card { background: #fff; border: 1px solid #f0f0f0; border-top: 4px solid var(--sazon-gold); padding: 25px 15px; cursor: pointer; transition: 0.4s; flex: 1 1 220px; max-width: 260px; position: relative; }
+        .branch-card { background: #fff; border: 1px solid #f0f0f0; border-top: 4px solid var(--sazon-gold); padding: 25px 15px; cursor: pointer; transition: 0.4s; flex: 1 1 220px; max-width: 260px; }
         .branch-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
         .branch-card.active { border-color: var(--sazon-navy); background: #fdfdfd; }
-        .nickname { font-size: 0.6rem; color: var(--sazon-gold); text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 5px; }
-        .descendants-list { max-height: 0; overflow: hidden; transition: max-height 0.6s ease-out; text-align: left; font-size: 0.85rem; line-height: 1.6; }
+        .descendants-list { max-height: 0; overflow: hidden; transition: max-height 0.6s ease-out; text-align: left; font-size: 0.85rem; }
         .branch-card.active .descendants-list { max-height: 800px; margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px; }
 
-        /* PHOTO SUBMISSION BANNER */
-        .photo-banner { background: var(--sazon-navy); color: #fff; padding: 60px 20px; border-top: 5px solid var(--sazon-gold); }
-        .email-link { color: var(--sazon-gold); font-weight: 700; text-decoration: none; font-size: clamp(1.2rem, 3vw, 1.8rem); transition: 0.3s; }
-        .email-link:hover { letter-spacing: 1px; color: #fff; }
+        /* PHOTO BANNER (RE-LOCKED) */
+        .photo-banner { background: var(--sazon-navy); color: #fff; padding: 80px 20px; border-top: 5px solid var(--sazon-gold); border-bottom: 5px solid var(--sazon-gold); }
+        .email-link { color: var(--sazon-gold); font-weight: 700; text-decoration: none; font-size: clamp(1.2rem, 4vw, 2.2rem); transition: 0.3s; display: block; margin-top: 15px; }
+        .email-link:hover { color: #fff; transform: scale(1.05); }
 
-        /* APPAREL */
-        .apparel-grid { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; }
-        .apparel-card { background: #fff; padding: 20px; border: 1px solid #eee; width: 400px; }
-        .apparel-card img { width: 100%; height: auto; }
+        /* APPAREL SWAP MODE */
+        .apparel-grid { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; max-width: 1200px; margin: 0 auto; }
+        .apparel-card { background: #fff; padding: 25px; border: 1px solid #eee; flex: 1 1 450px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .apparel-card img { width: 100%; height: auto; margin-bottom: 20px; border: 1px solid #f4f4f4; }
+        .apparel-label { color: var(--sazon-navy); font-size: 0.9rem; font-weight: 700; text-transform: uppercase; border-left: 3px solid var(--sazon-gold); padding-left: 10px; }
 
         .audio-ui { position: fixed; bottom: 30px; right: 30px; z-index: 1000; background: rgba(0,0,0,0.6); border: 1px solid var(--sazon-gold); padding: 12px; border-radius: 50%; cursor: pointer; opacity: 0; }
         .active-ui.audio-ui { opacity: 1; }
@@ -87,7 +87,7 @@
             <a href="#home">Home</a>
             <a href="#tree">Legacy</a>
             <a href="#apparel">Apparel</a>
-            <a href="#register">Register</a>
+            <a href="#photos">Archive</a>
         </div>
     </nav>
 
@@ -110,32 +110,31 @@
 
     <section class="section white-bg" id="tree">
         <div class="patriarch-box">
-            <span style="color:var(--sazon-gold); text-transform:uppercase; letter-spacing:5px; font-size:0.6rem;">The Foundation</span>
+            <span style="color:var(--sazon-gold); text-transform:uppercase; letter-spacing:5px; font-size:0.6rem;">Founding Legacy</span>
             <h2 class="p-name">Tereso & Teofista Sazon</h2>
-            <p style="font-size:0.8rem; opacity:0.7;">13 Branches • One Legacy</p>
+            <p style="font-size:0.8rem; opacity:0.7; text-transform:uppercase; letter-spacing:2px;">The 13 Branches</p>
         </div>
-        <div class="tree-grid" id="tree-engine">
-            </div>
+        <div class="tree-grid" id="tree-engine"></div>
     </section>
 
     <section class="photo-banner" id="photos">
-        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-            <h4 style="text-transform:uppercase; letter-spacing:4px; font-size:0.7rem; margin-bottom:20px;">Digital Legacy Archive</h4>
-            <p style="opacity:0.8; margin-bottom:30px;">To preserve our history, please send high-quality family photos to:</p>
+        <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+            <h4 style="text-transform:uppercase; letter-spacing:6px; font-size:0.8rem; margin-bottom:10px;">The Digital Legacy Archive</h4>
+            <p style="opacity:0.8; font-size:0.9rem;">Submit high-resolution photos for the Grand 2027 Gallery:</p>
             <a href="mailto:maemiliapalma@yahoo.com" class="email-link">maemiliapalma@yahoo.com</a>
         </div>
     </section>
 
-    <section class="section white-bg" id="apparel" style="background:#f9f9f9;">
-        <h2 style="color:var(--sazon-navy); margin-bottom:40px;">Official Apparel</h2>
+    <section class="section white-bg" id="apparel" style="background:#f4f4f4;">
+        <h2 style="color:var(--sazon-navy); margin-bottom:50px;">Official Apparel</h2>
         <div class="apparel-grid">
             <div class="apparel-card">
-                <img src="images/apparel_front.jpg" alt="Front" onerror="this.src='https://via.placeholder.com/400x500?text=Nutrition+Facts'">
-                <h4 style="color:var(--sazon-navy)">T-Shirt Front</h4>
+                <img src="images/apparel_front.jpg" alt="Logo Tree" onerror="this.src='https://via.placeholder.com/600x700?text=Sazon+Tree+Logo'">
+                <div class="apparel-label">T-SHIRT BACK</div>
             </div>
             <div class="apparel-card">
-                <img src="images/apparel_back.jpg" alt="Back" onerror="this.src='https://via.placeholder.com/400x500?text=Sazon+Tree+Logo'">
-                <h4 style="color:var(--sazon-navy)">T-Shirt Back</h4>
+                <img src="images/apparel_back.jpg" alt="Nutrition Facts" onerror="this.src='https://via.placeholder.com/600x700?text=Nutrition+Facts+Front'">
+                <div class="apparel-label">T-SHIRT/HOODIE FRONT</div>
             </div>
         </div>
     </section>
@@ -144,39 +143,15 @@
     <audio id="sfx-jingle" src="audio/jingle.mp3" loop></audio>
 
     <script>
-        /* AUTOMATED BRANCH DATA - Edit names here for bulk update */
-        const branches = [
-            { name: "Serafin", nick: "Lolo Apin", children: "Coming Soon..." },
-            { name: "Monserat", nick: "Lola Monching", children: "Coming Soon..." },
-            { name: "Felomina", nick: "Lola Mening", children: "Coming Soon..." },
-            { name: "Estrella", nick: "Lola Estring", children: "Coming Soon..." },
-            { name: "Gregorio", nick: "Lolo Gorio", children: "Coming Soon..." },
-            { name: "Regino", nick: "Lolo Taba", children: "Coming Soon..." },
-            { name: "Maria", nick: "Lola Maria", children: "Coming Soon..." },
-            { name: "Concepcion", nick: "Lola Moret", children: "Coming Soon..." },
-            { name: "Cezar", nick: "Lolo Cezar", children: "Coming Soon..." },
-            { name: "Priscilla", nick: "Lola Mamay", children: "Coming Soon..." },
-            { name: "Gloria", nick: "Lola Goly", children: "Coming Soon..." },
-            { name: "Reynaldo", nick: "Lolo Lope", children: "Coming Soon..." },
-            { name: "Nilda", nick: "Lola Nilda", children: "Coming Soon..." }
-        ];
-
+        const branches = ["Serafin", "Monserat", "Felomina", "Estrella", "Gregorio", "Regino", "Maria", "Concepcion", "Cezar", "Priscilla", "Gloria", "Reynaldo", "Nilda"];
+        
         function initTree() {
             const container = document.getElementById('tree-engine');
-            branches.forEach(b => {
+            branches.forEach(name => {
                 const card = document.createElement('div');
                 card.className = 'branch-card';
-                card.innerHTML = `
-                    <span class="nickname">${b.nick}</span>
-                    <h3 class="branch-name" style="margin:0; color:var(--sazon-navy);">${b.name}</h3>
-                    <div class="descendants-list">
-                        <b>Descendants:</b><br>${b.children}
-                    </div>
-                `;
-                card.onclick = () => {
-                    document.querySelectorAll('.branch-card').forEach(c => { if(c !== card) c.classList.remove('active'); });
-                    card.classList.toggle('active');
-                };
+                card.innerHTML = `<span style="font-size:0.6rem; color:var(--sazon-gold); text-transform:uppercase;">Branch</span><h3 class="branch-name" style="margin:0; color:var(--sazon-navy);">${name}</h3><div class="descendants-list"><b>Descendants Data:</b><br>Automated fill pending...</div>`;
+                card.onclick = () => { card.classList.toggle('active'); };
                 container.appendChild(card);
             });
         }
