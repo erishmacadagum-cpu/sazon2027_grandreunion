@@ -14,7 +14,7 @@
 
         h1, h2, h3, h4, .gold-letter, .branch-name, .p-name, .nav-links a { font-family: 'Cinzel', serif !important; letter-spacing: 2px; }
 
-        /* ENTRANCE */
+        /* ENTRANCE CONTROL */
         #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 100000; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: opacity 1.5s; }
         .tap-box { padding: 20px 40px; border: 1px solid var(--sazon-gold); letter-spacing: 8px; text-transform: uppercase; font-size: 0.7rem; text-align: center; background: rgba(197, 160, 89, 0.05); }
 
@@ -48,50 +48,49 @@
         .header-sub { text-transform: uppercase; letter-spacing: 5px; font-size: 0.7rem; color: var(--sazon-gold); display: block; margin-bottom: 50px; }
         .white-bg { background: #fff; color: #333; }
 
-        /* INTERACTIVE FAMILY TREE GRID */
+        /* BALANCED FAMILY TREE GRID (5-5-3) */
         .patriarch-box { max-width: 800px; margin: 0 auto 60px; padding: 40px; border: 1px solid var(--sazon-gold); background: #fff; }
         .p-name { font-size: clamp(1.8rem, 5vw, 2.5rem); color: var(--sazon-navy); margin: 0; }
-
-        .tree-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; max-width: 1300px; margin: 0 auto; }
-        .branch-card { background: #fff; border: 1px solid #f0f0f0; border-top: 4px solid var(--sazon-gold); padding: 30px 20px; cursor: pointer; transition: 0.3s; position: relative; overflow: hidden; }
+        
+        .tree-tier { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-bottom: 20px; max-width: 1400px; margin-left: auto; margin-right: auto; }
+        .branch-card { background: #fff; border: 1px solid #f0f0f0; border-top: 4px solid var(--sazon-gold); padding: 25px 15px; cursor: pointer; transition: 0.3s; flex: 1 1 calc(18% - 20px); min-width: 220px; max-width: 260px; text-align: center; }
         .branch-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        .branch-card.active { border-color: var(--sazon-navy); background: #fdfdfd; }
+        .branch-card.active { border-color: var(--sazon-navy); }
 
         .nickname-tag { font-size: 0.6rem; color: var(--sazon-gold); text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 8px; }
-        .branch-name { font-size: 1.3rem; color: var(--sazon-navy); margin: 0; }
-        
-        .descendants-list { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; text-align: left; margin-top: 0; }
-        .branch-card.active .descendants-list { max-height: 500px; margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px; }
-        
-        .descendant-item { font-size: 0.85rem; color: #555; padding: 5px 0; display: block; border-left: 2px solid var(--sazon-gold); padding-left: 10px; margin-bottom: 5px; }
-        .placeholder-text { font-style: italic; color: #aaa; font-size: 0.75rem; letter-spacing: 1px; }
+        .branch-name { font-size: 1.1rem; color: var(--sazon-navy); margin: 0; }
+        .descendants-list { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; text-align: left; }
+        .branch-card.active .descendants-list { max-height: 300px; margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px; }
+        .placeholder-text { font-style: italic; color: #aaa; font-size: 0.7rem; }
 
-        /* LYRICS */
-        .lyrics-box { max-width: 800px; margin: 0 auto; background: var(--glass); padding: 40px; border: 1px solid var(--sazon-gold); color: #fff; text-align: left; }
-        .lyrics-stamp { font-weight: 600; color: var(--sazon-gold); }
-        .lyrics-txt { font-weight: 300; font-size: 0.9rem; line-height: 1.8; margin-top: 10px; }
+        /* LYRICS SECTION */
+        .lyrics-box { max-width: 850px; margin: 0 auto; background: var(--glass); padding: 50px; border: 1px solid var(--sazon-gold); color: #fff; text-align: left; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+        .lyrics-stamp { font-weight: 700; color: var(--sazon-gold); font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; display: block; margin-top: 25px; border-left: 3px solid var(--sazon-gold); padding-left: 15px; }
+        .lyrics-txt { font-weight: 300; font-size: 1rem; line-height: 1.8; margin-top: 12px; font-style: italic; color: #e0e0e0; }
 
         /* APPAREL */
         .apparel-grid { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; max-width: 1200px; margin: 0 auto; }
-        .apparel-card { background: #fff; padding: 25px; border: 1px solid #eee; flex: 1 1 350px; max-width: 450px; cursor: pointer; transition: 0.5s; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .apparel-card:hover { border-color: var(--sazon-gold); transform: translateY(-5px); }
+        .apparel-card { background: #fff; padding: 25px; border: 1px solid #eee; flex: 1 1 350px; max-width: 450px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         .apparel-card img { width: 100%; height: auto; margin-bottom: 20px; }
 
         /* REGISTRY */
         .access-section { background: #f9f9f9; padding: 100px 20px; color: #333; }
-        .access-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px; max-width: 1100px; margin: 0 auto; align-items: flex-start; }
-        .qr-card { background: #fff; padding: 40px; border: 1px solid #ddd; text-align: center; transition: 0.4s; }
-        .qr-card img { width: 220px; height: 220px; margin-bottom: 20px; padding: 10px; }
-        .btn-gold { display: inline-block; background: var(--sazon-navy); color: #fff; padding: 20px 40px; text-decoration: none; font-weight: 700; letter-spacing: 3px; font-size: 0.7rem; text-transform: uppercase; border: 1px solid transparent; transition: 0.3s; margin-top: 20px; }
+        .access-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px; max-width: 1100px; margin: 0 auto; }
+        .qr-card { background: #fff; padding: 40px; border: 1px solid #ddd; text-align: center; }
+        .qr-card img { width: 200px; height: 200px; margin-bottom: 20px; }
+        .btn-gold { display: inline-block; background: var(--sazon-navy); color: #fff; padding: 20px 40px; text-decoration: none; font-weight: 700; letter-spacing: 3px; font-size: 0.7rem; text-transform: uppercase; margin-top: 20px; }
 
-        /* FOOTER (STRICT PHOTO SUBMISSION) */
+        /* FOOTER */
         .email-banner { background: var(--sazon-navy); color: #fff; padding: 80px 20px; text-align: center; border-top: 4px solid var(--sazon-gold); }
-        .email-link { color: var(--sazon-gold); text-decoration: none; font-size: 1.5rem; transition: 0.3s; }
+        .email-link { color: var(--sazon-gold); text-decoration: none; font-size: 1.5rem; }
 
         .audio-ui { position: fixed; bottom: 30px; right: 30px; z-index: 1000; background: rgba(0,0,0,0.6); border: 1px solid var(--sazon-gold); padding: 12px; border-radius: 50%; cursor: pointer; opacity: 0; transition: 1s; }
         .active-ui.audio-ui { opacity: 1; }
 
-        @media (max-width: 768px) { .nav-links { display: none; } }
+        @media (max-width: 768px) { 
+            .nav-links { display: none; }
+            .branch-card { flex: 1 1 100%; max-width: 100%; }
+        }
     </style>
 </head>
 <body>
@@ -105,7 +104,7 @@
         <div class="nav-links">
             <a href="#home">Home</a>
             <a href="#tree">Legacy Tree</a>
-            <a href="#apparel">Apparel</a>
+            <a href="#lyrics">Lyrics</a>
             <a href="#register">Register</a>
         </div>
     </nav>
@@ -132,55 +131,44 @@
         <h2 class="header-title">The Sazon Legacy Tree</h2>
         <div class="patriarch-box">
             <h2 class="p-name">Tereso & Teofista Sazon</h2>
-            <p style="text-transform:uppercase; letter-spacing:4px; font-size:0.65rem; color:var(--sazon-gold); margin-top:10px;">The Founding Patriarch & Matriarch</p>
+            <p style="text-transform:uppercase; letter-spacing:4px; font-size:0.65rem; color:var(--sazon-gold); margin-top:10px;">Founding Patriarch & Matriarch</p>
         </div>
 
-        <div class="tree-grid">
-            <div class="branch-card" onclick="toggleBranch(this)">
-                <span class="nickname-tag">Lolo Apin</span>
-                <h3 class="branch-name">Serafin</h3>
-                <div class="descendants-list">
-                    <span class="placeholder-text">Tracing descendants...</span>
-                </div>
-            </div>
-
-            <div class="branch-card" onclick="toggleBranch(this)">
-                <span class="nickname-tag">Lola Monching</span>
-                <h3 class="branch-name">Monserat</h3>
-                <div class="descendants-list">
-                    <span class="placeholder-text">Tracing descendants...</span>
-                </div>
-            </div>
-
-            <div class="branch-card" onclick="toggleBranch(this)">
-                <span class="nickname-tag">Lola Mening</span>
-                <h3 class="branch-name">Felomina</h3>
-                <div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div>
-            </div>
-
+        <div class="tree-tier">
+            <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lolo Apin</span><h3 class="branch-name">Serafin</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
+            <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lola Monching</span><h3 class="branch-name">Monserat</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
+            <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lola Mening</span><h3 class="branch-name">Felomina</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
             <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lola Estring</span><h3 class="branch-name">Estrella</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
             <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lolo Gorio</span><h3 class="branch-name">Gregorio</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
+        </div>
+
+        <div class="tree-tier">
             <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lolo Taba</span><h3 class="branch-name">Regino</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
             <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lola Maria</span><h3 class="branch-name">Maria</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
             <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lola Moret</span><h3 class="branch-name">Concepcion</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
             <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lolo Cezar</span><h3 class="branch-name">Cezar</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
             <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lola Mamay</span><h3 class="branch-name">Priscilla</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
+        </div>
+
+        <div class="tree-tier">
             <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lola Goly</span><h3 class="branch-name">Gloria</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
             <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lolo Lope</span><h3 class="branch-name">Reynaldo</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
             <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lola Nilda</span><h3 class="branch-name">Nilda</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
         </div>
-        
-        <p style="margin-top:50px; font-size:0.7rem; color:#888; text-transform:uppercase; letter-spacing:2px;">Tap a branch to view descendants</p>
     </section>
 
     <section class="section" id="lyrics" style="background:linear-gradient(#000, #001a4d);">
-        <span class="header-sub">The Teaser</span>
+        <span class="header-sub">The Anthem</span>
         <h2 class="header-title" style="color:white;">Lyrics of Our Legacy</h2>
         <div class="lyrics-box">
-            <div class="lyrics-stamp">(0:00-0:15) Intro - Miles Unfolding</div>
-            <div class="lyrics-txt">"Miles unfolding, ink on the page,<br>A story rewritten, turning the age.<br>July 2027, the compass aligns,<br>Marzon Hotel, Kalibo, where the heritage shines."</div>
-            <div class="lyrics-stamp" style="margin-top:30px;">(0:15-0:25) Chorus - High Energy</div>
-            <div class="lyrics-txt">"Gikan sa gamut, tubtob sa langit,<br>Seasoned with love, let the future ignite.<br>Sazon 2027, (Every path) leads us back to the gate."</div>
+            <span class="lyrics-stamp">(0:00-0:15) Intro - Miles Unfolding</span>
+            <p class="lyrics-txt">"Miles unfolding, ink on the page,<br>A story rewritten, turning the age.<br>July 2027, the compass aligns,<br>Marzon Hotel, Kalibo, where the heritage shines."</p>
+
+            <span class="lyrics-stamp">(0:15-0:25) Chorus - High Energy</span>
+            <p class="lyrics-txt">"Gikan sa gamut, tubtob sa langit,<br>Seasoned with love, let the future ignite.<br>Sazon 2027, (Every path) leads us back to the gate."</p>
+
+            <span class="lyrics-stamp">(0:25-0:30) Outro</span>
+            <p class="lyrics-txt">"We are Sazon. See you in Kalibo!"</p>
         </div>
     </section>
 
@@ -188,25 +176,19 @@
         <span class="header-sub">Commemorative Gear</span>
         <h2 class="header-title">Official Apparel</h2>
         <div class="apparel-grid">
-            <div class="apparel-card" onclick="playClick()"><img src="images/apparel_front.jpg" alt="Front"><h4>"Sazon Recipe" Tee</h4></div>
-            <div class="apparel-card" onclick="playClick()"><img src="images/apparel_back.jpg" alt="Back"><h4>Legacy Branch Hoodie</h4></div>
+            <div class="apparel-card"><img src="images/apparel_front.jpg" alt="Front"><h4>"Sazon Recipe" Tee</h4></div>
+            <div class="apparel-card"><img src="images/apparel_back.jpg" alt="Back"><h4>Legacy Branch Hoodie</h4></div>
         </div>
     </section>
 
     <section class="access-section" id="register">
         <div class="access-grid">
-            <div class="qr-card">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" alt="Register QR">
-                <h3>Registry QR</h3>
-            </div>
-            <div class="qr-card">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://tinyurl.com/SazonGrandReunion" alt="Share QR">
-                <h3>Share Hub QR</h3>
-            </div>
+            <div class="qr-card"><img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" alt="Reg QR"><h3>Registry QR</h3></div>
+            <div class="qr-card"><img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://tinyurl.com/SazonGrandReunion" alt="Share QR"><h3>Share Hub QR</h3></div>
             <div style="text-align:left;">
                 <h2 style="color:var(--sazon-navy); margin-bottom:20px;">Access Panel</h2>
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="btn-gold" onclick="playClick()">Open Google Registry</a>
-                <p style="margin-top:25px; font-size:0.7rem; color:#999; text-transform:uppercase;">Shortcut: tinyurl.com/SazonGrandReunion</p>
+                <p style="margin-top:20px; font-size:0.7rem; color:#999;">Shortcut: tinyurl.com/SazonGrandReunion</p>
             </div>
         </div>
     </section>
@@ -214,7 +196,7 @@
     <section class="email-banner" id="contact">
         <p style="text-transform:uppercase; letter-spacing:3px; font-size:0.7rem; margin-bottom:20px;">For Photo Submissions Only</p>
         <a href="mailto:maemiliapalma@yahoo.com" class="email-link" onclick="playClick()">maemiliapalma@yahoo.com</a>
-        <p style="font-size:0.6rem; color:var(--sazon-gold); margin-top:20px; letter-spacing:2px;">Help us grow the Family Tree — send branch photos here.</p>
+        <p style="font-size:0.6rem; color:var(--sazon-gold); margin-top:20px; letter-spacing:2px;">Help build the Legacy Tree — send photos to the archive.</p>
     </section>
 
     <div class="audio-ui" id="audio-btn" onclick="toggleMute()"><span id="audio-icon" style="color:var(--sazon-gold); font-size:1.2rem;">🔊</span></div>
@@ -236,11 +218,7 @@
         setInterval(updateTimer, 1000); updateTimer();
 
         function playClick() { document.getElementById('sfx-click').currentTime = 0; document.getElementById('sfx-click').play().catch(e => {}); }
-
-        function toggleBranch(element) {
-            playClick();
-            element.classList.toggle('active');
-        }
+        function toggleBranch(element) { playClick(); element.classList.toggle('active'); }
 
         function launchHub() {
             document.getElementById('sfx-open').play().catch(e => {});
