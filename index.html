@@ -4,231 +4,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAZON 2027 | The Grand Family Legacy</title>
-    
     <link rel="icon" type="image/png" href="images/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
-    
     <style>
         :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; }
         body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; scroll-behavior: smooth; }
-        h1, h2, h3, h4, .gold-letter, .branch-name, .p-name, .nav-links a { font-family: 'Cinzel', serif !important; letter-spacing: 2px; }
-
-        /* RAPID OVERLAY SYSTEM */
-        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 100000; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: opacity 1s; text-align: center;}
-        .credits-text { color: var(--sazon-gold); font-size: clamp(0.7rem, 2vw, 1.2rem); text-transform: uppercase; letter-spacing: 5px; margin: 3px; opacity: 0; transform: translateY(10px); transition: 0.8s; }
-        .reveal { opacity: 1; transform: translateY(0); }
-        .tap-box { padding: 15px 35px; border: 1px solid var(--sazon-gold); letter-spacing: 6px; text-transform: uppercase; font-size: 0.7rem; color: #fff; opacity: 0; transition: 1s; margin-top: 30px; }
-        .tap-reveal { opacity: 1; }
-
-        /* NAVIGATION */
-        #main-nav { position: fixed; top: 0; width: 100%; height: 70px; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); z-index: 999; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; border-bottom: 1px solid rgba(197,160,89,0.2); box-sizing: border-box; transform: translateY(-100%); transition: 1s; }
-        #main-nav.active { transform: translateY(0); }
-        .nav-links a { color: #fff; text-decoration: none; font-size: 0.65rem; text-transform: uppercase; margin-left: 20px; opacity: 0.7; transition: 0.3s; }
-        .nav-links a:hover { color: var(--sazon-gold); opacity: 1; }
-
-        /* HERO & TIMER */
-        .stage { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: hidden; }
-        .cinematic-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,26,77,0.8), transparent 50%, #000 100%), url('images/banner.jpg') center/cover no-repeat; z-index: 1; transition: 15s; background-color: #001a4d;}
-        .bg-active { transform: scale(1.1); }
-        .soon-container { position: relative; z-index: 10; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 2s; }
-        .active-ui.soon-container { opacity: 1; }
-        .gold-letter { font-size: clamp(3rem, 15vw, 10rem); background: linear-gradient(135deg, #fff 20%, var(--sazon-gold) 50%, #fff 80%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 6s linear infinite; }
-        @keyframes shine { to { background-position: 200% center; } }
-        .logo-circle-o { width: clamp(2.5rem, 12vw, 8.5rem); height: clamp(2.5rem, 12vw, 8.5rem); margin: 0 5px; border-radius: 50%; border: 1.5px solid var(--sazon-gold); background: #000; overflow: hidden; position: relative; }
-        .logo-circle-o img { width: 100%; height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-
-        .timer-wrapper { position: relative; z-index: 10; background: rgba(0,0,0,0.5); backdrop-filter: blur(12px); border: 1px solid rgba(197, 160, 89, 0.4); padding: 20px 40px; opacity: 0; transition: 1.5s 1s; margin-top: 30px; }
-        .timer-container { display: flex; gap: 20px; }
-
-        /* SECTIONS */
-        .section { padding: 100px 20px; text-align: center; }
-        .white-bg { background: #fff; color: #333; }
-        .navy-bg { background: var(--sazon-navy); color: #fff; }
-
-        /* JINGLE BOX */
-        .jingle-box { max-width: 800px; margin: 0 auto; border-left: 1px solid var(--sazon-gold); border-right: 1px solid var(--sazon-gold); padding: 40px; }
-        .lyrics-text { font-style: italic; color: #fff; line-height: 2; font-size: 1.1rem; }
-        .chorus { color: var(--sazon-gold); font-weight: 600; margin: 20px 0; }
-
-        /* TREE GRID */
-        .tree-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; max-width: 1200px; margin: 0 auto; }
-        .branch-card { background: #fff; border: 1px solid #eee; border-top: 4px solid var(--sazon-gold); padding: 20px; flex: 1 1 200px; max-width: 240px; text-align: center; }
-        .nickname { color: var(--sazon-gold); font-size: 0.7rem; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 5px; }
-
-        /* TRAVEL HUB */
-        .venue-grid { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; max-width: 1200px; margin: 40px auto; }
-        .map-box { flex: 1 1 400px; height: 350px; border: 2px solid var(--sazon-gold); }
-        .qr-card { background: #fff; padding: 20px; border-radius: 5px; display: inline-block; margin: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); color: #333; }
-        
-        /* APPAREL (Corrected Labels) */
-        .apparel-grid { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
-        .apparel-card { background: #fff; padding: 20px; width: 350px; border: 1px solid #eee; }
-        .apparel-label { color: var(--sazon-navy); font-weight: 700; font-size: 0.75rem; margin-top: 15px; border-left: 3px solid var(--sazon-gold); padding-left: 10px; text-align: left; text-transform: uppercase; }
-
-        .audio-ui { position: fixed; bottom: 30px; right: 30px; z-index: 1000; background: rgba(0,0,0,0.6); border: 1px solid var(--sazon-gold); padding: 12px; border-radius: 50%; cursor: pointer; opacity: 0; }
-        .active-ui.audio-ui { opacity: 1; }
+        .gold-txt { color: var(--sazon-gold); }
+        /* INTRO OVERLAY */
+        #overlay { position: fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:9999; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer; transition: opacity 1.5s; }
+        .credit { font-family:'Cinzel'; color:var(--sazon-gold); font-size:1.5rem; letter-spacing:8px; opacity:0; transform:translateY(20px); transition:0.8s; margin:10px 0; }
+        .reveal { opacity:1; transform:translateY(0); }
+        /* HERO */
+        .stage { height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; position:relative; background: linear-gradient(to bottom, rgba(0,26,77,0.7), #000); }
+        .timer-box { background:rgba(0,0,0,0.6); backdrop-filter:blur(10px); padding:30px; border:1px solid var(--sazon-gold); display:flex; gap:20px; }
+        /* CONTENT */
+        .section { padding:100px 20px; text-align:center; }
+        .tree-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:20px; max-width:1200px; margin:50px auto; }
+        .branch-card { background:#fff; color:#333; padding:20px; border-top:4px solid var(--sazon-gold); }
+        .apparel-grid { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; }
+        .apparel-card { width:350px; background:#fff; padding:20px; color:#333; }
+        .nav { position:fixed; top:0; width:100%; background:rgba(0,0,0,0.9); padding:20px; z-index:1000; text-align:center; transform:translateY(-100%); transition:1s; }
+        .nav.active { transform:translateY(0); }
     </style>
 </head>
-<body onload="startCredits()">
-
-    <div id="overlay" onclick="launchHub()">
-        <div class="salvo-container">
-            <h4 class="credits-text" id="creds-1">Sazon Production</h4>
-            <h4 class="credits-text" id="creds-2">Marzon Hotel Kalibo</h4>
-            <h4 class="credits-text" id="creds-3">Aklan</h4>
-            <h4 class="credits-text" id="creds-4" style="border-top: 1px solid var(--sazon-gold); padding-top: 10px;">July 2027</h4>
-        </div>
-        <div class="tap-box" id="tap-to-reveal">TAP TO ENTER</div>
+<body onload="init()">
+    <div id="overlay" onclick="enter()">
+        <h1 class="credit" id="c1">SAZON PRODUCTION</h1>
+        <h1 class="credit" id="c2">MARZON HOTEL KALIBO</h1>
+        <h1 class="credit" id="c3">JULY 2027</h1>
+        <div class="credit" id="c4" style="border:1px solid var(--sazon-gold); padding:10px 30px;">TAP TO ENTER</div>
     </div>
 
-    <nav id="main-nav">
-        <img src="images/logo.png" height="30" onerror="this.style.display='none'">
-        <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#lyrics">Jingle</a>
-            <a href="#tree">Legacy</a>
-            <a href="#venue">Venue</a>
-            <a href="#apparel">Apparel</a>
-        </div>
+    <nav class="nav" id="nav">
+        <a href="#tree" style="color:white; margin:0 20px; text-decoration:none;">LEGACY</a>
+        <a href="#venue" style="color:white; margin:0 20px; text-decoration:none;">VENUE</a>
+        <a href="#apparel" style="color:white; margin:0 20px; text-decoration:none;">APPAREL</a>
     </nav>
 
-    <div class="stage" id="home">
-        <div class="cinematic-bg" id="bg"></div>
-        <div class="soon-container" id="soon-ui">
-            <span class="gold-letter">S</span><span class="gold-letter">O</span>
-            <div class="logo-circle-o"><img src="images/logo.png" alt="O" onerror="this.style.display='none'"></div>
-            <span class="gold-letter">N</span>
-        </div>
-        <div class="timer-wrapper" id="timer-ui">
-            <div class="timer-container" id="countdown"></div>
-        </div>
-    </div>
-
-    <section class="section" id="lyrics" style="background:#000;">
-        <div class="jingle-box">
-            <div class="lyrics-text">
-                "Miles unfolding, ink on the page,<br>
-                A story rewritten, turning the age.<br>
-                July 2027, the compass aligns,<br>
-                Marzon Hotel, Kalibo, where the heritage shines."<br>
-                <div class="chorus">
-                    "Gikan sa gamut, tubtob sa langit,<br>
-                    Seasoned with love, let the future ignite.<br>
-                    Sazon 2027, (Every path) leads us back to the gate."
-                </div>
-                "We are Sazon. See you in Kalibo!"
-            </div>
-        </div>
+    <section class="stage" id="home">
+        <h1 style="font-family:'Cinzel'; font-size:5rem;">SAZON</h1>
+        <div class="timer-box" id="timer"></div>
     </section>
 
-    <section class="section white-bg" id="tree">
-        <h2 class="p-name" style="margin-bottom:10px;">Tereso & Teofista Sazon</h2>
-        <p style="color:var(--sazon-gold); letter-spacing:3px; font-size:0.7rem; margin-bottom:50px;">THE 13 BRANCHES</p>
-        <div class="tree-grid" id="tree-engine"></div>
+    <section class="section" id="tree">
+        <h2>THE 13 BRANCHES</h2>
+        <div class="tree-grid" id="grid"></div>
     </section>
 
-    <section class="section navy-bg" id="venue">
-        <h2 style="color:var(--sazon-gold)">The Venue & Logistics</h2>
-        <div class="venue-grid">
-            <div style="flex:1 1 400px; text-align:left;">
-                <h3>Marzon Hotel Kalibo</h3>
-                <p>Jaime Cardinal Sin Avenue, Andagao, Kalibo, Aklan</p>
-                <p style="font-size:0.85rem; opacity:0.8;">Located near Kalibo International Airport. Nearby spots include Bakhawan Eco-Park and Gaisano Capital.</p>
-                <h4 style="margin-top:30px; color:var(--sazon-gold)">Travel Info</h4>
-                <p style="font-size:0.8rem;">Domestic flights from Manila (MNL) or Cebu (CEB) to Kalibo (KLO) are 1 hour.</p>
-            </div>
-            <div class="map-box">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3905.123456789!2d122.366!3d11.708!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDQyJzI4LjgiTiAxMjLCsDIxJzU3LjYiRQ!5e0!3m2!1sen!2sph!4v1620000000000!5m2!1sen!2sph" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-        </div>
-    </section>
-
-    <section class="section white-bg" id="registration">
-        <h2>Join the Legacy</h2>
-        <div class="qr-card">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://tinyurl.com/SazonGrandReunion">
-            <p style="font-size:0.6rem; font-weight:700;">SHARE WEBSITE</p>
-        </div>
-        <div class="qr-card">
+    <section class="section" id="venue" style="background:var(--sazon-navy)">
+        <h2>VENUE: MARZON HOTEL KALIBO</h2>
+        <p>Aklan's Premier Heritage Destination</p>
+        <div class="qr-card" style="margin-top:40px; background:#fff; display:inline-block; padding:20px;">
             <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform">
-            <p style="font-size:0.6rem; font-weight:700;">SCAN TO REGISTER</p>
+            <p style="color:#000; font-size:0.7rem;">SCAN TO REGISTER</p>
         </div>
     </section>
 
-    <section class="section" id="apparel" style="background:#f4f4f4;">
-        <h2 style="color:var(--sazon-navy); margin-bottom:40px;">Official Apparel</h2>
+    <section class="section" id="apparel" style="background:#f4f4f4; color:#000;">
+        <h2>OFFICIAL APPAREL</h2>
         <div class="apparel-grid">
             <div class="apparel-card">
-                <img src="images/apparel_back.jpg" alt="Back" onerror="this.src='https://via.placeholder.com/400x500?text=Nutrition+Facts'">
-                <div class="apparel-label">T-SHIRT BACK (Nutrition Facts)</div>
+                <div style="height:300px; background:#ddd; margin-bottom:10px;"></div>
+                <div style="font-weight:700; border-left:4px solid var(--sazon-gold); padding-left:10px; text-align:left;">T-SHIRT BACK (NUTRITION FACTS)</div>
             </div>
             <div class="apparel-card">
-                <img src="images/apparel_front.jpg" alt="Front" onerror="this.src='https://via.placeholder.com/400x500?text=Logo+Tree'">
-                <div class="apparel-label">T-SHIRT / HOODIE FRONT (Logo Tree)</div>
+                <div style="height:300px; background:#ddd; margin-bottom:10px;"></div>
+                <div style="font-weight:700; border-left:4px solid var(--sazon-gold); padding-left:10px; text-align:left;">T-SHIRT/HOODIE FRONT (LOGO TREE)</div>
             </div>
         </div>
     </section>
 
-    <div class="audio-ui" id="audio-btn" onclick="toggleMute()">🔊</div>
-    <audio id="sfx-jingle" src="audio/jingle.mp3" loop></audio>
-
     <script>
-        const branches = [
-            {n: "Serafin", k: "Lolo Apin"}, {n: "Monserat", k: "Lola Monching"}, {n: "Felomina", k: "Lola Mening"},
-            {n: "Estrella", k: "Lola Estring"}, {n: "Gregorio", k: "Lolo Gorio"}, {n: "Regino", k: "Lolo Taba"},
-            {n: "Maria", k: "Lola Maria"}, {n: "Concepcion", k: "Lola Moret"}, {n: "Cezar", k: "Lolo Cezar"},
-            {n: "Priscilla", k: "Lola Mamay"}, {n: "Gloria", k: "Lola Goly"}, {n: "Reynaldo", k: "Lolo Lope"}, {n: "Nilda", k: "Lola Nilda"}
-        ];
-
-        function initTree() {
-            const container = document.getElementById('tree-engine');
-            branches.forEach(b => {
-                container.innerHTML += `<div class="branch-card"><span class="nickname">(${b.k})</span><h3 class="branch-name" style="margin:0; color:var(--sazon-navy);">${b.n}</h3></div>`;
-            });
+        function init() {
+            const branches = [
+                {n:"Serafin",k:"Lolo Apin"}, {n:"Monserat",k:"Lola Monching"}, {n:"Felomina",k:"Lola Mening"},
+                {n:"Estrella",k:"Lola Estring"}, {n:"Gregorio",k:"Lolo Gorio"}, {n:"Regino",k:"Lolo Taba"},
+                {n:"Maria",k:"Lola Maria"}, {n:"Concepcion",k:"Lola Moret"}, {n:"Cezar",k:"Lolo Cezar"},
+                {n:"Priscilla",k:"Lola Mamay"}, {n:"Gloria",k:"Lola Goly"}, {n:"Reynaldo",k:"Lolo Lope"}, {n:"Nilda",k:"Lola Nilda"}
+            ];
+            const g = document.getElementById('grid');
+            branches.forEach(b => g.innerHTML += `<div class="branch-card"><small style="color:var(--sazon-gold)">(${b.k})</small><h3>${b.n}</h3></div>`);
+            
+            setTimeout(() => document.getElementById('c1').classList.add('reveal'), 300);
+            setTimeout(() => document.getElementById('c2').classList.add('reveal'), 1100);
+            setTimeout(() => document.getElementById('c3').classList.add('reveal'), 1900);
+            setTimeout(() => document.getElementById('c4').classList.add('reveal'), 2700);
         }
-
-        function startCredits() {
-            initTree();
-            setTimeout(() => document.getElementById('creds-1').classList.add('reveal'), 300);
-            setTimeout(() => document.getElementById('creds-2').classList.add('reveal'), 700);
-            setTimeout(() => document.getElementById('creds-3').classList.add('reveal'), 1100);
-            setTimeout(() => document.getElementById('creds-4').classList.add('reveal'), 1500);
-            setTimeout(() => document.getElementById('tap-to-reveal').classList.add('tap-reveal'), 2200);
-        }
-
-        function launchHub() {
-            document.getElementById('sfx-jingle').play().catch(e => {});
+        function enter() {
             document.getElementById('overlay').style.opacity = '0';
-            setTimeout(() => { 
-                document.getElementById('overlay').style.display = 'none'; 
-                document.getElementById('main-nav').classList.add('active');
-                document.getElementById('bg').classList.add('bg-active');
-                document.getElementById('soon-ui').classList.add('active-ui');
-                document.getElementById('timer-ui').style.opacity = '1';
-                document.getElementById('audio-btn').classList.add('active-ui');
-            }, 800);
+            setTimeout(() => { document.getElementById('overlay').style.display='none'; document.getElementById('nav').classList.add('active'); }, 1000);
         }
-
-        function toggleMute() {
-            const j = document.getElementById('sfx-jingle');
-            j.muted = !j.muted;
-            document.getElementById('audio-btn').innerText = j.muted ? "🔇" : "🔊";
-        }
-
-        const target = new Date("July 23, 2027 00:00:00").getTime();
         setInterval(() => {
-            const now = new Date().getTime();
-            const diff = target - now;
-            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((diff % (1000 * 60)) / 1000);
-            document.getElementById('countdown').innerHTML = `
-                <div style="margin:0 10px;"><span style="font-size:2rem; color:var(--sazon-gold); font-weight:700;">${d}</span><br><small>DAYS</small></div>
-                <div style="margin:0 10px;"><span style="font-size:2rem; color:var(--sazon-gold); font-weight:700;">${h}</span><br><small>HRS</small></div>
-                <div style="margin:0 10px;"><span style="font-size:2rem; color:var(--sazon-gold); font-weight:700;">${m}</span><br><small>MIN</small></div>
-                <div style="margin:0 10px;"><span style="font-size:2rem; color:var(--sazon-gold); font-weight:700;">${s}</span><br><small>SEC</small></div>
-            `;
+            const d = new Date("July 23, 2027");
+            const diff = d - new Date();
+            document.getElementById('timer').innerHTML = `<div>${Math.floor(diff/86400000)}<br><small>DAYS</small></div><div>${Math.floor((diff%86400000)/3600000)}<br><small>HRS</small></div>`;
         }, 1000);
     </script>
 </body>
