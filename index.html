@@ -9,67 +9,64 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
     
     <style>
-        :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; }
+        :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; --sazon-blue: #007bff; }
         body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; scroll-behavior: smooth; }
         h1, h2, h3, h4, .gold-letter, .branch-name, .p-name, .nav-links a { font-family: 'Cinzel', serif !important; letter-spacing: 2px; }
 
         /* NAVIGATION */
         #main-nav { position: fixed; top: 0; width: 100%; height: 70px; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); z-index: 999; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; border-bottom: 1px solid rgba(197,160,89,0.2); box-sizing: border-box; transform: translateY(-100%); transition: 1s; }
         #main-nav.active { transform: translateY(0); }
-        .nav-links a { color: #fff; text-decoration: none; font-size: 0.65rem; text-transform: uppercase; margin-left: 25px; opacity: 0.7; transition: 0.3s; }
+        .nav-links a { color: #fff; text-decoration: none; font-size: 0.65rem; text-transform: uppercase; margin-left: 20px; opacity: 0.7; transition: 0.3s; }
         .nav-links a:hover { color: var(--sazon-gold); opacity: 1; }
 
-        /* RAPID OVERLAY */
-        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 100000; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: opacity 1s; text-align: center;}
+        /* OVERLAY SYSTEM */
+        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 100000; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; text-align: center;}
         .credits-text { color: var(--sazon-gold); font-size: clamp(0.7rem, 2vw, 1.2rem); text-transform: uppercase; letter-spacing: 5px; margin: 3px; opacity: 0; transform: translateY(10px); transition: 0.8s; }
         .reveal { opacity: 1; transform: translateY(0); }
         .tap-box { padding: 15px 35px; border: 1px solid var(--sazon-gold); letter-spacing: 6px; text-transform: uppercase; font-size: 0.7rem; color: #fff; opacity: 0; transition: 1s; margin-top: 30px; }
         .tap-reveal { opacity: 1; }
 
-        /* HERO & TIMER */
+        /* HERO */
         .stage { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: hidden; }
-        .cinematic-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,26,77,0.8), transparent 50%, #000 100%), url('images/banner.jpg') center/cover no-repeat; z-index: 1; transition: 15s ease-out; background-color: #001a4d;}
+        .cinematic-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,26,77,0.8), transparent 50%, #000 100%), url('images/banner.jpg') center/cover no-repeat; z-index: 1; transition: 15s; background-color: #001a4d;}
         .bg-active { transform: scale(1.1); }
         .soon-container { position: relative; z-index: 10; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 2s; }
         .active-ui.soon-container { opacity: 1; }
         .gold-letter { font-size: clamp(3rem, 15vw, 10rem); background: linear-gradient(135deg, #fff 20%, var(--sazon-gold) 50%, #fff 80%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 6s linear infinite; }
         @keyframes shine { to { background-position: 200% center; } }
-        .logo-circle-o { width: clamp(2.5rem, 12vw, 8.5rem); height: clamp(2.5rem, 12vw, 8.5rem); margin: 0 5px; border-radius: 50%; border: 1.5px solid var(--sazon-gold); position: relative; background: #000; overflow: hidden; }
-        .logo-circle-o img { width: 100%; height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .logo-circle-o { width: clamp(2.5rem, 12vw, 8.5rem); height: clamp(2.5rem, 12vw, 8.5rem); margin: 0 5px; border-radius: 50%; border: 1.5px solid var(--sazon-gold); background: #000; overflow: hidden; }
+        .logo-circle-o img { width: 100%; height: auto; }
 
-        .timer-wrapper { position: relative; z-index: 10; background: rgba(0,0,0,0.5); backdrop-filter: blur(12px); border: 1px solid rgba(197, 160, 89, 0.4); padding: 20px 40px; opacity: 0; transition: 1.5s 1s; margin-top: 30px; }
-        .timer-container { display: flex; gap: 20px; }
-        .timer-val { font-size: clamp(1.8rem, 4vw, 3rem); color: var(--sazon-gold); font-weight: 700; display: block; }
-        .timer-label { font-size: 0.55rem; text-transform: uppercase; color: #fff; letter-spacing: 2px; }
+        /* SECTIONS */
+        .section { padding: 80px 20px; text-align: center; }
+        .white-bg { background: #fff; color: #333; }
+        .navy-bg { background: var(--sazon-navy); color: #fff; }
 
         /* JINGLE */
-        .jingle-section { padding: 80px 20px; background: #000; text-align: center; }
         .jingle-box { max-width: 800px; margin: 0 auto; border-left: 1px solid var(--sazon-gold); border-right: 1px solid var(--sazon-gold); padding: 40px; }
         .lyrics-text { font-style: italic; color: #fff; line-height: 2; font-size: 1.1rem; }
         .chorus { color: var(--sazon-gold); font-weight: 600; margin: 20px 0; }
 
         /* TREE */
-        .section { padding: 100px 20px; text-align: center; }
-        .white-bg { background: #fff; color: #333; }
-        .patriarch-box { max-width: 800px; margin: 0 auto 60px; padding: 40px; border: 1px solid var(--sazon-gold); }
-        .p-name { font-size: clamp(1.5rem, 4vw, 2.5rem); color: var(--sazon-navy); margin: 0; }
-        .tree-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1400px; margin: 0 auto; }
-        .branch-card { background: #fff; border: 1px solid #f0f0f0; border-top: 4px solid var(--sazon-gold); padding: 25px 15px; cursor: pointer; transition: 0.4s; flex: 1 1 220px; max-width: 260px; text-align: center; }
-        .branch-card.active { border-color: var(--sazon-navy); background: #fdfdfd; }
-        .descendants-list { max-height: 0; overflow: hidden; transition: max-height 0.6s ease-out; text-align: left; font-size: 0.85rem; }
-        .branch-card.active .descendants-list { max-height: 800px; margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px; }
+        .tree-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; max-width: 1200px; margin: 0 auto; }
+        .branch-card { background: #fff; border: 1px solid #eee; border-top: 4px solid var(--sazon-gold); padding: 20px; flex: 1 1 200px; max-width: 240px; }
+        .branch-card h3 { color: var(--sazon-navy); margin: 5px 0; font-size: 1rem; }
+        .nickname { color: var(--sazon-gold); font-size: 0.7rem; text-transform: uppercase; font-weight: 700; }
 
-        /* ARCHIVE */
-        .photo-banner { background: var(--sazon-navy); color: #fff; padding: 60px 20px; border-top: 5px solid var(--sazon-gold); }
-        .email-link { color: var(--sazon-gold); font-weight: 700; text-decoration: none; font-size: clamp(1.2rem, 3vw, 1.8rem); transition: 0.3s; }
+        /* TRAVEL & VENUE */
+        .venue-grid { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; max-width: 1200px; margin: 40px auto; }
+        .venue-info { flex: 1 1 400px; text-align: left; }
+        .map-box { flex: 1 1 400px; height: 350px; border: 2px solid var(--sazon-gold); }
+        .qr-container { background: #fff; padding: 20px; border-radius: 10px; display: inline-block; margin: 20px; color: #333; }
+        .qr-container img { width: 150px; height: 150px; }
 
-        /* APPAREL (Correct Labels) */
-        .apparel-grid { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; }
-        .apparel-card { background: #fff; padding: 20px; border: 1px solid #eee; width: 400px; }
-        .apparel-card img { width: 100%; height: auto; }
-        .apparel-label { color: var(--sazon-navy); font-weight: 700; font-size: 0.8rem; margin-top: 15px; text-transform: uppercase; border-left: 3px solid var(--sazon-gold); padding-left: 10px; text-align: left;}
+        /* APPAREL */
+        .apparel-grid { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
+        .apparel-card { background: #fff; padding: 20px; width: 350px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .apparel-card img { width: 100%; }
+        .apparel-label { color: var(--sazon-navy); font-weight: 700; font-size: 0.75rem; margin-top: 15px; text-transform: uppercase; border-left: 3px solid var(--sazon-gold); padding-left: 10px; text-align: left;}
 
-        .audio-ui { position: fixed; bottom: 30px; right: 30px; z-index: 1000; background: rgba(0,0,0,0.6); border: 1px solid var(--sazon-gold); padding: 12px; border-radius: 50%; cursor: pointer; opacity: 0; transition: 1s; }
+        .audio-ui { position: fixed; bottom: 30px; right: 30px; z-index: 1000; background: rgba(0,0,0,0.6); border: 1px solid var(--sazon-gold); padding: 12px; border-radius: 50%; cursor: pointer; opacity: 0; }
         .active-ui.audio-ui { opacity: 1; }
     </style>
 </head>
@@ -86,11 +83,12 @@
     </div>
 
     <nav id="main-nav">
-        <img src="images/logo.png" height="35" onerror="this.style.display='none'">
+        <img src="images/logo.png" height="30" onerror="this.style.display='none'">
         <div class="nav-links">
             <a href="#home">Home</a>
-            <a href="#lyrics">Jingle</a>
-            <a href="#tree">Legacy Tree</a>
+            <a href="#tree">Legacy</a>
+            <a href="#venue">Venue</a>
+            <a href="#travel">Travel</a>
             <a href="#apparel">Apparel</a>
         </div>
     </nav>
@@ -102,18 +100,13 @@
             <div class="logo-circle-o"><img src="images/logo.png" alt="O" onerror="this.style.display='none'"></div>
             <span class="gold-letter">N</span>
         </div>
-        <div class="timer-wrapper" id="timer-ui">
-            <div class="timer-container">
-                <div class="timer-unit"><span class="timer-val" id="days">00</span><span class="timer-label">Days</span></div>
-                <div class="timer-unit"><span class="timer-val" id="hours">00</span><span class="timer-label">Hrs</span></div>
-                <div class="timer-unit"><span class="timer-val" id="mins">00</span><span class="timer-label">Min</span></div>
-                <div class="timer-unit"><span class="timer-val" id="secs" style="color:var(--sazon-gold)">00</span><span class="timer-label">Sec</span></div>
-            </div>
+        <div class="timer-wrapper" id="timer-ui" style="opacity:0">
+            <div class="timer-container" id="timer-vals">
+                </div>
         </div>
     </div>
 
-    <section class="jingle-section" id="lyrics">
-        <h2 style="color:var(--sazon-gold); margin-bottom:40px;">The Family Jingle</h2>
+    <section class="section" id="lyrics" style="background:#000;">
         <div class="jingle-box">
             <div class="lyrics-text">
                 "Miles unfolding, ink on the page,<br>
@@ -131,22 +124,61 @@
     </section>
 
     <section class="section white-bg" id="tree">
-        <div class="patriarch-box">
+        <div style="margin-bottom:50px;">
             <h2 class="p-name">Tereso & Teofista Sazon</h2>
-            <p style="text-transform:uppercase; letter-spacing:4px; font-size:0.65rem; color:var(--sazon-gold);">Founding Patriarch & Matriarch</p>
+            <p style="color:var(--sazon-gold); font-size:0.7rem; letter-spacing:3px;">THE 13 BRANCHES</p>
         </div>
         <div class="tree-grid" id="tree-engine"></div>
     </section>
 
-    <section class="photo-banner" id="archive">
-        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-            <p style="text-transform:uppercase; letter-spacing:3px; font-size:0.7rem; opacity:0.8;">Legacy Archive Submission</p>
-            <a href="mailto:maemiliapalma@yahoo.com" class="email-link">maemiliapalma@yahoo.com</a>
+    <section class="section navy-bg" id="venue">
+        <h2 style="color:var(--sazon-gold)">The Venue</h2>
+        <div class="venue-grid">
+            <div class="venue-info">
+                <h3>Marzon Hotel Kalibo</h3>
+                <p>Jaime Cardinal Sin Avenue, Andagao, Kalibo, Aklan 5600</p>
+                <p style="font-size:0.85rem; opacity:0.8;">A premier destination in the heart of Aklan, offering sophisticated spaces for our grand reunion. Located just minutes from Kalibo International Airport.</p>
+                <hr style="border:0; border-top:1px solid rgba(197,160,89,0.3); margin:20px 0;">
+                <h4>Nearby Establishments:</h4>
+                <ul style="font-size:0.8rem; line-height:1.8;">
+                    <li><b>Gaisano Capital Kalibo</b> - Shopping & Essentials</li>
+                    <li><b>Kalibo Pastrana Park</b> - Historical Center</li>
+                    <li><b>Bakhawan Eco-Park</b> - Multi-awarded Mangrove Forest</li>
+                </ul>
+            </div>
+            <div class="map-box">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3904.595089334547!2d122.3734024758509!3d11.69631624174828!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a1e967a2135d97%3A0xc4a382104a79c941!2sMarzon%20Hotel%20Kalibo!5e0!3m2!1sen!2sph!4v1714680000000!5m2!1sen!2sph" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section class="section white-bg" id="travel">
+        <h2 style="color:var(--sazon-navy)">Travel & Registration</h2>
+        <div class="venue-grid">
+            <div style="flex:1; text-align:left;">
+                <h4>Getting There:</h4>
+                <p style="font-size:0.85rem;"><b>From Abroad:</b> Fly to Manila (MNL) or Cebu (CEB), then take a 1-hour domestic flight to Kalibo (KLO).</p>
+                <p style="font-size:0.85rem;"><b>Local:</b> Direct flights available from Manila and Cebu via Philippine Airlines, Cebu Pacific, or AirAsia.</p>
+                <div class="qr-container">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://tinyurl.com/SazonGrandReunion" alt="QR Web">
+                    <p style="font-size:0.6rem; margin-top:10px;">SHARE WEBSITE</p>
+                </div>
+                <div class="qr-container">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://forms.gle/YOUR_GOOGLE_FORM_ID" alt="QR Form">
+                    <p style="font-size:0.6rem; margin-top:10px;">REGISTER HERE</p>
+                </div>
+            </div>
+            <div style="flex:1; text-align:left; background:var(--sazon-navy); color:#fff; padding:30px;">
+                <h4 style="color:var(--sazon-gold)">Legacy Archive</h4>
+                <p style="font-size:0.8rem;">Send your heritage photos to:</p>
+                <a href="mailto:maemiliapalma@yahoo.com" style="color:var(--sazon-gold); text-decoration:none; font-weight:700;">maemiliapalma@yahoo.com</a>
+                <p style="font-size:0.7rem; margin-top:20px; border-top:1px solid #333; padding-top:10px;">Official Web: <br><b>tinyurl.com/SazonGrandReunion</b></p>
+            </div>
         </div>
     </section>
 
     <section class="section white-bg" id="apparel" style="background:#f4f4f4;">
-        <h2 style="color:var(--sazon-navy); margin-bottom:50px;">Official Apparel</h2>
+        <h2 style="color:var(--sazon-navy); margin-bottom:40px;">Official Apparel</h2>
         <div class="apparel-grid">
             <div class="apparel-card">
                 <img src="images/apparel_front.jpg" alt="Back" onerror="this.src='https://via.placeholder.com/400x500?text=Sazon+Tree+Logo'">
@@ -163,15 +195,19 @@
     <audio id="sfx-jingle" src="audio/jingle.mp3" loop></audio>
 
     <script>
-        const branches = ["Serafin", "Monserat", "Felomina", "Estrella", "Gregorio", "Regino", "Maria", "Concepcion", "Cezar", "Priscilla", "Gloria", "Reynaldo", "Nilda"];
-        
+        const branches = [
+            {n: "Serafin", k: "Lolo Apin"}, {n: "Monserat", k: "Lola Monching"}, {n: "Felomina", k: "Lola Mening"},
+            {n: "Estrella", k: "Lola Estring"}, {n: "Gregorio", k: "Lolo Gorio"}, {n: "Regino", k: "Lolo Taba"},
+            {n: "Maria", k: "Lola Maria"}, {n: "Concepcion", k: "Lola Moret"}, {n: "Cezar", k: "Lolo Cezar"},
+            {n: "Priscilla", k: "Lola Mamay"}, {n: "Gloria", k: "Lola Goly"}, {n: "Reynaldo", k: "Lolo Lope"}, {n: "Nilda", k: "Lola Nilda"}
+        ];
+
         function initTree() {
             const container = document.getElementById('tree-engine');
-            branches.forEach(name => {
+            branches.forEach(b => {
                 const card = document.createElement('div');
                 card.className = 'branch-card';
-                card.innerHTML = `<span style="font-size:0.6rem; color:var(--sazon-gold); text-transform:uppercase;">Branch</span><h3 class="branch-name" style="margin:0; color:var(--sazon-navy);">${name}</h3><div class="descendants-list">Descendants data automated...</div>`;
-                card.onclick = () => { card.classList.toggle('active'); };
+                card.innerHTML = `<span class="nickname">(${b.k})</span><h3>${b.n}</h3><div style="font-size:0.65rem; opacity:0.6; margin-top:10px;">Branch Legacy</div>`;
                 container.appendChild(card);
             });
         }
@@ -208,10 +244,16 @@
         setInterval(() => {
             const now = new Date().getTime();
             const diff = target - now;
-            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-            document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-            document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-            document.getElementById('secs').innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById('timer-vals').innerHTML = `
+                <div style="margin:0 10px;"><span style="font-size:2rem; color:var(--sazon-gold); font-weight:700;">${d}</span><br><small>DAYS</small></div>
+                <div style="margin:0 10px;"><span style="font-size:2rem; color:var(--sazon-gold); font-weight:700;">${h}</span><br><small>HRS</small></div>
+                <div style="margin:0 10px;"><span style="font-size:2rem; color:var(--sazon-gold); font-weight:700;">${m}</span><br><small>MIN</small></div>
+                <div style="margin:0 10px;"><span style="font-size:2rem; color:var(--sazon-gold); font-weight:700;">${s}</span><br><small>SEC</small></div>
+            `;
         }, 1000);
     </script>
 </body>
