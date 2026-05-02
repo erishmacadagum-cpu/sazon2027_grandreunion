@@ -14,23 +14,21 @@
 
         h1, h2, h3, h4, .gold-letter, .branch-name, .p-name, .nav-links a { font-family: 'Cinzel', serif !important; letter-spacing: 2px; }
 
-        /* ENTRANCE CONTROL & SALVO */
+        /* ENTRANCE CONTROL */
         #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 100000; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: opacity 1.5s; text-align: center;}
-        
         .salvo-container { display: flex; flex-direction: column; gap: 15px; margin-bottom: 50px; }
-        .credits-text { font-family: 'Cinzel', serif; color: var(--sazon-gold); font-size: clamp(0.7rem, 2vw, 1.2rem); text-transform: uppercase; letter-spacing: 5px; margin: 0; line-height: 1.6; opacity: 0; transform: translateY(15px); transition: opacity 2s, transform 2s; }
+        .credits-text { color: var(--sazon-gold); font-size: clamp(0.7rem, 2vw, 1.2rem); text-transform: uppercase; letter-spacing: 5px; margin: 0; line-height: 1.6; opacity: 0; transform: translateY(15px); transition: 2s; }
         .reveal { opacity: 1; transform: translateY(0); }
-
-        .tap-box { padding: 20px 40px; border: 1px solid var(--sazon-gold); letter-spacing: 8px; text-transform: uppercase; font-size: 0.7rem; text-align: center; background: rgba(197, 160, 89, 0.05); color: #fff; opacity: 0; transition: opacity 2s 4s; }
+        .tap-box { padding: 20px 40px; border: 1px solid var(--sazon-gold); letter-spacing: 8px; text-transform: uppercase; font-size: 0.7rem; background: rgba(197, 160, 89, 0.05); color: #fff; opacity: 0; transition: 2s; }
         .tap-reveal { opacity: 1; }
 
-        /* NAVIGATION */
+        /* NAV */
         #main-nav { position: fixed; top: 0; width: 100%; height: 70px; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); z-index: 999; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; border-bottom: 1px solid rgba(197,160,89,0.2); box-sizing: border-box; transform: translateY(-100%); transition: 1s ease-out; }
         #main-nav.active { transform: translateY(0); }
         .nav-links a { color: #fff; text-decoration: none; font-size: 0.65rem; text-transform: uppercase; margin-left: 25px; opacity: 0.7; transition: 0.3s; }
         .nav-links a:hover { color: var(--sazon-gold); opacity: 1; }
 
-        /* HERO STAGE */
+        /* HERO */
         .stage { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; padding: 20px; text-align: center; }
         .cinematic-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,26,77,0.8), transparent 50%, #000 100%), url('images/banner.jpg') center/cover no-repeat; z-index: 1; transition: 20s ease-out; background-color: #001a4d; }
         .bg-active { transform: scale(1.1); }
@@ -67,7 +65,7 @@
         .branch-card.active .descendants-list { max-height: 300px; margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px; }
         .placeholder-text { font-style: italic; color: #aaa; font-size: 0.7rem; }
 
-        /* TRAVEL CONCIERGE & MAP */
+        /* CONCIERGE & MAP */
         .concierge-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; text-align: left; }
         .guide-card { background: #fff; border: 1px solid #eee; padding: 35px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
         .guide-card h3 { color: var(--sazon-navy); margin-top: 0; border-bottom: 2px solid var(--sazon-gold); padding-bottom: 10px; font-size: 1.2rem; }
@@ -79,7 +77,7 @@
 
         /* LYRICS */
         .lyrics-box { max-width: 850px; margin: 0 auto; background: var(--glass); padding: 50px; border: 1px solid var(--sazon-gold); color: #fff; text-align: left; }
-        .lyrics-stamp { font-weight: 700; color: var(--sazon-gold); font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; display: block; margin-top: 25px; border-left: 3px solid var(--sazon-gold); padding-left: 15px; }
+        .lyrics-stamp { font-weight: 700; color: var(--sazon-gold); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; display: block; margin-top: 25px; border-left: 3px solid var(--sazon-gold); padding-left: 15px; }
         .lyrics-txt { font-weight: 300; font-size: 1rem; line-height: 1.8; margin-top: 12px; font-style: italic; color: #e0e0e0; }
 
         /* APPAREL */
@@ -109,4 +107,12 @@
     <div id="overlay" onclick="launchHub()">
         <div class="salvo-container">
             <h4 class="credits-text" id="creds-1">Sazon Production</h4>
-            <h4 class="credits-text
+            <h4 class="credits-text" id="creds-2">Marzon Hotel Kalibo</h4>
+            <h4 class="credits-text" id="creds-3">Aklan</h4>
+            <h4 class="credits-text" id="creds-4" style="letter-spacing: 12px; border-top: 1px solid var(--sazon-gold); border-bottom: 1px solid var(--sazon-gold); padding: 10px 0;">July 2027</h4>
+        </div>
+        <div class="tap-box" id="tap-to-reveal">TAP TO ENTER</div>
+    </div>
+
+    <nav id="main-nav">
+        <img src="images/logo.png" alt="Logo" style="height:35
