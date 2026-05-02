@@ -41,16 +41,18 @@
 
         /* SECTION STYLING */
         .section { padding: 100px 20px; text-align: center; position: relative; z-index: 10; }
-        .header-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 10px; color: var(--sazon-navy); }
+        .header-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 10px; color: var(--sazon-navy); }
         .header-sub { text-transform: uppercase; letter-spacing: 5px; font-size: 0.7rem; color: var(--sazon-gold); display: block; margin-bottom: 50px; }
 
         /* LINEAGE SECTION */
-        .patriarch-box { max-width: 600px; margin: 0 auto 50px; padding: 30px; border-bottom: 2px solid var(--sazon-gold); }
-        .p-name { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--sazon-navy); }
-        .lineage-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto; }
-        .lineage-card { background: #fff; padding: 40px 20px; border: 1px solid #eee; transition: 0.4s; }
-        .branch-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--sazon-navy); margin-bottom: 15px; }
-        .branch-list { list-style: none; padding: 0; font-size: 0.85rem; color: #666; line-height: 2; }
+        .patriarch-box { max-width: 800px; margin: 0 auto 60px; padding: 40px; border: 1px solid var(--sazon-gold); background: #fff; }
+        .p-name { font-family: 'Playfair Display', serif; font-size: 2.4rem; color: var(--sazon-navy); margin: 0; }
+        
+        .lineage-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
+        .lineage-card { background: #fff; padding: 30px 15px; border-bottom: 3px solid #eee; transition: 0.4s; position: relative; }
+        .lineage-card:hover { border-bottom-color: var(--sazon-gold); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .branch-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--sazon-navy); margin-bottom: 5px; font-weight: 700; }
+        .nickname { font-size: 0.7rem; color: var(--sazon-gold); text-transform: uppercase; letter-spacing: 2px; display: block; }
 
         /* GALLERY SECTION */
         .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; max-width: 1200px; margin: 0 auto; }
@@ -65,7 +67,7 @@
         .audio-ui { position: fixed; bottom: 30px; right: 30px; z-index: 1000; background: rgba(0,0,0,0.6); border: 1px solid var(--sazon-gold); padding: 12px; border-radius: 50%; cursor: pointer; opacity: 0; transition: 1s; }
         .active-ui.audio-ui { opacity: 1; }
 
-        @media (max-width: 768px) { .nav-links { display: none; } .section { padding: 60px 20px; } }
+        @media (max-width: 768px) { .nav-links { display: none; } .section { padding: 60px 20px; } .header-title { font-size: 2rem; } }
     </style>
 </head>
 <body>
@@ -103,25 +105,26 @@
     </div>
 
     <section class="section" id="lineage" style="background: #fff;">
-        <span class="header-sub">The Roots of the Clan</span>
+        <span class="header-sub">The Legacy of Love</span>
         <div class="patriarch-box">
             <h2 class="p-name">Tereso & Teofista Sazon</h2>
-            <p style="text-transform:uppercase; letter-spacing:3px; font-size:0.6rem; color:var(--sazon-gold);">Founding Patriarch & Matriarch</p>
+            <p style="text-transform:uppercase; letter-spacing:4px; font-size:0.7rem; color:var(--sazon-gold); margin-top:10px;">The Founding Patriarch & Matriarch</p>
         </div>
         
         <div class="lineage-grid">
-            <div class="lineage-card">
-                <div class="branch-name">First Root</div>
-                <ul class="branch-list"><li>Ancestral Branch Details</li></ul>
-            </div>
-            <div class="lineage-card">
-                <div class="branch-name">Second Root</div>
-                <ul class="branch-list"><li>Ancestral Branch Details</li></ul>
-            </div>
-            <div class="lineage-card">
-                <div class="branch-name">Third Root</div>
-                <ul class="branch-list"><li>Ancestral Branch Details</li></ul>
-            </div>
+            <div class="lineage-card"><div class="branch-name">Serafin</div><span class="nickname">Lolo Apin</span></div>
+            <div class="lineage-card"><div class="branch-name">Monserat</div><span class="nickname">Lola Monching</span></div>
+            <div class="lineage-card"><div class="branch-name">Felomina</div><span class="nickname">Lola Mening</span></div>
+            <div class="lineage-card"><div class="branch-name">Estrella</div><span class="nickname">Lola Estring</span></div>
+            <div class="lineage-card"><div class="branch-name">Gregorio</div><span class="nickname">Lolo Gorio</span></div>
+            <div class="lineage-card"><div class="branch-name">Regino</div><span class="nickname">Lolo Taba</span></div>
+            <div class="lineage-card"><div class="branch-name">Maria</div><span class="nickname">Lola Maria</span></div>
+            <div class="lineage-card"><div class="branch-name">Concepcion</div><span class="nickname">Lola Moret</span></div>
+            <div class="lineage-card"><div class="branch-name">Cezar</div><span class="nickname">Lolo Cezar</span></div>
+            <div class="lineage-card"><div class="branch-name">Priscilla</div><span class="nickname">Lola Mamay</span></div>
+            <div class="lineage-card"><div class="branch-name">Gloria</div><span class="nickname">Lola Goly</span></div>
+            <div class="lineage-card"><div class="branch-name">Reynaldo</div><span class="nickname">Lolo Lope</span></div>
+            <div class="lineage-card"><div class="branch-name">Nilda</div><span class="nickname">Lola Nilda</span></div>
         </div>
     </section>
 
@@ -160,11 +163,8 @@
         setInterval(updateTimer, 1000); updateTimer();
 
         function launchHub() {
-            // Play Sounds
-            document.getElementById('sfx-open').play().catch(e => console.log("Audio block"));
+            document.getElementById('sfx-open').play().catch(e => {});
             setTimeout(() => { document.getElementById('sfx-jingle').play().catch(e => {}); }, 1000);
-
-            // Interface
             document.getElementById('overlay').style.opacity = '0';
             setTimeout(() => { 
                 document.getElementById('overlay').style.display = 'none'; 
