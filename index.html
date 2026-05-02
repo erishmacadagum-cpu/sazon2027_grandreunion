@@ -14,9 +14,15 @@
 
         h1, h2, h3, h4, .gold-letter, .branch-name, .p-name, .nav-links a { font-family: 'Cinzel', serif !important; letter-spacing: 2px; }
 
-        /* ENTRANCE CONTROL */
-        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 100000; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: opacity 1.5s; }
-        .tap-box { padding: 20px 40px; border: 1px solid var(--sazon-gold); letter-spacing: 8px; text-transform: uppercase; font-size: 0.7rem; text-align: center; background: rgba(197, 160, 89, 0.05); }
+        /* ENTRANCE CONTROL & SALVO */
+        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 100000; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: opacity 1.5s; text-align: center;}
+        
+        .salvo-container { display: flex; flex-direction: column; gap: 15px; margin-bottom: 50px; }
+        .credits-text { font-family: 'Cinzel', serif; color: var(--sazon-gold); font-size: clamp(0.7rem, 2vw, 1.2rem); text-transform: uppercase; letter-spacing: 5px; margin: 0; line-height: 1.6; opacity: 0; transform: translateY(15px); transition: opacity 2s, transform 2s; }
+        .reveal { opacity: 1; transform: translateY(0); }
+
+        .tap-box { padding: 20px 40px; border: 1px solid var(--sazon-gold); letter-spacing: 8px; text-transform: uppercase; font-size: 0.7rem; text-align: center; background: rgba(197, 160, 89, 0.05); color: #fff; opacity: 0; transition: opacity 2s 4s; }
+        .tap-reveal { opacity: 1; }
 
         /* NAVIGATION */
         #main-nav { position: fixed; top: 0; width: 100%; height: 70px; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); z-index: 999; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; border-bottom: 1px solid rgba(197,160,89,0.2); box-sizing: border-box; transform: translateY(-100%); transition: 1s ease-out; }
@@ -97,10 +103,16 @@
         @media (max-width: 768px) { .nav-links { display: none; } .branch-card { flex: 1 1 100%; max-width: 100%; } }
     </style>
 </head>
-<body>
+<body onload="startCredits()">
 
     <div id="overlay" onclick="launchHub()">
-        <div class="tap-box">SAZON 2027<br><br><span style="font-size:0.5rem; letter-spacing:4px;">TAP TO ENTER</span></div>
+        <div class="salvo-container">
+            <h4 class="credits-text" id="creds-1">Sazon Production</h4>
+            <h4 class="credits-text" id="creds-2">Marzon Hotel Kalibo</h4>
+            <h4 class="credits-text" id="creds-3">Aklan</h4>
+            <h4 class="credits-text" id="creds-4" style="letter-spacing: 12px; border-top: 1px solid var(--sazon-gold); border-bottom: 1px solid var(--sazon-gold); padding: 10px 0;">July 2027</h4>
+        </div>
+        <div class="tap-box" id="tap-to-reveal">TAP TO ENTER</div>
     </div>
 
     <nav id="main-nav">
@@ -167,7 +179,7 @@
                 <h3>Venue: Marzon Hotel</h3>
                 <div class="guide-item"><b>Address</b><p>Jaime Cardinal Sin Avenue, Andagao, Kalibo, Aklan 5600</p></div>
                 <div class="guide-item"><b>Room Rates (Est.)</b><p>Standard: ₱2,300 - ₱2,800/night<br>Executive: ₱3,500 - ₱6,000/night</p></div>
-                <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3905.772589083321!2d122.37340447585093!3d11.708892441221153!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a59da5d462d6d5%3A0xa28e81b4006ef31b!2sMarzon%20Hotel%20Kalibo!5e0!3m2!1sen!2sph!4v1714652000000!5m2!1sen!2sph" allowfullscreen="" loading="lazy"></iframe>
+                <iframe class="map-frame" src="https://maps.google.com/?cid=11713442290938606363&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" allowfullscreen="" loading="lazy"></iframe>
             </div>
             <div class="guide-card">
                 <h3>Getting There</h3>
@@ -242,9 +254,23 @@
         function playClick() { document.getElementById('sfx-click').currentTime = 0; document.getElementById('sfx-click').play().catch(e => {}); }
         function toggleBranch(element) { playClick(); element.classList.toggle('active'); }
 
+        /* CREDS SALVO LOGIC */
+        function startCredits() {
+            // Sequential timing for credits
+            setTimeout(() => document.getElementById('creds-1').classList.add('reveal'), 800);
+            setTimeout(() => document.getElementById('creds-2').classList.add('reveal'), 1600);
+            setTimeout(() => document.getElementById('creds-3').classList.add('reveal'), 2400);
+            setTimeout(() => document.getElementById('creds-4').classList.add('reveal'), 3200);
+            // Finally reveal the 'Tap to Enter' box
+            setTimeout(() => document.getElementById('tap-to-reveal').classList.add('tap-reveal'), 4500);
+        }
+
         function launchHub() {
+            // Attempt audio but don't hang if missing
             document.getElementById('sfx-open').play().catch(e => console.log("Audio not ready"));
-            setTimeout(() => { document.getElementById('sfx-jingle').play().catch(e => {}); }, 800);
+            setTimeout(() => { document.getElementById('sfx-jingle').play().catch(e => {}); }, 1200);
+            
+            // Core transition logic
             document.getElementById('overlay').style.opacity = '0';
             setTimeout(() => { 
                 document.getElementById('overlay').style.display = 'none'; 
