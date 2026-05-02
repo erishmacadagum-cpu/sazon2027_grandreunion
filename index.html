@@ -43,7 +43,7 @@
         .timer-val { font-size: clamp(1.8rem, 4vw, 3rem); color: var(--sazon-gold); font-weight: 700; display: block; }
         .timer-label { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 2px; color: #fff; opacity: 0.8; }
 
-        /* LINEAGE SECTION */
+        /* LINEAGE */
         .section { padding: 100px 20px; text-align: center; position: relative; z-index: 10; }
         .header-title { font-size: 2.5rem; margin-bottom: 10px; color: var(--sazon-navy); }
         .header-sub { text-transform: uppercase; letter-spacing: 5px; font-size: 0.7rem; color: var(--sazon-gold); display: block; margin-bottom: 50px; }
@@ -57,21 +57,21 @@
         .branch-name { font-size: 1.2rem; color: var(--sazon-navy); font-weight: 700; margin-bottom: 5px; }
         .nickname { font-size: 0.65rem; color: var(--sazon-gold); text-transform: uppercase; letter-spacing: 2px; }
 
-        /* APPAREL SECTION */
+        /* APPAREL */
         .apparel-grid { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; max-width: 1200px; margin: 0 auto; }
-        .apparel-card { background: #fff; padding: 25px; border: 1px solid #eee; flex: 1 1 350px; max-width: 450px; cursor: pointer; transition: 0.5s; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .apparel-card { background: #fff; padding: 25px; border: 1px solid #eee; flex: 1 1 350px; max-width: 450px; transition: 0.5s; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: left; }
         .apparel-card:hover { border-color: var(--sazon-gold); transform: translateY(-5px); }
-        .apparel-card img { width: 100%; height: auto; margin-bottom: 20px; border-radius: 4px; }
-        .apparel-title { color: var(--sazon-navy); font-size: 1rem; margin-top: 15px; border-top: 1px solid #f0f0f0; padding-top: 15px; text-align: left; }
+        .apparel-card img { width: 100%; height: auto; margin-bottom: 20px; }
+        .apparel-meta { border-top: 1px solid #f0f0f0; padding-top: 15px; }
 
         /* REGISTRATION PRECISION */
         .access-section { background: #f9f9f9; padding: 100px 20px; color: #333; }
         .access-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px; max-width: 1100px; margin: 0 auto; align-items: center; }
-        .qr-card { background: #fff; padding: 40px; border: 1px solid #ddd; text-align: center; }
-        .qr-card img { width: 220px; height: 220px; margin-bottom: 20px; border: 1px solid #eee; padding: 10px; }
+        .qr-card { background: #fff; padding: 40px; border: 1px solid #ddd; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .qr-card img { width: 240px; height: 240px; margin-bottom: 20px; border: 1px solid #eee; padding: 10px; }
         
         .btn-gold { display: inline-block; background: var(--sazon-navy); color: #fff; padding: 20px 40px; text-decoration: none; font-weight: 700; letter-spacing: 3px; font-size: 0.7rem; text-transform: uppercase; border: 1px solid transparent; transition: 0.3s; }
-        .btn-gold:hover { background: transparent; color: var(--sazon-navy); border-color: var(--sazon-navy); }
+        .btn-gold:hover { background: transparent; color: var(--sazon-navy); border-color: var(--sazon-navy); transform: scale(1.02); }
 
         .email-banner { background: var(--sazon-navy); color: #fff; padding: 80px 20px; text-align: center; border-top: 4px solid var(--sazon-gold); }
         .email-link { color: var(--sazon-gold); text-decoration: none; font-size: 1.5rem; transition: 0.3s; border-bottom: 1px solid transparent; }
@@ -144,17 +144,17 @@
         <h2 class="header-title">Official Apparel</h2>
         <div class="apparel-grid">
             <div class="apparel-card" onclick="playClick()">
-                <img src="images/apparel_front.jpg" alt="Nutrition Facts Design">
-                <div class="apparel-title">
-                    <h4 style="margin:0;">"Sazon Recipe" Tee</h4>
-                    <p style="color:var(--sazon-gold); font-size:0.7rem; margin-top:5px; text-transform:uppercase;">Luminous Blue Edition</p>
+                <img src="images/apparel_front.jpg" alt="Sazon T-Shirt Design">
+                <div class="apparel-meta">
+                    <h4 style="margin:0; color:var(--sazon-navy);">"Sazon Recipe" Tee</h4>
+                    <p style="color:var(--sazon-gold); font-size:0.7rem; margin-top:5px; text-transform:uppercase; font-weight:600;">Luminous Blue Edition</p>
                 </div>
             </div>
             <div class="apparel-card" onclick="playClick()">
-                <img src="images/apparel_back.jpg" alt="Legacy Tree Design">
-                <div class="apparel-title">
-                    <h4 style="margin:0;">Legacy Branch Hoodie</h4>
-                    <p style="color:var(--sazon-gold); font-size:0.7rem; margin-top:5px; text-transform:uppercase;">Signature 2027 Edition</p>
+                <img src="images/apparel_back.jpg" alt="Sazon Hoodie Design">
+                <div class="apparel-meta">
+                    <h4 style="margin:0; color:var(--sazon-navy);">Legacy Branch Hoodie</h4>
+                    <p style="color:var(--sazon-gold); font-size:0.7rem; margin-top:5px; text-transform:uppercase; font-weight:600;">Signature 2027 Series</p>
                 </div>
             </div>
         </div>
@@ -163,24 +163,24 @@
     <section class="access-section" id="register">
         <div class="access-grid">
             <div class="qr-card">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://tinyurl.com/SazonGrandReunion" alt="Scan to Register">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" alt="Scan to Register">
                 <h3 style="margin-bottom:10px;">Scan to Register</h3>
-                <p style="font-size:0.75rem; color:#666;">Confirm your attendance by scanning this code.</p>
+                <p style="font-size:0.75rem; color:#666;">Open your camera and scan to go directly to the Google Registration Form.</p>
             </div>
             <div style="text-align:left;">
                 <h2 style="color:var(--sazon-navy); margin-bottom:20px;">Official Registry</h2>
-                <p style="line-height:1.8; font-size:0.9rem; margin-bottom:30px;">Access the official registration form via the link below to help the Sazon Reunion Committee coordinate logistics.</p>
+                <p style="line-height:1.8; font-size:0.9rem; margin-bottom:30px;">To ensure a seamless reunion experience at Marzon Hotel, please register your attendance via our secure Google Form below.</p>
                 
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="btn-gold" onclick="playClick()">Open Google Form</a>
                 
-                <p style="margin-top:25px; font-size:0.7rem; color:#999; text-transform:uppercase;">Quick Link:</p>
+                <p style="margin-top:25px; font-size:0.7rem; color:#999; text-transform:uppercase; letter-spacing:1px;">Web Link Access:</p>
                 <a href="https://tinyurl.com/SazonGrandReunion" target="_blank" style="color:var(--sazon-gold); text-decoration:none; font-weight:700;" onclick="playClick()">tinyurl.com/SazonGrandReunion</a>
             </div>
         </div>
     </section>
 
     <section class="email-banner" id="contact">
-        <p style="text-transform:uppercase; letter-spacing:3px; font-size:0.7rem; margin-bottom:20px;">For Photo Submissions & Inquiries</p>
+        <p style="text-transform:uppercase; letter-spacing:3px; font-size:0.7rem; margin-bottom:20px;">Photos & Archive Submissions</p>
         <a href="mailto:maemiliapalma@yahoo.com" class="email-link" onclick="playClick()">maemiliapalma@yahoo.com</a>
     </section>
 
@@ -197,6 +197,7 @@
         function updateTimer() {
             const now = new Date().getTime();
             const diff = targetDate - now;
+            if(diff <= 0) return;
             document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
             document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
             document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
@@ -206,8 +207,7 @@
 
         function playClick() {
             const click = document.getElementById('sfx-click');
-            click.currentTime = 0;
-            click.play().catch(e => {});
+            click.currentTime = 0; click.play().catch(e => {});
         }
 
         function launchHub() {
