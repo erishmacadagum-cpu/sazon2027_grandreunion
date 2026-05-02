@@ -54,7 +54,7 @@
         .header-sub { text-transform: uppercase; letter-spacing: 5px; font-size: 0.7rem; color: var(--sazon-gold); display: block; margin-bottom: 50px; }
         .white-bg { background: #fff; color: #333; }
 
-        /* BALANCED FAMILY TREE (5-5-3) */
+        /* FAMILY TREE */
         .patriarch-box { max-width: 800px; margin: 0 auto 60px; padding: 40px; border: 1px solid var(--sazon-gold); background: #fff; }
         .p-name { font-size: clamp(1.8rem, 5vw, 2.5rem); color: var(--sazon-navy); margin: 0; }
         .tree-tier { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-bottom: 20px; max-width: 1400px; margin: 0 auto; }
@@ -67,14 +67,15 @@
         .branch-card.active .descendants-list { max-height: 300px; margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px; }
         .placeholder-text { font-style: italic; color: #aaa; font-size: 0.7rem; }
 
-        /* TRAVEL CONCIERGE */
+        /* TRAVEL CONCIERGE & MAP */
         .concierge-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; text-align: left; }
         .guide-card { background: #fff; border: 1px solid #eee; padding: 35px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
         .guide-card h3 { color: var(--sazon-navy); margin-top: 0; border-bottom: 2px solid var(--sazon-gold); padding-bottom: 10px; font-size: 1.2rem; }
         .guide-item { margin-bottom: 20px; }
         .guide-item b { display: block; color: var(--sazon-navy); font-size: 0.85rem; text-transform: uppercase; margin-bottom: 5px; }
         .guide-item p { margin: 0; font-size: 0.85rem; color: #666; line-height: 1.6; }
-        .map-frame { width: 100%; height: 300px; border: 0; margin-top: 20px; border: 1px solid #ddd; }
+        .map-container { width: 100%; height: 350px; margin-top: 20px; border: 1px solid #ddd; border-radius: 4px; overflow: hidden; }
+        .map-frame { width: 100%; height: 100%; border: 0; }
 
         /* LYRICS */
         .lyrics-box { max-width: 850px; margin: 0 auto; background: var(--glass); padding: 50px; border: 1px solid var(--sazon-gold); color: #fff; text-align: left; }
@@ -108,186 +109,4 @@
     <div id="overlay" onclick="launchHub()">
         <div class="salvo-container">
             <h4 class="credits-text" id="creds-1">Sazon Production</h4>
-            <h4 class="credits-text" id="creds-2">Marzon Hotel Kalibo</h4>
-            <h4 class="credits-text" id="creds-3">Aklan</h4>
-            <h4 class="credits-text" id="creds-4" style="letter-spacing: 12px; border-top: 1px solid var(--sazon-gold); border-bottom: 1px solid var(--sazon-gold); padding: 10px 0;">July 2027</h4>
-        </div>
-        <div class="tap-box" id="tap-to-reveal">TAP TO ENTER</div>
-    </div>
-
-    <nav id="main-nav">
-        <img src="images/logo.png" alt="Logo" style="height:35px;" onerror="this.style.display='none'">
-        <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#tree">Legacy</a>
-            <a href="#guide">Travel</a>
-            <a href="#register">Register</a>
-        </div>
-    </nav>
-
-    <div class="stage" id="home">
-        <div class="cinematic-bg" id="bg"></div>
-        <div class="soon-container" id="soon-ui">
-            <span class="gold-letter">S</span><span class="gold-letter">O</span>
-            <div class="logo-circle-o"><img src="images/logo.png" alt="O" onerror="this.style.display='none'"></div>
-            <span class="gold-letter">N</span>
-        </div>
-        <div class="timer-wrapper" id="timer-ui">
-            <div class="timer-container">
-                <div class="timer-unit"><span class="timer-val" id="days">00</span><span class="timer-label">Days</span></div>
-                <div class="timer-unit"><span class="timer-val" id="hours">00</span><span class="timer-label">Hrs</span></div>
-                <div class="timer-unit"><span class="timer-val" id="mins">00</span><span class="timer-label">Min</span></div>
-                <div class="timer-unit"><span class="timer-val" id="secs" style="color:#fff;">00</span><span class="timer-label" style="color:var(--sazon-gold);">Sec</span></div>
-            </div>
-        </div>
-    </div>
-
-    <section class="section white-bg" id="tree">
-        <span class="header-sub">Trace Your Roots</span>
-        <h2 class="header-title">The Sazon Legacy Tree</h2>
-        <div class="patriarch-box">
-            <h2 class="p-name">Tereso & Teofista Sazon</h2>
-            <p style="text-transform:uppercase; letter-spacing:4px; font-size:0.65rem; color:var(--sazon-gold); margin-top:10px;">Founding Patriarch & Matriarch</p>
-        </div>
-
-        <div class="tree-tier">
-            <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lolo Apin</span><h3 class="branch-name">Serafin</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
-            <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lola Monching</span><h3 class="branch-name">Monserat</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
-            <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lola Mening</span><h3 class="branch-name">Felomina</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
-            <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lola Estring</span><h3 class="branch-name">Estrella</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
-            <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lolo Gorio</span><h3 class="branch-name">Gregorio</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
-        </div>
-        <div class="tree-tier">
-            <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lolo Taba</span><h3 class="branch-name">Regino</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
-            <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lola Maria</span><h3 class="branch-name">Maria</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
-            <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lola Moret</span><h3 class="branch-name">Concepcion</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
-            <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lolo Cezar</span><h3 class="branch-name">Cezar</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
-            <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lola Mamay</span><h3 class="branch-name">Priscilla</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
-        </div>
-        <div class="tree-tier">
-            <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lola Goly</span><h3 class="branch-name">Gloria</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
-            <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lolo Lope</span><h3 class="branch-name">Reynaldo</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
-            <div class="branch-card" onclick="toggleBranch(this)"><span class="nickname-tag">Lola Nilda</span><h3 class="branch-name">Nilda</h3><div class="descendants-list"><span class="placeholder-text">Tracing descendants...</span></div></div>
-        </div>
-    </section>
-
-    <section class="section white-bg" id="guide" style="background:#f4f4f4; border-top: 1px solid #ddd;">
-        <span class="header-sub">Guest Concierge</span>
-        <h2 class="header-title">Kalibo Travel Guide</h2>
-        <div class="concierge-grid">
-            <div class="guide-card">
-                <h3>Venue: Marzon Hotel</h3>
-                <div class="guide-item"><b>Address</b><p>Jaime Cardinal Sin Avenue, Andagao, Kalibo, Aklan 5600</p></div>
-                <div class="guide-item"><b>Room Rates (Est.)</b><p>Standard: ₱2,300 - ₱2,800/night<br>Executive: ₱3,500 - ₱6,000/night</p></div>
-                <iframe class="map-frame" src="https://maps.google.com/?cid=11713442290938606363&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-            <div class="guide-card">
-                <h3>Getting There</h3>
-                <div class="guide-item"><b>Air Travel</b><p>Fly to <b>Kalibo International Airport (KLO)</b>. The hotel is 5-8 mins from the airport by trike or van.</p></div>
-                <div class="guide-item"><b>International Tips</b><p>Register on <b>eTravel.gov.ph</b> 72 hours before landing. Passport must be valid for 6 months.</p></div>
-            </div>
-            <div class="guide-card">
-                <h3>Eat & Explore</h3>
-                <div class="guide-item"><b>Local Eats</b><p>Gabriels Food, Late Coffee Cafe, and Gaisano Mall nearby for essentials.</p></div>
-                <div class="guide-item"><b>Post-Reunion</b><p>Boracay Island is 1.5 hours away via van to Caticlan Jetty Port.</p></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="lyrics" style="background:linear-gradient(#000, #001a4d);">
-        <span class="header-sub">The Anthem</span>
-        <h2 class="header-title white">Lyrics of Our Legacy</h2>
-        <div class="lyrics-box">
-            <span class="lyrics-stamp">Intro</span>
-            <p class="lyrics-txt">"Miles unfolding, ink on the page,<br>A story rewritten, turning the age.<br>July 2027, the compass aligns,<br>Marzon Hotel, Kalibo, where the heritage shines."</p>
-            <span class="lyrics-stamp">Chorus</span>
-            <p class="lyrics-txt">"Gikan sa gamut, tubtob sa langit,<br>Seasoned with love, let the future ignite.<br>Sazon 2027, (Every path) leads us back to the gate."</p>
-            <span class="lyrics-stamp">Outro</span>
-            <p class="lyrics-txt">"We are Sazon. See you in Kalibo!"</p>
-        </div>
-    </section>
-
-    <section class="section white-bg" id="apparel">
-        <span class="header-sub">Commemorative Gear</span>
-        <h2 class="header-title">Official Apparel</h2>
-        <div class="apparel-grid">
-            <div class="apparel-card"><img src="images/apparel_front.jpg" alt="Front Design" onerror="this.src='https://via.placeholder.com/400x400?text=Apparel+Front'"><h4>"Sazon Recipe" Tee</h4></div>
-            <div class="apparel-card"><img src="images/apparel_back.jpg" alt="Back Design" onerror="this.src='https://via.placeholder.com/400x400?text=Apparel+Back'"><h4>Legacy Branch Design</h4></div>
-        </div>
-    </section>
-
-    <section class="access-section" id="register">
-        <div class="access-grid">
-            <div class="qr-card"><img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" alt="Reg QR"><h3>Registry QR</h3></div>
-            <div class="qr-card"><img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://tinyurl.com/SazonGrandReunion" alt="Share QR"><h3>Share Hub QR</h3></div>
-            <div style="text-align:left;">
-                <h2 style="color:var(--sazon-navy); margin-bottom:20px;">Access Panel</h2>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="btn-gold" onclick="playClick()">Open Google Registry</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="email-banner" id="contact">
-        <p style="text-transform:uppercase; letter-spacing:3px; font-size:0.7rem; margin-bottom:20px; opacity: 0.8;">Photo Submissions Only</p>
-        <a href="mailto:maemiliapalma@yahoo.com" class="email-link" onclick="playClick()">maemiliapalma@yahoo.com</a>
-    </section>
-
-    <div class="audio-ui" id="audio-btn" onclick="toggleMute()"><span id="audio-icon" style="color:var(--sazon-gold); font-size:1.2rem;">🔊</span></div>
-
-    <audio id="sfx-open" src="audio/open.mp3"></audio>
-    <audio id="sfx-jingle" src="audio/jingle.mp3" loop></audio>
-    <audio id="sfx-click" src="audio/click.mp3"></audio>
-
-    <script>
-        const targetDate = new Date("July 23, 2027 00:00:00").getTime();
-        function updateTimer() {
-            const now = new Date().getTime();
-            const diff = targetDate - now;
-            if (diff < 0) return;
-            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-            document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-            document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-            document.getElementById('secs').innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
-        }
-        setInterval(updateTimer, 1000); updateTimer();
-
-        function playClick() { document.getElementById('sfx-click').currentTime = 0; document.getElementById('sfx-click').play().catch(e => {}); }
-        function toggleBranch(element) { playClick(); element.classList.toggle('active'); }
-
-        /* CREDS SALVO LOGIC */
-        function startCredits() {
-            // Sequential timing for credits
-            setTimeout(() => document.getElementById('creds-1').classList.add('reveal'), 800);
-            setTimeout(() => document.getElementById('creds-2').classList.add('reveal'), 1600);
-            setTimeout(() => document.getElementById('creds-3').classList.add('reveal'), 2400);
-            setTimeout(() => document.getElementById('creds-4').classList.add('reveal'), 3200);
-            // Finally reveal the 'Tap to Enter' box
-            setTimeout(() => document.getElementById('tap-to-reveal').classList.add('tap-reveal'), 4500);
-        }
-
-        function launchHub() {
-            // Attempt audio but don't hang if missing
-            document.getElementById('sfx-open').play().catch(e => console.log("Audio not ready"));
-            setTimeout(() => { document.getElementById('sfx-jingle').play().catch(e => {}); }, 1200);
-            
-            // Core transition logic
-            document.getElementById('overlay').style.opacity = '0';
-            setTimeout(() => { 
-                document.getElementById('overlay').style.display = 'none'; 
-                document.getElementById('main-nav').classList.add('active');
-                document.getElementById('bg').classList.add('bg-active');
-                document.getElementById('soon-ui').classList.add('active-ui');
-                document.getElementById('timer-ui').style.opacity = '1';
-                document.getElementById('audio-btn').classList.add('active-ui');
-            }, 1000);
-        }
-
-        function toggleMute() {
-            const jingle = document.getElementById('sfx-jingle');
-            jingle.muted = !jingle.muted;
-            document.getElementById('audio-icon').innerText = jingle.muted ? "🔇" : "🔊";
-            playClick();
-        }
-    </script>
-</body>
-</html>
+            <h4 class="credits-text
