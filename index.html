@@ -12,7 +12,7 @@
         :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; --glass: rgba(255, 255, 255, 0.1); }
         body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; scroll-behavior: smooth; }
 
-        h1, h2, h3, .gold-letter, .branch-name, .p-name, .nav-links a { font-family: 'Cinzel', serif !important; letter-spacing: 2px; }
+        h1, h2, h3, h4, .gold-letter, .branch-name, .p-name, .nav-links a { font-family: 'Cinzel', serif !important; letter-spacing: 2px; }
 
         /* ENTRANCE */
         #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 100000; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: opacity 1.5s; }
@@ -26,7 +26,7 @@
 
         /* HERO STAGE */
         .stage { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; padding: 20px; text-align: center; }
-        .cinematic-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,26,77,0.7), transparent 50%, #000 100%), url('images/banner.jpg') center/cover no-repeat; z-index: 1; transition: 20s ease-out; }
+        .cinematic-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,26,77,0.8), transparent 50%, #000 100%), url('images/banner.jpg') center/cover no-repeat; z-index: 1; transition: 20s ease-out; }
         .bg-active { transform: scale(1.1); }
 
         .soon-container { position: relative; z-index: 10; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(20px); transition: 3s 0.5s; }
@@ -42,37 +42,33 @@
         .timer-val { font-size: clamp(1.8rem, 4vw, 3rem); color: var(--sazon-gold); font-weight: 700; display: block; }
         .timer-label { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 2px; color: #fff; opacity: 0.8; }
 
-        /* REGISTRATION BOX */
-        .reg-box { position: relative; z-index: 10; margin-top: 40px; background: var(--glass); padding: 25px 40px; border: 1px solid var(--sazon-gold); backdrop-filter: blur(5px); transition: 1s 2.5s; opacity: 0; }
-        .reg-box.active-ui { opacity: 1; }
-        .btn-reg { background: var(--sazon-gold); color: #000; padding: 15px 30px; text-decoration: none; font-weight: 700; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; display: inline-block; transition: 0.3s; }
-        .btn-reg:hover { background: #fff; transform: translateY(-3px); }
-        .tiny-link { display: block; margin-top: 15px; color: #fff; font-size: 0.6rem; opacity: 0.6; text-decoration: none; letter-spacing: 1px; }
-
-        /* LINEAGE SECTION */
+        /* APPAREL SECTION */
         .section { padding: 100px 20px; text-align: center; position: relative; z-index: 10; }
         .header-title { font-size: 2.5rem; margin-bottom: 10px; color: var(--sazon-navy); }
         .header-sub { text-transform: uppercase; letter-spacing: 5px; font-size: 0.7rem; color: var(--sazon-gold); display: block; margin-bottom: 50px; }
-        .white-bg { background: #fff; color: #333; }
         
-        .lineage-container { display: flex; flex-wrap: wrap; gap: 15px; max-width: 1200px; margin: 0 auto; justify-content: center; }
-        .lineage-card { background: #fafafa; padding: 30px 15px; border-bottom: 2px solid #eee; flex: 1 1 200px; max-width: 240px; transition: 0.4s; }
-        .lineage-card:hover { border-color: var(--sazon-gold); background: #fff; }
+        .apparel-grid { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; max-width: 1200px; margin: 0 auto; }
+        .apparel-card { background: #fff; padding: 25px; border: 1px solid #eee; flex: 1 1 350px; max-width: 450px; cursor: pointer; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .apparel-card:hover { border-color: var(--sazon-gold); transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .apparel-card img { width: 100%; height: auto; margin-bottom: 20px; transition: 0.5s; }
+        .apparel-meta { text-align: left; border-top: 1px solid #f0f0f0; padding-top: 15px; }
+        .apparel-meta h4 { margin: 0; color: var(--sazon-navy); font-size: 1rem; }
+        .apparel-meta p { color: var(--sazon-gold); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; margin-top: 5px; }
 
-        /* ACCESS & CONTACT SECTION */
-        .access-section { background: #f4f4f4; padding: 80px 20px; color: #333; }
+        /* ACCESS SECTION */
+        .access-section { background: #f9f9f9; padding: 80px 20px; color: #333; }
         .access-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1100px; margin: 0 auto; align-items: center; }
-        .qr-card { background: #fff; padding: 30px; border: 1px solid #ddd; text-align: center; }
-        .qr-card img { width: 180px; height: 180px; margin-bottom: 20px; }
-        
-        .email-banner { background: var(--sazon-navy); color: #fff; padding: 60px 20px; border-top: 4px solid var(--sazon-gold); text-align: center; }
-        .email-link { color: var(--sazon-gold); text-decoration: none; font-family: 'Cinzel'; font-size: 1.3rem; border-bottom: 1px solid; transition: 0.3s; }
-        .email-link:hover { color: #fff; }
+        .qr-card { background: #fff; padding: 40px; border: 1px solid #ddd; text-align: center; }
+        .qr-card img { width: 200px; height: 200px; margin-bottom: 20px; border: 1px solid #eee; padding: 10px; }
+
+        .email-banner { background: var(--sazon-navy); color: #fff; padding: 80px 20px; text-align: center; border-top: 4px solid var(--sazon-gold); }
+        .email-link { color: var(--sazon-gold); text-decoration: none; font-family: 'Cinzel'; font-size: 1.5rem; border-bottom: 2px solid transparent; transition: 0.3s; }
+        .email-link:hover { border-bottom-color: var(--sazon-gold); color: #fff; }
 
         .audio-ui { position: fixed; bottom: 30px; right: 30px; z-index: 1000; background: rgba(0,0,0,0.6); border: 1px solid var(--sazon-gold); padding: 12px; border-radius: 50%; cursor: pointer; opacity: 0; transition: 1s; }
         .active-ui.audio-ui { opacity: 1; }
 
-        @media (max-width: 768px) { .nav-links { display: none; } .access-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .nav-links { display: none; } .apparel-card { flex: 1 1 100%; } }
     </style>
 </head>
 <body>
@@ -85,7 +81,7 @@
         <img src="images/logo.png" alt="Logo" style="height:35px;">
         <div class="nav-links">
             <a href="#home" onclick="playClick()">Home</a>
-            <a href="#lineage" onclick="playClick()">Lineage</a>
+            <a href="#apparel" onclick="playClick()">Apparel</a>
             <a href="#register" onclick="playClick()">Register</a>
             <a href="#contact" onclick="playClick()">Contact</a>
         </div>
@@ -107,52 +103,49 @@
                 <div class="timer-unit"><span class="timer-val" id="secs" style="color:#fff;">00</span><span class="timer-label" style="color:var(--sazon-gold);">Sec</span></div>
             </div>
         </div>
-
-        <div class="reg-box" id="reg-ui">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="btn-reg" onclick="playClick()">Confirm Attendance</a>
-            <a href="https://tinyurl.com/SazonGrandReunion" target="_blank" class="tiny-link">tinyurl.com/SazonGrandReunion</a>
-        </div>
     </div>
 
-    <section class="section white-bg" id="lineage">
-        <span class="header-sub">The 13 Branches</span>
-        <h2 class="header-title">The Sazon Lineage</h2>
-        <div class="lineage-container">
-            <div class="lineage-card"><div class="branch-name">Serafin</div><span class="nickname">Lolo Apin</span></div>
-            <div class="lineage-card"><div class="branch-name">Monserat</div><span class="nickname">Lola Monching</span></div>
-            <div class="lineage-card"><div class="branch-name">Felomina</div><span class="nickname">Lola Mening</span></div>
-            <div class="lineage-card"><div class="branch-name">Estrella</div><span class="nickname">Lola Estring</span></div>
-            <div class="lineage-card"><div class="branch-name">Gregorio</div><span class="nickname">Lolo Gorio</span></div>
-            <div class="lineage-card"><div class="branch-name">Regino</div><span class="nickname">Lolo Taba</span></div>
-            <div class="lineage-card"><div class="branch-name">Maria</div><span class="nickname">Lola Maria</span></div>
-            <div class="lineage-card"><div class="branch-name">Concepcion</div><span class="nickname">Lola Moret</span></div>
-            <div class="lineage-card"><div class="branch-name">Cezar</div><span class="nickname">Lolo Cezar</span></div>
-            <div class="lineage-card"><div class="branch-name">Priscilla</div><span class="nickname">Lola Mamay</span></div>
-            <div class="lineage-card"><div class="branch-name">Gloria</div><span class="nickname">Lola Goly</span></div>
-            <div class="lineage-card"><div class="branch-name">Reynaldo</div><span class="nickname">Lolo Lope</span></div>
-            <div class="lineage-card"><div class="branch-name">Nilda</div><span class="nickname">Lola Nilda</span></div>
+    <section class="section" id="apparel" style="background: #fff;">
+        <span class="header-sub">The Commemorative Collection</span>
+        <h2 class="header-title">Heritage Apparel</h2>
+        
+        <div class="apparel-grid">
+            <div class="apparel-card" onclick="playClick()">
+                <img src="images/apparel_front.jpg" alt="Nutrition Facts Design">
+                <div class="apparel-meta">
+                    <h4>"Sazon Recipe" Tee</h4>
+                    <p>Luminous Blue Series</p>
+                </div>
+            </div>
+            <div class="apparel-card" onclick="playClick()">
+                <img src="images/apparel_back.jpg" alt="Legacy Tree Design">
+                <div class="apparel-meta">
+                    <h4>Legacy Branch Hoodie</h4>
+                    <p>2027 Signature Edition</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <section class="access-section" id="register">
         <div class="access-grid">
             <div class="qr-card">
-                <img src="images/qr.png" alt="Scan to Register" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://tinyurl.com/SazonGrandReunion'">
-                <h3 style="font-family:Cinzel;">Scan to Register</h3>
-                <p style="font-size:0.75rem; color:#666;">Point your camera here to open the registration form instantly.</p>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://tinyurl.com/SazonGrandReunion" alt="Scan to Register">
+                <h3>Scan to Register</h3>
+                <p style="font-size:0.75rem; color:#666;">Confirm your attendance instantly via our digital registry.</p>
             </div>
             <div style="text-align:left;">
-                <h2 style="font-family:Cinzel; color:var(--sazon-navy);">Easy Access</h2>
-                <p style="line-height:1.8; font-size:0.9rem;">Share this shortcut with family members who are not on social media. It leads directly to our official Google Form.</p>
-                <code style="background:#ddd; padding:10px; display:block; text-align:center;">tinyurl.com/SazonGrandReunion</code>
+                <h2 style="color:var(--sazon-navy);">Official Access</h2>
+                <p style="line-height:1.8; font-size:0.9rem;">Please register early to help the committee with venue logistics at Marzon Hotel, Kalibo.</p>
+                <a href="https://tinyurl.com/SazonGrandReunion" target="_blank" style="color:var(--sazon-gold); text-decoration:none; font-weight:700;">tinyurl.com/SazonGrandReunion</a>
             </div>
         </div>
     </section>
 
     <section class="email-banner" id="contact">
-        <p style="text-transform:uppercase; letter-spacing:3px; font-size:0.7rem; margin-bottom:20px;">For Photo Submissions & Inquiries</p>
+        <p style="text-transform:uppercase; letter-spacing:3px; font-size:0.7rem; margin-bottom:20px;">Photos & Submissions</p>
         <a href="mailto:maemiliapalma@yahoo.com" class="email-link" onclick="playClick()">maemiliapalma@yahoo.com</a>
-        <p style="margin-top:20px; opacity:0.6; font-size:0.7rem;">Official Family Correspondence</p>
+        <p style="margin-top:20px; opacity:0.6; font-size:0.7rem;">Curated by the Sazon Archive Committee</p>
     </section>
 
     <div class="audio-ui" id="audio-btn" onclick="toggleMute()">
@@ -191,7 +184,6 @@
                 document.getElementById('bg').classList.add('bg-active');
                 document.getElementById('soon-ui').classList.add('active-ui');
                 document.getElementById('timer-ui').style.opacity = '1';
-                document.getElementById('reg-ui').classList.add('active-ui');
                 document.getElementById('audio-btn').classList.add('active-ui');
             }, 1200);
         }
