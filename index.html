@@ -35,15 +35,15 @@
         .logo-circle-o { width: clamp(2.5rem, 12vw, 8.5rem); height: clamp(2.5rem, 12vw, 8.5rem); margin: 0 5px; border-radius: 50%; overflow: hidden; border: 1.5px solid var(--sazon-gold); box-shadow: 0 0 30px rgba(197,160,89,0.3); position: relative; }
         .logo-circle-o img { width: 100%; height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
 
-        /* GLOWING TIMER */
-        .timer-wrapper { position: relative; z-index: 10; background: rgba(0,0,0,0.4); backdrop-filter: blur(10px); border: 1px solid rgba(197, 160, 89, 0.4); padding: 30px 40px; opacity: 0; transition: 2s 2s; margin-top: 30px; box-shadow: 0 0 50px rgba(0,0,0,1); }
+        /* DYNAMIC TIMER */
+        .timer-wrapper { position: relative; z-index: 10; background: rgba(0,0,0,0.5); backdrop-filter: blur(12px); border: 1px solid rgba(197, 160, 89, 0.4); padding: 30px; opacity: 0; transition: 2s 2s; margin-top: 30px; }
         .timer-container { display: flex; gap: 20px; align-items: center; }
-        .timer-unit { text-align: center; min-width: 60px; }
-        .timer-val { font-size: clamp(1.8rem, 4vw, 3rem); font-family: 'Playfair Display', serif; color: var(--sazon-gold); font-weight: 700; display: block; text-shadow: 0 0 15px rgba(197,160,89,0.5); }
-        .timer-label { font-size: 0.5rem; text-transform: uppercase; letter-spacing: 2px; color: #fff; opacity: 0.8; }
-        .timer-sep { color: var(--sazon-gold); font-size: 1.5rem; padding-bottom: 20px; opacity: 0.5; font-family: 'Playfair Display'; }
+        .timer-unit { text-align: center; min-width: 70px; }
+        .timer-val { font-size: clamp(1.8rem, 4vw, 3rem); font-family: 'Playfair Display', serif; color: var(--sazon-gold); font-weight: 700; display: block; }
+        .timer-label { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 2px; color: #fff; opacity: 0.8; }
+        .timer-sep { color: var(--sazon-gold); font-size: 1.5rem; padding-bottom: 20px; opacity: 0.6; }
 
-        /* LINEAGE SECTION - BALANCED 13 */
+        /* LINEAGE SECTION - NEW SYMMETRICAL FLEX */
         .section { padding: 100px 20px; text-align: center; position: relative; z-index: 10; }
         .header-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 10px; color: var(--sazon-navy); }
         .header-sub { text-transform: uppercase; letter-spacing: 5px; font-size: 0.7rem; color: var(--sazon-gold); display: block; margin-bottom: 50px; }
@@ -51,18 +51,26 @@
         .patriarch-box { max-width: 800px; margin: 0 auto 60px; padding: 40px; border: 1px solid var(--sazon-gold); background: #fff; }
         .p-name { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 5vw, 2.5rem); color: var(--sazon-navy); margin: 0; }
         
-        /* Balancing the 13 Names */
-        .lineage-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+        /* Balanced Flexbox Layout for 13 Items */
+        .lineage-container { 
+            display: flex; 
+            flex-wrap: wrap; 
             gap: 20px; 
-            max-width: 1200px; 
+            max-width: 1300px; 
             margin: 0 auto; 
             justify-content: center;
         }
-        .lineage-card { background: #fff; padding: 30px 10px; border-bottom: 2px solid #f0f0f0; transition: 0.4s; }
+        .lineage-card { 
+            background: #fff; 
+            padding: 40px 20px; 
+            border-bottom: 2px solid #f0f0f0; 
+            transition: 0.4s; 
+            flex: 1 1 230px; /* Base width of 230px, grows to fill space */
+            max-width: 250px;
+            box-sizing: border-box;
+        }
         .lineage-card:hover { border-bottom-color: var(--sazon-gold); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        .branch-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--sazon-navy); font-weight: 700; margin-bottom: 5px; }
+        .branch-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--sazon-navy); font-weight: 700; margin-bottom: 5px; }
         .nickname { font-size: 0.65rem; color: var(--sazon-gold); text-transform: uppercase; letter-spacing: 2px; }
 
         /* VISUAL LEGACY */
@@ -79,7 +87,7 @@
         .audio-ui { position: fixed; bottom: 30px; right: 30px; z-index: 1000; background: rgba(0,0,0,0.6); border: 1px solid var(--sazon-gold); padding: 12px; border-radius: 50%; cursor: pointer; opacity: 0; transition: 1s; }
         .active-ui.audio-ui { opacity: 1; }
 
-        @media (max-width: 768px) { .nav-links { display: none; } .timer-container { gap: 10px; } .timer-sep { display: none; } }
+        @media (max-width: 768px) { .nav-links { display: none; } .timer-container { gap: 10px; } .timer-sep { display: none; } .lineage-card { flex: 1 1 100%; max-width: 100%; } }
     </style>
 </head>
 <body>
@@ -113,8 +121,8 @@
                 <div class="timer-unit"><span class="timer-val" id="hours">00</span><span class="timer-label">Hrs</span></div>
                 <div class="timer-sep">:</div>
                 <div class="timer-unit"><span class="timer-val" id="mins">00</span><span class="timer-label">Min</span></div>
-                <div class="timer-sep" style="opacity:1;">:</div>
-                <div class="timer-unit"><span class="timer-val" id="secs" style="color:#fff;">00</span><span class="timer-label" style="color:var(--sazon-gold);">Sec</span></div>
+                <div class="timer-sep">:</div>
+                <div class="timer-unit"><span class="timer-val" id="secs" style="color:#fff; text-shadow: 0 0 10px #fff;">00</span><span class="timer-label" style="color:var(--sazon-gold);">Sec</span></div>
             </div>
         </div>
     </div>
@@ -123,10 +131,10 @@
         <span class="header-sub">Thirteen Branches, One Root</span>
         <div class="patriarch-box">
             <h2 class="p-name">Tereso & Teofista Sazon</h2>
-            <p style="text-transform:uppercase; letter-spacing:4px; font-size:0.7rem; color:var(--sazon-gold); margin-top:10px;">Founding Patriarch & Matriarch</p>
+            <p style="text-transform:uppercase; letter-spacing:4px; font-size:0.7rem; color:var(--sazon-gold); margin-top:10px;">The Founding Patriarch & Matriarch</p>
         </div>
         
-        <div class="lineage-grid">
+        <div class="lineage-container">
             <div class="lineage-card"><div class="branch-name">Serafin</div><span class="nickname">Lolo Apin</span></div>
             <div class="lineage-card"><div class="branch-name">Monserat</div><span class="nickname">Lola Monching</span></div>
             <div class="lineage-card"><div class="branch-name">Felomina</div><span class="nickname">Lola Mening</span></div>
@@ -148,7 +156,7 @@
         <span class="header-sub">Captured Moments</span>
         <div class="gallery-grid">
             <div class="gallery-item"><img src="images/roots.jpg"><div class="gallery-label">The Roots</div></div>
-            <div class="gallery-item"><img src="images/venue.jpg"><div class="gallery-label">Marzon Hotel</div></div>
+            <div class="gallery-item"><img src="images/venue.jpg"><div class="gallery-label">Marzon Hotel, Kalibo</div></div>
             <div class="gallery-item"><img src="images/memories.jpg"><div class="gallery-label">A Century of Memories</div></div>
             <div class="gallery-item"><img src="images/nextgen.jpg"><div class="gallery-label">The Second Generation</div></div>
         </div>
