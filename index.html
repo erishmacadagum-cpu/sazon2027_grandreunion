@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAZON 2027 | The Grand Reunion</title>
+    <title>SAZON 2027 | Mobile Ready</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #c5a059; --glow: rgba(197, 160, 89, 0.6); }
-        body { margin: 0; background: #000; color: white; font-family: 'Montserrat', sans-serif; overflow: hidden; height: 100vh; }
+        body { margin: 0; background: #000; color: white; font-family: 'Montserrat', sans-serif; overflow: hidden; height: 100vh; -webkit-tap-highlight-color: transparent; }
 
         /* THE GATE */
         #gate-overlay { 
@@ -16,21 +16,19 @@
         }
         .enter-btn { 
             padding: 20px 50px; border: 2px solid var(--gold); color: var(--gold); 
-            font-family: 'Cinzel'; text-transform: uppercase; letter-spacing: 8px;
-            box-shadow: 0 0 25px var(--glow); animation: pulse 2s infinite;
+            font-family: 'Cinzel'; text-transform: uppercase; letter-spacing: 5px;
+            box-shadow: 0 0 25px var(--glow); text-align: center;
         }
-        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
-        /* CINEMATIC CREDITS */
+        /* CREDITS */
         #credits-stage { 
             position: fixed; inset: 0; background: #000; z-index: 999999; 
             display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; 
         }
-        .credit-line { font-family: 'Cinzel'; color: var(--gold); opacity: 0; transform: translateY(20px); transition: 1.5s ease; margin: 10px 0; }
+        .credit-line { font-family: 'Cinzel'; color: var(--gold); opacity: 0; transform: translateY(20px); transition: 1.5s ease; margin: 10px 0; padding: 0 20px; }
         
-        /* SPARKLING VISIBLE FONTS FOR ANCESTORS */
         .patriarch-names { 
-            font-size: clamp(2.2rem, 6vw, 4rem); 
+            font-size: clamp(1.8rem, 6vw, 4rem); 
             font-weight: 700; 
             background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             -webkit-background-clip: text;
@@ -38,21 +36,18 @@
             color: transparent;
             animation: sparkle 3s linear infinite;
             background-size: 200% auto;
-            filter: drop-shadow(0 0 15px rgba(252, 246, 186, 0.5));
         }
         @keyframes sparkle { to { background-position: 200% center; } }
-        
         .reveal { opacity: 1 !important; transform: translateY(0) !important; }
 
-        /* MAIN HERO */
+        /* HERO */
         #main-hero { 
             height: 100vh; display: none; flex-direction: column; justify-content: center; align-items: center; 
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/banner.jpg') center/cover no-repeat; 
             opacity: 0; transition: 3s; 
         }
 
-        /* TRANSFORMATION */
-        .brand-text { display: flex; align-items: center; font-family: 'Cinzel'; font-size: clamp(3rem, 12vw, 9rem); color: var(--gold); font-weight: 700; }
+        .brand-text { display: flex; align-items: center; font-family: 'Cinzel'; font-size: clamp(2.5rem, 10vw, 9rem); color: var(--gold); font-weight: 700; }
         .vanish { transition: 1.2s cubic-bezier(0.7, 0, 0.3, 1); display: inline-block; overflow: hidden; }
         .vanish.hide { opacity: 0; width: 0; transform: scale(0.1); margin: 0; }
 
@@ -61,23 +56,23 @@
             transition: 2s cubic-bezier(0.17, 0.89, 0.32, 1.28); 
             border-radius: 50%;
             background: url('images/emblem.jpg') center/cover no-repeat; 
-            box-shadow: 0 0 50px var(--glow); display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 40px var(--glow); 
         }
-        .moon-o.show { width: clamp(3.5rem, 14vw, 9.5rem); height: clamp(3.5rem, 14vw, 9.5rem); opacity: 1; transform: scale(1) rotate(0deg); margin: 0 15px; }
+        .moon-o.show { width: clamp(3.2rem, 12vw, 9.5rem); height: clamp(3.2rem, 12vw, 9.5rem); opacity: 1; transform: scale(1) rotate(0deg); margin: 0 10px; }
 
-        /* IMPROVED TIMER WITH SECONDS */
-        .timer { display: flex; gap: 10px; margin-top: 45px; opacity: 0; transition: 2s; }
+        /* TIMER */
+        .timer { display: flex; gap: 8px; margin-top: 30px; opacity: 0; transition: 2s; }
         .timer.show { opacity: 1; }
-        .t-box { border: 1px solid var(--gold); padding: 12px; background: rgba(0,0,0,0.85); min-width: 75px; text-align: center; backdrop-filter: blur(5px); }
-        .t-num { display: block; font-size: 1.8rem; color: #fcf6ba; font-weight: 700; }
-        .t-lab { font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+        .t-box { border: 1px solid var(--gold); padding: 10px; background: rgba(0,0,0,0.8); min-width: 60px; text-align: center; }
+        .t-num { display: block; font-size: 1.5rem; color: #fcf6ba; font-weight: 700; }
+        .t-lab { font-size: 0.5rem; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); }
     </style>
 </head>
 <body>
 
-    <audio id="audio-open" src="audio/open.mp3" preload="auto"></audio>
-    <audio id="audio-shimmer" src="audio/shimmer.mp3" preload="auto"></audio>
-    <audio id="audio-jingle" src="audio/jingle.mp3" loop preload="auto"></audio>
+    <audio id="audio-open" src="audio/open.mp3" playsinline></audio>
+    <audio id="audio-shimmer" src="audio/shimmer.mp3" playsinline></audio>
+    <audio id="audio-jingle" src="audio/jingle.mp3" playsinline></audio>
 
     <div id="gate-overlay" onclick="launchExperience()">
         <div class="enter-btn">Enter Sazon Legacy</div>
@@ -86,7 +81,7 @@
     <div id="credits-stage">
         <div class="credit-line" id="l1">A Sazon Family Production</div>
         <div class="credit-line patriarch-names" id="l2">Tereso & Teofista Sazon</div>
-        <div class="credit-line" id="l3">July 23-24, 2027 • Marzon Hotel, Kalibo</div>
+        <div class="credit-line" id="l3">July 2027 • Kalibo, Aklan</div>
     </div>
 
     <main id="main-hero">
@@ -108,8 +103,16 @@
     </main>
 
     <script>
+        const aOpen = document.getElementById('audio-open');
+        const aShim = document.getElementById('audio-shimmer');
+        const aJingle = document.getElementById('audio-jingle');
+
         function launchExperience() {
-            document.getElementById('audio-open').play();
+            // MOBILE UNLOCK: Force start and immediate pause to bypass mobile security
+            aOpen.play();
+            aShim.play(); aShim.pause(); aShim.currentTime = 0;
+            aJingle.play(); aJingle.pause(); aJingle.currentTime = 0;
+            
             const gate = document.getElementById('gate-overlay');
             gate.style.opacity = '0';
             setTimeout(() => {
@@ -122,9 +125,8 @@
         function startCredits() {
             setTimeout(() => document.getElementById('l1').classList.add('reveal'), 500);
             
-            // SYNC: Shimmer on Sparkling Names
             setTimeout(() => {
-                document.getElementById('audio-shimmer').play();
+                aShim.play();
                 document.getElementById('l2').classList.add('reveal');
             }, 3000); 
 
@@ -136,7 +138,10 @@
                     document.getElementById('credits-stage').style.display = 'none';
                     const hero = document.getElementById('main-hero');
                     hero.style.display = 'flex';
-                    document.getElementById('audio-jingle').play();
+                    
+                    // MOBILE LOOP FIX: Manual Loop
+                    aJingle.loop = true;
+                    aJingle.play();
                     
                     setTimeout(() => {
                         hero.style.opacity = '1';
