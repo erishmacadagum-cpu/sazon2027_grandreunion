@@ -1,162 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sazon 13 Branches | Action Center</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,400&display=swap" rel="stylesheet">
-    <style>
-        :root { 
-            --aqua-deep: #0a2e36; /* Warm, dark teal-aquamarine */
-            --aqua-bright: #7fcdca; /* Soft Aquamarine */
-            --coral-pink: #f4a79d; /* Warm, sophisticated pink */
-            --glass-white: rgba(255, 255, 255, 0.07);
-        }
-        
-        body { 
-            background: radial-gradient(circle at center, #134e5e, #0a2e36); /* Soft Aquamarine gradient */
-            color: #f0f0f0; 
-            font-family: 'Cormorant Garamond', serif; 
-            margin: 0; padding: 40px 20px; 
-            overflow-x: hidden; 
-        }
+<div class="jingle-container">
+    <h2>Sazon: Gikan sa Gamot</h2>
+    <audio controls src="jingle.mp3"></audio>
+    <div class="lyrics-box">
+        <p class="lyric-tag">[Intro - Upbeat, Festive Percussion] --- (Verse 1 - The Roots)</p>
+        <p>Sa dugo ni Tereso kag ni <strong>Teyo-fista</strong>,</p>
+        <p>Ang kasanag sang kasanag, hindi madula.</p>
+        <p>Napulo’g tatlo ka sapa, nag-ilig sa iisa,</p>
+        <p>Sa sining duta sang Kalibo, kita magkita.</p>
 
-        .header { text-align: center; margin-bottom: 40px; }
-        .header h1 { 
-            font-family: 'Cinzel'; 
-            color: var(--aqua-bright); 
-            font-size: clamp(2rem, 5vw, 3rem); 
-            letter-spacing: 8px; margin: 0; 
-            text-transform: uppercase;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        #countdown { 
-            font-family: 'Cinzel'; 
-            color: var(--coral-pink); 
-            display: flex; justify-content: center; 
-            gap: 20px; margin: 20px 0 60px 0; 
-            font-size: 1.2rem; letter-spacing: 2px; 
-        }
-        .time-unit { text-align: center; }
-        .time-label { display: block; font-size: 0.6rem; text-transform: uppercase; opacity: 0.7; margin-top: 5px; }
+        <p class="lyric-tag">(Chorus)</p>
+        <p>Sazon! Sazon! Gikan sa Gamot!</p>
+        <p>(Sazon! Gikan sa Gamot!)</p>
+        <p>Our story’s written deep, hindi malilimot!</p>
+        <p>(Hindi malilimot!) ..Puso sa puso, bisag asa man mapunta,</p>
+        <p>Twenty-twenty-seven, bug-os ang pamilya!</p>
 
-        .container { max-width: 1300px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        <p class="lyric-tag">(The Roll Call - Heartfelt & Personal)</p>
+        <p><strong>Se-ra-fin</strong>, Monserat, Felomina, Estrella!</p>
+        <p>Gregorio, Regino, Maria, <strong>Con-cep-cion</strong>!</p>
+        <p>Cezar, Priscilla, Gloria, Reynaldo!</p>
+        <p>Kag si <strong>Nil-da</strong>—we are the Sazon nation!</p>
 
-        .branch-card { 
-            background: var(--glass-white); 
-            border: 1px solid rgba(127, 205, 202, 0.2); 
-            padding: 40px 15px; text-align: center; 
-            transition: all 0.4s ease;
-            width: calc(18% - 20px); min-width: 220px; 
-            box-sizing: border-box;
-            backdrop-filter: blur(5px);
-            border-radius: 8px;
-        }
-        .branch-card:hover { 
-            border-color: var(--coral-pink); 
-            background: rgba(244, 167, 157, 0.1); 
-            transform: translateY(-8px); 
-        }
-        .branch-card h3 { font-family: 'Cinzel'; color: var(--aqua-bright); margin: 0; font-size: 1.4rem; letter-spacing: 2px; }
-        .branch-card span { display: block; font-size: 0.9rem; font-style: italic; opacity: 0.6; margin-bottom: 25px; color: var(--coral-pink); }
-
-        .reg-btn { 
-            display: inline-block; padding: 12px 24px; 
-            border: 1.5px solid var(--coral-pink); 
-            color: var(--coral-pink); 
-            text-decoration: none; font-size: 0.75rem; 
-            letter-spacing: 2px; text-transform: uppercase; 
-            transition: 0.3s;
-            border-radius: 4px;
-        }
-        .reg-btn:hover { background: var(--coral-pink); color: var(--aqua-deep); font-weight: 600; }
-
-        .logistics-section { max-width: 900px; margin: 100px auto 60px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 60px; }
-        .logistics-section h2 { font-family: 'Cinzel'; color: var(--aqua-bright); letter-spacing: 4px; font-size: 1.5rem; margin-bottom: 30px; }
-        
-        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; text-align: left; }
-        .info-box { background: var(--glass-white); padding: 30px; border-left: 3px solid var(--aqua-bright); border-radius: 0 8px 8px 0; }
-        .info-box h4 { font-family: 'Cinzel'; color: var(--coral-pink); margin-top: 0; font-size: 0.9rem; letter-spacing: 2px; }
-        .info-box p { font-size: 1rem; opacity: 0.9; margin-bottom: 20px; }
-
-        .map-link { color: var(--aqua-bright); text-decoration: underline; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; font-weight: bold; }
-
-        .footer { text-align: center; margin-top: 80px; padding: 40px; opacity: 0.5; border-top: 1px solid rgba(255,255,255,0.05); letter-spacing: 3px; font-size: 0.8rem; }
-        .curator-tag { color: var(--aqua-bright); font-size: 1.1rem; text-decoration: none; border-bottom: 1px dashed var(--aqua-bright); }
-
-        @media (max-width: 1100px) { .branch-card { width: calc(33.33% - 20px); } }
-        @media (max-width: 750px) { .info-grid { grid-template-columns: 1fr; } .branch-card { width: calc(50% - 20px); } }
-    </style>
-</head>
-<body>
-
-    <audio id="clickSound" src="click.mp3" preload="auto"></audio>
-
-    <div class="header">
-        <h1>Sazon 2027</h1>
-        <div id="countdown">
-            <div class="time-unit"><span id="days">00</span><span class="time-label">Days</span></div>
-            <div class="time-unit"><span id="hours">00</span><span class="time-label">Hours</span></div>
-            <div class="time-unit"><span id="mins">00</span><span class="time-label">Mins</span></div>
-        </div>
+        <p class="lyric-tag">(Outro - Grand Finale)</p>
+        <p>Sazon! Sazon! Gikan sa Gamot!</p>
+        <p>(Sazon! Gikan sa Gamot!)</p>
+        <p>Bug-os ang kalipay, bug-os ang gugma!</p>
+        <p>(Bug-os ang gugma!)</p>
+        <p>Twenty-twenty-seven, Sazon forever!</p>
+        <p>Sazon forever!</p>
     </div>
-
-    <div class="container">
-        <div class="branch-card"><h3>Serafin</h3><span>Lolo Apin</span><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" target="_blank" class="reg-btn" onclick="playSound()">Register</a></div>
-        <div class="branch-card"><h3>Monserat</h3><span>Lola Monching</span><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" target="_blank" class="reg-btn" onclick="playSound()">Register</a></div>
-        <div class="branch-card"><h3>Felomina</h3><span>Lola Mining</span><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" target="_blank" class="reg-btn" onclick="playSound()">Register</a></div>
-        <div class="branch-card"><h3>Estrella</h3><span>Lola Estring</span><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" target="_blank" class="reg-btn" onclick="playSound()">Register</a></div>
-        <div class="branch-card"><h3>Gregorio</h3><span>Lolo Gorio</span><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" target="_blank" class="reg-btn" onclick="playSound()">Register</a></div>
-
-        <div class="branch-card"><h3>Regino</h3><span>Lolo Taba</span><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" target="_blank" class="reg-btn" onclick="playSound()">Register</a></div>
-        <div class="branch-card"><h3>Maria</h3><span>Lola Maria</span><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" target="_blank" class="reg-btn" onclick="playSound()">Register</a></div>
-        <div class="branch-card"><h3>Concepcion</h3><span>Lola Moret</span><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" target="_blank" class="reg-btn" onclick="playSound()">Register</a></div>
-        <div class="branch-card"><h3>Cezar</h3><span>Lolo Cezar</span><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" target="_blank" class="reg-btn" onclick="playSound()">Register</a></div>
-        <div class="branch-card"><h3>Priscilla</h3><span>Lola Mamay</span><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" target="_blank" class="reg-btn" onclick="playSound()">Register</a></div>
-
-        <div class="branch-card"><h3>Gloria</h3><span>Lola Goly</span><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" target="_blank" class="reg-btn" onclick="playSound()">Register</a></div>
-        <div class="branch-card"><h3>Reynaldo</h3><span>Lolo Lope</span><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" target="_blank" class="reg-btn" onclick="playSound()">Register</a></div>
-        <div class="branch-card"><h3>Nilda</h3><span>Lola Nilda</span><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" target="_blank" class="reg-btn" onclick="playSound()">Register</a></div>
-    </div>
-
-    <div class="logistics-section">
-        <h2>Event Logistics</h2>
-        <div class="info-grid">
-            <div class="info-box">
-                <h4>Primary Venue</h4>
-                <p>Marzon Hotel Kalibo<br>Jaime Cardinal Sin Ave, Kalibo, Aklan</p>
-                <a href="https://www.google.com/maps/search/?api=1&query=Marzon+Hotel+Kalibo" target="_blank" class="map-link">Open in Google Maps</a>
-            </div>
-            
-            <div class="info-box">
-                <h4>Photo Submission</h4>
-                <p>Send ancestral and family photos to our official curator:</p>
-                <a href="mailto:maemiliapalma@yahoo.com" class="curator-tag">maemiliapalma@yahoo.com</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="footer">
-        PRIVATE PORTAL • THE SAZON LINEAGE • EST. 2027
-    </div>
-
-    <script>
-        function playSound() {
-            var audio = document.getElementById("clickSound");
-            if (audio) { audio.currentTime = 0; audio.play(); }
-        }
-
-        const targetDate = new Date("July 1, 2027 00:00:00").getTime();
-        setInterval(() => {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-            if (distance > 0) {
-                document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-                document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById("mins").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            }
-        }, 1000);
-    </script>
-</body>
-</html>
+</div>
