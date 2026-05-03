@@ -10,24 +10,35 @@
         body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow: hidden; }
         .credits, .brand-text { font-family: 'Cinzel', serif !important; letter-spacing: 5px; }
 
+        /* INITIAL UNLOCK SCREEN */
+        #unlock-screen {
+            position: fixed; inset: 0; background: #000; z-index: 10000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            cursor: pointer;
+        }
+
+        /* THE MASK */
         #intro-overlay { 
             position: fixed; inset: 0; background: #000; z-index: 9999; 
-            display: flex; flex-direction: column; justify-content: center; align-items: center; 
-            cursor: pointer; text-align: center; transition: opacity 1.2s ease-in-out;
+            display: none; flex-direction: column; justify-content: center; align-items: center; 
+            text-align: center;
         }
         .credits { color: var(--sazon-gold); opacity: 0; transform: translateY(20px); transition: 1.5s ease; margin: 8px 0; }
         .credit-large { font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 700; text-shadow: 0 0 15px rgba(197,160,89,0.3); }
         .reveal { opacity: 1 !important; transform: translateY(0) !important; }
         
         .tap-btn { 
-            margin-top: 50px; padding: 12px 35px; border: 1px solid var(--sazon-gold); color: #fff; 
-            text-transform: uppercase; font-size: 0.7rem; letter-spacing: 4px; opacity: 0; transition: 1s;
+            padding: 12px 35px; border: 1px solid var(--sazon-gold); color: #fff; 
+            text-transform: uppercase; font-size: 0.7rem; letter-spacing: 4px;
+            animation: breathe 2s infinite;
         }
+        @keyframes breathe { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
+        /* MAIN HERO */
         #hero { 
             height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; 
             background: radial-gradient(circle, rgba(0,26,77,0.7), #000), url('banner.jpg') center/cover no-repeat; 
-            opacity: 0; transition: 2s; 
+            opacity: 0; transition: 2s; display: none;
         }
 
         .brand-text { display: flex; align-items: center; font-size: clamp(3rem, 14vw, 9rem); color: var(--sazon-gold); }
@@ -58,12 +69,15 @@
     <audio id="sfx-open" preload="auto" src="audio/open.mp3"></audio>
     <audio id="jingle" preload="auto" src="audio/jingle.mp3" loop></audio>
 
-    <div id="intro-overlay" onclick="launch()">
+    <div id="unlock-screen" onclick="beginExperience()">
+        <div class="tap-btn">Enter Sazon Legacy</div>
+    </div>
+
+    <div id="intro-overlay">
         <div class="credits" id="c1" style="font-size:0.7rem; letter-spacing:10px;">Sazon Family Production</div>
         <div class="credits" id="c2" style="font-size:0.6rem; margin-top:20px; opacity:0.6;">Honoring the Lineage of</div>
         <div class="credits credit-large" id="c3">Tereso & Teofista Sazon</div>
         <div class="credits" id="c4" style="font-size:0.7rem;">July 2027 • Kalibo, Aklan</div>
-        <div id="tap" class="tap-btn">Tap to Enter</div>
     </div>
 
     <main id="hero">
@@ -81,41 +95,57 @@
     </main>
 
     <script>
-        // High-precision audio triggers
         const shimmer = document.getElementById('sfx-shimmer');
         const openSfx = document.getElementById('sfx-open');
         const jingle = document.getElementById('jingle');
 
-        function start() {
-            setTimeout(() => document.getElementById('c1').classList.add('reveal'), 800);
-            setTimeout(() => { 
-                document.getElementById('c2').classList.add('reveal'); 
-                // Play shimmer on the second credit reveal
-                shimmer.play().catch(e => console.log("Audio waiting for tap"));
-            }, 2200);
-            setTimeout(() => document.getElementById('c3').classList.add('reveal'), 3500);
-            setTimeout(() => document.getElementById('c4').classList.add('reveal'), 4800);
-            setTimeout(() => document.getElementById('tap').style.opacity = '1', 6000);
+        function beginExperience() {
+            // Unlocks audio engine immediately
+            shimmer.play();
+            shimmer.pause();
+            shimmer.currentTime = 0;
+
+            document.getElementById('unlock-screen').style.display = 'none';
+            document.getElementById('intro-overlay').style.display = 'flex';
+            
+            // Start the credits sequence
+            runCredits();
         }
 
-        function launch() {
-            // UNLOCK ALL AUDIO (Essential for Mobile/Chrome)
-            openSfx.play(); 
-            jingle.play();
-
-            document.getElementById('intro-overlay').style.opacity = '0';
+        function runCredits() {
+            setTimeout(() => document.getElementById('c1').classList.add('reveal'), 500);
             
+            setTimeout(() => { 
+                document.getElementById('c2').classList.add('reveal'); 
+                shimmer.play(); // This will work now because of the initial click
+            }, 2000);
+
+            setTimeout(() => document.getElementById('c3').classList.add('reveal'), 3500);
+            setTimeout(() => document.getElementById('c4').classList.add('reveal'), 4800);
+
+            // AUTO-TRANSITION to Hero after credits
             setTimeout(() => {
-                document.getElementById('intro-overlay').style.display = 'none';
-                document.getElementById('hero').style.opacity = '1';
+                openSfx.play();
+                jingle.play();
+                document.getElementById('intro-overlay').style.opacity = '0';
                 
-                // Trigger the branding transformation
                 setTimeout(() => {
-                    document.getElementById('la').classList.add('hide');
-                    document.getElementById('lz').classList.add('hide');
-                    document.getElementById('logo-soon').classList.add('show');
-                }, 1000);
-            }, 1200);
+                    document.getElementById('intro-overlay').style.display = 'none';
+                    document.getElementById('hero').style.display = 'flex';
+                    setTimeout(() => {
+                        document.getElementById('hero').style.opacity = '1';
+                        triggerSoon();
+                    }, 100);
+                }, 1200);
+            }, 7500);
+        }
+
+        function triggerSoon() {
+            setTimeout(() => {
+                document.getElementById('la').classList.add('hide');
+                document.getElementById('lz').classList.add('hide');
+                document.getElementById('logo-soon').classList.add('show');
+            }, 1500);
         }
 
         function clock() {
@@ -128,7 +158,6 @@
         }
 
         setInterval(clock, 1000);
-        window.onload = start;
     </script>
 </body>
 </html>
