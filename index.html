@@ -1,237 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAZON 2027 | The Grand Family Legacy</title>
-    
-    <link rel="icon" type="image/png" href="logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
-    
-    <style>
-        :root { --sazon-navy: #001a4d; --sazon-gold: #c5a059; }
-        * { box-sizing: border-box; scroll-behavior: smooth; }
-        body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow-x: hidden; }
-        h1, h2, h3, .brand-text, .nav-links a { font-family: 'Cinzel', serif !important; letter-spacing: 3px; }
-
-        /* THE CINEMATIC INTRO */
-        #overlay { position: fixed; inset: 0; background: #000; z-index: 100000; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1); text-align: center; }
-        .credits { color: var(--sazon-gold); font-size: clamp(0.8rem, 2.5vw, 1.2rem); text-transform: uppercase; letter-spacing: 10px; margin: 15px; opacity: 0; transform: translateY(20px); transition: 1s; }
-        .reveal { opacity: 1 !important; transform: translateY(0) !important; }
-        .tap-btn { padding: 18px 50px; border: 1px solid var(--sazon-gold); letter-spacing: 8px; text-transform: uppercase; font-size: 0.7rem; color: #fff; margin-top: 50px; opacity: 0; transition: 1.5s; animation: pulse-glow 2s infinite; }
-        @keyframes pulse-glow { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
-
-        /* NAVIGATION */
-        #main-nav { position: fixed; top: 0; width: 100%; height: 90px; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); z-index: 999; display: flex; align-items: center; justify-content: space-between; padding: 0 6%; border-bottom: 1px solid rgba(197,160,89,0.2); transform: translateY(-100%); transition: 1s cubic-bezier(0.16, 1, 0.3, 1); }
-        #main-nav.active { transform: translateY(0); }
-        .nav-links a { color: #fff; text-decoration: none; font-size: 0.75rem; text-transform: uppercase; margin-left: 30px; opacity: 0.6; transition: 0.4s; font-weight: 600; }
-        .nav-links a:hover { color: var(--sazon-gold); opacity: 1; }
-
-        /* HERO: SAZON TO SOON TRANSITION */
-        .stage { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: radial-gradient(circle, rgba(0,26,77,0.4), #000), url('banner.jpg') center/cover no-repeat; position: relative; }
-        
-        .brand-text { display: flex; align-items: center; justify-content: center; font-size: clamp(4rem, 16vw, 12rem); color: var(--sazon-gold); line-height: 1; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .az { transition: all 1.5s ease; width: auto; opacity: 1; display: inline-block; }
-        .az.hide { opacity: 0; width: 0; transform: scale(0); margin: 0; visibility: hidden; }
-        
-        .logo-o { width: 0; height: 0; opacity: 0; transform: scale(0); transition: all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); margin: 0; border-radius: 50%; border: 3px solid var(--sazon-gold); background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .logo-o.show { width: clamp(4rem, 15vw, 11rem); height: clamp(4rem, 15vw, 11rem); opacity: 1; transform: scale(1); margin: 0 20px; box-shadow: 0 0 50px rgba(197,160,89,0.4); }
-        .logo-o img { width: 85%; height: auto; object-fit: contain; }
-
-        /* TIMER */
-        .timer-wrap { margin-top: 60px; display: flex; gap: 30px; background: rgba(0,0,0,0.6); padding: 25px 50px; border: 1px solid rgba(197,160,89,0.3); backdrop-filter: blur(10px); }
-        .t-unit { text-align: center; }
-        .t-num { font-size: 2.8rem; color: var(--sazon-gold); font-weight: 700; display: block; line-height: 1; }
-        .t-lab { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 3px; opacity: 0.8; margin-top: 10px; display: block; }
-
-        /* SECTIONS */
-        .section { padding: 120px 8%; text-align: center; }
-        .white { background: #fff; color: #1a1a1a; }
-        .navy { background: var(--sazon-navy); color: #fff; }
-
-        /* JINGLE */
-        .jingle-card { max-width: 900px; margin: 0 auto; background: rgba(255,255,255,0.03); padding: 70px; border: 1px solid var(--sazon-gold); border-radius: 4px; box-shadow: inset 0 0 30px rgba(197,160,89,0.1); }
-        .lyrics { font-size: 1.4rem; font-style: italic; line-height: 2.2; color: #eee; }
-
-        /* LEGACY GRID */
-        .tree-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 1400px; margin: 60px auto; }
-        .card { background: #fff; border-top: 6px solid var(--sazon-gold); padding: 50px 30px; box-shadow: 0 15px 40px rgba(0,0,0,0.06); transition: 0.4s; }
-        .card:hover { transform: translateY(-10px); border-top-color: var(--sazon-navy); }
-        .nick { color: var(--sazon-gold); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; display: block; }
-
-        /* LOGISTICS */
-        .log-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 60px; text-align: left; margin-top: 60px; }
-        .map-box { height: 500px; border: 2px solid var(--sazon-gold); }
-
-        /* APPAREL */
-        .app-flex { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 60px; }
-        .app-item { width: 480px; background: #fff; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #eee; }
-        .app-label { text-align: left; border-left: 6px solid var(--sazon-gold); padding-left: 20px; margin-top: 25px; font-weight: 700; color: var(--sazon-navy); text-transform: uppercase; }
-
-        /* AUDIO TOGGLE */
-        #audio-btn { position: fixed; bottom: 30px; right: 30px; z-index: 1000; width: 60px; height: 60px; background: rgba(0,0,0,0.8); border: 1px solid var(--sazon-gold); color: var(--sazon-gold); border-radius: 50%; cursor: pointer; display: none; align-items: center; justify-content: center; font-size: 1.5rem; }
-    </style>
-</head>
-<body onload="runIntro()">
-
-    <audio id="sfx-open" src="audio/open.mp3"></audio>
-    <audio id="sfx-click" src="audio/click.mp3"></audio>
-    <audio id="jingle" src="audio/jingle.mp3" loop></audio>
-
-    <button id="audio-btn" onclick="toggleMusic()">🔊</button>
-
-    <div id="overlay" onclick="launchSite()">
-        <div class="credits" id="cr1">Sazon Production</div>
-        <div class="credits" id="cr2">Marzon Hotel Kalibo</div>
-        <div class="credits" id="cr3">July 2027</div>
-        <div class="tap-btn" id="tap">TAP TO ENTER</div>
+<div class="brand-text">
+    <span>S</span>
+    <span class="az" id="let-a">A</span>
+    <span class="az" id="let-z">Z</span>
+    <div class="logo-o" id="logo-soon">
+        <img src="logo.png" alt="Sazon Tree">
     </div>
+    <span>O</span>
+    <span>N</span>
+</div>
 
-    <nav id="main-nav">
-        <span style="color:var(--sazon-gold); font-weight:700; font-size:1.5rem;">SAZON 2027</span>
-        <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#jingle-sec">Jingle</a>
-            <a href="#tree">Legacy</a>
-            <a href="#travel">Logistics</a>
-            <a href="#apparel">Apparel</a>
-        </div>
-    </nav>
+<style>
+    /* Technical Genius Tip: Using 'grid-template-columns' ensures 
+       the letters stay in their lane during the transition */
+    .brand-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0; /* Tight letter spacing for cinematic feel */
+    }
 
-    <section class="stage" id="home">
-        <div class="brand-text">
-            <span>S</span>
-            <span class="az" id="let-a">A</span>
-            <span class="az" id="let-z">Z</span>
-            <div class="logo-o" id="logo-soon"><img src="logo.png"></div>
-            <span>O</span>
-            <span>N</span>
-        </div>
-        <div class="timer-wrap" id="timer"></div>
-    </section>
+    .az {
+        transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 1;
+        width: auto; /* Adjusts based on font size */
+    }
 
-    <section class="section" id="jingle-sec" style="background:#000;">
-        <h2 style="color:var(--sazon-gold); margin-bottom: 50px;">The Official Jingle</h2>
-        <div class="jingle-card">
-            <p class="lyrics">
-                "Gikan sa gamut, tubtob sa langit,<br>
-                Seasoned with love, let the future ignite.<br>
-                Sazon 2027, every path leads us back to the gate.<br>
-                July 2027, the compass aligns,<br>
-                Marzon Hotel, Kalibo, where the heritage shines."
-            </p>
-        </div>
-    </section>
+    .az.hide {
+        opacity: 0;
+        width: 0;
+        margin: 0;
+        transform: scale(0.5);
+    }
 
-    <section class="section white" id="tree">
-        <h1 style="font-size: 3.5rem; color: var(--sazon-navy); margin: 0;">Tereso & Teofista Sazon</h1>
-        <p style="letter-spacing: 12px; color: var(--sazon-gold); font-weight: 600; margin-top: 15px;">THE 13 INTEGRATED BRANCHES</p>
-        <div class="tree-grid" id="tree-engine"></div>
-    </section>
+    .logo-o {
+        width: 0;
+        height: 0;
+        opacity: 0;
+        transform: scale(0);
+        transition: all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
 
-    <section class="section navy" id="travel">
-        <h2 style="color:var(--sazon-gold);">Logistical Planning</h2>
-        <div class="log-grid">
-            <div>
-                <h3 style="color:var(--sazon-gold)">Marzon Hotel Kalibo</h3>
-                <p>Jaime Cardinal Sin Ave, Andagao, Kalibo, Aklan 5600</p>
-                <p style="opacity: 0.8; line-height: 2;">
-                    The premiere venue for the Sazon 2027 Grand Reunion. Located in the heart of Kalibo, 
-                    only 10 minutes from Kalibo International Airport (KLO).
-                </p>
-                <div style="margin-top: 40px; display: flex; gap: 30px; align-items: center;">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://tinyurl.com/Sazon2027" style="border: 4px solid #fff;">
-                    <p style="font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;">Scan to<br>Register</p>
-                </div>
-            </div>
-            <div class="map-box">
-                <iframe src="https://maps.google.com/?cid=11713442290938606363&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ2" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-        </div>
-    </section>
-
-    <section class="section white" id="apparel">
-        <h2 style="color:var(--sazon-navy);">Official Reunion Apparel</h2>
-        <div class="app-flex">
-            <div class="app-item">
-                <img src="apparel_front.jpg" width="100%" alt="Front">
-                <div class="app-label">Front (Logo Tree)</div>
-            </div>
-            <div class="app-item">
-                <img src="apparel_back.jpg" width="100%" alt="Back">
-                <div class="app-label">Back (Nutrition Facts)</div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="section navy" style="padding: 100px 20px; border-top: 5px solid var(--sazon-gold);">
-        <p style="text-transform: uppercase; letter-spacing: 5px; font-size: 0.7rem; opacity: 0.6;">Legacy Photo Curator:</p>
-        <a href="mailto:maemiliapalma@yahoo.com" style="color:var(--sazon-gold); text-decoration:none; font-size: 1.8rem; font-weight: 700;">maemiliapalma@yahoo.com</a>
-        <p style="margin-top: 60px; font-size: 0.6rem; opacity: 0.4;">© 2026 SAZON FAMILY PRODUCTION. ALL RIGHTS RESERVED.</p>
-    </footer>
-
-    <script>
-        const branches = [
-            {n:"Serafin", k:"Lolo Apin"}, {n:"Monserat", k:"Lola Monching"}, {n:"Felomina", k:"Lola Mening"},
-            {n:"Estrella", k:"Lola Estring"}, {n:"Gregorio", k:"Lolo Gorio"}, {n:"Regino", k:"Lolo Taba"},
-            {n:"Maria", k:"Lola Maria"}, {n:"Concepcion", k:"Lola Moret"}, {n:"Cezar", k:"Lolo Cezar"},
-            {n:"Priscilla", k:"Lola Mamay"}, {n:"Gloria", k:"Lola Goly"}, {n:"Reynaldo", k:"Lolo Lope"}, {n:"Nilda", k:"Lola Nilda"}
-        ];
-
-        function runIntro() {
-            const engine = document.getElementById('tree-engine');
-            branches.forEach(b => {
-                engine.innerHTML += `<div class="card"><span class="nick">(${b.k})</span><h3 style="margin:0; color:var(--sazon-navy); font-size:1.6rem;">${b.n}</h3></div>`;
-            });
-
-            // Intro sequence (Always fires immediately)
-            setTimeout(() => document.getElementById('cr1').classList.add('reveal'), 400);
-            setTimeout(() => document.getElementById('cr2').classList.add('reveal'), 1200);
-            setTimeout(() => document.getElementById('cr3').classList.add('reveal'), 2000);
-            setTimeout(() => document.getElementById('tap').classList.add('reveal'), 2800);
-        }
-
-        function toggleMusic() {
-            const jingle = document.getElementById('jingle');
-            const btn = document.getElementById('audio-btn');
-            if (jingle.paused) { jingle.play(); btn.innerText = "🔊"; } 
-            else { jingle.pause(); btn.innerText = "🔇"; }
-        }
-
-        function launchSite() {
-            document.getElementById('sfx-open').play().catch(() => {});
-            document.getElementById('jingle').play().catch(() => {});
-            
-            document.getElementById('overlay').style.opacity = '0';
-            document.getElementById('audio-btn').style.display = 'flex';
-            
-            setTimeout(() => {
-                document.getElementById('overlay').style.display = 'none';
-                document.getElementById('main-nav').classList.add('active');
-                
-                // Branding Animation: SAZON -> SOON
-                setTimeout(() => {
-                    document.getElementById('let-a').classList.add('hide');
-                    document.getElementById('let-z').classList.add('hide');
-                    document.getElementById('logo-soon').classList.add('show');
-                }, 2000);
-            }, 1000);
-        }
-
-        // Countdown Timer
-        setInterval(() => {
-            const diff = new Date("July 23, 2027 00:00:00") - new Date();
-            const d = Math.floor(diff / 86400000);
-            const h = Math.floor((diff % 86400000) / 3600000);
-            const m = Math.floor((diff % 3600000) / 60000);
-            const s = Math.floor((diff % 60000) / 1000);
-            document.getElementById('timer').innerHTML = `
-                <div class="t-unit"><span class="t-num">${d}</span><span class="t-lab">Days</span></div>
-                <div class="t-unit"><span class="t-num">${h}</span><span class="t-lab">Hrs</span></div>
-                <div class="t-unit"><span class="t-num">${m}</span><span class="t-lab">Min</span></div>
-                <div class="t-unit"><span class="t-num">${s}</span><span class="t-lab">Sec</span></div>
-            `;
-        }, 1000);
-    </script>
-</body>
-</html>
+    .logo-o.show {
+        width: clamp(4rem, 15vw, 11rem);
+        height: clamp(4rem, 15vw, 11rem);
+        opacity: 1;
+        transform: scale(1);
+        margin: 0 15px; /* Adds space when it becomes SOON */
+    }
+</style>
