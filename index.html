@@ -10,56 +10,60 @@
         body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow: hidden; }
         .brand-text, .credits, .year-text { font-family: 'Cinzel', serif; letter-spacing: 4px; }
 
-        /* UNLOCK ENTRY */
+        /* ENTRY GATE */
         #unlock-screen { position: fixed; inset: 0; background: #000; z-index: 10000; display: flex; justify-content: center; align-items: center; cursor: pointer; }
         .tap-btn { padding: 15px 45px; border: 1px solid var(--gold); color: var(--gold); text-transform: uppercase; letter-spacing: 6px; animation: breathe 3s infinite; }
         @keyframes breathe { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
 
-        /* INTRO TRIBUTE */
+        /* TRIBUTE CREDITS */
         #intro-overlay { position: fixed; inset: 0; background: #000; z-index: 9999; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         .credits { color: var(--gold); opacity: 0; transform: translateY(10px); transition: 1.2s ease; margin: 10px 0; }
         .credit-large { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 700; text-shadow: 0 0 25px rgba(197,160,89,0.6); }
         .reveal { opacity: 1 !important; transform: translateY(0) !important; }
 
-        /* THE TEASER HUB */
-        #hero { height: 100vh; display: none; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('banner.jpg') center/cover no-repeat; opacity: 0; transition: 2.5s; }
+        /* MAIN HERO */
+        #hero { height: 100vh; display: none; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('banner.jpg') center/cover no-repeat; opacity: 0; transition: 2s; }
         .brand-wrap { display: flex; flex-direction: column; align-items: center; }
         .brand-text { display: flex; align-items: center; font-size: clamp(3.5rem, 15vw, 10rem); color: var(--gold); font-weight: 700; }
-        .year-text { font-size: clamp(1.2rem, 4vw, 2.8rem); color: var(--gold); margin-top: -10px; transition: 1s ease; opacity: 0.8; }
+        .year-text { font-size: clamp(1.2rem, 4vw, 2.5rem); color: var(--gold); margin-top: -10px; transition: 1s; opacity: 0.8; }
 
-        /* ANIMATION TRIGGERS */
-        .az { transition: all 1.2s cubic-bezier(0.6, -0.28, 0.7, 1); display: inline-block; overflow: hidden; }
+        /* THE SAZON TO SOON LOGIC */
+        .az { transition: all 1s cubic-bezier(0.6, -0.28, 0.7, 1); display: inline-block; overflow: hidden; }
         .az.hide { opacity: 0; width: 0; transform: scaleX(0); margin: 0; }
         .year-text.hide { opacity: 0; transform: translateY(-20px); }
 
-        /* THE PERFECT CELESTIAL O */
+        /* THE SCREENSHOT MOON O */
         .moon-o { 
             width: 0; height: 0; opacity: 0; transform: scale(0) rotate(-180deg); 
             transition: all 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; 
-            overflow: hidden; border: 4px solid var(--gold); position: relative; 
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            overflow: hidden; position: relative; 
         }
-        /* Integrating the Screenshot Lattice Texture */
+
+        /* The Gold Lattice Moon Texture from your screenshot */
         .moon-o::before {
             content: ''; position: absolute; inset: 0;
-            background: url('Screenshot 2026-05-03 at 10.06.29 PM.jpg') center/cover;
-            opacity: 0.55; mix-blend-mode: overlay; z-index: 1;
+            background: url('image_ff7c1a.jpg') center/cover; /* Pulls exactly from your reference */
+            z-index: 1; border-radius: 50%;
+            box-shadow: inset 0 0 40px rgba(197,160,89,1);
         }
-        /* Celestial Outer Glow */
+
         .moon-o.show { 
             width: clamp(3.5rem, 14vw, 9.5rem); height: clamp(3.5rem, 14vw, 9.5rem); 
             opacity: 1; transform: scale(1) rotate(0deg); margin: 0 15px; 
-            box-shadow: 0 0 70px rgba(197,160,89,0.9), 0 0 30px #fff;
+            box-shadow: 0 0 60px rgba(197,160,89,0.8), 0 0 20px #fff;
+            border: 2px solid var(--gold);
         }
-        /* Tucking logo.png inside the celestial shape */
-        .moon-o img { width: 82%; height: auto; z-index: 2; filter: drop-shadow(0 0 5px rgba(0,0,0,0.6)); }
+        
+        /* The Logo Tree sitting inside the Moon */
+        .moon-o img { width: 75%; height: auto; z-index: 2; filter: drop-shadow(0 0 5px rgba(0,0,0,0.8)); }
 
-        /* COUNTDOWN REVEAL */
+        /* COUNTDOWN */
         .countdown { display: flex; gap: 20px; margin-top: 50px; opacity: 0; transition: 2s; }
         .countdown.show { opacity: 1; }
-        .c-box { background: rgba(0,0,0,0.85); border: 1px solid var(--gold); padding: 15px; width: 85px; text-align: center; backdrop-filter: blur(10px); }
+        .c-box { background: rgba(0,0,0,0.85); border: 1px solid var(--gold); padding: 15px; width: 85px; text-align: center; }
         .c-num { font-size: 1.8rem; color: var(--gold); font-weight: 700; display: block; }
-        .c-lab { font-size: 0.5rem; text-transform: uppercase; opacity: 0.8; letter-spacing: 2px; }
+        .c-lab { font-size: 0.5rem; text-transform: uppercase; opacity: 0.8; }
     </style>
 </head>
 <body>
@@ -68,12 +72,12 @@
     <audio id="sfx-open" src="audio/open.mp3" preload="auto"></audio>
     <audio id="jingle" src="audio/jingle.mp3" loop preload="auto"></audio>
 
-    <div id="unlock-screen" onclick="beginLegacy()">
+    <div id="unlock-screen" onclick="launchSequence()">
         <div class="tap-btn">Enter Sazon Legacy</div>
     </div>
 
     <div id="intro-overlay">
-        <div class="credits" id="c1" style="font-size:0.7rem; letter-spacing:8px;">Sazon Family Production</div>
+        <div class="credits" id="c1" style="font-size:0.7rem;">Sazon Family Production</div>
         <div class="credits" id="c2" style="font-size:0.6rem; margin-top:15px; opacity:0.7;">Honoring the Lineage of</div>
         <div class="credits credit-large" id="c3">Tereso & Teofista Sazon</div>
         <div class="credits" id="c4" style="font-size:0.7rem;">July 2027 • Kalibo, Aklan</div>
@@ -97,57 +101,41 @@
     </main>
 
     <script>
-        const openS = document.getElementById('sfx-open');
-        const shimS = document.getElementById('sfx-shimmer');
-        const jingS = document.getElementById('jingle');
-
-        function beginLegacy() {
-            openS.play();
+        function launchSequence() {
+            document.getElementById('sfx-open').play();
             document.getElementById('unlock-screen').style.display = 'none';
             document.getElementById('intro-overlay').style.display = 'flex';
             
-            // Phase 1: Tribute Credits
-            setTimeout(() => document.getElementById('c1').classList.add('reveal'), 400);
-            setTimeout(() => document.getElementById('c2').classList.add('reveal'), 1800);
-            
-            // CRITICAL SYNC: Shimmer plays precisely as the Names reveal
+            setTimeout(() => document.getElementById('c1').classList.add('reveal'), 300);
+            setTimeout(() => document.getElementById('c2').classList.add('reveal'), 1600);
             setTimeout(() => { 
-                shimS.play(); 
+                document.getElementById('sfx-shimmer').play(); 
                 document.getElementById('c3').classList.add('reveal'); 
-            }, 3000); 
+            }, 2800); 
+            setTimeout(() => document.getElementById('c4').classList.add('reveal'), 4200);
 
-            setTimeout(() => document.getElementById('c4').classList.add('reveal'), 4500);
-
-            // Phase 2: Teaser Launch
             setTimeout(() => {
                 document.getElementById('intro-overlay').style.opacity = '0';
                 setTimeout(() => {
                     document.getElementById('intro-overlay').style.display = 'none';
                     const h = document.getElementById('hero');
                     h.style.display = 'flex';
-                    jingS.play();
+                    document.getElementById('jingle').play();
                     setTimeout(() => {
                         h.style.opacity = '1';
-                        // Phase 3: The Transformation
-                        setTimeout(executeCelestialShift, 3000);
+                        // THE "SOON" TRANSFORMATION
+                        setTimeout(() => {
+                            document.getElementById('la').classList.add('hide');
+                            document.getElementById('lz').classList.add('hide');
+                            document.getElementById('year').classList.add('hide');
+                            setTimeout(() => {
+                                document.getElementById('moon-o').classList.add('show');
+                                setTimeout(() => document.getElementById('timer').classList.add('show'), 1000);
+                            }, 450);
+                        }, 3000);
                     }, 100);
                 }, 1000);
-            }, 7800);
-        }
-
-        function executeCelestialShift() {
-            // A and Z dissolve, Year fades
-            document.getElementById('la').classList.add('hide');
-            document.getElementById('lz').classList.add('hide');
-            document.getElementById('year').classList.add('hide');
-
-            // Moon O rises to form SOON
-            setTimeout(() => {
-                document.getElementById('moon-o').classList.add('show');
-                setTimeout(() => {
-                    document.getElementById('timer').classList.add('show');
-                }, 1000);
-            }, 450);
+            }, 7500);
         }
 
         function clock() {
