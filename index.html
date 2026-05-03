@@ -3,159 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAZON 2027 | The Grand Reunion</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
+    <title>SAZON 2027</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #c5a059; --glow: rgba(197, 160, 89, 0.7); }
-        body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow: hidden; height: 100vh; }
+        :root { --gold: #c5a059; }
+        body { margin: 0; background: #000; color: white; font-family: 'Montserrat', sans-serif; overflow: hidden; height: 100vh; }
         
-        /* THE MASTER GATE - TOPMOST LAYER */
-        #unlock-screen { 
+        /* THE GATE - FORCED VISIBILITY */
+        #gate { 
             position: fixed; inset: 0; background: #000; z-index: 99999; 
             display: flex; justify-content: center; align-items: center; cursor: pointer;
-            transition: opacity 0.8s ease;
         }
-        .tap-btn { 
-            padding: 20px 50px; border: 2px solid var(--gold); color: var(--gold); 
-            text-transform: uppercase; letter-spacing: 8px; font-family: 'Cinzel';
-            box-shadow: 0 0 30px var(--glow); animation: breathe 3s infinite;
-        }
-        @keyframes breathe { 0%, 100% { opacity: 0.4; transform: scale(0.97); } 50% { opacity: 1; transform: scale(1); } }
+        .btn { padding: 20px 40px; border: 2px solid var(--gold); color: var(--gold); font-family: 'Cinzel'; letter-spacing: 5px; }
 
-        /* CINEMATIC OVERLAY */
-        #intro-overlay { 
-            position: fixed; inset: 0; background: #000; z-index: 9999; 
-            display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; 
-        }
-        .credits { font-family: 'Cinzel'; color: var(--gold); opacity: 0; transform: translateY(15px); transition: 1.5s ease; margin: 10px 0; }
-        .credit-large { font-size: clamp(2rem, 6vw, 4rem); font-weight: 700; text-shadow: 0 0 25px var(--glow); }
+        /* THE INTRO CREDITS */
+        #intro { position: fixed; inset: 0; background: #000; z-index: 9998; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .credit { font-family: 'Cinzel'; color: var(--gold); opacity: 0; transform: translateY(20px); transition: 1s; margin: 10px 0; }
         .reveal { opacity: 1 !important; transform: translateY(0) !important; }
 
-        /* THE REVEAL HUB */
-        #hero { 
+        /* THE MAIN STAGE */
+        #main { 
             height: 100vh; display: none; flex-direction: column; justify-content: center; align-items: center; 
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('banner.jpg') center/cover no-repeat; 
-            opacity: 0; transition: 3s ease-in-out; 
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('banner.jpg') center/cover;
+            opacity: 0; transition: 2s; 
         }
 
-        /* SAZON TO SOON LOGIC */
-        .brand-text { display: flex; align-items: center; font-family: 'Cinzel'; font-size: clamp(3rem, 12vw, 9rem); color: var(--gold); font-weight: 700; position: relative; }
-        .az { transition: 1.5s cubic-bezier(0.7, 0, 0.3, 1); display: inline-block; overflow: hidden; }
-        .az.hide { opacity: 0; width: 0; transform: scale(0.5) rotate(10deg); margin: 0; }
+        /* SAZON TO SOON */
+        .brand { display: flex; align-items: center; font-family: 'Cinzel'; font-size: clamp(3rem, 10vw, 8rem); color: var(--gold); }
+        .hide-me { transition: 1s; width: auto; opacity: 1; }
+        .hide-me.active { width: 0; opacity: 0; overflow: hidden; }
 
-        /* THE PERFECT MOON O */
+        /* THE MOON O - REBUILT */
         .moon-o { 
-            width: 0; height: 0; opacity: 0; transform: scale(0) rotate(-180deg); 
-            transition: 2s cubic-bezier(0.17, 0.89, 0.32, 1.28); 
-            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-            position: relative; border: 3px solid var(--gold);
-            background: url('Screenshot 2026-05-03 at 11.17.04 PM.jpg') center/cover !important;
-            box-shadow: 0 0 60px var(--glow), inset 0 0 20px #000;
-            z-index: 5;
+            width: 0; height: 0; opacity: 0; margin: 0;
+            transition: 1.5s cubic-bezier(0.17, 0.89, 0.32, 1.28);
+            border-radius: 50%; border: 2px solid var(--gold);
+            background: url('moon.jpg') center/cover; /* RENAME YOUR FILE TO moon.jpg */
+            display: flex; align-items: center; justify-content: center; position: relative;
         }
-        .moon-o.show { width: clamp(3.5rem, 14vw, 9.5rem); height: clamp(3.5rem, 14vw, 9.5rem); opacity: 1; transform: scale(1) rotate(0deg); margin: 0 15px; }
-        .moon-o img { width: 80%; height: auto; z-index: 10; position: relative; filter: drop-shadow(0 0 10px #000); }
+        .moon-o.active { width: clamp(4rem, 12vw, 9rem); height: clamp(4rem, 12vw, 9rem); opacity: 1; margin: 0 15px; }
+        .moon-o img { width: 80%; height: auto; filter: drop-shadow(0 0 5px #000); }
 
-        .year-tag { font-family: 'Cinzel'; font-size: 1.5rem; color: var(--gold); transition: 1.2s; margin-top: -10px; opacity: 0.8; }
-        .year-tag.hide { opacity: 0; transform: translateY(-40px); }
-
-        /* TIMER BOXES */
-        .timer { display: flex; gap: 20px; margin-top: 50px; opacity: 0; transition: 2s; }
-        .timer.show { opacity: 1; }
-        .t-box { border: 1px solid var(--gold); padding: 15px; background: rgba(0,0,0,0.85); min-width: 85px; text-align: center; backdrop-filter: blur(10px); }
-        .t-num { display: block; font-size: 2rem; color: var(--gold); font-weight: 700; }
-        .t-lab { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; }
+        .timer { display: flex; gap: 15px; margin-top: 30px; opacity: 0; transition: 1s; }
+        .timer.active { opacity: 1; }
+        .box { border: 1px solid var(--gold); padding: 10px; min-width: 60px; text-align: center; }
     </style>
 </head>
 <body>
 
-    <audio id="shim" src="audio/shimmer.mp3" preload="auto"></audio>
-    <audio id="openS" src="audio/open.mp3" preload="auto"></audio>
-    <audio id="jingle" src="audio/jingle.mp3" loop preload="auto"></audio>
-
-    <div id="unlock-screen" onclick="launchTeaser()">
-        <div class="tap-btn">Enter Sazon Legacy</div>
+    <div id="gate" onclick="start()">
+        <div class="btn">ENTER LEGACY</div>
     </div>
 
-    <div id="intro-overlay">
-        <div class="credits" id="c1">A Sazon Family Production</div>
-        <div class="credits" id="c2" style="font-size:0.8rem; margin-top:15px; opacity:0.8;">Honoring the 13 Branches</div>
-        <div class="credits credit-large" id="c3">Tereso & Teofista Sazon</div>
-        <div class="credits" id="c4" style="font-size:0.8rem;">July 2027 • Kalibo, Aklan</div>
+    <div id="intro">
+        <div class="credit" id="c1">Sazon Family Production</div>
+        <div class="credit" id="c2" style="font-size: 0.8rem;">Honoring the 13 Branches</div>
+        <div class="credit" id="c3" style="font-size: 2rem; font-weight: bold;">Tereso & Teofista Sazon</div>
+        <div class="credit" id="c4">July 2027 • Kalibo, Aklan</div>
     </div>
 
-    <main id="hero">
-        <div class="brand-text">
-            <span>S</span><span class="az" id="a">A</span><span class="az" id="z">Z</span>
-            <div class="moon-o" id="moon"><img src="logo.png"></div>
+    <main id="main">
+        <div class="brand">
+            <span>S</span><span class="hide-me">A</span><span class="hide-me">Z</span>
+            <div class="moon-o"><img src="logo.png"></div>
             <span>O</span><span>N</span>
         </div>
-        <div class="year-tag" id="year">2027</div>
-        <div class="timer" id="timer">
-            <div class="t-box"><span class="t-num" id="days">00</span><span class="t-lab">Days</span></div>
-            <div class="t-box"><span class="t-num" id="hours">00</span><span class="t-lab">Hrs</span></div>
-            <div class="t-box"><span class="t-num" id="mins">00</span><span class="t-lab">Min</span></div>
-            <div class="t-box"><span class="t-num" id="secs">00</span><span class="t-lab">Sec</span></div>
+        <div class="timer">
+            <div class="box"><span id="days">00</span><br><small>DAYS</small></div>
+            <div class="box"><span id="hours">00</span><br><small>HRS</small></div>
+            <div class="box"><span id="mins">00</span><br><small>MIN</small></div>
         </div>
     </main>
-
-    <script>
-        function launchTeaser() {
-            // Audio Trigger
-            document.getElementById('openS').play();
-            
-            // Clean Removal of Gate
-            const gate = document.getElementById('unlock-screen');
-            gate.style.opacity = '0';
-            setTimeout(() => {
-                gate.remove(); // Physically deletes the blocking layer
-                document.getElementById('intro-overlay').style.display = 'flex';
-                runCredits();
-            }, 800);
-        }
-
-        function runCredits() {
-            setTimeout(() => document.getElementById('c1').classList.add('reveal'), 500);
-            setTimeout(() => document.getElementById('c2').classList.add('reveal'), 1800);
-            setTimeout(() => {
-                document.getElementById('shim').play();
-                document.getElementById('c3').classList.add('reveal');
-            }, 3000); 
-            setTimeout(() => document.getElementById('c4').classList.add('reveal'), 4500);
-
-            // Shift to Hub
-            setTimeout(() => {
-                document.getElementById('intro-overlay').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('intro-overlay').style.display = 'none';
-                    const h = document.getElementById('hero');
-                    h.style.display = 'flex';
-                    document.getElementById('jingle').play();
-                    setTimeout(() => {
-                        h.style.opacity = '1';
-                        // Transformation Legwork
-                        setTimeout(triggerSoon, 3500);
-                    }, 100);
-                }, 1500);
-            }, 8500);
-        }
-
-        function triggerSoon() {
-            document.getElementById('a').classList.add('hide');
-            document.getElementById('z').classList.add('hide');
-            document.getElementById('year').classList.add('hide');
-            
-            setTimeout(() => {
-                document.getElementById('moon').classList.add('show');
-                setTimeout(() => {
-                    document.getElementById('timer').classList.add('show');
-                }, 1000);
-            }, 700);
-        }
-
-        function clock() {
-            const diff = new Date("July 23, 2027 00:00:00") - new Date();
-            if(diff < 0) return;
-            document.getElementById('days').innerText = Math.floor(diff/86400000).toString().padStart(2,'0');
-            document.getElementById('hours').innerText = Math.floor((diff%86400000)/3600000).toString().padStart(2,'0');
-            document.getElementById('mins').innerText = Math.floor((diff%3600000)/60000).toString().padStart
