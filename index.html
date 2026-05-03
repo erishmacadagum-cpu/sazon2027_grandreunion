@@ -3,51 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAZON 2027 | The Legacy</title>
+    <title>SAZON 2027 | The Grand Reunion</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #c5a059; }
+        :root { --gold: #c5a059; --shadow: rgba(0,0,0,0.8); }
         body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow: hidden; height: 100vh; }
         
-        /* THE MASTER GATE */
-        #unlock-screen { position: fixed; inset: 0; background: #000; z-index: 10000; display: flex; justify-content: center; align-items: center; cursor: pointer; }
-        .tap-btn { padding: 20px 50px; border: 2px solid var(--gold); color: var(--gold); text-transform: uppercase; letter-spacing: 8px; font-family: 'Cinzel'; animation: pulse 2.5s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+        /* THE GATEKEEPER - TOP LAYER */
+        #unlock-screen { 
+            position: fixed; inset: 0; background: #000; z-index: 99999; 
+            display: flex; justify-content: center; align-items: center; cursor: pointer;
+        }
+        .tap-btn { 
+            padding: 20px 50px; border: 2px solid var(--gold); color: var(--gold); 
+            text-transform: uppercase; letter-spacing: 8px; font-family: 'Cinzel';
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.4); animation: breathe 3s infinite;
+        }
+        @keyframes breathe { 0%, 100% { opacity: 0.4; transform: scale(0.98); } 50% { opacity: 1; transform: scale(1); } }
 
-        /* THE CREDITS SEQUENCE */
-        #intro-overlay { position: fixed; inset: 0; background: #000; z-index: 9999; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .credits { font-family: 'Cinzel'; color: var(--gold); opacity: 0; transform: translateY(20px); transition: 1.2s ease; margin: 10px 0; }
-        .credit-large { font-size: clamp(2rem, 6vw, 4rem); font-weight: 700; text-shadow: 0 0 20px rgba(197, 160, 89, 0.6); }
+        /* INTRO OVERLAY */
+        #intro-overlay { 
+            position: fixed; inset: 0; background: #000; z-index: 9998; 
+            display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; 
+        }
+        .credits { font-family: 'Cinzel'; color: var(--gold); opacity: 0; transform: translateY(15px); transition: 1.2s ease; margin: 8px 0; }
+        .credit-large { font-size: clamp(1.8rem, 5vw, 3.5rem); font-weight: 700; text-shadow: 0 0 20px rgba(197,160,89,0.6); }
         .reveal { opacity: 1 !important; transform: translateY(0) !important; }
 
-        /* THE MAIN STAGE */
-        #hero { height: 100vh; display: none; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('banner.jpg') center/cover no-repeat; opacity: 0; transition: 3s; }
+        /* THE MAIN HUB */
+        #hero { 
+            height: 100vh; display: none; flex-direction: column; justify-content: center; align-items: center; 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('banner.jpg') center/cover no-repeat; 
+            opacity: 0; transition: 2.5s; 
+        }
         .brand-text { display: flex; align-items: center; font-family: 'Cinzel'; font-size: clamp(3rem, 12vw, 9rem); color: var(--gold); font-weight: 700; }
         
-        /* THE "SOON" TRANSFORMATION */
+        /* TRANSFORMATION LEGWORK */
         .az { transition: 1.2s cubic-bezier(0.6, -0.28, 0.7, 1); display: inline-block; overflow: hidden; }
         .az.hide { opacity: 0; width: 0; transform: scaleX(0); margin: 0; }
 
-        /* THE MOON O: EXACT VISUAL FIX */
+        /* THE CELESTIAL MOON O */
         .moon-o { 
             width: 0; height: 0; opacity: 0; transform: scale(0) rotate(-180deg); 
-            transition: 1.8s cubic-bezier(0.17, 0.89, 0.32, 1.28); 
+            transition: 2s cubic-bezier(0.17, 0.89, 0.32, 1.28); 
             border-radius: 50%; display: flex; align-items: center; justify-content: center; 
             position: relative; border: 3px solid var(--gold);
-            /* FORCING THE SCREENSHOT IMAGE */
             background: url('Screenshot 2026-05-03 at 11.17.04 PM.jpg') center/cover !important;
-            box-shadow: 0 0 50px rgba(197,160,89,0.8);
+            box-shadow: 0 0 50px rgba(197,160,89,0.8), inset 0 0 20px #000;
         }
         .moon-o.show { width: clamp(3.5rem, 13vw, 8.5rem); height: clamp(3.5rem, 13vw, 8.5rem); opacity: 1; transform: scale(1) rotate(0deg); margin: 0 15px; }
-        .moon-o img { width: 85%; height: auto; z-index: 2; filter: drop-shadow(0 0 5px rgba(0,0,0,0.8)); }
+        .moon-o img { width: 82%; height: auto; z-index: 2; filter: drop-shadow(0 0 5px #000); }
 
-        .year-tag { font-family: 'Cinzel'; font-size: 1.5rem; color: var(--gold); transition: 1s; }
-        .year-tag.hide { opacity: 0; }
+        .year-tag { font-family: 'Cinzel'; font-size: 1.5rem; color: var(--gold); margin-top: -10px; transition: 1s; }
+        .year-tag.hide { opacity: 0; transform: translateY(-20px); }
 
-        /* TIMER */
-        .timer { display: flex; gap: 20px; margin-top: 40px; opacity: 0; transition: 2s; }
+        /* COUNTDOWN */
+        .timer { display: flex; gap: 15px; margin-top: 40px; opacity: 0; transition: 2s; }
         .timer.show { opacity: 1; }
-        .t-unit { border: 1px solid var(--gold); padding: 15px; background: rgba(0,0,0,0.7); min-width: 70px; text-align: center; }
+        .t-unit { border: 1px solid var(--gold); padding: 12px; background: rgba(0,0,0,0.75); min-width: 75px; text-align: center; backdrop-filter: blur(5px); }
         .t-num { display: block; font-size: 1.8rem; color: var(--gold); font-weight: 700; }
         .t-label { font-size: 0.5rem; text-transform: uppercase; letter-spacing: 2px; }
     </style>
@@ -58,15 +71,15 @@
     <audio id="openS" src="audio/open.mp3"></audio>
     <audio id="jingle" src="audio/jingle.mp3" loop></audio>
 
-    <div id="unlock-screen" onclick="startShow()">
+    <div id="unlock-screen" onclick="beginExperience()">
         <div class="tap-btn">Enter Sazon Legacy</div>
     </div>
 
     <div id="intro-overlay">
-        <div class="credits" id="c1">Sazon Family Production</div>
-        <div class="credits" id="c2" style="font-size:0.8rem; margin-top:15px;">Honoring the Lineage of</div>
+        <div class="credits" id="c1">A Sazon Family Production</div>
+        <div class="credits" id="c2" style="font-size:0.8rem; margin-top:15px;">In Honor of the 13 Branches</div>
         <div class="credits credit-large" id="c3">Tereso & Teofista Sazon</div>
-        <div class="credits" id="c4" style="font-size:0.8rem;">July 2027 • Aklan</div>
+        <div class="credits" id="c4" style="font-size:0.9rem; letter-spacing: 5px;">July 2027 • Kalibo, Aklan</div>
     </div>
 
     <main id="hero">
@@ -76,57 +89,74 @@
             <span>O</span><span>N</span>
         </div>
         <div class="year-tag" id="year">2027</div>
+        
         <div class="timer" id="timer">
-            <div class="t-unit"><span class="t-num" id="d">00</span><span class="t-label">Days</span></div>
-            <div class="t-unit"><span class="t-num" id="h">00</span><span class="t-label">Hrs</span></div>
-            <div class="t-unit"><span class="t-num" id="m">00</span><span class="t-label">Min</span></div>
-            <div class="t-unit"><span class="t-num" id="s">00</span><span class="t-label">Sec</span></div>
+            <div class="t-unit"><span class="t-num" id="days">00</span><span class="t-label">Days</span></div>
+            <div class="t-unit"><span class="t-num" id="hours">00</span><span class="t-label">Hrs</span></div>
+            <div class="t-unit"><span class="t-num" id="mins">00</span><span class="t-label">Min</span></div>
+            <div class="t-unit"><span class="t-num" id="secs">00</span><span class="t-label">Sec</span></div>
         </div>
     </main>
 
     <script>
-        function startShow() {
+        function beginExperience() {
             document.getElementById('openS').play();
-            document.getElementById('unlock-screen').style.display = 'none';
-            document.getElementById('intro-overlay').style.display = 'flex';
-
-            // Timing restored
-            setTimeout(() => document.getElementById('c1').classList.add('reveal'), 500);
+            document.getElementById('unlock-screen').style.pointerEvents = 'none';
+            document.getElementById('unlock-screen').style.opacity = '0';
+            
             setTimeout(() => {
-                document.getElementById('shim').play();
-                document.getElementById('c3').classList.add('reveal');
-            }, 2800); // Shimmer exactly on names
-            setTimeout(() => document.getElementById('c4').classList.add('reveal'), 4200);
-
-            // Shift to Hero
-            setTimeout(() => {
-                document.getElementById('intro-overlay').style.opacity = '0';
+                document.getElementById('unlock-screen').style.display = 'none';
+                document.getElementById('intro-overlay').style.display = 'flex';
+                
+                // RESTORED CREDITS & SOUND SYNC
+                setTimeout(() => document.getElementById('c1').classList.add('reveal'), 400);
+                setTimeout(() => document.getElementById('c2').classList.add('reveal'), 1800);
                 setTimeout(() => {
-                    document.getElementById('intro-overlay').style.display = 'none';
-                    const hero = document.getElementById('hero');
-                    hero.style.display = 'flex';
-                    document.getElementById('jingle').play();
-                    setTimeout(() => { 
-                        hero.style.opacity = '1'; 
-                        // The Transformation
+                    document.getElementById('shim').play();
+                    document.getElementById('c3').classList.add('reveal');
+                }, 3000); // Shimmer rings on Patriarch & Matriarch
+                setTimeout(() => document.getElementById('c4').classList.add('reveal'), 4500);
+
+                // TRANSITION TO MAIN HUB
+                setTimeout(() => {
+                    document.getElementById('intro-overlay').style.opacity = '0';
+                    setTimeout(() => {
+                        document.getElementById('intro-overlay').style.display = 'none';
+                        const hero = document.getElementById('hero');
+                        hero.style.display = 'flex';
+                        document.getElementById('jingle').play();
                         setTimeout(() => {
-                            document.getElementById('a').classList.add('hide');
-                            document.getElementById('z').classList.add('hide');
-                            document.getElementById('year').classList.add('hide');
-                            setTimeout(() => {
-                                document.getElementById('moon').classList.add('show');
-                                setTimeout(() => document.getElementById('timer').classList.add('show'), 1000);
-                            }, 500);
-                        }, 3000);
-                    }, 100);
-                }, 1000);
-            }, 7500);
+                            hero.style.opacity = '1';
+                            // SAZON TO SOON LEGWORK
+                            setTimeout(triggerSoon, 3000);
+                        }, 100);
+                    }, 1000);
+                }, 8000);
+            }, 500);
         }
 
-        function clock() {
-            const diff = new Date("July 23, 2027 00:00:00") - new Date();
-            if(diff < 0) return;
-            document.getElementById('d').innerText = Math.floor(diff/86400000).toString().padStart(2,'0');
-            document.getElementById('h').innerText = Math.floor((diff%86400000)/3600000).toString().padStart(2,'0');
-            document.getElementById('m').innerText = Math.floor((diff%3600000)/60000).toString().padStart(2,'0');
-            document.getElementById('s').innerText =
+        function triggerSoon() {
+            document.getElementById('a').classList.add('hide');
+            document.getElementById('z').classList.add('hide');
+            document.getElementById('year').classList.add('hide');
+            
+            setTimeout(() => {
+                document.getElementById('moon').classList.add('show');
+                setTimeout(() => {
+                    document.getElementById('timer').classList.add('show');
+                }, 1000);
+            }, 600);
+        }
+
+        function updateClock() {
+            const t = new Date("July 23, 2027 00:00:00") - new Date();
+            if (t < 0) return;
+            document.getElementById('days').innerText = Math.floor(t / 86400000).toString().padStart(2,'0');
+            document.getElementById('hours').innerText = Math.floor((t % 86400000) / 3600000).toString().padStart(2,'0');
+            document.getElementById('mins').innerText = Math.floor((t % 3600000) / 60000).toString().padStart(2,'0');
+            document.getElementById('secs').innerText = Math.floor((t % 60000) / 1000).toString().padStart(2,'0');
+        }
+        setInterval(updateClock, 1000);
+    </script>
+</body>
+</html>
