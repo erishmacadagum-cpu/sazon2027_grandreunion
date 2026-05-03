@@ -40,14 +40,14 @@
         .logistics-section h2 { font-family: 'Cinzel'; color: var(--gold); letter-spacing: 4px; font-size: 1.5rem; margin-bottom: 30px; }
         
         .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; text-align: left; }
-        .info-box { background: var(--glass); padding: 30px; border-left: 2px solid var(--gold); }
+        .info-box { background: var(--glass); padding: 30px; border-left: 2px solid var(--gold); height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
         .info-box h4 { font-family: 'Cinzel'; color: var(--gold); margin-top: 0; font-size: 0.9rem; letter-spacing: 2px; }
         .info-box p { font-size: 1rem; opacity: 0.8; margin-bottom: 20px; }
 
-        .map-link { color: var(--gold); text-decoration: underline; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; }
+        .map-link { color: var(--gold); text-decoration: underline; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; font-weight: bold; }
 
         .footer { text-align: center; margin-top: 80px; padding: 40px; opacity: 0.6; border-top: 1px solid rgba(255,255,255,0.05); }
-        .curator-tag { font-style: italic; color: var(--gold); font-size: 1.1rem; }
+        .curator-tag { font-style: italic; color: var(--gold); font-size: 1.1rem; text-decoration: none; }
 
         @media (max-width: 1100px) { .branch-card { width: calc(33.33% - 20px); } }
         @media (max-width: 750px) { .info-grid { grid-template-columns: 1fr; } .branch-card { width: calc(50% - 20px); } }
@@ -89,12 +89,13 @@
         <div class="info-grid">
             <div class="info-box">
                 <h4>Primary Venue</h4>
-                <p>Marzon Hotel, Kalibo, Aklan</p>
-                <a href="https://maps.app.goo.gl/9Tz8z8z8z8z8z8z8z" target="_blank" class="map-link">View Map Location</a>
+                <p>Marzon Hotel Kalibo<br>Jaime Cardinal Sin Ave, Kalibo, Aklan</p>
+                <a href="https://www.google.com/maps/dir//Marzon+Hotel+Kalibo+Jaime+Cardinal+Sin+Ave+Kalibo,+5600+Aklan" target="_blank" class="map-link">Open in Google Maps</a>
             </div>
+            
             <div class="info-box">
                 <h4>Photo Submission</h4>
-                <p>Please send all ancestral and family branch photos to our curator:</p>
+                <p>Send ancestral and family photos to our official curator:</p>
                 <a href="mailto:maemiliapalma@yahoo.com" class="curator-tag">maemiliapalma@yahoo.com</a>
             </div>
         </div>
@@ -105,6 +106,7 @@
     </div>
 
     <script>
+        // Sound function
         function playSound() {
             var audio = document.getElementById("clickSound");
             if (audio) { audio.currentTime = 0; audio.play(); }
@@ -115,9 +117,11 @@
         setInterval(() => {
             const now = new Date().getTime();
             const distance = targetDate - now;
-            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            document.getElementById("mins").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            if (distance > 0) {
+                document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+                document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("mins").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            }
         }, 1000);
     </script>
 </body>
