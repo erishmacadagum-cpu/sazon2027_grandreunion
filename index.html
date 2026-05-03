@@ -10,7 +10,7 @@
         body { margin: 0; background: #000; font-family: 'Montserrat', sans-serif; color: white; overflow: hidden; }
         .brand-text, .credits, .year-text { font-family: 'Cinzel', serif; letter-spacing: 4px; }
 
-        /* THE GATEKEEPER */
+        /* UNLOCK GATE */
         #unlock-screen { position: fixed; inset: 0; background: #000; z-index: 10000; display: flex; justify-content: center; align-items: center; cursor: pointer; }
         .tap-btn { padding: 15px 45px; border: 1px solid var(--gold); color: var(--gold); text-transform: uppercase; letter-spacing: 6px; animation: breathe 3s infinite; }
         @keyframes breathe { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
@@ -27,27 +27,30 @@
         .brand-text { display: flex; align-items: center; font-size: clamp(3.5rem, 15vw, 10rem); color: var(--gold); font-weight: 700; }
         .year-text { font-size: clamp(1rem, 4vw, 2.5rem); color: var(--gold); margin-top: -10px; transition: 1s; }
 
-        /* TRANSFORMATION */
+        /* THE "SAZON TO SOON" PHYSICS */
         .az { transition: all 1s cubic-bezier(0.6, -0.28, 0.7, 1); display: inline-block; overflow: hidden; }
         .az.hide { opacity: 0; width: 0; transform: scaleX(0); margin: 0; }
         .year-text.hide { opacity: 0; transform: translateY(-15px); }
 
-        /* THE CELESTIAL MOON O */
+        /* THE PERFECT CELESTIAL O */
         .moon-o { 
             width: 0; height: 0; opacity: 0; transform: scale(0) rotate(-180deg); 
             transition: all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; 
-            overflow: hidden; border: 3px solid var(--gold); position: relative; 
+            overflow: hidden; border: 4px solid var(--gold); position: relative; 
         }
-        .moon-o::after { content: ''; position: absolute; inset: 0; box-shadow: inset 0 0 30px var(--gold); border-radius: 50%; }
+        /* Moon Interior Glow */
+        .moon-o::after { content: ''; position: absolute; inset: 0; box-shadow: inset 0 0 35px var(--gold); border-radius: 50%; pointer-events: none; }
+        
         .moon-o.show { 
             width: clamp(3.5rem, 14vw, 9.5rem); height: clamp(3.5rem, 14vw, 9.5rem); 
-            opacity: 1; transform: scale(1) rotate(0deg); margin: 0 12px; 
-            box-shadow: 0 0 60px rgba(197,160,89,0.8), 0 0 20px #fff;
+            opacity: 1; transform: scale(1) rotate(0deg); margin: 0 15px; 
+            box-shadow: 0 0 60px rgba(197,160,89,0.8), 0 0 30px #fff;
         }
-        .moon-o img { width: 80%; height: auto; z-index: 2; filter: drop-shadow(0 0 3px rgba(0,0,0,0.4)); }
+        /* Logo tucked inside the moon */
+        .moon-o img { width: 85%; height: 85%; object-fit: contain; z-index: 2; filter: drop-shadow(0 0 4px rgba(0,0,0,0.5)); }
 
-        /* COUNTDOWN */
+        /* TIMER BOXES */
         .countdown { display: flex; gap: 20px; margin-top: 50px; opacity: 0; transition: 2s; }
         .countdown.show { opacity: 1; }
         .c-box { background: rgba(0,0,0,0.8); border: 1px solid var(--gold); padding: 15px; width: 85px; text-align: center; }
@@ -61,7 +64,7 @@
     <audio id="sfx-open" src="audio/open.mp3" preload="auto"></audio>
     <audio id="jingle" src="audio/jingle.mp3" loop preload="auto"></audio>
 
-    <div id="unlock-screen" onclick="launch()">
+    <div id="unlock-screen" onclick="launchExperience()">
         <div class="tap-btn">Enter Sazon Legacy</div>
     </div>
 
@@ -75,9 +78,12 @@
     <main id="hero">
         <div class="brand-wrap">
             <div class="brand-text">
-                <span>S</span><span class="az" id="la">A</span><span class="az" id="lz">Z</span>
-                <div class="moon-o" id="moon"><img src="logo.png"></div>
-                <span>O</span><span>N</span>
+                <span>S</span>
+                <span class="az" id="la">A</span>
+                <span class="az" id="lz">Z</span>
+                <div class="moon-o" id="moon-o"><img src="logo.png"></div>
+                <span>O</span>
+                <span>N</span>
             </div>
             <div class="year-text" id="year">2027</div>
         </div>
@@ -90,21 +96,21 @@
     </main>
 
     <script>
-        function launch() {
+        function launchExperience() {
             document.getElementById('sfx-open').play();
             document.getElementById('unlock-screen').style.display = 'none';
             document.getElementById('intro-overlay').style.display = 'flex';
             
-            // Credits sequence
+            // Credits Timing
             setTimeout(() => document.getElementById('c1').classList.add('reveal'), 300);
             setTimeout(() => document.getElementById('c2').classList.add('reveal'), 1600);
             setTimeout(() => { 
                 document.getElementById('sfx-shimmer').play(); 
                 document.getElementById('c3').classList.add('reveal'); 
-            }, 2800); // Shimmer hits exactly with the names
+            }, 2800); 
             setTimeout(() => document.getElementById('c4').classList.add('reveal'), 4200);
 
-            // Transition to main hero
+            // Shift to Teaser
             setTimeout(() => {
                 document.getElementById('intro-overlay').style.opacity = '0';
                 setTimeout(() => {
@@ -114,19 +120,19 @@
                     document.getElementById('jingle').play();
                     setTimeout(() => {
                         h.style.opacity = '1';
-                        // Transformation
+                        // The Transformation Sequence
                         setTimeout(() => {
                             document.getElementById('la').classList.add('hide');
                             document.getElementById('lz').classList.add('hide');
                             document.getElementById('year').classList.add('hide');
                             setTimeout(() => {
-                                document.getElementById('moon').classList.add('show');
+                                document.getElementById('moon-o').classList.add('show');
                                 setTimeout(() => document.getElementById('timer').classList.add('show'), 800);
-                            }, 400);
-                        }, 2500);
+                            }, 450);
+                        }, 3000); // 3 seconds to admire the banner before transforming
                     }, 100);
                 }, 1000);
-            }, 7000);
+            }, 7500);
         }
 
         function clock() {
