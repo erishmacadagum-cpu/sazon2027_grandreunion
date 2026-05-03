@@ -9,7 +9,7 @@
         :root { --gold: #c5a059; --glow: rgba(197, 160, 89, 0.6); }
         body { margin: 0; background: #000; color: white; font-family: 'Montserrat', sans-serif; overflow: hidden; height: 100vh; }
 
-        /* THE GATE - REMOVABLE LAYER */
+        /* THE GATE - ENSURES SITE ACCESS */
         #gate-overlay { 
             position: fixed; inset: 0; background: #000; z-index: 1000000; 
             display: flex; justify-content: center; align-items: center; cursor: pointer;
@@ -30,38 +30,39 @@
         .names { font-size: clamp(1.8rem, 5vw, 3.5rem); font-weight: 700; text-shadow: 0 0 35px var(--glow); }
         .reveal { opacity: 1 !important; transform: translateY(0) !important; }
 
-        /* MAIN REVEAL */
+        /* MAIN STAGE */
         #main-hero { 
             height: 100vh; display: none; flex-direction: column; justify-content: center; align-items: center; 
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('banner.jpg') center/cover no-repeat; 
             opacity: 0; transition: 3s; 
         }
 
-        /* TRANSFORMATION: SAZON TO SOON */
+        /* TRANSFORMATION LOGIC */
         .brand-text { display: flex; align-items: center; font-family: 'Cinzel'; font-size: clamp(3rem, 12vw, 9rem); color: var(--gold); font-weight: 700; }
         .vanish { transition: 1.2s cubic-bezier(0.7, 0, 0.3, 1); display: inline-block; overflow: hidden; }
-        .vanish.hide { opacity: 0; width: 0; transform: scale(0); margin: 0; }
+        .vanish.hide { opacity: 0; width: 0; transform: scale(0.1); margin: 0; }
 
-        /* THE MOON O WITH LOGO INTEGRATION */
+        /* THE EMBLEM O (emblem.jpg) */
         .moon-o { 
-            width: 0; height: 0; opacity: 0; transform: scale(0) rotate(-180deg); 
+            width: 0; height: 0; opacity: 0; transform: scale(0) rotate(-45deg); 
             transition: 2s cubic-bezier(0.17, 0.89, 0.32, 1.28); 
-            border-radius: 50%; border: 3px solid var(--gold);
-            background: url('Screenshot 2026-05-04 at 12.07.49 AM.png') center/cover !important;
+            border-radius: 50%;
+            background: url('emblem.jpg') center/cover no-repeat; 
             box-shadow: 0 0 50px var(--glow); display: flex; align-items: center; justify-content: center;
         }
-        .moon-o.show { width: clamp(3.5rem, 14vw, 9.5rem); height: clamp(3.5rem, 14vw, 9.5rem); opacity: 1; transform: scale(1) rotate(0deg); margin: 0 15px; }
-        
-        /* THE FAMILY TREE LOGO */
-        .moon-o img { width: 85%; height: auto; z-index: 10; position: relative; filter: drop-shadow(0 0 12px #000); }
+        .moon-o.show { 
+            width: clamp(3.5rem, 14vw, 9.5rem); 
+            height: clamp(3.5rem, 14vw, 9.5rem); 
+            opacity: 1; transform: scale(1) rotate(0deg); margin: 0 15px; 
+        }
 
         .year-tag { font-family: 'Cinzel'; font-size: 1.5rem; color: var(--gold); transition: 1.2s; margin-top: -10px; }
         .year-tag.hide { opacity: 0; transform: translateY(-40px); }
 
-        /* COUNTDOWN BOXES */
+        /* TIMER BOXES */
         .timer { display: flex; gap: 15px; margin-top: 45px; opacity: 0; transition: 2s; }
         .timer.show { opacity: 1; }
-        .t-box { border: 1px solid var(--gold); padding: 15px; background: rgba(0,0,0,0.85); min-width: 85px; text-align: center; backdrop-filter: blur(5px); }
+        .t-box { border: 1px solid var(--gold); padding: 15px; background: rgba(0,0,0,0.85); min-width: 85px; text-align: center; }
         .t-num { display: block; font-size: 2.2rem; color: var(--gold); font-weight: 700; }
         .t-lab { font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; }
     </style>
@@ -88,7 +89,7 @@
             <span>S</span>
             <span class="vanish" id="a">A</span>
             <span class="vanish" id="z">Z</span>
-            <div class="moon-o" id="moon"><img src="logo.png"></div>
+            <div class="moon-o" id="moon"></div>
             <span>O</span>
             <span>N</span>
         </div>
@@ -117,7 +118,7 @@
             setTimeout(() => document.getElementById('l1').classList.add('reveal'), 500);
             setTimeout(() => document.getElementById('l2').classList.add('reveal'), 1800);
             
-            // SYNC: Shimmer on Names
+            // SYNC: Shimmer on Tereso & Teofista (3.2s)
             setTimeout(() => {
                 document.getElementById('audio-shimmer').play();
                 document.getElementById('l3').classList.add('reveal');
@@ -125,7 +126,7 @@
 
             setTimeout(() => document.getElementById('l4').classList.add('reveal'), 4800);
 
-            // Transition to Hero
+            // Transition to Hero Reveal (8.5s)
             setTimeout(() => {
                 document.getElementById('credits-stage').style.opacity = '0';
                 setTimeout(() => {
@@ -136,7 +137,7 @@
                     
                     setTimeout(() => {
                         hero.style.opacity = '1';
-                        // THE LEGWORK TRANSFORMATION
+                        // Start SAZON to SOON transformation (12s mark)
                         setTimeout(transformToSoon, 3500);
                     }, 100);
                 }, 1000);
