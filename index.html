@@ -9,16 +9,19 @@
         :root { --gold: #d4af37; --black: #000000; }
         body, html { margin: 0; padding: 0; background-color: var(--black); color: white; font-family: 'Raleway', sans-serif; overflow: hidden; height: 100vh; }
 
-        #gate-screen { position: fixed; inset: 0; background: var(--black); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 1s ease; }
+        /* Gate Screen */
+        #gate-screen { position: fixed; inset: 0; background: var(--black); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 1.5s ease; }
         .tap-text { color: var(--gold); font-family: 'Cinzel', serif; letter-spacing: 4px; margin-bottom: 20px; font-size: 0.8rem; }
         .enter-btn { background: none; border: 2px solid var(--gold); color: var(--gold); padding: 15px 40px; font-family: 'Cinzel', serif; font-size: 1.2rem; cursor: pointer; letter-spacing: 5px; text-transform: uppercase; transition: 0.5s; }
         .enter-btn:hover { background: var(--gold); color: var(--black); box-shadow: 0 0 30px var(--gold); }
 
+        /* Main Stage */
         #main-stage { display: none; height: 100vh; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
         #final-banner { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('images/banner.jpg'); background-size: cover; background-position: center; opacity: 0; transition: opacity 3s ease; }
 
-        .credit { font-family: 'Cinzel', serif; font-size: 1.6rem; letter-spacing: 6px; color: var(--gold); opacity: 0; position: absolute; width: 100%; transition: opacity 1.5s ease; z-index: 10; }
+        .credit { font-family: 'Cinzel', serif; font-size: clamp(1.4rem, 5vw, 1.8rem); letter-spacing: 6px; color: var(--gold); opacity: 0; position: absolute; width: 100%; transition: opacity 2s ease; z-index: 10; pointer-events: none; }
         
+        /* SOON Reveal & Celestial Logo */
         #soon-wrap { display: none; flex-direction: column; align-items: center; z-index: 20; opacity: 0; transition: opacity 3s ease; }
         .soon-text { font-family: 'Cinzel', serif; font-size: clamp(4rem, 15vw, 8rem); font-weight: 700; color: var(--gold); display: flex; align-items: center; letter-spacing: 12px; }
         .celestial-o { width: clamp(65px, 13vw, 130px); height: clamp(65px, 13vw, 130px); margin: 0 10px; border-radius: 50%; box-shadow: 0 0 40px var(--gold); object-fit: cover; }
@@ -36,13 +39,13 @@
     <audio id="snd-click" preload="auto" src="audio/click.mp3"></audio>
     <audio id="snd-open" preload="auto" src="audio/open.mp3"></audio>
     <audio id="snd-shimmer" preload="auto" src="audio/shimmer.mp3"></audio>
-    <audio id="snd-jingle" preload="auto" src="audio/Sazon_Jingle.mp3"></audio>
+    <audio id="snd-jingle" preload="auto" src="audio/Gikan_sa_Gamot%2030secTEASER.mp3"></audio>
 
     <div id="main-stage">
         <div id="final-banner"></div>
         <div id="t1" class="credit">A SAZON FAMILY PRODUCTION</div>
         <div id="t2" class="credit">IN HONOR OF TERESO & TEOFISTA SAZON</div>
-        <div id="t3" class="credit">JULY 23-24, 2027<br><span style="font-size: 0.9rem;">KALIBO, AKLAN</span></div>
+        <div id="t3" class="credit">JULY 23-24, 2027<br><span style="font-size: 0.9rem; letter-spacing: 4px;">KALIBO, AKLAN</span></div>
 
         <div id="soon-wrap">
             <div class="soon-text">
@@ -61,9 +64,12 @@
         const aJingle = document.getElementById('snd-jingle');
 
         btn.addEventListener('click', function() {
-            // Master Audio Unlock
+            // UNLOCK ALL AUDIO CONTEXT
             [aClick, aOpen, aShim, aJingle].forEach(track => {
-                track.play().then(() => { track.pause(); track.currentTime = 0; }).catch(e => console.log("Unlock"));
+                track.play().then(() => {
+                    track.pause();
+                    track.currentTime = 0;
+                }).catch(e => console.log("Unlock failed"));
             });
 
             aClick.play();
@@ -72,29 +78,29 @@
             setTimeout(() => {
                 document.getElementById('gate-screen').style.display = 'none';
                 document.getElementById('main-stage').style.display = 'flex';
-                runCinematic();
+                runLegacyCinematic();
             }, 1000);
         });
 
-        function runCinematic() {
-            // 0s: Production + Open
+        function runLegacyCinematic() {
+            // 0s: PRODUCTION + open.mp3
             aOpen.play();
             document.getElementById('t1').classList.add('visible');
 
-            // 5s: Tribute + Shimmer
+            // 5s: TRIBUTE + shimmer.mp3 (Perfect timing)
             setTimeout(() => {
                 document.getElementById('t1').classList.remove('visible');
                 aShim.play();
                 document.getElementById('t2').classList.add('visible');
             }, 5000);
 
-            // 10s: Location
+            // 10s: LOCATION / DATE
             setTimeout(() => {
                 document.getElementById('t2').classList.remove('visible');
                 document.getElementById('t3').classList.add('visible');
             }, 10000);
 
-            // 15s: 30-Second Jingle + SOON Reveal
+            // 15s: 30s JINGLE TEASER REVEAL + BANNER + SOON
             setTimeout(() => {
                 document.getElementById('t3').classList.remove('visible');
                 document.getElementById('final-banner').classList.add('visible');
@@ -103,6 +109,7 @@
                 soon.style.display = 'flex';
                 setTimeout(() => soon.classList.add('visible'), 100);
 
+                // Ramp volume for the teaser
                 aJingle.volume = 0.1;
                 aJingle.play();
                 let v = 0.1;
