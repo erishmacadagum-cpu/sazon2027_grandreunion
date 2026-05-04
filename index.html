@@ -6,115 +6,61 @@
     <title>Sazon Family Grand Reunion 2027</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --gold: #d4af37;
-            --black: #000000;
-        }
+        :root { --gold: #d4af37; --black: #000000; }
+        body, html { margin: 0; padding: 0; background-color: var(--black); color: white; font-family: 'Raleway', sans-serif; overflow: hidden; height: 100vh; }
+        
+        /* Gate Screen */
+        #gate-screen { position: fixed; inset: 0; background: var(--black); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 2s ease; }
+        .tap-text { color: var(--gold); font-family: 'Cinzel', serif; letter-spacing: 3px; margin-bottom: 20px; font-size: 0.9rem; }
+        .enter-btn { background: none; border: 2px solid var(--gold); color: var(--gold); padding: 15px 40px; font-family: 'Cinzel', serif; font-size: 1.2rem; cursor: pointer; letter-spacing: 5px; transition: 0.5s; text-transform: uppercase; }
+        .enter-btn:hover { background: var(--gold); color: var(--black); box-shadow: 0 0 20px var(--gold); }
 
-        body, html {
-            margin: 0; padding: 0;
-            background-color: var(--black);
-            color: white;
-            font-family: 'Raleway', sans-serif;
-            overflow: hidden;
-            height: 100vh;
-        }
+        /* Main Stage */
+        #main-stage { display: none; height: 100vh; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/banner.jpg'); background-size: cover; background-position: center; }
 
-        #gate-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--black);
-            display: flex; justify-content: center; align-items: center;
-            z-index: 9999; transition: opacity 2s ease;
-        }
+        .fade-text { font-family: 'Cinzel', serif; font-size: 1.4rem; letter-spacing: 6px; opacity: 0; position: absolute; width: 100%; color: var(--gold); }
 
-        .enter-btn {
-            background: none; border: 2px solid var(--gold); color: var(--gold);
-            padding: 15px 40px; font-family: 'Cinzel', serif; font-size: 1.2rem;
-            cursor: pointer; letter-spacing: 5px; transition: 0.5s;
-        }
-        .enter-btn:hover { background: var(--gold); color: var(--black); }
+        /* The SOON Transformation */
+        #soon-container { display: none; flex-direction: column; align-items: center; position: relative; }
+        .soon-wrap { display: flex; align-items: center; justify-content: center; font-family: 'Cinzel', serif; font-size: clamp(4rem, 18vw, 10rem); font-weight: 700; color: var(--gold); }
+        .moon-o { position: relative; display: inline-flex; align-items: center; justify-content: center; }
+        .celestial-logo { height: 0.8em; width: auto; border-radius: 50%; filter: drop-shadow(0 0 15px var(--gold)); animation: moonGlow 4s infinite alternate; }
 
-        #main-stage {
-            display: none; height: 100vh;
-            flex-direction: column; justify-content: center; align-items: center;
-            text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
-                        url('https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/banner.jpg');
-            background-size: cover; background-position: center;
-        }
-
-        .fade-text {
-            font-family: 'Cinzel', serif; font-size: 1.5rem; letter-spacing: 8px;
-            opacity: 0; position: absolute; width: 100%; color: var(--gold);
-        }
-
-        #transform-container {
-            display: none; flex-direction: column; align-items: center;
-        }
-
-        .logo-text {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(3rem, 15vw, 8rem);
-            font-weight: 700;
-            letter-spacing: 15px;
-            color: var(--gold);
-            display: flex; align-items: center;
-        }
-
-        .emblem-img {
-            height: clamp(60px, 12vw, 120px);
-            margin: 0 -20px; /* CREATES THE MOON-SHAPE OVERLAP */
-            filter: drop-shadow(0 0 15px var(--gold));
-        }
-
-        .countdown-wrap {
-            margin-top: 40px; display: flex; gap: 20px; opacity: 0;
-            transition: opacity 2s ease;
-        }
-        .num { font-size: 2.5rem; font-weight: bold; color: var(--gold); display: block; }
-        .label { font-size: 0.7rem; text-transform: uppercase; color: white; }
-
-        @keyframes cinemaFade {
-            0% { opacity: 0; transform: translateY(10px); }
-            20% { opacity: 1; transform: translateY(0); }
-            80% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-10px); }
-        }
+        @keyframes moonGlow { from { filter: drop-shadow(0 0 10px var(--gold)); } to { filter: drop-shadow(0 0 25px #fff); } }
+        @keyframes cinemaFade { 0% { opacity: 0; transform: scale(0.95); } 20% { opacity: 1; transform: scale(1); } 80% { opacity: 1; transform: scale(1.05); } 100% { opacity: 0; transform: scale(1.1); } }
         .run-fade { animation: cinemaFade 5s forwards; }
     </style>
 </head>
 <body>
 
     <div id="gate-screen">
+        <div class="tap-text">TAP THE SCREEN</div>
         <button class="enter-btn" onclick="startCinema()">ENTER SAZON LEGACY</button>
     </div>
 
     <audio id="audio-open"><source src="https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/open.mp3" type="audio/mpeg"></audio>
     <audio id="audio-shimmer"><source src="https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/shimmer.mp3" type="audio/mpeg"></audio>
-    <audio id="bg-jingle" loop><source src="https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/Sazon_Jingle.mp3" type="audio/mpeg"></audio>
+    <audio id="bg-jingle"><source src="https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/jingle.mp3" type="audio/mpeg"></audio>
 
     <div id="main-stage">
-        <div id="intro-1" class="fade-text">A SAZON FAMILY PRODUCTION</div>
-        <div id="intro-2" class="fade-text">IN HONOR OF TERESO & TEOFISTA SAZON</div>
+        <div id="c1" class="fade-text">A SAZON FAMILY PRODUCTION</div>
+        <div id="c2" class="fade-text">IN HONOR OF TERESO & TEOFISTA SAZON</div>
+        <div id="c3" class="fade-text">JULY 23-24, 2027<br><small style="font-size: 0.8rem; letter-spacing: 4px;">KALIBO, AKLAN</small></div>
 
-        <div id="transform-container">
-            <div id="logo-reveal" class="logo-text">
+        <div id="soon-container">
+            <div class="soon-wrap">
                 <span>S</span>
-                <img src="https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/Sazon_Emblem.png" class="emblem-img" alt="Logo">
+                <div class="moon-o">
+                    <img src="https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/logo.jpg" class="celestial-logo" alt="Moon">
+                </div>
                 <span>OON</span>
-            </div>
-            <div class="countdown-wrap" id="timer-ui">
-                <div style="text-align:center"><span class="num" id="days">00</span><span class="label">Days</span></div>
-                <div style="text-align:center"><span class="num" id="hours">00</span><span class="label">Hours</span></div>
-                <div style="text-align:center"><span class="num" id="mins">00</span><span class="label">Mins</span></div>
-                <div style="text-align:center"><span class="num" id="secs">00</span><span class="label">Secs</span></div>
             </div>
         </div>
     </div>
 
     <script>
-        const aOpen = document.getElementById('audio-open');
-        const aShim = document.getElementById('audio-shimmer');
+        const audioOpen = document.getElementById('audio-open');
+        const audioShim = document.getElementById('audio-shimmer');
         const jingle = document.getElementById('bg-jingle');
 
         function startCinema() {
@@ -127,36 +73,41 @@
         }
 
         function runSequence() {
-            // First Credit + open.mp3
-            aOpen.play();
-            document.getElementById('intro-1').classList.add('run-fade');
+            // 1. Open sound + First credit
+            audioOpen.play();
+            document.getElementById('c1').classList.add('run-fade');
 
+            // 2. Shimmer sound syncs with In Honor Of...
             setTimeout(() => {
-                // Second Credit
-                document.getElementById('intro-2').classList.add('run-fade');
-            }, 5500);
+                audioShim.play();
+                document.getElementById('c2').classList.add('run-fade');
+            }, 5000);
 
+            // 3. Location credit
             setTimeout(() => {
-                // shimmer.mp3 + reveal of SOON
-                aShim.play();
-                document.getElementById('transform-container').style.display = 'flex';
-                // background jingle starts looping
+                document.getElementById('c3').classList.add('run-fade');
+            }, 10000);
+
+            // 4. Fade to Jingle (Ramping Volume) & SOON reveal
+            setTimeout(() => {
+                jingle.volume = 0.1;
                 jingle.play();
-                setTimeout(() => { document.getElementById('timer-ui').style.opacity = '1'; }, 1000);
-                startTimer();
-            }, 11000);
+                rampVolume(jingle, 0.6); // Soft to minimal loudness
+                
+                document.getElementById('soon-container').style.display = 'flex';
+            }, 15000);
         }
 
-        function startTimer() {
-            const target = new Date("July 23, 2027 08:00:00").getTime();
-            setInterval(() => {
-                const now = new Date().getTime();
-                const d = target - now;
-                document.getElementById("days").innerText = Math.floor(d / (1000 * 60 * 60 * 24));
-                document.getElementById("hours").innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById("mins").innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById("secs").innerText = Math.floor((d % (1000 * 60)) / 1000);
-            }, 1000);
+        function rampVolume(audio, target) {
+            let vol = 0.1;
+            const interval = setInterval(() => {
+                if (vol < target) {
+                    vol += 0.05;
+                    audio.volume = vol;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 200);
         }
     </script>
 </body>
