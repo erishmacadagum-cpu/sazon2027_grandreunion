@@ -9,13 +9,11 @@
         :root { --gold: #d4af37; --black: #000000; }
         body, html { margin: 0; padding: 0; background-color: var(--black); color: white; font-family: 'Raleway', sans-serif; overflow: hidden; height: 100vh; }
 
-        /* Gate Screen */
         #gate-screen { position: fixed; inset: 0; background: var(--black); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 1s ease; }
         .tap-text { color: var(--gold); font-family: 'Cinzel', serif; letter-spacing: 4px; margin-bottom: 20px; font-size: 0.8rem; }
         .enter-btn { background: none; border: 2px solid var(--gold); color: var(--gold); padding: 15px 40px; font-family: 'Cinzel', serif; font-size: 1.2rem; cursor: pointer; letter-spacing: 5px; text-transform: uppercase; transition: 0.5s; }
         .enter-btn:hover { background: var(--gold); color: var(--black); box-shadow: 0 0 30px var(--gold); }
 
-        /* Main Stage */
         #main-stage { display: none; height: 100vh; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
         #final-banner { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('images/banner.jpg'); background-size: cover; background-position: center; opacity: 0; transition: opacity 3s ease; }
 
@@ -38,7 +36,7 @@
     <audio id="snd-click" preload="auto" src="audio/click.mp3"></audio>
     <audio id="snd-open" preload="auto" src="audio/open.mp3"></audio>
     <audio id="snd-shimmer" preload="auto" src="audio/shimmer.mp3"></audio>
-    <audio id="snd-jingle" preload="auto" src="audio/jingle.mp3"></audio>
+    <audio id="snd-jingle" preload="auto" src="audio/Sazon_Jingle.mp3"></audio>
 
     <div id="main-stage">
         <div id="final-banner"></div>
@@ -63,9 +61,9 @@
         const aJingle = document.getElementById('snd-jingle');
 
         btn.addEventListener('click', function() {
-            // Audio Context Unlock
+            // Master Audio Unlock
             [aClick, aOpen, aShim, aJingle].forEach(track => {
-                track.play().then(() => { track.pause(); track.currentTime = 0; });
+                track.play().then(() => { track.pause(); track.currentTime = 0; }).catch(e => console.log("Unlock"));
             });
 
             aClick.play();
@@ -79,24 +77,24 @@
         });
 
         function runCinematic() {
-            // Scene 1: Production + Open
+            // 0s: Production + Open
             aOpen.play();
             document.getElementById('t1').classList.add('visible');
 
-            // Scene 2: Shimmer + Honor (5s)
+            // 5s: Tribute + Shimmer
             setTimeout(() => {
                 document.getElementById('t1').classList.remove('visible');
                 aShim.play();
                 document.getElementById('t2').classList.add('visible');
             }, 5000);
 
-            // Scene 3: Location (10s)
+            // 10s: Location
             setTimeout(() => {
                 document.getElementById('t2').classList.remove('visible');
                 document.getElementById('t3').classList.add('visible');
             }, 10000);
 
-            // Scene 4: The 30-Second Jingle Reveal (15s)
+            // 15s: 30-Second Jingle + SOON Reveal
             setTimeout(() => {
                 document.getElementById('t3').classList.remove('visible');
                 document.getElementById('final-banner').classList.add('visible');
@@ -105,7 +103,6 @@
                 soon.style.display = 'flex';
                 setTimeout(() => soon.classList.add('visible'), 100);
 
-                // Ramping the new jingle volume
                 aJingle.volume = 0.1;
                 aJingle.play();
                 let v = 0.1;
