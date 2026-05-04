@@ -63,7 +63,7 @@
 
         .emblem-img {
             height: clamp(60px, 12vw, 120px);
-            margin: 0 -20px; /* This creates the moon-shape overlap */
+            margin: 0 -20px; /* CREATES THE MOON-SHAPE OVERLAP */
             filter: drop-shadow(0 0 15px var(--gold));
         }
 
@@ -76,8 +76,8 @@
 
         @keyframes cinemaFade {
             0% { opacity: 0; transform: translateY(10px); }
-            30% { opacity: 1; transform: translateY(0); }
-            70% { opacity: 1; transform: translateY(0); }
+            20% { opacity: 1; transform: translateY(0); }
+            80% { opacity: 1; transform: translateY(0); }
             100% { opacity: 0; transform: translateY(-10px); }
         }
         .run-fade { animation: cinemaFade 5s forwards; }
@@ -127,19 +127,20 @@
         }
 
         function runSequence() {
-            // Trigger 1: Opening sound
+            // First Credit + open.mp3
             aOpen.play();
             document.getElementById('intro-1').classList.add('run-fade');
 
             setTimeout(() => {
+                // Second Credit
                 document.getElementById('intro-2').classList.add('run-fade');
             }, 5500);
 
             setTimeout(() => {
-                // Trigger 2: Shimmer sound on reveal
+                // shimmer.mp3 + reveal of SOON
                 aShim.play();
                 document.getElementById('transform-container').style.display = 'flex';
-                // Trigger 3: Background Jingle starts
+                // background jingle starts looping
                 jingle.play();
                 setTimeout(() => { document.getElementById('timer-ui').style.opacity = '1'; }, 1000);
                 startTimer();
