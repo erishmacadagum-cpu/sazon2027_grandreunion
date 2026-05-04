@@ -11,45 +11,48 @@
 
         /* Gate Screen */
         #gate-screen { position: fixed; inset: 0; background: var(--black); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 1.5s ease; }
-        .enter-btn { background: none; border: 1px solid var(--gold); color: var(--gold); padding: 20px 60px; font-family: 'Cinzel', serif; font-size: 1rem; cursor: pointer; letter-spacing: 8px; text-transform: uppercase; transition: 0.5s; box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.1); }
+        .enter-btn { background: none; border: 1px solid var(--gold); color: var(--gold); padding: 20px 60px; font-family: 'Cinzel', serif; font-size: 1rem; cursor: pointer; letter-spacing: 8px; text-transform: uppercase; transition: 0.5s; }
         .enter-btn:hover { background: var(--gold); color: var(--black); box-shadow: 0 0 50px var(--gold); }
 
         /* Main Stage */
         #main-stage { display: none; height: 100vh; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
-        #final-banner { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.9)), url('images/banner.jpg'); background-size: cover; background-position: center; opacity: 0; transition: opacity 6s ease; filter: saturate(1.2); }
+        #final-banner { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.9)), url('images/banner.jpg'); background-size: cover; background-position: center; opacity: 0; transition: opacity 5s ease, filter 4s ease; filter: blur(15px) saturate(1.2); }
+        .clear-focus { filter: blur(0px) saturate(1.2) !important; }
 
-        /* Varied Cinematic Typography */
+        /* Gold Foil Typography */
         .credit { opacity: 0; position: absolute; width: 100%; transition: all 2.5s cubic-bezier(0.4, 0, 0.2, 1); z-index: 10; transform: translateY(20px); }
-        
+        .gold-foil { background: linear-gradient(to bottom, #f3e5ab 0%, #d4af37 50%, #b38728 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; }
+
         #t1 { font-family: 'Montserrat', sans-serif; font-weight: 100; font-size: 0.9rem; letter-spacing: 15px; color: var(--light-gold); }
-        #t2 { font-family: 'Cinzel', serif; font-weight: 700; font-size: clamp(1.5rem, 5vw, 2.5rem); letter-spacing: 10px; color: var(--gold); line-height: 1.6; }
-        #t2 span { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 0.8rem; display: block; letter-spacing: 12px; margin-bottom: 10px; }
-        #t3 { font-family: 'Cinzel', serif; font-size: 1.4rem; letter-spacing: 8px; color: var(--gold); }
-        #t3 .sub-text { font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 0.7rem; display: block; margin-top: 15px; color: white; opacity: 0.8; letter-spacing: 5px; }
+        #t2 { font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 5vw, 2.5rem); letter-spacing: 10px; line-height: 1.6; }
+        #t2 span { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 0.8rem; display: block; letter-spacing: 12px; margin-bottom: 10px; color: var(--light-gold); -webkit-text-fill-color: initial; }
+        #t3 { font-family: 'Cinzel', serif; font-size: 1.4rem; letter-spacing: 8px; }
+        #t3 .sub-text { font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 0.7rem; display: block; margin-top: 15px; color: white; opacity: 0.8; letter-spacing: 5px; -webkit-text-fill-color: initial; }
 
         /* THE SOON REVEAL */
         #soon-wrap { display: none; flex-direction: column; align-items: center; z-index: 20; opacity: 0; transition: opacity 4s ease; }
-        .soon-text { font-family: 'Cinzel', serif; font-size: clamp(4rem, 18vw, 9rem); font-weight: 700; color: var(--gold); display: flex; align-items: center; justify-content: center; letter-spacing: 10px; text-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+        .soon-text { font-family: 'Cinzel', serif; font-size: clamp(4rem, 18vw, 9rem); display: flex; align-items: center; justify-content: center; letter-spacing: 10px; }
         
-        /* Circular Moon Portal */
+        /* Circular Moon Portal with Rotation */
         .moon-portal { position: relative; width: 1.15em; height: 1.15em; margin: 0 0.1em; display: flex; align-items: center; justify-content: center; }
-        .moon-glow { position: absolute; inset: -5%; border: 2px solid var(--gold); border-radius: 50%; box-shadow: 0 0 40px var(--gold), inset 0 0 20px var(--gold); opacity: 0.6; animation: rotateHalo 30s linear infinite, pulseGlow 3s infinite alternate; }
-        .logo-tree { width: 90%; height: 90%; border-radius: 50%; /* Force Round Shape */ object-fit: cover; z-index: 2; border: 1px solid var(--gold); filter: contrast(1.1) brightness(1.1); }
+        .moon-glow { position: absolute; inset: -5%; border: 2px solid var(--gold); border-radius: 50%; box-shadow: 0 0 40px var(--gold); opacity: 0.6; animation: rotateHalo 40s linear infinite, pulseGlow 4s infinite alternate; }
+        .logo-tree { width: 90%; height: 90%; border-radius: 50%; object-fit: cover; z-index: 2; border: 1px solid var(--gold); }
+
+        /* Calendar Button */
+        #cal-btn { margin-top: 50px; opacity: 0; transition: opacity 3s ease; z-index: 30; background: none; border: 1px solid var(--gold); color: var(--gold); padding: 12px 25px; font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 3px; cursor: pointer; text-transform: uppercase; }
+        #cal-btn:hover { background: var(--gold); color: var(--black); box-shadow: 0 0 20px var(--gold); }
 
         /* Countdown */
-        #countdown { margin-top: 40px; display: flex; gap: 30px; opacity: 0; transition: opacity 3s ease; z-index: 20; }
+        #countdown { margin-top: 35px; display: flex; gap: 30px; opacity: 0; transition: opacity 3s ease; z-index: 20; }
         .timer-unit { display: flex; flex-direction: column; min-width: 80px; }
-        .timer-num { font-family: 'Cinzel', serif; font-size: 2.2rem; font-weight: 700; color: var(--gold); text-shadow: 0 0 15px var(--gold); }
+        .timer-num { font-family: 'Cinzel', serif; font-size: 2.2rem; font-weight: 700; color: var(--gold); }
         .timer-label { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 0.55rem; letter-spacing: 4px; text-transform: uppercase; margin-top: 8px; color: var(--light-gold); }
 
-        /* Animations */
         .visible { opacity: 1 !important; transform: translateY(0) !important; }
         .exit-up { opacity: 0 !important; transform: translateY(-50px) !important; }
-        .jive { animation: rhythmicPulse 0.58s infinite alternate ease-in-out; }
 
         @keyframes rotateHalo { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes pulseGlow { from { opacity: 0.4; box-shadow: 0 0 20px var(--gold); } to { opacity: 0.8; box-shadow: 0 0 50px var(--gold); } }
-        @keyframes rhythmicPulse { from { transform: scale(1); } to { transform: scale(1.03); } }
+        @keyframes pulseGlow { from { opacity: 0.4; } to { opacity: 0.8; } }
     </style>
 </head>
 <body>
@@ -68,13 +71,11 @@
         <div id="final-banner"></div>
         
         <div id="t1" class="credit">A SAZON FAMILY PRODUCTION</div>
-        
-        <div id="t2" class="credit"><span>IN HONOR OF</span>TERESO & TEOFISTA SAZON</div>
-        
-        <div id="t3" class="credit">JULY 23-24, 2027<span class="sub-text">MARZON HOTEL • KALIBO, AKLAN</span></div>
+        <div id="t2" class="credit"><span>IN HONOR OF</span><div class="gold-foil">TERESO & TEOFISTA SAZON</div></div>
+        <div id="t3" class="credit"><div class="gold-foil">JULY 23-24, 2027</div><span class="sub-text">MARZON HOTEL • KALIBO, AKLAN</span></div>
 
         <div id="soon-wrap">
-            <div class="soon-text" id="jiveTarget">
+            <div class="soon-text gold-foil">
                 <span>S</span>
                 <div class="moon-portal">
                     <div class="moon-glow"></div>
@@ -90,6 +91,8 @@
                 <div class="timer-unit"><span class="timer-num" id="mins">00</span><span class="timer-label">Mins</span></div>
                 <div class="timer-unit"><span class="timer-num" id="secs">00</span><span class="timer-label">Secs</span></div>
             </div>
+
+            <button id="cal-btn" onclick="saveTheDate()">Save the Date</button>
         </div>
     </div>
 
@@ -103,12 +106,9 @@
         };
 
         btn.addEventListener('click', function() {
-            // Unlock audio for mobile/browsers
             Object.values(aud).forEach(t => { t.play().then(()=> {t.pause(); t.currentTime=0;}).catch(e=>{}); });
-
             aud.click.play();
             document.getElementById('gate-screen').style.opacity = '0';
-            
             setTimeout(() => {
                 document.getElementById('gate-screen').style.display = 'none';
                 document.getElementById('main-stage').style.display = 'flex';
@@ -117,29 +117,24 @@
         });
 
         function startShow() {
-            // Scene 1
             setTimeout(() => { aud.open.play(); show('t1', 4000); }, 500);
-
-            // Scene 2
             setTimeout(() => { aud.shim.play(); show('t2', 5000); }, 5500);
-
-            // Scene 3
             setTimeout(() => { show('t3', 5000); }, 11500);
 
-            // Scene 4: Finale
             setTimeout(() => {
                 document.getElementById('final-banner').style.opacity = '1';
+                setTimeout(() => document.getElementById('final-banner').classList.add('clear-focus'), 1000);
+                
                 const wrap = document.getElementById('soon-wrap');
                 wrap.style.display = 'flex';
                 
                 setTimeout(() => {
                     wrap.classList.add('visible');
-                    document.getElementById('jiveTarget').classList.add('jive');
                     document.getElementById('countdown').classList.add('visible');
+                    document.getElementById('cal-btn').classList.add('visible');
                     runClock();
                 }, 500);
 
-                // Audio ramp up
                 aud.jingle.volume = 0;
                 aud.jingle.play();
                 let v = 0;
@@ -167,6 +162,24 @@
                 document.getElementById('mins').innerText = Math.floor((d % 3600000) / 60000).toString().padStart(2, '0');
                 document.getElementById('secs').innerText = Math.floor((d % 60000) / 1000).toString().padStart(2, '0');
             }, 1000);
+        }
+
+        function saveTheDate() {
+            const event = {
+                title: "Sazon Family Grand Reunion 2027",
+                start: "20270723T090000Z",
+                end: "20270724T170000Z",
+                loc: "Marzon Hotel, Kalibo, Aklan",
+                desc: "The First Edition Sazon Family Grand Reunion. Legacy: Gikan sa Gamot, Tubtob sa Langit."
+            };
+            const icsData = "BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nDTSTART:" + event.start + "\nDTEND:" + event.end + "\nSUMMARY:" + event.title + "\nLOCATION:" + event.loc + "\nDESCRIPTION:" + event.desc + "\nEND:VEVENT\nEND:VCALENDAR";
+            const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.setAttribute('download', 'Sazon_Reunion_2027.ics');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
     </script>
 </body>
