@@ -9,52 +9,48 @@
         :root { --gold: #d4af37; --light-gold: #f3e5ab; --black: #000000; }
         body, html { margin: 0; padding: 0; background-color: var(--black); color: white; font-family: 'Montserrat', sans-serif; overflow: hidden; height: 100vh; }
 
-        /* Gate Screen for Initial Audio/Animation Unlock */
-        #gate-screen { position: fixed; inset: 0; background: var(--black); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 1.5s ease; }
+        /* Gate Screen - Fixed Clickability */
+        #gate-screen { position: fixed; inset: 0; background: var(--black); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 1.2s ease; }
         .tap-text { color: var(--gold); font-family: 'Cinzel', serif; letter-spacing: 5px; margin-bottom: 25px; font-size: 0.7rem; opacity: 0.8; }
-        .enter-btn { background: none; border: 1px solid var(--gold); color: var(--gold); padding: 18px 50px; font-family: 'Cinzel', serif; font-size: 1.1rem; cursor: pointer; letter-spacing: 6px; text-transform: uppercase; transition: 0.5s; position: relative; overflow: hidden; }
+        .enter-btn { background: none; border: 1px solid var(--gold); color: var(--gold); padding: 18px 50px; font-family: 'Cinzel', serif; font-size: 1.1rem; cursor: pointer; letter-spacing: 6px; text-transform: uppercase; transition: 0.5s; z-index: 10000; pointer-events: auto; }
         .enter-btn:hover { background: var(--gold); color: var(--black); box-shadow: 0 0 40px var(--gold); }
 
-        /* Main Stage & Background Reveal */
+        /* Main Stage */
         #main-stage { display: none; height: 100vh; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
-        #final-banner { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.85)), url('images/banner.jpg'); background-size: cover; background-position: center; opacity: 0; transition: opacity 5s ease; }
+        #final-banner { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.85)), url('images/banner.jpg'); background-size: cover; background-position: center; opacity: 0; transition: opacity 5s ease; }
 
-        /* Credits Style - Sophisticated Clarity */
-        .credit { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(1.2rem, 6vw, 2.2rem); letter-spacing: 12px; color: var(--gold); opacity: 0; position: absolute; width: 100%; transition: all 2s ease; z-index: 10; text-shadow: 0 0 15px rgba(212, 175, 55, 0.5); transform: translateY(10px); }
+        /* Credits Style */
+        .credit { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(1.2rem, 6vw, 2.2rem); letter-spacing: 12px; color: var(--gold); opacity: 0; position: absolute; width: 100%; transition: all 2s ease; z-index: 10; text-shadow: 0 0 15px rgba(212, 175, 55, 0.5); transform: translateY(15px); }
         .sub-credit { font-family: 'Montserrat', sans-serif; font-weight: 200; font-size: 0.8rem; letter-spacing: 8px; color: var(--light-gold); display: block; margin-top: 15px; text-transform: uppercase; }
 
-        /* The SOON Reveal & Jive */
+        /* SOON Reveal - Rectified Alignment */
         #soon-wrap { display: none; flex-direction: column; align-items: center; z-index: 20; opacity: 0; transition: opacity 3s ease; }
-        .soon-text { font-family: 'Cinzel', serif; font-size: clamp(4.5rem, 20vw, 11rem); font-weight: 700; color: var(--gold); display: flex; align-items: center; justify-content: center; letter-spacing: 15px; }
+        .soon-text { font-family: 'Cinzel', serif; font-size: clamp(4.5rem, 18vw, 10rem); font-weight: 700; color: var(--gold); display: flex; align-items: center; justify-content: center; letter-spacing: 10px; }
         
-        /* THE PROACTIVE MOON O: Alignment Fix */
-        .celestial-o-container { position: relative; width: 1.1em; height: 1.1em; margin: 0 0.15em; display: flex; align-items: center; justify-content: center; }
-        .moon-proactive-ring { position: absolute; inset: -8%; border: 1.5px solid var(--gold); border-radius: 50%; animation: rotateHalo 12s linear infinite; opacity: 0.5; box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
-        .moon-proactive-ring::after { content:''; position:absolute; top:-5px; left:50%; width:10px; height:10px; background:var(--gold); border-radius:50%; box-shadow:0 0 10px var(--gold); }
-        .logo-inside-moon { width: 85%; height: 85%; border-radius: 50%; box-shadow: 0 0 30px var(--gold); object-fit: cover; z-index: 2; border: 2px solid var(--gold); transition: transform 0.3s ease; }
+        /* Proactive Moon O */
+        .celestial-o-container { position: relative; width: 1.1em; height: 1.1em; margin: 0 0.1em; display: flex; align-items: center; justify-content: center; }
+        .moon-ring { position: absolute; inset: -5%; border: 2px solid var(--gold); border-radius: 50%; animation: rotateHalo 15s linear infinite; opacity: 0.6; box-shadow: 0 0 20px var(--gold); }
+        .logo-tree { width: 85%; height: 85%; border-radius: 50%; box-shadow: 0 0 30px var(--gold); object-fit: cover; z-index: 2; border: 1px solid var(--gold); }
 
-        /* Awe-Amazing Countdown Style */
-        #countdown { margin-top: 40px; font-family: 'Cinzel', serif; color: var(--gold); display: flex; gap: clamp(15px, 4vw, 35px); opacity: 0; transition: opacity 2s ease; z-index: 20; }
-        .timer-unit { display: flex; flex-direction: column; min-width: 70px; }
-        .timer-num { font-size: 2.2rem; display: block; font-weight: 700; text-shadow: 0 0 10px var(--gold); }
-        .timer-label { font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase; opacity: 0.7; font-family: 'Montserrat', sans-serif; margin-top: 5px; }
+        /* Countdown Grid */
+        #countdown { margin-top: 40px; font-family: 'Cinzel', serif; color: var(--gold); display: flex; gap: 30px; opacity: 0; transition: opacity 2s ease; z-index: 20; border-top: 1px solid rgba(212, 175, 55, 0.3); padding-top: 20px; }
+        .timer-unit { display: flex; flex-direction: column; min-width: 75px; }
+        .timer-num { font-size: 2.2rem; font-weight: 700; text-shadow: 0 0 10px var(--gold); }
+        .timer-label { font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase; opacity: 0.7; font-family: 'Montserrat', sans-serif; }
 
-        /* Status Classes for Cinematic Script */
+        /* Animations */
         .visible { opacity: 1 !important; transform: translateY(0) !important; }
-        .hidden-exit { opacity: 0 !important; transform: translateY(-20px) !important; }
-        .jive-pulse { animation: rhythmicJive 0.6s infinite alternate ease-in-out; }
+        .exit-up { opacity: 0 !important; transform: translateY(-30px) !important; }
+        .jive-pulse { animation: jiveBeat 0.58s infinite alternate ease-in-out; }
 
         @keyframes rotateHalo { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes rhythmicJive { 
-            from { transform: scale(1); filter: brightness(1); } 
-            to { transform: scale(1.03); filter: brightness(1.2); } 
-        }
+        @keyframes jiveBeat { from { transform: scale(1); filter: brightness(1); } to { transform: scale(1.03); filter: brightness(1.2); } }
     </style>
 </head>
 <body>
 
     <div id="gate-screen">
-        <div class="tap-text">A FAMILY LEGACY UNFOLDING</div>
+        <div class="tap-text">A LEGACY UNFOLDING</div>
         <button class="enter-btn" id="gateButton">ENTER SAZON LEGACY</button>
     </div>
 
@@ -67,25 +63,18 @@
         <div id="final-banner"></div>
         
         <div id="t1" class="credit">A SAZON FAMILY PRODUCTION</div>
-        
-        <div id="t2" class="credit">
-            IN HONOR OF<br>
-            <span style="font-size: 1.1em; letter-spacing: 15px;">TERESO & TEOFISTA SAZON</span>
-        </div>
-        
-        <div id="t3" class="credit">
-            JULY 23-24, 2027
-            <span class="sub-credit">MARZON HOTEL • KALIBO, AKLAN</span>
-        </div>
+        <div id="t2" class="credit">IN HONOR OF<br><span style="font-size: 1.1em; letter-spacing: 15px;">TERESO & TEOFISTA SAZON</span></div>
+        <div id="t3" class="credit">JULY 23-24, 2027<span class="sub-credit">MARZON HOTEL • KALIBO, AKLAN</span></div>
 
         <div id="soon-wrap">
             <div class="soon-text" id="jiveTarget">
                 <span>S</span>
+                <span>O</span>
                 <div class="celestial-o-container">
-                    <div class="moon-proactive-ring"></div>
-                    <img src="images/logo.jpg" class="logo-inside-moon" alt="O">
+                    <div class="moon-ring"></div>
+                    <img src="images/logo.jpg" class="logo-tree" alt="O">
                 </div>
-                <span>ON</span>
+                <span>N</span>
             </div>
 
             <div id="countdown">
@@ -106,48 +95,52 @@
             jingle: document.getElementById('snd-jingle')
         };
 
-        btn.addEventListener('click', () => {
-            // Audio Context Handshake: Pre-start all sounds to unlock them
-            Object.values(aud).forEach(s => { s.play(); s.pause(); s.currentTime = 0; });
+        btn.addEventListener('click', function() {
+            // Unlocking Audio Context
+            Object.values(aud).forEach(track => {
+                track.play().then(() => {
+                    track.pause();
+                    track.currentTime = 0;
+                }).catch(e => console.log("Init"));
+            });
+
             aud.click.play();
-            
             document.getElementById('gate-screen').style.opacity = '0';
+            
             setTimeout(() => {
                 document.getElementById('gate-screen').style.display = 'none';
                 document.getElementById('main-stage').style.display = 'flex';
-                start Experience();
+                runCinematic();
             }, 1200);
         });
 
-        function start Experience() {
-            // Scene 1: Production + Open (open.mp3)
+        function runCinematic() {
+            // 0s: Scene 1
             aud.open.play();
             showText('t1', 4000);
 
-            // Scene 2: Honor + Shimmer (shimmer.mp3 at 5s)
+            // 5s: Scene 2
             setTimeout(() => {
                 aud.shim.play();
                 showText('t2', 4500);
             }, 5000);
 
-            // Scene 3: Location / Date (at 10s)
+            // 10s: Scene 3
             setTimeout(() => showText('t3', 4500), 10000);
 
-            // Scene 4: Jingle Teaser Reveal (at 15s)
+            // 15s: Finale
             setTimeout(() => {
                 document.getElementById('final-banner').classList.add('visible');
-                const soonWrap = document.getElementById('soon-wrap');
-                soonWrap.style.display = 'flex';
+                const wrap = document.getElementById('soon-wrap');
+                wrap.style.display = 'flex';
                 
                 setTimeout(() => {
-                    soonWrap.classList.add('visible');
-                    // Start Rhythmic Jive & Active Timer
+                    wrap.classList.add('visible');
                     document.getElementById('jiveTarget').classList.add('jive-pulse');
                     document.getElementById('countdown').classList.add('visible');
-                    startCountdown();
+                    startTimer();
                 }, 100);
 
-                // Audio Volume Ramp for a smooth start
                 aud.jingle.volume = 0.1;
                 aud.jingle.play();
                 let v = 0.1;
@@ -161,10 +154,10 @@
         function showText(id, delay) {
             const el = document.getElementById(id);
             el.classList.add('visible');
-            setTimeout(() => el.classList.add('hidden-exit'), delay);
+            setTimeout(() => el.classList.add('exit-up'), delay);
         }
 
-        function startCountdown() {
+        function startTimer() {
             const target = new Date("July 23, 2027 00:00:00").getTime();
             setInterval(() => {
                 const now = new Date().getTime();
