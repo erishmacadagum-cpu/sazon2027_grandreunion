@@ -63,17 +63,13 @@
         const aJingle = document.getElementById('snd-jingle');
 
         btn.addEventListener('click', function() {
-            // UNLOCK ALL AUDIO IMMEDIATELY
+            // Audio Context Unlock
             [aClick, aOpen, aShim, aJingle].forEach(track => {
-                track.play().then(() => {
-                    track.pause();
-                    track.currentTime = 0;
-                }).catch(e => console.log("Unlock failed"));
+                track.play().then(() => { track.pause(); track.currentTime = 0; });
             });
 
-            aClick.play(); // Play click sound immediately
+            aClick.play();
 
-            // Transition
             document.getElementById('gate-screen').style.opacity = '0';
             setTimeout(() => {
                 document.getElementById('gate-screen').style.display = 'none';
@@ -83,24 +79,24 @@
         });
 
         function runCinematic() {
-            // 1. Production + Open.mp3
+            // Scene 1: Production + Open
             aOpen.play();
             document.getElementById('t1').classList.add('visible');
 
-            // 2. Shimmer + Honor (at 5s)
+            // Scene 2: Shimmer + Honor (5s)
             setTimeout(() => {
                 document.getElementById('t1').classList.remove('visible');
                 aShim.play();
                 document.getElementById('t2').classList.add('visible');
             }, 5000);
 
-            // 3. Location
+            // Scene 3: Location (10s)
             setTimeout(() => {
                 document.getElementById('t2').classList.remove('visible');
-                document.getElementById('text-3').classList.add('visible');
+                document.getElementById('t3').classList.add('visible');
             }, 10000);
 
-            // 4. Reveal SOON + Banner + Ramping Jingle (at 15s)
+            // Scene 4: The 30-Second Jingle Reveal (15s)
             setTimeout(() => {
                 document.getElementById('t3').classList.remove('visible');
                 document.getElementById('final-banner').classList.add('visible');
@@ -109,6 +105,7 @@
                 soon.style.display = 'flex';
                 setTimeout(() => soon.classList.add('visible'), 100);
 
+                // Ramping the new jingle volume
                 aJingle.volume = 0.1;
                 aJingle.play();
                 let v = 0.1;
