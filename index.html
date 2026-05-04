@@ -31,7 +31,6 @@
             background: none; border: 2px solid var(--gold); color: var(--gold);
             padding: 15px 40px; font-family: 'Cinzel', serif; font-size: 1.2rem;
             cursor: pointer; letter-spacing: 5px; transition: 0.5s;
-            text-transform: uppercase;
         }
         .enter-btn:hover { background: var(--gold); color: var(--black); }
 
@@ -59,21 +58,13 @@
             font-weight: 700;
             letter-spacing: 15px;
             color: var(--gold);
-            display: flex; 
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center;
         }
 
         .emblem-img {
             height: clamp(60px, 12vw, 120px);
-            margin: 0 -25px; /* THE MOON-SHAPE OVERLAP LOGIC */
+            margin: 0 -20px; /* The specific moon-shape logo overlap */
             filter: drop-shadow(0 0 15px var(--gold));
-            z-index: 2;
-        }
-
-        .logo-text span {
-            position: relative;
-            z-index: 1;
         }
 
         .countdown-wrap {
@@ -136,7 +127,7 @@
         }
 
         function runSequence() {
-            // Credits sequence with audio triggers
+            // Credits start with open.mp3
             aOpen.play();
             document.getElementById('intro-1').classList.add('run-fade');
 
@@ -145,8 +136,10 @@
             }, 5500);
 
             setTimeout(() => {
+                // Reveal starts with shimmer.mp3
                 aShim.play();
                 document.getElementById('transform-container').style.display = 'flex';
+                // Jingle starts
                 jingle.play();
                 setTimeout(() => { document.getElementById('timer-ui').style.opacity = '1'; }, 1000);
                 startTimer();
