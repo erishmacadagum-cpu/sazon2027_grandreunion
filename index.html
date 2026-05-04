@@ -6,89 +6,25 @@
     <title>Sazon Family Grand Reunion 2027</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --gold: #d4af37;
-            --black: #000000;
-        }
-
-        body, html {
-            margin: 0; padding: 0;
-            background-color: var(--black);
-            color: white;
-            font-family: 'Raleway', sans-serif;
-            overflow: hidden;
-            height: 100vh;
-        }
-
-        #gate-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--black);
-            display: flex; justify-content: center; align-items: center;
-            z-index: 9999; transition: opacity 2s ease;
-        }
-
-        .enter-btn {
-            background: none; border: 2px solid var(--gold); color: var(--gold);
-            padding: 15px 40px; font-family: 'Cinzel', serif; font-size: 1.2rem;
-            cursor: pointer; letter-spacing: 5px; transition: 0.5s;
-        }
-        .enter-btn:hover { background: var(--gold); color: var(--black); }
-
-        #main-stage {
-            display: none; height: 100vh;
-            flex-direction: column; justify-content: center; align-items: center;
-            text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
-                        url('https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/banner.jpg');
-            background-size: cover; background-position: center;
-        }
-
-        .fade-text {
-            font-family: 'Cinzel', serif; font-size: 1.5rem; letter-spacing: 8px;
-            opacity: 0; position: absolute; width: 100%; color: var(--gold);
-        }
-
-        #transform-container {
-            display: none; flex-direction: column; align-items: center;
-        }
-
-        .logo-text {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(3rem, 15vw, 8rem);
-            font-weight: 700;
-            letter-spacing: 15px;
-            color: var(--gold);
-            display: flex; align-items: center;
-        }
-
-        .emblem-img {
-            height: clamp(60px, 12vw, 120px);
-            margin: 0 -20px; /* ORIGINAL MOON-SHAPE OVERLAP */
-            filter: drop-shadow(0 0 15px var(--gold));
-        }
-
-        .countdown-wrap {
-            margin-top: 40px; display: flex; gap: 20px; opacity: 0;
-            transition: opacity 2s ease;
-        }
+        :root { --gold: #d4af37; --black: #000000; }
+        body, html { margin: 0; padding: 0; background-color: var(--black); color: white; font-family: 'Raleway', sans-serif; overflow: hidden; height: 100vh; }
+        #gate-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--black); display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 2s ease; }
+        .enter-btn { background: none; border: 2px solid var(--gold); color: var(--gold); padding: 15px 40px; font-family: 'Cinzel', serif; font-size: 1.2rem; cursor: pointer; letter-spacing: 5px; transition: 0.5s; text-transform: uppercase; }
+        .enter-btn:hover { background: var(--gold); color: var(--black); box-shadow: 0 0 20px rgba(212,175,55,0.4); }
+        #main-stage { display: none; height: 100vh; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/banner.jpg'); background-size: cover; background-position: center; }
+        .fade-text { font-family: 'Cinzel', serif; font-size: 1.5rem; letter-spacing: 8px; opacity: 0; position: absolute; width: 100%; color: var(--gold); }
+        #transform-container { display: none; flex-direction: column; align-items: center; }
+        .logo-text { font-family: 'Cinzel', serif; font-size: clamp(3rem, 15vw, 8rem); font-weight: 700; letter-spacing: 15px; color: var(--gold); display: flex; align-items: center; }
+        .emblem-img { height: clamp(60px, 12vw, 120px); margin: 0 -25px; filter: drop-shadow(0 0 15px var(--gold)); z-index: 2; }
+        .countdown-wrap { margin-top: 40px; display: flex; gap: 20px; opacity: 0; transition: opacity 2s ease; }
         .num { font-size: 2.5rem; font-weight: bold; color: var(--gold); display: block; }
-        .label { font-size: 0.7rem; text-transform: uppercase; color: white; }
-
-        @keyframes cinemaFade {
-            0% { opacity: 0; transform: translateY(10px); }
-            30% { opacity: 1; transform: translateY(0); }
-            70% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-10px); }
-        }
+        .label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: white; }
+        @keyframes cinemaFade { 0% { opacity: 0; transform: translateY(10px); } 30% { opacity: 1; transform: translateY(0); } 70% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-10px); } }
         .run-fade { animation: cinemaFade 5s forwards; }
     </style>
 </head>
 <body>
-
-    <div id="gate-screen">
-        <button class="enter-btn" onclick="startCinema()">ENTER SAZON LEGACY</button>
-    </div>
-
+    <div id="gate-screen"><button class="enter-btn" onclick="startCinema()">ENTER SAZON LEGACY</button></div>
     <audio id="audio-open"><source src="https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/open.mp3" type="audio/mpeg"></audio>
     <audio id="audio-shimmer"><source src="https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/shimmer.mp3" type="audio/mpeg"></audio>
     <audio id="bg-jingle" loop><source src="https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/Sazon_Jingle.mp3" type="audio/mpeg"></audio>
@@ -96,7 +32,6 @@
     <div id="main-stage">
         <div id="intro-1" class="fade-text">A SAZON FAMILY PRODUCTION</div>
         <div id="intro-2" class="fade-text">IN HONOR OF TERESO & TEOFISTA SAZON</div>
-
         <div id="transform-container">
             <div id="logo-reveal" class="logo-text">
                 <span>S</span>
@@ -116,7 +51,6 @@
         const aOpen = document.getElementById('audio-open');
         const aShim = document.getElementById('audio-shimmer');
         const jingle = document.getElementById('bg-jingle');
-
         function startCinema() {
             document.getElementById('gate-screen').style.opacity = '0';
             setTimeout(() => {
@@ -125,15 +59,10 @@
                 runSequence();
             }, 2000);
         }
-
         function runSequence() {
             aOpen.play();
             document.getElementById('intro-1').classList.add('run-fade');
-
-            setTimeout(() => {
-                document.getElementById('intro-2').classList.add('run-fade');
-            }, 5500);
-
+            setTimeout(() => { document.getElementById('intro-2').classList.add('run-fade'); }, 5500);
             setTimeout(() => {
                 aShim.play();
                 document.getElementById('transform-container').style.display = 'flex';
@@ -142,7 +71,6 @@
                 startTimer();
             }, 11000);
         }
-
         function startTimer() {
             const target = new Date("July 23, 2027 08:00:00").getTime();
             setInterval(() => {
