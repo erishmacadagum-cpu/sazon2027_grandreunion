@@ -9,49 +9,48 @@
         :root { --gold: #d4af37; --light-gold: #f3e5ab; --black: #000000; }
         body, html { margin: 0; padding: 0; background-color: var(--black); color: white; font-family: 'Montserrat', sans-serif; overflow: hidden; height: 100vh; }
 
-        /* Gate Screen - Fixed Clickability */
+        /* Gate Screen */
         #gate-screen { position: fixed; inset: 0; background: var(--black); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 1.2s ease; }
-        .tap-text { color: var(--gold); font-family: 'Cinzel', serif; letter-spacing: 5px; margin-bottom: 25px; font-size: 0.7rem; opacity: 0.8; }
-        .enter-btn { background: none; border: 1px solid var(--gold); color: var(--gold); padding: 18px 50px; font-family: 'Cinzel', serif; font-size: 1.1rem; cursor: pointer; letter-spacing: 6px; text-transform: uppercase; transition: 0.5s; z-index: 10000; pointer-events: auto; }
+        .enter-btn { background: none; border: 1px solid var(--gold); color: var(--gold); padding: 18px 50px; font-family: 'Cinzel', serif; font-size: 1.1rem; cursor: pointer; letter-spacing: 6px; text-transform: uppercase; transition: 0.5s; pointer-events: auto; }
         .enter-btn:hover { background: var(--gold); color: var(--black); box-shadow: 0 0 40px var(--gold); }
 
         /* Main Stage */
         #main-stage { display: none; height: 100vh; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
-        #final-banner { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.85)), url('images/banner.jpg'); background-size: cover; background-position: center; opacity: 0; transition: opacity 5s ease; }
+        #final-banner { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('images/banner.jpg'); background-size: cover; background-position: center; opacity: 0; transition: opacity 5s ease; }
 
         /* Credits Style */
-        .credit { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(1.2rem, 6vw, 2.2rem); letter-spacing: 12px; color: var(--gold); opacity: 0; position: absolute; width: 100%; transition: all 2s ease; z-index: 10; text-shadow: 0 0 15px rgba(212, 175, 55, 0.5); transform: translateY(15px); }
+        .credit { font-family: 'Cinzel', serif; font-size: clamp(1.2rem, 6vw, 2.2rem); letter-spacing: 12px; color: var(--gold); opacity: 0; position: absolute; width: 100%; transition: all 2s ease; z-index: 10; text-shadow: 0 0 15px rgba(212, 175, 55, 0.5); transform: translateY(15px); }
         .sub-credit { font-family: 'Montserrat', sans-serif; font-weight: 200; font-size: 0.8rem; letter-spacing: 8px; color: var(--light-gold); display: block; margin-top: 15px; text-transform: uppercase; }
 
-        /* SOON Reveal - Rectified Alignment */
+        /* THE EXACT "SOON" LAYOUT */
         #soon-wrap { display: none; flex-direction: column; align-items: center; z-index: 20; opacity: 0; transition: opacity 3s ease; }
-        .soon-text { font-family: 'Cinzel', serif; font-size: clamp(4.5rem, 18vw, 10rem); font-weight: 700; color: var(--gold); display: flex; align-items: center; justify-content: center; letter-spacing: 10px; }
+        .soon-text { font-family: 'Cinzel', serif; font-size: clamp(4rem, 18vw, 10rem); font-weight: 700; color: var(--gold); display: flex; align-items: center; justify-content: center; letter-spacing: 5px; }
         
-        /* Proactive Moon O */
-        .celestial-o-container { position: relative; width: 1.1em; height: 1.1em; margin: 0 0.1em; display: flex; align-items: center; justify-content: center; }
-        .moon-ring { position: absolute; inset: -5%; border: 2px solid var(--gold); border-radius: 50%; animation: rotateHalo 15s linear infinite; opacity: 0.6; box-shadow: 0 0 20px var(--gold); }
-        .logo-tree { width: 85%; height: 85%; border-radius: 50%; box-shadow: 0 0 30px var(--gold); object-fit: cover; z-index: 2; border: 1px solid var(--gold); }
+        /* The Moon Portal (First O) */
+        .moon-portal { position: relative; width: 1.05em; height: 1.05em; margin: 0 0.1em; display: flex; align-items: center; justify-content: center; }
+        .moon-glow { position: absolute; inset: -2%; border: 2px solid var(--gold); border-radius: 50%; box-shadow: 0 0 30px var(--gold); opacity: 0.8; animation: rotateHalo 20s linear infinite; }
+        .logo-tree { width: 90%; height: 90%; border-radius: 50%; object-fit: cover; z-index: 2; border: 1px solid var(--gold); filter: brightness(1.1); }
 
-        /* Countdown Grid */
-        #countdown { margin-top: 40px; font-family: 'Cinzel', serif; color: var(--gold); display: flex; gap: 30px; opacity: 0; transition: opacity 2s ease; z-index: 20; border-top: 1px solid rgba(212, 175, 55, 0.3); padding-top: 20px; }
-        .timer-unit { display: flex; flex-direction: column; min-width: 75px; }
-        .timer-num { font-size: 2.2rem; font-weight: 700; text-shadow: 0 0 10px var(--gold); }
-        .timer-label { font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase; opacity: 0.7; font-family: 'Montserrat', sans-serif; }
+        /* Countdown */
+        #countdown { margin-top: 30px; font-family: 'Cinzel', serif; color: var(--gold); display: flex; gap: clamp(10px, 3vw, 30px); opacity: 0; transition: opacity 2s ease; z-index: 20; }
+        .timer-unit { display: flex; flex-direction: column; min-width: 65px; }
+        .timer-num { font-size: 2rem; font-weight: 700; text-shadow: 0 0 10px var(--gold); }
+        .timer-label { font-size: 0.55rem; letter-spacing: 3px; text-transform: uppercase; opacity: 0.7; font-family: 'Montserrat', sans-serif; }
 
         /* Animations */
         .visible { opacity: 1 !important; transform: translateY(0) !important; }
         .exit-up { opacity: 0 !important; transform: translateY(-30px) !important; }
-        .jive-pulse { animation: jiveBeat 0.58s infinite alternate ease-in-out; }
+        .jive { animation: rhythmicPulse 0.58s infinite alternate ease-in-out; }
 
         @keyframes rotateHalo { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes jiveBeat { from { transform: scale(1); filter: brightness(1); } to { transform: scale(1.03); filter: brightness(1.2); } }
+        @keyframes rhythmicPulse { from { transform: scale(1); filter: brightness(1); } to { transform: scale(1.02); filter: brightness(1.2); } }
     </style>
 </head>
 <body>
 
     <div id="gate-screen">
-        <div class="tap-text">A LEGACY UNFOLDING</div>
-        <button class="enter-btn" id="gateButton">ENTER SAZON LEGACY</button>
+        <div style="color:var(--gold); font-family:'Cinzel'; letter-spacing:5px; margin-bottom:20px; font-size:0.7rem;">LEGACY 2027</div>
+        <button class="enter-btn" id="gateButton">ENTER EXPERIENCE</button>
     </div>
 
     <audio id="snd-click" src="audio/click.mp3"></audio>
@@ -69,11 +68,11 @@
         <div id="soon-wrap">
             <div class="soon-text" id="jiveTarget">
                 <span>S</span>
-                <span>O</span>
-                <div class="celestial-o-container">
-                    <div class="moon-ring"></div>
-                    <img src="images/logo.jpg" class="logo-tree" alt="O">
+                <div class="moon-portal">
+                    <div class="moon-glow"></div>
+                    <img src="images/logo.jpg" class="logo-tree" alt="Moon O">
                 </div>
+                <span>O</span>
                 <span>N</span>
             </div>
 
@@ -96,12 +95,8 @@
         };
 
         btn.addEventListener('click', function() {
-            // Unlocking Audio Context
             Object.values(aud).forEach(track => {
-                track.play().then(() => {
-                    track.pause();
-                    track.currentTime = 0;
-                }).catch(e => console.log("Init"));
+                track.play().then(() => { track.pause(); track.currentTime = 0; }).catch(e => {});
             });
 
             aud.click.play();
@@ -110,25 +105,21 @@
             setTimeout(() => {
                 document.getElementById('gate-screen').style.display = 'none';
                 document.getElementById('main-stage').style.display = 'flex';
-                runCinematic();
+                runLegacy();
             }, 1200);
         });
 
-        function runCinematic() {
-            // 0s: Scene 1
+        function runLegacy() {
             aud.open.play();
-            showText('t1', 4000);
+            animate('t1', 4000);
 
-            // 5s: Scene 2
             setTimeout(() => {
                 aud.shim.play();
-                showText('t2', 4500);
+                animate('t2', 4500);
             }, 5000);
 
-            // 10s: Scene 3
-            setTimeout(() => showText('t3', 4500), 10000);
+            setTimeout(() => animate('t3', 4500), 10000);
 
-            // 15s: Finale
             setTimeout(() => {
                 document.getElementById('final-banner').classList.add('visible');
                 const wrap = document.getElementById('soon-wrap');
@@ -136,9 +127,9 @@
                 
                 setTimeout(() => {
                     wrap.classList.add('visible');
-                    document.getElementById('jiveTarget').classList.add('jive-pulse');
+                    document.getElementById('jiveTarget').classList.add('jive');
                     document.getElementById('countdown').classList.add('visible');
-                    startTimer();
+                    startClock();
                 }, 100);
 
                 aud.jingle.volume = 0.1;
@@ -151,13 +142,13 @@
             }, 15000);
         }
 
-        function showText(id, delay) {
+        function animate(id, delay) {
             const el = document.getElementById(id);
             el.classList.add('visible');
             setTimeout(() => el.classList.add('exit-up'), delay);
         }
 
-        function startTimer() {
+        function startClock() {
             const target = new Date("July 23, 2027 00:00:00").getTime();
             setInterval(() => {
                 const now = new Date().getTime();
