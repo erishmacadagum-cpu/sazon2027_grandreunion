@@ -38,7 +38,7 @@
             display: none; height: 100vh;
             flex-direction: column; justify-content: center; align-items: center;
             text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
                         url('https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/banner.jpg');
             background-size: cover; background-position: center;
         }
@@ -58,12 +58,12 @@
             font-weight: 700;
             letter-spacing: 15px;
             color: var(--gold);
+            display: flex; align-items: center;
         }
 
         .emblem-img {
             height: clamp(60px, 12vw, 120px);
-            vertical-align: middle;
-            margin: 0 -15px; /* Creates the moon-shape overlap feel */
+            margin: 0 -10px;
             filter: drop-shadow(0 0 15px var(--gold));
         }
 
@@ -76,11 +76,11 @@
 
         @keyframes cinemaFade {
             0% { opacity: 0; transform: translateY(10px); }
-            20% { opacity: 1; transform: translateY(0); }
-            80% { opacity: 1; transform: translateY(0); }
+            30% { opacity: 1; transform: translateY(0); }
+            70% { opacity: 1; transform: translateY(0); }
             100% { opacity: 0; transform: translateY(-10px); }
         }
-        .run-fade { animation: cinemaFade 4s forwards; }
+        .run-fade { animation: cinemaFade 5s forwards; }
     </style>
 </head>
 <body>
@@ -98,10 +98,10 @@
         <div id="intro-2" class="fade-text">IN HONOR OF TERESO & TEOFISTA SAZON</div>
 
         <div id="transform-container">
-            <div id="logo-reveal">
-                <span class="logo-text">S</span>
+            <div id="logo-reveal" class="logo-text">
+                <span>S</span>
                 <img src="https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/Sazon_Emblem.png" class="emblem-img" alt="Logo">
-                <span class="logo-text">OON</span>
+                <span>OON</span>
             </div>
             <div class="countdown-wrap" id="timer-ui">
                 <div style="text-align:center"><span class="num" id="days">00</span><span class="label">Days</span></div>
@@ -113,9 +113,9 @@
     </div>
 
     <script>
-        const audioOpen = document.getElementById('audio-open');
-        const audioShimmer = document.getElementById('audio-shimmer');
-        const bgJingle = document.getElementById('bg-jingle');
+        const aOpen = document.getElementById('audio-open');
+        const aShim = document.getElementById('audio-shimmer');
+        const jingle = document.getElementById('bg-jingle');
 
         function startCinema() {
             document.getElementById('gate-screen').style.opacity = '0';
@@ -127,28 +127,20 @@
         }
 
         function runSequence() {
-            const i1 = document.getElementById('intro-1');
-            const i2 = document.getElementById('intro-2');
-            const tc = document.getElementById('transform-container');
-
-            // 1. Play Opening Sound & First Fade
-            audioOpen.play();
-            i1.classList.add('run-fade');
+            aOpen.play();
+            document.getElementById('intro-1').classList.add('run-fade');
 
             setTimeout(() => {
-                // 2. Second Fade
-                i2.classList.add('run-fade');
-            }, 4500);
+                document.getElementById('intro-2').classList.add('run-fade');
+            }, 5500);
 
             setTimeout(() => {
-                // 3. Play Shimmer & Reveal SOON
-                audioShimmer.play();
-                tc.style.display = 'flex';
-                // 4. Start Jingle
-                bgJingle.play();
-                document.getElementById('timer-ui').style.opacity = '1';
+                aShim.play();
+                document.getElementById('transform-container').style.display = 'flex';
+                jingle.play();
+                setTimeout(() => { document.getElementById('timer-ui').style.opacity = '1'; }, 1000);
                 startTimer();
-            }, 9000);
+            }, 11000);
         }
 
         function startTimer() {
