@@ -4,53 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sazon Family Legacy 2027</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@100;300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #d4af37; --light-gold: #f3e5ab; --black: #000000; }
+        :root { --gold: #d4af37; --light-gold: #f3e5ab; --black: #050505; }
         body, html { margin: 0; padding: 0; background-color: var(--black); color: white; font-family: 'Montserrat', sans-serif; overflow: hidden; height: 100vh; }
 
         /* Gate Screen */
-        #gate-screen { position: fixed; inset: 0; background: var(--black); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 1.2s ease; }
-        .enter-btn { background: none; border: 1px solid var(--gold); color: var(--gold); padding: 18px 50px; font-family: 'Cinzel', serif; font-size: 1.1rem; cursor: pointer; letter-spacing: 6px; text-transform: uppercase; transition: 0.5s; pointer-events: auto; }
-        .enter-btn:hover { background: var(--gold); color: var(--black); box-shadow: 0 0 40px var(--gold); }
+        #gate-screen { position: fixed; inset: 0; background: var(--black); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 1.5s ease; }
+        .enter-btn { background: none; border: 1px solid var(--gold); color: var(--gold); padding: 20px 60px; font-family: 'Cinzel', serif; font-size: 1rem; cursor: pointer; letter-spacing: 8px; text-transform: uppercase; transition: 0.5s; box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.1); }
+        .enter-btn:hover { background: var(--gold); color: var(--black); box-shadow: 0 0 50px var(--gold); }
 
         /* Main Stage */
         #main-stage { display: none; height: 100vh; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
-        #final-banner { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.85)), url('images/banner.jpg'); background-size: cover; background-position: center; opacity: 0; transition: opacity 5s ease; }
+        #final-banner { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.9)), url('images/banner.jpg'); background-size: cover; background-position: center; opacity: 0; transition: opacity 6s ease; filter: saturate(1.2); }
 
-        /* Cinematic Text */
-        .credit { font-family: 'Cinzel', serif; font-size: clamp(1.2rem, 6vw, 2.2rem); letter-spacing: 12px; color: var(--gold); opacity: 0; position: absolute; width: 100%; transition: all 2s ease; z-index: 10; text-shadow: 0 0 15px rgba(212, 175, 55, 0.5); transform: translateY(15px); }
-        .sub-credit { font-family: 'Montserrat', sans-serif; font-weight: 200; font-size: 0.8rem; letter-spacing: 8px; color: var(--light-gold); display: block; margin-top: 15px; text-transform: uppercase; }
-
-        /* THE "SOON" LAYOUT: S - MOON - O - N */
-        #soon-wrap { display: none; flex-direction: column; align-items: center; z-index: 20; opacity: 0; transition: opacity 3s ease; }
-        .soon-text { font-family: 'Cinzel', serif; font-size: clamp(4rem, 18vw, 9.5rem); font-weight: 700; color: var(--gold); display: flex; align-items: center; justify-content: center; letter-spacing: 8px; }
+        /* Varied Cinematic Typography */
+        .credit { opacity: 0; position: absolute; width: 100%; transition: all 2.5s cubic-bezier(0.4, 0, 0.2, 1); z-index: 10; transform: translateY(20px); }
         
-        /* The Celestial Moon Portal (First O) */
-        .moon-portal { position: relative; width: 1.1em; height: 1.1em; margin: 0 0.15em; display: flex; align-items: center; justify-content: center; }
-        .moon-glow { position: absolute; inset: -4%; border: 2px solid var(--gold); border-radius: 50%; box-shadow: 0 0 35px var(--gold); opacity: 0.8; animation: rotateHalo 25s linear infinite; }
-        .logo-tree { width: 88%; height: 88%; border-radius: 50%; object-fit: cover; z-index: 2; border: 1px solid var(--gold); filter: brightness(1.1) contrast(1.1); }
+        #t1 { font-family: 'Montserrat', sans-serif; font-weight: 100; font-size: 0.9rem; letter-spacing: 15px; color: var(--light-gold); }
+        #t2 { font-family: 'Cinzel', serif; font-weight: 700; font-size: clamp(1.5rem, 5vw, 2.5rem); letter-spacing: 10px; color: var(--gold); line-height: 1.6; }
+        #t2 span { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 0.8rem; display: block; letter-spacing: 12px; margin-bottom: 10px; }
+        #t3 { font-family: 'Cinzel', serif; font-size: 1.4rem; letter-spacing: 8px; color: var(--gold); }
+        #t3 .sub-text { font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 0.7rem; display: block; margin-top: 15px; color: white; opacity: 0.8; letter-spacing: 5px; }
 
-        /* Countdown Grid */
-        #countdown { margin-top: 30px; font-family: 'Cinzel', serif; color: var(--gold); display: flex; gap: clamp(15px, 4vw, 40px); opacity: 0; transition: opacity 2.5s ease; z-index: 20; }
-        .timer-unit { display: flex; flex-direction: column; min-width: 70px; }
-        .timer-num { font-size: 2.2rem; font-weight: 700; text-shadow: 0 0 12px var(--gold); }
-        .timer-label { font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase; opacity: 0.8; font-family: 'Montserrat', sans-serif; margin-top: 5px; }
+        /* THE SOON REVEAL */
+        #soon-wrap { display: none; flex-direction: column; align-items: center; z-index: 20; opacity: 0; transition: opacity 4s ease; }
+        .soon-text { font-family: 'Cinzel', serif; font-size: clamp(4rem, 18vw, 9rem); font-weight: 700; color: var(--gold); display: flex; align-items: center; justify-content: center; letter-spacing: 10px; text-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+        
+        /* Circular Moon Portal */
+        .moon-portal { position: relative; width: 1.15em; height: 1.15em; margin: 0 0.1em; display: flex; align-items: center; justify-content: center; }
+        .moon-glow { position: absolute; inset: -5%; border: 2px solid var(--gold); border-radius: 50%; box-shadow: 0 0 40px var(--gold), inset 0 0 20px var(--gold); opacity: 0.6; animation: rotateHalo 30s linear infinite, pulseGlow 3s infinite alternate; }
+        .logo-tree { width: 90%; height: 90%; border-radius: 50%; /* Force Round Shape */ object-fit: cover; z-index: 2; border: 1px solid var(--gold); filter: contrast(1.1) brightness(1.1); }
 
-        /* State Helpers */
+        /* Countdown */
+        #countdown { margin-top: 40px; display: flex; gap: 30px; opacity: 0; transition: opacity 3s ease; z-index: 20; }
+        .timer-unit { display: flex; flex-direction: column; min-width: 80px; }
+        .timer-num { font-family: 'Cinzel', serif; font-size: 2.2rem; font-weight: 700; color: var(--gold); text-shadow: 0 0 15px var(--gold); }
+        .timer-label { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 0.55rem; letter-spacing: 4px; text-transform: uppercase; margin-top: 8px; color: var(--light-gold); }
+
+        /* Animations */
         .visible { opacity: 1 !important; transform: translateY(0) !important; }
-        .exit-up { opacity: 0 !important; transform: translateY(-40px) !important; }
-        .jive { animation: rhythmicPulse 0.6s infinite alternate ease-in-out; }
+        .exit-up { opacity: 0 !important; transform: translateY(-50px) !important; }
+        .jive { animation: rhythmicPulse 0.58s infinite alternate ease-in-out; }
 
         @keyframes rotateHalo { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes rhythmicPulse { from { transform: scale(1); filter: brightness(1); } to { transform: scale(1.02); filter: brightness(1.25); } }
+        @keyframes pulseGlow { from { opacity: 0.4; box-shadow: 0 0 20px var(--gold); } to { opacity: 0.8; box-shadow: 0 0 50px var(--gold); } }
+        @keyframes rhythmicPulse { from { transform: scale(1); } to { transform: scale(1.03); } }
     </style>
 </head>
 <body>
 
     <div id="gate-screen">
-        <div style="color:var(--gold); font-family:'Cinzel'; letter-spacing:6px; margin-bottom:25px; font-size:0.75rem; opacity:0.7;">SAZON FAMILY LEGACY</div>
-        <button class="enter-btn" id="gateButton">ENTER EXPERIENCE</button>
+        <div style="color:var(--gold); font-family:'Montserrat'; font-weight:100; letter-spacing:10px; margin-bottom:30px; font-size:0.65rem;">EST. 2027</div>
+        <button class="enter-btn" id="gateButton">Begin Experience</button>
     </div>
 
     <audio id="snd-click" src="audio/click.mp3"></audio>
@@ -62,8 +68,10 @@
         <div id="final-banner"></div>
         
         <div id="t1" class="credit">A SAZON FAMILY PRODUCTION</div>
-        <div id="t2" class="credit">IN HONOR OF<br><span style="font-size: 1.1em; letter-spacing: 15px;">TERESO & TEOFISTA SAZON</span></div>
-        <div id="t3" class="credit">JULY 23-24, 2027<span class="sub-credit">MARZON HOTEL • KALIBO, AKLAN</span></div>
+        
+        <div id="t2" class="credit"><span>IN HONOR OF</span>TERESO & TEOFISTA SAZON</div>
+        
+        <div id="t3" class="credit">JULY 23-24, 2027<span class="sub-text">MARZON HOTEL • KALIBO, AKLAN</span></div>
 
         <div id="soon-wrap">
             <div class="soon-text" id="jiveTarget">
@@ -78,7 +86,7 @@
 
             <div id="countdown">
                 <div class="timer-unit"><span class="timer-num" id="days">00</span><span class="timer-label">Days</span></div>
-                <div class="timer-unit"><span class="timer-num" id="hours">00</span><span class="timer-label">Hrs</span></div>
+                <div class="timer-unit"><span class="timer-num" id="hours">00</span><span class="timer-label">Hours</span></div>
                 <div class="timer-unit"><span class="timer-num" id="mins">00</span><span class="timer-label">Mins</span></div>
                 <div class="timer-unit"><span class="timer-num" id="secs">00</span><span class="timer-label">Secs</span></div>
             </div>
@@ -95,9 +103,8 @@
         };
 
         btn.addEventListener('click', function() {
-            Object.values(aud).forEach(track => {
-                track.play().then(() => { track.pause(); track.currentTime = 0; }).catch(e => {});
-            });
+            // Unlock audio for mobile/browsers
+            Object.values(aud).forEach(t => { t.play().then(()=> {t.pause(); t.currentTime=0;}).catch(e=>{}); });
 
             aud.click.play();
             document.getElementById('gate-screen').style.opacity = '0';
@@ -105,23 +112,23 @@
             setTimeout(() => {
                 document.getElementById('gate-screen').style.display = 'none';
                 document.getElementById('main-stage').style.display = 'flex';
-                runLegacy(); 
-            }, 1200);
+                startShow(); 
+            }, 1500);
         });
 
-        function runLegacy() {
-            aud.open.play();
-            animateText('t1', 4000);
+        function startShow() {
+            // Scene 1
+            setTimeout(() => { aud.open.play(); show('t1', 4000); }, 500);
 
+            // Scene 2
+            setTimeout(() => { aud.shim.play(); show('t2', 5000); }, 5500);
+
+            // Scene 3
+            setTimeout(() => { show('t3', 5000); }, 11500);
+
+            // Scene 4: Finale
             setTimeout(() => {
-                aud.shim.play();
-                animateText('t2', 4500);
-            }, 5000);
-
-            setTimeout(() => animateText('t3', 4500), 10000);
-
-            setTimeout(() => {
-                document.getElementById('final-banner').classList.add('visible');
+                document.getElementById('final-banner').style.opacity = '1';
                 const wrap = document.getElementById('soon-wrap');
                 wrap.style.display = 'flex';
                 
@@ -129,38 +136,36 @@
                     wrap.classList.add('visible');
                     document.getElementById('jiveTarget').classList.add('jive');
                     document.getElementById('countdown').classList.add('visible');
-                    startCountdown();
-                }, 100);
+                    runClock();
+                }, 500);
 
-                aud.jingle.volume = 0.1;
+                // Audio ramp up
+                aud.jingle.volume = 0;
                 aud.jingle.play();
-                let vol = 0.1;
+                let v = 0;
                 let fade = setInterval(() => {
-                    if (vol < 0.7) { vol += 0.05; aud.jingle.volume = vol; }
+                    if(v < 0.8) { v += 0.05; aud.jingle.volume = v; }
                     else clearInterval(fade);
-                }, 400);
-            }, 15000);
+                }, 300);
+            }, 17500);
         }
 
-        function animateText(id, duration) {
+        function show(id, dur) {
             const el = document.getElementById(id);
-            if(el) {
-                el.classList.add('visible');
-                setTimeout(() => el.classList.add('exit-up'), duration);
-            }
+            el.classList.add('visible');
+            setTimeout(() => el.classList.add('exit-up'), dur);
         }
 
-        function startCountdown() {
-            const targetDate = new Date("July 23, 2027 00:00:00").getTime();
+        function runClock() {
+            const target = new Date("July 23, 2027 00:00:00").getTime();
             setInterval(() => {
                 const now = new Date().getTime();
-                const diff = targetDate - now;
-                if (diff < 0) return;
-                
-                document.getElementById('days').innerText = Math.floor(diff / 86400000);
-                document.getElementById('hours').innerText = Math.floor((diff % 86400000) / 3600000);
-                document.getElementById('mins').innerText = Math.floor((diff % 3600000) / 60000);
-                document.getElementById('secs').innerText = Math.floor((diff % 60000) / 1000);
+                const d = target - now;
+                if (d < 0) return;
+                document.getElementById('days').innerText = Math.floor(d / 86400000).toString().padStart(2, '0');
+                document.getElementById('hours').innerText = Math.floor((d % 86400000) / 3600000).toString().padStart(2, '0');
+                document.getElementById('mins').innerText = Math.floor((d % 3600000) / 60000).toString().padStart(2, '0');
+                document.getElementById('secs').innerText = Math.floor((d % 60000) / 1000).toString().padStart(2, '0');
             }, 1000);
         }
     </script>
