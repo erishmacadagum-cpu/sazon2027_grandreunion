@@ -4,103 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sazon Family Legacy 2027</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --gold: #d4af37; 
-            --soft-gold: #f3e5ab; 
-            --black: #000000; 
-            --glow: rgba(212, 175, 55, 0.4); 
-            --portal-size: clamp(80px, 18vw, 170px); /* PRECISE SIZE CONTROL */
-        }
+        :root { --gold: #d4af37; --light-gold: #f3e5ab; --black: #000000; }
         body, html { margin: 0; padding: 0; background-color: var(--black); color: white; font-family: 'Montserrat', sans-serif; overflow: hidden; height: 100vh; }
 
-        /* Gate Screen */
-        #gate-screen { position: fixed; inset: 0; background: var(--black); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 1s ease; }
-        .tap-text { color: var(--gold); font-family: 'Cinzel', serif; letter-spacing: 6px; margin-bottom: 25px; font-size: 0.75rem; opacity: 0.6; }
-        .enter-btn { background: none; border: 1px solid var(--gold); color: var(--gold); padding: 18px 50px; font-family: 'Cinzel', serif; font-size: 1.1rem; cursor: pointer; letter-spacing: 6px; text-transform: uppercase; transition: 0.5s; }
+        /* Gate Screen for Initial Audio/Animation Unlock */
+        #gate-screen { position: fixed; inset: 0; background: var(--black); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 1.5s ease; }
+        .tap-text { color: var(--gold); font-family: 'Cinzel', serif; letter-spacing: 5px; margin-bottom: 25px; font-size: 0.7rem; opacity: 0.8; }
+        .enter-btn { background: none; border: 1px solid var(--gold); color: var(--gold); padding: 18px 50px; font-family: 'Cinzel', serif; font-size: 1.1rem; cursor: pointer; letter-spacing: 6px; text-transform: uppercase; transition: 0.5s; position: relative; overflow: hidden; }
         .enter-btn:hover { background: var(--gold); color: var(--black); box-shadow: 0 0 40px var(--gold); }
 
-        /* Main Stage */
+        /* Main Stage & Background Reveal */
         #main-stage { display: none; height: 100vh; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
-        #final-banner { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.9)), url('images/banner.jpg'); background-size: cover; background-position: center; opacity: 0; transition: opacity 5s ease; }
+        #final-banner { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.85)), url('images/banner.jpg'); background-size: cover; background-position: center; opacity: 0; transition: opacity 5s ease; }
 
-        /* Elegant Credit Typography */
-        .credit { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(1.4rem, 6vw, 2.5rem); letter-spacing: 12px; color: var(--gold); opacity: 0; position: absolute; width: 100%; transition: all 2s ease; z-index: 10; text-shadow: 0 0 20px var(--glow); transform: translateY(20px); }
-        .sub-credit { font-family: 'Montserrat', sans-serif; font-weight: 200; font-size: 0.85rem; letter-spacing: 8px; color: var(--soft-gold); display: block; margin-top: 20px; text-transform: uppercase; }
+        /* Credits Style - Sophisticated Clarity */
+        .credit { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(1.2rem, 6vw, 2.2rem); letter-spacing: 12px; color: var(--gold); opacity: 0; position: absolute; width: 100%; transition: all 2s ease; z-index: 10; text-shadow: 0 0 15px rgba(212, 175, 55, 0.5); transform: translateY(10px); }
+        .sub-credit { font-family: 'Montserrat', sans-serif; font-weight: 200; font-size: 0.8rem; letter-spacing: 8px; color: var(--light-gold); display: block; margin-top: 15px; text-transform: uppercase; }
 
         /* The SOON Reveal & Jive */
         #soon-wrap { display: none; flex-direction: column; align-items: center; z-index: 20; opacity: 0; transition: opacity 3s ease; }
+        .soon-text { font-family: 'Cinzel', serif; font-size: clamp(4.5rem, 20vw, 11rem); font-weight: 700; color: var(--gold); display: flex; align-items: center; justify-content: center; letter-spacing: 15px; }
         
-        /* New precise SOON layout */
-        .soon-text { 
-            font-family: 'Cinzel', serif; 
-            font-size: clamp(4.5rem, 20vw, 11rem); 
-            font-weight: 700; 
-            color: var(--gold); 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            letter-spacing: 15px; 
-            width: 100%;
-        }
-        
-        /* Celestial Moon Portal Effect - RECTIFIED & VERIFIED */
-        .moon-portal-container { 
-            position: relative; 
-            width: var(--portal-size); 
-            height: var(--portal-size); 
-            margin: 0 5px; /* Tiny consistent margin to prevent contact */
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            /* Negative margin to pull flanking text in closely but SAFELY */
-            margin-left: -35px;
-            margin-right: -20px;
-        }
-        
-        /* The proactive round golden moon feels */
-        .moon-halo { 
-            position: absolute; 
-            inset: -8%; 
-            border: 2px solid var(--gold); 
-            border-radius: 50%; 
-            opacity: 0.5; 
-            animation: rotateHalo 20s linear infinite; 
-            box-shadow: 0 0 25px var(--glow), inset 0 0 15px var(--glow);
-        }
-        
-        /* The tree logo from image_3.png sitting perfectly inside the moon */
-        .logo-inside-moon { 
-            width: 85%; 
-            height: 85%; 
-            border-radius: 50%; 
-            box-shadow: 0 0 35px var(--gold); 
-            object-fit: cover; 
-            z-index: 2; 
-            border: 1px solid var(--gold); 
-            background: rgba(0,0,0,0.6); /* Darkens logo slightly to sit deep in the moon */
-        }
+        /* THE PROACTIVE MOON O: Alignment Fix */
+        .celestial-o-container { position: relative; width: 1.1em; height: 1.1em; margin: 0 0.15em; display: flex; align-items: center; justify-content: center; }
+        .moon-proactive-ring { position: absolute; inset: -8%; border: 1.5px solid var(--gold); border-radius: 50%; animation: rotateHalo 12s linear infinite; opacity: 0.5; box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+        .moon-proactive-ring::after { content:''; position:absolute; top:-5px; left:50%; width:10px; height:10px; background:var(--gold); border-radius:50%; box-shadow:0 0 10px var(--gold); }
+        .logo-inside-moon { width: 85%; height: 85%; border-radius: 50%; box-shadow: 0 0 30px var(--gold); object-fit: cover; z-index: 2; border: 2px solid var(--gold); transition: transform 0.3s ease; }
 
-        /* Awe-Amazing Timer */
-        #countdown { margin-top: 40px; font-family: 'Cinzel', serif; color: var(--gold); display: flex; gap: 30px; opacity: 0; transition: opacity 2s ease; z-index: 20; padding-top: 20px; border-top: 1px solid rgba(212, 175, 55, 0.3); }
-        .timer-unit { display: flex; flex-direction: column; }
-        .timer-num { font-size: 2.2rem; font-weight: 700; text-shadow: 0 0 10px var(--gold); }
-        .timer-label { font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase; opacity: 0.7; font-family: 'Montserrat', sans-serif; }
+        /* Awe-Amazing Countdown Style */
+        #countdown { margin-top: 40px; font-family: 'Cinzel', serif; color: var(--gold); display: flex; gap: clamp(15px, 4vw, 35px); opacity: 0; transition: opacity 2s ease; z-index: 20; }
+        .timer-unit { display: flex; flex-direction: column; min-width: 70px; }
+        .timer-num { font-size: 2.2rem; display: block; font-weight: 700; text-shadow: 0 0 10px var(--gold); }
+        .timer-label { font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase; opacity: 0.7; font-family: 'Montserrat', sans-serif; margin-top: 5px; }
 
-        /* Active Motion States */
+        /* Status Classes for Cinematic Script */
         .visible { opacity: 1 !important; transform: translateY(0) !important; }
-        .exit { opacity: 0 !important; transform: translateY(-30px) !important; }
-        .jive-pulse { animation: jiveBeat 0.58s infinite alternate ease-in-out; }
+        .hidden-exit { opacity: 0 !important; transform: translateY(-20px) !important; }
+        .jive-pulse { animation: rhythmicJive 0.6s infinite alternate ease-in-out; }
 
         @keyframes rotateHalo { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes jiveBeat { from { transform: scale(1); filter: brightness(1); } to { transform: scale(1.03); filter: brightness(1.15); } }
+        @keyframes rhythmicJive { 
+            from { transform: scale(1); filter: brightness(1); } 
+            to { transform: scale(1.03); filter: brightness(1.2); } 
+        }
     </style>
 </head>
 <body>
 
     <div id="gate-screen">
-        <div class="tap-text">A LEGACY UNFOLDING</div>
+        <div class="tap-text">A FAMILY LEGACY UNFOLDING</div>
         <button class="enter-btn" id="gateButton">ENTER SAZON LEGACY</button>
     </div>
 
@@ -127,16 +81,16 @@
         <div id="soon-wrap">
             <div class="soon-text" id="jiveTarget">
                 <span>S</span>
-                <div class="moon-portal-container">
-                    <div class="moon-halo"></div>
-                    <img src="images/logo.jpg" class="logo-inside-moon" alt="Moon Portal">
+                <div class="celestial-o-container">
+                    <div class="moon-proactive-ring"></div>
+                    <img src="images/logo.jpg" class="logo-inside-moon" alt="O">
                 </div>
-                <span>N</span>
+                <span>ON</span>
             </div>
 
             <div id="countdown">
                 <div class="timer-unit"><span class="timer-num" id="days">00</span><span class="timer-label">Days</span></div>
-                <div class="timer-unit"><span class="timer-num" id="hours">00</span><span class="timer-label">Hours</span></div>
+                <div class="timer-unit"><span class="timer-num" id="hours">00</span><span class="timer-label">Hrs</span></div>
                 <div class="timer-unit"><span class="timer-num" id="mins">00</span><span class="timer-label">Mins</span></div>
                 <div class="timer-unit"><span class="timer-num" id="secs">00</span><span class="timer-label">Secs</span></div>
             </div>
@@ -153,7 +107,7 @@
         };
 
         btn.addEventListener('click', () => {
-            // Audio Context Handshake
+            // Audio Context Handshake: Pre-start all sounds to unlock them
             Object.values(aud).forEach(s => { s.play(); s.pause(); s.currentTime = 0; });
             aud.click.play();
             
@@ -161,25 +115,25 @@
             setTimeout(() => {
                 document.getElementById('gate-screen').style.display = 'none';
                 document.getElementById('main-stage').style.display = 'flex';
-                runExperience();
+                start Experience();
             }, 1200);
         });
 
-        function runExperience() {
-            // Scene 1: Production + Open
+        function start Experience() {
+            // Scene 1: Production + Open (open.mp3)
             aud.open.play();
-            animateText('t1', 4000);
+            showText('t1', 4000);
 
-            // Scene 2: Honor + Shimmer (5s)
+            // Scene 2: Honor + Shimmer (shimmer.mp3 at 5s)
             setTimeout(() => {
                 aud.shim.play();
-                animateText('t2', 4000);
+                showText('t2', 4500);
             }, 5000);
 
-            // Scene 3: Location (10s)
-            setTimeout(() => animateText('t3', 4000), 10000);
+            // Scene 3: Location / Date (at 10s)
+            setTimeout(() => showText('t3', 4500), 10000);
 
-            // Scene 4: Finale Reveal (15s)
+            // Scene 4: Jingle Teaser Reveal (at 15s)
             setTimeout(() => {
                 document.getElementById('final-banner').classList.add('visible');
                 const soonWrap = document.getElementById('soon-wrap');
@@ -187,11 +141,13 @@
                 
                 setTimeout(() => {
                     soonWrap.classList.add('visible');
+                    // Start Rhythmic Jive & Active Timer
                     document.getElementById('jiveTarget').classList.add('jive-pulse');
                     document.getElementById('countdown').classList.add('visible');
                     startCountdown();
                 }, 100);
 
+                // Audio Volume Ramp for a smooth start
                 aud.jingle.volume = 0.1;
                 aud.jingle.play();
                 let v = 0.1;
@@ -202,10 +158,10 @@
             }, 15000);
         }
 
-        function animateText(id, delay) {
+        function showText(id, delay) {
             const el = document.getElementById(id);
             el.classList.add('visible');
-            setTimeout(() => el.classList.add('exit'), delay);
+            setTimeout(() => el.classList.add('hidden-exit'), delay);
         }
 
         function startCountdown() {
@@ -213,7 +169,7 @@
             setInterval(() => {
                 const now = new Date().getTime();
                 const d = target - now;
-                document.getElementById('days').innerText = Math.floor(d / (86400000));
+                document.getElementById('days').innerText = Math.floor(d / 86400000);
                 document.getElementById('hours').innerText = Math.floor((d % 86400000) / 3600000);
                 document.getElementById('mins').innerText = Math.floor((d % 3600000) / 60000);
                 document.getElementById('secs').innerText = Math.floor((d % 60000) / 1000);
