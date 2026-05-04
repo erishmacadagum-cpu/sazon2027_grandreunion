@@ -18,76 +18,103 @@
             background-color: var(--deep-navy);
             color: white;
             font-family: 'Raleway', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Header Styling */
+        .header {
+            padding: 80px 20px;
+            background: linear-gradient(rgba(10,14,23,0.85), rgba(10,14,23,0.85)), url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 3px solid var(--aqua-bright);
             text-align: center;
         }
 
-        .header {
-            padding: 60px 20px;
-            background: linear-gradient(rgba(10,14,23,0.8), rgba(10,14,23,0.8)), url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&q=80');
-            background-size: cover;
-            background-position: center;
-            border-bottom: 2px solid var(--aqua-bright);
+        h1 { font-family: 'Cinzel', serif; color: var(--aqua-bright); font-size: 2.8rem; margin: 0; text-shadow: 0 0 15px rgba(0,242,255,0.5); }
+        .tagline { font-size: 1.1rem; letter-spacing: 2px; color: #ccc; margin-top: 10px; }
+
+        /* Branch Section Styling */
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; text-align: center; }
+        
+        .tier-title { font-family: 'Cinzel', serif; color: var(--coral-pink); margin-top: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); display: inline-block; padding: 0 20px 5px; }
+
+        .tier-container { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 20px; 
+            padding: 30px 0; 
         }
 
-        h1 { font-family: 'Cinzel', serif; color: var(--aqua-bright); font-size: 2.5rem; margin-bottom: 10px; }
-
-        .anthem-section { padding: 40px 20px; background: rgba(255,255,255,0.05); margin: 20px auto; max-width: 800px; border-radius: 15px; }
-
-        .tier-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px; width: 100%; box-sizing: border-box; }
-        
         .branch-card { 
-            background: rgba(255, 255, 255, 0.1); 
+            background: rgba(255, 255, 255, 0.07); 
             border: 1px solid var(--aqua-bright); 
-            border-radius: 12px; 
-            padding: 20px; 
-            width: 180px; 
-            transition: 0.3s; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border-radius: 15px; 
+            padding: 25px; 
+            width: 200px; 
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
         }
-        
-        .branch-card:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.2); border-color: var(--coral-pink); }
-        .branch-card h3 { margin: 0; color: var(--aqua-bright); font-family: 'Cinzel', serif; }
-        .branch-card span { display: block; font-size: 0.85rem; margin-bottom: 15px; color: #ccc; font-style: italic; }
-        
+
+        .branch-card:hover { 
+            transform: translateY(-10px); 
+            background: rgba(0, 242, 255, 0.1); 
+            border-color: var(--coral-pink);
+            box-shadow: 0 8px 25px rgba(255,77,109,0.3);
+        }
+
+        .branch-card h3 { margin: 0 0 5px 0; color: var(--aqua-bright); font-family: 'Cinzel', serif; font-size: 1.3rem; }
+        .branch-card span { display: block; font-size: 0.9rem; color: #aaa; margin-bottom: 20px; font-style: italic; }
+
         .reg-btn { 
             background: var(--coral-pink); 
             color: white; 
-            border: none; 
-            padding: 10px 15px; 
-            border-radius: 5px; 
+            padding: 12px 20px; 
+            border-radius: 30px; 
             text-decoration: none; 
-            font-size: 0.8rem; 
+            font-size: 0.85rem; 
             font-weight: bold; 
             display: inline-block;
             transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
-        .reg-btn:hover { background: #ff7b8a; transform: scale(1.05); }
 
-        .logistics-section { padding: 50px 20px; background: rgba(0,0,0,0.4); margin-top: 40px; }
-        .info-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; max-width: 1100px; margin: auto; }
+        .reg-btn:hover { background: white; color: var(--coral-pink); transform: scale(1.05); }
+
+        /* Logistics Section */
+        .logistics-section { background: rgba(0,0,0,0.5); padding: 60px 20px; margin-top: 60px; }
+        .info-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; max-width: 1100px; margin: auto; }
         
         .info-box { 
             flex: 1; 
-            min-width: 300px; 
-            background: rgba(255,255,255,0.05); 
-            padding: 30px; 
-            border-radius: 15px; 
-            border-top: 4px solid var(--coral-pink); 
+            min-width: 320px; 
+            background: rgba(255,255,255,0.03); 
+            padding: 40px; 
+            border-radius: 20px; 
+            border-top: 5px solid var(--coral-pink);
+            text-align: center;
         }
 
-        .footer { padding: 40px; color: #666; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1); }
+        .info-box h4 { font-family: 'Cinzel', serif; color: var(--aqua-bright); font-size: 1.5rem; margin-top: 0; }
+        .email-link { color: var(--aqua-bright); font-weight: bold; font-size: 1.2rem; text-decoration: none; border-bottom: 1px dashed var(--aqua-bright); }
+
+        /* Map Fix */
+        .map-container { margin-top: 20px; border-radius: 15px; overflow: hidden; border: 1px solid var(--aqua-bright); }
+
+        .footer { padding: 50px; color: #555; font-size: 0.8rem; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
     <header class="header">
         <h1>THE 13 ANCESTRAL BRANCHES</h1>
-        <p>Honor the Past, Celebrate the Present, Embrace the Future</p>
+        <p class="tagline">SAZON FAMILY GRAND REUNION 2027</p>
     </header>
 
-    <div class="container" style="max-width: 1200px; margin: auto; padding: 20px;">
-        <h2 style="font-family: 'Cinzel'; color: var(--aqua-bright);">Branch Registration</h2>
-        <p>Please click the register button under your respective branch lineage.</p>
+    <div class="container">
+        <h2 style="font-family: 'Cinzel'; color: white; margin-bottom: 10px;">Branch Registration</h2>
+        <p style="color: #888;">Select your branch to register your family members.</p>
 
         <div class="tier-container">
             <div class="branch-card"><h3>Serafin</h3><span>Lolo Apin</span><a href="https://docs.google.com/forms/d/e/1FAIpQLScf4E4rG76uXU7S_m_SazonBranchReg/viewform" class="reg-btn" target="_blank">REGISTER</a></div>
@@ -113,8 +140,29 @@
     </div>
 
     <section class="logistics-section">
-        <h2 style="font-family: 'Cinzel'; color: var(--aqua-bright);">Logistics & Support</h2>
         <div class="info-grid">
             <div class="info-box">
-                <h4>📸 Photo Submission</h4>
-                <p>Help us complete the family gallery.
+                <h4>📸 ARCHIVE CURATOR</h4>
+                <p>We are collecting ancestral photos for the grand family tree. Please email your digital copies to:</p>
+                <a href="mailto:maemialiapalma@yahoo.com?subject=Sazon%20Family%20Archive%20Contribution" class="email-link">maemialiapalma@yahoo.com</a>
+            </div>
+            
+            <div class="info-box" style="border-top-color: var(--aqua-bright);">
+                <h4>📍 EVENT VENUE</h4>
+                <p>Marzon Hotel, Kalibo, Aklan</p>
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m13!1m1!2sMarzon+Hotel+Kalibo!5m2!1sen!2sph" 
+                        width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>THE SAZON LINEAGE • PRIVATE FAMILY PORTAL • EST. 2027</p>
+    </footer>
+
+</body>
+</html>
