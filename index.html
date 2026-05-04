@@ -9,25 +9,20 @@
         :root { --gold: #d4af37; --black: #000000; }
         body, html { margin: 0; padding: 0; background-color: var(--black); color: white; font-family: 'Raleway', sans-serif; overflow: hidden; height: 100vh; }
 
-        /* Step 1: Gate Screen */
-        #gate-screen { position: fixed; inset: 0; background: var(--black); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 1.5s ease; }
+        #gate-screen { position: fixed; inset: 0; background: var(--black); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 1s ease; }
         .tap-text { color: var(--gold); font-family: 'Cinzel', serif; letter-spacing: 4px; margin-bottom: 20px; font-size: 0.8rem; }
         .enter-btn { background: none; border: 2px solid var(--gold); color: var(--gold); padding: 15px 40px; font-family: 'Cinzel', serif; font-size: 1.2rem; cursor: pointer; letter-spacing: 5px; text-transform: uppercase; transition: 0.5s; }
         .enter-btn:hover { background: var(--gold); color: var(--black); box-shadow: 0 0 30px var(--gold); }
 
-        /* Step 2: Main Stage */
         #main-stage { display: none; height: 100vh; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
-        #final-banner { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/banner.jpg'); background-size: cover; background-position: center; opacity: 0; transition: opacity 3s ease; }
+        #final-banner { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/banner.jpg'); background-size: cover; background-position: center; opacity: 0; transition: opacity 3s ease; }
 
-        /* Cinematic Credits */
-        .credit { font-family: 'Cinzel', serif; font-size: 1.5rem; letter-spacing: 6px; color: var(--gold); opacity: 0; position: absolute; width: 100%; transition: opacity 2s ease; z-index: 10; pointer-events: none; }
-
-        /* SOON Reveal & Celestial Logo */
+        .credit { font-family: 'Cinzel', serif; font-size: 1.6rem; letter-spacing: 6px; color: var(--gold); opacity: 0; position: absolute; width: 100%; transition: opacity 1.5s ease; z-index: 10; }
+        
         #soon-wrap { display: none; flex-direction: column; align-items: center; z-index: 20; opacity: 0; transition: opacity 3s ease; }
-        .soon-text { font-family: 'Cinzel', serif; font-size: clamp(4rem, 15vw, 8rem); font-weight: 700; color: var(--gold); display: flex; align-items: center; letter-spacing: 10px; }
-        .celestial-o { width: clamp(65px, 13vw, 130px); height: clamp(65px, 13vw, 130px); margin: 0 8px; border-radius: 50%; box-shadow: 0 0 40px var(--gold); object-fit: cover; animation: moonPulse 4s infinite alternate; }
+        .soon-text { font-family: 'Cinzel', serif; font-size: clamp(4rem, 15vw, 8rem); font-weight: 700; color: var(--gold); display: flex; align-items: center; letter-spacing: 12px; }
+        .celestial-o { width: clamp(65px, 13vw, 130px); height: clamp(65px, 13vw, 130px); margin: 0 10px; border-radius: 50%; box-shadow: 0 0 40px var(--gold); object-fit: cover; }
 
-        @keyframes moonPulse { from { box-shadow: 0 0 20px var(--gold); transform: scale(1); } to { box-shadow: 0 0 50px #fff; transform: scale(1.05); } }
         .visible { opacity: 1 !important; }
     </style>
 </head>
@@ -35,19 +30,18 @@
 
     <div id="gate-screen">
         <div class="tap-text">TAP THE SCREEN</div>
-        <button class="enter-btn" id="masterTrigger">ENTER SAZON LEGACY</button>
+        <button class="enter-btn" id="gateButton">ENTER SAZON LEGACY</button>
     </div>
 
-    <audio id="sfx-open" preload="auto"><source src="https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/open.mp3" type="audio/mpeg"></audio>
-    <audio id="sfx-shimmer" preload="auto"><source src="https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/shimmer.mp3" type="audio/mpeg"></audio>
-    <audio id="music-jingle" preload="auto"><source src="https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/jingle.mp3" type="audio/mpeg"></audio>
+    <audio id="snd-open" preload="auto" src="https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/open.mp3"></audio>
+    <audio id="snd-shimmer" preload="auto" src="https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/shimmer.mp3"></audio>
+    <audio id="snd-jingle" preload="auto" src="https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/jingle.mp3"></audio>
 
     <div id="main-stage">
         <div id="final-banner"></div>
-        
-        <div id="text-1" class="credit">A SAZON FAMILY PRODUCTION</div>
-        <div id="text-2" class="credit">IN HONOR OF TERESO & TEOFISTA SAZON</div>
-        <div id="text-3" class="credit">JULY 23-24, 2027<br><span style="font-size: 0.9rem; letter-spacing: 4px;">KALIBO, AKLAN</span></div>
+        <div id="t1" class="credit">A SAZON FAMILY PRODUCTION</div>
+        <div id="t2" class="credit">IN HONOR OF TERESO & TEOFISTA SAZON</div>
+        <div id="t3" class="credit">JULY 23-24, 2027<br><span style="font-size: 0.9rem;">KALIBO, AKLAN</span></div>
 
         <div id="soon-wrap">
             <div class="soon-text">
@@ -59,71 +53,64 @@
     </div>
 
     <script>
-        const trigger = document.getElementById('masterTrigger');
-        const sOpen = document.getElementById('sfx-open');
-        const sShim = document.getElementById('sfx-shimmer');
-        const mJingle = document.getElementById('music-jingle');
+        const btn = document.getElementById('gateButton');
+        const aOpen = document.getElementById('snd-open');
+        const aShim = document.getElementById('snd-shimmer');
+        const aJingle = document.getElementById('snd-jingle');
 
-        trigger.addEventListener('click', function() {
-            // CRITICAL: Master Unlock - Play and immediately pause all tracks to "bless" them for the browser
-            [sOpen, sShim, mJingle].forEach(track => {
-                track.play().then(() => {
-                    track.pause();
-                    track.currentTime = 0;
-                }).catch(e => console.error("Audio unlock failed:", e));
+        btn.addEventListener('click', function() {
+            // THE CRITICAL FIX: Unlock and 'Warm Up' all audio context immediately
+            const allAudio = [aOpen, aShim, aJingle];
+            allAudio.forEach(track => {
+                track.play(); 
+                track.pause(); 
+                track.currentTime = 0;
             });
 
-            // Start Visual Transition
-            document.getElementById('gate-screen').classList.add('visible'); // Placeholder for opacity logic
+            // Transition out of gate
             document.getElementById('gate-screen').style.opacity = '0';
-            
             setTimeout(() => {
                 document.getElementById('gate-screen').style.display = 'none';
                 document.getElementById('main-stage').style.display = 'flex';
-                playLegacySequence();
-            }, 1500);
+                runCinematic();
+            }, 1000);
         });
 
-        function playLegacySequence() {
-            // 1. Production Text + Open.mp3
-            sOpen.play();
-            const t1 = document.getElementById('text-1');
-            t1.classList.add('visible');
+        function runCinematic() {
+            // Scene 1: Production + Open.mp3
+            aOpen.play().catch(e => console.log("Audio play blocked"));
+            document.getElementById('t1').classList.add('visible');
 
-            // 2. Family Tribute + Shimmer.mp3 (Synced)
+            // Scene 2: Shimmer + Honor (Synced at 5s)
             setTimeout(() => {
-                t1.classList.remove('visible');
-                sShim.play();
-                document.getElementById('text-2').classList.add('visible');
+                document.getElementById('t1').classList.remove('visible');
+                aShim.play();
+                document.getElementById('t2').classList.add('visible');
             }, 5000);
 
-            // 3. Location info
+            // Scene 3: Location
             setTimeout(() => {
-                document.getElementById('text-2').classList.remove('visible');
-                document.getElementById('text-3').classList.add('visible');
+                document.getElementById('t2').classList.remove('visible');
+                document.getElementById('t3').classList.add('visible');
             }, 10000);
 
-            // 4. Reveal SOON + Banner + Ramping Jingle
+            // Scene 4: Reveal Banner + Jingle + SOON (at 15s)
             setTimeout(() => {
-                document.getElementById('text-3').classList.remove('visible');
-                
-                // Show visuals
+                document.getElementById('t3').classList.remove('visible');
                 document.getElementById('final-banner').classList.add('visible');
+                
+                // Show SOON
                 const soon = document.getElementById('soon-wrap');
                 soon.style.display = 'flex';
                 setTimeout(() => soon.classList.add('visible'), 100);
 
-                // Start Jingle (Soft to Loud)
-                mJingle.volume = 0.1;
-                mJingle.play();
-                let vol = 0.1;
-                let ramp = setInterval(() => {
-                    if (vol < 0.6) {
-                        vol += 0.05;
-                        mJingle.volume = vol;
-                    } else {
-                        clearInterval(ramp);
-                    }
+                // Jingle Volume Ramp
+                aJingle.volume = 0.1;
+                aJingle.play();
+                let v = 0.1;
+                let interval = setInterval(() => {
+                    if (v < 0.6) { v += 0.05; aJingle.volume = v; }
+                    else { clearInterval(interval); }
                 }, 400);
             }, 15000);
         }
