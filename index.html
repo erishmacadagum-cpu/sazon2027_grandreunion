@@ -20,6 +20,7 @@
             height: 100vh;
         }
 
+        /* Initial Gate */
         #gate-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--black);
@@ -31,9 +32,11 @@
             background: none; border: 2px solid var(--gold); color: var(--gold);
             padding: 15px 40px; font-family: 'Cinzel', serif; font-size: 1.2rem;
             cursor: pointer; letter-spacing: 5px; transition: 0.5s;
+            text-transform: uppercase;
         }
-        .enter-btn:hover { background: var(--gold); color: var(--black); }
+        .enter-btn:hover { background: var(--gold); color: var(--black); box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
 
+        /* Main Stage */
         #main-stage {
             display: none; height: 100vh;
             flex-direction: column; justify-content: center; align-items: center;
@@ -43,11 +46,13 @@
             background-size: cover; background-position: center;
         }
 
+        /* Cinematic Fades */
         .fade-text {
             font-family: 'Cinzel', serif; font-size: 1.5rem; letter-spacing: 8px;
             opacity: 0; position: absolute; width: 100%; color: var(--gold);
         }
 
+        /* Logo Transformation */
         #transform-container {
             display: none; flex-direction: column; align-items: center;
         }
@@ -63,16 +68,18 @@
 
         .emblem-img {
             height: clamp(60px, 12vw, 120px);
-            margin: 0 -10px;
+            margin: 0 -15px; /* The specific moon-shape overlap */
             filter: drop-shadow(0 0 15px var(--gold));
         }
 
+        /* Timer Section */
         .countdown-wrap {
             margin-top: 40px; display: flex; gap: 20px; opacity: 0;
             transition: opacity 2s ease;
         }
+        .timer-box { text-align: center; min-width: 80px; }
         .num { font-size: 2.5rem; font-weight: bold; color: var(--gold); display: block; }
-        .label { font-size: 0.7rem; text-transform: uppercase; color: white; }
+        .label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: white; }
 
         @keyframes cinemaFade {
             0% { opacity: 0; transform: translateY(10px); }
@@ -80,6 +87,7 @@
             70% { opacity: 1; transform: translateY(0); }
             100% { opacity: 0; transform: translateY(-10px); }
         }
+
         .run-fade { animation: cinemaFade 5s forwards; }
     </style>
 </head>
@@ -103,11 +111,12 @@
                 <img src="https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/Sazon_Emblem.png" class="emblem-img" alt="Logo">
                 <span>OON</span>
             </div>
+
             <div class="countdown-wrap" id="timer-ui">
-                <div style="text-align:center"><span class="num" id="days">00</span><span class="label">Days</span></div>
-                <div style="text-align:center"><span class="num" id="hours">00</span><span class="label">Hours</span></div>
-                <div style="text-align:center"><span class="num" id="mins">00</span><span class="label">Mins</span></div>
-                <div style="text-align:center"><span class="num" id="secs">00</span><span class="label">Secs</span></div>
+                <div class="timer-box"><span class="num" id="days">00</span><span class="label">Days</span></div>
+                <div class="timer-box"><span class="num" id="hours">00</span><span class="label">Hours</span></div>
+                <div class="timer-box"><span class="num" id="mins">00</span><span class="label">Mins</span></div>
+                <div class="timer-box"><span class="num" id="secs">00</span><span class="label">Secs</span></div>
             </div>
         </div>
     </div>
@@ -127,13 +136,16 @@
         }
 
         function runSequence() {
+            // First Fade & Sound
             aOpen.play();
             document.getElementById('intro-1').classList.add('run-fade');
 
+            // Second Fade
             setTimeout(() => {
                 document.getElementById('intro-2').classList.add('run-fade');
             }, 5500);
 
+            // Transformation, Shimmer, & Jingle
             setTimeout(() => {
                 aShim.play();
                 document.getElementById('transform-container').style.display = 'flex';
