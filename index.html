@@ -9,23 +9,18 @@
         :root { --gold: #d4af37; --black: #000000; }
         body, html { margin: 0; padding: 0; background-color: var(--black); color: white; font-family: 'Raleway', sans-serif; overflow: hidden; height: 100vh; }
 
-        /* Step 1: Gate Screen */
         #gate-screen { position: fixed; inset: 0; background: var(--black); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; }
         .tap-text { color: var(--gold); font-family: 'Cinzel', serif; letter-spacing: 4px; margin-bottom: 20px; font-size: 0.8rem; }
-        .enter-btn { background: none; border: 2px solid var(--gold); color: var(--gold); padding: 15px 40px; font-family: 'Cinzel', serif; font-size: 1.2rem; cursor: pointer; letter-spacing: 5px; text-transform: uppercase; transition: 0.5s; }
-        .enter-btn:hover { background: var(--gold); color: var(--black); box-shadow: 0 0 20px var(--gold); }
+        .enter-btn { background: none; border: 2px solid var(--gold); color: var(--gold); padding: 15px 40px; font-family: 'Cinzel', serif; font-size: 1.2rem; cursor: pointer; letter-spacing: 5px; text-transform: uppercase; }
 
-        /* Step 2: Main Stage & Banner */
-        #main-stage { display: none; height: 100vh; flex-direction: column; justify-content: center; align-items: center; text-align: center; background-size: cover; background-position: center; position: relative; }
-        .banner-bg { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/banner.jpg'); background-size: cover; background-position: center; opacity: 0; transition: opacity 3s ease; }
+        #main-stage { display: none; height: 100vh; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
+        .banner-bg { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('banner.jpg'); background-size: cover; background-position: center; opacity: 0; transition: opacity 3s ease; }
 
-        /* Cinematic Credits */
-        .credit { font-family: 'Cinzel', serif; font-size: 1.5rem; letter-spacing: 6px; color: var(--gold); opacity: 0; position: absolute; width: 100%; transition: opacity 2s ease; }
-
-        /* Step 5 & 6: The SOON Logo Integration */
+        .credit { font-family: 'Cinzel', serif; font-size: 1.5rem; letter-spacing: 6px; color: var(--gold); opacity: 0; position: absolute; width: 100%; transition: opacity 2s ease; z-index: 5; }
+        
         #soon-wrap { display: none; flex-direction: column; align-items: center; z-index: 10; }
         .soon-text { font-family: 'Cinzel', serif; font-size: clamp(4rem, 15vw, 8rem); font-weight: 700; color: var(--gold); display: flex; align-items: center; letter-spacing: 10px; }
-        .celestial-o { width: clamp(60px, 12vw, 120px); height: clamp(60px, 12vw, 120px); margin: 0 5px; border-radius: 50%; box-shadow: 0 0 30px var(--gold); filter: brightness(1.2); object-fit: cover; }
+        .celestial-o { width: clamp(60px, 12vw, 120px); height: clamp(60px, 12vw, 120px); margin: 0 5px; border-radius: 50%; box-shadow: 0 0 30px var(--gold); object-fit: cover; }
 
         .visible { opacity: 1 !important; }
     </style>
@@ -34,16 +29,15 @@
 
     <div id="gate-screen">
         <div class="tap-text">TAP THE SCREEN</div>
-        <button class="enter-btn" onclick="initiateLegacy()">ENTER SAZON LEGACY</button>
+        <button class="enter-btn" id="startBtn">ENTER SAZON LEGACY</button>
     </div>
 
-    <audio id="sfx-open" src="https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/open.mp3"></audio>
-    <audio id="sfx-shimmer" src="https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/shimmer.mp3"></audio>
-    <audio id="music-jingle" src="https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/jingle.mp3"></audio>
+    <audio id="sfx-open" preload="auto"><source src="open.mp3" type="audio/mpeg"></audio>
+    <audio id="sfx-shimmer" preload="auto"><source src="shimmer.mp3" type="audio/mpeg"></audio>
+    <audio id="music-jingle" preload="auto"><source src="jingle.mp3" type="audio/mpeg"></audio>
 
     <div id="main-stage">
         <div class="banner-bg" id="final-banner"></div>
-        
         <div id="text-1" class="credit">A SAZON FAMILY PRODUCTION</div>
         <div id="text-2" class="credit">IN HONOR OF TERESO & TEOFISTA SAZON</div>
         <div id="text-3" class="credit">JULY 23-24, 2027<br><span style="font-size: 0.9rem;">KALIBO, AKLAN</span></div>
@@ -51,63 +45,65 @@
         <div id="soon-wrap">
             <div class="soon-text">
                 <span>S</span>
-                <img src="https://erishmacadagum-cpu.github.io/sazon2027_grandreunion/logo.jpg" class="celestial-o" alt="O">
+                <img src="logo.jpg" class="celestial-o" alt="O">
                 <span>ON</span>
             </div>
         </div>
     </div>
 
     <script>
+        const btn = document.getElementById('startBtn');
         const sOpen = document.getElementById('sfx-open');
         const sShim = document.getElementById('sfx-shimmer');
         const mJingle = document.getElementById('music-jingle');
 
-        function initiateLegacy() {
+        btn.addEventListener('click', () => {
+            // FORCE UNLOCK ALL AUDIO IMMEDIATELY ON CLICK
+            sOpen.play(); sOpen.pause(); sOpen.currentTime = 0;
+            sShim.play(); sShim.pause(); sShim.currentTime = 0;
+            mJingle.play(); mJingle.pause(); mJingle.currentTime = 0;
+
             document.getElementById('gate-screen').style.opacity = '0';
             setTimeout(() => {
                 document.getElementById('gate-screen').style.display = 'none';
                 document.getElementById('main-stage').style.display = 'flex';
-                playSequence();
+                startSequence();
             }, 1000);
-        }
+        });
 
-        function playSequence() {
-            // 1. Open sound + Production text
+        function startSequence() {
+            // 1. OPENING
             sOpen.play();
-            const t1 = document.getElementById('text-1');
-            t1.classList.add('visible');
+            document.getElementById('text-1').classList.add('visible');
 
-            // 2. Shimmer sound + In Honor text
+            // 2. SHIMMER & FAMILY
             setTimeout(() => {
-                t1.classList.remove('visible');
+                document.getElementById('text-1').classList.remove('visible');
                 sShim.play();
                 document.getElementById('text-2').classList.add('visible');
-            }, 4500);
+            }, 5000);
 
-            // 3. Location info
+            // 3. LOCATION
             setTimeout(() => {
                 document.getElementById('text-2').classList.remove('visible');
                 document.getElementById('text-3').classList.add('visible');
-            }, 9000);
+            }, 10000);
 
-            // 4. Final Reveal (Jingle + Banner + SOON)
+            // 4. REVEAL & JINGLE
             setTimeout(() => {
                 document.getElementById('text-3').classList.remove('visible');
-                
-                // Ramp jingle from soft
-                mJingle.volume = 0.2;
-                mJingle.play();
-                
-                // Show Banner and SOON
                 document.getElementById('final-banner').classList.add('visible');
                 document.getElementById('soon-wrap').style.display = 'flex';
                 
-                // Slowly increase loudness
-                let volInterval = setInterval(() => {
-                    if (mJingle.volume < 0.7) mJingle.volume += 0.05;
-                    else clearInterval(volInterval);
-                }, 400);
-            }, 14000);
+                mJingle.volume = 0;
+                mJingle.play();
+                // Smooth volume ramp
+                let vol = 0;
+                let interval = setInterval(() => {
+                    if (vol < 0.6) { vol += 0.05; mJingle.volume = vol; }
+                    else { clearInterval(interval); }
+                }, 300);
+            }, 15000);
         }
     </script>
 </body>
