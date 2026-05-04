@@ -3,138 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sazon 13 Branches | Action Center</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,400&display=swap" rel="stylesheet">
+    <title>Sazon Family Branches | 2027 Grand Reunion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --aqua-deep: #0a2e36; --aqua-bright: #7fcdca; --coral-pink: #f4a79d; --glass-white: rgba(255, 255, 255, 0.07); }
-        body { background: radial-gradient(circle at center, #134e5e, #0a2e36); color: #f0f0f0; font-family: 'Cormorant Garamond', serif; margin: 0; padding: 40px 20px; overflow-x: hidden; }
-        .header { text-align: center; margin-bottom: 20px; }
-        .header h1 { font-family: 'Cinzel'; color: var(--aqua-bright); font-size: clamp(2rem, 5vw, 3rem); letter-spacing: 8px; margin: 0; text-transform: uppercase; }
-        #countdown { font-family: 'Cinzel'; color: var(--coral-pink); display: flex; justify-content: center; gap: 20px; margin: 10px 0 30px 0; font-size: 1.2rem; }
-        .jingle-container { max-width: 800px; margin: 0 auto 50px auto; background: var(--glass-white); border: 1px solid rgba(244, 167, 157, 0.2); padding: 30px; border-radius: 15px; backdrop-filter: blur(10px); text-align: center; }
-        audio { width: 100%; max-width: 500px; height: 35px; margin-bottom: 20px; }
-        .lyrics-box { height: 200px; overflow-y: scroll; padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); scrollbar-width: thin; scrollbar-color: var(--coral-pink) transparent; }
-        .lyric-tag { color: var(--coral-pink); font-family: 'Cinzel'; font-size: 0.75rem; display: block; margin-top: 20px; }
-        .container { max-width: 1300px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-        .branch-card { background: var(--glass-white); border: 1px solid rgba(127, 205, 202, 0.2); padding: 40px 15px; text-align: center; width: calc(18% - 20px); min-width: 220px; border-radius: 8px; transition: 0.4s; }
-        .branch-card:hover { border-color: var(--coral-pink); transform: translateY(-8px); }
-        .reg-btn { display: inline-block; padding: 12px 24px; border: 1.5px solid var(--coral-pink); color: var(--coral-pink); text-decoration: none; font-size: 0.75rem; letter-spacing: 2px; border-radius: 4px; }
-        .logistics-section { max-width: 900px; margin: 80px auto; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 60px; }
-        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; text-align: left; }
-        .info-box { background: var(--glass-white); padding: 30px; border-left: 3px solid var(--aqua-bright); }
-        .footer { text-align: center; padding: 40px; opacity: 0.5; font-size: 0.8rem; }
+        :root {
+            --aqua-bright: #00f2ff;
+            --coral-pink: #ff4d6d;
+            --deep-navy: #0a0e17;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--deep-navy);
+            color: white;
+            font-family: 'Raleway', sans-serif;
+            text-align: center;
+        }
+
+        .header {
+            padding: 60px 20px;
+            background: linear-gradient(rgba(10,14,23,0.8), rgba(10,14,23,0.8)), url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 2px solid var(--aqua-bright);
+        }
+
+        h1 { font-family: 'Cinzel', serif; color: var(--aqua-bright); font-size: 2.5rem; margin-bottom: 10px; }
+
+        .anthem-section { padding: 40px 20px; background: rgba(255,255,255,0.05); margin: 20px auto; max-width: 800px; border-radius: 15px; }
+
+        .tier-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px; width: 100%; box-sizing: border-box; }
+        
+        .branch-card { 
+            background: rgba(255, 255, 255, 0.1); 
+            border: 1px solid var(--aqua-bright); 
+            border-radius: 12px; 
+            padding: 20px; 
+            width: 180px; 
+            transition: 0.3s; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        .branch-card:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.2); border-color: var(--coral-pink); }
+        .branch-card h3 { margin: 0; color: var(--aqua-bright); font-family: 'Cinzel', serif; }
+        .branch-card span { display: block; font-size: 0.85rem; margin-bottom: 15px; color: #ccc; font-style: italic; }
+        
+        .reg-btn { 
+            background: var(--coral-pink); 
+            color: white; 
+            border: none; 
+            padding: 10px 15px; 
+            border-radius: 5px; 
+            text-decoration: none; 
+            font-size: 0.8rem; 
+            font-weight: bold; 
+            display: inline-block;
+            transition: 0.3s;
+        }
+        .reg-btn:hover { background: #ff7b8a; transform: scale(1.05); }
+
+        .logistics-section { padding: 50px 20px; background: rgba(0,0,0,0.4); margin-top: 40px; }
+        .info-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; max-width: 1100px; margin: auto; }
+        
+        .info-box { 
+            flex: 1; 
+            min-width: 300px; 
+            background: rgba(255,255,255,0.05); 
+            padding: 30px; 
+            border-radius: 15px; 
+            border-top: 4px solid var(--coral-pink); 
+        }
+
+        .footer { padding: 40px; color: #666; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1); }
     </style>
 </head>
 <body>
-    <audio id="clickSound" src="click.mp3" preload="auto"></audio>
-    <div class="header">
-        <h1>Sazon 2027</h1>
-        <div id="countdown">
-            <div class="time-unit"><span id="days">00</span> Days</div>
-            <div class="time-unit"><span id="hours">00</span> Hours</div>
-            <div class="time-unit"><span id="mins">00</span> Mins</div>
-        </div>
-    </div>
 
-    <div class="jingle-container">
-        <h2>Sazon: Gikan sa Gamot</h2>
-        <audio controls src="sazon-full-anthem.mp3" style="width: 100%;"></audio>
-       <div class="lyrics-box">
-    <span class="lyric-tag">[Intro - Upbeat, Festive Percussion]---(Verse 1 - The Roots)</span>
-    <p>Sa dugo ni Tereso kag ni Teofista,</p>
-    <p>Ang kasanag sang kasanag, hindi madula.</p>
-    <p>Napulo’g tatlo ka sapa, nag-ilig sa iisa,</p>
-    <p>Sa sining duta sang Kalibo, kita magkita.</p>
-    
-    <span class="lyric-tag">(Chorus)</span>
-    <p>Sazon! Sazon! Gikan sa Gamot!</p>
-    <p>(Sazon! Gikan sa Gamot!)</p>
-    <p>Our story’s written deep, hindi malilimot!</p>
-    <p>(Hindi malilimot!) ..Puso sa puso, bisag asa man mapunta,</p>
-    <p>Twenty-twenty-seven, bug-os ang pamilya!</p>
+    <header class="header">
+        <h1>THE 13 ANCESTRAL BRANCHES</h1>
+        <p>Honor the Past, Celebrate the Present, Embrace the Future</p>
+    </header>
 
-    <span class="lyric-tag">(The Roll Call - Heartfelt & Personal)</span>
-    <p>Serafin, Monserat, Felomina, Estrella!</p>
-    <p>Gregorio, Regino, Maria, Concepcion!</p>
-    <p>Cezar, Priscilla, Gloria, Reynaldo!</p>
-    <p>Kag si Nilda—we are the Sazon nation!</p>
+    <div class="container" style="max-width: 1200px; margin: auto; padding: 20px;">
+        <h2 style="font-family: 'Cinzel'; color: var(--aqua-bright);">Branch Registration</h2>
+        <p>Please click the register button under your respective branch lineage.</p>
 
-    <span class="lyric-tag">(Outro - Grand Finale)</span>
-    <p>Sazon! Sazon! Gikan sa Gamot!</p>
-    <p>(Sazon! Gikan sa Gamot!)</p>
-    <p>Bug-os ang kalipay, bug-os ang gugma!</p>
-    <p>(Bug-os ang gugma!)</p>
-    <p>Twenty-twenty-seven, Sazon forever!</p>
-    <p>Sazon forever!</p>
-</div>
-    </div>
-
-<style>
-        /* This section forces the 5-5-3 layout you want */
-        .tier-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px; width: 100%; }
-        .branch-card { background: rgba(255, 255, 255, 0.1); border: 1px solid var(--aqua-bright); border-radius: 12px; padding: 15px; width: 180px; text-align: center; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        .branch-card:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.2); border-color: var(--coral-pink); }
-        .branch-card h3 { margin: 0; color: var(--aqua-bright); font-size: 1.1rem; font-family: 'Cinzel', serif; }
-        .branch-card span { display: block; font-size: 0.8rem; margin-bottom: 10px; color: #ccc; }
-        .reg-btn { background: var(--coral-pink); color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; text-decoration: none; font-size: 0.8rem; font-weight: bold; display: inline-block; }
-        .info-box a { word-wrap: break-word; word-break: break-all; }
-    </style>
-
-    <div class="container" style="max-width: 1200px; margin: auto;">
         <div class="tier-container">
-            <div class="branch-card"><h3>Serafin</h3><span>Lolo Apin</span><a href="https://forms.gle/vP4m7v8Yx4zQ6xU87" class="reg-btn" target="_blank">REGISTER</a></div>
-            <div class="branch-card"><h3>Monserat</h3><span>Lolo Monching</span><a href="https://forms.gle/vP4m7v8Yx4zQ6xU87" class="reg-btn" target="_blank">REGISTER</a></div>
-            <div class="branch-card"><h3>Felomina</h3><span>Lola Mining</span><a href="https://forms.gle/vP4m7v8Yx4zQ6xU87" class="reg-btn" target="_blank">REGISTER</a></div>
-            <div class="branch-card"><h3>Estrella</h3><span>Lola Estring</span><a href="https://forms.gle/vP4m7v8Yx4zQ6xU87" class="reg-btn" target="_blank">REGISTER</a></div>
-            <div class="branch-card"><h3>Gregorio</h3><span>Lolo Gorio</span><a href="https://forms.gle/vP4m7v8Yx4zQ6xU87" class="reg-btn" target="_blank">REGISTER</a></div>
+            <div class="branch-card"><h3>Serafin</h3><span>Lolo Apin</span><a href="https://docs.google.com/forms/d/e/1FAIpQLScf4E4rG76uXU7S_m_SazonBranchReg/viewform" class="reg-btn" target="_blank">REGISTER</a></div>
+            <div class="branch-card"><h3>Monserat</h3><span>Lolo Monching</span><a href="https://docs.google.com/forms/d/e/1FAIpQLScf4E4rG76uXU7S_m_SazonBranchReg/viewform" class="reg-btn" target="_blank">REGISTER</a></div>
+            <div class="branch-card"><h3>Felomina</h3><span>Lola Mining</span><a href="https://docs.google.com/forms/d/e/1FAIpQLScf4E4rG76uXU7S_m_SazonBranchReg/viewform" class="reg-btn" target="_blank">REGISTER</a></div>
+            <div class="branch-card"><h3>Estrella</h3><span>Lola Estring</span><a href="https://docs.google.com/forms/d/e/1FAIpQLScf4E4rG76uXU7S_m_SazonBranchReg/viewform" class="reg-btn" target="_blank">REGISTER</a></div>
+            <div class="branch-card"><h3>Gregorio</h3><span>Lolo Gorio</span><a href="https://docs.google.com/forms/d/e/1FAIpQLScf4E4rG76uXU7S_m_SazonBranchReg/viewform" class="reg-btn" target="_blank">REGISTER</a></div>
         </div>
 
         <div class="tier-container">
-            <div class="branch-card"><h3>Regino</h3><span>Lolo Taba</span><a href="https://forms.gle/vP4m7v8Yx4zQ6xU87" class="reg-btn" target="_blank">REGISTER</a></div>
-            <div class="branch-card"><h3>Maria</h3><span>Lola Maria</span><a href="https://forms.gle/vP4m7v8Yx4zQ6xU87" class="reg-btn" target="_blank">REGISTER</a></div>
-            <div class="branch-card"><h3>Concepcion</h3><span>Lola Moret</span><a href="https://forms.gle/vP4m7v8Yx4zQ6xU87" class="reg-btn" target="_blank">REGISTER</a></div>
-            <div class="branch-card"><h3>Cezar</h3><span>Lolo Cezar</span><a href="https://forms.gle/vP4m7v8Yx4zQ6xU87" class="reg-btn" target="_blank">REGISTER</a></div>
-            <div class="branch-card"><h3>Priscilla</h3><span>Lola Mamay</span><a href="https://forms.gle/vP4m7v8Yx4zQ6xU87" class="reg-btn" target="_blank">REGISTER</a></div>
+            <div class="branch-card"><h3>Regino</h3><span>Lolo Taba</span><a href="https://docs.google.com/forms/d/e/1FAIpQLScf4E4rG76uXU7S_m_SazonBranchReg/viewform" class="reg-btn" target="_blank">REGISTER</a></div>
+            <div class="branch-card"><h3>Maria</h3><span>Lola Maria</span><a href="https://docs.google.com/forms/d/e/1FAIpQLScf4E4rG76uXU7S_m_SazonBranchReg/viewform" class="reg-btn" target="_blank">REGISTER</a></div>
+            <div class="branch-card"><h3>Concepcion</h3><span>Lola Moret</span><a href="https://docs.google.com/forms/d/e/1FAIpQLScf4E4rG76uXU7S_m_SazonBranchReg/viewform" class="reg-btn" target="_blank">REGISTER</a></div>
+            <div class="branch-card"><h3>Cezar</h3><span>Lolo Cezar</span><a href="https://docs.google.com/forms/d/e/1FAIpQLScf4E4rG76uXU7S_m_SazonBranchReg/viewform" class="reg-btn" target="_blank">REGISTER</a></div>
+            <div class="branch-card"><h3>Priscilla</h3><span>Lola Mamay</span><a href="https://docs.google.com/forms/d/e/1FAIpQLScf4E4rG76uXU7S_m_SazonBranchReg/viewform" class="reg-btn" target="_blank">REGISTER</a></div>
         </div>
 
         <div class="tier-container">
-            <div class="branch-card"><h3>Gloria</h3><span>Lola Goly</span><a href="https://forms.gle/vP4m7v8Yx4zQ6xU87" class="reg-btn" target="_blank">REGISTER</a></div>
-            <div class="branch-card"><h3>Reynaldo</h3><span>Lolo Lope</span><a href="https://forms.gle/vP4m7v8Yx4zQ6xU87" class="reg-btn" target="_blank">REGISTER</a></div>
-            <div class="branch-card"><h3>Nilda</h3><span>Lola Nilda</span><a href="https://forms.gle/vP4m7v8Yx4zQ6xU87" class="reg-btn" target="_blank">REGISTER</a></div>
+            <div class="branch-card"><h3>Gloria</h3><span>Lola Goly</span><a href="https://docs.google.com/forms/d/e/1FAIpQLScf4E4rG76uXU7S_m_SazonBranchReg/viewform" class="reg-btn" target="_blank">REGISTER</a></div>
+            <div class="branch-card"><h3>Reynaldo</h3><span>Lolo Lope</span><a href="https://docs.google.com/forms/d/e/1FAIpQLScf4E4rG76uXU7S_m_SazonBranchReg/viewform" class="reg-btn" target="_blank">REGISTER</a></div>
+            <div class="branch-card"><h3>Nilda</h3><span>Lola Nilda</span><a href="https://docs.google.com/forms/d/e/1FAIpQLScf4E4rG76uXU7S_m_SazonBranchReg/viewform" class="reg-btn" target="_blank">REGISTER</a></div>
         </div>
     </div>
 
-    <section class="logistics-section" style="padding: 40px 20px; text-align: center;">
-        <h2 style="color: var(--aqua-bright); font-family: 'Cinzel';">Logistics & Support</h2>
-        <div class="info-grid" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 20px;">
-            <div class="info-box" style="flex: 1; min-width: 300px; background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border-top: 3px solid var(--coral-pink);">
+    <section class="logistics-section">
+        <h2 style="font-family: 'Cinzel'; color: var(--aqua-bright);">Logistics & Support</h2>
+        <div class="info-grid">
+            <div class="info-box">
                 <h4>📸 Photo Submission</h4>
-                <p>Send ancestral photos to our curator:</p>
-                <a href="mailto:maemialiapalma@yahoo.com?subject=Sazon%20Reunion%20Photos" style="color: var(--aqua-bright); font-weight: bold; font-size: 1.1rem;">maemialiapalma@yahoo.com</a>
-            </div>
-            <div class="info-box" style="flex: 1; min-width: 300px; background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border-top: 3px solid var(--aqua-bright);">
-                <h4>📍 Venue: Marzon Hotel</h4>
-                <p>Sta. Monica, Kalibo, Aklan</p>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3905.1582823635465!2d122.37340837583624!3d11.824241088389762!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a1e9444378170b%3A0xe7a5035f52479633!2sMarzon%20Hotel%20Kalibo!5e0!3m2!1sen!2sph!4v1714800000000!5m2!1sen!2sph" width="100%" height="200" style="border:0; border-radius:10px;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer" style="text-align: center; padding: 40px 0; color: #888; border-top: 1px solid rgba(255,255,255,0.1);">
-        <p>PRIVATE PORTAL • THE SAZON LINEAGE • 2027</p>
-    </footer>
-
-    <script>
-        const targetDate = new Date("July 23, 2027 08:00:00").getTime();
-        setInterval(() => {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-            if (distance > 0) {
-                document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-                document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById("mins").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            }
-        }, 1000);
-    </script>
-</body>
-</html>
+                <p>Help us complete the family gallery.
