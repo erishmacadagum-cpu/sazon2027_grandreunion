@@ -4,52 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sazon Family Legacy 2027</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #d4af37; --light-gold: #f3e5ab; --black: #000000; }
+        :root { --gold: #d4af37; --soft-gold: #f3e5ab; --black: #000000; --glow: rgba(212, 175, 55, 0.4); }
         body, html { margin: 0; padding: 0; background-color: var(--black); color: white; font-family: 'Montserrat', sans-serif; overflow: hidden; height: 100vh; }
 
         /* Gate Screen */
         #gate-screen { position: fixed; inset: 0; background: var(--black); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 1.5s ease; }
-        .tap-text { color: var(--gold); font-family: 'Cinzel', serif; letter-spacing: 5px; margin-bottom: 25px; font-size: 0.7rem; opacity: 0.8; }
-        .enter-btn { background: none; border: 1px solid var(--gold); color: var(--gold); padding: 18px 50px; font-family: 'Cinzel', serif; font-size: 1.1rem; cursor: pointer; letter-spacing: 6px; text-transform: uppercase; transition: 0.5s; position: relative; overflow: hidden; }
+        .tap-text { color: var(--gold); font-family: 'Cinzel', serif; letter-spacing: 6px; margin-bottom: 25px; font-size: 0.75rem; opacity: 0.6; }
+        .enter-btn { background: none; border: 1px solid var(--gold); color: var(--gold); padding: 18px 50px; font-family: 'Cinzel', serif; font-size: 1.1rem; cursor: pointer; letter-spacing: 6px; text-transform: uppercase; transition: 0.5s; }
         .enter-btn:hover { background: var(--gold); color: var(--black); box-shadow: 0 0 40px var(--gold); }
 
         /* Main Stage */
         #main-stage { display: none; height: 100vh; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
-        #final-banner { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.85)), url('images/banner.jpg'); background-size: cover; background-position: center; opacity: 0; transition: opacity 4s ease; }
+        #final-banner { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url('images/banner.jpg'); background-size: cover; background-position: center; opacity: 0; transition: opacity 5s ease; }
 
-        /* Credits Style */
-        .credit { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(1.2rem, 6vw, 2.2rem); letter-spacing: 12px; color: var(--gold); opacity: 0; position: absolute; width: 100%; transition: all 2s ease; z-index: 10; text-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
-        .sub-credit { font-family: 'Montserrat', sans-serif; font-weight: 200; font-size: 0.8rem; letter-spacing: 8px; color: var(--light-gold); display: block; margin-top: 15px; text-transform: uppercase; }
+        /* Elegant Credit Typography */
+        .credit { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(1.4rem, 6vw, 2.5rem); letter-spacing: 12px; color: var(--gold); opacity: 0; position: absolute; width: 100%; transition: all 2s ease; z-index: 10; text-shadow: 0 0 20px var(--glow); transform: translateY(20px); }
+        .sub-credit { font-family: 'Montserrat', sans-serif; font-weight: 200; font-size: 0.85rem; letter-spacing: 8px; color: var(--soft-gold); display: block; margin-top: 20px; text-transform: uppercase; }
 
         /* The SOON Reveal & Jive */
         #soon-wrap { display: none; flex-direction: column; align-items: center; z-index: 20; opacity: 0; transition: opacity 3s ease; }
-        .soon-text { font-family: 'Cinzel', serif; font-size: clamp(4rem, 18vw, 10rem); font-weight: 700; color: var(--gold); display: flex; align-items: center; letter-spacing: 15px; }
+        .soon-text { font-family: 'Cinzel', serif; font-size: clamp(4.5rem, 20vw, 11rem); font-weight: 700; color: var(--gold); display: flex; align-items: center; letter-spacing: 15px; }
         
-        /* Celestial O Effect */
-        .celestial-o-container { position: relative; width: clamp(70px, 15vw, 150px); height: clamp(70px, 15vw, 150px); margin: 0 10px; display: flex; align-items: center; justify-content: center; }
-        .celestial-o-container::before { content: ''; position: absolute; inset: -10px; border: 1px solid var(--gold); border-radius: 50%; animation: rotate 10s linear infinite; opacity: 0.3; }
-        .celestial-logo { width: 90%; height: 90%; border-radius: 50%; box-shadow: 0 0 30px var(--gold); object-fit: cover; z-index: 2; transition: transform 0.3s ease; }
+        /* Celestial Moon/Sun Logo Effect */
+        .celestial-container { position: relative; width: clamp(80px, 16vw, 160px); height: clamp(80px, 16vw, 160px); margin: 0 15px; }
+        .celestial-halo { position: absolute; inset: -10px; border: 1px solid var(--gold); border-radius: 50%; opacity: 0.4; animation: rotateHalo 12s linear infinite; }
+        .celestial-halo::after { content: ''; position: absolute; top: -5px; left: 50%; width: 10px; height: 10px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 15px var(--gold); }
+        .logo-tree { width: 100%; height: 100%; border-radius: 50%; box-shadow: 0 0 35px var(--gold); object-fit: cover; z-index: 2; border: 2px solid var(--gold); }
 
-        /* Timer Luxury Style */
-        #countdown { margin-top: 30px; font-family: 'Cinzel', serif; color: var(--gold); display: none; z-index: 20; }
-        .timer-unit { display: inline-block; margin: 0 15px; }
-        .timer-num { font-size: 2rem; display: block; font-weight: 700; }
-        .timer-label { font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; opacity: 0.7; }
+        /* Awe-Amazing Timer */
+        #countdown { margin-top: 40px; font-family: 'Cinzel', serif; color: var(--gold); display: flex; gap: 30px; opacity: 0; transition: opacity 2s ease; z-index: 20; }
+        .timer-unit { display: flex; flex-direction: column; }
+        .timer-num { font-size: 2.2rem; font-weight: 700; text-shadow: 0 0 10px var(--gold); }
+        .timer-label { font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase; opacity: 0.7; font-family: 'Montserrat', sans-serif; }
 
-        /* Animations */
-        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .jive { animation: jivePulse 0.6s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95); }
-        @keyframes jivePulse { from { transform: scale(1); filter: brightness(1); } to { transform: scale(1.03); filter: brightness(1.3); } }
+        /* Active Motion States */
         .visible { opacity: 1 !important; transform: translateY(0) !important; }
-        .hidden-up { opacity: 0 !important; transform: translateY(-20px) !important; }
+        .exit { opacity: 0 !important; transform: translateY(-30px) !important; }
+        .jive-pulse { animation: jiveBeat 0.58s infinite alternate ease-in-out; }
+
+        @keyframes rotateHalo { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes jiveBeat { from { transform: scale(1); filter: brightness(1); } to { transform: scale(1.04); filter: brightness(1.2); } }
     </style>
 </head>
 <body>
 
     <div id="gate-screen">
-        <div class="tap-text">A FAMILY LEGACY AWAITS</div>
+        <div class="tap-text">A LEGACY UNFOLDING</div>
         <button class="enter-btn" id="gateButton">ENTER SAZON LEGACY</button>
     </div>
 
@@ -65,7 +67,7 @@
         
         <div id="t2" class="credit">
             IN HONOR OF<br>
-            <span style="font-size: 1.2em;">TERESO & TEOFISTA SAZON</span>
+            <span style="font-size: 1.1em; letter-spacing: 15px;">TERESO & TEOFISTA SAZON</span>
         </div>
         
         <div id="t3" class="credit">
@@ -74,26 +76,27 @@
         </div>
 
         <div id="soon-wrap">
-            <div class="soon-text" id="soon-jive">
+            <div class="soon-text" id="jiveTarget">
                 <span>S</span>
-                <div class="celestial-o-container">
-                    <img src="images/logo.jpg" class="celestial-logo" alt="O">
+                <div class="celestial-container">
+                    <div class="celestial-halo"></div>
+                    <img src="images/logo.jpg" class="logo-tree" alt="O">
                 </div>
                 <span>ON</span>
             </div>
 
             <div id="countdown">
                 <div class="timer-unit"><span class="timer-num" id="days">00</span><span class="timer-label">Days</span></div>
-                <div class="timer-unit"><span class="timer-num" id="hours">00</span><span class="timer-label">Hrs</span></div>
-                <div class="timer-unit"><span class="timer-num" id="mins">00</span><span class="timer-label">Min</span></div>
-                <div class="timer-unit"><span class="timer-num" id="secs">00</span><span class="timer-label">Sec</span></div>
+                <div class="timer-unit"><span class="timer-num" id="hours">00</span><span class="timer-label">Hours</span></div>
+                <div class="timer-unit"><span class="timer-num" id="mins">00</span><span class="timer-label">Mins</span></div>
+                <div class="timer-unit"><span class="timer-num" id="secs">00</span><span class="timer-label">Secs</span></div>
             </div>
         </div>
     </div>
 
     <script>
         const btn = document.getElementById('gateButton');
-        const sounds = {
+        const aud = {
             click: document.getElementById('snd-click'),
             open: document.getElementById('snd-open'),
             shim: document.getElementById('snd-shimmer'),
@@ -101,67 +104,70 @@
         };
 
         btn.addEventListener('click', () => {
-            Object.values(sounds).forEach(s => { s.play(); s.pause(); s.currentTime = 0; });
-            sounds.click.play();
+            // Audio Context Handshake
+            Object.values(aud).forEach(s => { s.play(); s.pause(); s.currentTime = 0; });
+            aud.click.play();
+            
             document.getElementById('gate-screen').style.opacity = '0';
             setTimeout(() => {
                 document.getElementById('gate-screen').style.display = 'none';
                 document.getElementById('main-stage').style.display = 'flex';
-                startExperience();
-            }, 1500);
+                runExperience();
+            }, 1200);
         });
 
-        function startExperience() {
-            // Scene 1: open.mp3
-            sounds.open.play();
-            showText('t1', 4000);
+        function runExperience() {
+            // Scene 1: Production + Open
+            aud.open.play();
+            animateText('t1', 4000);
 
-            // Scene 2: shimmer.mp3 at 5s
+            // Scene 2: Honor + Shimmer (5s)
             setTimeout(() => {
-                sounds.shim.play();
-                showText('t2', 4500);
+                aud.shim.play();
+                animateText('t2', 4000);
             }, 5000);
 
-            // Scene 3: Location at 10s
-            setTimeout(() => showText('t3', 4500), 10000);
+            // Scene 3: Location (10s)
+            setTimeout(() => animateText('t3', 4000), 10000);
 
-            // Scene 4: Jingle Reveal at 15s
+            // Scene 4: Finale Reveal (15s)
             setTimeout(() => {
                 document.getElementById('final-banner').classList.add('visible');
-                const wrap = document.getElementById('soon-wrap');
-                wrap.style.display = 'flex';
+                const soonWrap = document.getElementById('soon-wrap');
+                soonWrap.style.display = 'flex';
+                
                 setTimeout(() => {
-                    wrap.classList.add('visible');
-                    document.getElementById('soon-jive').classList.add('jive');
-                    document.getElementById('countdown').style.display = 'block';
-                    startTimer();
+                    soonWrap.classList.add('visible');
+                    document.getElementById('jiveTarget').classList.add('jive-pulse');
+                    document.getElementById('countdown').classList.add('visible');
+                    startCountdown();
                 }, 100);
 
-                sounds.jingle.volume = 0.1;
-                sounds.jingle.play();
+                aud.jingle.volume = 0.1;
+                aud.jingle.play();
                 let v = 0.1;
-                let r = setInterval(() => {
-                    if (v < 0.7) { v += 0.05; sounds.jingle.volume = v; }
-                    else clearInterval(r);
+                let ramp = setInterval(() => {
+                    if (v < 0.7) { v += 0.05; aud.jingle.volume = v; }
+                    else clearInterval(ramp);
                 }, 400);
             }, 15000);
         }
 
-        function showText(id, duration) {
+        function animateText(id, delay) {
             const el = document.getElementById(id);
             el.classList.add('visible');
-            setTimeout(() => el.classList.add('hidden-up'), duration);
+            setTimeout(() => el.classList.add('exit'), delay);
         }
 
-        function startTimer() {
+        function startCountdown() {
             const target = new Date("July 23, 2027 00:00:00").getTime();
             setInterval(() => {
                 const now = new Date().getTime();
-                const diff = target - now;
-                document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-                document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById('secs').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+                const d = target - now;
+                document.getElementById('days').innerText = Math.floor(d / (86400000));
+                document.getElementById('hours').innerText = Math.floor((d % 86400000) / 3600000);
+                document.getElementById('mins').innerText = Math.floor((d % 3600000) / 60000);
+                document.getElementById('secs').innerText = Math.floor((d % 60000) / 1000);
             }, 1000);
         }
     </script>
