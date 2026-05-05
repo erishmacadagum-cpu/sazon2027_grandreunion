@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sazon Family Legacy | Main Hub</title>
 
-    <link rel="icon" type="image/png" href="images/logo.png?v=2">
+    <link rel="icon" type="image/png" href="images/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@100;300;400;600&display=swap" rel="stylesheet">
 
     <style>
@@ -13,8 +13,7 @@
             --gold: #d4af37;
             --light-gold: #f3e5ab;
             --black: #050505;
-            --dark-grey: #0a0a0a;
-            --glass: rgba(255, 255, 255, 0.05);
+            --dark-grey: #111111;
         }
 
         body, html {
@@ -41,16 +40,6 @@
         .nav-links a { color: white; text-decoration: none; margin-left: 30px; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; transition: 0.3s; }
         .nav-links a:hover { color: var(--gold); }
 
-        /* HERO */
-        .hero {
-            height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; background: linear-gradient(to bottom, rgba(0,0,0,0.6), var(--black)), url('images/banner.jpg');
-            background-size: cover; background-position: center;
-        }
-
-        .hero-title { font-family: 'Cinzel', serif; font-size: clamp(2rem, 6vw, 4rem); color: var(--gold); letter-spacing: 8px; text-transform: uppercase; }
-        .hero-subtitle { font-weight: 100; letter-spacing: 12px; font-size: 0.9rem; margin-bottom: 40px; color: var(--light-gold); }
-
         /* SECTIONS */
         .section-padding { padding: 120px 20px; text-align: center; }
         .section-header { font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.5rem; letter-spacing: 5px; margin-bottom: 20px; text-transform: uppercase; }
@@ -58,22 +47,26 @@
 
         /* APPAREL DESIGN BOXES */
         .apparel-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
-        .apparel-card { background: var(--dark-grey); border: 1px solid rgba(212, 175, 55, 0.2); padding: 20px; }
-        .design-split { display: flex; gap: 15px; margin-bottom: 20px; }
-        .design-view { flex: 1; background: #111; padding: 10px; border: 1px solid rgba(255,255,255,0.05); }
-        .design-view img { width: 100%; height: auto; display: block; }
-        .design-label { font-size: 0.6rem; letter-spacing: 2px; color: var(--gold); margin-top: 10px; text-transform: uppercase; text-align: center; }
+        .apparel-card { background: var(--dark-grey); border: 1px solid rgba(212, 175, 55, 0.2); padding: 30px; transition: 0.4s; }
+        .apparel-card:hover { border-color: var(--gold); transform: translateY(-5px); }
+        
+        .design-split { display: flex; gap: 15px; margin-bottom: 25px; }
+        .design-view { flex: 1; background: #000; padding: 15px; border: 1px solid rgba(255,255,255,0.05); }
+        .design-view img { width: 100%; height: auto; border-radius: 2px; }
+        .design-label { font-size: 0.6rem; letter-spacing: 2px; color: var(--gold); margin-top: 12px; text-transform: uppercase; }
 
-        /* LOGISTICS & INFO */
+        /* TRAVEL INFO */
         .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1100px; margin: 40px auto; text-align: left; }
-        .info-category h4 { font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 15px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 10px; }
-        .info-category p, .info-category li { font-size: 0.85rem; line-height: 1.8; font-weight: 300; margin-bottom: 10px; list-style: none; }
+        .info-category { background: rgba(212, 175, 55, 0.03); padding: 30px; border-top: 2px solid var(--gold); }
+        .info-category h4 { font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 15px; letter-spacing: 2px; }
+        .info-category p, .info-category li { font-size: 0.85rem; line-height: 1.8; font-weight: 300; margin-bottom: 8px; list-style: none; }
+        .info-category strong { color: var(--gold); }
 
         /* MAP FIX */
-        .map-box { width: 100%; height: 400px; border: 1px solid var(--gold); background: #111; margin-top: 30px; }
+        .map-box { width: 100%; height: 450px; border: 1px solid var(--gold); margin-top: 40px; overflow: hidden; }
 
-        .btn-gold { background: var(--gold); color: var(--black); border: none; padding: 15px 35px; font-family: 'Cinzel', serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; cursor: pointer; text-decoration: none; display: inline-block; transition: 0.3s; margin-top: 20px; }
-        .btn-gold:hover { background: var(--light-gold); transform: translateY(-3px); }
+        .btn-gold { background: var(--gold); color: var(--black); border: none; padding: 15px 35px; font-family: 'Cinzel', serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; cursor: pointer; text-decoration: none; display: inline-block; transition: 0.3s; margin-top: 20px; text-transform: uppercase; }
+        .btn-gold:hover { background: var(--light-gold); box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
 
         @media (max-width: 768px) { .nav-links { display: none; } .design-split { flex-direction: column; } }
     </style>
@@ -86,90 +79,66 @@
         <div class="nav-container">
             <a href="#" class="nav-logo">SAZON LEGACY</a>
             <div class="nav-links">
-                <a href="#roots" onclick="playClick()">Our Roots</a>
                 <a href="#apparel" onclick="playClick()">Apparel</a>
-                <a href="#itinerary" onclick="playClick()">Itinerary</a>
                 <a href="#travel" onclick="playClick()">RSVP & Travel</a>
             </div>
         </div>
     </nav>
 
-    <!-- HERO -->
-    <section class="hero">
-        <h1 class="hero-title">Gikan sa Gamut</h1>
-        <p class="hero-subtitle">TUBTOB SA LANGIT</p>
-    </section>
-
     <!-- APPAREL SECTION -->
-    <section id="apparel" class="section-padding" style="background: var(--dark-grey);">
-        <h2 class="section-header">The Sazon Collection</h2>
-        <p class="section-desc">Design: Family Tree (Front) & Nutrition Facts (Back)</p>
+    <section id="apparel" class="section-padding">
+        <h2 class="section-header">The First Edition Gear</h2>
+        <p class="section-desc">Legacy Tree & Nutrition Facts Designs</p>
 
         <div class="apparel-container">
-            <!-- T-SHIRT BOX -->
+            <!-- T-SHIRT/HOODIE FRONT & BACK -->
             <div class="apparel-card">
                 <div class="design-split">
                     <div class="design-view">
-                        <img src="images/tshirt-front.png" alt="Front Design">
-                        <div class="design-label">Front: Family Tree</div>
+                        <img src="images/apparel_front.jpg" alt="Family Tree Logo">
+                        <div class="design-label">Front: Family Tree Logo</div>
                     </div>
                     <div class="design-view">
-                        <img src="images/tshirt-back.png" alt="Back Design">
+                        <img src="images/apparel_back.jpg" alt="Nutrition Facts">
                         <div class="design-label">Back: Nutrition Facts</div>
                     </div>
                 </div>
-                <h4 style="font-family: 'Cinzel', serif; color: var(--gold);">Legacy T-Shirt</h4>
-                <p style="font-size: 0.8rem; font-weight: 300;">Premium cotton finish with sophisticated gold-tone detailing.</p>
-            </div>
-
-            <!-- HOODIE BOX -->
-            <div class="apparel-card">
-                <div class="design-split">
-                    <div class="design-view">
-                        <img src="images/hoodie-front.png" alt="Front Design">
-                        <div class="design-label">Front: Family Tree</div>
-                    </div>
-                    <div class="design-view">
-                        <img src="images/hoodie-back.png" alt="Back Design">
-                        <div class="design-label">Back: Nutrition Facts</div>
-                    </div>
-                </div>
-                <h4 style="font-family: 'Cinzel', serif; color: var(--gold);">Heritage Hoodie</h4>
-                <p style="font-size: 0.8rem; font-weight: 300;">Heavyweight fleece designed for the ultimate family legacy comfort.</p>
+                <h4 style="font-family: 'Cinzel', serif; color: var(--gold); letter-spacing: 3px;">Legacy Apparel Series</h4>
+                <p style="font-size: 0.8rem; font-weight: 300;">Sophisticated design featuring our family roots and unique clan traits. Available in T-Shirt and Hoodie styles.</p>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="btn-gold" onclick="playClick()">Select Your Size</a>
             </div>
         </div>
     </section>
 
-    <!-- TRAVEL & RSVP SECTION -->
-    <section id="travel" class="section-padding">
-        <h2 class="section-header">Travel & Logistics</h2>
-        <p class="section-desc">Your Guide to Kalibo, Aklan</p>
+    <!-- TRAVEL & LOGISTICS -->
+    <section id="travel" class="section-padding" style="background: var(--dark-grey);">
+        <h2 class="section-header">RSVP & Travel Guide</h2>
+        <p class="section-desc">Navigating to the Sazon Grand Reunion</p>
 
         <div class="info-grid">
             <div class="info-category">
-                <h4>RSVP Portal</h4>
-                <p>Ensure your participation is recorded for the First Edition kits. Deadline for responses: Dec 2026.</p>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="btn-gold" onclick="playClick()">Confirm Attendance</a>
+                <h4>Marzon Hotel Kalibo</h4>
+                <p><strong>Premier Hub:</strong> The chosen sanctuary for our reunion, known for its elegant architecture and proximity to local landmarks.</p>
+                <li>📍 Jaime Cardinal L. Sin Ave, Kalibo, Aklan</li>
+                <li>✈️ <strong>Travel Tip:</strong> Only 10 mins from Kalibo International Airport. Airport shuttles are available upon request.</li>
             </div>
 
             <div class="info-category">
-                <h4>The Venue</h4>
-                <p><strong>Marzon Hotel Kalibo:</strong> Known for its classy ambiance and spacious convention halls. It is the premier choice for large family gatherings in the region.</p>
-                <li>📍 Jaime Cardinal L. Sin Ave, Kalibo</li>
-                <li>🚗 10 Mins from Kalibo Int'l Airport</li>
-                <li>🏊 Amenities: Outdoor Pool, Fine Dining</li>
+                <h4>Nearby Establishments</h4>
+                <li>🍽️ <strong>Saylo Cuisine:</strong> Must-try local heritage dishes just 5 mins away.</li>
+                <li>🌳 <strong>Bakhawan Eco-Park:</strong> A stunning 220-hectare mangrove forest for family strolls.</li>
+                <li>🏛️ <strong>Museo it Akean:</strong> Explore Aklan's history nearby.</li>
             </div>
 
             <div class="info-category">
-                <h4>Nearby Spots</h4>
-                <li>🍽️ <strong>Saylo Cuisine:</strong> Heritage Filipino food (5 mins).</li>
-                <li>🌳 <strong>Bakhawan Eco-Park:</strong> Famous mangrove forest boardwalk.</li>
-                <li>🛍️ <strong>Gaisano Capital:</strong> For all reunion essentials.</li>
+                <h4>Logistical Information</h4>
+                <li>🕒 <strong>Check-in:</strong> July 23, 2027 at 2:00 PM.</li>
+                <li>🚕 <strong>Transport:</strong> Tricycles are the primary local transit; standard fares apply within Kalibo.</li>
+                <li>💼 <strong>Attire:</strong> "First Edition" Legacy Apparel is required for Day 1 evening sessions.</li>
             </div>
         </div>
 
         <div class="map-box">
-            <!-- FIXED MAP IFRAME -->
             <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m3!1d3904.341144594589!2d122.361955375836!3d11.705705341315894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33b0021679093a15%3A0xe45371c11030e445!2sMarzon%20Hotel%20Kalibo!5e0!3m2!1sen!2sph!4v1714935000000!5m2!1sen!2sph" 
                 width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
