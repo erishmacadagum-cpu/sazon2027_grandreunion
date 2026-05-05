@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sazon Family Legacy | Main Hub</title>
 
+    <!-- Branding & Fonts -->
     <link rel="icon" type="image/png" href="images/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@100;300;400;600&display=swap" rel="stylesheet">
 
@@ -40,7 +41,7 @@
         .nav-links a { color: white; text-decoration: none; margin-left: 20px; font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; transition: 0.3s; }
         .nav-links a:hover { color: var(--gold); }
 
-        /* HERO & SYNC TIMER */
+        /* SYNC TIMER */
         .hero {
             height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; background: linear-gradient(to bottom, rgba(0,0,0,0.7), var(--black)), url('images/banner.jpg');
@@ -56,7 +57,7 @@
         .section-padding { padding: 100px 20px; text-align: center; }
         .section-header { font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.2rem; letter-spacing: 4px; margin-bottom: 50px; text-transform: uppercase; }
 
-        /* APPAREL LABELS SWAPPED */
+        /* APPAREL LABELS (Verified per Screenshot 2026-05-05 at 9.03.14 PM.jpg) */
         .apparel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto; }
         .apparel-card { background: var(--dark-grey); border: 1px solid rgba(212, 175, 55, 0.2); padding: 25px; text-align: left; }
         .design-split { display: flex; gap: 15px; margin-bottom: 20px; }
@@ -74,7 +75,6 @@
         .map-frame { width: 100%; height: 450px; border: 1px solid var(--gold); margin-top: 40px; filter: grayscale(1) invert(1) contrast(1.1); }
 
         .btn-gold { background: var(--gold); color: var(--black); border: none; padding: 12px 30px; font-family: 'Cinzel', serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; cursor: pointer; text-decoration: none; display: inline-block; transition: 0.3s; margin-top: 15px; }
-        .btn-gold:hover { background: var(--light-gold); transform: translateY(-2px); }
 
         @media (max-width: 768px) { .nav-links { display: none; } .design-split { flex-direction: column; } }
     </style>
@@ -113,7 +113,7 @@
         <p style="font-weight: 300; letter-spacing: 2px; text-transform: uppercase;">The Foundation of the Sazon Clan</p>
     </section>
 
-    <!-- APPAREL (LABELS SWAPPED PER Screenshot 2026-05-05 at 9.03.14 PM.jpg) -->
+    <!-- APPAREL (Corrected Labels per Screenshot 2026-05-05 at 9.03.14 PM.jpg) -->
     <section id="apparel" class="section-padding" style="background: var(--dark-grey);">
         <h2 class="section-header">First Edition Apparel</h2>
         <div class="apparel-grid">
@@ -135,21 +135,6 @@
         </div>
     </section>
 
-    <!-- ITINERARY -->
-    <section id="itinerary" class="section-padding">
-        <h2 class="section-header">Itinerary</h2>
-        <div style="max-width: 700px; margin: 0 auto; border-left: 1px solid var(--gold); padding-left: 30px; text-align: left;">
-            <div style="margin-bottom: 40px; position: relative;">
-                <p style="color: var(--gold); font-family: 'Cinzel', serif;">Day 1: July 23, 2027</p>
-                <p style="font-size: 0.85rem;">Grand Welcome Gala & Clan Recognition at Marzon Hotel.</p>
-            </div>
-            <div style="position: relative;">
-                <p style="color: var(--gold); font-family: 'Cinzel', serif;">Day 2: July 24, 2027</p>
-                <p style="font-size: 0.85rem;">"Tubtob sa Langit" Closing Grand Banquet.</p>
-            </div>
-        </div>
-    </section>
-
     <!-- TRAVEL & RSVP -->
     <section id="travel" class="section-padding" style="background: var(--dark-grey);">
         <h2 class="section-header">Travel & RSVP</h2>
@@ -158,17 +143,15 @@
                 <h4>Venue: Marzon Hotel Kalibo</h4>
                 <p>Jaime Cardinal L. Sin Ave, Kalibo, Aklan.</p>
                 <li>🚗 <strong>Logistics:</strong> 10-minute drive from Kalibo International Airport.</li>
-                <li>🏢 <strong>Facilities:</strong> Poolside gala and grand convention halls.</li>
             </div>
             <div class="info-box">
                 <h4>Nearby Establishments</h4>
                 <li>🍽️ <strong>Saylo Cuisine:</strong> Local heritage Filipino food.</li>
                 <li>🌳 <strong>Bakhawan Eco-Park:</strong> Scenic mangrove forest boardwalk.</li>
-                <li>🛍️ <strong>Gaisano Capital:</strong> Nearby shopping for reunion essentials.</li>
             </div>
             <div class="info-box">
                 <h4>RSVP Portal</h4>
-                <p>Register attendance and apparel orders by Dec 2026 to guarantee your "First Edition" gear.</p>
+                <p>Register attendance via the link below.</p>
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="btn-gold" onclick="playClick()">Open Google Form</a>
             </div>
         </div>
