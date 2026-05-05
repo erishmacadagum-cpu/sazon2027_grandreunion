@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sazon Family Legacy 2027</title>
 
-    <!-- FAVICON UPDATE ONLY -->
+    <!-- FAVICON & TIME-ZONE SYNC -->
     <link rel="icon" type="image/png" href="images/logo.png?v=2">
     <link rel="apple-touch-icon" href="images/logo.png?v=2">
 
@@ -200,10 +200,12 @@
         }
 
         function runClock() {
-            const target = new Date("July 23, 2027 00:00:00").getTime();
+            // LOCKED TO PHILIPPINES TIME (UTC+8)
+            const targetDate = new Date("2027-07-23T00:00:00+08:00").getTime();
+            
             setInterval(() => {
                 const now = new Date().getTime();
-                const d = target - now;
+                const d = targetDate - now;
                 if (d < 0) return;
                 document.getElementById('days').innerText = Math.floor(d / 86400000).toString().padStart(2, '0');
                 document.getElementById('hours').innerText = Math.floor((d % 86400000) / 3600000).toString().padStart(2, '0');
