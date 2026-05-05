@@ -7,10 +7,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1A2CA3; /* Indigo Night */
-            --accent: #FFB703;  /* Festival Gold */
-            --highlight: #FB8500; /* Vivid Orange */
-            --surface: #F5F5F5;   /* Soft White */
+            --primary: #1A2CA3;
+            --accent: #FFB703;
+            --highlight: #FB8500;
+            --surface: #F5F5F5;
             --black: #0a0a0a;
         }
 
@@ -25,7 +25,6 @@
 
         h1, h2, h3, .cinzel { font-family: 'Cinzel', serif; }
 
-        /* Cinematic Banner */
         .banner {
             position: relative;
             height: 90vh;
@@ -41,64 +40,70 @@
             overflow: hidden;
         }
 
-        /* Top Left: 3D Celestial Moon */
+        /* Top Left: 3D Celestial Moon with Logo */
         .moon-container {
             position: absolute;
-            top: 40px;
+            top: 30px;
             left: 40px;
-            width: 160px;
-            height: 160px;
-            background: radial-gradient(circle at 30% 30%, #ffffff 0%, var(--accent) 40%, var(--highlight) 75%, #8b4513 100%);
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle at 35% 35%, #ffffff 0%, #a5ccff 20%, #4a90e2 60%, #102a4d 100%);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: inset -15px -15px 45px rgba(0,0,0,0.6), inset 10px 10px 35px rgba(255,255,255,0.4), 0 0 60px rgba(255, 183, 3, 0.6);
-            animation: moonFloat 6s ease-in-out infinite alternate;
-            z-index: 10;
+            box-shadow: 
+                inset -10px -10px 30px rgba(0,0,0,0.8),
+                inset 10px 10px 30px rgba(255,255,255,0.4),
+                0 0 50px rgba(165, 204, 255, 0.5);
+            animation: moonBreathing 8s ease-in-out infinite;
+            z-index: 15;
         }
 
         .logo-inside-moon {
-            width: 90px;
-            filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.8));
+            width: 85px;
+            filter: drop-shadow(0px 0px 5px rgba(255,255,255,0.5));
+            opacity: 0.8;
         }
 
-        /* Top Right: Silent Fireworks Container */
-        .fireworks-container {
+        /* Top Right: Advanced Burst Fireworks */
+        .fireworks-stage {
             position: absolute;
-            top: 20px;
-            right: 40px;
-            width: 250px;
-            height: 250px;
-            z-index: 5;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 50%;
+            pointer-events: none;
         }
 
-        .firework {
+        .firework-burst {
             position: absolute;
-            width: 4px;
-            height: 4px;
+            width: 5px;
+            height: 5px;
             border-radius: 50%;
+        }
+
+        /* Creating the "Sparks" effect */
+        .spark {
+            position: absolute;
+            width: 2px;
+            height: 15px;
+            border-radius: 2px;
             opacity: 0;
-            animation: explode 3s infinite;
+            animation: sparkBurst 2.5s infinite;
         }
 
-        .fw-1 { top: 20%; left: 30%; background: var(--accent); animation-delay: 0s; }
-        .fw-2 { top: 50%; left: 60%; background: var(--highlight); animation-delay: 1.5s; }
-        .fw-3 { top: 40%; left: 10%; background: #ffffff; animation-delay: 0.7s; }
-
-        /* Animations */
-        @keyframes moonFloat {
-            from { transform: translateY(0) rotate(0deg); }
-            to { transform: translateY(-15px) rotate(2deg); }
+        @keyframes sparkBurst {
+            0% { transform: rotate(var(--rot)) translateY(0); opacity: 1; height: 5px; }
+            50% { opacity: 1; height: 20px; }
+            100% { transform: rotate(var(--rot)) translateY(120px); opacity: 0; height: 2px; }
         }
 
-        @keyframes explode {
-            0% { transform: scale(1); opacity: 1; box-shadow: 0 0 0px var(--accent); }
-            50% { transform: scale(25); opacity: 0.8; box-shadow: 0 0 20px var(--accent), 0 0 40px var(--highlight); }
-            100% { transform: scale(40); opacity: 0; }
+        @keyframes moonBreathing {
+            0%, 100% { transform: scale(1) translateY(0); box-shadow: 0 0 40px rgba(165, 204, 255, 0.4); }
+            50% { transform: scale(1.05) translateY(-10px); box-shadow: 0 0 70px rgba(165, 204, 255, 0.7); }
         }
 
-        /* Text & UI Elements */
         .banner-content { z-index: 20; }
         
         .timer-container {
@@ -110,25 +115,18 @@
 
         .time-box {
             background: rgba(10, 10, 10, 0.8);
-            border: 2px solid var(--accent);
+            border: 1px solid var(--accent);
             padding: 15px;
             min-width: 80px;
-            border-radius: 4px;
+            border-radius: 2px;
             backdrop-filter: blur(8px);
         }
 
         .time-box span { display: block; font-size: 2rem; color: var(--accent); font-weight: bold; }
 
-        /* Tribute & Design Sections */
-        .roots-section { padding: 80px 20px; text-align: center; background: var(--black); border-bottom: 3px solid var(--highlight); }
-        .section-padding { padding: 90px 20px; text-align: center; background: var(--primary); }
+        .roots-section { padding: 80px 20px; text-align: center; background: var(--black); border-bottom: 2px solid var(--highlight); }
 
-        .design-split { display: flex; justify-content: center; gap: 40px; margin-top: 50px; flex-wrap: wrap; }
-        .apparel-card { background: var(--black); border: 2px solid var(--accent); padding: 25px; max-width: 400px; transition: 0.4s; }
-        .apparel-card:hover { border-color: var(--highlight); transform: translateY(-10px); }
-        .design-view img { width: 100%; height: auto; border: 1px solid rgba(255,255,255,0.1); }
-        
-        footer { padding: 60px; text-align: center; background: var(--black); border-top: 4px solid var(--highlight); }
+        footer { padding: 40px; text-align: center; background: var(--black); }
     </style>
 </head>
 <body onclick="playJingleOnce()">
@@ -137,21 +135,17 @@
     <audio id="jingle" src="sazon-full-anthem.mp3"></audio>
 
     <header class="banner">
-        <!-- Top Left: Moon -->
+        <!-- Top Left: 3D Moon -->
         <div class="moon-container">
             <img src="images/logo.png" alt="Sazon Logo" class="logo-inside-moon">
         </div>
 
-        <!-- Top Right: Silent Fireworks -->
-        <div class="fireworks-container">
-            <div class="firework fw-1"></div>
-            <div class="firework fw-2"></div>
-            <div class="firework fw-3"></div>
-        </div>
+        <!-- Top Right: Burst Fireworks -->
+        <div class="fireworks-stage" id="fireworks"></div>
 
         <div class="banner-content">
-            <h1 class="cinzel" style="color: var(--accent); font-size: 3.5rem; margin: 0; text-shadow: 3px 3px 20px #000;">Sazon 2027</h1>
-            <p class="cinzel" style="letter-spacing: 10px; color: var(--surface);">THE FIRST EDITION REUNION</p>
+            <h1 class="cinzel" style="color: var(--accent); font-size: 3.5rem; margin: 0; text-shadow: 2px 2px 15px #000;">Sazon 2027</h1>
+            <p class="cinzel" style="letter-spacing: 12px; color: var(--surface);">1st GRAND FAMILY REUNION</p>
 
             <div class="timer-container" id="countdown">
                 <div class="time-box"><span id="days">00</span><label>Days</label></div>
@@ -163,39 +157,43 @@
     </header>
 
     <section class="roots-section">
-        <h2 class="cinzel" style="color: var(--accent); font-size: 3rem;">The Roots</h2>
-        <p style="font-size: 1.5rem; color: var(--highlight); letter-spacing: 5px;">Tereso & Teofista Sazon</p>
-        <p class="cinzel" style="color: var(--accent); letter-spacing: 4px;">13 Branches • One Legacy</p>
-    </section>
-
-    <section class="section-padding">
-        <h2 class="cinzel" style="font-size: 2.5rem; color: var(--accent);">First Edition Apparel</h2>
-        <p style="font-style: italic; opacity: 0.9;">Refined sample designs curated for approval.</p>
-        
-        <div class="design-split">
-            <div class="apparel-card">
-                <div class="design-view">
-                    <img src="images/apparel-front.jpg" alt="Front">
-                    <div style="margin-top: 20px; color: var(--accent); font-weight: bold;">FRONT: FAMILY TREE LOGO</div>
-                </div>
-            </div>
-            <div class="apparel-card">
-                <div class="design-view">
-                    <img src="images/apparel-back.jpg" alt="Back">
-                    <div style="margin-top: 20px; color: var(--accent); font-weight: bold;">BACK: NUTRITION FACTS</div>
-                </div>
-            </div>
-        </div>
+        <h2 class="cinzel" style="color: var(--accent); font-size: 2.5rem; margin:0;">Gikan sa Gamut, Tubtob sa Langit</h2>
+        <p style="color: var(--highlight); font-style: italic;">From the Roots, Toward the Sky</p>
     </section>
 
     <footer>
-        <p class="cinzel" style="color: var(--accent);">Sazon Family Grand Reunion &copy; 2027</p>
-        <p>Marzon Hotel, Kalibo, Aklan</p>
+        <p class="cinzel" style="color: var(--accent); margin:0;">Sazon Clan • Marzon Hotel, Kalibo, Aklan</p>
+        <p style="font-size: 0.8rem; opacity: 0.7;">July 23-24, 2027</p>
     </footer>
 
     <script>
+        // Generate Dynamic Spark Bursts for the Top Right
+        function createFirework(top, right, color) {
+            const container = document.getElementById('fireworks');
+            const burst = document.createElement('div');
+            burst.className = 'firework-burst';
+            burst.style.top = top + '%';
+            burst.style.right = right + '%';
+            
+            for(let i=0; i<12; i++) {
+                const spark = document.createElement('div');
+                spark.className = 'spark';
+                spark.style.backgroundColor = color;
+                spark.style.setProperty('--rot', (i * 30) + 'deg');
+                spark.style.animationDelay = (Math.random() * 2) + 's';
+                burst.appendChild(spark);
+            }
+            container.appendChild(burst);
+        }
+
+        // Initialize multiple bursts like in your image
+        createFirework(20, 15, '#FFB703'); // Gold
+        createFirework(35, 25, '#FB8500'); // Orange
+        createFirework(15, 35, '#4CAF50'); // Green
+        createFirework(40, 10, '#ffffff'); // White
+
         window.onload = function() {
-            document.getElementById('openSound').play().catch(e => console.log("Interaction required."));
+            document.getElementById('openSound').play().catch(e => {});
         };
 
         let anthemPlayed = false;
