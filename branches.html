@@ -52,7 +52,7 @@
         .hero-title { font-family: 'Cinzel', serif; font-size: clamp(2rem, 6vw, 4rem); color: var(--gold); letter-spacing: 8px; text-transform: uppercase; }
         .hero-subtitle { font-weight: 100; letter-spacing: 12px; font-size: 0.9rem; margin-bottom: 40px; color: var(--light-gold); }
 
-        /* SYNCED CLOCK (UTC+8) */
+        /* CLOCK */
         .sync-timer { display: flex; gap: 20px; background: var(--glass); padding: 20px 40px; border: 1px solid var(--gold); }
         .time-block { display: flex; flex-direction: column; min-width: 70px; }
         .time-num { font-family: 'Cinzel', serif; font-size: 2rem; color: var(--gold); font-weight: 700; }
@@ -60,20 +60,26 @@
 
         /* SECTIONS */
         .section-padding { padding: 100px 20px; text-align: center; }
-        .section-header { font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.5rem; letter-spacing: 5px; margin-bottom: 20px; }
+        .section-header { font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.5rem; letter-spacing: 5px; margin-bottom: 20px; text-transform: uppercase; }
         .section-desc { font-weight: 300; letter-spacing: 4px; font-size: 0.85rem; margin-bottom: 60px; text-transform: uppercase; color: var(--light-gold); }
 
-        /* MERCHANDISE GALLERY */
-        .merch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1100px; margin: 0 auto; }
-        .merch-item { background: var(--dark-grey); border: 1px solid rgba(212, 175, 55, 0.1); padding: 20px; transition: 0.5s; cursor: pointer; position: relative; overflow: hidden; }
-        .merch-item:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1); }
-        .merch-img { width: 100%; height: 250px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: #333; font-family: 'Cinzel', serif; }
-        .merch-tag { position: absolute; top: 10px; right: 10px; background: var(--gold); color: var(--black); font-size: 0.6rem; padding: 5px 10px; font-weight: 700; letter-spacing: 1px; }
+        /* MERCHANDISE */
+        .merch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1100px; margin: 0 auto; }
+        .merch-item { background: var(--dark-grey); border: 1px solid rgba(212, 175, 55, 0.1); padding: 30px; transition: 0.5s; cursor: pointer; }
+        .merch-item:hover { border-color: var(--gold); transform: translateY(-5px); }
+        .merch-img { width: 100%; height: 280px; background: #151515; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px solid rgba(212, 175, 55, 0.05); }
 
-        .btn-gold { background: var(--gold); color: var(--black); border: none; padding: 12px 25px; font-family: 'Cinzel', serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; cursor: pointer; margin-top: 20px; transition: 0.3s; }
-        .btn-gold:hover { background: var(--light-gold); }
+        /* ITINERARY TIMELINE */
+        .timeline { max-width: 800px; margin: 0 auto; position: relative; text-align: left; padding-left: 30px; border-left: 1px solid var(--gold); }
+        .timeline-item { position: relative; margin-bottom: 50px; padding-left: 20px; }
+        .timeline-item::before { content: ''; position: absolute; left: -36px; top: 5px; width: 10px; height: 10px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 15px var(--gold); }
+        .time-stamp { font-family: 'Cinzel', serif; color: var(--gold); font-size: 0.8rem; letter-spacing: 2px; display: block; margin-bottom: 10px; }
+        .event-detail { font-size: 0.95rem; font-weight: 300; line-height: 1.6; }
 
-        @media (max-width: 768px) { .nav-links { display: none; } }
+        .btn-gold { background: var(--gold); color: var(--black); border: none; padding: 15px 35px; font-family: 'Cinzel', serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; cursor: pointer; margin-top: 40px; transition: 0.3s; }
+        .btn-gold:hover { background: var(--light-gold); letter-spacing: 4px; }
+
+        @media (max-width: 768px) { .nav-links { display: none; } .timeline { margin-left: 20px; } }
     </style>
 </head>
 <body>
@@ -86,11 +92,13 @@
             <div class="nav-links">
                 <a href="#roots" onclick="playClick()">Our Roots</a>
                 <a href="#merch" onclick="playClick()">Merchandise</a>
+                <a href="#itinerary" onclick="playClick()">Itinerary</a>
                 <a href="#heaven" onclick="playClick()">The Reunion</a>
             </div>
         </div>
     </nav>
 
+    <!-- HERO -->
     <section class="hero">
         <h1 class="hero-title">Gikan sa Gamut</h1>
         <p class="hero-subtitle">TUBTOB SA LANGIT</p>
@@ -102,45 +110,82 @@
         </div>
     </section>
 
-    <!-- ROOTS SECTION (PREVIOUSLY BUILT) -->
+    <!-- ROOTS (STUB) -->
     <section id="roots" class="section-padding">
         <h2 class="section-header">Gikan sa Gamut</h2>
-        <p class="section-desc">The Foundation of Tereso & Teofista Sazon</p>
-        <!-- (Keep your Branch Grid here) -->
+        <p class="section-desc">The Legacy of Tereso & Teofista Sazon</p>
+        <!-- Place your previous Roots Grid here -->
     </section>
 
-    <!-- NEW: MERCHANDISE SECTION -->
+    <!-- MERCHANDISE SECTION -->
     <section id="merch" class="section-padding" style="background: var(--dark-grey);">
-        <h2 class="section-header">First Edition Gear</h2>
-        <p class="section-desc">Limited Apparel for the 2027 Grand Reunion</p>
+        <h2 class="section-header">The First Edition Collection</h2>
+        <p class="section-desc">Featuring the Front Family Tree & Back Nutrition Facts Design</p>
 
         <div class="merch-grid">
             <div class="merch-item" onclick="playClick()">
-                <div class="merch-tag">FIRST EDITION</div>
-                <div class="merch-img">TEE REVEAL</div>
-                <h4 style="font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 10px;">Commemorative Tee</h4>
-                <p style="font-size: 0.75rem; font-weight: 300;">Premium cotton featuring the Sazon Roots logo.</p>
+                <div class="merch-img"><img src="images/logo.png" style="width:100px; opacity:0.3;" alt="Design Preview"></div>
+                <h4 style="font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 10px;">Legacy T-Shirt</h4>
+                <p style="font-size: 0.8rem; font-weight: 300; line-height: 1.6;">
+                    <strong>Front:</strong> Detailed Sazon Family Tree<br>
+                    <strong>Back:</strong> Sazon Clan Nutrition Facts
+                </p>
             </div>
 
             <div class="merch-item" onclick="playClick()">
-                <div class="merch-tag">PRE-ORDER</div>
-                <div class="merch-img">HOODIE REVEAL</div>
+                <div class="merch-img"><img src="images/logo.png" style="width:100px; opacity:0.3;" alt="Design Preview"></div>
                 <h4 style="font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 10px;">Legacy Hoodie</h4>
-                <p style="font-size: 0.75rem; font-weight: 300;">Sleek, modern design for the clan descendants.</p>
-            </div>
-
-            <div class="merch-item" onclick="playClick()">
-                <div class="merch-tag">ACCESSORY</div>
-                <div class="merch-img">TOTE REVEAL</div>
-                <h4 style="font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 10px;">Sazon Tote Bag</h4>
-                <p style="font-size: 0.75rem; font-weight: 300;">Sustainable canvas for the eco-conscious family.</p>
+                <p style="font-size: 0.8rem; font-weight: 300; line-height: 1.6;">
+                    <strong>Front:</strong> Detailed Sazon Family Tree<br>
+                    <strong>Back:</strong> Sazon Clan Nutrition Facts
+                </p>
             </div>
         </div>
         
-        <button class="btn-gold" onclick="playClick()">Inquire for Sizes</button>
+        <button class="btn-gold" onclick="playClick()">Secure Your Size</button>
     </section>
 
-    <!-- (Keep Heaven Section & Script below) -->
+    <!-- ITINERARY SECTION -->
+    <section id="itinerary" class="section-padding">
+        <h2 class="section-header">Event Itinerary</h2>
+        <p class="section-desc">July 23-24, 2027 | Marzon Hotel, Kalibo</p>
+
+        <div class="timeline">
+            <h3 style="font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 30px; letter-spacing: 3px;">Day 01: The Homecoming</h3>
+            <div class="timeline-item">
+                <span class="time-stamp">09:00 AM</span>
+                <p class="event-detail">Registration & Welcome Kits Distribution</p>
+            </div>
+            <div class="timeline-item">
+                <span class="time-stamp">10:30 AM</span>
+                <p class="event-detail">Opening Ceremony: Honoring Our Roots (Gikan sa Gamut)</p>
+            </div>
+            <div class="timeline-item">
+                <span class="time-stamp">06:00 PM</span>
+                <p class="event-detail">Grand Welcome Dinner & Clan Presentations</p>
+            </div>
+
+            <h3 style="font-family: 'Cinzel', serif; color: var(--gold); margin: 60px 0 30px 0; letter-spacing: 3px;">Day 02: Legacy & Future</h3>
+            <div class="timeline-item">
+                <span class="time-stamp">09:00 AM</span>
+                <p class="event-detail">Family Lineage Workshop & Storytelling</p>
+            </div>
+            <div class="timeline-item">
+                <span class="time-stamp">01:00 PM</span>
+                <p class="event-detail">Recreation & Photo Sessions</p>
+            </div>
+            <div class="timeline-item">
+                <span class="time-stamp">07:00 PM</span>
+                <p class="event-detail">Closing Gala: Reaching for the Future (Tubtob sa Langit)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- HEAVEN (STUB) -->
+    <section id="heaven" class="section-padding" style="background: var(--dark-grey);">
+        <h2 class="section-header">Tubtob sa Langit</h2>
+        <!-- Place your previous Heaven content here -->
+    </section>
 
     <script>
         function playClick() { const snd = document.getElementById('click-sound'); snd.currentTime = 0; snd.play(); }
