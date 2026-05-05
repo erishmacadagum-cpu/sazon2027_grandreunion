@@ -7,67 +7,74 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold: #d4af37;
+            --primary: #1A2CA3; /* Indigo Night */
+            --accent: #FFB703;  /* Festival Gold */
+            --highlight: #FB8500; /* Vivid Orange */
+            --surface: #F5F5F5;   /* Soft White */
             --black: #0a0a0a;
-            --white: #ffffff;
-            --dark-grey: #1a1a1a;
         }
 
         body, html {
             margin: 0;
             padding: 0;
-            background-color: var(--black);
-            color: var(--white);
+            background-color: var(--primary);
+            color: var(--surface);
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
         }
 
         h1, h2, h3, .cinzel { font-family: 'Cinzel', serif; }
 
-        /* Banner & Logo Overlay */
+        /* Festive Banner */
         .banner {
             position: relative;
             height: 60vh;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('images/banner-bg.jpg') center/cover;
+            background: linear-gradient(rgba(26, 44, 163, 0.8), rgba(10, 10, 10, 0.9)), url('images/banner-bg.jpg') center/cover;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            border-bottom: 2px solid var(--gold);
+            border-bottom: 4px solid var(--accent);
         }
 
-        .logo-main { width: 180px; margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--gold)); }
+        .logo-main { width: 180px; margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--accent)); }
 
-        /* Countdown Timer */
+        /* Elegant Countdown */
         .timer-container {
             margin-top: 20px;
             display: flex;
-            gap: 20px;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .time-box {
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid var(--gold);
+            background: rgba(255, 183, 3, 0.15);
+            border: 2px solid var(--accent);
             padding: 15px;
-            min-width: 80px;
+            min-width: 90px;
+            border-radius: 4px;
         }
 
-        .time-box span { display: block; font-size: 2rem; color: var(--gold); font-weight: bold; }
-        .time-box label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; }
+        .time-box span { display: block; font-size: 2.2rem; color: var(--accent); font-weight: bold; }
+        .time-box label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--surface); }
 
-        /* Roots Section */
+        /* Roots Tribute Section */
         .roots-section {
             padding: 80px 20px;
             text-align: center;
-            background: var(--dark-grey);
+            background-color: var(--black);
+            border-bottom: 1px solid var(--highlight);
         }
 
-        .roots-title { color: var(--gold); font-size: 2.5rem; margin-bottom: 10px; }
-        .roots-subtitle { font-size: 1.2rem; letter-spacing: 3px; margin-bottom: 30px; }
+        .roots-title { color: var(--accent); font-size: 2.8rem; margin-bottom: 10px; }
+        .roots-subtitle { font-size: 1.4rem; letter-spacing: 4px; margin-bottom: 20px; color: var(--highlight); }
+        .branch-tag { font-family: 'Cinzel', serif; color: var(--accent); font-size: 1.1rem; letter-spacing: 2px; }
 
-        /* Apparel Section */
-        .section-padding { padding: 80px 20px; text-align: center; }
+        /* Apparel Section with Vivid Accents */
+        .section-padding { padding: 80px 20px; text-align: center; background-color: var(--primary); }
+        
         .design-split {
             display: flex;
             justify-content: center;
@@ -78,33 +85,63 @@
 
         .apparel-card {
             background: var(--black);
-            border: 1px solid rgba(212,175,55,0.2);
-            padding: 20px;
-            max-width: 400px;
-            transition: 0.4s;
+            border: 2px solid var(--accent);
+            padding: 25px;
+            max-width: 420px;
+            transition: 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .apparel-card:hover { border-color: var(--gold); transform: translateY(-10px); }
+        .apparel-card:hover { 
+            border-color: var(--highlight); 
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(251, 133, 0, 0.3);
+        }
 
-        .design-view img { width: 100%; height: auto; display: block; }
-        .label { margin-top: 20px; color: var(--gold); font-weight: bold; letter-spacing: 1px; }
+        .design-view img { 
+            width: 100%; 
+            height: auto; 
+            display: block; 
+            border: 1px solid rgba(245, 245, 245, 0.1); 
+        }
 
-        footer { padding: 40px; text-align: center; border-top: 1px solid var(--gold); opacity: 0.7; }
+        .label { 
+            margin-top: 25px; 
+            color: var(--accent); 
+            font-weight: bold; 
+            letter-spacing: 2px; 
+            font-size: 1.1rem;
+            text-transform: uppercase;
+        }
 
-        /* Audio Control Hidden */
-        #audio-controls { display: none; }
+        footer { 
+            padding: 60px 40px; 
+            text-align: center; 
+            background: var(--black);
+            border-top: 3px solid var(--highlight);
+            color: var(--surface);
+            opacity: 0.9; 
+        }
+
+        /* Interaction prompt for Audio */
+        .audio-hint {
+            font-size: 0.8rem;
+            color: var(--highlight);
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body onclick="playJingle()">
 
-    <!-- Audio Files -->
+    <!-- Audio Assets -->
     <audio id="openSound" src="open.mp3"></audio>
     <audio id="jingle" src="jingle.mp3" loop></audio>
 
     <header class="banner">
         <img src="images/logo.png" alt="Sazon Logo" class="logo-main">
-        <h1 class="cinzel" style="color: var(--gold); font-size: 3rem;">Sazon 2027</h1>
-        <p class="cinzel" style="letter-spacing: 5px;">GRAND REUNION</p>
+        <h1 class="cinzel" style="color: var(--accent); font-size: 3.5rem; margin: 0;">Sazon 2027</h1>
+        <p class="cinzel" style="letter-spacing: 6px; margin-top: 10px;">GRAND REUNION</p>
 
         <div class="timer-container" id="countdown">
             <div class="time-box"><span id="days">00</span><label>Days</label></div>
@@ -112,17 +149,18 @@
             <div class="time-box"><span id="mins">00</span><label>Mins</label></div>
             <div class="time-box"><span id="secs">00</span><label>Secs</label></div>
         </div>
+        <p class="audio-hint">Click anywhere to activate the jingle</p>
     </header>
 
     <section class="roots-section">
         <h2 class="cinzel roots-title">The Roots</h2>
         <p class="roots-subtitle">Tereso & Teofista Sazon</p>
-        <p class="cinzel" style="color: var(--gold); letter-spacing: 2px;">13 Branches • One Legacy</p>
+        <p class="branch-tag">13 Branches • One Eternal Legacy</p>
     </section>
 
     <section id="gear" class="section-padding">
-        <h2 class="cinzel" style="font-size: 2.2rem; color: var(--gold);">FIRST EDITION APPAREL</h2>
-        <p style="max-width: 700px; margin: 20px auto; opacity: 0.8; font-style: italic;">
+        <h2 class="cinzel" style="font-size: 2.5rem; color: var(--accent);">FIRST EDITION APPAREL</h2>
+        <p style="max-width: 700px; margin: 20px auto; color: var(--surface); opacity: 0.8; font-style: italic;">
             Refined sample designs curated for the Sazon Clan grand reunion (for approval).
         </p>
         
@@ -144,14 +182,15 @@
     </section>
 
     <footer>
-        <p class="cinzel">Sazon Family Grand Reunion &copy; 2027</p>
-        <p>Marzon Hotel, Kalibo, Aklan</p>
+        <p class="cinzel" style="font-size: 1.2rem; color: var(--accent);">Sazon Family Grand Reunion &copy; 2027</p>
+        <p style="letter-spacing: 2px;">Marzon Hotel, Kalibo, Aklan</p>
     </footer>
 
     <script>
-        // Audio Logic: Play open sound on load, jingle on click
+        // Audio Logic
         window.onload = function() {
-            document.getElementById('openSound').play().catch(e => console.log("Click to play audio"));
+            const open = document.getElementById('openSound');
+            open.play().catch(e => console.log("Audio waiting for user interaction."));
         };
 
         function playJingle() {
