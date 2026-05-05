@@ -25,22 +25,50 @@
 
         h1, h2, h3, .cinzel { font-family: 'Cinzel', serif; }
 
-        /* Festive Banner */
+        /* Cinematic Banner with Refined Lighting */
         .banner {
             position: relative;
-            height: 65vh;
-            background: linear-gradient(rgba(26, 44, 163, 0.85), rgba(10, 10, 10, 0.95)), url('images/banner-bg.jpg') center/cover;
+            height: 85vh;
+            background: 
+                linear-gradient(rgba(26, 44, 163, 0.4), rgba(10, 10, 10, 0.85)), 
+                url('images/cover.jpeg') center/cover no-repeat;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             border-bottom: 5px solid var(--accent);
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
         }
 
-        .logo-main { width: 200px; margin-bottom: 25px; filter: drop-shadow(0 0 15px var(--accent)); }
+        /* The Moon with Logo */
+        .moon-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(255, 183, 3, 0.8) 0%, rgba(251, 133, 0, 0.2) 70%, transparent 100%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            box-shadow: 0 0 50px rgba(255, 183, 3, 0.6);
+            animation: moonPulse 4s ease-in-out infinite;
+        }
 
-        /* Countdown Timer */
+        .logo-inside-moon {
+            width: 110px;
+            z-index: 2;
+            filter: drop-shadow(0 0 5px var(--black));
+        }
+
+        @keyframes moonPulse {
+            0% { transform: scale(1); box-shadow: 0 0 40px rgba(255, 183, 3, 0.5); }
+            50% { transform: scale(1.05); box-shadow: 0 0 70px rgba(251, 133, 0, 0.8); }
+            100% { transform: scale(1); box-shadow: 0 0 40px rgba(255, 183, 3, 0.5); }
+        }
+
+        /* Countdown Timer Styles */
         .timer-container {
             margin-top: 30px;
             display: flex;
@@ -49,28 +77,29 @@
         }
 
         .time-box {
-            background: rgba(255, 183, 3, 0.1);
+            background: rgba(10, 10, 10, 0.7);
             border: 2px solid var(--accent);
             padding: 15px;
             min-width: 85px;
-            border-radius: 2px;
+            border-radius: 4px;
+            backdrop-filter: blur(5px);
         }
 
         .time-box span { display: block; font-size: 2.2rem; color: var(--accent); font-weight: bold; }
-        .time-box label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--surface); }
+        .time-box label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; }
 
         /* Tribute Section */
         .roots-section {
             padding: 100px 20px;
             text-align: center;
             background-color: var(--black);
-            border-bottom: 2px solid var(--highlight);
+            border-bottom: 3px solid var(--highlight);
         }
 
         .roots-title { color: var(--accent); font-size: 3rem; margin-bottom: 10px; }
-        .roots-subtitle { font-size: 1.5rem; letter-spacing: 5px; color: var(--highlight); margin-bottom: 15px; }
+        .roots-subtitle { font-size: 1.5rem; letter-spacing: 5px; color: var(--highlight); margin-bottom: 20px; }
 
-        /* Apparel Section */
+        /* Apparel Cards */
         .section-padding { padding: 80px 20px; text-align: center; background-color: var(--primary); }
         
         .design-split {
@@ -84,22 +113,22 @@
         .apparel-card {
             background: var(--black);
             border: 2px solid var(--accent);
-            padding: 30px;
+            padding: 25px;
             max-width: 420px;
             transition: 0.5s ease;
         }
 
         .apparel-card:hover { 
             border-color: var(--highlight); 
-            transform: scale(1.02);
-            box-shadow: 0 0 30px rgba(251, 133, 0, 0.2);
+            transform: scale(1.03);
+            box-shadow: 0 0 40px rgba(251, 133, 0, 0.3);
         }
 
         .design-view img { width: 100%; height: auto; border: 1px solid rgba(255,255,255,0.1); }
         .label { margin-top: 25px; color: var(--accent); font-weight: bold; letter-spacing: 2px; }
 
         footer { 
-            padding: 60px; 
+            padding: 80px 40px; 
             text-align: center; 
             background: var(--black);
             border-top: 4px solid var(--highlight);
@@ -112,9 +141,13 @@
     <audio id="jingle" src="jingle.mp3" loop></audio>
 
     <header class="banner">
-        <img src="images/logo.png" alt="Sazon Logo" class="logo-main">
-        <h1 class="cinzel" style="color: var(--accent); font-size: 3.5rem; margin: 0;">Sazon 2027</h1>
-        <p class="cinzel" style="letter-spacing: 8px;">THE FIRST EDITION REUNION</p>
+        <!-- Celestial Moon with Logo -->
+        <div class="moon-container">
+            <img src="images/logo.png" alt="Sazon Logo" class="logo-inside-moon">
+        </div>
+
+        <h1 class="cinzel" style="color: var(--accent); font-size: 3.8rem; margin: 0; text-shadow: 2px 2px 15px rgba(0,0,0,0.8);">Sazon 2027</h1>
+        <p class="cinzel" style="letter-spacing: 10px; color: var(--surface);">THE FIRST EDITION REUNION</p>
 
         <div class="timer-container" id="countdown">
             <div class="time-box"><span id="days">00</span><label>Days</label></div>
@@ -127,12 +160,12 @@
     <section class="roots-section">
         <h2 class="cinzel roots-title">The Roots</h2>
         <p class="roots-subtitle">Tereso & Teofista Sazon</p>
-        <p class="cinzel" style="color: var(--accent); letter-spacing: 3px;">13 Branches • One Legacy</p>
+        <p class="cinzel" style="color: var(--accent); letter-spacing: 4px;">13 Branches • One Eternal Legacy</p>
     </section>
 
     <section id="gear" class="section-padding">
-        <h2 class="cinzel" style="font-size: 2.5rem; color: var(--accent);">FIRST EDITION APPAREL</h2>
-        <p style="max-width: 700px; margin: 20px auto; font-style: italic; opacity: 0.9;">
+        <h2 class="cinzel" style="font-size: 2.8rem; color: var(--accent); text-transform: uppercase;">First Edition Apparel</h2>
+        <p style="max-width: 700px; margin: 20px auto; font-style: italic; font-size: 1.1rem; opacity: 0.9;">
             Refined sample designs curated for the Sazon Clan grand reunion (for approval).
         </p>
         
@@ -153,13 +186,13 @@
     </section>
 
     <footer>
-        <p class="cinzel" style="color: var(--accent);">Sazon Family Grand Reunion &copy; 2027</p>
-        <p>Marzon Hotel, Kalibo, Aklan</p>
+        <p class="cinzel" style="color: var(--accent); font-size: 1.4rem;">Sazon Family Grand Reunion &copy; 2027</p>
+        <p style="letter-spacing: 3px;">Marzon Hotel, Kalibo, Aklan</p>
     </footer>
 
     <script>
         window.onload = function() {
-            document.getElementById('openSound').play().catch(e => console.log("User interaction required for audio."));
+            document.getElementById('openSound').play().catch(e => console.log("User interaction required."));
         };
 
         function playJingle() {
