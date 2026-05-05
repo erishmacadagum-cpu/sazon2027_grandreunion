@@ -28,120 +28,93 @@
         /* Festive Banner */
         .banner {
             position: relative;
-            height: 60vh;
-            background: linear-gradient(rgba(26, 44, 163, 0.8), rgba(10, 10, 10, 0.9)), url('images/banner-bg.jpg') center/cover;
+            height: 65vh;
+            background: linear-gradient(rgba(26, 44, 163, 0.85), rgba(10, 10, 10, 0.95)), url('images/banner-bg.jpg') center/cover;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            border-bottom: 4px solid var(--accent);
+            border-bottom: 5px solid var(--accent);
         }
 
-        .logo-main { width: 180px; margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--accent)); }
+        .logo-main { width: 200px; margin-bottom: 25px; filter: drop-shadow(0 0 15px var(--accent)); }
 
-        /* Elegant Countdown */
+        /* Countdown Timer */
         .timer-container {
-            margin-top: 20px;
+            margin-top: 30px;
             display: flex;
             gap: 15px;
-            flex-wrap: wrap;
             justify-content: center;
         }
 
         .time-box {
-            background: rgba(255, 183, 3, 0.15);
+            background: rgba(255, 183, 3, 0.1);
             border: 2px solid var(--accent);
             padding: 15px;
-            min-width: 90px;
-            border-radius: 4px;
+            min-width: 85px;
+            border-radius: 2px;
         }
 
         .time-box span { display: block; font-size: 2.2rem; color: var(--accent); font-weight: bold; }
-        .time-box label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--surface); }
+        .time-box label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--surface); }
 
-        /* Roots Tribute Section */
+        /* Tribute Section */
         .roots-section {
-            padding: 80px 20px;
+            padding: 100px 20px;
             text-align: center;
             background-color: var(--black);
-            border-bottom: 1px solid var(--highlight);
+            border-bottom: 2px solid var(--highlight);
         }
 
-        .roots-title { color: var(--accent); font-size: 2.8rem; margin-bottom: 10px; }
-        .roots-subtitle { font-size: 1.4rem; letter-spacing: 4px; margin-bottom: 20px; color: var(--highlight); }
-        .branch-tag { font-family: 'Cinzel', serif; color: var(--accent); font-size: 1.1rem; letter-spacing: 2px; }
+        .roots-title { color: var(--accent); font-size: 3rem; margin-bottom: 10px; }
+        .roots-subtitle { font-size: 1.5rem; letter-spacing: 5px; color: var(--highlight); margin-bottom: 15px; }
 
-        /* Apparel Section with Vivid Accents */
+        /* Apparel Section */
         .section-padding { padding: 80px 20px; text-align: center; background-color: var(--primary); }
         
         .design-split {
             display: flex;
             justify-content: center;
             gap: 40px;
-            margin-top: 40px;
+            margin-top: 50px;
             flex-wrap: wrap;
         }
 
         .apparel-card {
             background: var(--black);
             border: 2px solid var(--accent);
-            padding: 25px;
+            padding: 30px;
             max-width: 420px;
-            transition: 0.4s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: 0.5s ease;
         }
 
         .apparel-card:hover { 
             border-color: var(--highlight); 
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(251, 133, 0, 0.3);
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(251, 133, 0, 0.2);
         }
 
-        .design-view img { 
-            width: 100%; 
-            height: auto; 
-            display: block; 
-            border: 1px solid rgba(245, 245, 245, 0.1); 
-        }
-
-        .label { 
-            margin-top: 25px; 
-            color: var(--accent); 
-            font-weight: bold; 
-            letter-spacing: 2px; 
-            font-size: 1.1rem;
-            text-transform: uppercase;
-        }
+        .design-view img { width: 100%; height: auto; border: 1px solid rgba(255,255,255,0.1); }
+        .label { margin-top: 25px; color: var(--accent); font-weight: bold; letter-spacing: 2px; }
 
         footer { 
-            padding: 60px 40px; 
+            padding: 60px; 
             text-align: center; 
             background: var(--black);
-            border-top: 3px solid var(--highlight);
-            color: var(--surface);
-            opacity: 0.9; 
-        }
-
-        /* Interaction prompt for Audio */
-        .audio-hint {
-            font-size: 0.8rem;
-            color: var(--highlight);
-            margin-top: 10px;
-            letter-spacing: 1px;
+            border-top: 4px solid var(--highlight);
         }
     </style>
 </head>
 <body onclick="playJingle()">
 
-    <!-- Audio Assets -->
     <audio id="openSound" src="open.mp3"></audio>
     <audio id="jingle" src="jingle.mp3" loop></audio>
 
     <header class="banner">
         <img src="images/logo.png" alt="Sazon Logo" class="logo-main">
         <h1 class="cinzel" style="color: var(--accent); font-size: 3.5rem; margin: 0;">Sazon 2027</h1>
-        <p class="cinzel" style="letter-spacing: 6px; margin-top: 10px;">GRAND REUNION</p>
+        <p class="cinzel" style="letter-spacing: 8px;">THE FIRST EDITION REUNION</p>
 
         <div class="timer-container" id="countdown">
             <div class="time-box"><span id="days">00</span><label>Days</label></div>
@@ -149,18 +122,17 @@
             <div class="time-box"><span id="mins">00</span><label>Mins</label></div>
             <div class="time-box"><span id="secs">00</span><label>Secs</label></div>
         </div>
-        <p class="audio-hint">Click anywhere to activate the jingle</p>
     </header>
 
     <section class="roots-section">
         <h2 class="cinzel roots-title">The Roots</h2>
         <p class="roots-subtitle">Tereso & Teofista Sazon</p>
-        <p class="branch-tag">13 Branches • One Eternal Legacy</p>
+        <p class="cinzel" style="color: var(--accent); letter-spacing: 3px;">13 Branches • One Legacy</p>
     </section>
 
     <section id="gear" class="section-padding">
         <h2 class="cinzel" style="font-size: 2.5rem; color: var(--accent);">FIRST EDITION APPAREL</h2>
-        <p style="max-width: 700px; margin: 20px auto; color: var(--surface); opacity: 0.8; font-style: italic;">
+        <p style="max-width: 700px; margin: 20px auto; font-style: italic; opacity: 0.9;">
             Refined sample designs curated for the Sazon Clan grand reunion (for approval).
         </p>
         
@@ -171,7 +143,6 @@
                     <div class="label">FRONT: FAMILY TREE LOGO</div>
                 </div>
             </div>
-
             <div class="apparel-card">
                 <div class="design-view">
                     <img src="images/apparel-back.jpg" alt="Back Design">
@@ -182,15 +153,13 @@
     </section>
 
     <footer>
-        <p class="cinzel" style="font-size: 1.2rem; color: var(--accent);">Sazon Family Grand Reunion &copy; 2027</p>
-        <p style="letter-spacing: 2px;">Marzon Hotel, Kalibo, Aklan</p>
+        <p class="cinzel" style="color: var(--accent);">Sazon Family Grand Reunion &copy; 2027</p>
+        <p>Marzon Hotel, Kalibo, Aklan</p>
     </footer>
 
     <script>
-        // Audio Logic
         window.onload = function() {
-            const open = document.getElementById('openSound');
-            open.play().catch(e => console.log("Audio waiting for user interaction."));
+            document.getElementById('openSound').play().catch(e => console.log("User interaction required for audio."));
         };
 
         function playJingle() {
@@ -198,13 +167,10 @@
             if (jingle.paused) { jingle.play(); }
         }
 
-        // Countdown Logic for July 23, 2027
         const countDate = new Date("July 23, 2027 00:00:00").getTime();
-
         function countdown() {
             const now = new Date().getTime();
             const gap = countDate - now;
-
             const second = 1000;
             const minute = second * 60;
             const hour = minute * 60;
@@ -215,7 +181,6 @@
             document.getElementById("mins").innerText = Math.floor((gap % hour) / minute);
             document.getElementById("secs").innerText = Math.floor((gap % minute) / second);
         }
-
         setInterval(countdown, 1000);
     </script>
 </body>
