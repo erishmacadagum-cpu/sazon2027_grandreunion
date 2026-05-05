@@ -29,7 +29,7 @@
         /* NAVIGATION */
         nav {
             position: fixed; top: 0; width: 100%; padding: 20px 0;
-            background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(10px);
             z-index: 1000; border-bottom: 1px solid var(--gold);
         }
 
@@ -63,23 +63,16 @@
         .section-header { font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.5rem; letter-spacing: 5px; margin-bottom: 20px; text-transform: uppercase; }
         .section-desc { font-weight: 300; letter-spacing: 4px; font-size: 0.85rem; margin-bottom: 60px; text-transform: uppercase; color: var(--light-gold); }
 
-        /* MERCHANDISE */
-        .merch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1100px; margin: 0 auto; }
-        .merch-item { background: var(--dark-grey); border: 1px solid rgba(212, 175, 55, 0.1); padding: 30px; transition: 0.5s; cursor: pointer; }
-        .merch-item:hover { border-color: var(--gold); transform: translateY(-5px); }
-        .merch-img { width: 100%; height: 280px; background: #151515; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px solid rgba(212, 175, 55, 0.05); }
+        /* TRAVEL GUIDE & RSVP BOXES */
+        .flex-container { display: flex; flex-wrap: wrap; gap: 40px; max-width: 1100px; margin: 0 auto; text-align: left; }
+        .info-box { flex: 1; min-width: 300px; background: var(--dark-grey); padding: 50px; border-left: 4px solid var(--gold); }
+        
+        .map-container { width: 100%; height: 300px; margin-top: 20px; border: 1px solid rgba(212, 175, 55, 0.3); }
 
-        /* ITINERARY TIMELINE */
-        .timeline { max-width: 800px; margin: 0 auto; position: relative; text-align: left; padding-left: 30px; border-left: 1px solid var(--gold); }
-        .timeline-item { position: relative; margin-bottom: 50px; padding-left: 20px; }
-        .timeline-item::before { content: ''; position: absolute; left: -36px; top: 5px; width: 10px; height: 10px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 15px var(--gold); }
-        .time-stamp { font-family: 'Cinzel', serif; color: var(--gold); font-size: 0.8rem; letter-spacing: 2px; display: block; margin-bottom: 10px; }
-        .event-detail { font-size: 0.95rem; font-weight: 300; line-height: 1.6; }
+        .btn-gold { background: var(--gold); color: var(--black); border: none; padding: 15px 35px; font-family: 'Cinzel', serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; cursor: pointer; text-decoration: none; display: inline-block; transition: 0.3s; }
+        .btn-gold:hover { background: var(--light-gold); transform: scale(1.05); }
 
-        .btn-gold { background: var(--gold); color: var(--black); border: none; padding: 15px 35px; font-family: 'Cinzel', serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; cursor: pointer; margin-top: 40px; transition: 0.3s; }
-        .btn-gold:hover { background: var(--light-gold); letter-spacing: 4px; }
-
-        @media (max-width: 768px) { .nav-links { display: none; } .timeline { margin-left: 20px; } }
+        @media (max-width: 768px) { .nav-links { display: none; } }
     </style>
 </head>
 <body>
@@ -93,7 +86,7 @@
                 <a href="#roots" onclick="playClick()">Our Roots</a>
                 <a href="#merch" onclick="playClick()">Merchandise</a>
                 <a href="#itinerary" onclick="playClick()">Itinerary</a>
-                <a href="#heaven" onclick="playClick()">The Reunion</a>
+                <a href="#travel" onclick="playClick()">RSVP & Travel</a>
             </div>
         </div>
     </nav>
@@ -110,81 +103,45 @@
         </div>
     </section>
 
-    <!-- ROOTS (STUB) -->
-    <section id="roots" class="section-padding">
-        <h2 class="section-header">Gikan sa Gamut</h2>
-        <p class="section-desc">The Legacy of Tereso & Teofista Sazon</p>
-        <!-- Place your previous Roots Grid here -->
-    </section>
+    <!-- ROOTS, MERCH, ITINERARY SECTIONS HERE (Keep your previous code for those sections) -->
 
-    <!-- MERCHANDISE SECTION -->
-    <section id="merch" class="section-padding" style="background: var(--dark-grey);">
-        <h2 class="section-header">The First Edition Collection</h2>
-        <p class="section-desc">Featuring the Front Family Tree & Back Nutrition Facts Design</p>
+    <!-- TRAVEL & RSVP SECTION -->
+    <section id="travel" class="section-padding" style="background: var(--black); border-top: 1px solid rgba(212, 175, 55, 0.1);">
+        <h2 class="section-header">Travel & Attendance</h2>
+        <p class="section-desc">Securing the Legacy for July 2027</p>
 
-        <div class="merch-grid">
-            <div class="merch-item" onclick="playClick()">
-                <div class="merch-img"><img src="images/logo.png" style="width:100px; opacity:0.3;" alt="Design Preview"></div>
-                <h4 style="font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 10px;">Legacy T-Shirt</h4>
-                <p style="font-size: 0.8rem; font-weight: 300; line-height: 1.6;">
-                    <strong>Front:</strong> Detailed Sazon Family Tree<br>
-                    <strong>Back:</strong> Sazon Clan Nutrition Facts
+        <div class="flex-container">
+            <!-- RSVP PORTAL -->
+            <div class="info-box">
+                <h3 style="font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 20px;">RSVP Portal</h3>
+                <p style="font-size: 0.9rem; line-height: 2; font-weight: 300; margin-bottom: 30px;">
+                    To help us coordinate the "First Edition" Grand Reunion perfectly, please finalize your attendance via the official clan form.
                 </p>
+                <!-- REPLACE THE '#' WITH YOUR ACTUAL GOOGLE FORM LINK -->
+                <a href="#" target="_blank" class="btn-gold" onclick="playClick()">Open RSVP Form</a>
             </div>
 
-            <div class="merch-item" onclick="playClick()">
-                <div class="merch-img"><img src="images/logo.png" style="width:100px; opacity:0.3;" alt="Design Preview"></div>
-                <h4 style="font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 10px;">Legacy Hoodie</h4>
-                <p style="font-size: 0.8rem; font-weight: 300; line-height: 1.6;">
-                    <strong>Front:</strong> Detailed Sazon Family Tree<br>
-                    <strong>Back:</strong> Sazon Clan Nutrition Facts
+            <!-- TRAVEL GUIDE -->
+            <div class="info-box">
+                <h3 style="font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 20px;">The Venue</h3>
+                <p style="font-size: 0.9rem; line-height: 2; font-weight: 300;">
+                    <strong>Marzon Hotel Kalibo</strong><br>
+                    Jaime Cardinal L. Sin Ave, Kalibo, Aklan.<br>
+                    A 10-minute drive from Kalibo International Airport.
                 </p>
+                <div class="map-container">
+                    <!-- GOOGLE MAPS EMBED PINNED TO MARZON HOTEL KALIBO -->
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m3!1d3904.341144594589!2d122.361955375836!3d11.705705341315894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33b0021679093a15%3A0xe45371c11030e445!2sMarzon%20Hotel%20Kalibo!5e0!3m2!1sen!2sph!4v1714935000000!5m2!1sen!2sph" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
             </div>
         </div>
-        
-        <button class="btn-gold" onclick="playClick()">Secure Your Size</button>
-    </section>
-
-    <!-- ITINERARY SECTION -->
-    <section id="itinerary" class="section-padding">
-        <h2 class="section-header">Event Itinerary</h2>
-        <p class="section-desc">July 23-24, 2027 | Marzon Hotel, Kalibo</p>
-
-        <div class="timeline">
-            <h3 style="font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 30px; letter-spacing: 3px;">Day 01: The Homecoming</h3>
-            <div class="timeline-item">
-                <span class="time-stamp">09:00 AM</span>
-                <p class="event-detail">Registration & Welcome Kits Distribution</p>
-            </div>
-            <div class="timeline-item">
-                <span class="time-stamp">10:30 AM</span>
-                <p class="event-detail">Opening Ceremony: Honoring Our Roots (Gikan sa Gamut)</p>
-            </div>
-            <div class="timeline-item">
-                <span class="time-stamp">06:00 PM</span>
-                <p class="event-detail">Grand Welcome Dinner & Clan Presentations</p>
-            </div>
-
-            <h3 style="font-family: 'Cinzel', serif; color: var(--gold); margin: 60px 0 30px 0; letter-spacing: 3px;">Day 02: Legacy & Future</h3>
-            <div class="timeline-item">
-                <span class="time-stamp">09:00 AM</span>
-                <p class="event-detail">Family Lineage Workshop & Storytelling</p>
-            </div>
-            <div class="timeline-item">
-                <span class="time-stamp">01:00 PM</span>
-                <p class="event-detail">Recreation & Photo Sessions</p>
-            </div>
-            <div class="timeline-item">
-                <span class="time-stamp">07:00 PM</span>
-                <p class="event-detail">Closing Gala: Reaching for the Future (Tubtob sa Langit)</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- HEAVEN (STUB) -->
-    <section id="heaven" class="section-padding" style="background: var(--dark-grey);">
-        <h2 class="section-header">Tubtob sa Langit</h2>
-        <!-- Place your previous Heaven content here -->
     </section>
 
     <script>
