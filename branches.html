@@ -1,159 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sazon Family Legacy | Main Hub</title>
-
-    <!-- FAVICON & ICON SYNC -->
-    <link rel="icon" type="image/png" href="images/logo.png?v=2">
-    <link rel="apple-touch-icon" href="images/logo.png?v=2">
-
-    <!-- TYPOGRAPHY -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@100;300;400;600&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --gold: #d4af37;
-            --black: #050505;
-            --glass: rgba(255, 255, 255, 0.05);
-        }
-
-        body, html {
-            margin: 0;
-            padding: 0;
-            background-color: var(--black);
-            color: white;
-            font-family: 'Montserrat', sans-serif;
-            scroll-behavior: smooth;
-        }
-
-        /* Sophisticated Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid var(--gold);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 40px;
-        }
-
-        .nav-logo {
-            font-family: 'Cinzel', serif;
-            color: var(--gold);
-            font-size: 1.2rem;
-            letter-spacing: 3px;
-            text-decoration: none;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            margin-left: 30px;
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover { color: var(--gold); }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.5), var(--black)), url('images/banner.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .hero-title {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(2rem, 6vw, 4rem);
-            color: var(--gold);
-            margin-bottom: 10px;
-            letter-spacing: 8px;
-        }
-
-        .hero-subtitle {
-            font-weight: 100;
-            letter-spacing: 12px;
-            font-size: 0.9rem;
-            margin-bottom: 40px;
-        }
-
-        /* Persistent Synchronized Timer */
-        .sync-timer {
-            display: flex;
-            gap: 20px;
-            background: var(--glass);
-            padding: 20px 40px;
-            border: 1px solid var(--gold);
-            border-radius: 2px;
-        }
-
-        .time-block { display: flex; flex-direction: column; min-width: 60px; }
-        .time-num { font-family: 'Cinzel', serif; font-size: 1.8rem; color: var(--gold); }
-        .time-label { font-size: 0.5rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7; }
-
-    </style>
-</head>
-<body>
-
-    <nav>
-        <div class="nav-container">
-            <a href="#" class="nav-logo">SAZON LEGACY</a>
-            <div class="nav-links">
-                <a href="#roots">Our Roots</a>
-                <a href="#event">The Reunion</a>
-                <a href="#merch">Merchandise</a>
-            </div>
-        </div>
-    </nav>
-
-    <section class="hero">
-        <h1 class="hero-title">Gikan sa Gamot</h1>
-        <p class="hero-subtitle">TUBTOB SA LANGIT</p>
+<!-- ADD THIS SECTION DIRECTLY BELOW YOUR HERO SECTION -->
+<section id="roots" style="padding: 100px 20px; background: #050505; color: white;">
+    <div style="max-width: 1100px; margin: 0 auto; text-align: center;">
         
-        <div class="sync-timer">
-            <div class="time-block"><span class="time-num" id="d">00</span><span class="time-label">Days</span></div>
-            <div class="time-block"><span class="time-num" id="h">00</span><span class="time-label">Hours</span></div>
-            <div class="time-block"><span class="time-num" id="m">00</span><span class="time-label">Mins</span></div>
-            <div class="time-block"><span class="time-num" id="s">00</span><span class="time-label">Secs</span></div>
+        <!-- LEGACY HEADER -->
+        <h2 style="font-family: 'Cinzel', serif; color: #d4af37; font-size: 2.5rem; letter-spacing: 5px; margin-bottom: 20px;">
+            Gikan sa Gamut
+        </h2>
+        <p style="font-family: 'Montserrat', sans-serif; font-weight: 300; letter-spacing: 4px; font-size: 0.9rem; margin-bottom: 60px; text-transform: uppercase; color: #f3e5ab;">
+            The Foundation of the Sazon Clan
+        </p>
+
+        <!-- CLAN BRANCHES GRID -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+            
+            <!-- BRANCH: TERESO & TEOFISTA -->
+            <div class="branch-card" onclick="playClick()">
+                <div style="border: 1px solid #d4af37; padding: 40px 20px; transition: 0.4s; cursor: pointer; background: rgba(255,255,255,0.03);">
+                    <h3 style="font-family: 'Cinzel', serif; color: #d4af37; margin-bottom: 15px;">Legacy Leaders</h3>
+                    <p style="font-size: 0.8rem; line-height: 1.8; font-weight: 300;">
+                        Honoring the life and legacy of Tereso & Teofista Sazon, the roots from which our family flourishes.
+                    </p>
+                </div>
+            </div>
+
+            <!-- BRANCH: THE LINEAGES -->
+            <div class="branch-card" onclick="playClick()">
+                <div style="border: 1px solid #d4af37; padding: 40px 20px; transition: 0.4s; cursor: pointer; background: rgba(255,255,255,0.03);">
+                    <h3 style="font-family: 'Cinzel', serif; color: #d4af37; margin-bottom: 15px;">Multi-Generational</h3>
+                    <p style="font-size: 0.8rem; line-height: 1.8; font-weight: 300;">
+                        Tracing the descendants across generations as we gather for this historic grand reunion.
+                    </p>
+                </div>
+            </div>
+
+            <!-- BRANCH: CLAN TRAITS -->
+            <div class="branch-card" onclick="playClick()">
+                <div style="border: 1px solid #d4af37; padding: 40px 20px; transition: 0.4s; cursor: pointer; background: rgba(255,255,255,0.03);">
+                    <h3 style="font-family: 'Cinzel', serif; color: #d4af37; margin-bottom: 15px;">Sazon Spirit</h3>
+                    <p style="font-size: 0.8rem; line-height: 1.8; font-weight: 300;">
+                        Celebrating the shared traits and enduring values that define the Sazon Clan identity.
+                    </p>
+                </div>
+            </div>
+
         </div>
-    </section>
+    </div>
+</section>
 
-    <script>
-        function updateClock() {
-            // LOCKED TO PHILIPPINES TIME (UTC+8)
-            const target = new Date("2027-07-23T00:00:00+08:00").getTime();
-            const now = new Date().getTime();
-            const diff = target - now;
+<!-- AUDIO AND SCRIPT FOR CLICKS -->
+<audio id="click-sound" src="audio/click.mp3"></audio>
 
-            if (diff <= 0) return;
+<script>
+    function playClick() {
+        const sound = document.getElementById('click-sound');
+        sound.currentTime = 0;
+        sound.play();
+    }
+</script>
 
-            document.getElementById('d').innerText = Math.floor(diff / 86400000).toString().padStart(2, '0');
-            document.getElementById('h').innerText = Math.floor((diff % 86400000) / 3600000).toString().padStart(2, '0');
-            document.getElementById('m').innerText = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
-            document.getElementById('s').innerText = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-    </script>
-</body>
-</html>
+<style>
+    .branch-card:hover div {
+        background: #d4af37 !important;
+        color: #050505 !important;
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+    }
+    .branch-card:hover h3 {
+        color: #050505 !important;
+    }
+</style>
