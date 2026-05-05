@@ -25,10 +25,10 @@
 
         h1, h2, h3, .cinzel { font-family: 'Cinzel', serif; }
 
-        /* The "Stunning" Hala Bira Banner */
+        /* The "Hala Bira" Cinematic Banner */
         .banner {
             position: relative;
-            height: 90vh; /* Professional height for public debut */
+            height: 90vh;
             background: 
                 linear-gradient(rgba(26, 44, 163, 0.45), rgba(10, 10, 10, 0.95)), 
                 url('images/cover.jpeg') center/cover no-repeat;
@@ -40,7 +40,6 @@
             border-bottom: 5px solid var(--accent);
             overflow: hidden;
             box-shadow: inset 0 0 100px rgba(0,0,0,0.6);
-            /* Atmosphere Breathing animation */
             animation: atmosphericGlow 12s ease-in-out infinite alternate;
         }
 
@@ -49,35 +48,29 @@
             100% { filter: saturate(125%) brightness(110%); }
         }
 
-        /* Top Left: 3D Celestial Moon with Logo */
+        /* Top Left: The New High-Fidelity Moon asset */
         .moon-container {
             position: absolute;
             top: 40px;
             left: 40px;
-            width: 170px;
-            height: 170px;
-            /* Creating the 'Volumetric' spherical effect */
-            background: radial-gradient(circle at 35% 35%, #ffffff 0%, #a5ccff 20%, #4a90e2 60%, #102a4d 100%);
-            border-radius: 50%;
+            width: 180px; /* Adjusted for the new image asset */
+            height: 180px;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 
-                inset -12px -12px 40px rgba(0,0,0,0.8),
-                inset 10px 10px 40px rgba(255,255,255,0.4),
-                0 0 60px rgba(165, 204, 255, 0.6);
-            animation: moonFloat 8s ease-in-out infinite alternate;
             z-index: 10;
+            /* Applying a celestial glow to the image asset */
+            filter: drop-shadow(0 0 30px rgba(165, 204, 255, 0.6));
+            animation: moonFloat 8s ease-in-out infinite alternate;
         }
 
-        .logo-inside-moon {
-            width: 95px;
-            z-index: 2;
-            filter: drop-shadow(0px 0px 5px rgba(255,255,255,0.6)) contrast(1.1);
-            opacity: 0.85;
+        .moon-asset {
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
         }
 
-        /* Top Right: High-Fidelity Burst Fireworks "The Peg" */
+        /* Top Right: Advanced Burst Fireworks */
         .fireworks-stage {
             position: absolute;
             top: 0;
@@ -103,7 +96,7 @@
             100% { transform: rotate(var(--rot)) translateY(200px); opacity: 0; height: 3px; }
         }
 
-        /* Text & UI elements for Clarity */
+        /* Center Content Clarity */
         .banner-content { z-index: 20; }
         
         .timer-container {
@@ -114,7 +107,7 @@
         }
 
         .time-box {
-            background: rgba(10, 10, 10, 0.8);
+            background: rgba(10, 10, 10, 0.85);
             border: 2px solid var(--accent);
             padding: 15px;
             min-width: 85px;
@@ -133,14 +126,12 @@
             border-bottom: 3px solid var(--highlight);
         }
 
-        .roots-title { color: var(--accent); font-size: 3rem; margin-bottom: 10px; }
-        .roots-subtitle { font-size: 1.5rem; letter-spacing: 6px; color: var(--highlight); margin-bottom: 15px; }
+        .roots-title { color: var(--accent); font-size: 2.8rem; margin-bottom: 10px; }
+        .roots-subtitle { font-size: 1.4rem; letter-spacing: 6px; color: var(--highlight); margin-bottom: 15px; }
 
-        /* General Utility Styles */
-        .cinzel { font-family: 'Cinzel', serif; }
         @keyframes moonFloat {
-            from { transform: translateY(0); }
-            to { transform: translateY(-15px); }
+            from { transform: translateY(0) rotate(0deg); }
+            to { transform: translateY(-15px) rotate(2deg); }
         }
 
         footer { 
@@ -157,12 +148,12 @@
     <audio id="jingle" src="sazon-full-anthem.mp3"></audio>
 
     <header class="banner">
-        <!-- Top Left: 3D Volumetric Moon -->
+        <!-- New Moon Image from GitHub Asset -->
         <div class="moon-container">
-            <img src="images/logo.png" alt="Sazon Logo" class="logo-inside-moon">
+            <img src="images/moon.png" alt="Sazon Moon" class="moon-asset">
         </div>
 
-        <!-- Top Right: Advanced Burst Fireworks -->
+        <!-- Top Right: High-Fidelity Burst Fireworks -->
         <div class="fireworks-stage" id="fireworks"></div>
 
         <div class="banner-content">
@@ -190,15 +181,13 @@
     </footer>
 
     <script>
-        // High-Fidelity Burst Generation (The specific 'peg' in motion)
+        // Burst Effect Logic
         function createBurst(top, right, color, count, delay) {
             const container = document.getElementById('fireworks');
             const burstOrigin = document.createElement('div');
             burstOrigin.style.position = 'absolute';
             burstOrigin.style.top = top + '%';
             burstOrigin.style.right = right + '%';
-            burstOrigin.style.width = '1px';
-            burstOrigin.style.height = '1px';
 
             const angleStep = 360 / count;
             for(let i=0; i<count; i++) {
@@ -212,15 +201,15 @@
             container.appendChild(burstOrigin);
         }
 
-        // Initialize multiple bursts in different 'Hala Bira' festive colors
-        createBurst(20, 15, '#FFB703', 20, 0); // Festival Gold
-        createBurst(35, 30, '#FB8500', 16, 1.5); // Vivid Orange
+        // Initialize multiple bursts like in the reference image
+        createBurst(20, 15, '#FFB703', 20, 0); // Gold
+        createBurst(35, 30, '#FB8500', 16, 1.5); // Orange
         createBurst(15, 35, '#4CAF50', 18, 0.8); // Green
         createBurst(45, 10, '#ffffff', 14, 2.1); // White
 
-        // Audio and UI Logic
+        // Audio and Timer
         window.onload = function() {
-            document.getElementById('openSound').play().catch(e => console.log("User interaction required."));
+            document.getElementById('openSound').play().catch(e => {});
         };
 
         let anthemPlayed = false;
