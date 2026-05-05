@@ -24,7 +24,7 @@
             scroll-behavior: smooth;
         }
 
-        /* NAVIGATION */
+        /* NAVIGATION & LOGIC */
         nav {
             position: fixed; top: 0; width: 100%; padding: 20px 0;
             background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(10px);
@@ -40,41 +40,35 @@
         .nav-links a { color: white; text-decoration: none; margin-left: 20px; font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; transition: 0.3s; }
         .nav-links a:hover { color: var(--gold); }
 
-        /* HERO & TIMER */
+        /* SYNC TIMER */
         .hero {
             height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; background: linear-gradient(to bottom, rgba(0,0,0,0.7), var(--black)), url('images/banner.jpg');
             background-size: cover; background-position: center;
         }
 
-        .hero-title { font-family: 'Cinzel', serif; font-size: clamp(2rem, 5vw, 4rem); color: var(--gold); letter-spacing: 8px; text-transform: uppercase; }
         .sync-timer { display: flex; gap: 15px; margin-top: 30px; border: 1px solid var(--gold); padding: 15px 30px; background: rgba(255,255,255,0.02); }
         .time-block { display: flex; flex-direction: column; min-width: 60px; }
         .time-num { font-family: 'Cinzel', serif; font-size: 1.8rem; color: var(--gold); }
-        .time-label { font-size: 0.5rem; letter-spacing: 1px; opacity: 0.7; }
+        .time-label { font-size: 0.5rem; letter-spacing: 1px; opacity: 0.7; text-transform: uppercase; }
 
-        /* SECTIONS */
+        /* SECTION STYLING */
         .section-padding { padding: 100px 20px; text-align: center; }
         .section-header { font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.2rem; letter-spacing: 4px; margin-bottom: 50px; text-transform: uppercase; }
 
-        /* APPAREL SWAP DESIGN */
+        /* APPAREL SWAP */
         .apparel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto; }
         .apparel-card { background: var(--dark-grey); border: 1px solid rgba(212, 175, 55, 0.2); padding: 25px; text-align: left; }
-        .design-split { display: flex; gap: 10px; margin-bottom: 20px; }
+        .design-split { display: flex; gap: 15px; margin-bottom: 20px; }
         .design-view { flex: 1; background: #000; padding: 10px; border: 1px solid rgba(255,255,255,0.05); text-align: center; }
         .design-view img { width: 100%; height: auto; }
-        .design-label { font-size: 0.55rem; color: var(--gold); margin-top: 8px; text-transform: uppercase; letter-spacing: 1.5px; }
-
-        /* ITINERARY */
-        .itinerary-timeline { max-width: 700px; margin: 0 auto; border-left: 1px solid var(--gold); padding-left: 30px; text-align: left; }
-        .event-node { position: relative; margin-bottom: 40px; }
-        .event-node::before { content: ''; position: absolute; left: -36px; top: 5px; width: 10px; height: 10px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 10px var(--gold); }
+        .design-label { font-size: 0.6rem; color: var(--gold); margin-top: 10px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; }
 
         /* TRAVEL INFO GRID */
         .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto; text-align: left; }
-        .info-box { background: rgba(212, 175, 55, 0.03); padding: 25px; border-left: 3px solid var(--gold); }
-        .info-box h4 { font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 10px; font-size: 0.9rem; }
-        .info-box p, .info-box li { font-size: 0.8rem; line-height: 1.6; font-weight: 300; list-style: none; margin-bottom: 5px; }
+        .info-box { background: rgba(212, 175, 55, 0.03); padding: 25px; border-left: 3px solid var(--gold); height: 100%; }
+        .info-box h4 { font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 10px; font-size: 0.9rem; letter-spacing: 1px; }
+        .info-box p, .info-box li { font-size: 0.8rem; line-height: 1.6; font-weight: 300; list-style: none; margin-bottom: 8px; }
 
         /* DARK MODE MAP */
         .map-frame { width: 100%; height: 450px; border: 1px solid var(--gold); margin-top: 40px; filter: grayscale(1) invert(1) contrast(1.1); }
@@ -103,7 +97,8 @@
 
     <!-- HERO -->
     <section class="hero">
-        <h1 class="hero-title">Gikan sa Gamut</h1>
+        <h1 style="font-family: 'Cinzel', serif; font-size: clamp(2rem, 5vw, 4rem); color: var(--gold); letter-spacing: 8px; text-transform: uppercase;">Gikan sa Gamut</h1>
+        <p style="font-weight: 100; letter-spacing: 10px; font-size: 0.8rem; color: var(--light-gold);">TUBTOB SA LANGIT</p>
         <div class="sync-timer">
             <div class="time-block"><span class="time-num" id="d">00</span><span class="time-label">Days</span></div>
             <div class="time-block"><span class="time-num" id="h">00</span><span class="time-label">Hours</span></div>
@@ -115,42 +110,42 @@
     <!-- ROOTS -->
     <section id="roots" class="section-padding">
         <h2 class="section-header">Our Roots</h2>
-        <p style="font-weight: 300; letter-spacing: 2px;">Foundation of the Sazon Clan</p>
+        <p style="font-weight: 300; letter-spacing: 2px; text-transform: uppercase;">The Foundation of the Sazon Clan</p>
     </section>
 
-    <!-- APPAREL (SWAPPED IMAGES) -->
+    <!-- APPAREL (TEXT CORRECTED) -->
     <section id="apparel" class="section-padding" style="background: var(--dark-grey);">
-        <h2 class="section-header">Legacy Apparel</h2>
+        <h2 class="section-header">First Edition Apparel</h2>
         <div class="apparel-grid">
             <div class="apparel-card">
                 <div class="design-split">
                     <div class="design-view">
-                        <!-- Swapped to apparel_front.jpg for Family Tree -->
-                        <img src="images/apparel_front.jpg" alt="Front Design">
+                        <img src="images/apparel_front.jpg" alt="Family Tree Logo">
+                        <!-- CORRECTED TEXT -->
                         <div class="design-label">Front: Family Tree Logo</div>
                     </div>
                     <div class="design-view">
-                        <!-- Swapped to apparel_back.jpg for Nutrition Facts -->
-                        <img src="images/apparel_back.jpg" alt="Back Design">
+                        <img src="images/apparel_back.jpg" alt="Nutrition Facts">
+                        <!-- CORRECTED TEXT -->
                         <div class="design-label">Back: Nutrition Facts</div>
                     </div>
                 </div>
-                <h4 style="font-family: 'Cinzel', serif; color: var(--gold);">First Edition Gear</h4>
-                <p style="font-size: 0.75rem;">Premium apparel designed for the July 2027 reunion sessions.</p>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="btn-gold" onclick="playClick()">Order Now</a>
+                <h4 style="font-family: 'Cinzel', serif; color: var(--gold); letter-spacing: 2px;">Heritage Collection</h4>
+                <p style="font-size: 0.75rem;">Premium designs featuring our lineage for the July 2027 sessions.</p>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="btn-gold" onclick="playClick()">Confirm Sizes</a>
             </div>
         </div>
     </section>
 
     <!-- ITINERARY -->
     <section id="itinerary" class="section-padding">
-        <h2 class="section-header">The Itinerary</h2>
-        <div class="itinerary-timeline">
-            <div class="event-node">
+        <h2 class="section-header">Itinerary</h2>
+        <div style="max-width: 700px; margin: 0 auto; border-left: 1px solid var(--gold); padding-left: 30px; text-align: left;">
+            <div style="margin-bottom: 40px; position: relative;">
                 <p style="color: var(--gold); font-family: 'Cinzel', serif;">Day 1: July 23, 2027</p>
                 <p style="font-size: 0.85rem;">Grand Welcome Gala & Clan Recognition at Marzon Hotel.</p>
             </div>
-            <div class="event-node">
+            <div style="position: relative;">
                 <p style="color: var(--gold); font-family: 'Cinzel', serif;">Day 2: July 24, 2027</p>
                 <p style="font-size: 0.85rem;">"Tubtob sa Langit" Closing Grand Banquet.</p>
             </div>
@@ -159,34 +154,36 @@
 
     <!-- TRAVEL & RSVP -->
     <section id="travel" class="section-padding" style="background: var(--dark-grey);">
-        <h2 class="section-header">RSVP & Travel Guide</h2>
+        <h2 class="section-header">Travel & RSVP</h2>
         <div class="info-grid">
             <div class="info-box">
-                <h4>The Venue: Marzon Hotel</h4>
-                <p>Located in Kalibo, Aklan, this venue offers a sophisticated setting for our grand reunion.</p>
-                <li>📍 Jaime Cardinal L. Sin Ave, Kalibo</li>
-                <li>🚕 10 Mins from Kalibo Int'l Airport</li>
+                <h4>Venue: Marzon Hotel Kalibo</h4>
+                <p>Jaime Cardinal L. Sin Ave, Kalibo, Aklan.</p>
+                <li>🚗 <strong>Logistics:</strong> 10-minute drive from Kalibo International Airport.</li>
+                <li>🏢 <strong>Facilities:</strong> Poolside gala and grand convention halls.</li>
             </div>
             <div class="info-box">
-                <h4>Local Spots</h4>
-                <li>🍽️ <strong>Saylo Cuisine:</strong> Heritage Aklanon dining.</li>
-                <li>🌳 <strong>Bakhawan Eco-Park:</strong> Famous mangrove forest.</li>
-                <li>🛍️ <strong>Gaisano Capital:</strong> Central shopping hub.</li>
+                <h4>Nearby Establishments</h4>
+                <li>🍽️ <strong>Saylo Cuisine:</strong> Local heritage Filipino food.</li>
+                <li>🌳 <strong>Bakhawan Eco-Park:</strong> Scenic mangrove forest boardwalk.</li>
+                <li>🛍️ <strong>Gaisano Capital:</strong> Nearby shopping for reunion essentials.</li>
             </div>
             <div class="info-box">
                 <h4>RSVP Portal</h4>
-                <p>Submit your final attendance and apparel sizes via the link below.</p>
+                <p>Register attendance and apparel orders by Dec 2026 to guarantee your "First Edition" gear.</p>
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="btn-gold" onclick="playClick()">Open Google Form</a>
             </div>
         </div>
 
         <div class="map-frame">
+            <!-- PRECISE GOOGLE MAPS PIN -->
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m3!1d3904.341144594589!2d122.361955375836!3d11.705705341315894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33b0021679093a15%3A0xe45371c11030e445!2sMarzon%20Hotel%20Kalibo!5e0!3m2!1sen!2sph!4v1714935000000!5m2!1sen!2sph" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
     </section>
 
     <script>
         function playClick() { const snd = document.getElementById('click-sound'); snd.currentTime = 0; snd.play(); }
+        
         function updateClock() {
             const target = new Date("2027-07-23T00:00:00+08:00").getTime();
             const now = new Date().getTime();
