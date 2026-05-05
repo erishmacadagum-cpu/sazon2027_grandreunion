@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sazon 2027 | Legacy Gear Hub</title>
+    <title>Sazon 2027 | The Legacy Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -19,47 +19,55 @@
             background-color: var(--black);
             color: var(--white);
             font-family: 'Montserrat', sans-serif;
-            scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
-        h1, h2, .cinzel { font-family: 'Cinzel', serif; }
+        h1, h2, h3, .cinzel { font-family: 'Cinzel', serif; }
 
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 0;
-            background: rgba(0,0,0,0.9);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-        }
-
-        .logo { font-size: 1.5rem; color: var(--gold); text-decoration: none; font-weight: bold; }
-
-        .hero {
-            height: 50vh;
+        /* Banner & Logo Overlay */
+        .banner {
+            position: relative;
+            height: 60vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('images/banner-bg.jpg') center/cover;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8));
+            border-bottom: 2px solid var(--gold);
         }
 
-        .hero h1 { font-size: 3.5rem; color: var(--gold); margin-bottom: 10px; }
-        .hero p { font-size: 1rem; letter-spacing: 4px; text-transform: uppercase; }
+        .logo-main { width: 180px; margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--gold)); }
 
-        .section-padding { padding: 60px 20px; text-align: center; }
+        /* Countdown Timer */
+        .timer-container {
+            margin-top: 20px;
+            display: flex;
+            gap: 20px;
+        }
 
+        .time-box {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold);
+            padding: 15px;
+            min-width: 80px;
+        }
+
+        .time-box span { display: block; font-size: 2rem; color: var(--gold); font-weight: bold; }
+        .time-box label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* Roots Section */
+        .roots-section {
+            padding: 80px 20px;
+            text-align: center;
+            background: var(--dark-grey);
+        }
+
+        .roots-title { color: var(--gold); font-size: 2.5rem; margin-bottom: 10px; }
+        .roots-subtitle { font-size: 1.2rem; letter-spacing: 3px; margin-bottom: 30px; }
+
+        /* Apparel Section */
+        .section-padding { padding: 80px 20px; text-align: center; }
         .design-split {
             display: flex;
             justify-content: center;
@@ -69,69 +77,66 @@
         }
 
         .apparel-card {
-            background: var(--dark-grey);
+            background: var(--black);
             border: 1px solid rgba(212,175,55,0.2);
             padding: 20px;
             max-width: 400px;
-            transition: 0.3s;
+            transition: 0.4s;
         }
 
-        .design-view { text-align: center; }
-        .design-view img { 
-            width: 100%; 
-            height: auto; 
-            border: 1px solid rgba(255,255,255,0.1);
-            display: block;
-        }
+        .apparel-card:hover { border-color: var(--gold); transform: translateY(-10px); }
 
-        .label {
-            margin-top: 20px;
-            color: var(--gold);
-            font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-            font-weight: bold;
-        }
+        .design-view img { width: 100%; height: auto; display: block; }
+        .label { margin-top: 20px; color: var(--gold); font-weight: bold; letter-spacing: 1px; }
 
-        footer {
-            padding: 40px;
-            text-align: center;
-            border-top: 1px solid rgba(212,175,55,0.3);
-            color: rgba(255,255,255,0.5);
-            font-size: 0.8rem;
-        }
+        footer { padding: 40px; text-align: center; border-top: 1px solid var(--gold); opacity: 0.7; }
+
+        /* Audio Control Hidden */
+        #audio-controls { display: none; }
     </style>
 </head>
-<body>
+<body onclick="playJingle()">
 
-    <nav>
-        <div class="nav-container">
-            <a href="#" class="logo cinzel">SAZON 2027</a>
+    <!-- Audio Files -->
+    <audio id="openSound" src="open.mp3"></audio>
+    <audio id="jingle" src="jingle.mp3" loop></audio>
+
+    <header class="banner">
+        <img src="images/logo.png" alt="Sazon Logo" class="logo-main">
+        <h1 class="cinzel" style="color: var(--gold); font-size: 3rem;">Sazon 2027</h1>
+        <p class="cinzel" style="letter-spacing: 5px;">GRAND REUNION</p>
+
+        <div class="timer-container" id="countdown">
+            <div class="time-box"><span id="days">00</span><label>Days</label></div>
+            <div class="time-box"><span id="hours">00</span><label>Hrs</label></div>
+            <div class="time-box"><span id="mins">00</span><label>Mins</label></div>
+            <div class="time-box"><span id="secs">00</span><label>Secs</label></div>
         </div>
-    </nav>
-
-    <header class="hero">
-        <h1 class="cinzel">The Legacy Hub</h1>
-        <p>Official Sazon Clan Gear</p>
     </header>
+
+    <section class="roots-section">
+        <h2 class="cinzel roots-title">The Roots</h2>
+        <p class="roots-subtitle">Tereso & Teofista Sazon</p>
+        <p class="cinzel" style="color: var(--gold); letter-spacing: 2px;">13 Branches • One Legacy</p>
+    </section>
 
     <section id="gear" class="section-padding">
         <h2 class="cinzel" style="font-size: 2.2rem; color: var(--gold);">FIRST EDITION APPAREL</h2>
-        <p style="max-width: 700px; margin: 20px auto; opacity: 0.8; font-style: italic;">Refined sample designs curated for the Sazon Clan grand reunion (for approval).</p>
+        <p style="max-width: 700px; margin: 20px auto; opacity: 0.8; font-style: italic;">
+            Refined sample designs curated for the Sazon Clan grand reunion (for approval).
+        </p>
         
         <div class="design-split">
-            <!-- Left Side: Front Design -->
             <div class="apparel-card">
                 <div class="design-view">
-                    <img src="images/apparel-front.jpg" alt="Family Tree Logo">
+                    <img src="images/apparel-front.jpg" alt="Front Design">
                     <div class="label">FRONT: FAMILY TREE LOGO</div>
                 </div>
             </div>
 
-            <!-- Right Side: Back Design -->
             <div class="apparel-card">
                 <div class="design-view">
-                    <img src="images/apparel-back.jpg" alt="Nutrition Facts">
+                    <img src="images/apparel-back.jpg" alt="Back Design">
                     <div class="label">BACK: NUTRITION FACTS</div>
                 </div>
             </div>
@@ -143,5 +148,36 @@
         <p>Marzon Hotel, Kalibo, Aklan</p>
     </footer>
 
+    <script>
+        // Audio Logic: Play open sound on load, jingle on click
+        window.onload = function() {
+            document.getElementById('openSound').play().catch(e => console.log("Click to play audio"));
+        };
+
+        function playJingle() {
+            const jingle = document.getElementById('jingle');
+            if (jingle.paused) { jingle.play(); }
+        }
+
+        // Countdown Logic for July 23, 2027
+        const countDate = new Date("July 23, 2027 00:00:00").getTime();
+
+        function countdown() {
+            const now = new Date().getTime();
+            const gap = countDate - now;
+
+            const second = 1000;
+            const minute = second * 60;
+            const hour = minute * 60;
+            const day = hour * 24;
+
+            document.getElementById("days").innerText = Math.floor(gap / day);
+            document.getElementById("hours").innerText = Math.floor((gap % day) / hour);
+            document.getElementById("mins").innerText = Math.floor((gap % hour) / minute);
+            document.getElementById("secs").innerText = Math.floor((gap % minute) / second);
+        }
+
+        setInterval(countdown, 1000);
+    </script>
 </body>
 </html>
