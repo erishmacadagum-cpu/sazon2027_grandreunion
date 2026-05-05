@@ -25,12 +25,12 @@
 
         h1, h2, h3, .cinzel { font-family: 'Cinzel', serif; }
 
-        /* Cinematic Banner with cover.jpeg */
+        /* Cinematic Banner using cover.jpeg */
         .banner {
             position: relative;
             height: 85vh;
             background: 
-                linear-gradient(rgba(26, 44, 163, 0.4), rgba(10, 10, 10, 0.85)), 
+                linear-gradient(rgba(26, 44, 163, 0.45), rgba(10, 10, 10, 0.9)), 
                 url('images/cover.jpeg') center/cover no-repeat;
             display: flex;
             flex-direction: column;
@@ -38,55 +38,64 @@
             align-items: center;
             text-align: center;
             border-bottom: 5px solid var(--accent);
-            box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.6);
         }
 
-        /* Celestial Moon with logo.png */
+        /* 3D Celestial Moon with logo.png */
         .moon-container {
             position: relative;
-            width: 180px;
-            height: 180px;
-            background: radial-gradient(circle, rgba(255, 183, 3, 0.8) 0%, rgba(251, 133, 0, 0.2) 70%, transparent 100%);
+            width: 195px;
+            height: 195px;
+            background: radial-gradient(circle at 30% 30%, 
+                #ffffff 0%, 
+                var(--accent) 40%, 
+                var(--highlight) 75%, 
+                #8b4513 100%);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 20px;
-            box-shadow: 0 0 50px rgba(255, 183, 3, 0.6);
-            animation: moonPulse 4s ease-in-out infinite;
+            margin-bottom: 25px;
+            box-shadow: 
+                inset -15px -15px 45px rgba(0,0,0,0.6),
+                inset 10px 10px 35px rgba(255,255,255,0.4),
+                0 0 60px rgba(255, 183, 3, 0.7),
+                0 0 110px rgba(251, 133, 0, 0.4);
+            animation: moonPulse 5s ease-in-out infinite alternate;
         }
 
         .logo-inside-moon {
-            width: 110px;
+            width: 115px;
             z-index: 2;
-            filter: drop-shadow(0 0 5px var(--black));
+            filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.8)) contrast(1.1);
+            opacity: 0.95;
         }
 
         @keyframes moonPulse {
-            0% { transform: scale(1); box-shadow: 0 0 40px rgba(255, 183, 3, 0.5); }
-            50% { transform: scale(1.05); box-shadow: 0 0 70px rgba(251, 133, 0, 0.8); }
-            100% { transform: scale(1); box-shadow: 0 0 40px rgba(255, 183, 3, 0.5); }
+            0% { transform: scale(1); box-shadow: 0 0 50px rgba(255, 183, 3, 0.5); }
+            100% { transform: scale(1.04); box-shadow: 0 0 80px rgba(251, 133, 0, 0.7); }
         }
 
         .timer-container {
-            margin-top: 30px;
+            margin-top: 35px;
             display: flex;
             gap: 15px;
             justify-content: center;
         }
 
         .time-box {
-            background: rgba(10, 10, 10, 0.7);
+            background: rgba(10, 10, 10, 0.8);
             border: 2px solid var(--accent);
             padding: 15px;
             min-width: 85px;
             border-radius: 4px;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
         }
 
         .time-box span { display: block; font-size: 2.2rem; color: var(--accent); font-weight: bold; }
-        .time-box label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; }
+        .time-box label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; }
 
+        /* Tribute Section for Tereso & Teofista Sazon */
         .roots-section {
             padding: 100px 20px;
             text-align: center;
@@ -94,35 +103,36 @@
             border-bottom: 3px solid var(--highlight);
         }
 
-        .roots-title { color: var(--accent); font-size: 3rem; margin-bottom: 10px; }
-        .roots-subtitle { font-size: 1.5rem; letter-spacing: 5px; color: var(--highlight); margin-bottom: 20px; }
+        .roots-title { color: var(--accent); font-size: 3.2rem; margin-bottom: 10px; }
+        .roots-subtitle { font-size: 1.6rem; letter-spacing: 6px; color: var(--highlight); margin-bottom: 20px; }
 
-        .section-padding { padding: 80px 20px; text-align: center; background-color: var(--primary); }
+        /* Apparel Section */
+        .section-padding { padding: 90px 20px; text-align: center; background-color: var(--primary); }
         
         .design-split {
             display: flex;
             justify-content: center;
-            gap: 40px;
-            margin-top: 50px;
+            gap: 45px;
+            margin-top: 55px;
             flex-wrap: wrap;
         }
 
         .apparel-card {
             background: var(--black);
             border: 2px solid var(--accent);
-            padding: 25px;
+            padding: 30px;
             max-width: 420px;
-            transition: 0.5s ease;
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .apparel-card:hover { 
             border-color: var(--highlight); 
-            transform: scale(1.03);
-            box-shadow: 0 0 40px rgba(251, 133, 0, 0.3);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
         }
 
         .design-view img { width: 100%; height: auto; border: 1px solid rgba(255,255,255,0.1); }
-        .label { margin-top: 25px; color: var(--accent); font-weight: bold; letter-spacing: 2px; }
+        .label { margin-top: 25px; color: var(--accent); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; }
 
         footer { 
             padding: 80px 40px; 
@@ -132,19 +142,20 @@
         }
     </style>
 </head>
-<body onclick="playJingle()">
+<body onclick="playJingleOnce()">
 
-    <!-- Corrected Audio Files based on your GitHub uploads -->
+    <!-- Audio Assets -->
     <audio id="openSound" src="open.mp3"></audio>
-    <audio id="jingle" src="sazon-full-anthem.mp3" loop></audio>
+    <audio id="jingle" src="sazon-full-anthem.mp3"></audio>
 
     <header class="banner">
+        <!-- 3D Celestial Moon with Logo inside -->
         <div class="moon-container">
             <img src="images/logo.png" alt="Sazon Logo" class="logo-inside-moon">
         </div>
 
-        <h1 class="cinzel" style="color: var(--accent); font-size: 3.8rem; margin: 0; text-shadow: 2px 2px 15px rgba(0,0,0,0.8);">Sazon 2027</h1>
-        <p class="cinzel" style="letter-spacing: 10px; color: var(--surface);">THE FIRST EDITION REUNION</p>
+        <h1 class="cinzel" style="color: var(--accent); font-size: 4rem; margin: 0; text-shadow: 3px 3px 20px rgba(0,0,0,1);">Sazon 2027</h1>
+        <p class="cinzel" style="letter-spacing: 12px; color: var(--surface); font-weight: 300;">THE FIRST EDITION REUNION</p>
 
         <div class="timer-container" id="countdown">
             <div class="time-box"><span id="days">00</span><label>Days</label></div>
@@ -157,12 +168,12 @@
     <section class="roots-section">
         <h2 class="cinzel roots-title">The Roots</h2>
         <p class="roots-subtitle">Tereso & Teofista Sazon</p>
-        <p class="cinzel" style="color: var(--accent); letter-spacing: 4px;">13 Branches • One Eternal Legacy</p>
+        <p class="cinzel" style="color: var(--accent); letter-spacing: 5px;">13 Branches • One Eternal Legacy</p>
     </section>
 
     <section id="gear" class="section-padding">
-        <h2 class="cinzel" style="font-size: 2.8rem; color: var(--accent); text-transform: uppercase;">First Edition Apparel</h2>
-        <p style="max-width: 700px; margin: 20px auto; font-style: italic; font-size: 1.1rem; opacity: 0.9;">
+        <h2 class="cinzel" style="font-size: 2.8rem; color: var(--accent);">First Edition Apparel</h2>
+        <p style="max-width: 700px; margin: 25px auto; font-style: italic; font-size: 1.15rem; opacity: 0.95;">
             Refined sample designs curated for the Sazon Clan grand reunion (for approval).
         </p>
         
@@ -170,33 +181,40 @@
             <div class="apparel-card">
                 <div class="design-view">
                     <img src="images/apparel-front.jpg" alt="Front Design">
-                    <div class="label">FRONT: FAMILY TREE LOGO</div>
+                    <div class="label">Front: Family Tree Logo</div>
                 </div>
             </div>
             <div class="apparel-card">
                 <div class="design-view">
                     <img src="images/apparel-back.jpg" alt="Back Design">
-                    <div class="label">BACK: NUTRITION FACTS</div>
+                    <div class="label">Back: Nutrition Facts</div>
                 </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <p class="cinzel" style="color: var(--accent); font-size: 1.4rem;">Sazon Family Grand Reunion &copy; 2027</p>
-        <p style="letter-spacing: 3px;">Marzon Hotel, Kalibo, Aklan</p>
+        <p class="cinzel" style="color: var(--accent); font-size: 1.5rem;">Sazon Family Grand Reunion &copy; 2027</p>
+        <p style="letter-spacing: 4px; font-weight: 300;">Marzon Hotel, Kalibo, Aklan</p>
     </footer>
 
     <script>
+        // Play grand opening sound on load (if permitted)
         window.onload = function() {
-            document.getElementById('openSound').play().catch(e => console.log("User interaction required for audio."));
+            document.getElementById('openSound').play().catch(e => console.log("Waiting for interaction."));
         };
 
-        function playJingle() {
+        // Play Anthem ONLY ONCE upon user interaction
+        let anthemPlayed = false;
+        function playJingleOnce() {
             const jingle = document.getElementById('jingle');
-            if (jingle.paused) { jingle.play(); }
+            if (!anthemPlayed) {
+                jingle.play();
+                anthemPlayed = true;
+            }
         }
 
+        // Countdown Logic for July 23, 2027
         const countDate = new Date("July 23, 2027 00:00:00").getTime();
         function countdown() {
             const now = new Date().getTime();
