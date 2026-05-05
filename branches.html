@@ -6,7 +6,6 @@
     <title>Sazon Family Legacy | Main Hub</title>
 
     <link rel="icon" type="image/png" href="images/logo.png?v=2">
-    <link rel="apple-touch-icon" href="images/logo.png?v=2">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@100;300;400;600&display=swap" rel="stylesheet">
 
     <style>
@@ -52,40 +51,31 @@
         .hero-title { font-family: 'Cinzel', serif; font-size: clamp(2rem, 6vw, 4rem); color: var(--gold); letter-spacing: 8px; text-transform: uppercase; }
         .hero-subtitle { font-weight: 100; letter-spacing: 12px; font-size: 0.9rem; margin-bottom: 40px; color: var(--light-gold); }
 
-        /* SYNCED CLOCK (UTC+8) */
-        .sync-timer { display: flex; gap: 20px; background: var(--glass); padding: 20px 40px; border: 1px solid var(--gold); }
-        .time-block { display: flex; flex-direction: column; min-width: 70px; }
-        .time-num { font-family: 'Cinzel', serif; font-size: 2rem; color: var(--gold); font-weight: 700; }
-        .time-label { font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; }
-
-        /* SECTION STYLES */
+        /* SECTIONS */
         .section-padding { padding: 120px 20px; text-align: center; }
         .section-header { font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.5rem; letter-spacing: 5px; margin-bottom: 20px; text-transform: uppercase; }
         .section-desc { font-weight: 300; letter-spacing: 4px; font-size: 0.85rem; margin-bottom: 60px; text-transform: uppercase; color: var(--light-gold); }
 
-        /* APPAREL / MERCH GRID */
-        .merch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; max-width: 1100px; margin: 0 auto; }
-        .merch-item { background: var(--dark-grey); border: 1px solid rgba(212, 175, 55, 0.1); padding: 30px; transition: 0.5s; cursor: pointer; text-align: left; }
-        .merch-item:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1); }
-        .merch-img-box { width: 100%; height: 250px; background: #111; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.05); overflow: hidden; }
-        .merch-img-box img { width: 80%; opacity: 0.8; transition: 0.5s; }
-        .merch-item:hover .merch-img-box img { opacity: 1; transform: scale(1.05); }
+        /* APPAREL DESIGN BOXES */
+        .apparel-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .apparel-card { background: var(--dark-grey); border: 1px solid rgba(212, 175, 55, 0.2); padding: 20px; }
+        .design-split { display: flex; gap: 15px; margin-bottom: 20px; }
+        .design-view { flex: 1; background: #111; padding: 10px; border: 1px solid rgba(255,255,255,0.05); }
+        .design-view img { width: 100%; height: auto; display: block; }
+        .design-label { font-size: 0.6rem; letter-spacing: 2px; color: var(--gold); margin-top: 10px; text-transform: uppercase; text-align: center; }
 
-        /* ITINERARY TIMELINE */
-        .timeline { max-width: 800px; margin: 0 auto; position: relative; text-align: left; padding-left: 30px; border-left: 1px solid var(--gold); }
-        .timeline-item { position: relative; margin-bottom: 50px; padding-left: 20px; }
-        .timeline-item::before { content: ''; position: absolute; left: -36px; top: 5px; width: 10px; height: 10px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 15px var(--gold); }
-        .time-stamp { font-family: 'Cinzel', serif; color: var(--gold); font-size: 0.8rem; letter-spacing: 2px; display: block; margin-bottom: 5px; }
+        /* LOGISTICS & INFO */
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1100px; margin: 40px auto; text-align: left; }
+        .info-category h4 { font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 15px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 10px; }
+        .info-category p, .info-category li { font-size: 0.85rem; line-height: 1.8; font-weight: 300; margin-bottom: 10px; list-style: none; }
 
-        /* TRAVEL & RSVP BOXES */
-        .flex-container { display: flex; flex-wrap: wrap; gap: 40px; max-width: 1100px; margin: 0 auto; text-align: left; }
-        .info-box { flex: 1; min-width: 320px; background: var(--dark-grey); padding: 50px; border-left: 4px solid var(--gold); }
-        .map-frame { width: 100%; height: 250px; margin-top: 20px; filter: grayscale(1) invert(1) contrast(1.2); border: 1px solid var(--gold); }
+        /* MAP FIX */
+        .map-box { width: 100%; height: 400px; border: 1px solid var(--gold); background: #111; margin-top: 30px; }
 
         .btn-gold { background: var(--gold); color: var(--black); border: none; padding: 15px 35px; font-family: 'Cinzel', serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; cursor: pointer; text-decoration: none; display: inline-block; transition: 0.3s; margin-top: 20px; }
-        .btn-gold:hover { background: var(--light-gold); transform: scale(1.05); letter-spacing: 4px; }
+        .btn-gold:hover { background: var(--light-gold); transform: translateY(-3px); }
 
-        @media (max-width: 768px) { .nav-links { display: none; } }
+        @media (max-width: 768px) { .nav-links { display: none; } .design-split { flex-direction: column; } }
     </style>
 </head>
 <body>
@@ -97,133 +87,98 @@
             <a href="#" class="nav-logo">SAZON LEGACY</a>
             <div class="nav-links">
                 <a href="#roots" onclick="playClick()">Our Roots</a>
-                <a href="#merch" onclick="playClick()">Apparel</a>
+                <a href="#apparel" onclick="playClick()">Apparel</a>
                 <a href="#itinerary" onclick="playClick()">Itinerary</a>
                 <a href="#travel" onclick="playClick()">RSVP & Travel</a>
             </div>
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
+    <!-- HERO -->
     <section class="hero">
         <h1 class="hero-title">Gikan sa Gamut</h1>
         <p class="hero-subtitle">TUBTOB SA LANGIT</p>
-        <div class="sync-timer">
-            <div class="time-block"><span class="time-num" id="d">00</span><span class="time-label">Days</span></div>
-            <div class="time-block"><span class="time-num" id="h">00</span><span class="time-label">Hours</span></div>
-            <div class="time-block"><span class="time-num" id="m">00</span><span class="time-label">Mins</span></div>
-            <div class="time-block"><span class="time-num" id="s">00</span><span class="time-label">Secs</span></div>
-        </div>
     </section>
 
-    <!-- ROOTS SECTION -->
-    <section id="roots" class="section-padding">
-        <h2 class="section-header">Gikan sa Gamut</h2>
-        <p class="section-desc">The Foundation of Tereso & Teofista Sazon</p>
-        <!-- Branch Grid Logic Goes Here -->
-    </section>
+    <!-- APPAREL SECTION -->
+    <section id="apparel" class="section-padding" style="background: var(--dark-grey);">
+        <h2 class="section-header">The Sazon Collection</h2>
+        <p class="section-desc">Design: Family Tree (Front) & Nutrition Facts (Back)</p>
 
-    <!-- MERCHANDISE / APPAREL SECTION -->
-    <section id="merch" class="section-padding" style="background: var(--dark-grey);">
-        <h2 class="section-header">The First Edition Gear</h2>
-        <p class="section-desc">Exclusive Designs for the July 2027 Reunion</p>
-
-        <div class="merch-grid">
+        <div class="apparel-container">
             <!-- T-SHIRT BOX -->
-            <div class="merch-item" onclick="playClick()">
-                <div class="merch-img-box">
-                    <img src="images/logo.png" alt="Sazon T-Shirt Design">
+            <div class="apparel-card">
+                <div class="design-split">
+                    <div class="design-view">
+                        <img src="images/tshirt-front.png" alt="Front Design">
+                        <div class="design-label">Front: Family Tree</div>
+                    </div>
+                    <div class="design-view">
+                        <img src="images/tshirt-back.png" alt="Back Design">
+                        <div class="design-label">Back: Nutrition Facts</div>
+                    </div>
                 </div>
-                <h4 style="font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 10px; letter-spacing: 2px;">Legacy T-Shirt</h4>
-                <p style="font-size: 0.75rem; line-height: 1.8; font-weight: 300;">
-                    <strong>FRONT:</strong> Intricate Sazon Family Tree Illustration.<br>
-                    <strong>BACK:</strong> Custom Clan Nutrition Facts Typography.
-                </p>
+                <h4 style="font-family: 'Cinzel', serif; color: var(--gold);">Legacy T-Shirt</h4>
+                <p style="font-size: 0.8rem; font-weight: 300;">Premium cotton finish with sophisticated gold-tone detailing.</p>
             </div>
 
             <!-- HOODIE BOX -->
-            <div class="merch-item" onclick="playClick()">
-                <div class="merch-img-box">
-                    <img src="images/logo.png" alt="Sazon Hoodie Design">
+            <div class="apparel-card">
+                <div class="design-split">
+                    <div class="design-view">
+                        <img src="images/hoodie-front.png" alt="Front Design">
+                        <div class="design-label">Front: Family Tree</div>
+                    </div>
+                    <div class="design-view">
+                        <img src="images/hoodie-back.png" alt="Back Design">
+                        <div class="design-label">Back: Nutrition Facts</div>
+                    </div>
                 </div>
-                <h4 style="font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 10px; letter-spacing: 2px;">Heritage Hoodie</h4>
-                <p style="font-size: 0.75rem; line-height: 1.8; font-weight: 300;">
-                    <strong>FRONT:</strong> Intricate Sazon Family Tree Illustration.<br>
-                    <strong>BACK:</strong> Custom Clan Nutrition Facts Typography.
-                </p>
-            </div>
-        </div>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="btn-gold" onclick="playClick()">Select Sizes</a>
-    </section>
-
-    <!-- ITINERARY SECTION -->
-    <section id="itinerary" class="section-padding">
-        <h2 class="section-header">Event Schedule</h2>
-        <p class="section-desc">Two Days of Connection at Marzon Hotel</p>
-
-        <div class="timeline">
-            <h3 style="font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 30px; letter-spacing: 3px;">Day 01: The Homecoming</h3>
-            <div class="timeline-item">
-                <span class="time-stamp">09:00 AM</span>
-                <p style="font-size: 0.9rem;">Registration & Welcome Kit Handover</p>
-            </div>
-            <div class="timeline-item">
-                <span class="time-stamp">06:00 PM</span>
-                <p style="font-size: 0.9rem;">Grand Welcome Gala & Clan Presentations</p>
-            </div>
-
-            <h3 style="font-family: 'Cinzel', serif; color: var(--gold); margin: 60px 0 30px 0; letter-spacing: 3px;">Day 02: Legacy & Beyond</h3>
-            <div class="timeline-item">
-                <span class="time-stamp">10:00 AM</span>
-                <p style="font-size: 0.9rem;">Family Lineage Storytelling & Workshops</p>
-            </div>
-            <div class="timeline-item">
-                <span class="time-stamp">07:00 PM</span>
-                <p style="font-size: 0.9rem;">Tubtob sa Langit: Closing Grand Banquet</p>
+                <h4 style="font-family: 'Cinzel', serif; color: var(--gold);">Heritage Hoodie</h4>
+                <p style="font-size: 0.8rem; font-weight: 300;">Heavyweight fleece designed for the ultimate family legacy comfort.</p>
             </div>
         </div>
     </section>
 
     <!-- TRAVEL & RSVP SECTION -->
-    <section id="travel" class="section-padding" style="background: var(--black); border-top: 1px solid rgba(212,175,55,0.1);">
-        <h2 class="section-header">RSVP & Travel</h2>
-        <p class="section-desc">Your Guide to the 2027 Grand Reunion</p>
+    <section id="travel" class="section-padding">
+        <h2 class="section-header">Travel & Logistics</h2>
+        <p class="section-desc">Your Guide to Kalibo, Aklan</p>
 
-        <div class="flex-container">
-            <div class="info-box">
-                <h3 style="font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 20px;">Confirm Attendance</h3>
-                <p style="font-size: 0.85rem; line-height: 2; font-weight: 300;">Please fill out the form by the deadline to ensure your First Edition apparel and hotel seating are reserved.</p>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="btn-gold" onclick="playClick()">Open RSVP Form</a>
+        <div class="info-grid">
+            <div class="info-category">
+                <h4>RSVP Portal</h4>
+                <p>Ensure your participation is recorded for the First Edition kits. Deadline for responses: Dec 2026.</p>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="btn-gold" onclick="playClick()">Confirm Attendance</a>
             </div>
 
-            <div class="info-box">
-                <h3 style="font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 20px;">Location</h3>
-                <p style="font-size: 0.85rem; line-height: 2; font-weight: 300;">
-                    <strong>Marzon Hotel Kalibo</strong><br>
-                    Jaime Cardinal L. Sin Ave, Kalibo, Aklan.<br>
-                    Nearby: Kalibo International Airport (10 mins).
-                </p>
-                <div class="map-frame">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m3!1d3904.341144594589!2d122.361955375836!3d11.705705341315894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33b0021679093a15%3A0xe45371c11030e445!2sMarzon%20Hotel%20Kalibo!5e0!3m2!1sen!2sph!4v1714935000000!5m2!1sen!2sph" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                </div>
+            <div class="info-category">
+                <h4>The Venue</h4>
+                <p><strong>Marzon Hotel Kalibo:</strong> Known for its classy ambiance and spacious convention halls. It is the premier choice for large family gatherings in the region.</p>
+                <li>📍 Jaime Cardinal L. Sin Ave, Kalibo</li>
+                <li>🚗 10 Mins from Kalibo Int'l Airport</li>
+                <li>🏊 Amenities: Outdoor Pool, Fine Dining</li>
             </div>
+
+            <div class="info-category">
+                <h4>Nearby Spots</h4>
+                <li>🍽️ <strong>Saylo Cuisine:</strong> Heritage Filipino food (5 mins).</li>
+                <li>🌳 <strong>Bakhawan Eco-Park:</strong> Famous mangrove forest boardwalk.</li>
+                <li>🛍️ <strong>Gaisano Capital:</strong> For all reunion essentials.</li>
+            </div>
+        </div>
+
+        <div class="map-box">
+            <!-- FIXED MAP IFRAME -->
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m3!1d3904.341144594589!2d122.361955375836!3d11.705705341315894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33b0021679093a15%3A0xe45371c11030e445!2sMarzon%20Hotel%20Kalibo!5e0!3m2!1sen!2sph!4v1714935000000!5m2!1sen!2sph" 
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+            </iframe>
         </div>
     </section>
 
     <script>
         function playClick() { const snd = document.getElementById('click-sound'); snd.currentTime = 0; snd.play(); }
-        
-        function updateClock() {
-            const target = new Date("2027-07-23T00:00:00+08:00").getTime();
-            const now = new Date().getTime();
-            const diff = target - now;
-            if (diff <= 0) return;
-            document.getElementById('d').innerText = Math.floor(diff / 86400000).toString().padStart(2, '0');
-            document.getElementById('h').innerText = Math.floor((diff % 86400000) / 3600000).toString().padStart(2, '0');
-            document.getElementById('m').innerText = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
-            document.getElementById('s').innerText = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
-        }
-        setInterval(updateClock, 1000); updateClock();
     </script>
 </body>
 </html>
