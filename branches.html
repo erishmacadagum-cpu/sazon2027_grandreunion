@@ -75,7 +75,7 @@
             background: radial-gradient(circle, rgba(26, 44, 163, 0.1), rgba(10, 10, 10, 0.7)),
                         url('images/cover.jpeg') center/cover no-repeat;
             z-index: 1;
-            animation: breathe 15s ease-in-out infinite; /* THE BREATHING EFFECT */
+            animation: breathe 15s ease-in-out infinite; 
         }
 
         @keyframes breathe {
@@ -83,7 +83,7 @@
             50% { transform: scale(1.05); filter: brightness(1.2); }
         }
 
-        /* --- RISING EMBERS (FIREFLIES) --- */
+        /* --- RISING EMBERS --- */
         #ember-stage {
             position: absolute;
             bottom: 0; left: 0; width: 100%; height: 60%;
@@ -144,7 +144,7 @@
 
     <header class="banner" id="main-banner">
         <div class="banner-bg"></div>
-        <div id="ember-stage"></div> <!-- Rising embers layer -->
+        <div id="ember-stage"></div> 
         <div class="moon-container">
             <img src="images/moon.png" alt="Moon" class="moon-asset">
         </div>
@@ -158,10 +158,10 @@
         </div>
     </header>
 
-    <!-- Audio Assets -->
+    <!-- Audio Assets (Loop removed from Anthem) -->
     <audio id="snd-swell" src="audio/prelude_swell.mp3" preload="auto"></audio>
     <audio id="snd-shimmer" src="audio/reveal_shimmer.mp3" preload="auto"></audio>
-    <audio id="snd-anthem" src="audio/sazon-full-anthem.mp3" loop></audio>
+    <audio id="snd-anthem" src="audio/sazon-full-anthem.mp3"></audio>
     
     <audio id="burst-low" src="audio/firework_burst_low.mp3" preload="auto"></audio>
     <audio id="burst-high" src="audio/firework_burst_high.mp3" preload="auto"></audio>
@@ -188,7 +188,6 @@
                 anthem.play();
                 document.body.style.overflow = 'auto';
 
-                // Initialize animations
                 setInterval(launchFirework, 2000);
                 createEmbers();
                 
@@ -196,7 +195,6 @@
             }, 3500); 
         }
 
-        // Rising Embers Function
         function createEmbers() {
             const stage = document.getElementById('ember-stage');
             for(let i=0; i<20; i++) {
