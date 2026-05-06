@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* VIBRANT & FRESH PALETTE */
+            /* VIBRANT ROYAL HERITAGE PALETTE */
             --bg-deep: #0A1128;      /* Midnight Navy */
             --bg-accent: #152044;    /* Royal Blue */
             --accent-vibrant: #FF7F50; /* Vibrant Coral */
@@ -18,13 +18,13 @@
 
         body, html { margin: 0; padding: 0; background: var(--bg-deep); color: var(--silver-mist); font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
 
-        /* --- THE CINEMATIC ENTRANCE --- */
+        /* --- STAGE 1: CINEMATIC ENTRANCE --- */
         #intro-curtain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-deep); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 2s ease-in-out; }
         #motto-text { font-family: 'Cinzel', serif; color: var(--gold-leaf); font-size: clamp(1.2rem, 5vw, 2.2rem); text-align: center; letter-spacing: 6px; opacity: 0; transition: opacity 2s ease-in; margin-bottom: 40px; text-shadow: 0 0 20px rgba(255, 215, 0, 0.4); }
         .start-btn { padding: 18px 50px; background: transparent; border: 2px solid var(--accent-vibrant); color: var(--accent-vibrant); font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 5px; font-weight: 600; cursor: pointer; transition: 0.4s; border-radius: 50px; }
         .start-btn:hover { background: var(--accent-vibrant); color: white; box-shadow: 0 0 30px rgba(255, 127, 80, 0.5); }
 
-        /* --- THE BANNER (SKY) --- */
+        /* --- STAGE 2: THE BANNER (SKY) --- */
         .banner { position: relative; height: 100dvh; width: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; overflow: hidden; opacity: 0; transition: opacity 3s ease-in; }
         .banner.active { opacity: 1; }
         .banner-bg { position: absolute; top: -5%; left: -5%; width: 110%; height: 115%; background: radial-gradient(circle, rgba(10, 17, 40, 0.3), rgba(10, 17, 40, 0.9)), url('images/cover.jpeg') center/cover no-repeat; z-index: 1; animation: breathe 15s ease-in-out infinite; }
@@ -35,14 +35,14 @@
         .time-box span { display: block; font-size: 2rem; color: var(--gold-leaf); font-weight: bold; font-family: 'Cinzel', serif; }
         .time-box label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--white); opacity: 0.8; }
 
-        /* --- ROOTS SECTION --- */
+        /* --- STAGE 3: THE ROOTS --- */
         .roots-section { padding: 120px 20px; background: linear-gradient(to bottom, var(--bg-deep), var(--bg-accent)); text-align: center; }
         .section-title { font-family: 'Cinzel', serif; color: var(--gold-leaf); font-size: 2.8rem; margin-bottom: 60px; letter-spacing: 5px; text-shadow: 2px 2px 15px rgba(0,0,0,0.4); }
         .ancestor-card { width: 300px; border: 3px solid var(--gold-leaf); padding: 20px; background: rgba(255, 255, 255, 0.05); border-radius: 12px; transition: 0.5s; }
         .ancestor-card:hover { transform: translateY(-15px); border-color: var(--accent-vibrant); box-shadow: 0 15px 40px rgba(255, 127, 80, 0.2); }
         .ancestor-name { font-family: 'Cinzel', serif; color: var(--accent-vibrant); font-size: 1.5rem; margin-top: 15px; font-weight: bold; }
 
-        /* --- BRANCHES (5-5-3 TIER) --- */
+        /* --- STAGE 4: BRANCHES (5-5-3 TIER) --- */
         .branches-section { padding: 100px 20px; background: var(--bg-accent); text-align: center; }
         .tier { display: flex; justify-content: center; flex-wrap: wrap; gap: 25px; max-width: 1300px; margin: 0 auto 25px auto; }
         .branch-tag { 
@@ -55,10 +55,18 @@
         .nickname { display: block; font-size: 0.9rem; color: var(--white); opacity: 0.8; }
         .branch-tag:hover .formal-name, .branch-tag:hover .nickname { color: var(--white); opacity: 1; }
 
-        /* --- PROGRAMME TIMELINE --- */
+        /* --- STAGE 5: PROGRAMME --- */
         .roadmap-section { padding: 120px 20px; background: var(--bg-deep); text-align: center; }
-        .prog-card { background: rgba(255, 255, 255, 0.05); border-left: 5px solid var(--accent-vibrant); padding: 35px; border-radius: 0 15px 15px 0; margin-bottom: 30px; text-align: left; }
+        .prog-card { background: rgba(255, 255, 255, 0.05); border-left: 5px solid var(--accent-vibrant); padding: 35px; border-radius: 0 15px 15px 0; margin-bottom: 30px; text-align: left; max-width: 900px; margin-left: auto; margin-right: auto; }
         .prog-date { color: var(--gold-leaf); font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: bold; margin-bottom: 15px; }
+
+        /* --- STAGE 6: RSVP & REGISTRATION --- */
+        .registration-section { padding: 120px 20px; background: linear-gradient(to top, var(--bg-deep), var(--bg-accent)); text-align: center; }
+        .registration-container { max-width: 800px; margin: 0 auto; }
+        .registration-card { background: rgba(255, 255, 255, 0.05); border: 2px solid var(--gold-leaf); border-radius: 20px; padding: 50px 30px; backdrop-filter: blur(10px); box-shadow: 0 15px 50px rgba(0,0,0,0.5); transition: 0.4s; }
+        .registration-card h3 { font-family: 'Cinzel', serif; color: var(--gold-leaf); font-size: 1.8rem; margin-bottom: 10px; }
+        .rsvp-btn { display: inline-block; padding: 18px 45px; background: var(--accent-vibrant); color: white; text-decoration: none; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; border-radius: 50px; transition: 0.3s; box-shadow: 0 4px 15px rgba(255, 127, 80, 0.4); margin-top: 30px; }
+        .rsvp-btn:hover { background: var(--white); color: var(--accent-vibrant); transform: scale(1.05); }
 
         /* FIREWORKS STYLING */
         .fireworks-stage { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
@@ -68,13 +76,13 @@
 </head>
 <body>
 
-    <!-- STAGE 1: THE ENTRANCE -->
+    <!-- INTRO CURTAIN -->
     <div id="intro-curtain">
         <div id="motto-text">Gikan sa Gamut...<br>Tubtob sa Langit</div>
         <button id="begin-btn" class="start-btn" onclick="executeCinematicOpening()">Enter the Legacy</button>
     </div>
 
-    <!-- STAGE 2: THE SKY -->
+    <!-- MAIN BANNER -->
     <header class="banner" id="main-banner">
         <div class="banner-bg"></div>
         <div id="fireworks" class="fireworks-stage"></div>
@@ -86,7 +94,7 @@
         </div>
     </header>
 
-    <!-- STAGE 3: THE ROOTS -->
+    <!-- THE ROOTS -->
     <section class="roots-section">
         <h2 class="section-title">The Roots</h2>
         <div style="display: flex; justify-content: center; gap: 50px; flex-wrap: wrap;">
@@ -103,7 +111,7 @@
         </div>
     </section>
 
-    <!-- STAGE 4: THE 13 BRANCHES -->
+    <!-- THE 13 BRANCHES (5-5-3 TIER) -->
     <section class="branches-section">
         <h2 class="section-title">The 13 Branches</h2>
         
@@ -130,36 +138,42 @@
         </div>
     </section>
 
-    <!-- STAGE 5: THE PROGRAMME -->
+    <!-- THE PROGRAMME -->
     <section class="roadmap-section">
         <h2 class="section-title">Grand Reunion Program</h2>
-        <div style="max-width: 900px; margin: 0 auto; padding: 0 20px;">
-            <div class="prog-card">
-                <div class="prog-date">July 23, 2027 (Day 1)</div>
-                <p style="line-height: 1.8;"><strong>The Homecoming</strong><br>Registration and Welcome Kits • Ancestral Thanksgiving Mass • Clan Grand Entrance & Banner Presentation • "Sazon Heritage" Gala Dinner • Evening Fireworks Display.</p>
-            </div>
-            <div class="prog-card">
-                <div class="prog-date">July 24, 2027 (Day 2)</div>
-                <p style="line-height: 1.8;"><strong>The Legacy Continues</strong><br>Morning Family Sports & Teambuilding • "Gikan sa Gamut" Photo Exhibit Tour • Sazon Talent Showcase • Awarding & Recognition Ceremony • Closing "Tubtob sa Langit" Unity Ritual.</p>
-            </div>
+        <div class="prog-card">
+            <div class="prog-date">July 23, 2027 (Day 1)</div>
+            <p style="line-height: 1.8;"><strong>The Homecoming</strong><br>Registration & Welcome Kits • Ancestral Thanksgiving Mass • Clan Grand Entrance & Banner Presentation • "Sazon Heritage" Gala Dinner • Evening Fireworks Display.</p>
+        </div>
+        <div class="prog-card">
+            <div class="prog-date">July 24, 2027 (Day 2)</div>
+            <p style="line-height: 1.8;"><strong>The Legacy Continues</strong><br>Morning Family Sports • "Gikan sa Gamut" Photo Exhibit • Sazon Talent Showcase • Awarding Ceremony • Closing "Tubtob sa Langit" Unity Ritual.</p>
         </div>
     </section>
 
-    <audio id="snd-swell" src="audio/prelude_swell.mp3" preload="auto"></audio>
-    <audio id="snd-shimmer" src="audio/reveal_shimmer.mp3" preload="auto"></audio>
-    <audio id="snd-anthem" src="audio/sazon-full-anthem.mp3"></audio>
-    <audio id="burst-low" src="audio/firework_burst_low.mp3" preload="auto"></audio>
+    <!-- THE REGISTRATION HUB -->
+    <section class="registration-section">
+        <div class="registration-container">
+            <h2 class="section-title" style="margin-bottom: 20px;">Secure Your Place</h2>
+            <p style="margin-bottom: 40px; opacity: 0.9;">To help our Registration Committee with tracking and logistics for the 13 branches, please officially register your family branch attendance for July 2027.</p>
+            
+            <div class="registration-card">
+                <h3>Sazon Clan RSVP</h3>
+                <p>Register your family branch and headcount here.</p>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="rsvp-btn">Open Registration Form</a>
+            </div>
+            <p style="margin-top: 30px; font-size: 0.8rem; font-style: italic; opacity: 0.6;">*Shared link for Registration Committee tracking and recording purposes.</p>
+        </div>
+    </section>
 
+    <!-- SCRIPTS -->
     <script>
         function executeCinematicOpening() {
             document.getElementById('begin-btn').style.display = 'none';
-            document.getElementById('snd-swell').play();
             document.getElementById('motto-text').style.opacity = '1';
             setTimeout(() => {
-                document.getElementById('snd-shimmer').play();
                 document.getElementById('intro-curtain').style.opacity = '0';
                 document.getElementById('main-banner').classList.add('active');
-                document.getElementById('snd-anthem').play();
                 setInterval(launchFirework, 2200);
                 setTimeout(() => { document.getElementById('intro-curtain').style.display = 'none'; }, 2000);
                 document.body.style.overflow = 'auto';
@@ -170,7 +184,6 @@
             const stage = document.getElementById('fireworks');
             const x = 50 + (Math.random() * 40);
             const y = 10 + (Math.random() * 30);
-            document.getElementById('burst-low').cloneNode().play();
             for (let i = 0; i < 40; i++) {
                 const p = document.createElement('div');
                 p.className = 'particle';
