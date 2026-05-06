@@ -21,11 +21,12 @@
             color: var(--surface);
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
         h1, h2, h3, .cinzel { font-family: 'Cinzel', serif; }
 
-        /* The "Hala Bira" Cinematic Banner */
+        /* --- 1. THE CINEMATIC BANNER --- */
         .banner {
             position: relative;
             height: 90vh;
@@ -48,18 +49,17 @@
             100% { filter: saturate(125%) brightness(110%); }
         }
 
-        /* Top Left: The New High-Fidelity Moon asset */
+        /* Top Left: 3D Celestial Moon Asset */
         .moon-container {
             position: absolute;
             top: 40px;
             left: 40px;
-            width: 180px; /* Adjusted for the new image asset */
+            width: 180px;
             height: 180px;
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 10;
-            /* Applying a celestial glow to the image asset */
             filter: drop-shadow(0 0 30px rgba(165, 204, 255, 0.6));
             animation: moonFloat 8s ease-in-out infinite alternate;
         }
@@ -70,7 +70,7 @@
             border-radius: 50%;
         }
 
-        /* Top Right: Advanced Burst Fireworks */
+        /* Top Right: High-Fidelity Burst Fireworks */
         .fireworks-stage {
             position: absolute;
             top: 0;
@@ -96,7 +96,6 @@
             100% { transform: rotate(var(--rot)) translateY(200px); opacity: 0; height: 3px; }
         }
 
-        /* Center Content Clarity */
         .banner-content { z-index: 20; }
         
         .timer-container {
@@ -118,16 +117,72 @@
         .time-box span { display: block; font-size: 2.2rem; color: var(--accent); font-weight: bold; }
         .time-box label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* The Tribute Section */
+        /* --- 2. THE ROOTS SECTION (FAMILY TREE) --- */
         .roots-section {
-            padding: 100px 20px;
-            text-align: center;
-            background-color: var(--black);
+            position: relative;
+            padding: 120px 0;
+            background: 
+                linear-gradient(rgba(10, 10, 10, 0.85), rgba(26, 44, 163, 0.9)), 
+                url('images/family-tree.jpeg') center/cover no-repeat fixed;
             border-bottom: 3px solid var(--highlight);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
         }
 
-        .roots-title { color: var(--accent); font-size: 2.8rem; margin-bottom: 10px; }
-        .roots-subtitle { font-size: 1.4rem; letter-spacing: 6px; color: var(--highlight); margin-bottom: 15px; }
+        .roots-overlay {
+            width: 100%;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .roots-title { color: var(--accent); font-size: 3rem; margin: 0; }
+        .roots-subtitle { font-size: 1.5rem; letter-spacing: 6px; color: var(--highlight); margin-top: 10px; }
+        .branch-tagline { color: var(--accent); letter-spacing: 4px; margin-bottom: 60px; font-weight: 600; text-transform: uppercase; }
+
+        /* --- 3. INTERACTIVE 13 BRANCHES GRID --- */
+        .branch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .branch-card {
+            background: rgba(10, 10, 10, 0.7);
+            border: 1px solid var(--accent);
+            padding: 50px 20px;
+            backdrop-filter: blur(12px);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .branch-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--highlight);
+            background: rgba(26, 44, 163, 0.85);
+            box-shadow: 0 20px 60px rgba(251, 133, 0, 0.4);
+        }
+
+        .branch-inner h3 {
+            color: var(--accent);
+            font-size: 1.7rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .branch-inner p {
+            font-size: 0.9rem;
+            color: var(--surface);
+            opacity: 0.8;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
 
         @keyframes moonFloat {
             from { transform: translateY(0) rotate(0deg); }
@@ -140,6 +195,14 @@
             background: var(--black);
             border-top: 4px solid var(--highlight);
         }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .moon-container { width: 120px; height: 120px; top: 20px; left: 20px; }
+            .banner-content h1 { font-size: 2.5rem; }
+            .roots-title { font-size: 2rem; }
+            .branch-grid { grid-template-columns: 1fr; padding: 0 30px; }
+        }
     </style>
 </head>
 <body onclick="playJingleOnce()">
@@ -148,7 +211,7 @@
     <audio id="jingle" src="sazon-full-anthem.mp3"></audio>
 
     <header class="banner">
-        <!-- New Moon Image from GitHub Asset -->
+        <!-- Top Left: 3D Breathing Moon Asset -->
         <div class="moon-container">
             <img src="images/moon.png" alt="Sazon Moon" class="moon-asset">
         </div>
@@ -157,7 +220,7 @@
         <div class="fireworks-stage" id="fireworks"></div>
 
         <div class="banner-content">
-            <h1 class="cinzel" style="color: var(--accent); font-size: 3.8rem; margin: 0; text-shadow: 3px 3px 20px #000; letter-spacing: 2px;">Sazon 2027</h1>
+            <h1 class="cinzel" style="color: var(--accent); font-size: 4rem; margin: 0; text-shadow: 3px 3px 20px #000; letter-spacing: 2px;">Sazon 2027</h1>
             <p class="cinzel" style="letter-spacing: 12px; color: var(--surface); font-weight: 300;">1st GRAND FAMILY REUNION</p>
 
             <div class="timer-container" id="countdown">
@@ -170,9 +233,28 @@
     </header>
 
     <section class="roots-section">
-        <h2 class="cinzel roots-title">Gikan sa Gamut, Tubtob sa Langit</h2>
-        <p class="roots-subtitle">From the Roots, Toward the Sky</p>
-        <p class="cinzel" style="color: var(--accent); letter-spacing: 4px;">13 Branches • One Eternal Legacy</p>
+        <div class="roots-overlay">
+            <h2 class="cinzel roots-title">Gikan sa Gamut, Tubtob sa Langit</h2>
+            <p class="roots-subtitle">From the Roots, Toward the Sky</p>
+            <p class="cinzel branch-tagline">The 13 Branches of Tereso & Teofista Sazon</p>
+
+            <div class="branch-grid">
+                <!-- Manually Update these 13 cards with names -->
+                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 1</h3><p>Legacy Clan</p></div></div>
+                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 2</h3><p>Legacy Clan</p></div></div>
+                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 3</h3><p>Legacy Clan</p></div></div>
+                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 4</h3><p>Legacy Clan</p></div></div>
+                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 5</h3><p>Legacy Clan</p></div></div>
+                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 6</h3><p>Legacy Clan</p></div></div>
+                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 7</h3><p>Legacy Clan</p></div></div>
+                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 8</h3><p>Legacy Clan</p></div></div>
+                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 9</h3><p>Legacy Clan</p></div></div>
+                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 10</h3><p>Legacy Clan</p></div></div>
+                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 11</h3><p>Legacy Clan</p></div></div>
+                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 12</h3><p>Legacy Clan</p></div></div>
+                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 13</h3><p>Legacy Clan</p></div></div>
+            </div>
+        </div>
     </section>
 
     <footer>
@@ -181,7 +263,7 @@
     </footer>
 
     <script>
-        // Burst Effect Logic
+        // High-Fidelity Burst Generation
         function createBurst(top, right, color, count, delay) {
             const container = document.getElementById('fireworks');
             const burstOrigin = document.createElement('div');
@@ -189,25 +271,22 @@
             burstOrigin.style.top = top + '%';
             burstOrigin.style.right = right + '%';
 
-            const angleStep = 360 / count;
             for(let i=0; i<count; i++) {
                 const spark = document.createElement('div');
                 spark.className = 'spark';
                 spark.style.backgroundColor = color;
-                spark.style.setProperty('--rot', (i * angleStep) + 'deg');
+                spark.style.setProperty('--rot', (i * (360/count)) + 'deg');
                 spark.style.animationDelay = delay + (Math.random() * 0.5) + 's';
                 burstOrigin.appendChild(spark);
             }
             container.appendChild(burstOrigin);
         }
 
-        // Initialize multiple bursts like in the reference image
-        createBurst(20, 15, '#FFB703', 20, 0); // Gold
-        createBurst(35, 30, '#FB8500', 16, 1.5); // Orange
-        createBurst(15, 35, '#4CAF50', 18, 0.8); // Green
-        createBurst(45, 10, '#ffffff', 14, 2.1); // White
+        createBurst(20, 15, '#FFB703', 20, 0); 
+        createBurst(35, 30, '#FB8500', 16, 1.5); 
+        createBurst(15, 35, '#4CAF50', 18, 0.8); 
+        createBurst(45, 10, '#ffffff', 14, 2.1); 
 
-        // Audio and Timer
         window.onload = function() {
             document.getElementById('openSound').play().catch(e => {});
         };
