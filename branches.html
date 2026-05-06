@@ -7,10 +7,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1A2CA3; /* Indigo Night */
-            --accent: #FFB703;  /* Festival Gold */
-            --highlight: #FB8500; /* Vivid Orange */
-            --surface: #F5F5F5;   /* Soft White */
+            --primary: #1A2CA3;
+            --accent: #FFB703;
+            --highlight: #FB8500;
+            --surface: #F5F5F5;
             --black: #0a0a0a;
         }
 
@@ -21,46 +21,38 @@
             color: var(--surface);
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
-            scroll-behavior: smooth;
         }
 
         h1, h2, h3, .cinzel { font-family: 'Cinzel', serif; }
 
-        /* --- 1. THE CINEMATIC BANNER --- */
+        /* --- 1. BRIGHTER CINEMATIC BANNER --- */
         .banner {
             position: relative;
-            height: 90vh;
+            height: 100vh;
+            /* Brighter linear gradient for clear visuals */
             background: 
-                linear-gradient(rgba(26, 44, 163, 0.45), rgba(10, 10, 10, 0.95)), 
+                linear-gradient(rgba(26, 44, 163, 0.2), rgba(10, 10, 10, 0.6)), 
                 url('images/cover.jpeg') center/cover no-repeat;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-end; /* Lowers the timer content */
             align-items: center;
             text-align: center;
             border-bottom: 5px solid var(--accent);
             overflow: hidden;
-            box-shadow: inset 0 0 100px rgba(0,0,0,0.6);
-            animation: atmosphericGlow 12s ease-in-out infinite alternate;
+            padding-bottom: 50px; /* Space for the lowered timer */
         }
 
-        @keyframes atmosphericGlow {
-            0% { filter: saturate(100%) brightness(100%); }
-            100% { filter: saturate(125%) brightness(110%); }
-        }
-
-        /* Top Left: 3D Celestial Moon Asset */
+        /* --- 2. REALISTIC MOON (NO BLACK RIM) --- */
         .moon-container {
             position: absolute;
             top: 40px;
             left: 40px;
             width: 180px;
             height: 180px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             z-index: 10;
-            filter: drop-shadow(0 0 30px rgba(165, 204, 255, 0.6));
+            /* Using drop-shadow instead of a border/rim for realism */
+            filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.4));
             animation: moonFloat 8s ease-in-out infinite alternate;
         }
 
@@ -68,202 +60,125 @@
             width: 100%;
             height: auto;
             border-radius: 50%;
+            /* Ensures no black edges from the original image file are visible */
+            mix-blend-mode: screen; 
         }
 
-        /* Top Right: High-Fidelity Burst Fireworks */
+        /* --- 3. FLOURISHING TEXT (ROOTS TO BRANCHES) --- */
+        .tree-text-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            pointer-events: none;
+            z-index: 15;
+        }
+
+        .motto {
+            display: block;
+            opacity: 0;
+            animation: flourishUp 2.5s ease-out forwards;
+            text-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+        }
+
+        .motto.gamut {
+            font-size: 1.8rem;
+            color: var(--highlight);
+            margin-top: 200px; /* Aligns with roots */
+            animation-delay: 0.5s;
+        }
+
+        .motto.langit {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-top: -350px; /* Aligns with branches */
+            animation-delay: 1.5s;
+        }
+
+        @keyframes flourishUp {
+            0% { opacity: 0; transform: translateY(30px) scale(0.9); filter: blur(10px); }
+            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+
+        /* --- 4. LOWERED TIMER --- */
+        .timer-container {
+            display: flex;
+            gap: 15px;
+            z-index: 20;
+            backdrop-filter: blur(5px);
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .time-box {
+            border: 1px solid rgba(255, 183, 3, 0.5);
+            padding: 10px;
+            min-width: 70px;
+        }
+
+        .time-box span { display: block; font-size: 1.8rem; color: var(--accent); font-weight: bold; }
+        .time-box label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* Top Right: Fireworks Peg */
         .fireworks-stage {
             position: absolute;
             top: 0;
             right: 0;
-            width: 60%;
-            height: 60%;
+            width: 50%;
+            height: 50%;
             pointer-events: none;
             z-index: 5;
         }
 
         .spark {
             position: absolute;
-            width: 3px;
-            height: 20px;
-            border-radius: 3px;
+            width: 2px;
+            height: 15px;
+            border-radius: 2px;
             opacity: 0;
             animation: sparkBurst 3.5s infinite;
         }
 
         @keyframes sparkBurst {
-            0% { transform: rotate(var(--rot)) translateY(0); opacity: 1; height: 5px; }
-            50% { opacity: 1; height: 30px; }
-            100% { transform: rotate(var(--rot)) translateY(200px); opacity: 0; height: 3px; }
-        }
-
-        .banner-content { z-index: 20; }
-        
-        .timer-container {
-            margin-top: 40px;
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-
-        .time-box {
-            background: rgba(10, 10, 10, 0.85);
-            border: 2px solid var(--accent);
-            padding: 15px;
-            min-width: 85px;
-            border-radius: 4px;
-            backdrop-filter: blur(8px);
-        }
-
-        .time-box span { display: block; font-size: 2.2rem; color: var(--accent); font-weight: bold; }
-        .time-box label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; }
-
-        /* --- 2. THE ROOTS SECTION (FAMILY TREE) --- */
-        .roots-section {
-            position: relative;
-            padding: 120px 0;
-            background: 
-                linear-gradient(rgba(10, 10, 10, 0.85), rgba(26, 44, 163, 0.9)), 
-                url('images/family-tree.jpeg') center/cover no-repeat fixed;
-            border-bottom: 3px solid var(--highlight);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-        }
-
-        .roots-overlay {
-            width: 100%;
-            z-index: 2;
-            text-align: center;
-        }
-
-        .roots-title { color: var(--accent); font-size: 3rem; margin: 0; }
-        .roots-subtitle { font-size: 1.5rem; letter-spacing: 6px; color: var(--highlight); margin-top: 10px; }
-        .branch-tagline { color: var(--accent); letter-spacing: 4px; margin-bottom: 60px; font-weight: 600; text-transform: uppercase; }
-
-        /* --- 3. INTERACTIVE 13 BRANCHES GRID --- */
-        .branch-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 30px;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-        }
-
-        .branch-card {
-            background: rgba(10, 10, 10, 0.7);
-            border: 1px solid var(--accent);
-            padding: 50px 20px;
-            backdrop-filter: blur(12px);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .branch-card:hover {
-            transform: translateY(-15px);
-            border-color: var(--highlight);
-            background: rgba(26, 44, 163, 0.85);
-            box-shadow: 0 20px 60px rgba(251, 133, 0, 0.4);
-        }
-
-        .branch-inner h3 {
-            color: var(--accent);
-            font-size: 1.7rem;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .branch-inner p {
-            font-size: 0.9rem;
-            color: var(--surface);
-            opacity: 0.8;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            0% { transform: rotate(var(--rot)) translateY(0); opacity: 1; }
+            100% { transform: rotate(var(--rot)) translateY(150px); opacity: 0; }
         }
 
         @keyframes moonFloat {
-            from { transform: translateY(0) rotate(0deg); }
-            to { transform: translateY(-15px) rotate(2deg); }
-        }
-
-        footer { 
-            padding: 80px 40px; 
-            text-align: center; 
-            background: var(--black);
-            border-top: 4px solid var(--highlight);
-        }
-
-        /* Mobile Adjustments */
-        @media (max-width: 768px) {
-            .moon-container { width: 120px; height: 120px; top: 20px; left: 20px; }
-            .banner-content h1 { font-size: 2.5rem; }
-            .roots-title { font-size: 2rem; }
-            .branch-grid { grid-template-columns: 1fr; padding: 0 30px; }
+            from { transform: translateY(0); }
+            to { transform: translateY(-15px); }
         }
     </style>
 </head>
-<body onclick="playJingleOnce()">
-
-    <audio id="openSound" src="open.mp3"></audio>
-    <audio id="jingle" src="sazon-full-anthem.mp3"></audio>
+<body>
 
     <header class="banner">
-        <!-- Top Left: 3D Breathing Moon Asset -->
+        <!-- Realistic Moon -->
         <div class="moon-container">
-            <img src="images/moon.png" alt="Sazon Moon" class="moon-asset">
+            <img src="images/moon.png" alt="Moon" class="moon-asset">
         </div>
 
-        <!-- Top Right: High-Fidelity Burst Fireworks -->
+        <!-- Burst Fireworks -->
         <div class="fireworks-stage" id="fireworks"></div>
 
-        <div class="banner-content">
-            <h1 class="cinzel" style="color: var(--accent); font-size: 4rem; margin: 0; text-shadow: 3px 3px 20px #000; letter-spacing: 2px;">Sazon 2027</h1>
-            <p class="cinzel" style="letter-spacing: 12px; color: var(--surface); font-weight: 300;">1st GRAND FAMILY REUNION</p>
+        <!-- Flourishing Motto along the Tree -->
+        <div class="tree-text-container">
+            <span class="cinzel motto gamut">Gikan sa Gamut,</span>
+            <span class="cinzel motto langit">Tubtob sa Langit</span>
+        </div>
 
-            <div class="timer-container" id="countdown">
-                <div class="time-box"><span id="days">00</span><label>Days</label></div>
-                <div class="time-box"><span id="hours">00</span><label>Hrs</label></div>
-                <div class="time-box"><span id="mins">00</span><label>Mins</label></div>
-                <div class="time-box"><span id="secs">00</span><label>Secs</label></div>
-            </div>
+        <!-- Lowered Timer Highlight -->
+        <div class="timer-container" id="countdown">
+            <div class="time-box"><span id="days">00</span><label>Days</label></div>
+            <div class="time-box"><span id="hours">00</span><label>Hrs</label></div>
+            <div class="time-box"><span id="mins">00</span><label>Mins</label></div>
+            <div class="time-box"><span id="secs">00</span><label>Secs</label></div>
         </div>
     </header>
 
-    <section class="roots-section">
-        <div class="roots-overlay">
-            <h2 class="cinzel roots-title">Gikan sa Gamut, Tubtob sa Langit</h2>
-            <p class="roots-subtitle">From the Roots, Toward the Sky</p>
-            <p class="cinzel branch-tagline">The 13 Branches of Tereso & Teofista Sazon</p>
-
-            <div class="branch-grid">
-                <!-- Manually Update these 13 cards with names -->
-                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 1</h3><p>Legacy Clan</p></div></div>
-                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 2</h3><p>Legacy Clan</p></div></div>
-                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 3</h3><p>Legacy Clan</p></div></div>
-                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 4</h3><p>Legacy Clan</p></div></div>
-                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 5</h3><p>Legacy Clan</p></div></div>
-                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 6</h3><p>Legacy Clan</p></div></div>
-                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 7</h3><p>Legacy Clan</p></div></div>
-                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 8</h3><p>Legacy Clan</p></div></div>
-                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 9</h3><p>Legacy Clan</p></div></div>
-                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 10</h3><p>Legacy Clan</p></div></div>
-                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 11</h3><p>Legacy Clan</p></div></div>
-                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 12</h3><p>Legacy Clan</p></div></div>
-                <div class="branch-card"><div class="branch-inner"><h3 class="cinzel">Branch 13</h3><p>Legacy Clan</p></div></div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p class="cinzel" style="color: var(--accent); font-size: 1.5rem;">Sazon Family Grand Reunion &copy; 2027</p>
-        <p style="letter-spacing: 4px; font-weight: 300;">Marzon Hotel, Kalibo, Aklan | July 23-24, 2027</p>
-    </footer>
-
     <script>
-        // High-Fidelity Burst Generation
         function createBurst(top, right, color, count, delay) {
             const container = document.getElementById('fireworks');
             const burstOrigin = document.createElement('div');
@@ -282,22 +197,8 @@
             container.appendChild(burstOrigin);
         }
 
-        createBurst(20, 15, '#FFB703', 20, 0); 
-        createBurst(35, 30, '#FB8500', 16, 1.5); 
-        createBurst(15, 35, '#4CAF50', 18, 0.8); 
-        createBurst(45, 10, '#ffffff', 14, 2.1); 
-
-        window.onload = function() {
-            document.getElementById('openSound').play().catch(e => {});
-        };
-
-        let anthemPlayed = false;
-        function playJingleOnce() {
-            if (!anthemPlayed) {
-                document.getElementById('jingle').play();
-                anthemPlayed = true;
-            }
-        }
+        createBurst(20, 15, '#FFB703', 15, 0); 
+        createBurst(30, 25, '#FB8500', 12, 1); 
 
         const countDate = new Date("July 23, 2027 00:00:00").getTime();
         function countdown() {
