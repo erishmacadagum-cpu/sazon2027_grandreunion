@@ -14,9 +14,16 @@
             --embers: rgba(251, 133, 0, 0.6);
         }
 
-        body, html { margin: 0; padding: 0; background: var(--black); color: var(--white); font-family: 'Montserrat', sans-serif; overflow: hidden; height: 100%; }
+        body, html { 
+            margin: 0; padding: 0; 
+            background: var(--black); 
+            color: var(--white); 
+            font-family: 'Montserrat', sans-serif; 
+            overflow: hidden; 
+            height: 100%; 
+        }
 
-        /* --- STAGE 1: THE PRELUDE CURTAIN --- */
+        /* --- STAGE 1: INTRO CURTAIN --- */
         #intro-curtain {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -54,7 +61,7 @@
         }
         .start-btn:hover { background: var(--accent); color: var(--black); }
 
-        /* --- STAGE 2: THE "BREATHING" BANNER --- */
+        /* --- STAGE 2: THE MAIN HUB --- */
         .banner {
             position: relative;
             height: 100dvh;
@@ -69,6 +76,20 @@
         }
         .banner.active { opacity: 1; }
 
+        /* FIXED MOON: Referenced from Screenshot 2026-05-06 at 10.41.13 PM.jpg */
+        .moon-container {
+            position: absolute;
+            top: 30px; 
+            left: 30px;
+            width: 120px; /* Restored desired size */
+            z-index: 100;
+            mix-blend-mode: screen;
+            filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.4));
+            pointer-events: none;
+        }
+        .moon-asset { width: 100%; border-radius: 50%; }
+
+        /* BREATHING BACKGROUND */
         .banner-bg {
             position: absolute;
             top: -5%; left: -5%; width: 110%; height: 115%;
@@ -80,10 +101,10 @@
 
         @keyframes breathe {
             0%, 100% { transform: scale(1); filter: brightness(1); }
-            50% { transform: scale(1.05); filter: brightness(1.2); }
+            50% { transform: scale(1.04); filter: brightness(1.2); }
         }
 
-        /* --- RISING EMBERS --- */
+        /* RISING EMBERS */
         #ember-stage {
             position: absolute;
             bottom: 0; left: 0; width: 100%; height: 60%;
@@ -104,52 +125,51 @@
             100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
         }
 
-        .moon-container {
-            position: absolute;
-            top: 5vh; left: 5vw;
-            width: clamp(120px, 20vw, 200px);
-            z-index: 10;
-            mix-blend-mode: screen;
-            filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
-        }
-
+        /* FIREWORKS */
         .fireworks-stage { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
         .particle { position: absolute; width: 3px; height: 3px; border-radius: 50%; opacity: 0; }
-
         @keyframes explode {
             0% { transform: translate(0, 0) scale(1); opacity: 1; }
             100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
         }
 
+        /* TIMER BOX */
         .timer-container {
-            margin-bottom: 5vh;
-            display: flex; gap: 12px; z-index: 20;
-            background: rgba(10, 10, 10, 0.65);
-            padding: 15px 30px; border-radius: 10px;
-            border: 1px solid rgba(255, 183, 3, 0.2);
-            backdrop-filter: blur(8px);
+            margin-bottom: 6vh;
+            display: flex; gap: 15px; z-index: 20;
+            background: rgba(10, 10, 10, 0.7);
+            padding: 20px 35px; border-radius: 12px;
+            border: 1px solid rgba(255, 183, 3, 0.25);
+            backdrop-filter: blur(10px);
         }
-
-        .time-box { text-align: center; min-width: 60px; }
-        .time-box span { display: block; font-size: 1.6rem; color: var(--accent); font-weight: bold; font-family: 'Cinzel', serif; }
-        .time-box label { font-size: 0.55rem; text-transform: uppercase; opacity: 0.7; }
+        .time-box { text-align: center; min-width: 65px; }
+        .time-box span { display: block; font-size: 1.8rem; color: var(--accent); font-weight: bold; font-family: 'Cinzel', serif; }
+        .time-box label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
     </style>
 </head>
 <body>
 
+    <!-- THE PRELUDE -->
     <div id="intro-curtain">
         <div id="motto-text">Gikan sa Gamut...<br>Tubtob sa Langit</div>
         <button id="begin-btn" class="start-btn" onclick="executeCinematicOpening()">Begin the Legacy</button>
     </div>
 
+    <!-- THE MAIN BANNER -->
     <header class="banner" id="main-banner">
-        <div class="banner-bg"></div>
-        <div id="ember-stage"></div> 
+        <!-- Moon Fixed in desired position -->
         <div class="moon-container">
             <img src="images/moon.png" alt="Moon" class="moon-asset">
         </div>
+
+        <!-- Breathing Background Layer -->
+        <div class="banner-bg"></div>
+
+        <!-- Animation Layers -->
+        <div id="ember-stage"></div> 
         <div id="fireworks" class="fireworks-stage"></div>
 
+        <!-- Countdown -->
         <div class="timer-container">
             <div class="time-box"><span id="days">00</span><label>Days</label></div>
             <div class="time-box"><span id="hours">00</span><label>Hrs</label></div>
@@ -158,7 +178,7 @@
         </div>
     </header>
 
-    <!-- Audio Assets (Loop removed from Anthem) -->
+    <!-- AUDIO ASSETS: Anthem plays once (no loop) -->
     <audio id="snd-swell" src="audio/prelude_swell.mp3" preload="auto"></audio>
     <audio id="snd-shimmer" src="audio/reveal_shimmer.mp3" preload="auto"></audio>
     <audio id="snd-anthem" src="audio/sazon-full-anthem.mp3"></audio>
@@ -185,10 +205,14 @@
                 shimmer.play();
                 curtain.style.opacity = '0';
                 banner.classList.add('active');
-                anthem.play();
+                
+                // Plays exactly once as requested
+                anthem.play(); 
+                
                 document.body.style.overflow = 'auto';
 
-                setInterval(launchFirework, 2000);
+                // Launch Animations
+                setInterval(launchFirework, 2200);
                 createEmbers();
                 
                 setTimeout(() => { curtain.style.display = 'none'; }, 2000);
@@ -197,7 +221,7 @@
 
         function createEmbers() {
             const stage = document.getElementById('ember-stage');
-            for(let i=0; i<20; i++) {
+            for(let i=0; i<25; i++) {
                 const e = document.createElement('div');
                 e.className = 'ember';
                 e.style.left = Math.random() * 100 + 'vw';
@@ -209,37 +233,38 @@
 
         function launchFirework() {
             const stage = document.getElementById('fireworks');
-            const x = 55 + (Math.random() * 35);
-            const y = 15 + (Math.random() * 25);
+            const x = 50 + (Math.random() * 40);
+            const y = 10 + (Math.random() * 30);
             
             const sounds = ['burst-low', 'burst-high', 'burst-whistle'];
             const randomSnd = sounds[Math.floor(Math.random() * sounds.length)];
             const sfx = document.getElementById(randomSnd).cloneNode();
-            sfx.volume = 0.25;
+            sfx.volume = 0.2;
             sfx.play();
 
-            const colors = ['#FFD700', '#FB8500', '#FFFFFF'];
+            const colors = ['#FFD700', '#FB8500', '#FFFFFF', '#6A5ACD'];
             const color = colors[Math.floor(Math.random() * colors.length)];
             
-            for (let i = 0; i < 35; i++) {
+            for (let i = 0; i < 40; i++) {
                 const p = document.createElement('div');
                 p.className = 'particle';
-                const angle = (i * 10.3) * (Math.PI / 180);
-                const velocity = 70 + Math.random() * 90;
+                const angle = (i * 9) * (Math.PI / 180);
+                const velocity = 80 + Math.random() * 100;
                 
                 p.style.backgroundColor = color;
-                p.style.boxShadow = `0 0 6px ${color}`;
+                p.style.boxShadow = `0 0 8px ${color}`;
                 p.style.left = x + '%';
                 p.style.top = y + '%';
                 p.style.setProperty('--x', `${Math.cos(angle) * velocity}px`);
-                p.style.setProperty('--y', `${Math.sin(angle) * velocity + 30}px`);
-                p.style.animation = `explode 1.4s ease-out forwards`;
+                p.style.setProperty('--y', `${Math.sin(angle) * velocity + 40}px`);
+                p.style.animation = `explode 1.5s ease-out forwards`;
                 
                 stage.appendChild(p);
-                setTimeout(() => p.remove(), 1400);
+                setTimeout(() => p.remove(), 1500);
             }
         }
 
+        // Countdown Logic (Target: July 23, 2027)
         const countDate = new Date("July 23, 2027 00:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
