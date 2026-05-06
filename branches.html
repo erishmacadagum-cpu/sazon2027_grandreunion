@@ -9,14 +9,13 @@
         :root {
             --primary: #1A2CA3;
             --accent: #FFB703;
-            --highlight: #FB8500;
             --surface: #F5F5F5;
             --black: #0a0a0a;
         }
 
         body, html { margin: 0; padding: 0; background: var(--black); color: var(--surface); font-family: 'Montserrat', sans-serif; overflow: hidden; height: 100%; }
 
-        /* --- CINEMATIC OPENING CREDITS --- */
+        /* --- INTRO CURTAIN --- */
         #intro-curtain {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -32,36 +31,34 @@
         .intro-text {
             font-family: 'Cinzel', serif;
             color: var(--accent);
-            font-size: 1.5rem;
-            letter-spacing: 8px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: textRise 3s forwards;
+            font-size: 1.8rem;
+            letter-spacing: 6px;
             text-align: center;
-        }
-
-        .click-to-begin {
-            margin-top: 30px;
-            color: var(--surface);
-            font-size: 0.7rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            cursor: pointer;
-            border: 1px solid var(--accent);
-            padding: 10px 20px;
             opacity: 0;
-            animation: fadeIn 1s 2s forwards;
+            animation: textPulse 4s infinite;
         }
 
-        @keyframes textRise {
-            0% { opacity: 0; transform: translateY(20px); }
-            50% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-20px); }
+        .btn-enter {
+            margin-top: 40px;
+            padding: 12px 30px;
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: 0.3s;
         }
 
-        @keyframes fadeIn { to { opacity: 1; } }
+        .btn-enter:hover { background: var(--accent); color: var(--black); }
 
-        /* --- MAIN BANNER (Initially Hidden) --- */
+        @keyframes textPulse {
+            0%, 100% { opacity: 0.4; transform: scale(0.98); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* --- MAIN BANNER --- */
         .banner {
             position: relative;
             height: 100dvh;
@@ -71,7 +68,6 @@
             justify-content: flex-end;
             align-items: center;
             overflow: hidden;
-            border-bottom: 5px solid var(--accent);
             opacity: 0;
             transition: opacity 3s ease-in;
         }
@@ -81,7 +77,7 @@
         .banner-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 115%;
-            background: radial-gradient(circle, rgba(26, 44, 163, 0.1) 0%, rgba(10, 10, 10, 0.5) 100%),
+            background: radial-gradient(circle, rgba(26, 44, 163, 0.1), rgba(10, 10, 10, 0.6)),
                         url('images/cover.jpeg') center/cover no-repeat;
             z-index: 1;
         }
@@ -89,47 +85,42 @@
         .moon-container {
             position: absolute;
             top: 5vh; left: 5vw;
-            width: clamp(110px, 18vw, 190px);
+            width: clamp(120px, 20vw, 200px);
             z-index: 10;
-            mix-blend-mode: screen; 
-            filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.4));
-            animation: moonFloat 8s ease-in-out infinite alternate;
+            mix-blend-mode: screen;
+            filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
         }
 
         .moon-asset { width: 100%; border-radius: 50%; }
 
+        /* --- FIREWORKS --- */
         .fireworks-stage { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
-
         .particle { position: absolute; width: 3px; height: 3px; border-radius: 50%; opacity: 0; }
 
-        @keyframes fireworkExplode {
+        @keyframes explode {
             0% { transform: translate(0, 0) scale(1); opacity: 1; }
             100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
         }
 
+        /* --- TIMER --- */
         .timer-container {
-            margin-bottom: clamp(30px, 8vh, 60px);
-            display: flex; gap: 12px; z-index: 20;
-            backdrop-filter: blur(12px);
-            padding: 18px 35px;
-            background: rgba(10, 10, 10, 0.6);
-            border: 1px solid rgba(255, 183, 3, 0.4);
-            border-radius: 12px;
+            margin-bottom: 5vh;
+            display: flex; gap: 15px; z-index: 20;
+            background: rgba(10, 10, 10, 0.7);
+            padding: 20px; border-radius: 10px;
+            border: 1px solid rgba(255, 183, 3, 0.3);
         }
 
-        .time-box { text-align: center; min-width: 70px; }
-        .time-box span { display: block; font-size: 1.8rem; color: var(--accent); font-weight: bold; font-family: 'Cinzel', serif; }
-        .time-box label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; }
-
-        @keyframes moonFloat { from { transform: translateY(0); } to { transform: translateY(-18px); } }
+        .time-box { text-align: center; min-width: 60px; }
+        .time-box span { display: block; font-size: 1.8rem; color: var(--accent); font-weight: bold; }
+        .time-box label { font-size: 0.6rem; text-transform: uppercase; opacity: 0.7; }
     </style>
 </head>
 <body>
 
-    <!-- Opening Credits Curtain -->
-    <div id="intro-curtain" onclick="startLegacyHub()">
-        <div class="intro-text">Gikan sa Gamut...</div>
-        <div class="click-to-begin">Enter the Legacy</div>
+    <div id="intro-curtain">
+        <div class="intro-text">Gikan sa Gamut...<br>Tubtob sa Langit</div>
+        <button class="btn-enter" onclick="igniteLegacy()">Enter the Legacy</button>
     </div>
 
     <header class="banner" id="main-banner">
@@ -137,9 +128,9 @@
         <div class="moon-container">
             <img src="images/moon.png" alt="Moon" class="moon-asset">
         </div>
-        <div class="fireworks-stage" id="fireworks"></div>
+        <div id="fireworks" class="fireworks-stage"></div>
 
-        <div class="timer-container" id="countdown">
+        <div class="timer-container">
             <div class="time-box"><span id="days">00</span><label>Days</label></div>
             <div class="time-box"><span id="hours">00</span><label>Hrs</label></div>
             <div class="time-box"><span id="mins">00</span><label>Mins</label></div>
@@ -147,63 +138,82 @@
         </div>
     </header>
 
-    <!-- Audio Files -->
-    <audio id="anthem" src="sazon-full-anthem.mp3"></audio>
+    <!-- Preloaded Audio Elements -->
+    <audio id="snd-swell" src="audio/prelude_swell.mp3" preload="auto"></audio>
+    <audio id="snd-shimmer" src="audio/reveal_shimmer.mp3" preload="auto"></audio>
+    <audio id="snd-anthem" src="audio/sazon-full-anthem.mp3" loop></audio>
+    
+    <!-- Firework SFX Pool -->
+    <audio id="burst-low" src="audio/firework_burst_low.mp3" preload="auto"></audio>
+    <audio id="burst-high" src="audio/firework_burst_high.mp3" preload="auto"></audio>
+    <audio id="burst-whistle" src="audio/firework_whistle.mp3" preload="auto"></audio>
 
     <script>
-        function startLegacyHub() {
-            // 1. Fade out the curtain
+        // Start the prelude swell immediately on load
+        window.onload = () => { document.getElementById('snd-swell').play().catch(() => {}); };
+
+        function igniteLegacy() {
+            // 1. Play reveal sound
+            document.getElementById('snd-shimmer').play();
+            
+            // 2. Transition Curtain
             const curtain = document.getElementById('intro-curtain');
             curtain.style.opacity = '0';
             setTimeout(() => { curtain.style.display = 'none'; }, 2000);
 
-            // 2. Fade in the banner
+            // 3. Show Banner & Start Anthem
             const banner = document.getElementById('main-banner');
             banner.classList.add('active');
-            document.body.style.overflow = 'auto';
+            document.getElementById('snd-anthem').play();
 
-            // 3. Play the anthem
-            const anthem = document.getElementById('anthem');
-            anthem.play();
-
-            // 4. Start fireworks loop
-            setInterval(launchFirework, 1500);
+            // 4. Start Firework Loop
+            setInterval(launchFirework, 1800);
         }
 
         function launchFirework() {
             const stage = document.getElementById('fireworks');
-            const xOrigin = 60 + (Math.random() * 30);
-            const yOrigin = 15 + (Math.random() * 25);
-            const colors = ['#FFD700', '#FB8500', '#FFFFFF', '#FFB703'];
+            const x = 50 + (Math.random() * 40 - 20);
+            const y = 20 + (Math.random() * 30);
+            
+            // --- AUDIO RANDOMIZER ---
+            const sounds = ['burst-low', 'burst-high', 'burst-whistle'];
+            const randomSnd = sounds[Math.floor(Math.random() * sounds.length)];
+            const sfx = document.getElementById(randomSnd).cloneNode();
+            sfx.volume = 0.4; // Set lower so it doesn't drown the anthem
+            sfx.play();
+
+            // --- VISUAL BURST ---
+            const colors = ['#FFD700', '#FB8500', '#FFFFFF'];
             const color = colors[Math.floor(Math.random() * colors.length)];
             
-            for (let i = 0; i < 35; i++) {
+            for (let i = 0; i < 40; i++) {
                 const p = document.createElement('div');
                 p.className = 'particle';
-                const angle = (i * (360 / 35)) * (Math.PI / 180);
-                const velocity = 80 + (Math.random() * 120);
+                const angle = (i * 9) * (Math.PI / 180);
+                const velocity = 80 + Math.random() * 100;
+                
                 p.style.backgroundColor = color;
-                p.style.boxShadow = `0 0 8px ${color}`;
-                p.style.left = xOrigin + '%';
-                p.style.top = yOrigin + '%';
+                p.style.left = x + '%';
+                p.style.top = y + '%';
                 p.style.setProperty('--x', `${Math.cos(angle) * velocity}px`);
-                p.style.setProperty('--y', `${(Math.sin(angle) * velocity) + 40}px`);
-                p.style.animation = `fireworkExplode ${1.2 + Math.random()}s ease-out forwards`;
+                p.style.setProperty('--y', `${Math.sin(angle) * velocity + 40}px`);
+                p.style.animation = `explode ${1.5}s ease-out forwards`;
+                
                 stage.appendChild(p);
-                setTimeout(() => p.remove(), 2000);
+                setTimeout(() => p.remove(), 1600);
             }
         }
 
-        // Countdown Logic
+        // Timer Logic
         const countDate = new Date("July 23, 2027 00:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
             const gap = countDate - now;
             const second = 1000, minute = second * 60, hour = minute * 60, day = hour * 24;
-            document.getElementById("days").innerText = String(Math.floor(gap / day)).padStart(2, '0');
-            document.getElementById("hours").innerText = String(Math.floor((gap % day) / hour)).padStart(2, '0');
-            document.getElementById("mins").innerText = String(Math.floor((gap % hour) / minute)).padStart(2, '0');
-            document.getElementById("secs").innerText = String(Math.floor((gap % minute) / second)).padStart(2, '0');
+            document.getElementById("days").innerText = Math.floor(gap / day);
+            document.getElementById("hours").innerText = Math.floor((gap % day) / hour);
+            document.getElementById("mins").innerText = Math.floor((gap % hour) / minute);
+            document.getElementById("secs").innerText = Math.floor((gap % minute) / second);
         }, 1000);
     </script>
 </body>
