@@ -23,36 +23,34 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3, .cinzel { font-family: 'Cinzel', serif; }
-
         /* --- 1. BRIGHTER CINEMATIC BANNER --- */
         .banner {
             position: relative;
             height: 100vh;
-            /* Brighter linear gradient for clear visuals */
+            /* Lightened overlay for maximum tree clarity */
             background: 
-                linear-gradient(rgba(26, 44, 163, 0.2), rgba(10, 10, 10, 0.6)), 
+                linear-gradient(rgba(26, 44, 163, 0.15), rgba(10, 10, 10, 0.5)), 
                 url('images/cover.jpeg') center/cover no-repeat;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end; /* Lowers the timer content */
+            justify-content: flex-end; 
             align-items: center;
-            text-align: center;
             border-bottom: 5px solid var(--accent);
             overflow: hidden;
-            padding-bottom: 50px; /* Space for the lowered timer */
+            padding-bottom: 40px;
         }
 
-        /* --- 2. REALISTIC MOON (NO BLACK RIM) --- */
+        /* --- 2. REALISTIC MOON (NO RIM / NO SECOND MOON) --- */
         .moon-container {
             position: absolute;
             top: 40px;
             left: 40px;
-            width: 180px;
-            height: 180px;
+            width: 190px;
+            height: 190px;
             z-index: 10;
-            /* Using drop-shadow instead of a border/rim for realism */
-            filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.4));
+            /* Screen mode removes any black background/rim from the png */
+            mix-blend-mode: screen;
+            filter: drop-shadow(0 0 50px rgba(255, 255, 255, 0.5));
             animation: moonFloat 8s ease-in-out infinite alternate;
         }
 
@@ -60,116 +58,72 @@
             width: 100%;
             height: auto;
             border-radius: 50%;
-            /* Ensures no black edges from the original image file are visible */
-            mix-blend-mode: screen; 
         }
 
-        /* --- 3. FLOURISHING TEXT (ROOTS TO BRANCHES) --- */
-        .tree-text-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            pointer-events: none;
-            z-index: 15;
-        }
-
-        .motto {
-            display: block;
-            opacity: 0;
-            animation: flourishUp 2.5s ease-out forwards;
-            text-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
-        }
-
-        .motto.gamut {
-            font-size: 1.8rem;
-            color: var(--highlight);
-            margin-top: 200px; /* Aligns with roots */
-            animation-delay: 0.5s;
-        }
-
-        .motto.langit {
-            font-size: 2.5rem;
-            color: var(--accent);
-            margin-top: -350px; /* Aligns with branches */
-            animation-delay: 1.5s;
-        }
-
-        @keyframes flourishUp {
-            0% { opacity: 0; transform: translateY(30px) scale(0.9); filter: blur(10px); }
-            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-        }
-
-        /* --- 4. LOWERED TIMER --- */
-        .timer-container {
-            display: flex;
-            gap: 15px;
-            z-index: 20;
-            backdrop-filter: blur(5px);
-            padding: 20px;
-            border-radius: 10px;
-            background: rgba(0, 0, 0, 0.3);
-        }
-
-        .time-box {
-            border: 1px solid rgba(255, 183, 3, 0.5);
-            padding: 10px;
-            min-width: 70px;
-        }
-
-        .time-box span { display: block; font-size: 1.8rem; color: var(--accent); font-weight: bold; }
-        .time-box label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; }
-
-        /* Top Right: Fireworks Peg */
+        /* --- 3. INTENSE FIREWORKS SYSTEM --- */
         .fireworks-stage {
             position: absolute;
             top: 0;
             right: 0;
-            width: 50%;
-            height: 50%;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
             z-index: 5;
         }
 
         .spark {
             position: absolute;
-            width: 2px;
-            height: 15px;
-            border-radius: 2px;
+            width: 3px;
+            height: 25px;
+            border-radius: 4px;
             opacity: 0;
-            animation: sparkBurst 3.5s infinite;
+            animation: sparkBurst 4s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
         }
 
         @keyframes sparkBurst {
-            0% { transform: rotate(var(--rot)) translateY(0); opacity: 1; }
-            100% { transform: rotate(var(--rot)) translateY(150px); opacity: 0; }
+            0% { transform: rotate(var(--rot)) translateY(0) scale(0); opacity: 1; height: 5px; }
+            40% { opacity: 1; height: 35px; }
+            100% { transform: rotate(var(--rot)) translateY(350px) scale(0.5); opacity: 0; height: 2px; }
         }
+
+        /* --- 4. ANCHORED TIMER --- */
+        .timer-container {
+            display: flex;
+            gap: 15px;
+            z-index: 20;
+            backdrop-filter: blur(8px);
+            padding: 15px 30px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 183, 3, 0.3);
+        }
+
+        .time-box {
+            text-align: center;
+            min-width: 75px;
+        }
+
+        .time-box span { display: block; font-size: 2rem; color: var(--accent); font-weight: bold; }
+        .time-box label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; color: var(--surface); opacity: 0.8; }
 
         @keyframes moonFloat {
             from { transform: translateY(0); }
-            to { transform: translateY(-15px); }
+            to { transform: translateY(-20px); }
         }
     </style>
 </head>
 <body>
 
     <header class="banner">
-        <!-- Realistic Moon -->
+        <!-- The Realistic Moon Asset -->
         <div class="moon-container">
             <img src="images/moon.png" alt="Moon" class="moon-asset">
         </div>
 
-        <!-- Burst Fireworks -->
+        <!-- Bursting Fireworks Stage -->
         <div class="fireworks-stage" id="fireworks"></div>
 
-        <!-- Flourishing Motto along the Tree -->
-        <div class="tree-text-container">
-            <span class="cinzel motto gamut">Gikan sa Gamut,</span>
-            <span class="cinzel motto langit">Tubtob sa Langit</span>
-        </div>
-
-        <!-- Lowered Timer Highlight -->
+        <!-- Lowered Timer (Motto text removed as requested) -->
         <div class="timer-container" id="countdown">
             <div class="time-box"><span id="days">00</span><label>Days</label></div>
             <div class="time-box"><span id="hours">00</span><label>Hrs</label></div>
@@ -179,6 +133,7 @@
     </header>
 
     <script>
+        // Enhanced Burst logic for more "Hala Bira" impact
         function createBurst(top, right, color, count, delay) {
             const container = document.getElementById('fireworks');
             const burstOrigin = document.createElement('div');
@@ -190,16 +145,22 @@
                 const spark = document.createElement('div');
                 spark.className = 'spark';
                 spark.style.backgroundColor = color;
+                // Add more variety to spark colors for realism
+                spark.style.boxShadow = `0 0 10px ${color}`;
                 spark.style.setProperty('--rot', (i * (360/count)) + 'deg');
-                spark.style.animationDelay = delay + (Math.random() * 0.5) + 's';
+                spark.style.animationDelay = delay + (Math.random() * 0.8) + 's';
                 burstOrigin.appendChild(spark);
             }
             container.appendChild(burstOrigin);
         }
 
-        createBurst(20, 15, '#FFB703', 15, 0); 
-        createBurst(30, 25, '#FB8500', 12, 1); 
+        // Multiple bursts positioned to fill the right-side sky
+        createBurst(15, 10, '#FFD700', 25, 0);   // Primary Gold Burst
+        createBurst(30, 25, '#FF4500', 20, 1.2); // Vibrant Orange Burst
+        createBurst(20, 35, '#FFFFFF', 15, 0.5); // White Glitter Burst
+        createBurst(45, 15, '#FFB703', 18, 2.5); // Accent Gold Burst
 
+        // Simple Countdown logic for the Sazon 2027 Reunion
         const countDate = new Date("July 23, 2027 00:00:00").getTime();
         function countdown() {
             const now = new Date().getTime();
