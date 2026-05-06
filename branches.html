@@ -9,13 +9,13 @@
         :root {
             --primary: #1A2CA3;
             --accent: #FFB703;
-            --surface: #F5F5F5;
             --black: #0a0a0a;
+            --white: #F5F5F5;
         }
 
-        body, html { margin: 0; padding: 0; background: var(--black); color: var(--surface); font-family: 'Montserrat', sans-serif; overflow: hidden; height: 100%; }
+        body, html { margin: 0; padding: 0; background: var(--black); color: var(--white); font-family: 'Montserrat', sans-serif; overflow: hidden; height: 100%; }
 
-        /* --- INTRO CURTAIN --- */
+        /* --- STAGE 1: THE PRELUDE CURTAIN --- */
         #intro-curtain {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -28,37 +28,30 @@
             transition: opacity 2s ease-in-out;
         }
 
-        .intro-text {
+        #motto-text {
             font-family: 'Cinzel', serif;
             color: var(--accent);
-            font-size: 1.8rem;
-            letter-spacing: 6px;
+            font-size: clamp(1.2rem, 5vw, 2rem);
             text-align: center;
-            opacity: 0;
-            animation: textPulse 4s infinite;
+            letter-spacing: 5px;
+            opacity: 0; /* Starts hidden */
+            transition: opacity 2s ease-in;
+            margin-bottom: 30px;
         }
 
-        .btn-enter {
-            margin-top: 40px;
-            padding: 12px 30px;
+        .start-btn {
+            padding: 15px 40px;
             background: transparent;
             border: 1px solid var(--accent);
             color: var(--accent);
             font-family: 'Montserrat', sans-serif;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             cursor: pointer;
-            transition: 0.3s;
+            z-index: 1001;
         }
 
-        .btn-enter:hover { background: var(--accent); color: var(--black); }
-
-        @keyframes textPulse {
-            0%, 100% { opacity: 0.4; transform: scale(0.98); }
-            50% { opacity: 1; transform: scale(1); }
-        }
-
-        /* --- MAIN BANNER --- */
+        /* --- STAGE 2: THE REVEAL BANNER --- */
         .banner {
             position: relative;
             height: 100dvh;
@@ -69,7 +62,7 @@
             align-items: center;
             overflow: hidden;
             opacity: 0;
-            transition: opacity 3s ease-in;
+            transition: opacity 3.5s ease-in;
         }
 
         .banner.active { opacity: 1; }
@@ -105,22 +98,23 @@
         /* --- TIMER --- */
         .timer-container {
             margin-bottom: 5vh;
-            display: flex; gap: 15px; z-index: 20;
-            background: rgba(10, 10, 10, 0.7);
-            padding: 20px; border-radius: 10px;
-            border: 1px solid rgba(255, 183, 3, 0.3);
+            display: flex; gap: 12px; z-index: 20;
+            background: rgba(10, 10, 10, 0.6);
+            padding: 15px 30px; border-radius: 10px;
+            border: 1px solid rgba(255, 183, 3, 0.2);
+            backdrop-filter: blur(5px);
         }
 
         .time-box { text-align: center; min-width: 60px; }
-        .time-box span { display: block; font-size: 1.8rem; color: var(--accent); font-weight: bold; }
-        .time-box label { font-size: 0.6rem; text-transform: uppercase; opacity: 0.7; }
+        .time-box span { display: block; font-size: 1.6rem; color: var(--accent); font-weight: bold; }
+        .time-box label { font-size: 0.55rem; text-transform: uppercase; opacity: 0.7; }
     </style>
 </head>
 <body>
 
     <div id="intro-curtain">
-        <div class="intro-text">Gikan sa Gamut...<br>Tubtob sa Langit</div>
-        <button class="btn-enter" onclick="igniteLegacy()">Enter the Legacy</button>
+        <div id="motto-text">Gikan sa Gamut...<br>Tubtob sa Langit</div>
+        <button id="begin-btn" class="start-btn" onclick="executeCinematicOpening()">Begin the Legacy</button>
     </div>
 
     <header class="banner" id="main-banner">
@@ -138,82 +132,94 @@
         </div>
     </header>
 
-    <!-- Preloaded Audio Elements -->
+    <!-- Audio Assets -->
     <audio id="snd-swell" src="audio/prelude_swell.mp3" preload="auto"></audio>
     <audio id="snd-shimmer" src="audio/reveal_shimmer.mp3" preload="auto"></audio>
     <audio id="snd-anthem" src="audio/sazon-full-anthem.mp3" loop></audio>
     
-    <!-- Firework SFX Pool -->
     <audio id="burst-low" src="audio/firework_burst_low.mp3" preload="auto"></audio>
     <audio id="burst-high" src="audio/firework_burst_high.mp3" preload="auto"></audio>
     <audio id="burst-whistle" src="audio/firework_whistle.mp3" preload="auto"></audio>
 
     <script>
-        // Start the prelude swell immediately on load
-        window.onload = () => { document.getElementById('snd-swell').play().catch(() => {}); };
-
-        function igniteLegacy() {
-            // 1. Play reveal sound
-            document.getElementById('snd-shimmer').play();
-            
-            // 2. Transition Curtain
-            const curtain = document.getElementById('intro-curtain');
-            curtain.style.opacity = '0';
-            setTimeout(() => { curtain.style.display = 'none'; }, 2000);
-
-            // 3. Show Banner & Start Anthem
+        function executeCinematicOpening() {
+            const btn = document.getElementById('begin-btn');
+            const motto = document.getElementById('motto-text');
+            const swell = document.getElementById('snd-swell');
+            const shimmer = document.getElementById('snd-shimmer');
+            const anthem = document.getElementById('snd-anthem');
             const banner = document.getElementById('main-banner');
-            banner.classList.add('active');
-            document.getElementById('snd-anthem').play();
+            const curtain = document.getElementById('intro-curtain');
 
-            // 4. Start Firework Loop
-            setInterval(launchFirework, 1800);
+            // 1. Hide Button & Play Swell Immediately
+            btn.style.display = 'none';
+            swell.play();
+            
+            // 2. Fade in the Motto Text during the swell
+            motto.style.opacity = '1';
+
+            // 3. Set the Reveal Timing (Adjust 3500ms to match your swell peak)
+            setTimeout(() => {
+                // Play shimmer and fade out curtain
+                shimmer.play();
+                curtain.style.opacity = '0';
+                
+                // Show the hub and start celebration
+                banner.classList.add('active');
+                anthem.play();
+                document.body.style.overflow = 'auto';
+
+                // Start fireworks
+                setInterval(launchFirework, 2000);
+                
+                // Final cleanup of the curtain
+                setTimeout(() => { curtain.style.display = 'none'; }, 2000);
+            }, 3500); 
         }
 
         function launchFirework() {
             const stage = document.getElementById('fireworks');
-            const x = 50 + (Math.random() * 40 - 20);
-            const y = 20 + (Math.random() * 30);
+            const x = 55 + (Math.random() * 35);
+            const y = 15 + (Math.random() * 25);
             
-            // --- AUDIO RANDOMIZER ---
             const sounds = ['burst-low', 'burst-high', 'burst-whistle'];
             const randomSnd = sounds[Math.floor(Math.random() * sounds.length)];
             const sfx = document.getElementById(randomSnd).cloneNode();
-            sfx.volume = 0.4; // Set lower so it doesn't drown the anthem
+            sfx.volume = 0.3;
             sfx.play();
 
-            // --- VISUAL BURST ---
             const colors = ['#FFD700', '#FB8500', '#FFFFFF'];
             const color = colors[Math.floor(Math.random() * colors.length)];
             
-            for (let i = 0; i < 40; i++) {
+            for (let i = 0; i < 35; i++) {
                 const p = document.createElement('div');
                 p.className = 'particle';
-                const angle = (i * 9) * (Math.PI / 180);
-                const velocity = 80 + Math.random() * 100;
+                const angle = (i * 10.3) * (Math.PI / 180);
+                const velocity = 70 + Math.random() * 90;
                 
                 p.style.backgroundColor = color;
+                p.style.boxShadow = `0 0 6px ${color}`;
                 p.style.left = x + '%';
                 p.style.top = y + '%';
                 p.style.setProperty('--x', `${Math.cos(angle) * velocity}px`);
-                p.style.setProperty('--y', `${Math.sin(angle) * velocity + 40}px`);
-                p.style.animation = `explode ${1.5}s ease-out forwards`;
+                p.style.setProperty('--y', `${Math.sin(angle) * velocity + 30}px`);
+                p.style.animation = `explode 1.4s ease-out forwards`;
                 
                 stage.appendChild(p);
-                setTimeout(() => p.remove(), 1600);
+                setTimeout(() => p.remove(), 1400);
             }
         }
 
-        // Timer Logic
+        // Countdown for July 23, 2027
         const countDate = new Date("July 23, 2027 00:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
             const gap = countDate - now;
             const second = 1000, minute = second * 60, hour = minute * 60, day = hour * 24;
-            document.getElementById("days").innerText = Math.floor(gap / day);
-            document.getElementById("hours").innerText = Math.floor((gap % day) / hour);
-            document.getElementById("mins").innerText = Math.floor((gap % hour) / minute);
-            document.getElementById("secs").innerText = Math.floor((gap % minute) / second);
+            document.getElementById("days").innerText = String(Math.floor(gap / day)).padStart(2, '0');
+            document.getElementById("hours").innerText = String(Math.floor((gap % day) / hour)).padStart(2, '0');
+            document.getElementById("mins").innerText = String(Math.floor((gap % hour) / minute)).padStart(2, '0');
+            document.getElementById("secs").innerText = String(Math.floor((gap % minute) / second)).padStart(2, '0');
         }, 1000);
     </script>
 </body>
