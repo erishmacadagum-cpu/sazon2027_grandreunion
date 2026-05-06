@@ -14,18 +14,54 @@
             --black: #0a0a0a;
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body, html { margin: 0; padding: 0; background: var(--black); color: var(--surface); font-family: 'Montserrat', sans-serif; overflow: hidden; height: 100%; }
 
-        body, html {
-            margin: 0; padding: 0;
-            background-color: var(--black);
-            color: var(--surface);
-            font-family: 'Montserrat', sans-serif;
-            overflow-x: hidden;
-            height: 100%;
+        /* --- CINEMATIC OPENING CREDITS --- */
+        #intro-curtain {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--black);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 2s ease-in-out;
         }
 
-        /* --- 1. THE HERO BANNER --- */
+        .intro-text {
+            font-family: 'Cinzel', serif;
+            color: var(--accent);
+            font-size: 1.5rem;
+            letter-spacing: 8px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: textRise 3s forwards;
+            text-align: center;
+        }
+
+        .click-to-begin {
+            margin-top: 30px;
+            color: var(--surface);
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border: 1px solid var(--accent);
+            padding: 10px 20px;
+            opacity: 0;
+            animation: fadeIn 1s 2s forwards;
+        }
+
+        @keyframes textRise {
+            0% { opacity: 0; transform: translateY(20px); }
+            50% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-20px); }
+        }
+
+        @keyframes fadeIn { to { opacity: 1; } }
+
+        /* --- MAIN BANNER (Initially Hidden) --- */
         .banner {
             position: relative;
             height: 100dvh;
@@ -36,66 +72,49 @@
             align-items: center;
             overflow: hidden;
             border-bottom: 5px solid var(--accent);
+            opacity: 0;
+            transition: opacity 3s ease-in;
         }
+
+        .banner.active { opacity: 1; }
 
         .banner-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 115%;
-            background: 
-                radial-gradient(circle, rgba(26, 44, 163, 0.1) 0%, rgba(10, 10, 10, 0.5) 100%),
-                url('images/cover.jpeg') center/cover no-repeat;
+            background: radial-gradient(circle, rgba(26, 44, 163, 0.1) 0%, rgba(10, 10, 10, 0.5) 100%),
+                        url('images/cover.jpeg') center/cover no-repeat;
             z-index: 1;
-            will-change: transform;
         }
 
-        /* --- 2. THE MOON (CLEAN & REALISTIC) --- */
         .moon-container {
             position: absolute;
             top: 5vh; left: 5vw;
             width: clamp(110px, 18vw, 190px);
-            aspect-ratio: 1/1;
             z-index: 10;
             mix-blend-mode: screen; 
             filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.4));
             animation: moonFloat 8s ease-in-out infinite alternate;
         }
-        .moon-asset { width: 100%; height: auto; border-radius: 50%; }
 
-        /* --- 3. ADVANCED FIREWORKS ENGINE --- */
-        .fireworks-stage {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 5;
-        }
+        .moon-asset { width: 100%; border-radius: 50%; }
 
-        .particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            border-radius: 50%;
-            opacity: 0;
-            will-change: transform, opacity;
-        }
+        .fireworks-stage { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
+
+        .particle { position: absolute; width: 3px; height: 3px; border-radius: 50%; opacity: 0; }
 
         @keyframes fireworkExplode {
             0% { transform: translate(0, 0) scale(1); opacity: 1; }
             100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
         }
 
-        /* --- 4. ANCHORED TIMER --- */
         .timer-container {
             margin-bottom: clamp(30px, 8vh, 60px);
-            display: flex;
-            gap: 12px;
-            z-index: 20;
+            display: flex; gap: 12px; z-index: 20;
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             padding: 18px 35px;
             background: rgba(10, 10, 10, 0.6);
             border: 1px solid rgba(255, 183, 3, 0.4);
             border-radius: 12px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
         }
 
         .time-box { text-align: center; min-width: 70px; }
@@ -107,8 +126,14 @@
 </head>
 <body>
 
-    <header class="banner">
-        <div class="banner-bg" id="parallax-bg"></div>
+    <!-- Opening Credits Curtain -->
+    <div id="intro-curtain" onclick="startLegacyHub()">
+        <div class="intro-text">Gikan sa Gamut...</div>
+        <div class="click-to-begin">Enter the Legacy</div>
+    </div>
+
+    <header class="banner" id="main-banner">
+        <div class="banner-bg"></div>
         <div class="moon-container">
             <img src="images/moon.png" alt="Moon" class="moon-asset">
         </div>
@@ -122,52 +147,54 @@
         </div>
     </header>
 
+    <!-- Audio Files -->
+    <audio id="anthem" src="sazon-full-anthem.mp3"></audio>
+
     <script>
-        // High-Fidelity Particle Fireworks
+        function startLegacyHub() {
+            // 1. Fade out the curtain
+            const curtain = document.getElementById('intro-curtain');
+            curtain.style.opacity = '0';
+            setTimeout(() => { curtain.style.display = 'none'; }, 2000);
+
+            // 2. Fade in the banner
+            const banner = document.getElementById('main-banner');
+            banner.classList.add('active');
+            document.body.style.overflow = 'auto';
+
+            // 3. Play the anthem
+            const anthem = document.getElementById('anthem');
+            anthem.play();
+
+            // 4. Start fireworks loop
+            setInterval(launchFirework, 1500);
+        }
+
         function launchFirework() {
             const stage = document.getElementById('fireworks');
-            const xOrigin = 50 + (Math.random() * 40 - 20); // Focus on right side/center
-            const yOrigin = 20 + (Math.random() * 30);
-            const colors = ['#FFD700', '#FB8500', '#FFFFFF', '#FFB703', '#FF4500'];
+            const xOrigin = 60 + (Math.random() * 30);
+            const yOrigin = 15 + (Math.random() * 25);
+            const colors = ['#FFD700', '#FB8500', '#FFFFFF', '#FFB703'];
             const color = colors[Math.floor(Math.random() * colors.length)];
             
-            const particleCount = 40;
-            const burstId = Date.now();
-
-            for (let i = 0; i < particleCount; i++) {
+            for (let i = 0; i < 35; i++) {
                 const p = document.createElement('div');
                 p.className = 'particle';
-                
-                // Physics Calculations
-                const angle = (i * (360 / particleCount)) * (Math.PI / 180);
-                const velocity = 100 + (Math.random() * 150);
-                const xDest = Math.cos(angle) * velocity;
-                const yDest = Math.sin(angle) * velocity + 50; // Added "gravity" pull
-
+                const angle = (i * (360 / 35)) * (Math.PI / 180);
+                const velocity = 80 + (Math.random() * 120);
                 p.style.backgroundColor = color;
-                p.style.boxShadow = `0 0 10px ${color}`;
+                p.style.boxShadow = `0 0 8px ${color}`;
                 p.style.left = xOrigin + '%';
                 p.style.top = yOrigin + '%';
-                p.style.setProperty('--x', `${xDest}px`);
-                p.style.setProperty('--y', `${yDest}px`);
-                
-                p.style.animation = `fireworkExplode ${1.5 + Math.random()}s ease-out forwards`;
-                
+                p.style.setProperty('--x', `${Math.cos(angle) * velocity}px`);
+                p.style.setProperty('--y', `${(Math.sin(angle) * velocity) + 40}px`);
+                p.style.animation = `fireworkExplode ${1.2 + Math.random()}s ease-out forwards`;
                 stage.appendChild(p);
-                setTimeout(() => p.remove(), 2500);
+                setTimeout(() => p.remove(), 2000);
             }
         }
 
-        // Launch bursts at intervals for continuous "Hala Bira" energy
-        setInterval(launchFirework, 1800);
-        setTimeout(launchFirework, 500);
-
-        // Parallax & Countdown
-        window.addEventListener('scroll', () => {
-            const offset = window.pageYOffset;
-            document.getElementById('parallax-bg').style.transform = `translateY(${offset * 0.3}px)`;
-        });
-
+        // Countdown Logic
         const countDate = new Date("July 23, 2027 00:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
