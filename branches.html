@@ -17,14 +17,10 @@
 
         body, html { margin: 0; padding: 0; background: var(--bg-deep); color: var(--silver-mist); font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
 
-        /* --- FIREWORKS MOTION --- */
-        .firework-particle {
-            position: fixed; width: 4px; height: 4px; border-radius: 50%;
-            pointer-events: none; z-index: 999; opacity: 0;
-        }
-        @keyframes firework-burst {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(25); opacity: 0; }
+        /* --- WHIMSICAL FIREWORKS SYSTEM --- */
+        canvas#fireworks-canvas {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 999;
         }
 
         /* --- INTRO CURTAIN --- */
@@ -46,45 +42,27 @@
         .time-val { display: block; font-size: 2.2rem; font-weight: 700; color: var(--gold-leaf); font-family: 'Cinzel', serif; }
         .time-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* --- ROOTS & BRANCHES --- */
-        .roots-section { padding: 80px 20px 40px 20px; text-align: center; }
-        .ancestor-card { width: 280px; border: 2px solid var(--gold-leaf); padding: 20px; background: rgba(255, 255, 255, 0.05); border-radius: 12px; display: inline-block; margin: 15px; }
-
-        .branches-section { padding: 20px 20px 60px 20px; background: var(--bg-accent); text-align: center; }
+        /* --- BRANCHES INTERACTION --- */
+        .branches-section { padding: 40px 20px 80px 20px; background: var(--bg-accent); text-align: center; }
         .tier { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 25px; }
         .branch-tag { 
             flex: 1 1 180px; max-width: 200px; padding: 20px; background: rgba(255, 255, 255, 0.05); 
             border: 1px solid rgba(255, 215, 0, 0.2); border-radius: 10px; cursor: pointer; 
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        /* INTERACTIVE COLOR-CHANGING STATE */
-        .branch-tag.active-branch { background: var(--accent-vibrant); border-color: white; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .branch-tag.active-branch { background: var(--accent-vibrant); border-color: white; transform: scale(1.1); box-shadow: 0 0 20px rgba(255, 127, 80, 0.6); }
         .formal-name { display: block; font-family: 'Cinzel', serif; color: var(--gold-leaf); font-weight: bold; pointer-events: none; }
 
-        /* --- PROGRAMME SECTION --- */
-        .programme-section { padding: 80px 20px; background: var(--bg-deep); text-align: center; }
-        .prog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto; }
+        /* --- PROGRAMME & REGISTRATION --- */
+        .prog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1000px; margin: 40px auto; }
         .day-card { background: var(--glass); padding: 30px; border-radius: 15px; border-top: 4px solid var(--gold-leaf); text-align: left; }
-        .day-title { font-family: 'Cinzel', serif; color: var(--accent-vibrant); font-size: 1.5rem; margin-bottom: 20px; border-bottom: 1px solid var(--glass); padding-bottom: 10px; }
-        .event-item { margin-bottom: 15px; font-size: 0.9rem; }
-        .event-time { color: var(--gold-leaf); font-weight: bold; display: block; }
-
-        /* --- REGISTRATION BOX --- */
-        .reg-box { 
-            max-width: 600px; margin: 50px auto; padding: 40px; 
-            background: linear-gradient(135deg, var(--bg-accent), #1a2a5a);
-            border-radius: 20px; border: 1px solid var(--gold-leaf); text-align: center;
-        }
-        .rsvp-btn { 
-            display: inline-block; padding: 20px 50px; background: var(--accent-vibrant); 
-            color: white; text-decoration: none; font-weight: 700; border-radius: 50px; 
-            text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(255, 127, 80, 0.4);
-        }
-        .rsvp-btn:hover { transform: scale(1.05); background: #ff936b; }
+        .reg-box { max-width: 600px; margin: 50px auto; padding: 40px; background: var(--bg-accent); border-radius: 20px; border: 1px solid var(--gold-leaf); text-align: center; }
+        .rsvp-btn { display: inline-block; padding: 20px 50px; background: var(--accent-vibrant); color: white; text-decoration: none; font-weight: 700; border-radius: 50px; text-transform: uppercase; letter-spacing: 2px; }
     </style>
 </head>
 <body>
+
+    <canvas id="fireworks-canvas"></canvas>
 
     <div id="intro-curtain">
         <div id="motto-text">
@@ -108,120 +86,136 @@
         </div>
     </header>
 
-    <section class="roots-section">
+    <section style="padding: 60px 20px; text-align: center;">
         <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf);">The Roots</h2>
-        <div class="ancestor-card">
-            <div style="height: 250px; background: #1a1a1a; border-radius: 8px;"></div>
-            <div style="font-family: 'Cinzel'; color: var(--accent-vibrant); font-size: 1.4rem; margin-top: 15px;">Tereso Sazon</div>
-        </div>
-        <div class="ancestor-card">
-            <div style="height: 250px; background: #1a1a1a; border-radius: 8px;"></div>
-            <div style="font-family: 'Cinzel'; color: var(--accent-vibrant); font-size: 1.4rem; margin-top: 15px;">Teofista Sazon</div>
+        <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
+            <div style="width: 250px; border: 1px solid var(--gold-leaf); padding: 15px; border-radius: 10px;">
+                <div style="height: 200px; background: #222; border-radius: 5px;"></div>
+                <h3 style="font-family: 'Cinzel'; color: var(--accent-vibrant);">Tereso Sazon</h3>
+            </div>
+            <div style="width: 250px; border: 1px solid var(--gold-leaf); padding: 15px; border-radius: 10px;">
+                <div style="height: 200px; background: #222; border-radius: 5px;"></div>
+                <h3 style="font-family: 'Cinzel'; color: var(--accent-vibrant);">Teofista Sazon</h3>
+            </div>
         </div>
     </section>
 
     <section class="branches-section">
         <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf); margin-bottom: 30px;">The 13 Branches</h2>
-        <div class="tier" id="branch-container">
-            <!-- JavaScript will populate these to ensure clean interaction -->
-        </div>
+        <div class="tier" id="branch-container"></div>
     </section>
 
-    <section class="programme-section">
-        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf); margin-bottom: 50px;">Event Programme</h2>
+    <section style="padding: 60px 20px; text-align: center;">
+        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf);">Event Programme</h2>
         <div class="prog-grid">
             <div class="day-card">
-                <div class="day-title">Day 1: July 23, 2027</div>
-                <div class="event-item"><span class="event-time">08:00 AM</span> Grand Motorcade & Assembly</div>
-                <div class="event-item"><span class="event-time">10:30 AM</span> Thanksgiving Mass</div>
-                <div class="event-item"><span class="event-time">12:00 PM</span> Welcome Lunch: The 13 Branches Feast</div>
-                <div class="event-item"><span class="event-time">02:00 PM</span> Sazon Roots Presentation</div>
+                <h3 style="color: var(--accent-vibrant);">Day 1: July 23, 2027</h3>
+                <p>08:00 AM - Motorcade & Opening Ceremony</p>
+                <p>12:00 PM - Welcome Luncheon</p>
             </div>
             <div class="day-card">
-                <div class="day-title">Day 2: July 24, 2027</div>
-                <div class="event-item"><span class="event-time">09:00 AM</span> Family Sports & Team Building</div>
-                <div class="event-item"><span class="event-time">01:00 PM</span> Talent Showcase (P-Pop & Jingle)</div>
-                <div class="event-item"><span class="event-time">06:00 PM</span> Grand Gala Night & Awards</div>
-                <div class="event-item"><span class="event-time">09:00 PM</span> Farewell Fireworks Display</div>
+                <h3 style="color: var(--accent-vibrant);">Day 2: July 24, 2027</h3>
+                <p>09:00 AM - Family Fun Games</p>
+                <p>06:00 PM - Grand Gala Night</p>
             </div>
         </div>
     </section>
 
-    <section style="padding: 60px 20px;">
-        <div class="reg-box">
-            <h3 style="font-family: 'Cinzel'; color: var(--gold-leaf);">Secure Your Spot</h3>
-            <p style="margin-bottom: 30px;">Please register your branch members by July 2027.</p>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="rsvp-btn">Open Registration Form</a>
-        </div>
+    <section class="reg-box">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="rsvp-btn">Register Your Branch</a>
     </section>
 
-    <!-- AUDIO -->
+    <!-- AUDIO FILES AS REQUESTED -->
     <audio id="snd-swell" src="audio/prelude_swell.mp3"></audio>
     <audio id="snd-anthem" src="audio/sazon-full-anthem.mp3"></audio>
-    <audio id="fw1" src="audio/firework1.mp3"></audio>
-    <audio id="fw2" src="audio/firework2.mp3"></audio>
-    <audio id="fw3" src="audio/firework3.mp3"></audio>
+    <audio id="fw-whistle" src="audio/firework_whistle_.mp3"></audio>
+    <audio id="fw-high" src="audio/firework_burst_high.mp3"></audio>
+    <audio id="fw-low" src="audio/firework_burst_low.mp3"></audio>
 
     <script>
-        // --- BRANCH DATA & INTERACTION ---
+        // --- BRANCH INTERACTION ---
         const branches = [
             {f: "Serafin", n: "Lolo Apin"}, {f: "Monserat", n: "Lola Monching"}, {f: "Felomina", n: "Lola Mining"},
             {f: "Estrella", n: "Lola Estring"}, {f: "Gregorio", n: "Lolo Gorio"}, {f: "Regino", n: "Lolo Taba"},
             {f: "Maria", n: "Lola Maria"}, {f: "Concepcion", n: "Lola Moret"}, {f: "Cezar", n: "Lolo Cezar"},
             {f: "Priscilla", n: "Lola Mamay"}, {f: "Gloria", n: "Lola Goly"}, {f: "Reynaldo", n: "Lolo Lope"}, {f: "Nilda", n: "Lola Nilda"}
         ];
-
-        const container = document.getElementById('branch-container');
+        const bc = document.getElementById('branch-container');
         branches.forEach(b => {
-            const div = document.createElement('div');
-            div.className = 'branch-tag';
-            div.innerHTML = `<span class="formal-name">${b.f}</span><span class="nickname">(${b.n})</span>`;
-            div.onclick = () => div.classList.toggle('active-branch');
-            container.appendChild(div);
+            const d = document.createElement('div'); d.className = 'branch-tag';
+            d.innerHTML = `<span class="formal-name">${b.f}</span><span>(${b.n})</span>`;
+            d.onclick = () => d.classList.toggle('active-branch');
+            bc.appendChild(d);
         });
 
-        // --- FIREWORKS MOTION EFFECT ---
-        function createFirework() {
-            const colors = ['#FFD700', '#FF7F50', '#FFFFFF', '#00E5FF'];
-            for(let i=0; i<20; i++) {
-                const p = document.createElement('div');
-                p.className = 'firework-particle';
-                p.style.left = Math.random() * 100 + 'vw';
-                p.style.top = Math.random() * 100 + 'vh';
-                p.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
-                p.style.animation = `firework-burst 1.5s ease-out forwards`;
-                document.body.appendChild(p);
-                setTimeout(() => p.remove(), 1500);
+        // --- FIREWORKS CANVAS ENGINE ---
+        const canvas = document.getElementById('fireworks-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        let particles = [];
+
+        function createBurst(x, y) {
+            const count = 50;
+            const colors = ['#FFD700', '#FF7F50', '#FFFFFF', '#00E5FF', '#FF00FF'];
+            for(let i=0; i<count; i++) {
+                particles.push({
+                    x, y, 
+                    vX: (Math.random() - 0.5) * 15,
+                    vY: (Math.random() - 0.5) * 15,
+                    life: 1, 
+                    color: colors[Math.floor(Math.random()*colors.length)]
+                });
             }
         }
 
-        // --- TIMER ---
-        const target = new Date("July 23, 2027 08:00:00").getTime();
-        setInterval(() => {
-            const dist = target - new Date().getTime();
-            document.getElementById("days").innerText = Math.floor(dist / 86400000);
-            document.getElementById("hours").innerText = Math.floor((dist % 86400000) / 3600000);
-            document.getElementById("minutes").innerText = Math.floor((dist % 3600000) / 60000);
-            document.getElementById("seconds").innerText = Math.floor((dist % 60000) / 1000);
-        }, 1000);
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, i) => {
+                p.x += p.vX; p.y += p.vY; p.vY += 0.1; p.life -= 0.015;
+                ctx.fillStyle = p.color; ctx.globalAlpha = p.life;
+                ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI*2); ctx.fill();
+                if(p.life <= 0) particles.splice(i, 1);
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
 
+        // --- PRODUCTION INTRO ---
         function runProductionIntro() {
             document.getElementById('begin-btn').style.display = 'none';
             document.getElementById('snd-swell').play();
             document.getElementById('motto-text').style.opacity = '1';
             
             setTimeout(() => {
-                // Trigger Sounds & Motion
-                document.getElementById('fw1').play(); createFirework();
-                setTimeout(() => { document.getElementById('fw2').play(); createFirework(); }, 500);
-                setTimeout(() => { document.getElementById('fw3').play(); createFirework(); }, 1200);
+                // Sequence of WHISTLE then BURSTS
+                document.getElementById('fw-whistle').play();
                 
+                setTimeout(() => {
+                    document.getElementById('fw-high').play();
+                    createBurst(window.innerWidth/4, window.innerHeight/3);
+                }, 800);
+
+                setTimeout(() => {
+                    document.getElementById('fw-low').play();
+                    createBurst(window.innerWidth*0.75, window.innerHeight/2);
+                }, 1300);
+
                 document.getElementById('intro-curtain').style.opacity = '0';
                 document.getElementById('main-banner').classList.add('active');
                 document.getElementById('snd-anthem').play();
                 setTimeout(() => document.getElementById('intro-curtain').style.display = 'none', 2500);
             }, 4000);
         }
+
+        // Timer Logic
+        const target = new Date("July 23, 2027 08:00:00").getTime();
+        setInterval(() => {
+            const d = target - new Date().getTime();
+            document.getElementById("days").innerText = Math.floor(d / 86400000);
+            document.getElementById("hours").innerText = Math.floor((d % 86400000) / 3600000);
+            document.getElementById("minutes").innerText = Math.floor((d % 3600000) / 60000);
+            document.getElementById("seconds").innerText = Math.floor((d % 60000) / 1000);
+        }, 1000);
     </script>
 </body>
 </html>
