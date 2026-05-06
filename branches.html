@@ -14,12 +14,10 @@
             --black: #0a0a0a;
         }
 
-        /* Prevent unwanted mobile horizontal scrolling */
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body, html {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             background-color: var(--black);
             color: var(--surface);
             font-family: 'Montserrat', sans-serif;
@@ -27,10 +25,10 @@
             height: 100%;
         }
 
-        /* --- 1. BRIGHTER PARALLAX BANNER --- */
+        /* --- 1. THE HERO BANNER --- */
         .banner {
             position: relative;
-            height: 100dvh; /* Dynamic Viewport for mobile browsers */
+            height: 100dvh;
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -42,94 +40,78 @@
 
         .banner-bg {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 110%;
-            /* Lightened for clarity of the tree and people */
+            top: 0; left: 0; width: 100%; height: 115%;
             background: 
-                linear-gradient(rgba(26, 44, 163, 0.1), rgba(10, 10, 10, 0.4)),
+                radial-gradient(circle, rgba(26, 44, 163, 0.1) 0%, rgba(10, 10, 10, 0.5) 100%),
                 url('images/cover.jpeg') center/cover no-repeat;
             z-index: 1;
             will-change: transform;
         }
 
-        /* --- 2. REALISTIC MOON (NO BLACK RIM) --- */
+        /* --- 2. THE MOON (CLEAN & REALISTIC) --- */
         .moon-container {
             position: absolute;
-            top: 4vh;
-            left: 4vw;
-            width: clamp(100px, 18vw, 180px);
+            top: 5vh; left: 5vw;
+            width: clamp(110px, 18vw, 190px);
             aspect-ratio: 1/1;
             z-index: 10;
-            mix-blend-mode: screen; /* Strips black rim from png */
-            filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.4));
+            mix-blend-mode: screen; 
+            filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.4));
             animation: moonFloat 8s ease-in-out infinite alternate;
         }
-
         .moon-asset { width: 100%; height: auto; border-radius: 50%; }
 
-        /* --- 3. MOBILE-OPTIMIZED FIREWORKS --- */
+        /* --- 3. ADVANCED FIREWORKS ENGINE --- */
         .fireworks-stage {
             position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
             z-index: 5;
         }
 
-        .spark {
+        .particle {
             position: absolute;
-            width: 2px;
-            height: 15px;
-            border-radius: 2px;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
             opacity: 0;
-            animation: sparkBurst 4s infinite;
+            will-change: transform, opacity;
         }
 
-        @keyframes sparkBurst {
-            0% { transform: rotate(var(--rot)) translateY(0) scale(0); opacity: 1; }
-            100% { transform: rotate(var(--rot)) translateY(min(300px, 35vh)) scale(0.5); opacity: 0; }
+        @keyframes fireworkExplode {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
         }
 
-        /* --- 4. ANCHORED TIMER (BOTTOM HIGHLIGHT) --- */
+        /* --- 4. ANCHORED TIMER --- */
         .timer-container {
-            margin-bottom: 40px;
+            margin-bottom: clamp(30px, 8vh, 60px);
             display: flex;
-            gap: 10px;
+            gap: 12px;
             z-index: 20;
-            backdrop-filter: blur(8px);
-            padding: 15px 25px;
-            background: rgba(10, 10, 10, 0.5);
-            border: 1px solid rgba(255, 183, 3, 0.3);
-            border-radius: 10px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 18px 35px;
+            background: rgba(10, 10, 10, 0.6);
+            border: 1px solid rgba(255, 183, 3, 0.4);
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
         }
 
-        .time-box { text-align: center; min-width: 65px; }
-        .time-box span { display: block; font-size: 1.6rem; color: var(--accent); font-weight: bold; font-family: 'Cinzel', serif; }
+        .time-box { text-align: center; min-width: 70px; }
+        .time-box span { display: block; font-size: 1.8rem; color: var(--accent); font-weight: bold; font-family: 'Cinzel', serif; }
         .time-box label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; }
 
-        @keyframes moonFloat { from { transform: translateY(0); } to { transform: translateY(-15px); } }
-
-        /* Mobile specific adjustments */
-        @media (max-width: 480px) {
-            .timer-container { gap: 5px; padding: 10px; margin-bottom: 25px; }
-            .time-box { min-width: 55px; }
-            .time-box span { font-size: 1.3rem; }
-        }
+        @keyframes moonFloat { from { transform: translateY(0); } to { transform: translateY(-18px); } }
     </style>
 </head>
 <body>
 
     <header class="banner">
         <div class="banner-bg" id="parallax-bg"></div>
-        
         <div class="moon-container">
-            <img src="images/moon.png" alt="Sazon Moon" class="moon-asset">
+            <img src="images/moon.png" alt="Moon" class="moon-asset">
         </div>
-
         <div class="fireworks-stage" id="fireworks"></div>
 
         <div class="timer-container" id="countdown">
@@ -141,46 +123,60 @@
     </header>
 
     <script>
-        // High-Vibrance Firework Bursts
-        function createBurst(top, right, color, count, delay) {
-            const container = document.getElementById('fireworks');
-            const burstOrigin = document.createElement('div');
-            burstOrigin.style.position = 'absolute';
-            burstOrigin.style.top = top + '%';
-            burstOrigin.style.right = right + '%';
+        // High-Fidelity Particle Fireworks
+        function launchFirework() {
+            const stage = document.getElementById('fireworks');
+            const xOrigin = 50 + (Math.random() * 40 - 20); // Focus on right side/center
+            const yOrigin = 20 + (Math.random() * 30);
+            const colors = ['#FFD700', '#FB8500', '#FFFFFF', '#FFB703', '#FF4500'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            const particleCount = 40;
+            const burstId = Date.now();
 
-            for(let i=0; i<count; i++) {
-                const spark = document.createElement('div');
-                spark.className = 'spark';
-                spark.style.backgroundColor = color;
-                spark.style.boxShadow = `0 0 8px ${color}`;
-                spark.style.setProperty('--rot', (i * (360/count)) + 'deg');
-                spark.style.animationDelay = delay + (Math.random() * 0.8) + 's';
-                burstOrigin.appendChild(spark);
+            for (let i = 0; i < particleCount; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                
+                // Physics Calculations
+                const angle = (i * (360 / particleCount)) * (Math.PI / 180);
+                const velocity = 100 + (Math.random() * 150);
+                const xDest = Math.cos(angle) * velocity;
+                const yDest = Math.sin(angle) * velocity + 50; // Added "gravity" pull
+
+                p.style.backgroundColor = color;
+                p.style.boxShadow = `0 0 10px ${color}`;
+                p.style.left = xOrigin + '%';
+                p.style.top = yOrigin + '%';
+                p.style.setProperty('--x', `${xDest}px`);
+                p.style.setProperty('--y', `${yDest}px`);
+                
+                p.style.animation = `fireworkExplode ${1.5 + Math.random()}s ease-out forwards`;
+                
+                stage.appendChild(p);
+                setTimeout(() => p.remove(), 2500);
             }
-            container.appendChild(burstOrigin);
         }
 
-        createBurst(20, 15, '#FFD700', 20, 0);   
-        createBurst(35, 30, '#FB8500', 16, 1.2); 
-        createBurst(10, 25, '#FFFFFF', 12, 0.5); 
+        // Launch bursts at intervals for continuous "Hala Bira" energy
+        setInterval(launchFirework, 1800);
+        setTimeout(launchFirework, 500);
 
-        // Parallax Logic
+        // Parallax & Countdown
         window.addEventListener('scroll', () => {
             const offset = window.pageYOffset;
             document.getElementById('parallax-bg').style.transform = `translateY(${offset * 0.3}px)`;
         });
 
-        // Countdown Logic for July 23, 2027
         const countDate = new Date("July 23, 2027 00:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
             const gap = countDate - now;
             const second = 1000, minute = second * 60, hour = minute * 60, day = hour * 24;
-            document.getElementById("days").innerText = Math.floor(gap / day);
-            document.getElementById("hours").innerText = Math.floor((gap % day) / hour);
-            document.getElementById("mins").innerText = Math.floor((gap % hour) / minute);
-            document.getElementById("secs").innerText = Math.floor((gap % minute) / second);
+            document.getElementById("days").innerText = String(Math.floor(gap / day)).padStart(2, '0');
+            document.getElementById("hours").innerText = String(Math.floor((gap % day) / hour)).padStart(2, '0');
+            document.getElementById("mins").innerText = String(Math.floor((gap % hour) / minute)).padStart(2, '0');
+            document.getElementById("secs").innerText = String(Math.floor((gap % minute) / second)).padStart(2, '0');
         }, 1000);
     </script>
 </body>
