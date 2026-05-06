@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* VIBRANT ROYAL HERITAGE PALETTE */
             --bg-deep: #0A1128;      /* Midnight Navy */
             --bg-accent: #152044;    /* Royal Blue */
             --accent-vibrant: #FF7F50; /* Vibrant Coral */
@@ -20,14 +19,17 @@
 
         /* --- STAGE 1: CINEMATIC ENTRANCE --- */
         #intro-curtain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-deep); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 2s ease-in-out; }
-        #motto-text { font-family: 'Cinzel', serif; color: var(--gold-leaf); font-size: clamp(1.2rem, 5vw, 2.2rem); text-align: center; letter-spacing: 6px; opacity: 0; transition: opacity 2s ease-in; margin-bottom: 40px; text-shadow: 0 0 20px rgba(255, 215, 0, 0.4); }
-        .start-btn { padding: 18px 50px; background: transparent; border: 2px solid var(--accent-vibrant); color: var(--accent-vibrant); font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 5px; font-weight: 600; cursor: pointer; transition: 0.4s; border-radius: 50px; }
+        #motto-text { font-family: 'Cinzel', serif; color: var(--gold-leaf); font-size: clamp(1rem, 4vw, 1.8rem); text-align: center; letter-spacing: 5px; opacity: 0; transition: opacity 1.5s ease-in; margin-bottom: 20px; text-shadow: 0 0 20px rgba(255, 215, 0, 0.4); line-height: 1.6; }
+        .credits-sub { font-size: 0.8rem; letter-spacing: 3px; color: var(--silver-mist); opacity: 0.7; text-transform: uppercase; margin-top: 10px; }
+        .start-btn { padding: 18px 50px; background: transparent; border: 2px solid var(--accent-vibrant); color: var(--accent-vibrant); font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 5px; font-weight: 600; cursor: pointer; transition: 0.4s; border-radius: 50px; margin-top: 30px; }
         .start-btn:hover { background: var(--accent-vibrant); color: white; box-shadow: 0 0 30px rgba(255, 127, 80, 0.5); }
 
-        /* --- STAGE 2: THE BANNER (SKY) --- */
+        /* --- STAGE 2: THE BANNER & MOON --- */
         .banner { position: relative; height: 100dvh; width: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; overflow: hidden; opacity: 0; transition: opacity 3s ease-in; }
         .banner.active { opacity: 1; }
         .banner-bg { position: absolute; top: -5%; left: -5%; width: 110%; height: 115%; background: radial-gradient(circle, rgba(10, 17, 40, 0.3), rgba(10, 17, 40, 0.9)), url('images/cover.jpeg') center/cover no-repeat; z-index: 1; animation: breathe 15s ease-in-out infinite; }
+        .moon-container { position: absolute; top: 10%; right: 10%; width: 120px; height: 120px; z-index: 2; opacity: 0.8; filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.3)); }
+        
         @keyframes breathe { 0%, 100% { transform: scale(1); filter: brightness(1); } 50% { transform: scale(1.05); filter: brightness(1.3); } }
         
         /* --- TIMER --- */
@@ -38,37 +40,30 @@
         /* --- STAGE 3: THE ROOTS --- */
         .roots-section { padding: 120px 20px; background: linear-gradient(to bottom, var(--bg-deep), var(--bg-accent)); text-align: center; }
         .section-title { font-family: 'Cinzel', serif; color: var(--gold-leaf); font-size: 2.8rem; margin-bottom: 60px; letter-spacing: 5px; text-shadow: 2px 2px 15px rgba(0,0,0,0.4); }
-        .ancestor-card { width: 300px; border: 3px solid var(--gold-leaf); padding: 20px; background: rgba(255, 255, 255, 0.05); border-radius: 12px; transition: 0.5s; display: inline-block; margin: 10px; vertical-align: top;}
+        .ancestor-card { width: 300px; border: 3px solid var(--gold-leaf); padding: 20px; background: rgba(255, 255, 255, 0.05); border-radius: 12px; transition: 0.5s; display: inline-block; margin: 15px; vertical-align: top; }
         .ancestor-card:hover { transform: translateY(-15px); border-color: var(--accent-vibrant); box-shadow: 0 15px 40px rgba(255, 127, 80, 0.2); }
         .ancestor-name { font-family: 'Cinzel', serif; color: var(--accent-vibrant); font-size: 1.5rem; margin-top: 15px; font-weight: bold; }
 
         /* --- STAGE 4: BRANCHES (5-5-3 TIER) --- */
         .branches-section { padding: 100px 20px; background: var(--bg-accent); text-align: center; }
         .tier { display: flex; justify-content: center; flex-wrap: wrap; gap: 25px; max-width: 1300px; margin: 0 auto 25px auto; }
-        .branch-tag { 
-            flex: 1 1 200px; max-width: 240px; padding: 30px 15px; 
-            background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 215, 0, 0.2); 
-            border-radius: 15px; transition: 0.4s ease; box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-        }
+        .branch-tag { flex: 1 1 200px; max-width: 240px; padding: 30px 15px; background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 215, 0, 0.2); border-radius: 15px; transition: 0.4s ease; box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
         .branch-tag:hover { background: var(--accent-vibrant); border-color: var(--white); transform: scale(1.08); }
         .formal-name { display: block; font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gold-leaf); font-weight: bold; margin-bottom: 8px; }
         .nickname { display: block; font-size: 0.9rem; color: var(--white); opacity: 0.8; }
-        .branch-tag:hover .formal-name, .branch-tag:hover .nickname { color: var(--white); opacity: 1; }
 
         /* --- STAGE 5: PROGRAMME --- */
         .roadmap-section { padding: 120px 20px; background: var(--bg-deep); text-align: center; }
-        .prog-card { background: rgba(255, 255, 255, 0.05); border-left: 5px solid var(--accent-vibrant); padding: 35px; border-radius: 0 15px 15px 0; margin-bottom: 30px; text-align: left; max-width: 900px; margin-left: auto; margin-right: auto; }
+        .prog-card { background: rgba(255, 255, 255, 0.05); border-left: 5px solid var(--accent-vibrant); padding: 35px; border-radius: 0 15px 15px 0; margin-bottom: 30px; text-align: left; max-width: 900px; margin: 0 auto 30px auto; }
         .prog-date { color: var(--gold-leaf); font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: bold; margin-bottom: 15px; }
 
         /* --- STAGE 6: RSVP & REGISTRATION --- */
         .registration-section { padding: 120px 20px; background: linear-gradient(to top, var(--bg-deep), var(--bg-accent)); text-align: center; }
-        .registration-container { max-width: 800px; margin: 0 auto; }
-        .registration-card { background: rgba(255, 255, 255, 0.05); border: 2px solid var(--gold-leaf); border-radius: 20px; padding: 50px 30px; backdrop-filter: blur(10px); box-shadow: 0 15px 50px rgba(0,0,0,0.5); transition: 0.4s; }
-        .registration-card h3 { font-family: 'Cinzel', serif; color: var(--gold-leaf); font-size: 1.8rem; margin-bottom: 10px; }
-        .rsvp-btn { display: inline-block; padding: 18px 45px; background: var(--accent-vibrant); color: white; text-decoration: none; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; border-radius: 50px; transition: 0.3s; box-shadow: 0 4px 15px rgba(255, 127, 80, 0.4); margin-top: 30px; }
+        .registration-card { background: rgba(255, 255, 255, 0.05); border: 2px solid var(--gold-leaf); border-radius: 20px; padding: 50px 30px; backdrop-filter: blur(10px); max-width: 800px; margin: 0 auto; box-shadow: 0 15px 50px rgba(0,0,0,0.5); }
+        .rsvp-btn { display: inline-block; padding: 18px 45px; background: var(--accent-vibrant); color: white; text-decoration: none; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; border-radius: 50px; transition: 0.3s; margin-top: 30px; box-shadow: 0 4px 15px rgba(255, 127, 80, 0.4); }
         .rsvp-btn:hover { background: var(--white); color: var(--accent-vibrant); transform: scale(1.05); }
 
-        /* FIREWORKS STYLING */
+        /* FIREWORKS */
         .fireworks-stage { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
         .particle { position: absolute; width: 5px; height: 5px; border-radius: 50%; opacity: 0; }
         @keyframes explode { 0% { transform: translate(0, 0) scale(1); opacity: 1; } 100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; } }
@@ -76,14 +71,22 @@
 </head>
 <body>
 
-    <!-- INTRO CURTAIN -->
+    <!-- STAGE 1: CINEMATIC ENTRANCE -->
     <div id="intro-curtain">
-        <div id="motto-text">Gikan sa Gamut...<br>Tubtob sa Langit</div>
+        <div id="motto-text">
+            Gikan sa Gamut, Tubtob sa Langit<br>
+            <div class="credits-sub">In Cooperation with Sazon Family Production</div>
+            <div class="credits-sub">Marzon Hotel Kalibo</div>
+            <div class="credits-sub" style="font-weight: bold; color: var(--gold-leaf);">Present</div>
+        </div>
         <button id="begin-btn" class="start-btn" onclick="executeCinematicOpening()">Enter the Legacy</button>
     </div>
 
     <!-- MAIN BANNER -->
     <header class="banner" id="main-banner">
+        <div class="moon-container">
+            <img src="images/moon.png" alt="Moon" style="width: 100%; height: 100%; object-fit: contain;">
+        </div>
         <div class="banner-bg"></div>
         <div id="fireworks" class="fireworks-stage"></div>
         <div class="timer-container">
@@ -94,94 +97,102 @@
         </div>
     </header>
 
-    <!-- THE ROOTS -->
+    <!-- ROOTS SECTION -->
     <section class="roots-section">
         <h2 class="section-title">The Roots</h2>
-        <div style="display: block;">
-            <div class="ancestor-card">
-                <div style="width: 100%; height: 350px; background: #1a1a1a; border-radius: 8px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; color: #555;">[Photo of Tereso]</div>
-                <div class="ancestor-name">Tereso Sazon</div>
-                <div style="font-size: 0.9rem; letter-spacing: 3px; color: var(--gold-leaf);">THE PATRIARCH</div>
-            </div>
-            <div class="ancestor-card">
-                <div style="width: 100%; height: 350px; background: #1a1a1a; border-radius: 8px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; color: #555;">[Photo of Teofista]</div>
-                <div class="ancestor-name">Teofista Sazon</div>
-                <div style="font-size: 0.9rem; letter-spacing: 3px; color: var(--gold-leaf);">THE MATRIARCH</div>
-            </div>
+        <div class="ancestor-card">
+            <div style="width: 100%; height: 350px; background: #1a1a1a; border-radius: 8px; margin-bottom: 20px;"></div>
+            <div class="ancestor-name">Tereso Sazon</div>
+            <div style="font-size: 0.9rem; letter-spacing: 3px; color: var(--gold-leaf);">THE PATRIARCH</div>
+        </div>
+        <div class="ancestor-card">
+            <div style="width: 100%; height: 350px; background: #1a1a1a; border-radius: 8px; margin-bottom: 20px;"></div>
+            <div class="ancestor-name">Teofista Sazon</div>
+            <div style="font-size: 0.9rem; letter-spacing: 3px; color: var(--gold-leaf);">THE MATRIARCH</div>
         </div>
     </section>
 
-    <!-- THE 13 BRANCHES (5-5-3 TIER) -->
+    <!-- 13 BRANCHES -->
     <section class="branches-section">
         <h2 class="section-title">The 13 Branches</h2>
-        
-        <div class="tier"> <!-- TIER 1 -->
+        <div class="tier">
             <div class="branch-tag"><span class="formal-name">Serafin</span><span class="nickname">(Lolo Apin)</span></div>
             <div class="branch-tag"><span class="formal-name">Monserat</span><span class="nickname">(Lola Monching)</span></div>
             <div class="branch-tag"><span class="formal-name">Felomina</span><span class="nickname">(Lola Mining)</span></div>
             <div class="branch-tag"><span class="formal-name">Estrella</span><span class="nickname">(Lola Estring)</span></div>
             <div class="branch-tag"><span class="formal-name">Gregorio</span><span class="nickname">(Lolo Gorio)</span></div>
         </div>
-
-        <div class="tier"> <!-- TIER 2 -->
+        <div class="tier">
             <div class="branch-tag"><span class="formal-name">Regino</span><span class="nickname">(Lolo Taba)</span></div>
             <div class="branch-tag"><span class="formal-name">Maria</span><span class="nickname">(Lola Maria)</span></div>
             <div class="branch-tag"><span class="formal-name">Concepcion</span><span class="nickname">(Lola Moret)</span></div>
             <div class="branch-tag"><span class="formal-name">Cezar</span><span class="nickname">(Lolo Cezar)</span></div>
             <div class="branch-tag"><span class="formal-name">Priscilla</span><span class="nickname">(Lola Mamay)</span></div>
         </div>
-
-        <div class="tier"> <!-- TIER 3 -->
+        <div class="tier">
             <div class="branch-tag"><span class="formal-name">Gloria</span><span class="nickname">(Lola Goly)</span></div>
             <div class="branch-tag"><span class="formal-name">Reynaldo</span><span class="nickname">(Lolo Lope)</span></div>
             <div class="branch-tag"><span class="formal-name">Nilda</span><span class="nickname">(Lola Nilda)</span></div>
         </div>
     </section>
 
-    <!-- THE PROGRAMME -->
+    <!-- PROGRAMME -->
     <section class="roadmap-section">
         <h2 class="section-title">Grand Reunion Program</h2>
         <div class="prog-card">
             <div class="prog-date">July 23, 2027 (Day 1)</div>
-            <p style="line-height: 1.8;"><strong>The Homecoming</strong><br>Registration & Welcome Kits • Ancestral Thanksgiving Mass • Clan Grand Entrance & Banner Presentation • "Sazon Heritage" Gala Dinner • Evening Fireworks Display.</p>
+            <p><strong>The Homecoming</strong><br>Registration • Mass • Gala Dinner • Fireworks Display.</p>
         </div>
         <div class="prog-card">
             <div class="prog-date">July 24, 2027 (Day 2)</div>
-            <p style="line-height: 1.8;"><strong>The Legacy Continues</strong><br>Morning Family Sports • "Gikan sa Gamut" Photo Exhibit • Sazon Talent Showcase • Awarding Ceremony • Closing "Tubtob sa Langit" Unity Ritual.</p>
+            <p><strong>The Legacy Continues</strong><br>Sports • Photo Exhibit • Talent Showcase • Closing Ritual.</p>
         </div>
     </section>
 
-    <!-- THE REGISTRATION HUB -->
+    <!-- RSVP -->
     <section class="registration-section">
-        <div class="registration-container">
-            <h2 class="section-title" style="margin-bottom: 20px;">Secure Your Place</h2>
-            <p style="margin-bottom: 40px; opacity: 0.9;">To help our Registration Committee with tracking and logistics for the 13 branches, please officially register your family branch attendance for July 2027.</p>
-            
-            <div class="registration-card">
-                <h3>Sazon Clan RSVP</h3>
-                <p>Register your family branch and headcount here.</p>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="rsvp-btn">Open Registration Form</a>
-            </div>
-            <p style="margin-top: 30px; font-size: 0.8rem; font-style: italic; opacity: 0.6;">*Shared link for Registration Committee tracking and recording purposes.</p>
+        <div class="registration-card">
+            <h2 class="section-title" style="font-size: 2rem; margin-bottom: 20px;">Secure Your Place</h2>
+            <p>Register your family branch and headcount for July 2027.</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="rsvp-btn">Open RSVP Form</a>
         </div>
     </section>
 
-    <!-- SCRIPTS -->
+    <!-- AUDIO ASSETS -->
+    <audio id="snd-swell" src="audio/prelude_swell.mp3" preload="auto"></audio>
+    <audio id="snd-shimmer" src="audio/reveal_shimmer.mp3" preload="auto"></audio>
+    <audio id="snd-anthem" src="audio/sazon-full-anthem.mp3" preload="auto"></audio>
+    <audio id="burst-low" src="audio/firework_burst_low.mp3" preload="auto"></audio>
+
     <script>
         function executeCinematicOpening() {
             document.getElementById('begin-btn').style.display = 'none';
+            const swell = document.getElementById('snd-swell');
+            if(swell) swell.play();
+            
             document.getElementById('motto-text').style.opacity = '1';
+            
             setTimeout(() => {
+                const shimmer = document.getElementById('snd-shimmer');
+                if(shimmer) shimmer.play();
+                
                 document.getElementById('intro-curtain').style.opacity = '0';
                 document.getElementById('main-banner').classList.add('active');
+                
+                const anthem = document.getElementById('snd-anthem');
+                if(anthem) anthem.play();
+                
                 setInterval(launchFirework, 2200);
                 setTimeout(() => { document.getElementById('intro-curtain').style.display = 'none'; }, 2000);
                 document.body.style.overflow = 'auto';
-            }, 3500);
+            }, 4500);
         }
 
         function launchFirework() {
             const stage = document.getElementById('fireworks');
+            const burst = document.getElementById('burst-low');
+            if(burst) burst.cloneNode().play();
+            
             const x = 50 + (Math.random() * 40);
             const y = 10 + (Math.random() * 30);
             for (let i = 0; i < 40; i++) {
