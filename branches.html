@@ -16,20 +16,18 @@
 
         body, html { margin: 0; padding: 0; background: var(--black); color: var(--white); font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; }
 
-        /* --- STAGE 1: INTRO CURTAIN --- */
+        /* --- INTRO & BANNER --- */
         #intro-curtain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--black); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 2s ease-in-out; }
         #motto-text { font-family: 'Cinzel', serif; color: var(--accent); font-size: clamp(1.2rem, 5vw, 2rem); text-align: center; letter-spacing: 5px; opacity: 0; transition: opacity 2s ease-in; margin-bottom: 30px; }
         .start-btn { padding: 15px 40px; background: transparent; border: 1px solid var(--accent); color: var(--accent); font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 4px; cursor: pointer; transition: 0.3s; }
         .start-btn:hover { background: var(--accent); color: var(--black); }
 
-        /* --- STAGE 2: BANNER --- */
         .banner { position: relative; height: 100dvh; width: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; overflow: hidden; opacity: 0; transition: opacity 3.5s ease-in; }
         .banner.active { opacity: 1; }
         .moon-container { position: absolute; top: 30px; left: 30px; width: 120px; z-index: 100; mix-blend-mode: screen; filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.4)); }
         .banner-bg { position: absolute; top: -5%; left: -5%; width: 110%; height: 115%; background: radial-gradient(circle, rgba(26, 44, 163, 0.1), rgba(10, 10, 10, 0.7)), url('images/cover.jpeg') center/cover no-repeat; z-index: 1; animation: breathe 15s ease-in-out infinite; }
         @keyframes breathe { 0%, 100% { transform: scale(1); filter: brightness(1); } 50% { transform: scale(1.04); filter: brightness(1.2); } }
         
-        /* --- TIMER --- */
         .timer-container { margin-bottom: 6vh; display: flex; gap: 15px; z-index: 20; background: rgba(10, 10, 10, 0.7); padding: 20px 35px; border-radius: 12px; border: 1px solid rgba(255, 183, 3, 0.25); backdrop-filter: blur(10px); }
         .time-box { text-align: center; min-width: 65px; }
         .time-box span { display: block; font-size: 1.8rem; color: var(--accent); font-weight: bold; font-family: 'Cinzel', serif; }
@@ -45,13 +43,13 @@
         .ancestor-name { font-family: 'Cinzel', serif; color: var(--accent); font-size: 1.3rem; margin-bottom: 5px; }
         .ancestor-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--silver); }
 
-        /* --- 13 BRANCHES --- */
+        /* --- 3-TIER BALANCED BRANCHES (5-5-3) --- */
         .branches-section { padding: 80px 20px; background: var(--black); text-align: center; }
-        .branch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; max-width: 1200px; margin: 0 auto; }
-        .branch-tag { padding: 20px; border: 1px solid rgba(26, 44, 163, 0.2); background: rgba(26, 44, 163, 0.03); font-family: 'Cinzel', serif; font-size: 0.85rem; color: var(--white); transition: 0.3s; display: flex; align-items: center; justify-content: center; }
+        .tier { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; max-width: 1200px; margin: 0 auto 15px auto; }
+        .branch-tag { flex: 1 1 180px; max-width: 220px; padding: 20px; border: 1px solid rgba(26, 44, 163, 0.2); background: rgba(26, 44, 163, 0.03); font-family: 'Cinzel', serif; font-size: 0.85rem; color: var(--white); transition: 0.3s; }
         .branch-tag:hover { border-color: var(--accent); background: rgba(26, 44, 163, 0.1); color: var(--accent); }
 
-        /* --- ROADMAP TIMELINE --- */
+        /* --- TIMELINE SECTION --- */
         .roadmap-section { padding: 100px 20px; background: #0d0d0d; text-align: center; }
         .timeline { position: relative; max-width: 800px; margin: 50px auto 0; }
         .timeline::after { content: ''; position: absolute; width: 1px; background: var(--silver); top: 0; bottom: 0; left: 50%; opacity: 0.2; }
@@ -60,9 +58,7 @@
         .timeline-item.right { left: 50%; text-align: left; }
         .timeline-content { padding: 25px; background: rgba(229, 228, 226, 0.03); border: 1px solid rgba(229, 228, 226, 0.1); border-radius: 4px; }
         .timeline-date { color: var(--accent); font-family: 'Cinzel', serif; font-weight: bold; margin-bottom: 10px; font-size: 1.1rem; }
-        .timeline-content p { font-size: 0.9rem; line-height: 1.6; margin: 0; opacity: 0.8; }
 
-        /* --- FIREWORKS --- */
         .fireworks-stage { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
         .particle { position: absolute; width: 3px; height: 3px; border-radius: 50%; opacity: 0; }
         @keyframes explode { 0% { transform: translate(0, 0) scale(1); opacity: 1; } 100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; } }
@@ -93,69 +89,64 @@
         </div>
     </header>
 
-    <!-- ROOTS SECTION -->
     <section class="roots-section">
         <h2 class="section-title">The Roots</h2>
         <div class="patriarch-matriarch-grid">
             <div class="ancestor-card">
-                <div class="image-placeholder">Tereso Sazon</div>
+                <div class="image-placeholder">Photo of Tereso</div>
                 <div class="ancestor-name">Tereso Sazon</div>
                 <div class="ancestor-title">The Patriarch</div>
             </div>
             <div class="ancestor-card">
-                <div class="image-placeholder">Teofista Sazon</div>
+                <div class="image-placeholder">Photo of Teofista</div>
                 <div class="ancestor-name">Teofista Sazon</div>
                 <div class="ancestor-title">The Matriarch</div>
             </div>
         </div>
     </section>
 
-    <!-- THE 13 BRANCHES -->
     <section class="branches-section">
         <h2 class="section-title" style="font-size: 2rem;">The 13 Branches</h2>
-        <div class="branch-grid">
-            <div class="branch-tag">1. Serafin (Lolo Apin)</div>
-            <div class="branch-tag">2. Lola Monserat (Lola Monching)</div>
-            <div class="branch-tag">3. Felomina (Lola Mining)</div>
-            <div class="branch-tag">4. Estrella (Lola Estring)</div>
-            <div class="branch-tag">5. Gregorio (Lolo Gorio)</div>
-            <div class="branch-tag">6. Regino (Lolo Taba)</div>
-            <div class="branch-tag">7. Maria (Lola Maria)</div>
-            <div class="branch-tag">8. Concepcion (Lola Moret)</div>
-            <div class="branch-tag">9. Cezar (Lolo Cezar)</div>
-            <div class="branch-tag">10. Priscilla (Lola Mamay)</div>
-            <div class="branch-tag">11. Gloria (Lola Goly)</div>
-            <div class="branch-tag">12. Reynaldo (Lolo Lope)</div>
-            <div class="branch-tag">13. Nilda (Lola Nilda)</div>
+        
+        <!-- TIER 1: 5 BRANCHES -->
+        <div class="tier">
+            <div class="branch-tag">Serafin (Lolo Apin)</div>
+            <div class="branch-tag">Monserat (Lola Monching)</div>
+            <div class="branch-tag">Felomina (Lola Mining)</div>
+            <div class="branch-tag">Estrella (Lola Estring)</div>
+            <div class="branch-tag">Gregorio (Lolo Gorio)</div>
+        </div>
+
+        <!-- TIER 2: 5 BRANCHES -->
+        <div class="tier">
+            <div class="branch-tag">Regino (Lolo Taba)</div>
+            <div class="branch-tag">Maria (Lola Maria)</div>
+            <div class="branch-tag">Concepcion (Lola Moret)</div>
+            <div class="branch-tag">Cezar (Lolo Cezar)</div>
+            <div class="branch-tag">Priscilla (Lola Mamay)</div>
+        </div>
+
+        <!-- TIER 3: 3 BRANCHES -->
+        <div class="tier">
+            <div class="branch-tag">Gloria (Lola Goly)</div>
+            <div class="branch-tag">Reynaldo (Lolo Lope)</div>
+            <div class="branch-tag">Nilda (Lola Nilda)</div>
         </div>
     </section>
 
-    <!-- PRODUCTION ROADMAP -->
     <section class="roadmap-section">
-        <h2 class="section-title">Production Roadmap</h2>
+        <h2 class="section-title">Programme Outline</h2>
         <div class="timeline">
             <div class="timeline-item left">
                 <div class="timeline-content">
-                    <div class="timeline-date">April 2024</div>
-                    <p>Initial conceptualization and collection of "Roots" data for all 13 family branches.</p>
-                </div>
-            </div>
-            <div class="timeline-item right">
-                <div class="timeline-content">
-                    <div class="timeline-date">April 2027</div>
-                    <p>Launch of the official musical jingles and multimedia production teaser.</p>
-                </div>
-            </div>
-            <div class="timeline-item left">
-                <div class="timeline-content">
                     <div class="timeline-date">July 23, 2027</div>
-                    <p>Day 1: Grand Opening and Sazon Clan reunion festivities.</p>
+                    <p><strong>Grand Reunion Day 1</strong><br>Opening ceremony, clan presentations, and legacy banquet.</p>
                 </div>
             </div>
             <div class="timeline-item right">
                 <div class="timeline-content">
                     <div class="timeline-date">July 24, 2027</div>
-                    <p>Day 2: Closing Ceremony and the continued legacy of the Sazon family.</p>
+                    <p><strong>Grand Reunion Day 2</strong><br>Family activities, closing tribute, and 2027 roadmap announcement.</p>
                 </div>
             </div>
         </div>
