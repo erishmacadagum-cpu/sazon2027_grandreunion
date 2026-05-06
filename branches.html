@@ -7,57 +7,72 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-deep: #0A1128;
-            --bg-accent: #152044;
-            --accent-vibrant: #FF7F50;
-            --gold-leaf: #FFD700;
-            --silver-mist: #F0F0F0;
-            --glass: rgba(255, 255, 255, 0.1);
+            --bg-deep: #0A1128;      /* Midnight Navy */
+            --bg-accent: #152044;    /* Royal Blue */
+            --accent-vibrant: #FF7F50; /* Vibrant Coral */
+            --gold-leaf: #FFD700;    /* Festive Gold */
+            --silver-mist: #F0F0F0;  /* Champagne Silver */
+            --white: #FFFFFF;
         }
 
         body, html { margin: 0; padding: 0; background: var(--bg-deep); color: var(--silver-mist); font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
 
-        /* --- WHIMSICAL FIREWORKS SYSTEM --- */
+        /* --- WHIMSICAL FIREWORKS ENGINE --- */
         canvas#fireworks-canvas {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 999;
         }
 
-        /* --- INTRO CURTAIN --- */
+        /* --- STAGE 1: CINEMATIC ENTRANCE --- */
         #intro-curtain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-deep); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 2.5s ease-in-out; }
-        #motto-text { font-family: 'Cinzel', serif; color: var(--gold-leaf); font-size: clamp(1.2rem, 5vw, 2.2rem); text-align: center; letter-spacing: 6px; opacity: 0; transition: opacity 2s ease-in; margin-bottom: 20px; }
+        
+        #motto-text { font-family: 'Cinzel', serif; color: var(--gold-leaf); font-size: clamp(1.2rem, 5vw, 2.2rem); text-align: center; letter-spacing: 6px; opacity: 0; transition: opacity 2s ease-in; margin-bottom: 20px; text-shadow: 0 0 20px rgba(255, 215, 0, 0.4); }
+
+        /* Opening Credits Styling Refinements */
         .credit-production { font-family: 'Montserrat', sans-serif; font-style: italic; font-weight: 300; font-size: 0.9rem; color: var(--silver-mist); letter-spacing: 3px; margin-top: 15px; text-transform: uppercase; }
         .credit-location { font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.1rem; color: var(--accent-vibrant); letter-spacing: 4px; margin-top: 8px; }
-        .start-btn { padding: 18px 50px; background: transparent; border: 2px solid var(--accent-vibrant); color: var(--accent-vibrant); text-transform: uppercase; letter-spacing: 5px; cursor: pointer; transition: 0.4s; border-radius: 50px; margin-top: 40px; }
+        .credit-present { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.8rem; color: var(--gold-leaf); letter-spacing: 10px; margin-top: 15px; text-transform: uppercase; }
 
-        /* --- BANNER --- */
-        .banner { position: relative; height: 100dvh; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; opacity: 0; transition: opacity 3s ease-in; }
+        .start-btn { padding: 18px 50px; background: transparent; border: 2px solid var(--accent-vibrant); color: var(--accent-vibrant); text-transform: uppercase; letter-spacing: 5px; font-weight: 600; cursor: pointer; transition: 0.4s; border-radius: 50px; margin-top: 40px; }
+        .start-btn:hover { background: var(--accent-vibrant); color: white; box-shadow: 0 0 30px rgba(255, 127, 80, 0.5); }
+
+        /* --- STAGE 2: THE BANNER & PERFECT MOON --- */
+        .banner { position: relative; height: 100dvh; width: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; overflow: hidden; opacity: 0; transition: opacity 3s ease-in; }
         .banner.active { opacity: 1; }
-        .banner-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent, var(--bg-deep)), url('images/cover.jpeg') center/cover no-repeat; z-index: 1; }
+        
+        /* Updated Banner-BG: Shifts background to mask the original moon */
+        .banner-bg { position: absolute; top: -5%; left: -5%; width: 110%; height: 115%; background: radial-gradient(circle, rgba(10, 17, 40, 0.2), rgba(10, 17, 40, 0.8)), url('images/cover.jpeg') center/cover no-repeat; z-index: 1; animation: breathe 15s ease-in-out infinite; }
+        
+        /* Moon Positioned Upper Right - Clean, Perfectly Round, No Black Detail */
+        .moon-overlay { 
+            position: absolute; 
+            top: 5%; 
+            right: 5%; 
+            width: clamp(100px, 15vw, 150px); 
+            height: clamp(100px, 15vw, 150px); 
+            z-index: 10; 
+            border-radius: 50%; /* Perfect Circle Crop */
+            overflow: hidden; 
+            box-shadow: 0 0 35px rgba(255, 215, 0, 0.5); /* Soft Gold Halo */
+            border: 2px solid rgba(255, 215, 0, 0.2); /* Subtle Gold Edge */
+        }
+        .moon-overlay img { width: 100%; height: 100%; object-fit: cover; }
+        
+        @keyframes breathe { 0%, 100% { transform: scale(1); filter: brightness(1); } 50% { transform: scale(1.05); filter: brightness(1.1); } }
         
         /* --- TIMER --- */
-        .timer-container { position: relative; z-index: 20; display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 25vh; }
-        .countdown-wrapper { display: flex; gap: 12px; justify-content: center; }
-        .time-box { background: var(--glass); backdrop-filter: blur(10px); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 12px; padding: 15px; min-width: 75px; text-align: center; }
-        .time-val { display: block; font-size: 2.2rem; font-weight: 700; color: var(--gold-leaf); font-family: 'Cinzel', serif; }
-        .time-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; }
+        .timer-container { margin-bottom: 8vh; display: flex; gap: 20px; z-index: 20; background: rgba(255, 255, 255, 0.1); padding: 25px 40px; border-radius: 15px; border: 1px solid var(--gold-leaf); backdrop-filter: blur(15px); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+        .time-box span { display: block; font-size: 2.2rem; color: var(--gold-leaf); font-weight: bold; font-family: 'Cinzel', serif; }
+        .time-box label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--white); opacity: 0.8; }
 
-        /* --- BRANCHES INTERACTION --- */
-        .branches-section { padding: 40px 20px 80px 20px; background: var(--bg-accent); text-align: center; }
-        .tier { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 25px; }
-        .branch-tag { 
-            flex: 1 1 180px; max-width: 200px; padding: 20px; background: rgba(255, 255, 255, 0.05); 
-            border: 1px solid rgba(255, 215, 0, 0.2); border-radius: 10px; cursor: pointer; 
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .branch-tag.active-branch { background: var(--accent-vibrant); border-color: white; transform: scale(1.1); box-shadow: 0 0 20px rgba(255, 127, 80, 0.6); }
-        .formal-name { display: block; font-family: 'Cinzel', serif; color: var(--gold-leaf); font-weight: bold; pointer-events: none; }
+        /* --- THE 13 BRANCHES --- */
+        .branches-section { padding: 100px 20px; background: var(--bg-accent); text-align: center; }
+        .branch-tag { flex: 1 1 200px; max-width: 230px; padding: 25px 15px; background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 215, 0, 0.2); border-radius: 15px; transition: 0.4s; }
+        .branch-tag:hover { background: var(--accent-vibrant); transform: scale(1.05); }
 
-        /* --- PROGRAMME & REGISTRATION --- */
-        .prog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1000px; margin: 40px auto; }
-        .day-card { background: var(--glass); padding: 30px; border-radius: 15px; border-top: 4px solid var(--gold-leaf); text-align: left; }
-        .reg-box { max-width: 600px; margin: 50px auto; padding: 40px; background: var(--bg-accent); border-radius: 20px; border: 1px solid var(--gold-leaf); text-align: center; }
-        .rsvp-btn { display: inline-block; padding: 20px 50px; background: var(--accent-vibrant); color: white; text-decoration: none; font-weight: 700; border-radius: 50px; text-transform: uppercase; letter-spacing: 2px; }
+        /* --- ROADMAP & RSVP --- */
+        .prog-card { background: rgba(255, 255, 255, 0.05); border-left: 5px solid var(--accent-vibrant); padding: 30px; border-radius: 0 15px 15px 0; margin: 0 auto 30px auto; text-align: left; max-width: 800px; }
+        .rsvp-btn { display: inline-block; padding: 18px 45px; background: var(--accent-vibrant); color: white; text-decoration: none; font-weight: 600; border-radius: 50px; margin-top: 30px; transition: 0.3s; }
     </style>
 </head>
 <body>
@@ -69,86 +84,82 @@
             Gikan sa Gamut, Tubtob sa Langit
             <div class="credit-production">In Cooperation with Sazon Family Production</div>
             <div class="credit-location">Marzon Hotel Kalibo</div>
+            <div class="credit-present">Present</div>
         </div>
-        <button id="begin-btn" class="start-btn" onclick="runProductionIntro()">Enter the Legacy</button>
+        <button id="begin-btn" class="start-btn" onclick="executeCinematicOpening()">Enter the Legacy</button>
     </div>
 
     <header class="banner" id="main-banner">
+        <div class="moon-overlay">
+            <img src="images/moon.png" alt="Sazon Heritage Perfect Moon">
+        </div>
         <div class="banner-bg"></div>
         <div class="timer-container">
-            <div style="font-size: 0.8rem; letter-spacing: 3px; color: var(--accent-vibrant);">COUNTDOWN TO REUNION (PST)</div>
-            <div class="countdown-wrapper">
-                <div class="time-box"><span class="time-val" id="days">00</span><span class="time-label">Days</span></div>
-                <div class="time-box"><span class="time-val" id="hours">00</span><span class="time-label">Hrs</span></div>
-                <div class="time-box"><span class="time-val" id="minutes">00</span><span class="time-label">Min</span></div>
-                <div class="time-box"><span class="time-val" id="seconds">00</span><span class="time-label">Sec</span></div>
-            </div>
+            <div class="time-box"><span id="days">00</span><label>Days</label></div>
+            <div class="time-box"><span id="hours">00</span><label>Hrs</label></div>
+            <div class="time-box"><span id="mins">00</span><label>Mins</label></div>
+            <div class="time-box"><span id="secs">00</span><label>Secs</label></div>
         </div>
     </header>
 
-    <section style="padding: 60px 20px; text-align: center;">
+    <section style="padding: 120px 20px; background: linear-gradient(to bottom, var(--bg-deep), var(--bg-accent)); text-align: center;">
         <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf);">The Roots</h2>
-        <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
-            <div style="width: 250px; border: 1px solid var(--gold-leaf); padding: 15px; border-radius: 10px;">
-                <div style="height: 200px; background: #222; border-radius: 5px;"></div>
-                <h3 style="font-family: 'Cinzel'; color: var(--accent-vibrant);">Tereso Sazon</h3>
-            </div>
-            <div style="width: 250px; border: 1px solid var(--gold-leaf); padding: 15px; border-radius: 10px;">
-                <div style="height: 200px; background: #222; border-radius: 5px;"></div>
-                <h3 style="font-family: 'Cinzel'; color: var(--accent-vibrant);">Teofista Sazon</h3>
-            </div>
+        <div style="width: 280px; border: 3px solid var(--gold-leaf); padding: 20px; border-radius: 12px; display: inline-block; margin: 15px;">
+            <div style="width: 100%; height: 350px; background: #1a1a1a; border-radius: 8px;"></div>
+            <div style="font-family: 'Cinzel'; color: var(--accent-vibrant); font-size: 1.4rem; margin-top: 15px;">Tereso Sazon</div>
+            <div style="font-size: 0.8rem; letter-spacing: 2px;">THE PATRIARCH</div>
+        </div>
+        <div style="width: 280px; border: 3px solid var(--gold-leaf); padding: 20px; border-radius: 12px; display: inline-block; margin: 15px;">
+            <div style="width: 100%; height: 350px; background: #1a1a1a; border-radius: 8px;"></div>
+            <div style="font-family: 'Cinzel'; color: var(--accent-vibrant); font-size: 1.4rem; margin-top: 15px;">Teofista Sazon</div>
+            <div style="font-size: 0.8rem; letter-spacing: 2px;">THE MATRIARCH</div>
         </div>
     </section>
 
     <section class="branches-section">
-        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf); margin-bottom: 30px;">The 13 Branches</h2>
-        <div class="tier" id="branch-container"></div>
-    </section>
-
-    <section style="padding: 60px 20px; text-align: center;">
-        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf);">Event Programme</h2>
-        <div class="prog-grid">
-            <div class="day-card">
-                <h3 style="color: var(--accent-vibrant);">Day 1: July 23, 2027</h3>
-                <p>08:00 AM - Motorcade & Opening Ceremony</p>
-                <p>12:00 PM - Welcome Luncheon</p>
-            </div>
-            <div class="day-card">
-                <h3 style="color: var(--accent-vibrant);">Day 2: July 24, 2027</h3>
-                <p>09:00 AM - Family Fun Games</p>
-                <p>06:00 PM - Grand Gala Night</p>
-            </div>
+        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf); margin-bottom: 50px;">The 13 Branches</h2>
+        <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; max-width: 1200px; margin: 0 auto;">
+            <div class="branch-tag">Serafin<br>(Lolo Apin)</div>
+            <div class="branch-tag">Monserat<br>(Lola Monching)</div>
+            <div class="branch-tag">Felomina<br>(Lola Mining)</div>
+            <div class="branch-tag">Estrella<br>(Lola Estring)</div>
+            <div class="branch-tag">Gregorio<br>(Lolo Gorio)</div>
+            <div class="branch-tag">Regino<br>(Lolo Taba)</div>
+            <div class="branch-tag">Maria<br>(Lola Maria)</div>
+            <div class="branch-tag">Concepcion<br>(Lola Moret)</div>
+            <div class="branch-tag">Cezar<br>(Lolo Cezar)</div>
+            <div class="branch-tag">Priscilla<br>(Lola Mamay)</div>
+            <div class="branch-tag">Gloria<br>(Lola Goly)</div>
+            <div class="branch-tag">Reynaldo<br>(Lolo Lope)</div>
+            <div class="branch-tag">Nilda<br>(Lola Nilda)</div>
         </div>
     </section>
 
-    <section class="reg-box">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="rsvp-btn">Register Your Branch</a>
+    <section style="padding: 100px 20px; text-align: center;">
+        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf);">Production Roadmap</h2>
+        <div class="prog-card">
+            <div style="color: var(--gold-leaf); font-family: 'Cinzel'; font-weight: bold;">July 23, 2027</div>
+            <p>Homecoming, Registration, Mass, and Gala Dinner.</p>
+        </div>
+        <div class="prog-card">
+            <div style="color: var(--gold-leaf); font-family: 'Cinzel'; font-weight: bold;">July 24, 2027</div>
+            <p>Sports Festival, Family Exhibit, and Closing Unity Ritual.</p>
+        </div>
     </section>
 
-    <!-- AUDIO FILES AS REQUESTED -->
-    <audio id="snd-swell" src="audio/prelude_swell.mp3"></audio>
-    <audio id="snd-anthem" src="audio/sazon-full-anthem.mp3"></audio>
-    <audio id="fw-whistle" src="audio/firework_whistle_.mp3"></audio>
-    <audio id="fw-high" src="audio/firework_burst_high.mp3"></audio>
-    <audio id="fw-low" src="audio/firework_burst_low.mp3"></audio>
+    <section style="padding: 100px 20px; text-align: center; background: var(--bg-accent);">
+        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf); margin-bottom: 20px;">Join the Gathering</h2>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="rsvp-btn">Open Google Form</a>
+    </section>
+
+    <audio id="snd-swell" src="audio/prelude_swell.mp3" preload="auto"></audio>
+    <audio id="snd-shimmer" src="audio/reveal_shimmer.mp3" preload="auto"></audio>
+    <audio id="snd-anthem" src="audio/sazon-full-anthem.mp3" preload="auto"></audio>
+    <audio id="snd-low" src="audio/firework_burst_low.mp3" preload="auto"></audio>
+    <audio id="snd-high" src="audio/firework_burst_high.mp3" preload="auto"></audio>
 
     <script>
-        // --- BRANCH INTERACTION ---
-        const branches = [
-            {f: "Serafin", n: "Lolo Apin"}, {f: "Monserat", n: "Lola Monching"}, {f: "Felomina", n: "Lola Mining"},
-            {f: "Estrella", n: "Lola Estring"}, {f: "Gregorio", n: "Lolo Gorio"}, {f: "Regino", n: "Lolo Taba"},
-            {f: "Maria", n: "Lola Maria"}, {f: "Concepcion", n: "Lola Moret"}, {f: "Cezar", n: "Lolo Cezar"},
-            {f: "Priscilla", n: "Lola Mamay"}, {f: "Gloria", n: "Lola Goly"}, {f: "Reynaldo", n: "Lolo Lope"}, {f: "Nilda", n: "Lola Nilda"}
-        ];
-        const bc = document.getElementById('branch-container');
-        branches.forEach(b => {
-            const d = document.createElement('div'); d.className = 'branch-tag';
-            d.innerHTML = `<span class="formal-name">${b.f}</span><span>(${b.n})</span>`;
-            d.onclick = () => d.classList.toggle('active-branch');
-            bc.appendChild(d);
-        });
-
-        // --- FIREWORKS CANVAS ENGINE ---
+        // --- WHIMSICAL CANVAS FIREWORKS LOGIC ---
         const canvas = document.getElementById('fireworks-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
@@ -156,65 +167,72 @@
 
         function createBurst(x, y) {
             const count = 50;
-            const colors = ['#FFD700', '#FF7F50', '#FFFFFF', '#00E5FF', '#FF00FF'];
+            const colors = ['#FFD700', '#FF7F50', '#FFFFFF', '#00E5FF'];
             for(let i=0; i<count; i++) {
                 particles.push({
                     x, y, 
-                    vX: (Math.random() - 0.5) * 15,
-                    vY: (Math.random() - 0.5) * 15,
+                    vX: (Math.random() - 0.5) * 12,
+                    vY: (Math.random() - 0.5) * 12,
                     life: 1, 
                     color: colors[Math.floor(Math.random()*colors.length)]
                 });
             }
         }
 
-        function animate() {
+        function animateFireworks() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             particles.forEach((p, i) => {
-                p.x += p.vX; p.y += p.vY; p.vY += 0.1; p.life -= 0.015;
+                p.x += p.vX; p.y += p.vY; p.vY += 0.1; p.life -= 0.02;
                 ctx.fillStyle = p.color; ctx.globalAlpha = p.life;
                 ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI*2); ctx.fill();
                 if(p.life <= 0) particles.splice(i, 1);
             });
-            requestAnimationFrame(animate);
+            requestAnimationFrame(animateFireworks);
         }
-        animate();
+        animateFireworks();
 
-        // --- PRODUCTION INTRO ---
-        function runProductionIntro() {
+        // --- CINEMATIC OPENING ---
+        function executeCinematicOpening() {
             document.getElementById('begin-btn').style.display = 'none';
-            document.getElementById('snd-swell').play();
+            const swell = document.getElementById('snd-swell');
+            if(swell) swell.play();
+            
             document.getElementById('motto-text').style.opacity = '1';
             
             setTimeout(() => {
-                // Sequence of WHISTLE then BURSTS
-                document.getElementById('fw-whistle').play();
+                // Synchronized Burst & Sound
+                document.getElementById('snd-low').play();
+                createBurst(window.innerWidth/3, window.innerHeight/3);
+
+                document.getElementById('snd-shimmer').play();
                 
                 setTimeout(() => {
-                    document.getElementById('fw-high').play();
-                    createBurst(window.innerWidth/4, window.innerHeight/3);
+                    document.getElementById('snd-high').play();
+                    // Burst near the NEW MOON
+                    createBurst(window.innerWidth*0.9, window.innerHeight/6);
                 }, 800);
-
-                setTimeout(() => {
-                    document.getElementById('fw-low').play();
-                    createBurst(window.innerWidth*0.75, window.innerHeight/2);
-                }, 1300);
 
                 document.getElementById('intro-curtain').style.opacity = '0';
                 document.getElementById('main-banner').classList.add('active');
-                document.getElementById('snd-anthem').play();
-                setTimeout(() => document.getElementById('intro-curtain').style.display = 'none', 2500);
-            }, 4000);
+                
+                const anthem = document.getElementById('snd-anthem');
+                if(anthem) anthem.play();
+                
+                setTimeout(() => { document.getElementById('intro-curtain').style.display = 'none'; }, 2000);
+                document.body.style.overflow = 'auto';
+            }, 4500);
         }
 
-        // Timer Logic
-        const target = new Date("July 23, 2027 08:00:00").getTime();
+        // --- COUNTDOWN LOGIC ---
+        const countDate = new Date("July 23, 2027 00:00:00").getTime();
         setInterval(() => {
-            const d = target - new Date().getTime();
-            document.getElementById("days").innerText = Math.floor(d / 86400000);
-            document.getElementById("hours").innerText = Math.floor((d % 86400000) / 3600000);
-            document.getElementById("minutes").innerText = Math.floor((d % 3600000) / 60000);
-            document.getElementById("seconds").innerText = Math.floor((d % 60000) / 1000);
+            const now = new Date().getTime();
+            const gap = countDate - now;
+            const second = 1000, minute = second * 60, hour = minute * 60, day = hour * 24;
+            document.getElementById("days").innerText = String(Math.floor(gap / day)).padStart(2, '0');
+            document.getElementById("hours").innerText = String(Math.floor((gap % day) / hour)).padStart(2, '0');
+            document.getElementById("mins").innerText = String(Math.floor((gap % hour) / minute)).padStart(2, '0');
+            document.getElementById("secs").innerText = String(Math.floor((gap % minute) / second)).padStart(2, '0');
         }, 1000);
     </script>
 </body>
