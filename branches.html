@@ -18,7 +18,7 @@
         body, html { margin: 0; padding: 0; background: var(--bg-deep); color: var(--silver-mist); font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
 
         /* --- INTRO CURTAIN --- */
-        #intro-curtain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-deep); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 2s ease-in-out; }
+        #intro-curtain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-deep); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 2.5s ease-in-out; }
         #motto-text { font-family: 'Cinzel', serif; color: var(--gold-leaf); font-size: clamp(1.2rem, 5vw, 2.2rem); text-align: center; letter-spacing: 6px; opacity: 0; transition: opacity 2s ease-in; margin-bottom: 20px; }
         .credit-production { font-family: 'Montserrat', sans-serif; font-style: italic; font-weight: 300; font-size: 0.9rem; color: var(--silver-mist); letter-spacing: 3px; margin-top: 15px; text-transform: uppercase; }
         .credit-location { font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.1rem; color: var(--accent-vibrant); letter-spacing: 4px; margin-top: 8px; }
@@ -29,64 +29,38 @@
         .banner { position: relative; height: 100dvh; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; opacity: 0; transition: opacity 3s ease-in; }
         .banner.active { opacity: 1; }
         .banner-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent, var(--bg-deep)), url('images/cover.jpeg') center/cover no-repeat; z-index: 1; }
-        .moon-overlay { position: absolute; top: 3%; left: 3%; width: 150px; height: 150px; z-index: 10; border-radius: 50%; box-shadow: 0 0 25px rgba(255,255,255,0.2); }
-        .moon-overlay img { width: 100%; height: 100%; border-radius: 50%; }
+        .moon-overlay { position: absolute; top: 3%; left: 3%; width: clamp(100px, 15vw, 150px); height: clamp(100px, 15vw, 150px); z-index: 10; border-radius: 50%; box-shadow: 0 0 25px rgba(255,255,255,0.2); }
+        .moon-overlay img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 
-        /* --- IMPROVED TIMER DESIGN --- */
-        .timer-container {
-            position: relative;
-            z-index: 20;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            margin-top: 30vh; /* Adjust position relative to the banner image background */
-        }
-        .countdown-wrapper {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-        .time-box {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            border-radius: 12px;
-            padding: 15px;
-            min-width: 80px;
-            text-align: center;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-        }
-        .time-val {
-            display: block;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--gold-leaf);
-            font-family: 'Cinzel', serif;
-        }
-        .time-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--silver-mist);
-        }
-        .timezone-tag {
-            font-size: 0.8rem;
-            letter-spacing: 3px;
-            color: var(--accent-vibrant);
-            font-weight: 600;
-            text-transform: uppercase;
-        }
+        /* --- TIMER --- */
+        .timer-container { position: relative; z-index: 20; display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 25vh; }
+        .countdown-wrapper { display: flex; gap: 12px; justify-content: center; }
+        .time-box { background: var(--glass); backdrop-filter: blur(10px); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 12px; padding: 15px; min-width: 75px; text-align: center; }
+        .time-val { display: block; font-size: 2.2rem; font-weight: 700; color: var(--gold-leaf); font-family: 'Cinzel', serif; }
+        .time-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* --- ROOTS & BRANCHES --- */
-        .roots-section { padding: 100px 20px; background: linear-gradient(to bottom, var(--bg-deep), var(--bg-accent)); text-align: center; z-index: 5; position: relative; }
+        /* --- ROOTS SECTION --- */
+        .roots-section { padding: 80px 20px 40px 20px; background: linear-gradient(to bottom, var(--bg-deep), var(--bg-accent)); text-align: center; z-index: 5; position: relative; }
         .ancestor-card { width: 280px; border: 2px solid var(--gold-leaf); padding: 20px; background: rgba(255, 255, 255, 0.05); border-radius: 12px; display: inline-block; margin: 15px; }
-        .branches-section { padding: 80px 20px; background: var(--bg-accent); text-align: center; }
+
+        /* --- 13 BRANCHES (COLOR CHANGE ON CLICK) --- */
+        .branches-section { padding: 20px 20px 80px 20px; background: var(--bg-accent); text-align: center; }
         .tier { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 25px; }
-        .branch-tag { flex: 1 1 180px; max-width: 200px; padding: 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 215, 0, 0.2); border-radius: 10px; }
-        .formal-name { display: block; font-family: 'Cinzel', serif; color: var(--gold-leaf); font-weight: bold; }
-        
-        .rsvp-btn { display: inline-block; padding: 18px 45px; background: var(--accent-vibrant); color: white; text-decoration: none; font-weight: 600; border-radius: 50px; transition: 0.3s; margin-top: 30px; }
+        .branch-tag { 
+            flex: 1 1 180px; 
+            max-width: 200px; 
+            padding: 20px; 
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(255, 215, 0, 0.2); 
+            border-radius: 10px; 
+            cursor: pointer; 
+            transition: background-color 0.6s, transform 0.3s;
+        }
+        .branch-tag.clicked { background: var(--accent-vibrant) !important; transform: scale(1.05); }
+        .formal-name { display: block; font-family: 'Cinzel', serif; color: var(--gold-leaf); font-weight: bold; pointer-events: none; }
+        .nickname { pointer-events: none; }
+
+        .rsvp-btn { display: inline-block; padding: 18px 45px; background: var(--accent-vibrant); color: white; text-decoration: none; font-weight: 600; border-radius: 50px; transition: 0.3s; }
     </style>
 </head>
 <body>
@@ -104,10 +78,8 @@
     <header class="banner" id="main-banner">
         <div class="moon-overlay"><img src="images/moon.png" alt="Sazon Moon"></div>
         <div class="banner-bg"></div>
-        
-        <!-- NEW IMPROVED TIMER (REPLACES REDUNDANT TEXT) -->
         <div class="timer-container">
-            <div class="timezone-tag">Countdown to Reunion (PST)</div>
+            <div style="font-size: 0.8rem; letter-spacing: 3px; color: var(--accent-vibrant);">COUNTDOWN TO REUNION (PST)</div>
             <div class="countdown-wrapper">
                 <div class="time-box"><span class="time-val" id="days">00</span><span class="time-label">Days</span></div>
                 <div class="time-box"><span class="time-val" id="hours">00</span><span class="time-label">Hrs</span></div>
@@ -118,7 +90,7 @@
     </header>
 
     <section class="roots-section">
-        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf);">The Roots</h2>
+        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf); margin-bottom: 30px;">The Roots</h2>
         <div class="ancestor-card">
             <div style="height: 300px; background: #1a1a1a; border-radius: 8px;"></div>
             <div style="font-family: 'Cinzel'; color: var(--accent-vibrant); font-size: 1.4rem; margin-top: 15px;">Tereso Sazon</div>
@@ -131,54 +103,50 @@
         </div>
     </section>
 
+    <!-- MOVED HIGHER: 13 BRANCHES -->
     <section class="branches-section">
-        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf); margin-bottom: 40px;">The 13 Branches</h2>
+        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf); margin-bottom: 30px;">The 13 Branches</h2>
         <div class="tier">
-            <div class="branch-tag"><span class="formal-name">Serafin</span><span class="nickname">(Lolo Apin)</span></div>
-            <div class="branch-tag"><span class="formal-name">Monserat</span><span class="nickname">(Lola Monching)</span></div>
-            <div class="branch-tag"><span class="formal-name">Felomina</span><span class="nickname">(Lola Mining)</span></div>
-            <div class="branch-tag"><span class="formal-name">Estrella</span><span class="nickname">(Lola Estring)</span></div>
-            <div class="branch-tag"><span class="formal-name">Gregorio</span><span class="nickname">(Lolo Gorio)</span></div>
+            <div class="branch-tag" onclick="this.classList.toggle('clicked')"><span class="formal-name">Serafin</span><span class="nickname">(Lolo Apin)</span></div>
+            <div class="branch-tag" onclick="this.classList.toggle('clicked')"><span class="formal-name">Monserat</span><span class="nickname">(Lola Monching)</span></div>
+            <div class="branch-tag" onclick="this.classList.toggle('clicked')"><span class="formal-name">Felomina</span><span class="nickname">(Lola Mining)</span></div>
+            <div class="branch-tag" onclick="this.classList.toggle('clicked')"><span class="formal-name">Estrella</span><span class="nickname">(Lola Estring)</span></div>
+            <div class="branch-tag" onclick="this.classList.toggle('clicked')"><span class="formal-name">Gregorio</span><span class="nickname">(Lolo Gorio)</span></div>
         </div>
         <div class="tier">
-            <div class="branch-tag"><span class="formal-name">Regino</span><span class="nickname">(Lolo Taba)</span></div>
-            <div class="branch-tag"><span class="formal-name">Maria</span><span class="nickname">(Lola Maria)</span></div>
-            <div class="branch-tag"><span class="formal-name">Concepcion</span><span class="nickname">(Lola Moret)</span></div>
-            <div class="branch-tag"><span class="formal-name">Cezar</span><span class="nickname">(Lolo Cezar)</span></div>
-            <div class="branch-tag"><span class="formal-name">Priscilla</span><span class="nickname">(Lola Mamay)</span></div>
+            <div class="branch-tag" onclick="this.classList.toggle('clicked')"><span class="formal-name">Regino</span><span class="nickname">(Lolo Taba)</span></div>
+            <div class="branch-tag" onclick="this.classList.toggle('clicked')"><span class="formal-name">Maria</span><span class="nickname">(Lola Maria)</span></div>
+            <div class="branch-tag" onclick="this.classList.toggle('clicked')"><span class="formal-name">Concepcion</span><span class="nickname">(Lola Moret)</span></div>
+            <div class="branch-tag" onclick="this.classList.toggle('clicked')"><span class="formal-name">Cezar</span><span class="nickname">(Lolo Cezar)</span></div>
+            <div class="branch-tag" onclick="this.classList.toggle('clicked')"><span class="formal-name">Priscilla</span><span class="nickname">(Lola Mamay)</span></div>
         </div>
         <div class="tier">
-            <div class="branch-tag"><span class="formal-name">Gloria</span><span class="nickname">(Lola Goly)</span></div>
-            <div class="branch-tag"><span class="formal-name">Reynaldo</span><span class="nickname">(Lolo Lope)</span></div>
-            <div class="branch-tag"><span class="formal-name">Nilda</span><span class="nickname">(Lola Nilda)</span></div>
+            <div class="branch-tag" onclick="this.classList.toggle('clicked')"><span class="formal-name">Gloria</span><span class="nickname">(Lola Goly)</span></div>
+            <div class="branch-tag" onclick="this.classList.toggle('clicked')"><span class="formal-name">Reynaldo</span><span class="nickname">(Lolo Lope)</span></div>
+            <div class="branch-tag" onclick="this.classList.toggle('clicked')"><span class="formal-name">Nilda</span><span class="nickname">(Lola Nilda)</span></div>
         </div>
     </section>
 
-    <section style="padding: 100px 20px; text-align: center; background: var(--bg-deep);">
-        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf);">Registration</h2>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="rsvp-btn">Open Google Form</a>
+    <section style="padding: 80px 20px; text-align: center; background: var(--bg-deep);">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="rsvp-btn">Register Your Branch</a>
     </section>
 
+    <!-- AUDIO ASSETS -->
     <audio id="snd-swell" src="audio/prelude_swell.mp3" preload="auto"></audio>
     <audio id="snd-anthem" src="audio/sazon-full-anthem.mp3" preload="auto"></audio>
+    <audio id="firework1" src="audio/firework1.mp3" preload="auto"></audio>
+    <audio id="firework2" src="audio/firework2.mp3" preload="auto"></audio>
+    <audio id="firework3" src="audio/firework3.mp3" preload="auto"></audio>
 
     <script>
-        // --- COUNTDOWN LOGIC ---
         const targetDate = new Date("July 23, 2027 08:00:00").getTime();
-
         function updateTimer() {
             const now = new Date().getTime();
             const distance = targetDate - now;
-
-            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("days").innerText = d < 10 ? "0" + d : d;
-            document.getElementById("hours").innerText = h < 10 ? "0" + h : h;
-            document.getElementById("minutes").innerText = m < 10 ? "0" + m : m;
-            document.getElementById("seconds").innerText = s < 10 ? "0" + s : s;
+            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
         }
         setInterval(updateTimer, 1000);
 
@@ -188,10 +156,14 @@
             document.getElementById('motto-text').style.opacity = '1';
             
             setTimeout(() => {
+                document.getElementById('firework1').play();
+                setTimeout(() => document.getElementById('firework2').play(), 400);
+                setTimeout(() => document.getElementById('firework3').play(), 900);
+                
                 document.getElementById('intro-curtain').style.opacity = '0';
                 document.getElementById('main-banner').classList.add('active');
                 document.getElementById('snd-anthem').play();
-                setTimeout(() => { document.getElementById('intro-curtain').style.display = 'none'; }, 2000);
+                setTimeout(() => { document.getElementById('intro-curtain').style.display = 'none'; }, 2500);
             }, 4000);
         }
     </script>
