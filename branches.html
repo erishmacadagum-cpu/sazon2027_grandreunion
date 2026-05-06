@@ -7,273 +7,223 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1A2CA3;
-            --accent: #FFB703;
+            --primary: #1A2CA3; /* Luminous Blue */
+            --accent: #FFB703; /* Gold */
+            --silver: #E5E4E2; /* Champagne Silver */
             --black: #0a0a0a;
             --white: #F5F5F5;
-            --embers: rgba(251, 133, 0, 0.6);
         }
 
-        body, html { 
-            margin: 0; padding: 0; 
-            background: var(--black); 
-            color: var(--white); 
-            font-family: 'Montserrat', sans-serif; 
-            overflow: hidden; 
-            height: 100%; 
+        body, html { margin: 0; padding: 0; background: var(--black); color: var(--white); font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; }
+
+        /* --- BANNER & INTRO (SAME AS PREVIOUS) --- */
+        #intro-curtain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--black); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 2s; }
+        .banner { position: relative; height: 100dvh; width: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; overflow: hidden; opacity: 0; transition: opacity 3.5s ease-in; }
+        .banner.active { opacity: 1; }
+        .banner-bg { position: absolute; top: -5%; left: -5%; width: 110%; height: 115%; background: radial-gradient(circle, rgba(26, 44, 163, 0.1), rgba(10, 10, 10, 0.7)), url('images/cover.jpeg') center/cover no-repeat; z-index: 1; animation: breathe 15s ease-in-out infinite; }
+        @keyframes breathe { 0%, 100% { transform: scale(1); filter: brightness(1); } 50% { transform: scale(1.04); filter: brightness(1.2); } }
+        
+        .moon-container { position: absolute; top: 30px; left: 30px; width: 120px; z-index: 100; mix-blend-mode: screen; filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.4)); }
+        
+        /* --- ROOTS SECTION: Tereso & Teofista --- */
+        .roots-section {
+            padding: 100px 20px;
+            background: linear-gradient(to bottom, var(--black), #121212);
+            text-align: center;
+            border-top: 1px solid rgba(229, 228, 226, 0.1);
         }
 
-        /* --- STAGE 1: INTRO CURTAIN --- */
-        #intro-curtain {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--black);
-            z-index: 1000;
+        .section-title {
+            font-family: 'Cinzel', serif;
+            color: var(--silver);
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            letter-spacing: 4px;
+        }
+
+        .patriarch-matriarch-grid {
             display: flex;
-            flex-direction: column;
             justify-content: center;
-            align-items: center;
-            transition: opacity 2s ease-in-out;
+            gap: 40px;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
-        #motto-text {
+        .ancestor-card {
+            width: 300px;
+            border: 2px solid var(--silver);
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            transition: transform 0.4s ease;
+        }
+
+        .ancestor-card:hover { transform: translateY(-10px); border-color: var(--accent); }
+
+        .image-placeholder {
+            width: 100%;
+            height: 350px;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(229, 228, 226, 0.2);
+            margin-bottom: 20px;
+            color: var(--silver);
+            font-style: italic;
+        }
+
+        .ancestor-name {
             font-family: 'Cinzel', serif;
             color: var(--accent);
-            font-size: clamp(1.2rem, 5vw, 2rem);
-            text-align: center;
-            letter-spacing: 5px;
-            opacity: 0;
-            transition: opacity 2s ease-in;
-            margin-bottom: 30px;
+            font-size: 1.4rem;
+            margin-bottom: 5px;
         }
 
-        .start-btn {
-            padding: 15px 40px;
-            background: transparent;
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            font-family: 'Montserrat', sans-serif;
+        .ancestor-title {
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            cursor: pointer;
-            z-index: 1001;
+            letter-spacing: 2px;
+            color: var(--silver);
+            opacity: 0.7;
+        }
+
+        /* --- THE 13 BRANCHES PREVIEW --- */
+        .branches-preview {
+            padding: 80px 20px;
+            background: var(--black);
+        }
+
+        .branch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .branch-tag {
+            padding: 15px;
+            border: 1px solid rgba(26, 44, 163, 0.3);
+            background: rgba(26, 44, 163, 0.05);
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            color: var(--white);
             transition: 0.3s;
         }
-        .start-btn:hover { background: var(--accent); color: var(--black); }
 
-        /* --- STAGE 2: THE MAIN HUB --- */
-        .banner {
-            position: relative;
-            height: 100dvh;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-            overflow: hidden;
-            opacity: 0;
-            transition: opacity 3.5s ease-in;
-        }
-        .banner.active { opacity: 1; }
+        .branch-tag:hover { border-color: var(--accent); background: var(--primary); color: var(--black); }
 
-        /* FIXED MOON: Referenced from Screenshot 2026-05-06 at 10.41.13 PM.jpg */
-        .moon-container {
-            position: absolute;
-            top: 30px; 
-            left: 30px;
-            width: 120px; /* Restored desired size */
-            z-index: 100;
-            mix-blend-mode: screen;
-            filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.4));
-            pointer-events: none;
-        }
-        .moon-asset { width: 100%; border-radius: 50%; }
-
-        /* BREATHING BACKGROUND */
-        .banner-bg {
-            position: absolute;
-            top: -5%; left: -5%; width: 110%; height: 115%;
-            background: radial-gradient(circle, rgba(26, 44, 163, 0.1), rgba(10, 10, 10, 0.7)),
-                        url('images/cover.jpeg') center/cover no-repeat;
-            z-index: 1;
-            animation: breathe 15s ease-in-out infinite; 
-        }
-
-        @keyframes breathe {
-            0%, 100% { transform: scale(1); filter: brightness(1); }
-            50% { transform: scale(1.04); filter: brightness(1.2); }
-        }
-
-        /* RISING EMBERS */
-        #ember-stage {
-            position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 60%;
-            z-index: 2;
-            pointer-events: none;
-        }
-        .ember {
-            position: absolute;
-            width: 4px; height: 4px;
-            background: var(--embers);
-            border-radius: 50%;
-            filter: blur(1px);
-            animation: rise 8s linear infinite;
-        }
-        @keyframes rise {
-            0% { transform: translateY(0) translateX(0); opacity: 0; }
-            20% { opacity: 0.8; }
-            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
-        }
-
-        /* FIREWORKS */
+        /* REUSE PREVIOUS FIREWORKS/PARTICLE CSS HERE */
         .fireworks-stage { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
         .particle { position: absolute; width: 3px; height: 3px; border-radius: 50%; opacity: 0; }
-        @keyframes explode {
-            0% { transform: translate(0, 0) scale(1); opacity: 1; }
-            100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
-        }
-
-        /* TIMER BOX */
-        .timer-container {
-            margin-bottom: 6vh;
-            display: flex; gap: 15px; z-index: 20;
-            background: rgba(10, 10, 10, 0.7);
-            padding: 20px 35px; border-radius: 12px;
-            border: 1px solid rgba(255, 183, 3, 0.25);
-            backdrop-filter: blur(10px);
-        }
-        .time-box { text-align: center; min-width: 65px; }
-        .time-box span { display: block; font-size: 1.8rem; color: var(--accent); font-weight: bold; font-family: 'Cinzel', serif; }
-        .time-box label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        @keyframes explode { 0% { transform: translate(0, 0) scale(1); opacity: 1; } 100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; } }
     </style>
 </head>
 <body>
 
-    <!-- THE PRELUDE -->
     <div id="intro-curtain">
-        <div id="motto-text">Gikan sa Gamut...<br>Tubtob sa Langit</div>
-        <button id="begin-btn" class="start-btn" onclick="executeCinematicOpening()">Begin the Legacy</button>
+        <div id="motto-text" style="font-family: 'Cinzel', serif; color: var(--accent); font-size: 2rem; text-align: center; letter-spacing: 5px; opacity: 0; transition: 2s;">Gikan sa Gamut...<br>Tubtob sa Langit</div>
+        <button id="begin-btn" class="start-btn" onclick="executeCinematicOpening()" style="margin-top: 30px; padding: 15px 40px; background: transparent; border: 1px solid var(--accent); color: var(--accent); cursor: pointer;">Begin the Legacy</button>
     </div>
 
-    <!-- THE MAIN BANNER -->
     <header class="banner" id="main-banner">
-        <!-- Moon Fixed in desired position -->
-        <div class="moon-container">
-            <img src="images/moon.png" alt="Moon" class="moon-asset">
-        </div>
-
-        <!-- Breathing Background Layer -->
+        <div class="moon-container"><img src="images/moon.png" alt="Moon" style="width: 100%; border-radius: 50%;"></div>
         <div class="banner-bg"></div>
-
-        <!-- Animation Layers -->
-        <div id="ember-stage"></div> 
         <div id="fireworks" class="fireworks-stage"></div>
-
-        <!-- Countdown -->
-        <div class="timer-container">
-            <div class="time-box"><span id="days">00</span><label>Days</label></div>
-            <div class="time-box"><span id="hours">00</span><label>Hrs</label></div>
-            <div class="time-box"><span id="mins">00</span><label>Mins</label></div>
-            <div class="time-box"><span id="secs">00</span><label>Secs</label></div>
+        <div class="timer-container" style="z-index: 20; display: flex; gap: 15px; background: rgba(10,10,10,0.7); padding: 20px; border-radius: 12px; margin-bottom: 5vh; border: 1px solid rgba(255,183,3,0.3);">
+            <div class="time-box" style="text-align: center; color: var(--accent);"><span id="days" style="display: block; font-size: 1.8rem; font-weight: bold;">00</span><label style="font-size: 0.6rem; text-transform: uppercase;">Days</label></div>
+            <div class="time-box" style="text-align: center; color: var(--accent);"><span id="hours" style="display: block; font-size: 1.8rem; font-weight: bold;">00</span><label style="font-size: 0.6rem; text-transform: uppercase;">Hrs</label></div>
+            <div class="time-box" style="text-align: center; color: var(--accent);"><span id="mins" style="display: block; font-size: 1.8rem; font-weight: bold;">00</span><label style="font-size: 0.6rem; text-transform: uppercase;">Mins</label></div>
+            <div class="time-box" style="text-align: center; color: var(--accent);"><span id="secs" style="display: block; font-size: 1.8rem; font-weight: bold;">00</span><label style="font-size: 0.6rem; text-transform: uppercase;">Secs</label></div>
         </div>
     </header>
 
-    <!-- AUDIO ASSETS: Anthem plays once (no loop) -->
-    <audio id="snd-swell" src="audio/prelude_swell.mp3" preload="auto"></audio>
-    <audio id="snd-shimmer" src="audio/reveal_shimmer.mp3" preload="auto"></audio>
+    <section class="roots-section">
+        <h2 class="section-title">The Roots</h2>
+        <div class="patriarch-matriarch-grid">
+            <div class="ancestor-card">
+                <div class="image-placeholder">Photo of Tereso</div>
+                <div class="ancestor-name">Tereso Sazon</div>
+                <div class="ancestor-title">The Patriarch</div>
+            </div>
+            <div class="ancestor-card">
+                <div class="image-placeholder">Photo of Teofista</div>
+                <div class="ancestor-name">Teofista Sazon</div>
+                <div class="ancestor-title">The Matriarch</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="branches-preview">
+        <h2 class="section-title" style="font-size: 1.8rem;">The 13 Branches</h2>
+        <div class="branch-grid">
+            <!-- These are ready for your specific family branch names -->
+            <div class="branch-tag">Branch 1</div>
+            <div class="branch-tag">Branch 2</div>
+            <div class="branch-tag">Branch 3</div>
+            <div class="branch-tag">Branch 4</div>
+            <div class="branch-tag">Branch 5</div>
+            <div class="branch-tag">Branch 6</div>
+            <div class="branch-tag">Branch 7</div>
+            <div class="branch-tag">Branch 8</div>
+            <div class="branch-tag">Branch 9</div>
+            <div class="branch-tag">Branch 10</div>
+            <div class="branch-tag">Branch 11</div>
+            <div class="branch-tag">Branch 12</div>
+            <div class="branch-tag">Branch 13</div>
+        </div>
+    </section>
+
+    <!-- AUDIO ASSETS -->
+    <audio id="snd-swell" src="audio/prelude_swell.mp3"></audio>
+    <audio id="snd-shimmer" src="audio/reveal_shimmer.mp3"></audio>
     <audio id="snd-anthem" src="audio/sazon-full-anthem.mp3"></audio>
-    
-    <audio id="burst-low" src="audio/firework_burst_low.mp3" preload="auto"></audio>
-    <audio id="burst-high" src="audio/firework_burst_high.mp3" preload="auto"></audio>
-    <audio id="burst-whistle" src="audio/firework_whistle.mp3" preload="auto"></audio>
+    <audio id="burst-low" src="audio/firework_burst_low.mp3"></audio>
 
     <script>
         function executeCinematicOpening() {
-            const btn = document.getElementById('begin-btn');
-            const motto = document.getElementById('motto-text');
-            const swell = document.getElementById('snd-swell');
-            const shimmer = document.getElementById('snd-shimmer');
-            const anthem = document.getElementById('snd-anthem');
-            const banner = document.getElementById('main-banner');
-            const curtain = document.getElementById('intro-curtain');
-
-            btn.style.display = 'none';
-            swell.play();
-            motto.style.opacity = '1';
-
+            document.getElementById('begin-btn').style.display = 'none';
+            document.getElementById('snd-swell').play();
+            document.getElementById('motto-text').style.opacity = '1';
             setTimeout(() => {
-                shimmer.play();
-                curtain.style.opacity = '0';
-                banner.classList.add('active');
-                
-                // Plays exactly once as requested
-                anthem.play(); 
-                
+                document.getElementById('snd-shimmer').play();
+                document.getElementById('intro-curtain').style.opacity = '0';
+                document.getElementById('main-banner').classList.add('active');
+                document.getElementById('snd-anthem').play();
+                setInterval(launchFirework, 2500);
+                setTimeout(() => { document.getElementById('intro-curtain').style.display = 'none'; }, 2000);
                 document.body.style.overflow = 'auto';
-
-                // Launch Animations
-                setInterval(launchFirework, 2200);
-                createEmbers();
-                
-                setTimeout(() => { curtain.style.display = 'none'; }, 2000);
-            }, 3500); 
-        }
-
-        function createEmbers() {
-            const stage = document.getElementById('ember-stage');
-            for(let i=0; i<25; i++) {
-                const e = document.createElement('div');
-                e.className = 'ember';
-                e.style.left = Math.random() * 100 + 'vw';
-                e.style.animationDelay = Math.random() * 8 + 's';
-                e.style.opacity = Math.random();
-                stage.appendChild(e);
-            }
+            }, 3500);
         }
 
         function launchFirework() {
             const stage = document.getElementById('fireworks');
-            const x = 50 + (Math.random() * 40);
-            const y = 10 + (Math.random() * 30);
-            
-            const sounds = ['burst-low', 'burst-high', 'burst-whistle'];
-            const randomSnd = sounds[Math.floor(Math.random() * sounds.length)];
-            const sfx = document.getElementById(randomSnd).cloneNode();
-            sfx.volume = 0.2;
-            sfx.play();
-
-            const colors = ['#FFD700', '#FB8500', '#FFFFFF', '#6A5ACD'];
-            const color = colors[Math.floor(Math.random() * colors.length)];
-            
-            for (let i = 0; i < 40; i++) {
+            const x = Math.random() * 100;
+            const y = Math.random() * 50;
+            document.getElementById('burst-low').cloneNode().play();
+            for (let i = 0; i < 30; i++) {
                 const p = document.createElement('div');
                 p.className = 'particle';
-                const angle = (i * 9) * (Math.PI / 180);
-                const velocity = 80 + Math.random() * 100;
-                
-                p.style.backgroundColor = color;
-                p.style.boxShadow = `0 0 8px ${color}`;
-                p.style.left = x + '%';
-                p.style.top = y + '%';
-                p.style.setProperty('--x', `${Math.cos(angle) * velocity}px`);
-                p.style.setProperty('--y', `${Math.sin(angle) * velocity + 40}px`);
-                p.style.animation = `explode 1.5s ease-out forwards`;
-                
+                p.style.backgroundColor = '#FFB703';
+                p.style.left = x + '%'; p.style.top = y + '%';
+                p.style.setProperty('--x', (Math.random() - 0.5) * 200 + 'px');
+                p.style.setProperty('--y', (Math.random() - 0.5) * 200 + 'px');
+                p.style.animation = 'explode 1s forwards';
                 stage.appendChild(p);
-                setTimeout(() => p.remove(), 1500);
+                setTimeout(() => p.remove(), 1000);
             }
         }
 
-        // Countdown Logic (Target: July 23, 2027)
         const countDate = new Date("July 23, 2027 00:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
             const gap = countDate - now;
             const second = 1000, minute = second * 60, hour = minute * 60, day = hour * 24;
-            document.getElementById("days").innerText = String(Math.floor(gap / day)).padStart(2, '0');
-            document.getElementById("hours").innerText = String(Math.floor((gap % day) / hour)).padStart(2, '0');
-            document.getElementById("mins").innerText = String(Math.floor((gap % hour) / minute)).padStart(2, '0');
-            document.getElementById("secs").innerText = String(Math.floor((gap % minute) / second)).padStart(2, '0');
+            document.getElementById("days").innerText = Math.floor(gap / day);
+            document.getElementById("hours").innerText = Math.floor((gap % day) / hour);
+            document.getElementById("mins").innerText = Math.floor((gap % hour) / minute);
+            document.getElementById("secs").innerText = Math.floor((gap % minute) / second);
         }, 1000);
     </script>
 </body>
