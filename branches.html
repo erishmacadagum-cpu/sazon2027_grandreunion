@@ -184,23 +184,54 @@
         animate();
 
         function runReveal() {
-            document.querySelector('.start-btn').style.display = 'none';
-            document.getElementById('motto-text').style.opacity = '1';
+            const startBtn = document.querySelector('.start-btn');
+            const motto = document.getElementById('motto-text');
+            const curtain = document.getElementById('intro-curtain');
+            const anthem = document.getElementById('snd-anthem');
+            
+            // 1. CLEAR THE STAGE
+            startBtn.style.opacity = '0';
+            setTimeout(() => startBtn.style.display = 'none', 500);
+
+            // 2. THE SWELL & SHIMMER (Atmosphere)
+            // We use the anthem at low volume initially to act as the "Swell"
+            anthem.volume = 0.2;
+            anthem.play();
+
+            // 3. THE WHISTLE (Rising Energy)
             setTimeout(() => {
                 document.getElementById('fw-whistle').play();
-                setTimeout(() => {
-                    document.getElementById('fw-high').play();
-                    createBurst(window.innerWidth*0.15, window.innerHeight*0.15);
-                    document.getElementById('intro-curtain').style.opacity = '0';
-                    document.getElementById('main-banner').classList.add('active');
-                    document.getElementById('snd-anthem').play();
-                    document.getElementById('mute-toggle').style.display = 'block';
-                    setTimeout(() => document.getElementById('intro-curtain').style.display = 'none', 2000);
-                }, 1200);
-            }, 2000);
-        }
+                motto.style.opacity = '1'; // Motto emerges with the whistle
+                motto.style.transform = 'scale(1.1)'; // Subtle zoom for impact
+                motto.style.transition = 'all 3s ease-out';
+            }, 1000);
 
-        const target = new Date("July 23, 2027 08:00:00").getTime();
+            // 4. THE GRAND REVEAL (Fireworks Burst High & Low)
+            setTimeout(() => {
+                // Audio Layering
+                document.getElementById('fw-high').play();
+                setTimeout(() => document.getElementById('fw-low').play(), 200); // Slight offset for "depth"
+                
+                // Visual Explosion
+                createBurst(window.innerWidth * 0.5, window.innerHeight * 0.3); // Center Burst
+                createBurst(window.innerWidth * 0.2, window.innerHeight * 0.5); // Left Side
+                createBurst(window.innerWidth * 0.8, window.innerHeight * 0.5); // Right Side
+                
+                // Transition to Main Site
+                curtain.style.opacity = '0';
+                document.getElementById('main-banner').classList.add('active');
+                
+                // Ramp up the Anthem volume to full
+                let vol = 0.2;
+                const interval = setInterval(() => {
+                    if (vol < 1) { vol += 0.05; anthem.volume = vol; }
+                    else { clearInterval(interval); }
+                }, 100);
+
+                document.getElementById('mute-toggle').style.display = 'block';
+                setTimeout(() => curtain.style.display = 'none', 2000);
+            }, 4500); // The "Sweet Spot" for the reveal
+        }
         setInterval(() => {
             const diff = target - new Date().getTime();
             document.getElementById("days").innerText = String(Math.floor(diff / 86400000)).padStart(2,'0');
