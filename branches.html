@@ -13,90 +13,93 @@
             --accent-vibrant: #FF7F50;
             --gold-leaf: #FFD700;
             --silver-mist: #F0F0F0;
+            --glass: rgba(255, 255, 255, 0.08);
         }
 
         body, html { margin: 0; padding: 0; background: var(--bg-deep); color: var(--silver-mist); font-family: 'Montserrat', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* --- UI CONTROLS --- */
+        /* --- UI ELEMENTS --- */
         #mute-toggle {
-            position: fixed; bottom: 20px; right: 20px; z-index: 1100;
-            background: rgba(255, 255, 255, 0.1); border: 1px solid var(--gold-leaf);
-            color: var(--gold-leaf); padding: 10px; border-radius: 50%; cursor: pointer;
-            width: 45px; height: 45px; backdrop-filter: blur(5px); transition: 0.3s;
-            display: none; /* Shown after start */
+            position: fixed; bottom: 25px; right: 25px; z-index: 1100;
+            background: var(--glass); border: 1px solid var(--gold-leaf);
+            color: var(--gold-leaf); width: 50px; height: 50px; border-radius: 50%;
+            cursor: pointer; backdrop-filter: blur(10px); display: none; 
+            font-size: 1.2rem; transition: 0.3s ease;
         }
-        #mute-toggle:active { transform: scale(0.9); }
+        #mute-toggle:hover { background: var(--accent-vibrant); color: white; }
 
-        /* --- FIREWORKS --- */
         canvas#fireworks-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; }
 
-        /* --- CINEMATIC OPENING --- */
-        #intro-curtain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-deep); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 2s ease-in-out; }
-        #motto-text { font-family: 'Cinzel', serif; color: var(--gold-leaf); font-size: clamp(1.2rem, 5vw, 2.2rem); text-align: center; letter-spacing: 6px; opacity: 0; transition: opacity 2s ease-in; margin-bottom: 20px; }
-        .credit-line { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; margin-top: 10px; color: var(--silver-mist); }
+        /* --- CINEMATIC INTRO --- */
+        #intro-curtain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-deep); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 2s ease; }
+        #motto-text { font-family: 'Cinzel', serif; color: var(--gold-leaf); text-align: center; letter-spacing: 6px; opacity: 0; transition: opacity 2s ease; }
+        .credit-line { font-size: 0.75rem; letter-spacing: 4px; text-transform: uppercase; margin-top: 12px; color: var(--silver-mist); opacity: 0.8; }
         
-        .start-btn { padding: 18px 50px; background: transparent; border: 2px solid var(--accent-vibrant); color: var(--accent-vibrant); text-transform: uppercase; letter-spacing: 5px; cursor: pointer; border-radius: 50px; margin-top: 40px; transition: 0.2s; }
-        .start-btn:active { transform: scale(0.95); background: var(--accent-vibrant); color: white; }
+        .start-btn { padding: 20px 60px; background: transparent; border: 2px solid var(--accent-vibrant); color: var(--accent-vibrant); text-transform: uppercase; letter-spacing: 5px; cursor: pointer; border-radius: 50px; margin-top: 50px; font-weight: 600; transition: 0.3s; }
+        .start-btn:hover { background: var(--accent-vibrant); color: white; box-shadow: 0 0 20px rgba(255,127,80,0.4); }
+        .start-btn:active { transform: scale(0.92); }
 
         /* --- BANNER & MOON --- */
-        .banner { position: relative; height: 100dvh; width: 100%; display: flex; justify-content: center; align-items: center; opacity: 0; transition: opacity 3s ease-in; overflow: hidden; }
+        .banner { position: relative; height: 100dvh; width: 100%; display: flex; justify-content: center; align-items: center; opacity: 0; transition: opacity 3s ease; overflow: hidden; }
         .banner.active { opacity: 1; }
-        .banner-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 20% 20%, transparent, var(--bg-deep) 85%), url('images/cover.jpeg') center/cover no-repeat; z-index: 1; }
+        .banner-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 15% 15%, transparent, var(--bg-deep) 90%), url('images/cover.jpeg') center/cover no-repeat; z-index: 1; }
 
         .branded-moon {
-            position: absolute; top: 8%; left: 8%; width: 140px; height: 140px; z-index: 10;
+            position: absolute; top: 10%; left: 10%; width: 130px; height: 130px; z-index: 10;
             border-radius: 50%; clip-path: circle(50% at 50% 50%);
-            box-shadow: 0 0 40px var(--accent-vibrant);
+            box-shadow: 0 0 30px var(--accent-vibrant);
         }
         .branded-moon img { width: 100%; height: 100%; object-fit: cover; }
 
         /* --- TIMER --- */
-        .timer-container { position: relative; z-index: 20; display: flex; gap: 15px; background: rgba(0,0,0,0.5); padding: 15px 25px; border-radius: 12px; border: 1px solid var(--gold-leaf); backdrop-filter: blur(10px); margin-top: 25vh; }
-        .time-box { text-align: center; min-width: 60px; }
-        .time-val { display: block; font-size: 1.8rem; color: var(--gold-leaf); font-family: 'Cinzel', serif; font-weight: bold; }
+        .timer-container { position: relative; z-index: 20; display: flex; gap: 15px; background: var(--glass); padding: 20px 30px; border-radius: 20px; border: 1px solid rgba(255,215,0,0.3); backdrop-filter: blur(15px); margin-top: 20vh; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .time-box { text-align: center; min-width: 65px; }
+        .time-val { display: block; font-size: 2rem; color: var(--gold-leaf); font-family: 'Cinzel', serif; font-weight: 700; }
+        .time-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.7; }
 
-        /* --- THE ROOTS (ADJUSTED HIGHER) --- */
-        .roots-section { padding: 40px 20px; text-align: center; background: linear-gradient(to bottom, var(--bg-deep), var(--bg-accent)); }
-        .root-card { width: 240px; border: 2px solid var(--gold-leaf); padding: 12px; border-radius: 12px; display: inline-block; margin: 10px; background: rgba(255,255,255,0.03); }
-        .root-photo { width: 100%; height: 280px; background: #1a1a1a; border-radius: 8px; margin-bottom: 10px; }
-        .root-name { font-family: 'Cinzel', serif; color: var(--accent-vibrant); font-size: 1.2rem; }
+        /* --- THE ROOTS (COMPACT & HIGHER) --- */
+        .roots-section { padding: 50px 20px; text-align: center; background: linear-gradient(to bottom, var(--bg-deep), var(--bg-accent)); }
+        .root-card { width: 230px; border: 1px solid var(--gold-leaf); padding: 12px; border-radius: 15px; display: inline-block; margin: 15px; background: rgba(255,255,255,0.02); transition: transform 0.3s ease; }
+        .root-card:hover { transform: translateY(-5px); border-color: var(--accent-vibrant); }
+        .root-photo { width: 100%; height: 260px; background: #111; border-radius: 10px; margin-bottom: 15px; }
+        .root-name { font-family: 'Cinzel', serif; color: var(--accent-vibrant); font-size: 1.1rem; letter-spacing: 1px; }
 
-        /* --- 13 BRANCHES (PULSE & INTERACTIVE) --- */
-        .branches-section { padding: 30px 20px; background: var(--bg-accent); text-align: center; }
+        /* --- 13 BRANCHES --- */
+        .branches-section { padding: 40px 20px; background: var(--bg-accent); text-align: center; }
         .branch-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; max-width: 1100px; margin: 0 auto; }
-        .branch-tag { padding: 12px 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,215,0,0.2); border-radius: 8px; cursor: pointer; transition: 0.3s; min-width: 160px; position: relative; }
-        .branch-tag:active { transform: scale(0.95); }
+        .branch-tag { padding: 15px 20px; background: var(--glass); border: 1px solid rgba(255,215,0,0.15); border-radius: 12px; cursor: pointer; transition: all 0.3s ease; min-width: 170px; }
+        .branch-tag:hover { background: rgba(255,255,255,0.12); border-color: var(--gold-leaf); }
+        .branch-tag:active { transform: scale(0.94); }
         
         .branch-tag.active-pulse { 
             background: var(--accent-vibrant) !important; 
             color: white; 
             border-color: white;
-            animation: subtlePulse 2s infinite; 
+            animation: moon-glow 2s infinite alternate; 
         }
         
-        .nickname { display: block; font-size: 0.75rem; opacity: 0.8; font-style: italic; }
+        .nickname { display: block; font-size: 0.7rem; opacity: 0.8; font-style: italic; margin-top: 4px; }
 
-        @keyframes subtlePulse {
-            0% { box-shadow: 0 0 0px var(--accent-vibrant); }
-            50% { box-shadow: 0 0 15px var(--accent-vibrant); }
-            100% { box-shadow: 0 0 0px var(--accent-vibrant); }
+        @keyframes moon-glow {
+            from { box-shadow: 0 0 5px var(--accent-vibrant); }
+            to { box-shadow: 0 0 20px var(--accent-vibrant); }
         }
 
         /* --- RSVP --- */
-        .rsvp-btn { display: inline-block; padding: 18px 45px; background: var(--accent-vibrant); color: white; text-decoration: none; font-weight: bold; border-radius: 50px; text-transform: uppercase; letter-spacing: 2px; transition: 0.2s; }
+        .rsvp-btn { display: inline-block; padding: 20px 60px; background: var(--accent-vibrant); color: white; text-decoration: none; font-weight: 700; border-radius: 50px; text-transform: uppercase; letter-spacing: 3px; transition: 0.3s; margin-top: 20px; box-shadow: 0 5px 15px rgba(255,127,80,0.3); }
+        .rsvp-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255,127,80,0.5); }
         .rsvp-btn:active { transform: scale(0.95); }
     </style>
 </head>
 <body>
 
     <canvas id="fireworks-canvas"></canvas>
-
     <button id="mute-toggle" onclick="toggleAudio()">🔊</button>
 
     <div id="intro-curtain">
         <div id="motto-text">
             Gikan sa Gamut, Tubtob sa Langit
-            <div class="credit-line">Sazon Family Production</div>
+            <div class="credit-line">A Sazon Family Production</div>
             <div class="credit-line" style="color:var(--accent-vibrant); font-family:'Cinzel';">Marzon Hotel Kalibo</div>
         </div>
         <button class="start-btn" onclick="runReveal()">Enter the Legacy</button>
@@ -106,15 +109,15 @@
         <div class="branded-moon"><img src="images/moon.png" alt="Sazon Moon"></div>
         <div class="banner-bg"></div>
         <div class="timer-container">
-            <div class="time-box"><span class="time-val" id="days">00</span><span>Days</span></div>
-            <div class="time-box"><span class="time-val" id="hours">00</span><span>Hrs</span></div>
-            <div class="time-box"><span class="time-val" id="mins">00</span><span>Min</span></div>
-            <div class="time-box"><span class="time-val" id="secs">00</span><span>Sec</span></div>
+            <div class="time-box"><span class="time-val" id="days">00</span><span class="time-label">Days</span></div>
+            <div class="time-box"><span class="time-val" id="hours">00</span><span class="time-label">Hrs</span></div>
+            <div class="time-box"><span class="time-val" id="mins">00</span><span class="time-label">Min</span></div>
+            <div class="time-box"><span class="time-val" id="secs">00</span><span class="time-label">Sec</span></div>
         </div>
     </header>
 
     <section class="roots-section">
-        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf); margin-bottom: 20px;">The Roots</h2>
+        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf); margin-bottom: 30px;">The Roots</h2>
         <div class="root-card">
             <div class="root-photo"></div>
             <div class="root-name">Tereso Sazon</div>
@@ -126,11 +129,11 @@
     </section>
 
     <section class="branches-section">
-        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf); margin-bottom: 25px;">The 13 Branches</h2>
+        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf); margin-bottom: 30px;">The 13 Branches</h2>
         <div class="branch-grid" id="branch-container"></div>
     </section>
 
-    <section style="padding: 40px 20px; text-align: center;">
+    <section style="padding: 60px 20px; text-align: center; background: var(--bg-deep);">
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="rsvp-btn">Register Your Branch</a>
     </section>
 
@@ -140,7 +143,6 @@
     <audio id="snd-anthem" src="audio/sazon-full-anthem.mp3" loop></audio>
 
     <script>
-        // Branch Data with Nicknames
         const branches = [
             {f:"Serafin", n:"Lolo Apin"}, {f:"Monserat", n:"Lola Monching"}, {f:"Felomina", n:"Lola Mining"},
             {f:"Estrella", n:"Lola Estring"}, {f:"Gregorio", n:"Lolo Gorio"}, {f:"Regino", n:"Lolo Taba"},
@@ -157,35 +159,36 @@
             bContainer.appendChild(d);
         });
 
-        // Audio Toggle Logic
         function toggleAudio() {
             const anthem = document.getElementById('snd-anthem');
             const btn = document.getElementById('mute-toggle');
-            if (anthem.muted) {
-                anthem.muted = false;
-                btn.innerText = "🔊";
-            } else {
-                anthem.muted = true;
-                btn.innerText = "🔇";
-            }
+            anthem.muted = !anthem.muted;
+            btn.innerText = anthem.muted ? "🔇" : "🔊";
         }
 
-        // Fireworks Engine
         const canvas = document.getElementById('fireworks-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         let particles = [];
-        function createBurst(x, y) {
-            for(let i=0; i<40; i++) {
-                particles.push({ x, y, vX:(Math.random()-0.5)*12, vY:(Math.random()-0.5)*12, life:1, color:Math.random()>0.5?'#FFD700':'#FF7F50' });
+        
+        function createBurst(x, y, color) {
+            for(let i=0; i<50; i++) {
+                particles.push({ 
+                    x, y, 
+                    vX:(Math.random()-0.5)*14, 
+                    vY:(Math.random()-0.5)*14, 
+                    life:1, 
+                    color: color || (Math.random()>0.5?'#FFD700':'#FF7F50') 
+                });
             }
         }
+
         function animate() {
             ctx.clearRect(0,0,canvas.width,canvas.height);
             particles.forEach((p,i) => {
-                p.x+=p.vX; p.y+=p.vY; p.vY+=0.1; p.life-=0.02;
+                p.x+=p.vX; p.y+=p.vY; p.vY+=0.12; p.life-=0.015;
                 ctx.fillStyle = p.color; ctx.globalAlpha = p.life;
-                ctx.beginPath(); ctx.arc(p.x,p.y,2,0,Math.PI*2); ctx.fill();
+                ctx.beginPath(); ctx.arc(p.x,p.y,2.5,0,Math.PI*2); ctx.fill();
                 if(p.life<=0) particles.splice(i,1);
             });
             requestAnimationFrame(animate);
@@ -195,18 +198,29 @@
         function runReveal() {
             document.querySelector('.start-btn').style.display = 'none';
             document.getElementById('motto-text').style.opacity = '1';
+            
             setTimeout(() => {
                 document.getElementById('fw-whistle').play();
+                
                 setTimeout(() => {
+                    // Burst 1: Over the Moon
                     document.getElementById('fw-high').play();
-                    createBurst(window.innerWidth*0.15, window.innerHeight*0.15);
+                    createBurst(window.innerWidth*0.15, window.innerHeight*0.15, '#FF7F50');
+                    
                     document.getElementById('intro-curtain').style.opacity = '0';
                     document.getElementById('main-banner').classList.add('active');
                     document.getElementById('snd-anthem').play();
                     document.getElementById('mute-toggle').style.display = 'block';
+                    
+                    // Burst 2: Center Reveal
+                    setTimeout(() => {
+                        document.getElementById('fw-low').play();
+                        createBurst(window.innerWidth/2, window.innerHeight/3, '#FFD700');
+                    }, 800);
+
                     setTimeout(() => document.getElementById('intro-curtain').style.display = 'none', 2000);
-                }, 1000);
-            }, 2500);
+                }, 1200);
+            }, 2000);
         }
 
         const target = new Date("July 23, 2027 08:00:00").getTime();
