@@ -2,155 +2,75 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Sazon 2027 | The 13 Branches</title>
-    <link rel="icon" type="image/png" href="images/moon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sazon 2027 | Grand Reunion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        <div class="branch-grid" id="branch-container"></div>
-    </section>
+        :root { --gold: #FFD700; --deep: #050812; --accent: #FF7F50; }
+        body { margin: 0; background: var(--deep); color: white; font-family: 'Montserrat', sans-serif; text-align: center; }
+        
+        /* Intro Curtain */
+        #intro-curtain { position: fixed; inset: 0; background: var(--deep); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: 1s; }
+        #motto-text { color: var(--gold); font-family: 'Cinzel', serif; letter-spacing: 4px; padding: 20px; }
+        .start-btn { padding: 15px 40px; border: 2px solid var(--accent); background: none; color: var(--accent); cursor: pointer; border-radius: 30px; font-weight: bold; margin-top: 20px; }
 
-    <section class="prog-section">
-        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf);">Event Programme</h2>
-        <div class="prog-card">
-            <h3 style="color: var(--accent-vibrant); margin:0;">Day 1: July 23, 2027</h3>
-            <p style="font-size:0.9rem; margin:10px 0 0;">Motorcade, Welcome Luncheon, & Grand Gala Night</p>
+        /* Banner & Moon */
+        .banner { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('images/cover.jpeg') center/cover; }
+        .branded-moon { width: 150px; height: 150px; border-radius: 50%; border: 3px solid var(--gold); overflow: hidden; box-shadow: 0 0 20px var(--accent); margin-bottom: 20px; }
+        .branded-moon img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Timer */
+        .timer { display: flex; gap: 15px; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; backdrop-filter: blur(5px); }
+        .time-box { min-width: 60px; }
+        .time-val { display: block; font-size: 2rem; color: var(--gold); font-family: 'Cinzel', serif; }
+
+        /* Map Section */
+        .map-box { max-width: 800px; margin: 40px auto; padding: 20px; }
+        iframe { width: 100%; height: 350px; border-radius: 15px; border: 1px solid var(--gold); }
+
+        canvas { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
+    </style>
+</head>
+<body>
+
+    <canvas id="fw-canvas"></canvas>
+
+    <div id="intro-curtain">
+        <div id="motto-text">
+            <h1>GIKAN SA GAMUT,<br>TUBTOB SA LANGIT</h1>
         </div>
-        <div class="prog-card">
-            <h3 style="color: var(--accent-vibrant); margin:0;">Day 2: July 24, 2027</h3>
-            <p style="font-size:0.9rem; margin:10px 0 0;">Sports Fest, Family Games, & Unity Ritual</p>
+        <button class="start-btn" onclick="reveal()">ENTER THE LEGACY</button>
+    </div>
+
+    <div class="banner">
+        <div class="branded-moon"><img src="images/moon.png"></div>
+        <div class="timer">
+            <div class="time-box"><span id="d" class="time-val">00</span>Days</div>
+            <div class="time-box"><span id="h" class="time-val">00</span>Hrs</div>
+            <div class="time-box"><span id="m" class="time-val">00</span>Min</div>
+            <div class="time-box"><span id="s" class="time-val">00</span>Sec</div>
         </div>
-    </section>
+    </div>
 
-    <section class="rsvp-section">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="rsvp-btn">Register Your Branch</a>
-    </section>
-
-    <audio id="fw-whistle" src="audio/firework_whistle_.mp3"></audio>
-    <audio id="fw-high" src="audio/firework_burst_high.mp3"></audio>
-    <audio id="snd-anthem" src="audio/sazon-full-anthem.mp3" loop></audio>
+    <div class="map-box">
+        <h2>✈️ MARZON HOTEL, KALIBO</h2>
+        <iframe src="https://maps.google.com/?cid=11713442290938606363&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ"></iframe>
+    </div>
 
     <script>
-        const branches = [
-            {f:"Serafin", n:"Lolo Apin"}, {f:"Monserat", n:"Lola Monching"}, {f:"Felomina", n:"Lola Mining"},
-            {f:"Estrella", n:"Lola Estring"}, {f:"Gregorio", n:"Lolo Gorio"}, {f:"Regino", n:"Lolo Taba"},
-            {f:"Maria", n:"Lola Maria"}, {f:"Concepcion", n:"Lola Moret"}, {f:"Cezar", n:"Lolo Cezar"},
-            {f:"Priscilla", n:"Lola Mamay"}, {f:"Gloria", n:"Lola Goly"}, {f:"Reynaldo", n:"Lolo Lope"}, {f:"Nilda", n:"Lola Nilda"}
-        ];
-
-        const bContainer = document.getElementById('branch-container');
-        branches.forEach(b => {
-            const d = document.createElement('div'); d.className = 'branch-tag';
-            d.innerHTML = `<strong>${b.f}</strong><span class="nickname">(${b.n})</span>`;
-           d.onclick = () => {
-                d.classList.add('active-pulse');
-                setTimeout(() => {
-                    window.open("https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing", "_blank");
-                }, 400); // Small delay so they see the "pulse" before it redirects
-            };
-            bContainer.appendChild(d);
-        });
-
-        function toggleAudio() {
-            const anthem = document.getElementById('snd-anthem');
-            const btn = document.getElementById('mute-toggle');
-            anthem.muted = !anthem.muted;
-            btn.innerText = anthem.muted ? "🔇" : "🔊";
+        function reveal() {
+            document.getElementById('intro-curtain').style.opacity = '0';
+            setTimeout(() => document.getElementById('intro-curtain').style.display = 'none', 1000);
         }
 
-        <script>
-        const canvas = document.getElementById('fireworks-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        let particles = [];
-        
-        // --- WHIMSICAL POPPING PHYSICS ---
-        function createBurst(x, y, color) {
-            for(let i=0; i<85; i++) { 
-                particles.push({ 
-                    x, y, 
-                    vX: (Math.random()-0.5)*(Math.random() * 25), 
-                    vY: (Math.random()-0.5)*(Math.random() * 25), 
-                    life: 1.2 + Math.random(), 
-                    color: color || (Math.random()>0.5?'#FFD700':'#FF7F50'), 
-                    size: 3 + Math.random() * 3, 
-                    resistance: 0.94 + Math.random() * 0.04, 
-                });
-            }
-        }
-        
-        function animate() {
-            ctx.clearRect(0,0,canvas.width,canvas.height);
-            particles.forEach((p,i) => {
-                p.vX *= p.resistance;
-                p.vY *= p.resistance;
-                p.x+=p.vX; p.y+=p.vY; p.vY+=0.07; p.life-=0.012;
-                
-                // FLASH EFFECT: Bright white "pop" then fades to gold/coral
-                ctx.fillStyle = p.life > 0.85 ? '#FFFFFF' : p.color; 
-                ctx.globalAlpha = p.life;
-                
-                ctx.beginPath(); 
-                ctx.arc(p.x,p.y,p.size * p.life,0,Math.PI*2); 
-                ctx.fill();
-                
-                if(p.life<=0) particles.splice(i,1);
-            });
-            requestAnimationFrame(animate);
-        }
-        animate();
-
-        function runReveal() {
-            const startBtn = document.querySelector('.start-btn');
-            const motto = document.getElementById('motto-text');
-            const curtain = document.getElementById('intro-curtain');
-            const anthem = document.getElementById('snd-anthem');
-            
-            startBtn.style.opacity = '0';
-            setTimeout(() => startBtn.style.display = 'none', 500);
-            anthem.volume = 0.2;
-            anthem.play();
-
-            setTimeout(() => {
-                document.getElementById('fw-whistle').play();
-                motto.style.opacity = '1';
-                motto.style.transform = 'scale(1.1)';
-                motto.style.transition = 'all 3s ease-out';
-            }, 1000);
-
-            setTimeout(() => {
-                document.getElementById('fw-high').play();
-                setTimeout(() => document.getElementById('fw-low').play(), 250);
-                
-                // --- FULL SCREEN BUSTING VISUALS (Center, Left, Right, Lower) ---
-                createBurst(window.innerWidth * 0.5, window.innerHeight * 0.4, '#FFD700'); 
-                setTimeout(() => createBurst(window.innerWidth * 0.2, window.innerHeight * 0.5, '#FF7F50'), 150);
-                setTimeout(() => createBurst(window.innerWidth * 0.8, window.innerHeight * 0.5, '#FFD700'), 300);
-                // Lower burst to fill the bottom area as requested
-                setTimeout(() => createBurst(window.innerWidth * 0.5, window.innerHeight * 0.75, '#FF7F50'), 600);
-                
-                curtain.style.opacity = '0';
-                document.getElementById('main-banner').classList.add('active');
-                
-                let vol = 0.2;
-                const interval = setInterval(() => {
-                    if (vol < 1) { vol += 0.05; anthem.volume = vol; }
-                    else { clearInterval(interval); }
-                }, 100);
-
-                document.getElementById('mute-toggle').style.display = 'block';
-                setTimeout(() => curtain.style.display = 'none', 2000);
-            }, 4500); 
-        }
-
-        // --- TIMER LOGIC ---
         const target = new Date("July 23, 2027 08:00:00").getTime();
         setInterval(() => {
-            const diff = target - new Date().getTime();
-            document.getElementById("days").innerText = String(Math.floor(diff / 86400000)).padStart(2,'0');
-            document.getElementById("hours").innerText = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,'0');
-            document.getElementById("mins").innerText = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
-            document.getElementById("secs").innerText = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
+            const now = new Date().getTime();
+            const diff = target - now;
+            document.getElementById("d").innerText = Math.floor(diff / 86400000);
+            document.getElementById("h").innerText = Math.floor((diff % 86400000) / 3600000);
+            document.getElementById("m").innerText = Math.floor((diff % 3600000) / 60000);
+            document.getElementById("s").innerText = Math.floor((diff % 60000) / 1000);
         }, 1000);
     </script>
 </body>
