@@ -14,8 +14,19 @@
             --silver-mist: #F0F0F0;
             --glass: rgba(255, 255, 255, 0.05);
         }
-
-        body, html { margin: 0; padding: 0; background: var(--bg-deep); color: var(--silver-mist); font-family: 'Montserrat', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+.branded-moon { 
+            position: absolute !important;
+            top: 20px !important;
+            left: 20px !important;
+            width: 170px !important;
+            height: 170px !important;
+            z-index: 100 !important;
+            border-radius: 50% !important;
+            overflow: hidden !important;
+            border: none !important;
+            box-shadow: 0 0 40px var(--gold-leaf) !important;
+        }
+        .branded-moon img { width: 100%; height: 100%; object-fit: cover; }at', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
 
         /* --- THE BANNER (COVER) --- */
         .banner { position: relative; height: 100dvh; /* Dynamic viewport height for mobile */ width: 100%; display: flex; justify-content: center; align-items: center; text-align: center; overflow: hidden; opacity: 0; /* Start hidden for reveal */ animation: revealBanner 2s ease forwards; animation-delay: 1s; /* Delay for motto intro */ }
