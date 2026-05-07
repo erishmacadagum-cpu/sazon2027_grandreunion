@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sazon 2027 | The 13 Branches</title>
+    <link rel="icon" type="image/png" href="images/moon.png">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -16,81 +17,104 @@
 
         body, html { margin: 0; padding: 0; background: var(--bg-deep); color: var(--silver-mist); font-family: 'Montserrat', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
 
+        /* --- UI CONTROLS --- */
+        #mute-toggle {
+            position: fixed; bottom: 20px; right: 20px; z-index: 1100;
+            background: rgba(255, 255, 255, 0.1); border: 1px solid var(--gold-leaf);
+            color: var(--gold-leaf); padding: 10px; border-radius: 50%; cursor: pointer;
+            width: 45px; height: 45px; backdrop-filter: blur(5px); transition: 0.3s;
+            display: none; /* Shown after start */
+        }
+        #mute-toggle:active { transform: scale(0.9); }
+
         /* --- FIREWORKS --- */
         canvas#fireworks-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; }
 
         /* --- CINEMATIC OPENING --- */
         #intro-curtain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-deep); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 2s ease-in-out; }
         #motto-text { font-family: 'Cinzel', serif; color: var(--gold-leaf); font-size: clamp(1.2rem, 5vw, 2.2rem); text-align: center; letter-spacing: 6px; opacity: 0; transition: opacity 2s ease-in; margin-bottom: 20px; }
-        .credit-production { font-family: 'Montserrat', sans-serif; font-style: italic; font-weight: 300; font-size: 0.9rem; color: var(--silver-mist); letter-spacing: 3px; margin-top: 15px; text-transform: uppercase; }
-        .credit-location { font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.1rem; color: var(--accent-vibrant); letter-spacing: 4px; margin-top: 8px; }
-        .start-btn { padding: 18px 50px; background: transparent; border: 2px solid var(--accent-vibrant); color: var(--accent-vibrant); text-transform: uppercase; letter-spacing: 5px; cursor: pointer; border-radius: 50px; margin-top: 40px; transition: 0.4s; }
-        .start-btn:hover { background: var(--accent-vibrant); color: white; }
+        .credit-line { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; margin-top: 10px; color: var(--silver-mist); }
+        
+        .start-btn { padding: 18px 50px; background: transparent; border: 2px solid var(--accent-vibrant); color: var(--accent-vibrant); text-transform: uppercase; letter-spacing: 5px; cursor: pointer; border-radius: 50px; margin-top: 40px; transition: 0.2s; }
+        .start-btn:active { transform: scale(0.95); background: var(--accent-vibrant); color: white; }
 
         /* --- BANNER & MOON --- */
         .banner { position: relative; height: 100dvh; width: 100%; display: flex; justify-content: center; align-items: center; opacity: 0; transition: opacity 3s ease-in; overflow: hidden; }
         .banner.active { opacity: 1; }
-        .banner-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 20% 20%, transparent, var(--bg-deep) 80%), url('images/cover.jpeg') center/cover no-repeat; z-index: 1; }
+        .banner-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 20% 20%, transparent, var(--bg-deep) 85%), url('images/cover.jpeg') center/cover no-repeat; z-index: 1; }
 
         .branded-moon {
-            position: absolute; top: 10%; left: 10%; width: 150px; height: 150px; z-index: 10;
-            border-radius: 50%; clip-path: circle(50% at 50% 50%); /* Removed all rim details */
-            box-shadow: 0 0 40px var(--accent-vibrant); background: var(--bg-deep);
+            position: absolute; top: 8%; left: 8%; width: 140px; height: 140px; z-index: 10;
+            border-radius: 50%; clip-path: circle(50% at 50% 50%);
+            box-shadow: 0 0 40px var(--accent-vibrant);
         }
         .branded-moon img { width: 100%; height: 100%; object-fit: cover; }
 
         /* --- TIMER --- */
-        .timer-container { position: relative; z-index: 20; display: flex; gap: 15px; background: rgba(255,255,255,0.1); padding: 20px 30px; border-radius: 15px; border: 1px solid var(--gold-leaf); backdrop-filter: blur(10px); margin-top: 30vh; }
-        .time-box { text-align: center; min-width: 65px; }
-        .time-val { display: block; font-size: 2rem; color: var(--gold-leaf); font-family: 'Cinzel', serif; font-weight: bold; }
+        .timer-container { position: relative; z-index: 20; display: flex; gap: 15px; background: rgba(0,0,0,0.5); padding: 15px 25px; border-radius: 12px; border: 1px solid var(--gold-leaf); backdrop-filter: blur(10px); margin-top: 25vh; }
+        .time-box { text-align: center; min-width: 60px; }
+        .time-val { display: block; font-size: 1.8rem; color: var(--gold-leaf); font-family: 'Cinzel', serif; font-weight: bold; }
 
-        /* --- THE ROOTS --- */
-        .roots-section { padding: 80px 20px; text-align: center; background: linear-gradient(to bottom, var(--bg-deep), var(--bg-accent)); }
-        .root-card { width: 260px; border: 2px solid var(--gold-leaf); padding: 15px; border-radius: 12px; display: inline-block; margin: 20px; transition: 0.3s; }
-        .root-photo { width: 100%; height: 300px; background: #1a1a1a; border-radius: 8px; margin-bottom: 15px; }
-        .root-name { font-family: 'Cinzel', serif; color: var(--accent-vibrant); font-size: 1.3rem; font-weight: bold; }
+        /* --- THE ROOTS (ADJUSTED HIGHER) --- */
+        .roots-section { padding: 40px 20px; text-align: center; background: linear-gradient(to bottom, var(--bg-deep), var(--bg-accent)); }
+        .root-card { width: 240px; border: 2px solid var(--gold-leaf); padding: 12px; border-radius: 12px; display: inline-block; margin: 10px; background: rgba(255,255,255,0.03); }
+        .root-photo { width: 100%; height: 280px; background: #1a1a1a; border-radius: 8px; margin-bottom: 10px; }
+        .root-name { font-family: 'Cinzel', serif; color: var(--accent-vibrant); font-size: 1.2rem; }
 
-        /* --- BRANCHES --- */
-        .branches-section { padding: 60px 20px; background: var(--bg-accent); text-align: center; }
-        .branch-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; max-width: 1100px; margin: 0 auto; }
-        .branch-tag { padding: 15px 25px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,215,0,0.3); border-radius: 8px; cursor: pointer; transition: 0.3s; }
-        .branch-tag:hover { background: var(--accent-vibrant); color: white; }
+        /* --- 13 BRANCHES (PULSE & INTERACTIVE) --- */
+        .branches-section { padding: 30px 20px; background: var(--bg-accent); text-align: center; }
+        .branch-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; max-width: 1100px; margin: 0 auto; }
+        .branch-tag { padding: 12px 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,215,0,0.2); border-radius: 8px; cursor: pointer; transition: 0.3s; min-width: 160px; position: relative; }
+        .branch-tag:active { transform: scale(0.95); }
+        
+        .branch-tag.active-pulse { 
+            background: var(--accent-vibrant) !important; 
+            color: white; 
+            border-color: white;
+            animation: subtlePulse 2s infinite; 
+        }
+        
+        .nickname { display: block; font-size: 0.75rem; opacity: 0.8; font-style: italic; }
 
-        /* --- PROGRAMME & RSVP --- */
-        .prog-section { padding: 60px 20px; text-align: center; }
-        .prog-card { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 15px; border-left: 4px solid var(--gold-leaf); max-width: 700px; margin: 20px auto; text-align: left; }
-        .rsvp-box { padding: 80px 20px; background: var(--bg-accent); text-align: center; }
-        .rsvp-btn { display: inline-block; padding: 20px 50px; background: var(--accent-vibrant); color: white; text-decoration: none; font-weight: bold; border-radius: 50px; text-transform: uppercase; letter-spacing: 2px; }
+        @keyframes subtlePulse {
+            0% { box-shadow: 0 0 0px var(--accent-vibrant); }
+            50% { box-shadow: 0 0 15px var(--accent-vibrant); }
+            100% { box-shadow: 0 0 0px var(--accent-vibrant); }
+        }
+
+        /* --- RSVP --- */
+        .rsvp-btn { display: inline-block; padding: 18px 45px; background: var(--accent-vibrant); color: white; text-decoration: none; font-weight: bold; border-radius: 50px; text-transform: uppercase; letter-spacing: 2px; transition: 0.2s; }
+        .rsvp-btn:active { transform: scale(0.95); }
     </style>
 </head>
 <body>
 
     <canvas id="fireworks-canvas"></canvas>
 
+    <button id="mute-toggle" onclick="toggleAudio()">🔊</button>
+
     <div id="intro-curtain">
         <div id="motto-text">
             Gikan sa Gamut, Tubtob sa Langit
-            <div class="credit-production">In Cooperation with Sazon Family Production</div>
-            <div class="credit-location">Marzon Hotel Kalibo</div>
+            <div class="credit-line">Sazon Family Production</div>
+            <div class="credit-line" style="color:var(--accent-vibrant); font-family:'Cinzel';">Marzon Hotel Kalibo</div>
         </div>
         <button class="start-btn" onclick="runReveal()">Enter the Legacy</button>
     </div>
 
     <header class="banner" id="main-banner">
-        <div class="branded-moon">
-            <img src="images/moon.png" alt="Sazon Moon">
-        </div>
+        <div class="branded-moon"><img src="images/moon.png" alt="Sazon Moon"></div>
         <div class="banner-bg"></div>
         <div class="timer-container">
             <div class="time-box"><span class="time-val" id="days">00</span><span>Days</span></div>
             <div class="time-box"><span class="time-val" id="hours">00</span><span>Hrs</span></div>
-            <div class="time-box"><span class="time-val" id="mins">00</span><span>Mins</span></div>
-            <div class="time-box"><span class="time-val" id="secs">00</span><span>Secs</span></div>
+            <div class="time-box"><span class="time-val" id="mins">00</span><span>Min</span></div>
+            <div class="time-box"><span class="time-val" id="secs">00</span><span>Sec</span></div>
         </div>
     </header>
 
     <section class="roots-section">
-        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf); margin-bottom: 40px;">The Roots</h2>
+        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf); margin-bottom: 20px;">The Roots</h2>
         <div class="root-card">
             <div class="root-photo"></div>
             <div class="root-name">Tereso Sazon</div>
@@ -102,42 +126,49 @@
     </section>
 
     <section class="branches-section">
-        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf); margin-bottom: 40px;">The 13 Branches</h2>
+        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf); margin-bottom: 25px;">The 13 Branches</h2>
         <div class="branch-grid" id="branch-container"></div>
     </section>
 
-    <section class="prog-section">
-        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf);">Event Programme</h2>
-        <div class="prog-card">
-            <h3 style="color: var(--accent-vibrant);">Day 1: July 23, 2027</h3>
-            <p>08:00 AM - Motorcade & Opening Ceremony</p>
-            <p>12:00 PM - Welcome Luncheon</p>
-            <p>06:00 PM - Grand Gala Night</p>
-        </div>
-        <div class="prog-card">
-            <h3 style="color: var(--accent-vibrant);">Day 2: July 24, 2027</h3>
-            <p>09:00 AM - Family Fun Games & Sports Fest</p>
-            <p>04:00 PM - Closing Unity Ritual</p>
-        </div>
-    </section>
-
-    <section class="rsvp-box">
+    <section style="padding: 40px 20px; text-align: center;">
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing" target="_blank" class="rsvp-btn">Register Your Branch</a>
     </section>
 
     <audio id="fw-whistle" src="audio/firework_whistle_.mp3"></audio>
     <audio id="fw-high" src="audio/firework_burst_high.mp3"></audio>
     <audio id="fw-low" src="audio/firework_burst_low.mp3"></audio>
-    <audio id="snd-anthem" src="audio/sazon-full-anthem.mp3"></audio>
+    <audio id="snd-anthem" src="audio/sazon-full-anthem.mp3" loop></audio>
 
     <script>
-        const branches = ["Serafin", "Monserat", "Felomina", "Estrella", "Gregorio", "Regino", "Maria", "Concepcion", "Cezar", "Priscilla", "Gloria", "Reynaldo", "Nilda"];
+        // Branch Data with Nicknames
+        const branches = [
+            {f:"Serafin", n:"Lolo Apin"}, {f:"Monserat", n:"Lola Monching"}, {f:"Felomina", n:"Lola Mining"},
+            {f:"Estrella", n:"Lola Estring"}, {f:"Gregorio", n:"Lolo Gorio"}, {f:"Regino", n:"Lolo Taba"},
+            {f:"Maria", n:"Lola Maria"}, {f:"Concepcion", n:"Lola Moret"}, {f:"Cezar", n:"Lolo Cezar"},
+            {f:"Priscilla", n:"Lola Mamay"}, {f:"Gloria", n:"Lola Goly"}, {f:"Reynaldo", n:"Lolo Lope"}, {f:"Nilda", n:"Lola Nilda"}
+        ];
+
         const bContainer = document.getElementById('branch-container');
-        branches.forEach(n => {
-            const d = document.createElement('div'); d.className = 'branch-tag'; d.innerText = n;
-            d.onclick = () => d.style.background = 'var(--accent-vibrant)';
+        branches.forEach(b => {
+            const d = document.createElement('div'); 
+            d.className = 'branch-tag';
+            d.innerHTML = `<strong>${b.f}</strong><span class="nickname">(${b.n})</span>`;
+            d.onclick = () => d.classList.toggle('active-pulse');
             bContainer.appendChild(d);
         });
+
+        // Audio Toggle Logic
+        function toggleAudio() {
+            const anthem = document.getElementById('snd-anthem');
+            const btn = document.getElementById('mute-toggle');
+            if (anthem.muted) {
+                anthem.muted = false;
+                btn.innerText = "🔊";
+            } else {
+                anthem.muted = true;
+                btn.innerText = "🔇";
+            }
+        }
 
         // Fireworks Engine
         const canvas = document.getElementById('fireworks-canvas');
@@ -145,8 +176,8 @@
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         let particles = [];
         function createBurst(x, y) {
-            for(let i=0; i<50; i++) {
-                particles.push({ x, y, vX: (Math.random()-0.5)*15, vY: (Math.random()-0.5)*15, life: 1, color: '#FFD700' });
+            for(let i=0; i<40; i++) {
+                particles.push({ x, y, vX:(Math.random()-0.5)*12, vY:(Math.random()-0.5)*12, life:1, color:Math.random()>0.5?'#FFD700':'#FF7F50' });
             }
         }
         function animate() {
@@ -172,17 +203,19 @@
                     document.getElementById('intro-curtain').style.opacity = '0';
                     document.getElementById('main-banner').classList.add('active');
                     document.getElementById('snd-anthem').play();
+                    document.getElementById('mute-toggle').style.display = 'block';
+                    setTimeout(() => document.getElementById('intro-curtain').style.display = 'none', 2000);
                 }, 1000);
-            }, 3000);
+            }, 2500);
         }
 
         const target = new Date("July 23, 2027 08:00:00").getTime();
         setInterval(() => {
             const diff = target - new Date().getTime();
-            document.getElementById("days").innerText = Math.floor(diff / 86400000);
-            document.getElementById("hours").innerText = Math.floor((diff % 86400000) / 3600000);
-            document.getElementById("mins").innerText = Math.floor((diff % 3600000) / 60000);
-            document.getElementById("secs").innerText = Math.floor((diff % 60000) / 1000);
+            document.getElementById("days").innerText = String(Math.floor(diff / 86400000)).padStart(2,'0');
+            document.getElementById("hours").innerText = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,'0');
+            document.getElementById("mins").innerText = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
+            document.getElementById("secs").innerText = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
         }, 1000);
     </script>
 </body>
