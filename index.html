@@ -84,13 +84,9 @@
                     <img src="images/logo.png" class="logo-tree" alt="Moon O">
                 </div>
                 <span>O</span>
-                <span>N</span>
-            </div>
-
-            <div id="countdown">
-                <div class="timer-unit"><span class="timer-num" id="days">00</span><span class="timer-label">Days</span></div>
-                <div class="timer-unit"><span class="timer-num" id="hours">00</span><span class="timer-label">Hours</span></div>
-                <div class="timer-unit"><span class="timer-num" id="mins">00</span><span class="timer-label">Mins</span></div>
+              <div class="branded-moon">
+            <img src="images/moon.png" alt="Sazon Logo">
+        </div>
                 <div class="timer-unit"><span class="timer-num" id="secs">00</span><span class="timer-label">Secs</span></div>
             </div>
 
@@ -172,7 +168,7 @@
             link.href = window.URL.createObjectURL(blob);
             link.setAttribute('download', 'Sazon_Reunion_2027.ics');
             document.body.appendChild(link);
-            link.click();
+            link.click()
             document.body.removeChild(link);
         }
     </script>
