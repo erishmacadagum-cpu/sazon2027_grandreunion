@@ -3,113 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sazon 2027 | Grand Reunion</title>
+    <title>Sazon 2027 | The Grand Reunion</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #FFD700; --deep: #050812; --accent: #FF7F50; }
-        body, html { margin: 0; padding: 0; background: var(--deep); color: #f0f0f0; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+        :root {
+            --bg-deep: #050812;
+            --bg-accent: #0A1128;
+            --accent-vibrant: #FF7F50;
+            --gold-leaf: #FFD700;
+            --silver-mist: #F0F0F0;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
 
-        /* INTRO CURTAIN */
-        #intro-curtain { position: fixed; inset: 0; background: var(--deep); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 1.5s; }
-        #motto-text { text-align: center; color: var(--gold); font-family: 'Cinzel', serif; letter-spacing: 5px; }
-        .start-btn { padding: 15px 40px; border: 2px solid var(--accent); background: none; color: var(--accent); cursor: pointer; border-radius: 30px; font-weight: bold; margin-top: 30px; transition: 0.3s; }
-        .start-btn:hover { background: var(--accent); color: white; }
+        body, html { margin: 0; padding: 0; background: var(--bg-deep); color: var(--silver-mist); font-family: 'Montserrat', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* BANNER - DARK & CLEAN */
-        .banner { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('images/cover.jpeg') center/cover no-repeat; opacity: 0; transition: opacity 2s; }
+        /* --- UI ELEMENTS --- */
+        #mute-toggle { position: fixed; bottom: 25px; right: 25px; z-index: 1100; background: var(--glass); border: 1px solid var(--gold-leaf); color: var(--gold-leaf); width: 50px; height: 50px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(10px); display: none; font-size: 1.2rem; }
+        canvas#fireworks-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; }
+
+        /* --- CINEMATIC INTRO --- */
+        #intro-curtain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-deep); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 2s ease; }
+        #motto-text { font-family: 'Cinzel', serif; color: var(--gold-leaf); text-align: center; letter-spacing: 6px; opacity: 0; transform: scale(0.9); transition: all 3s ease-out; }
+        .production-credits { color: var(--silver-mist); font-size: 0.8rem; letter-spacing: 4px; margin-bottom: 20px; text-transform: uppercase; opacity: 0.7; }
+        .start-btn { padding: 18px 50px; background: transparent; border: 2px solid var(--accent-vibrant); color: var(--accent-vibrant); text-transform: uppercase; letter-spacing: 5px; cursor: pointer; border-radius: 50px; margin-top: 40px; transition: 0.3s; font-weight: 600; }
+        .start-btn:hover { background: var(--accent-vibrant); color: white; box-shadow: 0 0 20px var(--accent-vibrant); }
+
+        /* --- MAIN BANNER --- */
+        .banner { position: relative; height: 100dvh; width: 100%; display: flex; justify-content: center; align-items: center; opacity: 0; transition: opacity 3s ease; overflow: hidden; }
         .banner.active { opacity: 1; }
+        .banner-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/cover.jpeg') center/cover no-repeat; z-index: 1; filter: brightness(0.4); }
         
-        /* CLEAN LOGO MOON - NO RIM, NO FACE */
-        .branded-moon { width: 160px; height: 160px; border-radius: 50%; border: 2px solid var(--gold); overflow: hidden; box-shadow: 0 0 30px var(--accent); margin-bottom: 20px; z-index: 10; }
+        .branded-moon { position: absolute; top: 12%; left: 50%; transform: translateX(-50%); width: 160px; height: 160px; z-index: 10; border-radius: 50%; overflow: hidden; border: 2.5px solid var(--gold-leaf); box-shadow: 0 0 40px rgba(255, 127, 80, 0.6); }
         .branded-moon img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* TIMER */
-        .timer { display: flex; gap: 15px; background: rgba(0,0,0,0.5); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,215,0,0.3); backdrop-filter: blur(10px); }
-        .time-val { display: block; font-size: 2rem; color: var(--gold); font-family: 'Cinzel', serif; }
+        .timer-container { position: relative; z-index: 20; display: flex; gap: 20px; background: rgba(0,0,0,0.65); padding: 30px; border-radius: 20px; border: 1px solid var(--gold-leaf); backdrop-filter: blur(12px); }
+        .time-box { text-align: center; min-width: 80px; }
+        .time-val { display: block; font-size: 2.5rem; color: var(--gold-leaf); font-family: 'Cinzel', serif; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+        .time-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--silver-mist); }
 
-        /* MAP SECTION */
-        .content-section { padding: 60px 20px; text-align: center; }
-        .map-container { max-width: 900px; margin: 0 auto; height: 400px; border-radius: 20px; overflow: hidden; border: 1px solid var(--gold); }
-        
-        canvas { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
+        /* --- CONTENT SECTIONS --- */
+        .section-padding { padding: 100px 20px; position: relative; z-index: 2; }
+        .patriarch-matriarch { max-width: 1000px; margin: 0 auto 80px; display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; }
+        .elder-card { background: var(--bg-accent); border: 1px solid var(--gold-leaf); padding: 30px; border-radius: 15px; width: 400px; text-align: center; transition: 0.3s; }
+        .elder-card:hover { transform: translateY(-10px); background: rgba(255, 215, 0, 0.05); }
+
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .branch-card { background: var(--glass); border: 1px solid rgba(255,255,255,0.1); padding: 40px; border-radius: 25px; transition: 0.4s; backdrop-filter: blur(5px); text-align: center; }
+        .branch-card:hover { border-color: var(--accent-vibrant); background: rgba(255, 127, 80, 0.1); transform: scale(1.03); }
+
+        /* --- FOOTER --- */
+        footer { background: #02040a; padding: 80px 20px; border-top: 1px solid var(--gold-leaf); text-align: center; }
+        .rsvp-form { max-width: 600px; margin: 40px auto; background: var(--bg-accent); padding: 40px; border-radius: 20px; border: 1px solid var(--glass); }
+        .rsvp-btn { width: 100%; padding: 15px; background: var(--accent-vibrant); color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; letter-spacing: 2px; }
+
+        h1, h2, h3 { font-family: 'Cinzel', serif; color: var(--gold-leaf); }
     </style>
 </head>
 <body>
 
-    <canvas id="fw-canvas"></canvas>
+    <canvas id="fireworks-canvas"></canvas>
+    <button id="mute-toggle" onclick="toggleMute()">🔊</button>
 
     <div id="intro-curtain">
+        <p class="production-credits">A Sazon Family Production</p>
         <div id="motto-text">
             <h1>GIKAN SA GAMUT,<br>TUBTOB SA LANGIT</h1>
-            <p style="letter-spacing: 2px; opacity: 0.8;">The Sazon Legacy 2027</p>
+            <p style="font-size: 1.2rem; margin-top: 20px; letter-spacing: 3px;">The 2027 Grand Reunion</p>
         </div>
-        <button class="start-btn" onclick="revealSite()">ENTER THE LEGACY</button>
+        <button class="start-btn" onclick="runReveal()">Enter the Legacy</button>
     </div>
 
-    <section class="banner" id="main-site">
-        <div class="branded-moon"><img src="images/moon.png"></div>
-        <div class="timer">
-            <div style="text-align:center"><span id="days" class="time-val">00</span>Days</div>
-            <div style="text-align:center"><span id="hours" class="time-val">00</span>Hrs</div>
-            <div style="text-align:center"><span id="mins" class="time-val">00</span>Min</div>
-            <div style="text-align:center"><span id="secs" class="time-val">00</span>Sec</div>
+    <section class="banner" id="main-banner">
+        <div class="banner-bg"></div>
+        <div class="branded-moon">
+            <img src="images/moon.png" alt="Sazon Logo">
+        </div>
+        <div class="timer-container">
+            <div class="time-box"><span class="time-val" id="days">00</span><span class="time-label">Days</span></div>
+            <div class="time-box"><span class="time-val" id="hours">00</span><span class="time-label">Hrs</span></div>
+            <div class="time-box"><span class="time-val" id="mins">00</span><span class="time-label">Min</span></div>
+            <div class="time-box"><span class="time-val" id="secs">00</span><span class="time-label">Sec</span></div>
         </div>
     </section>
 
-    <section class="content-section">
-        <h2 style="font-family: 'Cinzel'; color: var(--gold);">✈️ TRAVEL GUIDE & LOCATION</h2>
-        <div class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3903.465134731853!2d122.3704870758444!3d11.69614454190867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33af9ca988f5068f%3A0x633a696236b2f768!2sMarzon%20Hotel%20Kalibo!5e0!3m2!1sen!2sph!4v1715075000000!5m2!1sen!2sph" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    <section class="section-padding">
+        <div class="patriarch-matriarch">
+            <div class="elder-card">
+                <h3>The Patriarch</h3>
+                <p style="font-size: 1.5rem; color: var(--silver-mist);">Tereso Sazon</p>
+            </div>
+            <div class="elder-card">
+                <h3>The Matriarch</h3>
+                <p style="font-size: 1.5rem; color: var(--silver-mist);">Teofista Sazon</p>
+            </div>
+        </div>
+
+        <h2 style="font-size: 2.5rem; margin-bottom: 50px;">The 13 Branches</h2>
+        <div class="grid-container">
+            <div class="branch-card"><h3>Serafin</h3><p>Branch Head: TBD</p></div>
+            <div class="branch-card"><h3>Monserat</h3><p>Branch Head: TBD</p></div>
+            <div class="branch-card"><h3>Felomina</h3><p>Branch Head: TBD</p></div>
+            </div>
+    </section>
+
+    <section class="section-padding" style="background: var(--bg-accent);">
+        <h2>✈️ Travel & Location</h2>
+        <div style="max-width: 1000px; margin: 40px auto; height: 450px; border-radius: 20px; overflow: hidden; border: 1px solid var(--gold-leaf);">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3905.10526027003!2d122.3683!3d11.7064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a5987178872b71%3A0xc3f6d7d79b97204!2sMarzon%20Hotel%20Kalibo!5e0!3m2!1sen!2sph!4v1714900000000!5m2!1sen!2sph" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
     </section>
+
+    <footer>
+        <h2>Join the Celebration</h2>
+        <div class="rsvp-form">
+            <p>Ready to confirm your branch attendance?</p>
+            <button class="rsvp-btn">ACCESS REGISTRATION FORM</button>
+        </div>
+        <p style="opacity: 0.5; margin-top: 50px;">&copy; 2027 Sazon Grand Reunion | Kalibo, Aklan</p>
+    </footer>
+
+    <audio id="snd-anthem" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
+    <audio id="fw-whistle" src="https://assets.mixkit.co/active_storage/sfx/2855/2855-preview.mp3"></audio>
+    <audio id="fw-high" src="https://assets.mixkit.co/active_storage/sfx/2850/2850-preview.mp3"></audio>
+    <audio id="fw-low" src="https://assets.mixkit.co/active_storage/sfx/2854/2854-preview.mp3"></audio>
 
     <script>
-        function revealSite() {
-            document.getElementById('intro-curtain').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('intro-curtain').style.display = 'none';
-                document.getElementById('main-site').classList.add('active');
-                createBurst(window.innerWidth/2, window.innerHeight/2);
-            }, 1500);
-        }
-
-        // FIREWORKS
-        const canvas = document.getElementById('fw-canvas');
+        const canvas = document.getElementById('fireworks-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         let particles = [];
-        function createBurst(x, y) {
-            for(let i=0; i<100; i++) {
-                particles.push({
-                    x, y,
-                    vX: (Math.random()-0.5)*20,
-                    vY: (Math.random()-0.5)*20,
-                    life: 1,
-                    color: Math.random() > 0.5 ? '#FFD700' : '#FF7F50'
+        
+        function createBurst(x, y, color) {
+            for(let i=0; i<85; i++) { 
+                particles.push({ 
+                    x, y, 
+                    vX: (Math.random()-0.5)*(Math.random() * 25), 
+                    vY: (Math.random()-0.5)*(Math.random() * 25), 
+                    life: 1.2 + Math.random(), 
+                    color: color || (Math.random()>0.5?'#FFD700':'#FF7F50'), 
+                    size: 3 + Math.random() * 3, 
+                    resistance: 0.94 + Math.random() * 0.04, 
                 });
             }
         }
+        
         function animate() {
             ctx.clearRect(0,0,canvas.width,canvas.height);
             particles.forEach((p,i) => {
-                p.x += p.vX; p.y += p.vY; p.vY += 0.05; p.life -= 0.01;
-                ctx.fillStyle = p.color; ctx.globalAlpha = p.life;
-                ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI*2); ctx.fill();
-                if(p.life <= 0) particles.splice(i, 1);
+                p.vX *= p.resistance; p.vY *= p.resistance;
+                p.x+=p.vX; p.y+=p.vY; p.vY+=0.07; p.life-=0.012;
+                ctx.fillStyle = p.life > 0.85 ? '#FFFFFF' : p.color; 
+                ctx.globalAlpha = p.life;
+                ctx.beginPath(); ctx.arc(p.x,p.y,p.size * p.life,0,Math.PI*2); ctx.fill();
+                if(p.life<=0) particles.splice(i,1);
             });
             requestAnimationFrame(animate);
         }
         animate();
 
-        // COUNTDOWN
+        function runReveal() {
+            const startBtn = document.querySelector('.start-btn');
+            const motto = document.getElementById('motto-text');
+            const curtain = document.getElementById('intro-curtain');
+            const anthem = document.getElementById('snd-anthem');
+            
+            startBtn.style.opacity = '0';
+            setTimeout(() => startBtn.style.display = 'none', 500);
+            
+            anthem.volume = 0.2;
+            anthem.play();
+
+            setTimeout(() => {
+                document.getElementById('fw-whistle').play();
+                motto.style.opacity = '1';
+                motto.style.transform = 'scale(1.1)';
+            }, 1000);
+
+            setTimeout(() => {
+                document.getElementById('fw-high').play();
+                createBurst(window.innerWidth * 0.5, window.innerHeight * 0.4); 
+                setTimeout(() => createBurst(window.innerWidth * 0.2, window.innerHeight * 0.5), 150);
+                setTimeout(() => createBurst(window.innerWidth * 0.8, window.innerHeight * 0.5), 300);
+                
+                curtain.style.opacity = '0';
+                document.getElementById('main-banner').classList.add('active');
+                document.getElementById('mute-toggle').style.display = 'block';
+                setTimeout(() => curtain.style.display = 'none', 2000);
+            }, 4500); 
+        }
+
         const target = new Date("July 23, 2027 08:00:00").getTime();
         setInterval(() => {
             const diff = target - new Date().getTime();
-            document.getElementById("days").innerText = Math.floor(diff / 86400000);
-            document.getElementById("hours").innerText = Math.floor((diff % 86400000) / 3600000);
-            document.getElementById("mins").innerText = Math.floor((diff % 3600000) / 60000);
-            document.getElementById("secs").innerText = Math.floor((diff % 60000) / 1000);
+            document.getElementById("days").innerText = String(Math.floor(diff / 86400000)).padStart(2,'0');
+            document.getElementById("hours").innerText = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,'0');
+            document.getElementById("mins").innerText = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
+            document.getElementById("secs").innerText = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
         }, 1000);
+
+        function toggleMute() {
+            const anthem = document.getElementById('snd-anthem');
+            const btn = document.getElementById('mute-toggle');
+            if (anthem.muted) { anthem.muted = false; btn.innerText = "🔊"; }
+            else { anthem.muted = true; btn.innerText = "🔇"; }
+        }
     </script>
 </body>
 </html>
