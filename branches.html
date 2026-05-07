@@ -18,15 +18,14 @@
 
         body, html { margin: 0; padding: 0; background: var(--bg-deep); color: var(--silver-mist); font-family: 'Montserrat', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* --- UI ELEMENTS --- */
+        /* --- UI CONTROLS --- */
         #mute-toggle {
             position: fixed; bottom: 25px; right: 25px; z-index: 1100;
             background: var(--glass); border: 1px solid var(--gold-leaf);
             color: var(--gold-leaf); width: 50px; height: 50px; border-radius: 50%;
-            cursor: pointer; backdrop-filter: blur(10px); display: none; 
-            font-size: 1.2rem; transition: 0.3s ease;
+            cursor: pointer; backdrop-filter: blur(10px); display: none; font-size: 1.2rem; transition: 0.2s;
         }
-        #mute-toggle:hover { background: var(--accent-vibrant); color: white; }
+        #mute-toggle:active { transform: scale(0.9); }
 
         canvas#fireworks-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; }
 
@@ -35,60 +34,43 @@
         #motto-text { font-family: 'Cinzel', serif; color: var(--gold-leaf); text-align: center; letter-spacing: 6px; opacity: 0; transition: opacity 2s ease; }
         .credit-line { font-size: 0.75rem; letter-spacing: 4px; text-transform: uppercase; margin-top: 12px; color: var(--silver-mist); opacity: 0.8; }
         
-        .start-btn { padding: 20px 60px; background: transparent; border: 2px solid var(--accent-vibrant); color: var(--accent-vibrant); text-transform: uppercase; letter-spacing: 5px; cursor: pointer; border-radius: 50px; margin-top: 50px; font-weight: 600; transition: 0.3s; }
-        .start-btn:hover { background: var(--accent-vibrant); color: white; box-shadow: 0 0 20px rgba(255,127,80,0.4); }
-        .start-btn:active { transform: scale(0.92); }
+        .start-btn { padding: 18px 50px; background: transparent; border: 2px solid var(--accent-vibrant); color: var(--accent-vibrant); text-transform: uppercase; letter-spacing: 5px; cursor: pointer; border-radius: 50px; margin-top: 40px; transition: 0.1s; }
+        .start-btn:active, .branch-tag:active, .rsvp-btn:active { transform: scale(0.94); background: var(--accent-vibrant); color: white; }
 
-        /* .roots-section {-- BANNER & MOON --- */
+        /* --- BANNER & MOON --- */
         .banner { position: relative; height: 100dvh; width: 100%; display: flex; justify-content: center; align-items: center; opacity: 0; transition: opacity 3s ease; overflow: hidden; }
         .banner.active { opacity: 1; }
         .banner-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 15% 15%, transparent, var(--bg-deep) 90%), url('images/cover.jpeg') center/cover no-repeat; z-index: 1; }
 
         .branded-moon {
             position: absolute; top: 10%; left: 10%; width: 130px; height: 130px; z-index: 10;
-            border-radius: 50%; clip-path: circle(50% at 50% 50%);
+            border-radius: 50%; clip-path: circle(50% at 50% 50%); /* Clean Moon, No Rim */
             box-shadow: 0 0 30px var(--accent-vibrant);
         }
         .branded-moon img { width: 100%; height: 100%; object-fit: cover; }
 
         /* --- TIMER --- */
-        .timer-container { position: relative; z-index: 20; display: flex; gap: 15px; background: var(--glass); padding: 20px 30px; border-radius: 20px; border: 1px solid rgba(255,215,0,0.3); backdrop-filter: blur(15px); margin-top: 20vh; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .time-box { text-align: center; min-width: 65px; }
-        .time-val { display: block; font-size: 2rem; color: var(--gold-leaf); font-family: 'Cinzel', serif; font-weight: 700; }
-        .time-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.7; }
+        .timer-container { position: relative; z-index: 20; display: flex; gap: 15px; background: var(--glass); padding: 15px 25px; border-radius: 15px; border: 1px solid rgba(255,215,0,0.3); backdrop-filter: blur(10px); margin-top: 25vh; }
+        .time-box { text-align: center; min-width: 60px; }
+        .time-val { display: block; font-size: 1.8rem; color: var(--gold-leaf); font-family: 'Cinzel', serif; font-weight: 700; }
 
-        /* --- THE ROOTS (COMPACT & HIGHER) --- */
-         padding: 50px 20px; text-align: center; background: linear-gradient(to bottom, var(--bg-deep), var(--bg-accent)); }
-        .root-card { width: 230px; border: 1px solid var(--gold-leaf); padding: 12px; border-radius: 15px; display: inline-block; margin: 15px; background: rgba(255,255,255,0.02); transition: transform 0.3s ease; }
-        .root-card:hover { transform: translateY(-5px); border-color: var(--accent-vibrant); }
-        .root-photo { width: 100%; height: 260px; background: #111; border-radius: 10px; margin-bottom: 15px; }
-        .root-name { font-family: 'Cinzel', serif; color: var(--accent-vibrant); font-size: 1.1rem; letter-spacing: 1px; }
+        /* --- THE ROOTS (ADJUSTED HIGHER) --- */
+        .roots-section { padding: 30px 20px; text-align: center; background: linear-gradient(to bottom, var(--bg-deep), var(--bg-accent)); }
+        .root-card { width: 230px; border: 1px solid var(--gold-leaf); padding: 12px; border-radius: 15px; display: inline-block; margin: 10px; background: rgba(255,255,255,0.02); }
+        .root-photo { width: 100%; height: 270px; background: #111; border-radius: 10px; margin-bottom: 12px; }
+        .root-name { font-family: 'Cinzel', serif; color: var(--accent-vibrant); font-size: 1.1rem; }
 
-        /* --- 13 BRANCHES --- */
-        .branches-section { padding: 40px 20px; background: var(--bg-accent); text-align: center; }
+        /* --- 13 BRANCHES (ADJUSTED HIGHER) --- */
+        .branches-section { padding: 20px 20px; background: var(--bg-accent); text-align: center; }
         .branch-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; max-width: 1100px; margin: 0 auto; }
-        .branch-tag { padding: 15px 20px; background: var(--glass); border: 1px solid rgba(255,215,0,0.15); border-radius: 12px; cursor: pointer; transition: all 0.3s ease; min-width: 170px; }
-        .branch-tag:hover { background: rgba(255,255,255,0.12); border-color: var(--gold-leaf); }
-        .branch-tag:active { transform: scale(0.94); }
-        
-        .branch-tag.active-pulse { 
-            background: var(--accent-vibrant) !important; 
-            color: white; 
-            border-color: white;
-            animation: moon-glow 2s infinite alternate; 
-        }
-        
+        .branch-tag { padding: 12px 18px; background: var(--glass); border: 1px solid rgba(255,215,0,0.15); border-radius: 10px; cursor: pointer; transition: 0.2s; min-width: 160px; }
+        .branch-tag.active-pulse { background: var(--accent-vibrant) !important; color: white; animation: moon-glow 2s infinite alternate; }
         .nickname { display: block; font-size: 0.7rem; opacity: 0.8; font-style: italic; margin-top: 4px; }
 
-        @keyframes moon-glow {
-            from { box-shadow: 0 0 5px var(--accent-vibrant); }
-            to { box-shadow: 0 0 20px var(--accent-vibrant); }
-        }
+        @keyframes moon-glow { from { box-shadow: 0 0 5px var(--accent-vibrant); } to { box-shadow: 0 0 20px var(--accent-vibrant); } }
 
         /* --- RSVP --- */
-        .rsvp-btn { display: inline-block; padding: 20px 60px; background: var(--accent-vibrant); color: white; text-decoration: none; font-weight: 700; border-radius: 50px; text-transform: uppercase; letter-spacing: 3px; transition: 0.3s; margin-top: 20px; box-shadow: 0 5px 15px rgba(255,127,80,0.3); }
-        .rsvp-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255,127,80,0.5); }
-        .rsvp-btn:active { transform: scale(0.95); }
+        .rsvp-btn { display: inline-block; padding: 18px 50px; background: var(--accent-vibrant); color: white; text-decoration: none; font-weight: 700; border-radius: 50px; text-transform: uppercase; letter-spacing: 2px; transition: 0.2s; margin-top: 30px; }
     </style>
 </head>
 <body>
@@ -109,27 +91,21 @@
         <div class="branded-moon"><img src="images/moon.png" alt="Sazon Moon"></div>
         <div class="banner-bg"></div>
         <div class="timer-container">
-            <div class="time-box"><span class="time-val" id="days">00</span><span class="time-label">Days</span></div>
-            <div class="time-box"><span class="time-val" id="hours">00</span><span class="time-label">Hrs</span></div>
-            <div class="time-box"><span class="time-val" id="mins">00</span><span class="time-label">Min</span></div>
-            <div class="time-box"><span class="time-val" id="secs">00</span><span class="time-label">Sec</span></div>
+            <div class="time-box"><span class="time-val" id="days">00</span><span style="font-size:0.6rem">Days</span></div>
+            <div class="time-box"><span class="time-val" id="hours">00</span><span style="font-size:0.6rem">Hrs</span></div>
+            <div class="time-box"><span class="time-val" id="mins">00</span><span style="font-size:0.6rem">Min</span></div>
+            <div class="time-box"><span class="time-val" id="secs">00</span><span style="font-size:0.6rem">Sec</span></div>
         </div>
     </header>
 
     <section class="roots-section">
-        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf); margin-bottom: 30px;">The Roots</h2>
-        <div class="root-card">
-            <div class="root-photo"></div>
-            <div class="root-name">Tereso Sazon</div>
-        </div>
-        <div class="root-card">
-            <div class="root-photo"></div>
-            <div class="root-name">Teofista Sazon</div>
-        </div>
+        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf); margin-bottom: 25px;">The Roots</h2>
+        <div class="root-card"><div class="root-photo"></div><div class="root-name">Tereso Sazon</div></div>
+        <div class="root-card"><div class="root-photo"></div><div class="root-name">Teofista Sazon</div></div>
     </section>
 
     <section class="branches-section">
-        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf); margin-bottom: 30px;">The 13 Branches</h2>
+        <h2 style="font-family: 'Cinzel'; color: var(--gold-leaf); margin-bottom: 25px;">The 13 Branches</h2>
         <div class="branch-grid" id="branch-container"></div>
     </section>
 
@@ -171,15 +147,9 @@
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         let particles = [];
         
-        function createBurst(x, y, color) {
-            for(let i=0; i<50; i++) {
-                particles.push({ 
-                    x, y, 
-                    vX:(Math.random()-0.5)*14, 
-                    vY:(Math.random()-0.5)*14, 
-                    life:1, 
-                    color: color || (Math.random()>0.5?'#FFD700':'#FF7F50') 
-                });
+        function createBurst(x, y) {
+            for(let i=0; i<40; i++) {
+                particles.push({ x, y, vX:(Math.random()-0.5)*12, vY:(Math.random()-0.5)*12, life:1, color:Math.random()>0.5?'#FFD700':'#FF7F50' });
             }
         }
 
@@ -198,26 +168,15 @@
         function runReveal() {
             document.querySelector('.start-btn').style.display = 'none';
             document.getElementById('motto-text').style.opacity = '1';
-            
             setTimeout(() => {
                 document.getElementById('fw-whistle').play();
-                
                 setTimeout(() => {
-                    // Burst 1: Over the Moon
                     document.getElementById('fw-high').play();
-                    createBurst(window.innerWidth*0.15, window.innerHeight*0.15, '#FF7F50');
-                    
+                    createBurst(window.innerWidth*0.15, window.innerHeight*0.15);
                     document.getElementById('intro-curtain').style.opacity = '0';
                     document.getElementById('main-banner').classList.add('active');
                     document.getElementById('snd-anthem').play();
                     document.getElementById('mute-toggle').style.display = 'block';
-                    
-                    // Burst 2: Center Reveal
-                    setTimeout(() => {
-                        document.getElementById('fw-low').play();
-                        createBurst(window.innerWidth/2, window.innerHeight/3, '#FFD700');
-                    }, 800);
-
                     setTimeout(() => document.getElementById('intro-curtain').style.display = 'none', 2000);
                 }, 1200);
             }, 2000);
