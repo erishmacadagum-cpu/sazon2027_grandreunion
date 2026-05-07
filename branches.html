@@ -204,5 +204,90 @@
             document.getElementById("secs").innerText = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
         }, 1000);
     </script>
-</body>
+
+
+<style>
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 40px 20px;
+        background: var(--bg-deep);
+    }
+    .info-card {
+        background: var(--glass);
+        padding: 25px;
+        border-radius: 15px;
+        border: 1px solid rgba(255, 215, 0, 0.1);
+    }
+    .info-card h3 {
+        color: var(--gold-leaf);
+        font-family: 'Cinzel', serif;
+        margin-top: 0;
+        border-bottom: 1px solid var(--accent-vibrant);
+        padding-bottom: 10px;
+    }
+    .travel-tag {
+        display: inline-block;
+        background: var(--accent-vibrant);
+        color: white;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+    }
+    .contact-list { list-style: none; padding: 0; }
+    .contact-list li { margin-bottom: 10px; font-size: 0.9rem; }
+    .contact-label { color: var(--accent-vibrant); font-weight: bold; display: block; }
+</style>
+
+<div class="info-grid">
+    <div class="info-card">
+        <h3>✈️ Travel Guide</h3>
+        <p style="font-size: 0.85rem; opacity: 0.8;">Routes to Marzon Hotel, Kalibo:</p>
+        
+        <div>
+            <span class="travel-tag">Manila / Cebu</span>
+            <p style="font-size: 0.85rem; margin-top: 0;">Direct flights to <strong>Kalibo (KLO)</strong>. Marzon is a 5-min ride from the airport.</p>
+        </div>
+        
+        <div>
+            <span class="travel-tag">Davao / GenSan</span>
+            <p style="font-size: 0.85rem; margin-top: 0;">Fly to Manila or Cebu, then connecting flight to Kalibo. Alternatively, fly to Iloilo and take a 3-hour van to Kalibo.</p>
+        </div>
+
+        <div>
+            <span class="travel-tag">Via Caticlan</span>
+            <p style="font-size: 0.85rem; margin-top: 0;">If flying via MPH, take a 1.5-hour van to Kalibo Ceres Terminal.</p>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <h3>🏨 Where to Stay</h3>
+        <p style="font-size: 0.85rem;"><strong>Primary Venue: Marzon Hotel</strong><br>We recommend staying here to be at the center of the festivities.</p>
+        <p style="font-size: 0.85rem; font-style: italic; color: var(--accent-vibrant);">*Discount code for Sazon Clan coming soon!*</p>
+        <hr style="opacity: 0.1;">
+        <p style="font-size: 0.8rem; opacity: 0.7;">Nearby Alternatives:<br>• Discover Boracay Hotel (Airport area)<br>• Sampaguita Gardens<br>• Local Pension Houses</p>
+    </div>
+
+    <div class="info-card">
+        <h3>📞 Contact Us</h3>
+        <p style="font-size: 0.85rem; margin-bottom: 15px;">Have questions about registration or the venue?</p>
+        <ul class="contact-list">
+            <li>
+                <span class="contact-label">Lead Coordinator</span>
+                [Insert Name Here] — [Insert Phone Number]
+            </li>
+            <li>
+                <span class="contact-label">Accommodation Support</span>
+                [Insert Name Here] — [Insert Phone Number]
+            </li>
+            <li>
+                <span class="contact-label">Finance & Fees</span>
+                [Insert Name Here] — [Insert Phone Number]
+            </li>
+        </ul>
+    </div>
+</div></body>
 </html>
