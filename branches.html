@@ -4,30 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sazon 2027 | Grand Reunion</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #FFD700; --deep: #050812; --accent: #FF7F50; }
-        body { margin: 0; background: var(--deep); color: white; font-family: 'Montserrat', sans-serif; text-align: center; }
-        
-        /* Intro Curtain */
-        #intro-curtain { position: fixed; inset: 0; background: var(--deep); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: 1s; }
-        #motto-text { color: var(--gold); font-family: 'Cinzel', serif; letter-spacing: 4px; padding: 20px; }
-        .start-btn { padding: 15px 40px; border: 2px solid var(--accent); background: none; color: var(--accent); cursor: pointer; border-radius: 30px; font-weight: bold; margin-top: 20px; }
+        body, html { margin: 0; padding: 0; background: var(--deep); color: #f0f0f0; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
 
-        /* Banner & Moon */
-        .banner { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('images/cover.jpeg') center/cover; }
-        .branded-moon { width: 150px; height: 150px; border-radius: 50%; border: 3px solid var(--gold); overflow: hidden; box-shadow: 0 0 20px var(--accent); margin-bottom: 20px; }
+        /* INTRO CURTAIN */
+        #intro-curtain { position: fixed; inset: 0; background: var(--deep); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 1.5s; }
+        #motto-text { text-align: center; color: var(--gold); font-family: 'Cinzel', serif; letter-spacing: 5px; }
+        .start-btn { padding: 15px 40px; border: 2px solid var(--accent); background: none; color: var(--accent); cursor: pointer; border-radius: 30px; font-weight: bold; margin-top: 30px; transition: 0.3s; }
+        .start-btn:hover { background: var(--accent); color: white; }
+
+        /* BANNER - DARK & CLEAN */
+        .banner { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('images/cover.jpeg') center/cover no-repeat; opacity: 0; transition: opacity 2s; }
+        .banner.active { opacity: 1; }
+        
+        /* CLEAN LOGO MOON - NO RIM, NO FACE */
+        .branded-moon { width: 160px; height: 160px; border-radius: 50%; border: 2px solid var(--gold); overflow: hidden; box-shadow: 0 0 30px var(--accent); margin-bottom: 20px; z-index: 10; }
         .branded-moon img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* Timer */
-        .timer { display: flex; gap: 15px; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; backdrop-filter: blur(5px); }
-        .time-box { min-width: 60px; }
+        /* TIMER */
+        .timer { display: flex; gap: 15px; background: rgba(0,0,0,0.5); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,215,0,0.3); backdrop-filter: blur(10px); }
         .time-val { display: block; font-size: 2rem; color: var(--gold); font-family: 'Cinzel', serif; }
 
-        /* Map Section */
-        .map-box { max-width: 800px; margin: 40px auto; padding: 20px; }
-        iframe { width: 100%; height: 350px; border-radius: 15px; border: 1px solid var(--gold); }
-
+        /* MAP SECTION */
+        .content-section { padding: 60px 20px; text-align: center; }
+        .map-container { max-width: 900px; margin: 0 auto; height: 400px; border-radius: 20px; overflow: hidden; border: 1px solid var(--gold); }
+        
         canvas { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
     </style>
 </head>
@@ -38,39 +41,74 @@
     <div id="intro-curtain">
         <div id="motto-text">
             <h1>GIKAN SA GAMUT,<br>TUBTOB SA LANGIT</h1>
+            <p style="letter-spacing: 2px; opacity: 0.8;">The Sazon Legacy 2027</p>
         </div>
-        <button class="start-btn" onclick="reveal()">ENTER THE LEGACY</button>
+        <button class="start-btn" onclick="revealSite()">ENTER THE LEGACY</button>
     </div>
 
-    <div class="banner">
+    <section class="banner" id="main-site">
         <div class="branded-moon"><img src="images/moon.png"></div>
         <div class="timer">
-            <div class="time-box"><span id="d" class="time-val">00</span>Days</div>
-            <div class="time-box"><span id="h" class="time-val">00</span>Hrs</div>
-            <div class="time-box"><span id="m" class="time-val">00</span>Min</div>
-            <div class="time-box"><span id="s" class="time-val">00</span>Sec</div>
+            <div style="text-align:center"><span id="days" class="time-val">00</span>Days</div>
+            <div style="text-align:center"><span id="hours" class="time-val">00</span>Hrs</div>
+            <div style="text-align:center"><span id="mins" class="time-val">00</span>Min</div>
+            <div style="text-align:center"><span id="secs" class="time-val">00</span>Sec</div>
         </div>
-    </div>
+    </section>
 
-    <div class="map-box">
-        <h2>✈️ MARZON HOTEL, KALIBO</h2>
-        <iframe src="https://maps.google.com/?cid=11713442290938606363&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ"></iframe>
-    </div>
+    <section class="content-section">
+        <h2 style="font-family: 'Cinzel'; color: var(--gold);">✈️ TRAVEL GUIDE & LOCATION</h2>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3903.465134731853!2d122.3704870758444!3d11.69614454190867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33af9ca988f5068f%3A0x633a696236b2f768!2sMarzon%20Hotel%20Kalibo!5e0!3m2!1sen!2sph!4v1715075000000!5m2!1sen!2sph" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
 
     <script>
-        function reveal() {
+        function revealSite() {
             document.getElementById('intro-curtain').style.opacity = '0';
-            setTimeout(() => document.getElementById('intro-curtain').style.display = 'none', 1000);
+            setTimeout(() => {
+                document.getElementById('intro-curtain').style.display = 'none';
+                document.getElementById('main-site').classList.add('active');
+                createBurst(window.innerWidth/2, window.innerHeight/2);
+            }, 1500);
         }
 
+        // FIREWORKS
+        const canvas = document.getElementById('fw-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        let particles = [];
+        function createBurst(x, y) {
+            for(let i=0; i<100; i++) {
+                particles.push({
+                    x, y,
+                    vX: (Math.random()-0.5)*20,
+                    vY: (Math.random()-0.5)*20,
+                    life: 1,
+                    color: Math.random() > 0.5 ? '#FFD700' : '#FF7F50'
+                });
+            }
+        }
+        function animate() {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            particles.forEach((p,i) => {
+                p.x += p.vX; p.y += p.vY; p.vY += 0.05; p.life -= 0.01;
+                ctx.fillStyle = p.color; ctx.globalAlpha = p.life;
+                ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI*2); ctx.fill();
+                if(p.life <= 0) particles.splice(i, 1);
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // COUNTDOWN
         const target = new Date("July 23, 2027 08:00:00").getTime();
         setInterval(() => {
-            const now = new Date().getTime();
-            const diff = target - now;
-            document.getElementById("d").innerText = Math.floor(diff / 86400000);
-            document.getElementById("h").innerText = Math.floor((diff % 86400000) / 3600000);
-            document.getElementById("m").innerText = Math.floor((diff % 3600000) / 60000);
-            document.getElementById("s").innerText = Math.floor((diff % 60000) / 1000);
+            const diff = target - new Date().getTime();
+            document.getElementById("days").innerText = Math.floor(diff / 86400000);
+            document.getElementById("hours").innerText = Math.floor((diff % 86400000) / 3600000);
+            document.getElementById("mins").innerText = Math.floor((diff % 3600000) / 60000);
+            document.getElementById("secs").innerText = Math.floor((diff % 60000) / 1000);
         }, 1000);
     </script>
 </body>
