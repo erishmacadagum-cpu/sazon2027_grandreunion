@@ -146,7 +146,12 @@
         branches.forEach(b => {
             const d = document.createElement('div'); d.className = 'branch-tag';
             d.innerHTML = `<strong>${b.f}</strong><span class="nickname">(${b.n})</span>`;
-            d.onclick = () => d.classList.toggle('active-pulse');
+           d.onclick = () => {
+                d.classList.add('active-pulse');
+                setTimeout(() => {
+                    window.open("https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing", "_blank");
+                }, 400); // Small delay so they see the "pulse" before it redirects
+            };
             bContainer.appendChild(d);
         });
 
