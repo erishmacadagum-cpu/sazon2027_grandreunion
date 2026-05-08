@@ -10,132 +10,133 @@
             --gold: #d4af37; 
             --navy: #000814; 
             --luminous-blue: #00e5ff; 
-            --sepia: rgba(212, 175, 55, 0.2);
         }
         body, html { margin: 0; padding: 0; height: 100%; background: var(--navy); color: white; font-family: 'Montserrat', sans-serif; overflow: hidden; }
 
-        /* Step 1: Pre-Click Interface */
-        #hype-trigger { position: fixed; top:0; left:0; width:100%; height:100%; z-index: 10000; background: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        #hype-trigger button { padding: 15px 40px; background: transparent; border: 1px solid var(--gold); color: var(--gold); cursor: pointer; letter-spacing: 5px; font-family: 'Montserrat'; }
-        #hype-trigger h2 { font-weight: 200; color: #fff; margin-bottom: 20px; font-size: 0.9rem; letter-spacing: 10px; text-transform: uppercase; }
+        /* Initial Black Screen */
+        #hype-trigger { position: fixed; top:0; left:0; width:100%; height:100%; z-index: 10000; background: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; transition: opacity 2s; }
+        #trigger-btn { padding: 15px 40px; background: transparent; border: 1px solid var(--gold); color: var(--gold); cursor: pointer; letter-spacing: 5px; font-family: 'Montserrat'; text-transform: uppercase; font-size: 0.8rem; }
+        #trigger-btn:hover { background: var(--gold); color: black; }
 
-        /* The Main Salvbo Visuals */
-        #main-salvo { display: none; height: 100%; }
-
-        /* Mysterious Montage Background */
+        /* Montage Background */
         .bg-overlay { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            background: linear-gradient(to bottom, rgba(0,8,20,0.9), rgba(0,8,20,0.5), rgba(0,8,20,0.95)),
-                        url('images/old-roots.jpg') no-repeat center center; 
+            background: linear-gradient(to bottom, rgba(0,8,20,0.9), rgba(0,8,20,0.4), rgba(0,8,20,0.95)),
+                        url('images/memories.jpg') no-repeat center center; 
             background-size: cover;
-            /* STRICT BLUR APPLIED HERE */
-            filter: grayscale(100%) sepia(20%) blur(15px);
+            filter: grayscale(100%) blur(12px); /* High Mystery Blur */
             z-index: 1;
-            animation: slowZoom 35s forwards alternate;
+            opacity: 0;
+            transition: opacity 3s, filter 30s ease;
         }
-        
-        @keyframes slowZoom { from { transform: scale(1) blur(15px); } to { transform: scale(1.15) blur(20px); } }
 
-        /* Content Revealed Layer */
+        /* Content Layer */
         .content { 
             position: relative; z-index: 10; height: 100%; 
             display: flex; flex-direction: column; justify-content: center; 
             align-items: center; text-align: center; 
-            opacity: 0; animation: fadeInContent 2s 1s forwards;
+            display: none; /* Revealed by JS */
         }
-        @keyframes fadeInContent { to { opacity: 1; } }
 
-        /* The Battlecry Message (Interplaying) */
-        #battlecry-box { max-width: 650px; font-family: 'Prata', serif; font-size: 1.4rem; color: #c0c0c0; line-height: 1.6; font-style: italic; margin-bottom: 40px; text-shadow: 2px 2px 5px black; }
+        #battlecry-box { 
+            max-width: 80%; font-family: 'Prata', serif; font-size: clamp(1.2rem, 4vw, 2rem); 
+            color: #f0f0f0; line-height: 1.4; font-style: italic; 
+            min-height: 100px; transition: opacity 1.5s ease-in-out; opacity: 0;
+        }
 
-        /* Countdown Timer */
-        #timer { display: flex; gap: 20px; font-family: 'Montserrat', sans-serif; }
-        .time-block { text-align: center; border: 1px solid rgba(212, 175, 55, 0.4); padding: 15px; min-width: 80px; border-radius: 5px; background: rgba(0,0,0,0.5); }
-        .time-num { display: block; font-size: 2rem; font-weight: 600; color: var(--gold); }
-        .time-label { font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: white; }
+        /* Countdown Style */
+        #timer { display: flex; gap: 15px; margin-bottom: 50px; opacity: 0.8; }
+        .time-block { text-align: center; border-bottom: 1px solid var(--gold); padding: 10px; min-width: 60px; }
+        .time-num { display: block; font-size: 1.8rem; font-weight: 200; color: var(--gold); }
+        .time-label { font-size: 0.5rem; letter-spacing: 2px; text-transform: uppercase; }
 
-        /* The Payoff Button (Starts Hidden) */
-        #enter-heritage { display: none; opacity: 0; transition: opacity 1.5s ease-in; margin-top: 50px; padding: 18px 50px; border: 1px solid var(--luminous-blue); background: transparent; color: var(--luminous-blue); text-decoration: none; font-weight: 600; letter-spacing: 5px; animation: pulseBlue 2s infinite; }
-        #enter-heritage.reveal { display: inline-block; opacity: 1; }
+        /* The Final Payoff Button */
+        #enter-heritage { 
+            display: none; opacity: 0; transition: opacity 2s; 
+            margin-top: 20px; padding: 18px 50px; border: 1px solid var(--luminous-blue); 
+            background: transparent; color: var(--luminous-blue); text-decoration: none; 
+            font-weight: 600; letter-spacing: 5px; animation: pulseBlue 2s infinite; 
+        }
         
         @keyframes pulseBlue { 0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(0, 229, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); } }
 
-        footer { position: absolute; bottom: 20px; width: 100%; text-align: center; font-size: 0.6rem; letter-spacing: 3px; color: rgba(255,255,255,0.3); z-index: 10; }
+        footer { position: absolute; bottom: 20px; width: 100%; text-align: center; font-size: 0.55rem; letter-spacing: 3px; color: rgba(255,255,255,0.3); z-index: 10; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
     <div id="hype-trigger">
-        <h2>A Salvo of Legacy</h2>
-        <button id="trigger-btn">LISTEN TO THE CALL</button>
+        <button id="trigger-btn">Hear the Call of Legacy</button>
     </div>
 
-    <div id="main-salvo">
-        <div class="bg-overlay"></div>
-        <div class="content">
-            <div id="timer">
-                <div class="time-block"><span class="time-num" id="days">00</span><span class="time-label">Days</span></div>
-                <div class="time-block"><span class="time-num" id="hours">00</span><span class="time-label">Hrs</span></div>
-                <div class="time-block"><span class="time-num" id="mins">00</span><span class="time-label">Mins</span></div>
-                <div class="time-block"><span class="time-num" id="secs">00</span><span class="time-label">Secs</span></div>
-            </div>
-
-            <div style="margin: 50px 0;"> <div id="battlecry-box"></div>
-                <a href="branches.html" id="enter-heritage">ENTER THE HERITAGE</a>
-            </div>
-            
-            <div style="color:var(--gold); letter-spacing:3px; font-size:0.7rem; font-weight:600;">JULY 23-24, 2027</div>
+    <div class="bg-overlay" id="bg"></div>
+    
+    <div class="content" id="salvo-content">
+        <div id="timer">
+            <div class="time-block"><span class="time-num" id="days">00</span><span class="time-label">Days</span></div>
+            <div class="time-block"><span class="time-num" id="hours">00</span><span class="time-label">Hrs</span></div>
+            <div class="time-block"><span class="time-num" id="mins">00</span><span class="time-label">Mins</span></div>
+            <div class="time-block"><span class="time-num" id="secs">00</span><span class="time-label">Secs</span></div>
         </div>
-        <footer>© 2027 SAZON | maemiliapalma@yahoo.com</footer>
+
+        <div id="battlecry-box"></div>
+
+        <a href="branches.html" id="enter-heritage">ENTER THE HERITAGE</a>
     </div>
+
+    <footer>Marzon Hotel Kalibo - Aklan | #SAZON2027GRANDREUNION</footer>
 
     <script>
-        const jingle = new Audio('audio/teaze_jingle.mp3'); // Rename your github jingle file to match
-        const battlecry = [
-            "We’ve missed HOME...",
-            "...We’ve missed FAMILY.",
-            "The time has come...",
-            "...to answer the call of legacy."
+        const jingle = new Audio('audio/teaze_jingle.mp3'); 
+        const messages = [
+            "We have missed HOME.",
+            "We have missed FAMILY.",
+            "The 18-year wait is ending.",
+            "The Legacy begins now."
         ];
-        
-        const trigger = document.getElementById('hype-trigger');
-        const triggerBtn = document.getElementById('trigger-btn');
-        const main = document.getElementById('main-salvo');
-        const box = document.getElementById('battlecry-box');
-        const payBtn = document.getElementById('enter-heritage');
 
-        triggerBtn.onclick = function() {
-            trigger.style.display = 'none';
-            main.style.display = 'block';
+        const trigger = document.getElementById('hype-trigger');
+        const bg = document.getElementById('bg');
+        const content = document.getElementById('salvo-content');
+        const box = document.getElementById('battlecry-box');
+        const enterBtn = document.getElementById('enter-heritage');
+
+        document.getElementById('trigger-btn').onclick = function() {
+            trigger.style.opacity = '0';
+            setTimeout(() => trigger.style.display = 'none', 2000);
+            
+            // Start Visuals & Audio
+            bg.style.opacity = '1';
+            bg.style.filter = 'grayscale(100%) blur(18px)'; // Intensify blur during jingle
+            content.style.display = 'flex';
             jingle.play();
 
-            // Run the Battlecry Interplay (0–28 Seconds)
-            runBattlecrySequence();
+            // Run Text Sequence
+            runBattlecry();
 
-            // At 30 Seconds, trigger the Payoff button and fade background to black
+            // At 30 Seconds: Transition to Black & Show Button
             setTimeout(() => {
-                document.querySelector('.bg-overlay').style.opacity = '0'; // Go to pure black
-                document.getElementById('timer').style.opacity = '0.3'; // Dim the timer
-                box.style.opacity = '0'; // Clear battlecry
-                payBtn.classList.add('reveal'); // Show Enter button
-            }, 30000); // 30000ms = 30 seconds
-        }
+                bg.style.opacity = '0'; // Fade to black
+                box.style.display = 'none';
+                enterBtn.style.display = 'inline-block';
+                setTimeout(() => enterBtn.style.opacity = '1', 100);
+            }, 30000);
+        };
 
-        async function runBattlecrySequence() {
-            for(let msg of battlecry) {
+        async function runBattlecry() {
+            for (let msg of messages) {
                 box.innerText = msg;
-                box.style.opacity = '1'; // Fade In
-                await new Promise(r => setTimeout(r, 6000)); // Show for 6 seconds
-                box.style.opacity = '0'; // Fade Out
-                await new Promise(r => setTimeout(r, 1000)); // Delay between
+                box.style.opacity = '1';
+                await new Promise(r => setTimeout(r, 6000));
+                box.style.opacity = '0';
+                await new Promise(r => setTimeout(r, 1500));
             }
         }
 
-        // --- Standard Countdown Logic ---
+        // Timer Logic
         const targetDate = new Date("July 23, 2027 00:00:00").getTime();
         function updateTimer() {
             const distance = targetDate - new Date().getTime();
-            if (distance < 0) { document.getElementById("timer").innerHTML = "NOW"; return; }
             document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
             document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
             document.getElementById("mins").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
