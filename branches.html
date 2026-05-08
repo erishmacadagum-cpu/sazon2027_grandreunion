@@ -3,208 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sazon 2027 | The Grand Reunion</title>
+    <title>Sazon 2027 | The 13 Branches</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-  .branch-section { padding: 80px 20px; background: #050812; text-align: center; }
-        
-        .branch-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            max-width: 1200px;
-            margin: 40px auto;
-        }
+    <style>
+        :root { --gold-leaf: #d4af37; --silver-mist: #a8ada9; --bg-deep: #02040a; }
+        body { margin: 0; padding: 0; background: var(--bg-deep); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
 
-        .branch-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            padding: 25px;
-            border-radius: 12px;
-            text-decoration: none;
-            transition: all 0.4s ease;
-            text-align: center;
-            backdrop-filter: blur(5px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+        /* Banner Styling */
+        .banner { position: relative; height: 80vh; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
+        .banner-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/moon.png') no-repeat center center; background-size: contain; opacity: 0.4; z-index: 1; }
+        .branded-moon { position: relative; z-index: 2; width: 300px; margin-bottom: 20px; }
+        .branded-moon img { width: 100%; filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.5)); }
 
-        /* 5-5-3 Tier Logic */
-        .tier-5 { flex: 1 1 calc(18% - 20px); min-width: 180px; }
-        .tier-3 { flex: 1 1 calc(30% - 20px); min-width: 250px; }
-
-        .branch-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 30px var(--hover-color);
-            border-color: var(--hover-color);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .branch-card h3 { font-family: 'Cinzel', serif; color: #fff; margin: 0 0 10px 0; font-size: 1.1rem; }
-        .reg-link { font-size: 0.7rem; color: var(--gold-leaf); letter-spacing: 2px; text-transform: uppercase; }
-        .legacy-title { font-family: 'Cinzel', serif; font-size: 3rem; color: var(--gold-leaf); text-shadow: 0 0 15px rgba(255, 215, 0, 0.6); margin: 0; }
-        .location-sub { font-size: 1rem; color: var(--silver-mist); opacity: 0.8; margin-top: -15px; }
-
-        .countdown { display: flex; gap: 25px; font-family: 'Cinzel', serif; }
+        /* Countdown Styling - Curated & Lowered */
+        .timer-container { position: relative; z-index: 3; margin-top: 50px; }
+        .countdown { display: flex; gap: 20px; justify-content: center; }
         .time-box { 
-            background: rgba(0, 0, 0, 0.6); 
+            background: rgba(0, 0, 0, 0.5); 
             border: 1px solid var(--gold-leaf); 
-            backdrop-filter: blur(10px); 
-            padding: 20px; 
+            backdrop-filter: blur(8px); 
+            padding: 15px; 
             border-radius: 50%; 
-            width: 130px;
-            height: 130px;
-          
-       }
-        .time-val { display: block; font-size: 2.2rem; color: var(--gold-leaf); font-weight: 300; }
-        }
-        .time-val { display: block; font-size: 2.2rem; color: var(--gold-leaf); font-weight: 300; }
-        .time-label { display: block; font-size: 0.7rem; color: var(--silver-mist); letter-spacing: 2px; }
-        footer { background: #02040a; padding: 60px 20px; border-top: 1px solid rgba(255,215,0,0.2); text-align: center; }
-        .footer-credits { font-size: 0.8rem; letter-spacing: 2px; color: var(--silver-mist); opacity: 0.6; }
-        h2 { font-family: 'Cinzel', serif; color: var(--gold-leaf); }
-.branch-section {
-            padding: 80px 20px;
-            background: #050812;
+            width: 100px; 
+            height: 100px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
             text-align: center;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
         }
-      /* 5-5-3 Tier & Multi-Color Styling */
-        .branch-section { padding: 80px 20px; background: #050812; text-align: center; }
+        .time-val { display: block; font-size: 2rem; color: var(--gold-leaf); font-family: 'Cinzel', serif; font-weight: 300; }
+        .time-label { display: block; font-size: 0.6rem; color: var(--silver-mist); letter-spacing: 2px; text-transform: uppercase; }
+
+        /* Branch Section Styling */
+        .branch-section { padding: 80px 20px; background: #050812; text-align: center; position: relative; z-index: 4; }
         .branch-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1200px; margin: 40px auto; }
+        
         .branch-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            padding: 25px;
-            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            padding: 30px;
+            border-radius: 15px;
             text-decoration: none;
             transition: all 0.4s ease;
             text-align: center;
             backdrop-filter: blur(5px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
-        .tier-5 { flex: 1 1 calc(18% - 20px); min-width: 160px; }
+        .tier-5 { flex: 1 1 calc(18% - 20px); min-width: 170px; }
         .tier-3 { flex: 1 1 calc(30% - 20px); min-width: 250px; }
-        .branch-card:hover { transform: translateY(-10px); box-shadow: 0 0 30px var(--hover-color); border-color: var(--hover-color); background: rgba(255, 255, 255, 0.1); }
-        .branch-card h3 { font-family: 'Cinzel', serif; color: #fff; margin: 0 0 10px 0; font-size: 1.1rem; }
-        .reg-link { font-size: 0.7rem; color: var(--gold-leaf); letter-spacing: 2px; text-transform: uppercase; }
+
+        .branch-card:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 0 30px var(--hover-color); 
+            border-color: var(--hover-color); 
+            background: rgba(255, 255, 255, 0.08); 
+        }
+        .branch-card h3 { font-family: 'Cinzel', serif; color: #fff; margin: 0 0 10px 0; font-size: 1.2rem; letter-spacing: 1px; }
+        .reg-link { font-size: 0.7rem; color: var(--gold-leaf); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
+
+        footer { padding: 40px; text-align: center; background: #02040a; color: var(--silver-mist); font-size: 0.8rem; letter-spacing: 1px; }
     </style>
 </head>
-<section class="banner">
+<body>
+
+    <section class="banner">
         <div class="banner-bg"></div>
         <div class="branded-moon">
             <img src="images/moon.png" alt="Sazon Logo">
         </div>
         <div class="timer-container">
-            <div class="countdown" id="countdown" style="justify-content: center;">
-                </div>
+            <div class="countdown" id="countdown">
+                <div class="time-box"><span class="time-val" id="days">00</span><span class="time-label">Days</span></div>
+                <div class="time-box"><span class="time-val" id="hours">00</span><span class="time-label">Hrs</span></div>
+                <div class="time-box"><span class="time-val" id="mins">00</span><span class="time-label">Mins</span></div>
+                <div class="time-box"><span class="time-val" id="secs">00</span><span class="time-label">Secs</span></div>
+            </div>
         </div>
     </section>
-<section class="branch-section">
-        <h2 style="font-family: 'Cinzel', serif; font-size: 2.5rem; color: white;">The 13 Branches</h2>
+
+    <section class="branch-section">
+        <h2 style="font-family: 'Cinzel', serif; font-size: 2.5rem; color: white; margin-bottom: 5px;">The 13 Branches</h2>
+        <p style="color: var(--silver-mist); letter-spacing: 3px; margin-bottom: 40px;">GIKAN SA GAMUT, TUBTOB SA LANGIT</p>
+        
         <div class="branch-grid">
             <a href="#" class="branch-card tier-5" style="--hover-color: #ff4d4d;"><h3>Serafin</h3><span class="reg-link">Register →</span></a>
             <a href="#" class="branch-card tier-5" style="--hover-color: #4da6ff;"><h3>Monserat</h3><span class="reg-link">Register →</span></a>
             <a href="#" class="branch-card tier-5" style="--hover-color: #4dff88;"><h3>Felomina</h3><span class="reg-link">Register →</span></a>
             <a href="#" class="branch-card tier-5" style="--hover-color: #ffcc4d;"><h3>Estrella</h3><span class="reg-link">Register →</span></a>
             <a href="#" class="branch-card tier-5" style="--hover-color: #ff4dff;"><h3>Gregorio</h3><span class="reg-link">Register →</span></a>
-
             <a href="#" class="branch-card tier-5" style="--hover-color: #00f2fe;"><h3>Regino</h3><span class="reg-link">Register →</span></a>
             <a href="#" class="branch-card tier-5" style="--hover-color: #f6d365;"><h3>Maria</h3><span class="reg-link">Register →</span></a>
             <a href="#" class="branch-card tier-5" style="--hover-color: #a8edea;"><h3>Concepcion</h3><span class="reg-link">Register →</span></a>
             <a href="#" class="branch-card tier-5" style="--hover-color: #89f7fe;"><h3>Cezar</h3><span class="reg-link">Register →</span></a>
             <a href="#" class="branch-card tier-5" style="--hover-color: #667eea;"><h3>Priscilla</h3><span class="reg-link">Register →</span></a>
-
             <a href="#" class="branch-card tier-3" style="--hover-color: #fa709a;"><h3>Gloria</h3><span class="reg-link">Register →</span></a>
             <a href="#" class="branch-card tier-3" style="--hover-color: #fee140;"><h3>Reynaldo</h3><span class="reg-link">Register →</span></a>
             <a href="#" class="branch-card tier-3" style="--hover-color: #30cfd0;"><h3>Nilda</h3><span class="reg-link">Register →</span></a>
         </div>
     </section>
 
-    <audio id="snd-anthem" src="audio/anthem.mp3" loop></audio>
-    <audio id="fw-launch" src="audio/launch.mp3"></audio>
-    <audio id="fw-burst" src="audio/burst.mp3"></audio>
+    <footer>
+        &copy; 2027 SAZON GRAND FAMILY REUNION | MARZON HOTEL, KALIBO, AKLAN
+    </footer>
+
+    <script>
+        // Simple Countdown Logic
+        const targetDate = new Date("July 23, 2027 00:00:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+            document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("secs").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+        }, 1000);
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sazon 2027 | The 13 Branches</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --gold-leaf: #d4af37; --silver-mist: #a8ada9; --bg-deep: #02040a; }
+        body { margin: 0; padding: 0; background: var(--bg-deep); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+
+        /* Banner Styling */
+        .banner { position: relative; height: 80vh; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
+        .banner-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/moon.png') no-repeat center center; background-size: contain; opacity: 0.4; z-index: 1; }
+        .branded-moon { position: relative; z-index: 2; width: 300px; margin-bottom: 20px; }
+        .branded-moon img { width: 100%; filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.5)); }
+
+        /* Countdown Styling - Curated & Lowered */
+        .timer-container { position: relative; z-index: 3; margin-top: 50px; }
+        .countdown { display: flex; gap: 20px; justify-content: center; }
+        .time-box { 
+            background: rgba(0, 0, 0, 0.5); 
+            border: 1px solid var(--gold-leaf); 
+            backdrop-filter: blur(8px); 
+            padding: 15px; 
+            border-radius: 50%; 
+            width: 100px; 
+            height: 100px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            text-align: center;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+        }
+        .time-val { display: block; font-size: 2rem; color: var(--gold-leaf); font-family: 'Cinzel', serif; font-weight: 300; }
+        .time-label { display: block; font-size: 0.6rem; color: var(--silver-mist); letter-spacing: 2px; text-transform: uppercase; }
+
+        /* Branch Section Styling */
+        .branch-section { padding: 80px 20px; background: #050812; text-align: center; position: relative; z-index: 4; }
+        .branch-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1200px; margin: 40px auto; }
+        
+        .branch-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+        .tier-5 { flex: 1 1 calc(18% - 20px); min-width: 170px; }
+        .tier-3 { flex: 1 1 calc(30% - 20px); min-width: 250px; }
+
+        .branch-card:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 0 30px var(--hover-color); 
+            border-color: var(--hover-color); 
+            background: rgba(255, 255, 255, 0.08); 
+        }
+        .branch-card h3 { font-family: 'Cinzel', serif; color: #fff; margin: 0 0 10px 0; font-size: 1.2rem; letter-spacing: 1px; }
+        .reg-link { font-size: 0.7rem; color: var(--gold-leaf); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
+
+        footer { padding: 40px; text-align: center; background: #02040a; color: var(--silver-mist); font-size: 0.8rem; letter-spacing: 1px; }
+    </style>
+</head>
+<body>
 
     <section class="banner">
-       <div class="banner-bg"></div>
+        <div class="banner-bg"></div>
         <div class="branded-moon">
             <img src="images/moon.png" alt="Sazon Logo">
         </div>
         <div class="timer-container">
-            
-            
-           
+            <div class="countdown" id="countdown">
+                <div class="time-box"><span class="time-val" id="days">00</span><span class="time-label">Days</span></div>
                 <div class="time-box"><span class="time-val" id="hours">00</span><span class="time-label">Hrs</span></div>
-               <div class="countdown" id="countdown" style="justify-content: center;">
+                <div class="time-box"><span class="time-val" id="mins">00</span><span class="time-label">Mins</span></div>
                 <div class="time-box"><span class="time-val" id="secs">00</span><span class="time-label">Secs</span></div>
             </div>
         </div>
     </section>
 
-    <section style="height:100vh; padding: 100px 20px; text-align: center;">
-        <section class="branch-section">
-        <h2 style="font-family: 'Cinzel', serif; font-size: 2.5rem; color: white;">The 13 Branches</h2>
-        <p style="color: var(--silver-mist); letter-spacing: 3px;">SELECT A BRANCH TO EXPLORE THE LINEAGE</p>
+    <section class="branch-section">
+        <h2 style="font-family: 'Cinzel', serif; font-size: 2.5rem; color: white; margin-bottom: 5px;">The 13 Branches</h2>
+        <p style="color: var(--silver-mist); letter-spacing: 3px; margin-bottom: 40px;">GIKAN SA GAMUT, TUBTOB SA LANGIT</p>
         
         <div class="branch-grid">
-        <a href="LINK_HERE" class="branch-card tier-5" style="--hover-color: #ff4d4d;"><h3>Serafin</h3><span class="register-btn">Register →</span></a>
-        <a href="LINK_HERE" class="branch-card tier-5" style="--hover-color: #4da6ff;"><h3>Monserat</h3><span class="register-btn">Register →</span></a>
-        <a href="LINK_HERE" class="branch-card tier-5" style="--hover-color: #4dff88;"><h3>Felomina</h3><span class="register-btn">Register →</span></a>
-        <a href="LINK_HERE" class="branch-card tier-5" style="--hover-color: #ffcc4d;"><h3>Estrella</h3><span class="register-btn">Register →</span></a>
-        <a href="LINK_HERE" class="branch-card tier-5" style="--hover-color: #ff4dff;"><h3>Gregorio</h3><span class="register-btn">Register →</span></a>
-
-        <a href="LINK_HERE" class="branch-card tier-5" style="--hover-color: #00f2fe;"><h3>Regino</h3><span class="register-btn">Register →</span></a>
-        <a href="LINK_HERE" class="branch-card tier-5" style="--hover-color: #f6d365;"><h3>Maria</h3><span class="register-btn">Register →</span></a>
-        <a href="LINK_HERE" class="branch-card tier-5" style="--hover-color: #a8edea;"><h3>Concepcion</h3><span class="register-btn">Register →</span></a>
-        <a href="LINK_HERE" class="branch-card tier-5" style="--hover-color: #89f7fe;"><h3>Cezar</h3><span class="register-btn">Register →</span></a>
-        <a href="LINK_HERE" class="branch-card tier-5" style="--hover-color: #667eea;"><h3>Priscilla</h3><span class="register-btn">Register →</span></a>
-
-        <a href="LINK_HERE" class="branch-card tier-3" style="--hover-color: #fa709a;"><h3>Gloria</h3><span class="register-btn">Register →</span></a>
-        <a href="LINK_HERE" class="branch-card tier-3" style="--hover-color: #fee140;"><h3>Reynaldo</h3><span class="register-btn">Register →</span></a>
-        <a href="LINK_HERE" class="branch-card tier-3" style="--hover-color: #30cfd0;"><h3>Nilda</h3><span class="register-btn">Register →</span></a>
-    </div>
+            <a href="#" class="branch-card tier-5" style="--hover-color: #ff4d4d;"><h3>Serafin</h3><span class="reg-link">Register →</span></a>
+            <a href="#" class="branch-card tier-5" style="--hover-color: #4da6ff;"><h3>Monserat</h3><span class="reg-link">Register →</span></a>
+            <a href="#" class="branch-card tier-5" style="--hover-color: #4dff88;"><h3>Felomina</h3><span class="reg-link">Register →</span></a>
+            <a href="#" class="branch-card tier-5" style="--hover-color: #ffcc4d;"><h3>Estrella</h3><span class="reg-link">Register →</span></a>
+            <a href="#" class="branch-card tier-5" style="--hover-color: #ff4dff;"><h3>Gregorio</h3><span class="reg-link">Register →</span></a>
+            <a href="#" class="branch-card tier-5" style="--hover-color: #00f2fe;"><h3>Regino</h3><span class="reg-link">Register →</span></a>
+            <a href="#" class="branch-card tier-5" style="--hover-color: #f6d365;"><h3>Maria</h3><span class="reg-link">Register →</span></a>
+            <a href="#" class="branch-card tier-5" style="--hover-color: #a8edea;"><h3>Concepcion</h3><span class="reg-link">Register →</span></a>
+            <a href="#" class="branch-card tier-5" style="--hover-color: #89f7fe;"><h3>Cezar</h3><span class="reg-link">Register →</span></a>
+            <a href="#" class="branch-card tier-5" style="--hover-color: #667eea;"><h3>Priscilla</h3><span class="reg-link">Register →</span></a>
+            <a href="#" class="branch-card tier-3" style="--hover-color: #fa709a;"><h3>Gloria</h3><span class="reg-link">Register →</span></a>
+            <a href="#" class="branch-card tier-3" style="--hover-color: #fee140;"><h3>Reynaldo</h3><span class="reg-link">Register →</span></a>
+            <a href="#" class="branch-card tier-3" style="--hover-color: #30cfd0;"><h3>Nilda</h3><span class="reg-link">Register →</span></a>
+        </div>
     </section>
-        <p>Gikan sa Gamut, Tubtob sa Langit</p>
-        </section>
 
     <footer>
-        <p class="footer-credits">© 2027 Sazon Grand Reunion | Kalibo, Aklan</p>
+        &copy; 2027 SAZON GRAND FAMILY REUNION | MARZON HOTEL, KALIBO, AKLAN
     </footer>
 
     <script>
-        // --- COUNTDOWN LOGIC ---
-        // Set the reunion date: July 23, 2027    
-        const reunionDate = new Date("July 23, 2027 08:00:00").getTime();
-
-        const updateCountdown = () => {
+        // Simple Countdown Logic
+        const targetDate = new Date("July 23, 2027 00:00:00").getTime();
+        setInterval(() => {
             const now = new Date().getTime();
-            const distance = reunionDate - now;
-
-            // Time calculations
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Update DOM with leading zeros
-            document.getElementById("days").innerText = String(days).padStart(2, '0');
-            document.getElementById("hours").innerText = String(hours).padStart(2, '0');
-            document.getElementById("mins").innerText = String(minutes).padStart(2, '0');
-            document.getElementById("secs").innerText = String(seconds).padStart(2, '0');
-
-            // Optional: Action when countdown finishes
-            if (distance < 0) {
-                clearInterval(countdownInterval);
-                document.getElementById("countdown").innerHTML = "<h2>The Legacy Has Begun</h2>";
-            }
-        };
-
-        // Update every second
-        updateCountdown(); // Call once immediately
-        const countdownInterval = setInterval(updateCountdown, 1000);
-
+            const diff = targetDate - now;
+            document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("secs").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+        }, 1000);
     </script>
 </body>
 </html>
