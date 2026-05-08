@@ -4,96 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sazon 2027 | The 13 Branches</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Playfair+Display:ital,wght@1,700&family=Montserrat:wght@300;600&family=Prata&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&family=Prata&family=Cinzel:wght@700&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #d4af37; --aqua: #7fffd4; --silver: #c0c0c0; --blue: #00b4ff; --charcoal: #1a1a1a; }
+        :root { --gold: #d4af37; --aqua: #7fffd4; --silver: #c0c0c0; --luminous-blue: #00e5ff; --charcoal: #121212; }
         body { margin: 0; padding: 0; background: var(--charcoal); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
 
-        /* Intro Overlay - Dark Charcoal */
-        #intro-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #121212; z-index: 5000; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .credit-line { font-family: 'Cinzel Decorative', cursive; margin: 15px; display: none; padding: 0 20px; }
-        #enter-btn { padding: 15px 40px; border: 2px solid var(--gold); background: transparent; color: var(--gold); font-family: 'Cinzel Decorative'; cursor: pointer; font-size: 1.2rem; transition: 0.5s; margin-top: 30px; z-index: 5001; }
-        #enter-btn:hover { background: var(--gold); color: #121212; box-shadow: 0 0 20px var(--gold); }
+        /* Intro Overlay - Simple & Elegant */
+        #intro-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0a0a0a; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .credit-line { font-family: 'Montserrat', sans-serif; font-weight: 200; letter-spacing: 5px; margin: 15px; display: none; text-transform: uppercase; }
+        #enter-btn { padding: 15px 45px; border: 1px solid var(--luminous-blue); background: transparent; color: var(--luminous-blue); font-family: 'Montserrat', sans-serif; letter-spacing: 3px; cursor: pointer; font-size: 1rem; transition: 0.5s; margin-top: 30px; }
+        #enter-btn:hover { background: var(--luminous-blue); color: black; box-shadow: 0 0 30px var(--luminous-blue); }
 
-        /* Mute Toggle */
-        #audio-btn { position: fixed; top: 20px; right: 20px; z-index: 4000; background: rgba(0,0,0,0.7); color: var(--gold); border: 1px solid var(--gold); padding: 10px 20px; cursor: pointer; border-radius: 5px; font-size: 0.7rem; }
+        /* Nav Bar - Right Aligned */
+        nav { width: 100%; padding: 25px 0; background: rgba(0,0,0,0.85); position: fixed; top: 0; z-index: 5000; display: flex; justify-content: flex-end; border-bottom: 1px solid rgba(212,175,55,0.3); }
+        nav a { color: var(--gold); text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 400; margin-right: 40px; font-size: 0.8rem; letter-spacing: 2px; }
+        
+        /* Audio Control */
+        #audio-toggle { position: fixed; bottom: 20px; right: 20px; z-index: 6000; background: rgba(0,0,0,0.7); border: 1px solid var(--gold); color: var(--gold); padding: 10px 15px; cursor: pointer; font-size: 0.7rem; border-radius: 5px; }
 
-        /* Main Content Transition */
-        #main-content { visibility: hidden; opacity: 0; transition: opacity 2s ease-in; }
+        /* Banner & Lowered Elders */
+        .hero-banner { position: relative; min-height: 100vh; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; padding-top: 150px; }
+        .banner-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/banner.jpg') no-repeat center center; background-size: cover; opacity: 0.3; z-index: 1; }
+        
+        .elders-container { z-index: 10; display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; margin-bottom: 80px; }
+        .elder-box { width: 280px; height: 350px; border: 1px solid var(--gold); background: rgba(0,0,0,0.5); display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; box-sizing: border-box; text-align: center; backdrop-filter: blur(5px); }
+        .elder-box h2 { font-family: 'Prata', serif; color: var(--gold); margin: 0; font-size: 1.8rem; }
+        .elder-box p { font-size: 0.9rem; color: var(--silver); margin: 5px 0 0 0; }
 
-        /* Navigation */
-        nav { width: 100%; padding: 20px; background: rgba(0,0,0,0.8); position: fixed; top: 0; z-index: 4000; text-align: center; border-bottom: 1px solid var(--gold); }
-        nav a { color: var(--gold); text-decoration: none; font-family: 'Cinzel Decorative'; margin: 0 20px; letter-spacing: 2px; font-size: 0.8rem; }
-
-        /* Banner & Elders */
-        .hero-banner { position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-top: 80px; }
-        .banner-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/banner.jpg') no-repeat center center; background-size: cover; opacity: 0.35; z-index: 1; }
-        .elders { z-index: 10; display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
-        .elder-card { border: 2px solid var(--gold); padding: 25px; border-radius: 10px; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); text-align: center; min-width: 250px; }
-        .elder-card h2 { font-family: 'Cinzel Decorative'; color: var(--gold); margin: 0; font-size: 1.8rem; }
-
-        /* Itinerary Card */
-        .itinerary-card { z-index: 10; max-width: 800px; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.3); border-radius: 15px; padding: 30px; backdrop-filter: blur(10px); margin: 0 20px 60px 20px; }
-        .itinerary-card h3 { font-family: 'Cinzel Decorative'; color: var(--gold); text-align: center; border-bottom: 1px solid rgba(212,175,55,0.2); padding-bottom: 10px; }
-        .day-box { margin-bottom: 20px; }
-        .day-box h4 { color: var(--gold); margin: 0 0 5px 0; font-size: 0.9rem; text-transform: uppercase; }
-        .day-box p { font-size: 0.85rem; color: var(--silver); margin: 0; line-height: 1.6; }
-
-        /* 5-5-3 Grid */
-        .branch-section { padding: 80px 20px; background: #0c0c0c; text-align: center; }
-        .branch-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1250px; margin: 0 auto; }
-        .branch-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.2); padding: 25px; border-radius: 12px; text-decoration: none; transition: 0.4s; text-align: center; }
+        /* Branch Section (Layer 2) */
+        .branch-section { position: relative; z-index: 20; padding: 100px 20px; background: #0a0a0a; text-align: center; }
+        .branch-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1300px; margin: 0 auto; }
+        .branch-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.2); padding: 35px 20px; border-radius: 10px; text-decoration: none; transition: 0.4s; }
         .tier-5 { flex: 1 1 calc(18% - 20px); min-width: 180px; }
-        .tier-3 { flex: 1 1 calc(30% - 20px); min-width: 280px; }
-        .branch-card:hover { transform: translateY(-10px); box-shadow: 0 0 30px var(--hover-color); border-color: var(--hover-color); background: rgba(255,255,255,0.07); }
-        .branch-card h3 { font-family: 'Prata'; color: white; margin: 0; font-size: 1.3rem; }
-        .nickname { display: block; color: var(--silver); font-size: 0.8rem; margin-top: 5px; font-style: italic; }
+        .tier-3 { flex: 1 1 calc(30% - 20px); min-width: 300px; }
+        .branch-card:hover { transform: translateY(-10px); box-shadow: 0 0 40px var(--hover-color); border-color: var(--hover-color); background: rgba(255,255,255,0.06); }
+        .branch-card h3 { font-family: 'Prata'; color: white; margin: 0; font-size: 1.4rem; }
+        .nickname { display: block; font-size: 0.8rem; color: var(--silver); margin-top: 8px; font-style: italic; }
 
-        /* Footer & Committee */
-        footer { padding: 60px 20px; background: #050505; text-align: center; border-top: 1px solid var(--gold); font-size: 0.8rem; }
-        .committee-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; color: var(--gold); margin-bottom: 30px; font-family: 'Prata'; }
-        .committee-box b { color: white; display: block; margin-bottom: 5px; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px; }
+        /* Itinerary (Layer 3) */
+        .itinerary-section { padding: 80px 20px; background: #080808; display: flex; justify-content: center; }
+        .itinerary-card { max-width: 900px; width: 100%; border: 1px solid rgba(212,175,55,0.2); padding: 40px; background: rgba(255,255,255,0.02); border-radius: 20px; }
+        .itinerary-card h2 { font-family: 'Prata'; color: var(--gold); text-align: center; margin-bottom: 30px; letter-spacing: 3px; }
+        .day-row { margin-bottom: 25px; border-left: 2px solid var(--gold); padding-left: 20px; }
+        .day-row h4 { margin: 0; color: var(--gold); text-transform: uppercase; font-size: 0.9rem; }
+        .day-row p { margin: 5px 0 0 0; font-size: 0.85rem; color: var(--silver); line-height: 1.6; }
 
-        #fw-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2500; }
+        /* Map Section */
+        .map-section { padding: 60px 20px; background: #050505; text-align: center; }
+        .map-container { width: 100%; max-width: 1000px; height: 450px; margin: 30px auto; border: 1px solid var(--gold); filter: grayscale(0.5) contrast(1.2); }
+
+        /* Committee Footer */
+        footer { padding: 80px 20px; background: #000; border-top: 1px solid var(--gold); text-align: center; }
+        .committee-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-bottom: 50px; font-family: 'Prata'; color: var(--gold); }
+        .com-item b { display: block; color: var(--silver); font-family: 'Montserrat'; font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 5px; }
+
+        #fw-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 8000; }
+        #main-content { display: none; }
     </style>
 </head>
 <body>
 
 <div id="intro-overlay">
-    <div id="l1" class="credit-line" style="color: var(--gold); font-family: 'Cinzel Decorative'; font-size: 2.5rem;">GIKAN SA GAMUT, TUBTOB SA LANGIT</div>
-    <div id="l2" class="credit-line" style="color: var(--aqua); font-family: 'Prata'; font-size: 1.8rem;">A SAZON FAMILY PRODUCTION</div>
-    <div id="l3" class="credit-line" style="color: var(--silver); font-size: 1.2rem;">MARZON HOTEL, KALIBO, AKLAN | JULY 23-24, 2027</div>
-    <div id="l4" class="credit-line" style="color: var(--blue); font-family: 'Playfair Display'; font-size: 3rem;">PRESENT</div>
+    <div id="line1" class="credit-line" style="color:var(--gold);">Gikan sa Gamut, Tubtob sa Langit</div>
+    <div id="line2" class="credit-line" style="color:var(--aqua);">A Sazon Family Production</div>
+    <div id="line3" class="credit-line" style="color:var(--silver);">Marzon Hotel, Kalibo, Aklan | July 23-24, 2027</div>
+    <div id="line4" class="credit-line" style="color:var(--luminous-blue); font-weight:600;">Present</div>
     <button id="enter-btn">CLICK TO ENTER</button>
 </div>
 
-<button id="audio-btn">MUTE ANTHEM</button>
+<button id="audio-toggle">MUTE ANTHEM</button>
 <canvas id="fw-canvas"></canvas>
 
 <div id="main-content">
-    <nav><a href="index.html">HOME</a><a href="https://www.facebook.com/messages/t/2007378753379015">JOIN GROUP</a></nav>
+    <nav>
+        <a href="index.html">HOME</a>
+        <a href="https://www.facebook.com/messages/t/2007378753379015">JOIN GROUP</a>
+    </nav>
 
     <div class="hero-banner">
         <div class="banner-img"></div>
-        <div class="elders">
-            <div class="elder-card"><h2>Tereso Sazon</h2><p>(Lolo Isok)</p></div>
-            <div class="elder-card"><h2>Teofista Sazon</h2><p>(Lola Pistang)</p></div>
-        </div>
-
-        <div class="itinerary-card">
-            <h3>EVENT ITINERARY</h3>
-            <div class="day-box">
-                <h4>July 22: Early Arrivals</h4>
-                <p>Check-in & Pre-registration / Welcome Dinner for early arrivals.</p>
-            </div>
-            <div class="day-box">
-                <h4>Day 1 (July 23): Event Proper</h4>
-                <p>Registration & Breakfast / Fellowship / Opening Programme / Luncheon / Games / Presentations / Dinner Gala / Fireworks Display</p>
-            </div>
-            <div class="day-box">
-                <h4>Day 2 (July 24): Thanksgiving</h4>
-                <p>Breakfast / Thanksgiving Programme / Community Outreach / Farewell.</p>
-            </div>
+        <div class="elders-container">
+            <div class="elder-box"><h2>Tereso Sazon</h2><p>(Lolo Isok)</p></div>
+            <div class="elder-box"><h2>Teofista Sazon</h2><p>(Lola Pistang)</p></div>
         </div>
     </div>
 
@@ -115,15 +107,41 @@
         </div>
     </div>
 
+    <div class="itinerary-section">
+        <div class="itinerary-card">
+            <h2>PROGRAMME OF ACTIVITIES</h2>
+            <div class="day-row">
+                <h4>July 22: Early Arrivals</h4>
+                <p>Check-in & Pre-registration / Welcome Dinner for family arriving ahead of schedule.</p>
+            </div>
+            <div class="day-row">
+                <h4>Day 1 (July 23): The Celebration</h4>
+                <p>Registration & Breakfast / Fellowship / Opening Ceremony / Luncheon / Games / Family Presentations / Dinner Gala / Grand Fireworks Display</p>
+            </div>
+            <div class="day-row">
+                <h4>Day 2 (July 24): Thanksgiving</h4>
+                <p>Farewell Breakfast / Thanksgiving Service / Community Outreach Activity / Farewell Hugs.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="map-section">
+        <h2 style="font-family:'Prata'; color:var(--gold);">THE VENUE</h2>
+        <p style="font-size:0.8rem; color:var(--silver);">Marzon Hotel, Kalibo, Aklan</p>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3905.8115668953184!2d122.36873537583626!3d11.63606694270144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a3ce4608c02c63%3A0xc074092b70f20958!2sMarzon%20Hotel%20Kalibo!5e0!3m2!1sen!2sph!4v1715180000000!5m2!1sen!2sph" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+
     <footer>
         <div class="committee-grid">
-            <div class="committee-box"><b>Overall In-Charge</b> TBA</div>
-            <div class="committee-box"><b>Finance</b> TBA</div>
-            <div class="committee-box"><b>Food & Catering</b> TBA</div>
-            <div class="committee-box"><b>Logistics</b> TBA</div>
+            <div class="com-item"><b>Overall In-Charge</b>Fr. Tudd Belandres</div>
+            <div class="com-item"><b>Finance</b>TBA</div>
+            <div class="com-item"><b>Food & Catering</b>TBA</div>
+            <div class="com-item"><b>Logistics</b>TBA</div>
         </div>
-        <p>Photos & Inquiries: <a href="mailto:maemiliapalma@yahoo.com" style="color:var(--gold);">maemiliapalma@yahoo.com</a></p>
-        <p>© 2027 SAZON GRAND FAMILY REUNION | MARZON HOTEL, KALIBO, AKLAN</p>
+        <p style="font-size:0.7rem; color:var(--silver); letter-spacing:1px;">Send Photos: <a href="mailto:maemiliapalma@yahoo.com" style="color:var(--gold);">maemiliapalma@yahoo.com</a></p>
+        <p style="margin-top:20px; font-size:0.6rem; color:rgba(255,255,255,0.3);">© 2027 SAZON GRAND FAMILY REUNION | GIKAN SA GAMUT, TUBTOB SA LANGIT</p>
     </footer>
 </div>
 
@@ -138,8 +156,8 @@
     document.getElementById('enter-btn').onclick = async function() {
         this.style.display = 'none';
         swell.play();
-        const lines = ['l1', 'l2', 'l3', 'l4'];
-        for (let id of lines) {
+        const lines = ['line1', 'line2', 'line3', 'line4'];
+        for(let id of lines) {
             let el = document.getElementById(id);
             el.style.display = 'block';
             await new Promise(r => setTimeout(r, 2000));
@@ -147,35 +165,61 @@
         }
         shimmer.play();
         document.getElementById('intro-overlay').style.display = 'none';
-        const content = document.getElementById('main-content');
-        content.style.visibility = 'visible';
-        content.style.opacity = '1';
-        startFW();
-        setTimeout(() => { stopFW(); anthem.play(); }, 5000);
+        document.getElementById('main-content').style.display = 'block';
+        startFireworks();
+        setTimeout(() => { stopFireworks(); anthem.play(); }, 5000);
     };
 
-    document.getElementById('audio-btn').onclick = function() {
+    document.getElementById('audio-toggle').onclick = function() {
         anthem.muted = !anthem.muted;
         this.innerText = anthem.muted ? "UNMUTE ANTHEM" : "MUTE ANTHEM";
     };
 
+    // Festive Visual Fireworks Logic
     const canvas = document.getElementById('fw-canvas');
     const ctx = canvas.getContext('2d');
-    let fwOn = false;
-    function startFW() {
-        fwOn = true; canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        whistle.play(); drawFW();
-        setInterval(() => { if(fwOn) { bLow.play(); bHigh.play(); }}, 1200);
+    let fwActive = false;
+    let particles = [];
+
+    function startFireworks() {
+        fwActive = true; canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        whistle.play();
+        update();
+        const interval = setInterval(() => {
+            if(!fwActive) { clearInterval(interval); return; }
+            createBlast();
+            bLow.play(); bHigh.play();
+        }, 800);
     }
-    function stopFW() { fwOn = false; ctx.clearRect(0,0,canvas.width,canvas.height); }
-    function drawFW() {
-        if(!fwOn) return;
-        ctx.fillStyle = 'rgba(0,0,0,0.1)'; ctx.fillRect(0,0,canvas.width,canvas.height);
-        for(let i=0; i<15; i++) {
-            ctx.fillStyle = `hsl(${Math.random()*360}, 100%, 50%)`;
-            ctx.beginPath(); ctx.arc(Math.random()*canvas.width, Math.random()*canvas.height, 3, 0, Math.PI*2); ctx.fill();
+    function stopFireworks() { fwActive = false; particles = []; ctx.clearRect(0,0,canvas.width,canvas.height); }
+
+    function createBlast() {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * (canvas.height / 2);
+        const color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        for(let i=0; i<40; i++) {
+            particles.push({
+                x: x, y: y,
+                vx: Math.cos(i) * Math.random() * 8,
+                vy: Math.sin(i) * Math.random() * 8,
+                life: 1.0,
+                color: color
+            });
         }
-        requestAnimationFrame(drawFW);
+    }
+
+    function update() {
+        if(!fwActive && particles.length === 0) return;
+        ctx.fillStyle = 'rgba(0,0,0,0.15)';
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+        particles.forEach((p, index) => {
+            p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.life -= 0.015;
+            ctx.fillStyle = p.color;
+            ctx.globalAlpha = p.life;
+            ctx.beginPath(); ctx.arc(p.x, p.y, 4, 0, Math.PI*2); ctx.fill();
+            if(p.life <= 0) particles.splice(index, 1);
+        });
+        requestAnimationFrame(update);
     }
 </script>
 </body>
