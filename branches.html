@@ -54,16 +54,20 @@
 
         /* THE COUNTDOWN (Using Glassmorphism for a premium feel) */
         .countdown { display: flex; gap: 25px; font-family: 'Cinzel', serif; }
-        .time-box { background: var(--glass); border: 1px solid var(--gold-leaf); backdrop-filter: blur(15px); padding: 30px 20px; border-radius: 15px; min-width: 100px; }
-        .time-val { display: block; font-size: 3.5rem; color: var(--gold-leaf); }
-        .time-label { display: block; font-size: 0.8rem; color: var(--silver-mist); letter-spacing: 2px; }
-
-        /* --- FOOTER (A premium wrap-up) --- */
-        footer { background: #02040a; padding: 60px 20px; border-top: 1px solid rgba(255,215,0,0.2); text-align: center; }
-        .footer-credits { font-size: 0.8rem; letter-spacing: 2px; color: var(--silver-mist); opacity: 0.6; }
-
-        h2 { font-family: 'Cinzel', serif; color: var(--gold-leaf); }
-    </style>
+        .time-box { 
+            background: rgba(0, 0, 0, 0.6); 
+            border: 1px solid var(--gold-leaf); 
+            backdrop-filter: blur(10px); 
+            padding: 20px; 
+            border-radius: 50%; 
+            width: 130px;
+            height: 130px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-top: 350px; /* Pushes the countdown much lower to clear the center image */
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        }
 </head>
 <body>
 
