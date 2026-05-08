@@ -10,124 +10,137 @@
             --gold: #d4af37; 
             --navy: #000814; 
             --luminous-blue: #00e5ff; 
-            --sepia: rgba(212, 175, 55, 0.15);
+            --sepia: rgba(212, 175, 55, 0.2);
         }
         body, html { margin: 0; padding: 0; height: 100%; background: var(--navy); color: white; font-family: 'Montserrat', sans-serif; overflow: hidden; }
 
-        /* Dramatic Background */
+        /* Step 1: Pre-Click Interface */
+        #hype-trigger { position: fixed; top:0; left:0; width:100%; height:100%; z-index: 10000; background: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        #hype-trigger button { padding: 15px 40px; background: transparent; border: 1px solid var(--gold); color: var(--gold); cursor: pointer; letter-spacing: 5px; font-family: 'Montserrat'; }
+        #hype-trigger h2 { font-weight: 200; color: #fff; margin-bottom: 20px; font-size: 0.9rem; letter-spacing: 10px; text-transform: uppercase; }
+
+        /* The Main Salvbo Visuals */
+        #main-salvo { display: none; height: 100%; }
+
+        /* Mysterious Montage Background */
         .bg-overlay { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            background: linear-gradient(to bottom, rgba(0,8,20,0.8), rgba(0,8,20,0.4), rgba(0,8,20,0.9)),
-                        url('images/old-family-roots.jpg') no-repeat center center; 
+            background: linear-gradient(to bottom, rgba(0,8,20,0.9), rgba(0,8,20,0.5), rgba(0,8,20,0.95)),
+                        url('images/old-roots.jpg') no-repeat center center; 
             background-size: cover;
-            filter: grayscale(100%) sepia(20%);
+            /* STRICT BLUR APPLIED HERE */
+            filter: grayscale(100%) sepia(20%) blur(15px);
             z-index: 1;
-            animation: slowZoom 30s infinite alternate;
+            animation: slowZoom 35s forwards alternate;
         }
         
-        @keyframes slowZoom {
-            from { transform: scale(1); }
-            to { transform: scale(1.1); }
-        }
+        @keyframes slowZoom { from { transform: scale(1) blur(15px); } to { transform: scale(1.15) blur(20px); } }
 
-        /* Content Reveal */
+        /* Content Revealed Layer */
         .content { 
             position: relative; z-index: 10; height: 100%; 
             display: flex; flex-direction: column; justify-content: center; 
             align-items: center; text-align: center; 
-            opacity: 0; animation: fadeInPage 4s forwards;
+            opacity: 0; animation: fadeInContent 2s 1s forwards;
         }
+        @keyframes fadeInContent { to { opacity: 1; } }
 
-        @keyframes fadeInPage { to { opacity: 1; } }
-
-        h2 { font-weight: 200; letter-spacing: 12px; margin-bottom: 5px; font-size: 0.9rem; color: var(--gold); }
-        h1 { font-family: 'Cinzel Decorative', cursive; font-size: clamp(2.5rem, 7vw, 5rem); margin: 0; letter-spacing: 10px; }
-        
-        .inaugural-msg { 
-            max-width: 600px; font-family: 'Prata', serif; font-size: 1.1rem; 
-            margin: 20px 0; color: #c0c0c0; line-height: 1.6; font-style: italic;
-        }
+        /* The Battlecry Message (Interplaying) */
+        #battlecry-box { max-width: 650px; font-family: 'Prata', serif; font-size: 1.4rem; color: #c0c0c0; line-height: 1.6; font-style: italic; margin-bottom: 40px; text-shadow: 2px 2px 5px black; }
 
         /* Countdown Timer */
-        #timer { 
-            display: flex; gap: 20px; margin: 30px 0; font-family: 'Montserrat', sans-serif;
-        }
-        .time-block { text-align: center; border: 1px solid rgba(212, 175, 55, 0.3); padding: 15px; min-width: 80px; border-radius: 5px; background: rgba(0,0,0,0.4); }
+        #timer { display: flex; gap: 20px; font-family: 'Montserrat', sans-serif; }
+        .time-block { text-align: center; border: 1px solid rgba(212, 175, 55, 0.4); padding: 15px; min-width: 80px; border-radius: 5px; background: rgba(0,0,0,0.5); }
         .time-num { display: block; font-size: 2rem; font-weight: 600; color: var(--gold); }
         .time-label { font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: white; }
 
-        .location-line { font-weight: 400; letter-spacing: 4px; font-size: 0.8rem; margin-top: 20px; color: var(--gold); }
-
-        /* The Button */
-        .cta-btn { 
-            margin-top: 50px; padding: 18px 50px; 
-            border: 1px solid var(--luminous-blue); background: transparent; 
-            color: var(--luminous-blue); text-decoration: none; 
-            font-weight: 600; letter-spacing: 5px; transition: 0.5s; 
-            animation: pulseBlue 2s infinite; 
-        }
-        .cta-btn:hover { background: var(--luminous-blue); color: var(--navy); }
-
-        @keyframes pulseBlue { 
-            0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); } 
-            70% { box-shadow: 0 0 0 20px rgba(0, 229, 255, 0); } 
-            100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); } 
-        }
+        /* The Payoff Button (Starts Hidden) */
+        #enter-heritage { display: none; opacity: 0; transition: opacity 1.5s ease-in; margin-top: 50px; padding: 18px 50px; border: 1px solid var(--luminous-blue); background: transparent; color: var(--luminous-blue); text-decoration: none; font-weight: 600; letter-spacing: 5px; animation: pulseBlue 2s infinite; }
+        #enter-heritage.reveal { display: inline-block; opacity: 1; }
+        
+        @keyframes pulseBlue { 0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(0, 229, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); } }
 
         footer { position: absolute; bottom: 20px; width: 100%; text-align: center; font-size: 0.6rem; letter-spacing: 3px; color: rgba(255,255,255,0.3); z-index: 10; }
     </style>
 </head>
 <body>
 
-    <div class="bg-overlay"></div>
-
-    <div class="content">
-        <h2>THE INAUGURAL SALVO</h2>
-        <h1>SAZON 2027</h1>
-        
-        <p class="inaugural-msg">
-            "Before the branches touch the sky, we honor the strength of the roots that hold us together."
-        </p>
-
-        <div id="timer">
-            <div class="time-block"><span class="time-num" id="days">00</span><span class="time-label">Days</span></div>
-            <div class="time-block"><span class="time-num" id="hours">00</span><span class="time-label">Hrs</span></div>
-            <div class="time-block"><span class="time-num" id="mins">00</span><span class="time-label">Mins</span></div>
-            <div class="time-block"><span class="time-num" id="secs">00</span><span class="time-label">Secs</span></div>
-        </div>
-        
-        <div class="location-line">MARZON HOTEL KALIBO - AKLAN</div>
-
-        <a href="branches.html" class="cta-btn">ENTER THE HERITAGE</a>
+    <div id="hype-trigger">
+        <h2>A Salvo of Legacy</h2>
+        <button id="trigger-btn">LISTEN TO THE CALL</button>
     </div>
 
-    <footer>
-        GIKAN SA GAMUT, TUBTOB SA LANGIT | #SAZON2027GRANDREUNION
-    </footer>
+    <div id="main-salvo">
+        <div class="bg-overlay"></div>
+        <div class="content">
+            <div id="timer">
+                <div class="time-block"><span class="time-num" id="days">00</span><span class="time-label">Days</span></div>
+                <div class="time-block"><span class="time-num" id="hours">00</span><span class="time-label">Hrs</span></div>
+                <div class="time-block"><span class="time-num" id="mins">00</span><span class="time-label">Mins</span></div>
+                <div class="time-block"><span class="time-num" id="secs">00</span><span class="time-label">Secs</span></div>
+            </div>
+
+            <div style="margin: 50px 0;"> <div id="battlecry-box"></div>
+                <a href="branches.html" id="enter-heritage">ENTER THE HERITAGE</a>
+            </div>
+            
+            <div style="color:var(--gold); letter-spacing:3px; font-size:0.7rem; font-weight:600;">JULY 23-24, 2027</div>
+        </div>
+        <footer>© 2027 SAZON | maemiliapalma@yahoo.com</footer>
+    </div>
 
     <script>
-        const targetDate = new Date("July 23, 2027 00:00:00").getTime();
+        const jingle = new Audio('audio/teaze_jingle.mp3'); // Rename your github jingle file to match
+        const battlecry = [
+            "We’ve missed HOME...",
+            "...We’ve missed FAMILY.",
+            "The time has come...",
+            "...to answer the call of legacy."
+        ];
+        
+        const trigger = document.getElementById('hype-trigger');
+        const triggerBtn = document.getElementById('trigger-btn');
+        const main = document.getElementById('main-salvo');
+        const box = document.getElementById('battlecry-box');
+        const payBtn = document.getElementById('enter-heritage');
 
-        function updateTimer() {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
+        triggerBtn.onclick = function() {
+            trigger.style.display = 'none';
+            main.style.display = 'block';
+            jingle.play();
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const secs = Math.floor((distance % (1000 * 60)) / 1000);
+            // Run the Battlecry Interplay (0–28 Seconds)
+            runBattlecrySequence();
 
-            document.getElementById("days").innerText = days.toString().padStart(2, '0');
-            document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
-            document.getElementById("mins").innerText = mins.toString().padStart(2, '0');
-            document.getElementById("secs").innerText = secs.toString().padStart(2, '0');
+            // At 30 Seconds, trigger the Payoff button and fade background to black
+            setTimeout(() => {
+                document.querySelector('.bg-overlay').style.opacity = '0'; // Go to pure black
+                document.getElementById('timer').style.opacity = '0.3'; // Dim the timer
+                box.style.opacity = '0'; // Clear battlecry
+                payBtn.classList.add('reveal'); // Show Enter button
+            }, 30000); // 30000ms = 30 seconds
+        }
 
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("timer").innerHTML = "THE REUNION IS HERE";
+        async function runBattlecrySequence() {
+            for(let msg of battlecry) {
+                box.innerText = msg;
+                box.style.opacity = '1'; // Fade In
+                await new Promise(r => setTimeout(r, 6000)); // Show for 6 seconds
+                box.style.opacity = '0'; // Fade Out
+                await new Promise(r => setTimeout(r, 1000)); // Delay between
             }
         }
 
+        // --- Standard Countdown Logic ---
+        const targetDate = new Date("July 23, 2027 00:00:00").getTime();
+        function updateTimer() {
+            const distance = targetDate - new Date().getTime();
+            if (distance < 0) { document.getElementById("timer").innerHTML = "NOW"; return; }
+            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById("mins").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById("secs").innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        }
         setInterval(updateTimer, 1000);
         updateTimer();
     </script>
