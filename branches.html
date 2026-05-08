@@ -4,89 +4,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sazon 2027 | The 13 Branches</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Playfair+Display:ital,wght@1,700&family=Montserrat:wght@300;600&family=Prata&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #d4af37; --aqua: #7fffd4; --silver: #a8ada9; --blue: #007bff; --bg-dark: #0a0a0a; }
-        body { margin: 0; padding: 0; background: var(--bg-dark); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+        :root { --gold: #d4af37; --aqua: #7fffd4; --silver: #c0c0c0; --blue: #00b4ff; --charcoal: #1a1a1a; }
+        body { margin: 0; padding: 0; background: var(--charcoal); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
 
         /* Intro Overlay - Dark Charcoal */
-        #intro-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #121212; z-index: 3000; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .credit-line { font-family: 'Cinzel', serif; font-size: 2rem; display: none; margin: 10px; }
-        #enter-btn { padding: 15px 30px; border: 2px solid var(--gold); background: none; color: var(--gold); font-family: 'Cinzel'; cursor: pointer; font-size: 1.2rem; transition: 0.3s; margin-top: 20px; }
-        #enter-btn:hover { background: var(--gold); color: black; }
+        #intro-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #121212; z-index: 5000; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .credit-line { font-family: 'Cinzel Decorative', cursive; margin: 15px; display: none; padding: 0 20px; }
+        #enter-btn { padding: 15px 40px; border: 2px solid var(--gold); background: transparent; color: var(--gold); font-family: 'Cinzel Decorative'; cursor: pointer; font-size: 1.2rem; transition: 0.5s; margin-top: 30px; z-index: 5001; }
+        #enter-btn:hover { background: var(--gold); color: #121212; box-shadow: 0 0 20px var(--gold); }
 
         /* Mute Toggle */
-        #audio-control { position: fixed; top: 20px; right: 20px; z-index: 2500; background: rgba(0,0,0,0.5); border: 1px solid var(--gold); color: white; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.8rem; }
+        #audio-btn { position: fixed; top: 20px; right: 20px; z-index: 4000; background: rgba(0,0,0,0.7); color: var(--gold); border: 1px solid var(--gold); padding: 10px 20px; cursor: pointer; border-radius: 5px; font-size: 0.7rem; }
 
-        /* Main Sections */
-        .page-content { visibility: hidden; } /* Hidden until intro ends */
-        .banner-container { position: relative; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .main-cover { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/moon.png') no-repeat center center; background-size: cover; opacity: 0.3; z-index: 1; }
-        
-        .elders-row { z-index: 10; display: flex; gap: 40px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center; }
-        .elder-card { border: 1px solid var(--gold); padding: 20px; border-radius: 10px; background: rgba(212,175,55,0.1); backdrop-filter: blur(5px); text-align: center; }
-        .elder-card h2 { font-family: 'Cinzel'; color: var(--gold); margin: 0; }
+        /* Main Content Transition */
+        #main-content { visibility: hidden; opacity: 0; transition: opacity 2s ease-in; }
+
+        /* Navigation */
+        nav { width: 100%; padding: 20px; background: rgba(0,0,0,0.8); position: fixed; top: 0; z-index: 4000; text-align: center; border-bottom: 1px solid var(--gold); }
+        nav a { color: var(--gold); text-decoration: none; font-family: 'Cinzel Decorative'; margin: 0 20px; letter-spacing: 2px; font-size: 0.8rem; }
+
+        /* Banner & Elders */
+        .hero-banner { position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-top: 80px; }
+        .banner-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/banner.jpg') no-repeat center center; background-size: cover; opacity: 0.35; z-index: 1; }
+        .elders { z-index: 10; display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
+        .elder-card { border: 2px solid var(--gold); padding: 25px; border-radius: 10px; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); text-align: center; min-width: 250px; }
+        .elder-card h2 { font-family: 'Cinzel Decorative'; color: var(--gold); margin: 0; font-size: 1.8rem; }
+
+        /* Itinerary Card */
+        .itinerary-card { z-index: 10; max-width: 800px; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.3); border-radius: 15px; padding: 30px; backdrop-filter: blur(10px); margin: 0 20px 60px 20px; }
+        .itinerary-card h3 { font-family: 'Cinzel Decorative'; color: var(--gold); text-align: center; border-bottom: 1px solid rgba(212,175,55,0.2); padding-bottom: 10px; }
+        .day-box { margin-bottom: 20px; }
+        .day-box h4 { color: var(--gold); margin: 0 0 5px 0; font-size: 0.9rem; text-transform: uppercase; }
+        .day-box p { font-size: 0.85rem; color: var(--silver); margin: 0; line-height: 1.6; }
 
         /* 5-5-3 Grid */
-        .branch-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; max-width: 1300px; margin: 0 auto 50px auto; padding: 0 20px; z-index: 10; position: relative; }
-        .branch-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,215,0,0.2); padding: 25px; border-radius: 12px; text-decoration: none; text-align: center; transition: 0.4s; }
-        .tier-5 { flex: 1 1 calc(18% - 15px); min-width: 170px; }
-        .tier-3 { flex: 1 1 calc(30% - 15px); min-width: 250px; }
-        .branch-card:hover { transform: translateY(-10px); box-shadow: 0 0 30px var(--hover-color); border-color: var(--hover-color); }
-        .branch-card h3 { font-family: 'Cinzel'; color: white; margin: 0; }
-        .nickname { display: block; color: var(--silver); font-size: 0.8rem; margin: 5px 0 10px 0; font-style: italic; }
+        .branch-section { padding: 80px 20px; background: #0c0c0c; text-align: center; }
+        .branch-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1250px; margin: 0 auto; }
+        .branch-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.2); padding: 25px; border-radius: 12px; text-decoration: none; transition: 0.4s; text-align: center; }
+        .tier-5 { flex: 1 1 calc(18% - 20px); min-width: 180px; }
+        .tier-3 { flex: 1 1 calc(30% - 20px); min-width: 280px; }
+        .branch-card:hover { transform: translateY(-10px); box-shadow: 0 0 30px var(--hover-color); border-color: var(--hover-color); background: rgba(255,255,255,0.07); }
+        .branch-card h3 { font-family: 'Prata'; color: white; margin: 0; font-size: 1.3rem; }
+        .nickname { display: block; color: var(--silver); font-size: 0.8rem; margin-top: 5px; font-style: italic; }
 
-        /* Fireworks Canvas */
-        #fw-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2000; }
+        /* Footer & Committee */
+        footer { padding: 60px 20px; background: #050505; text-align: center; border-top: 1px solid var(--gold); font-size: 0.8rem; }
+        .committee-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; color: var(--gold); margin-bottom: 30px; font-family: 'Prata'; }
+        .committee-box b { color: white; display: block; margin-bottom: 5px; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px; }
 
-        /* Navigation Bar */
-        .nav-bar { width: 100%; padding: 15px 0; background: rgba(0,0,0,0.8); position: fixed; top: 0; z-index: 1000; display: flex; justify-content: center; gap: 30px; border-bottom: 1px solid var(--gold); }
-        .nav-bar a { color: white; text-decoration: none; font-family: 'Cinzel'; letter-spacing: 2px; font-size: 0.8rem; }
+        #fw-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2500; }
     </style>
 </head>
 <body>
 
 <div id="intro-overlay">
-    <div id="line1" class="credit-line" style="color: var(--gold);">GIKAN SA GAMUT, TUBTOB SA LANGIT</div>
-    <div id="line2" class="credit-line" style="color: var(--aqua);">A SAZON FAMILY PRODUCTION</div>
-    <div id="line3" class="credit-line" style="color: var(--silver);">MARZON HOTEL, KALIBO, AKLAN | JULY 23-24, 2027</div>
-    <div id="line4" class="credit-line" style="color: var(--blue); font-weight: bold;">PRESENT</div>
+    <div id="l1" class="credit-line" style="color: var(--gold); font-family: 'Cinzel Decorative'; font-size: 2.5rem;">GIKAN SA GAMUT, TUBTOB SA LANGIT</div>
+    <div id="l2" class="credit-line" style="color: var(--aqua); font-family: 'Prata'; font-size: 1.8rem;">A SAZON FAMILY PRODUCTION</div>
+    <div id="l3" class="credit-line" style="color: var(--silver); font-size: 1.2rem;">MARZON HOTEL, KALIBO, AKLAN | JULY 23-24, 2027</div>
+    <div id="l4" class="credit-line" style="color: var(--blue); font-family: 'Playfair Display'; font-size: 3rem;">PRESENT</div>
     <button id="enter-btn">CLICK TO ENTER</button>
 </div>
 
-<button id="audio-control">MUTE ANTHEM</button>
+<button id="audio-btn">MUTE ANTHEM</button>
 <canvas id="fw-canvas"></canvas>
 
-<div class="page-content" id="main-content">
-    <nav class="nav-bar"><a href="index.html">HOME</a><a href="mailto:maemiliapalma@yahoo.com">SEND PHOTOS</a></nav>
+<div id="main-content">
+    <nav><a href="index.html">HOME</a><a href="https://www.facebook.com/messages/t/2007378753379015">JOIN GROUP</a></nav>
 
-    <div class="banner-container">
-        <div class="main-cover"></div>
-        <div class="elders-row">
+    <div class="hero-banner">
+        <div class="banner-img"></div>
+        <div class="elders">
             <div class="elder-card"><h2>Tereso Sazon</h2><p>(Lolo Isok)</p></div>
             <div class="elder-card"><h2>Teofista Sazon</h2><p>(Lola Pistang)</p></div>
         </div>
+
+        <div class="itinerary-card">
+            <h3>EVENT ITINERARY</h3>
+            <div class="day-box">
+                <h4>July 22: Early Arrivals</h4>
+                <p>Check-in & Pre-registration / Welcome Dinner for early arrivals.</p>
+            </div>
+            <div class="day-box">
+                <h4>Day 1 (July 23): Event Proper</h4>
+                <p>Registration & Breakfast / Fellowship / Opening Programme / Luncheon / Games / Presentations / Dinner Gala / Fireworks Display</p>
+            </div>
+            <div class="day-box">
+                <h4>Day 2 (July 24): Thanksgiving</h4>
+                <p>Breakfast / Thanksgiving Programme / Community Outreach / Farewell.</p>
+            </div>
+        </div>
     </div>
 
-    <div class="branch-grid">
-        <a href="#" class="branch-card tier-5" style="--hover-color: #ff4d4d;"><h3>Serafin</h3><span class="nickname">(Lolo Apin)</span></a>
-        <a href="#" class="branch-card tier-5" style="--hover-color: #4da6ff;"><h3>Monserat</h3><span class="nickname">(Lola Monching)</span></a>
-        <a href="#" class="branch-card tier-5" style="--hover-color: #4dff88;"><h3>Felomina</h3><span class="nickname">(Lola Mining)</span></a>
-        <a href="#" class="branch-card tier-5" style="--hover-color: #ffcc4d;"><h3>Estrella</h3><span class="nickname">(Lola Estring)</span></a>
-        <a href="#" class="branch-card tier-5" style="--hover-color: #ff4dff;"><h3>Gregorio</h3><span class="nickname">(Lolo Gorio)</span></a>
-        <a href="#" class="branch-card tier-5" style="--hover-color: #00f2fe;"><h3>Regino</h3><span class="nickname">(Lolo Taba)</span></a>
-        <a href="#" class="branch-card tier-5" style="--hover-color: #f6d365;"><h3>Maria</h3><span class="nickname">(Lola Maria)</span></a>
-        <a href="#" class="branch-card tier-5" style="--hover-color: #a8edea;"><h3>Concepcion</h3><span class="nickname">(Lola Moret)</span></a>
-        <a href="#" class="branch-card tier-5" style="--hover-color: #89f7fe;"><h3>Cezar</h3><span class="nickname">(Lolo Cezar)</span></a>
-        <a href="#" class="branch-card tier-5" style="--hover-color: #667eea;"><h3>Priscilla</h3><span class="nickname">(Lola Mamay)</span></a>
-        <a href="#" class="branch-card tier-3" style="--hover-color: #fa709a;"><h3>Gloria</h3><span class="nickname">(Lola Goly)</span></a>
-        <a href="#" class="branch-card tier-3" style="--hover-color: #fee140;"><h3>Reynaldo</h3><span class="nickname">(Lolo Lope)</span></a>
-        <a href="#" class="branch-card tier-3" style="--hover-color: #30cfd0;"><h3>Nilda</h3><span class="nickname">(Lola Nilda)</span></a>
+    <div class="branch-section">
+        <div class="branch-grid">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #ff4d4d;"><h3>Serafin</h3><span class="nickname">(Lolo Apin)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #4da6ff;"><h3>Monserat</h3><span class="nickname">(Lola Monching)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #4dff88;"><h3>Felomina</h3><span class="nickname">(Lola Mining)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #ffcc4d;"><h3>Estrella</h3><span class="nickname">(Lola Estring)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #ff4dff;"><h3>Gregorio</h3><span class="nickname">(Lolo Gorio)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #00f2fe;"><h3>Regino</h3><span class="nickname">(Lolo Taba)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #f6d365;"><h3>Maria</h3><span class="nickname">(Lola Maria)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #a8edea;"><h3>Concepcion</h3><span class="nickname">(Lola Moret)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #89f7fe;"><h3>Cezar</h3><span class="nickname">(Lolo Cezar)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #667eea;"><h3>Priscilla</h3><span class="nickname">(Lola Mamay)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-3" style="--hover-color: #fa709a;"><h3>Gloria</h3><span class="nickname">(Lola Goly)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-3" style="--hover-color: #fee140;"><h3>Reynaldo</h3><span class="nickname">(Lolo Lope)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-3" style="--hover-color: #30cfd0;"><h3>Nilda</h3><span class="nickname">(Lola Nilda)</span></a>
+        </div>
     </div>
+
+    <footer>
+        <div class="committee-grid">
+            <div class="committee-box"><b>Overall In-Charge</b> TBA</div>
+            <div class="committee-box"><b>Finance</b> TBA</div>
+            <div class="committee-box"><b>Food & Catering</b> TBA</div>
+            <div class="committee-box"><b>Logistics</b> TBA</div>
+        </div>
+        <p>Photos & Inquiries: <a href="mailto:maemiliapalma@yahoo.com" style="color:var(--gold);">maemiliapalma@yahoo.com</a></p>
+        <p>© 2027 SAZON GRAND FAMILY REUNION | MARZON HOTEL, KALIBO, AKLAN</p>
+    </footer>
 </div>
 
 <script>
-    const btn = document.getElementById('enter-btn');
     const anthem = new Audio('audio/sazon-full-anthem.mp3');
     const swell = new Audio('audio/prelude_swell.mp3');
     const shimmer = new Audio('audio/reveal_shimmer.mp3');
@@ -94,61 +135,47 @@
     const bHigh = new Audio('audio/firework_burst_high.mp3');
     const whistle = new Audio('audio/firework_whistle.mp3');
 
-    btn.onclick = async () => {
-        btn.style.display = 'none';
+    document.getElementById('enter-btn').onclick = async function() {
+        this.style.display = 'none';
         swell.play();
-        
-        const lines = ['line1', 'line2', 'line3', 'line4'];
+        const lines = ['l1', 'l2', 'l3', 'l4'];
         for (let id of lines) {
             let el = document.getElementById(id);
             el.style.display = 'block';
             await new Promise(r => setTimeout(r, 2000));
             el.style.display = 'none';
         }
-
         shimmer.play();
         document.getElementById('intro-overlay').style.display = 'none';
-        document.getElementById('main-content').style.visibility = 'visible';
-        
-        // Fireworks Start (5 Seconds)
-        startFireworks();
-        setTimeout(() => { 
-            stopFireworks(); 
-            anthem.play(); 
-        }, 5000);
+        const content = document.getElementById('main-content');
+        content.style.visibility = 'visible';
+        content.style.opacity = '1';
+        startFW();
+        setTimeout(() => { stopFW(); anthem.play(); }, 5000);
     };
 
-    // Mute Toggle Logic
-    document.getElementById('audio-control').onclick = (e) => {
+    document.getElementById('audio-btn').onclick = function() {
         anthem.muted = !anthem.muted;
-        e.target.innerText = anthem.muted ? "UNMUTE ANTHEM" : "MUTE ANTHEM";
+        this.innerText = anthem.muted ? "UNMUTE ANTHEM" : "MUTE ANTHEM";
     };
 
-    // Fireworks Logic (Canvas)
     const canvas = document.getElementById('fw-canvas');
     const ctx = canvas.getContext('2d');
-    let fwActive = false;
-
-    function startFireworks() {
-        fwActive = true;
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        whistle.play();
-        animateFW();
-        setInterval(() => { if(fwActive) { bLow.play(); bHigh.play(); }}, 1000);
+    let fwOn = false;
+    function startFW() {
+        fwOn = true; canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        whistle.play(); drawFW();
+        setInterval(() => { if(fwOn) { bLow.play(); bHigh.play(); }}, 1200);
     }
-    function stopFireworks() { fwActive = false; ctx.clearRect(0,0,canvas.width,canvas.height); }
-    
-    function animateFW() {
-        if(!fwActive) return;
-        ctx.fillStyle = 'rgba(0,0,0,0.2)';
-        ctx.fillRect(0,0,canvas.width, canvas.height);
-        // Simple spark effect
-        for(let i=0; i<10; i++){
+    function stopFW() { fwOn = false; ctx.clearRect(0,0,canvas.width,canvas.height); }
+    function drawFW() {
+        if(!fwOn) return;
+        ctx.fillStyle = 'rgba(0,0,0,0.1)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+        for(let i=0; i<15; i++) {
             ctx.fillStyle = `hsl(${Math.random()*360}, 100%, 50%)`;
-            ctx.fillRect(Math.random()*canvas.width, Math.random()*canvas.height, 4, 4);
+            ctx.beginPath(); ctx.arc(Math.random()*canvas.width, Math.random()*canvas.height, 3, 0, Math.PI*2); ctx.fill();
         }
-        requestAnimationFrame(animateFW);
+        requestAnimationFrame(drawFW);
     }
 </script>
 </body>
