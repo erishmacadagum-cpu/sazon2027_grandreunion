@@ -67,6 +67,7 @@
     <footer>Marzon Hotel Kalibo - Aklan | #SAZON2027GRANDREUNION</footer>
 
     <script>
+        // Points to your renamed 30-second file
         const teaserAudio = new Audio('audio/teaser_jingle.mp3'); 
         teaserAudio.preload = 'auto';
 
@@ -77,7 +78,7 @@
         const box = document.getElementById('battlecry-box');
         const enterBtn = document.getElementById('enter-heritage');
 
-        // THE UPDATED THUNDEROUS HEARTBEAT SFX
+        // THE THUNDEROUS HEARTBEAT SFX
         function playCinematicBoom() {
             const context = new (window.AudioContext || window.webkitAudioContext)();
             const strike = (time, freq, volume) => {
@@ -94,11 +95,9 @@
                 osc.stop(time + 2.5);
             };
 
-            // Double Thump Logic
             strike(context.currentTime, 55, 0.9); // Deepest first hit
             strike(context.currentTime + 0.35, 35, 0.7); // Second echo hit
             
-            // Metallic shimmer to add "edge"
             const shimmer = context.createOscillator();
             const shimGain = context.createGain();
             shimmer.type = 'triangle';
@@ -125,6 +124,7 @@
             content.style.display = 'flex';
             runBattlecry();
 
+            // Climax at 30 seconds
             setTimeout(() => {
                 bg.style.opacity = '0'; 
                 box.style.display = 'none';
