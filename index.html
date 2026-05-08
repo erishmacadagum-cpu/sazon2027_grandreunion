@@ -3,339 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sazon 2027 | The Grand Reunion</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Sazon 2027 | Grand Family Reunion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&family=Prata&family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-deep: #050812;
-            --bg-accent: #0A1128;
-            --accent-vibrant: #FF7F50;
-            --gold-leaf: #FFD700;
-            --silver-mist: #F0F0F0;
-            --glass: rgba(255, 255, 255, 0.05);
+        :root { 
+            --gold: #d4af37; 
+            --navy: #001b3a; 
+            --luminous-blue: #00e5ff; 
         }
+        body, html { margin: 0; padding: 0; height: 100%; background: var(--navy); color: white; font-family: 'Montserrat', sans-serif; overflow: hidden; }
 
-        body, html { margin: 0; padding: 0; background: var(--bg-deep); color: var(--silver-mist); font-family: 'Montserrat', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+        /* Video/Image Background */
+        .bg-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; overflow: hidden; }
+        .bg-container img { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; filter: brightness(0.8); }
 
-        /* --- UI ELEMENTS --- */
-        #mute-toggle { position: fixed; bottom: 25px; right: 25px; z-index: 1100; background: var(--glass); border: 1px solid var(--gold-leaf); color: var(--gold-leaf); width: 50px; height: 50px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(10px); display: none; font-size: 1.2rem; }
-        canvas#fireworks-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; }
+        /* Content Overlay */
+        .overlay { position: relative; z-index: 10; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: rgba(0, 27, 58, 0.4); padding: 20px; }
 
-        /* --- THE MOON LOGO (FIXED) --- */
-        .branded-moon { 
-            position: absolute; 
-            top: 10px; 
-            left: 5px; 
-            width: 185px; 
-            height: 185px; 
-            z-index: 100; 
-            border-radius: 50%; 
-            overflow: hidden; 
-            box-shadow: 0 0 30px var(--gold-leaf); 
-            border: none; 
-        }
-        .branded-moon img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* --- CINEMATIC INTRO --- */
-        #intro-curtain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-deep); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 2s ease; }
-        #motto-text { font-family: 'Cinzel', serif; color: var(--gold-leaf); text-align: center; letter-spacing: 6px; opacity: 0; transform: scale(0.9); transition: all 3s ease-out; }
-        .production-credits { color: var(--silver-mist); font-size: 0.8rem; letter-spacing: 4px; margin-bottom: 20px; text-transform: uppercase; opacity: 0.7; }
-        .start-btn { padding: 18px 50px; background: transparent; border: 2px solid var(--accent-vibrant); color: var(--accent-vibrant); text-transform: uppercase; letter-spacing: 5px; cursor: pointer; border-radius: 50px; margin-top: 40px; transition: 0.3s; font-weight: 600; }
-        .start-btn:hover { background: var(--accent-vibrant); color: white; box-shadow: 0 0 20px var(--accent-vibrant); }
-
-        /* --- MAIN BANNER --- */
-        .banner { position: relative; height: 100dvh; width: 100%; display: flex; justify-content: center; align-items: center; opacity: 0; transition: opacity 3s ease; overflow: hidden; }
-        .banner.active { opacity: 1; }
-        .banner-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/cover.jpeg') center/cover no-repeat; z-index: 1; filter: brightness(0.4); }
+        h2 { font-weight: 200; letter-spacing: 8px; margin-bottom: 10px; font-size: clamp(0.8rem, 2vw, 1.2rem); text-transform: uppercase; color: var(--gold); }
+        h1 { font-family: 'Cinzel Decorative', cursive; font-size: clamp(2rem, 8vw, 5rem); margin: 0; letter-spacing: 5px; color: white; text-shadow: 0 0 20px rgba(0,0,0,0.5); }
         
-        .timer-container { position: relative; z-index: 20; display: flex; gap: 20px; background: rgba(0,0,0,0.65); padding: 30px; border-radius: 20px; border: 1px solid var(--gold-leaf); backdrop-filter: blur(12px); }
-        .time-box { text-align: center; min-width: 80px; }
-        .time-val { display: block; font-size: 2.5rem; color: var(--gold-leaf); font-family: 'Cinzel', serif; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
-        .time-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--silver-mist); }
-
-        /* --- SECTIONS --- */
-        .section-padding { padding: 100px 20px; position: relative; z-index: 2; text-align: center; }
-        .patriarch-matriarch { max-width: 1000px; margin: 0 auto 80px; display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; }
-        .elder-card { background: var(--bg-accent); border: 1px solid var(--gold-leaf); padding: 30px; border-radius: 15px; width: 400px; text-align: center; transition: 0.3s; }
+        .tagline { font-family: 'Prata', serif; font-size: clamp(1rem, 3vw, 1.8rem); margin-top: 10px; color: #7fffd4; font-style: italic; }
         
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 40px auto; }
-        .branch-card { background: var(--glass); border: 1px solid rgba(255,255,255,0.1); padding: 40px; border-radius: 25px; transition: 0.4s; backdrop-filter: blur(5px); }
+        .event-details { margin-top: 40px; font-weight: 400; letter-spacing: 3px; font-size: clamp(0.7rem, 1.5vw, 1rem); border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); padding: 15px 30px; }
 
-        /* --- FOOTER --- */
-        footer { background: #02040a; padding: 80px 20px; border-top: 1px solid var(--gold-leaf); text-align: center; }
-        .rsvp-btn { padding: 15px 40px; background: var(--accent-vibrant); color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; letter-spacing: 2px; }
+        /* Button Styling */
+        .cta-btn { margin-top: 50px; padding: 15px 40px; border: 2px solid var(--luminous-blue); background: transparent; color: var(--luminous-blue); text-decoration: none; font-weight: 600; letter-spacing: 4px; transition: 0.4s; animation: pulseBlue 2s infinite; }
+        .cta-btn:hover { background: var(--luminous-blue); color: var(--navy); box-shadow: 0 0 30px var(--luminous-blue); }
 
-        h1, h2, h3 { font-family: 'Cinzel', serif; color: var(--gold-leaf); }
+        @keyframes pulseBlue { 0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(0, 229, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); } }
+
+        footer { position: absolute; bottom: 30px; width: 100%; text-align: center; font-size: 0.6rem; letter-spacing: 2px; color: rgba(255,255,255,0.4); z-index: 10; }
     </style>
 </head>
 <body>
 
-    <canvas id="fireworks-canvas"></canvas>
-    <button id="mute-toggle" onclick="toggleMute()">🔊</button>
-
-    <div id="intro-curtain">
-        <p class="production-credits">A Sazon Family Production</p>
-        <div id="motto-text">
-            <h1>GIKAN SA GAMUT,<br>TUBTOB SA LANGIT</h1>
-            <p style="font-size: 1.2rem; margin-top: 20px; letter-spacing: 3px;">The 2027 Grand Reunion</p>
-        </div>
-        <button class="start-btn" onclick="runReveal()">Enter the Legacy</button>
+    <div class="bg-container">
+        <img src="images/heritage-banner.jpg" alt="Sazon Heritage">
     </div>
 
-    <section class="banner" id="main-banner">
-        <div class="banner-bg"></div>
+    <div class="overlay">
+        <h2>Save the Date</h2>
+        <h1>SAZON 2027</h1>
+        <div class="tagline">"Gikan sa Gamut, Tubtob sa Langit"</div>
         
-        <div class="branded-moon">
-            <img src="images/moon.png" alt="Sazon Logo">
+        <div class="event-details">
+            JULY 23 - 24, 2027 • MARZON HOTEL KALIBO - AKLAN
         </div>
 
-        <div class="timer-container">
-           <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; max-width: 600px; margin: 30px auto; text-align: center;">
-    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px 15px; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.3);">
-        <div id="days" style="font-size: 42px; font-weight: bold; color: white; font-family: Arial Black, sans-serif;">00</div>
-        <div style="color: rgba(255,255,255,0.9); margin-top: 8px; font-size: 14px; font-weight: 600;">Days</div>
+        <a href="branches.html" class="cta-btn">EXPLORE THE BRANCHES</a>
     </div>
-    <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 25px 15px; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.3);">
-        <div id="hours" style="font-size: 42px; font-weight: bold; color: white; font-family: Arial Black, sans-serif;">00</div>
-        <div style="color: rgba(255,255,255,0.9); margin-top: 8px; font-size: 14px; font-weight: 600;">Hours</div>
-    </div>
-    <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 25px 15px; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.3);">
-        <div id="minutes" style="font-size: 42px; font-weight: bold; color: white; font-family: Arial Black, sans-serif;">00</div>
-        <div style="color: rgba(255,255,255,0.9); margin-top: 8px; font-size: 14px; font-weight: 600;">Minutes</div>
-    </div>
-    <div style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); padding: 25px 15px; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.3);">
-        <div id="seconds" style="font-size: 42px; font-weight: bold; color: white; font-family: Arial Black, sans-serif;">00</div>
-        <div style="color: rgba(255,255,255,0.9); margin-top: 8px; font-size: 14px; font-weight: 600;">Seconds</div>
-    </div>
-</div>
-
-<script>
-function updateCountdown() {
-    const eventDate = new Date('2027-07-23T08:00:00+08:00').getTime();
-    const now = new Date().getTime();
-    const distance = eventDate - now;
-    
-    if (distance < 0) {
-        document.getElementById('days').innerHTML = '00';
-        document.getElementById('hours').innerHTML = '00';
-        document.getElementById('minutes').innerHTML = '00';
-        document.getElementById('seconds').innerHTML = '00';
-        return;
-    }
-    
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
-    document.getElementById('days').innerHTML = days.toString().padStart(2, '0');
-    document.getElementById('hours').innerHTML = hours.toString().padStart(2, '0');
-    document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0');
-    document.getElementById('seconds').innerHTML = seconds.toString().padStart(2, '0');
-}
-
-updateCountdown();
-setInterval(updateCountdown, 1000);
-</script>
-        </div>
-    </section>
-
-    <section class="section-padding">
-        <div class="patriarch-matriarch">
-            <div class="elder-card"><h3>The Patriarch</h3><p>Tereso Sazon</p></div>
-            <div class="elder-card"><h3>The Matriarch</h3><p>Teofista Sazon</p></div>
-        </div>
-        <h2>The 13 Branches</h2>
-        <div class="grid-container">
-            <div style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
-    
-    <!-- Branch Grid -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 50px;">
-        
-        <!-- Branch 1 -->
-        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; color: white; transition: transform 0.3s;">
-            <div style="font-size: 48px; margin-bottom: 15px;">🌳</div>
-            <h3 style="font-size: 24px; margin-bottom: 10px; font-weight: bold;">Branch 1</h3>
-            <p style="font-size: 18px; opacity: 0.9; margin-bottom: 8px;">Leader: [Name Here]</p>
-            <p style="font-size: 14px; opacity: 0.7;">Members: [Number]</p>
-        </div>
-        
-        <!-- Branch 2 -->
-        <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; color: white;">
-            <div style="font-size: 48px; margin-bottom: 15px;">🌳</div>
-            <h3 style="font-size: 24px; margin-bottom: 10px; font-weight: bold;">Branch 2</h3>
-            <p style="font-size: 18px; opacity: 0.9; margin-bottom: 8px;">Leader: [Name Here]</p>
-            <p style="font-size: 14px; opacity: 0.7;">Members: [Number]</p>
-        </div>
-        
-        <!-- Branch 3 -->
-        <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; color: white;">
-            <div style="font-size: 48px; margin-bottom: 15px;">🌳</div>
-            <h3 style="font-size: 24px; margin-bottom: 10px; font-weight: bold;">Branch 3</h3>
-            <p style="font-size: 18px; opacity: 0.9; margin-bottom: 8px;">Leader: [Name Here]</p>
-            <p style="font-size: 14px; opacity: 0.7;">Members: [Number]</p>
-        </div>
-        
-        <!-- Branch 4 -->
-        <div style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; color: white;">
-            <div style="font-size: 48px; margin-bottom: 15px;">🌳</div>
-            <h3 style="font-size: 24px; margin-bottom: 10px; font-weight: bold;">Branch 4</h3>
-            <p style="font-size: 18px; opacity: 0.9; margin-bottom: 8px;">Leader: [Name Here]</p>
-            <p style="font-size: 14px; opacity: 0.7;">Members: [Number]</p>
-        </div>
-        
-        <!-- Branch 5 -->
-        <div style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; color: white;">
-            <div style="font-size: 48px; margin-bottom: 15px;">🌳</div>
-            <h3 style="font-size: 24px; margin-bottom: 10px; font-weight: bold;">Branch 5</h3>
-            <p style="font-size: 18px; opacity: 0.9; margin-bottom: 8px;">Leader: [Name Here]</p>
-            <p style="font-size: 14px; opacity: 0.7;">Members: [Number]</p>
-        </div>
-        
-        <!-- Branch 6 -->
-        <div style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; color: white;">
-            <div style="font-size: 48px; margin-bottom: 15px;">🌳</div>
-            <h3 style="font-size: 24px; margin-bottom: 10px; font-weight: bold;">Branch 6</h3>
-            <p style="font-size: 18px; opacity: 0.9; margin-bottom: 8px;">Leader: [Name Here]</p>
-            <p style="font-size: 14px; opacity: 0.7;">Members: [Number]</p>
-        </div>
-        
-        <!-- Branch 7 -->
-        <div style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; color: #333;">
-            <div style="font-size: 48px; margin-bottom: 15px;">🌳</div>
-            <h3 style="font-size: 24px; margin-bottom: 10px; font-weight: bold;">Branch 7</h3>
-            <p style="font-size: 18px; opacity: 0.9; margin-bottom: 8px;">Leader: [Name Here]</p>
-            <p style="font-size: 14px; opacity: 0.7;">Members: [Number]</p>
-        </div>
-        
-        <!-- Branch 8 -->
-        <div style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; color: #333;">
-            <div style="font-size: 48px; margin-bottom: 15px;">🌳</div>
-            <h3 style="font-size: 24px; margin-bottom: 10px; font-weight: bold;">Branch 8</h3>
-            <p style="font-size: 18px; opacity: 0.9; margin-bottom: 8px;">Leader: [Name Here]</p>
-            <p style="font-size: 14px; opacity: 0.7;">Members: [Number]</p>
-        </div>
-        
-        <!-- Branch 9 -->
-        <div style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; color: #333;">
-            <div style="font-size: 48px; margin-bottom: 15px;">🌳</div>
-            <h3 style="font-size: 24px; margin-bottom: 10px; font-weight: bold;">Branch 9</h3>
-            <p style="font-size: 18px; opacity: 0.9; margin-bottom: 8px;">Leader: [Name Here]</p>
-            <p style="font-size: 14px; opacity: 0.7;">Members: [Number]</p>
-        </div>
-        
-        <!-- Branch 10 -->
-        <div style="background: linear-gradient(135deg, #ff6e7f 0%, #bfe9ff 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; color: white;">
-            <div style="font-size: 48px; margin-bottom: 15px;">🌳</div>
-            <h3 style="font-size: 24px; margin-bottom: 10px; font-weight: bold;">Branch 10</h3>
-            <p style="font-size: 18px; opacity: 0.9; margin-bottom: 8px;">Leader: [Name Here]</p>
-            <p style="font-size: 14px; opacity: 0.7;">Members: [Number]</p>
-        </div>
-        
-        <!-- Branch 11 -->
-        <div style="background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; color: #333;">
-            <div style="font-size: 48px; margin-bottom: 15px;">🌳</div>
-            <h3 style="font-size: 24px; margin-bottom: 10px; font-weight: bold;">Branch 11</h3>
-            <p style="font-size: 18px; opacity: 0.9; margin-bottom: 8px;">Leader: [Name Here]</p>
-            <p style="font-size: 14px; opacity: 0.7;">Members: [Number]</p>
-        </div>
-        
-        <!-- Branch 12 -->
-        <div style="background: linear-gradient(135deg, #f77062 0%, #fe5196 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; color: white;">
-            <div style="font-size: 48px; margin-bottom: 15px;">🌳</div>
-            <h3 style="font-size: 24px; margin-bottom: 10px; font-weight: bold;">Branch 12</h3>
-            <p style="font-size: 18px; opacity: 0.9; margin-bottom: 8px;">Leader: [Name Here]</p>
-            <p style="font-size: 14px; opacity: 0.7;">Members: [Number]</p>
-        </div>
-        
-        <!-- Branch 13 -->
-        <div style="background: linear-gradient(135deg, #c471f5 0%, #fa71cd 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; color: white;">
-            <div style="font-size: 48px; margin-bottom: 15px;">🌳</div>
-            <h3 style="font-size: 24px; margin-bottom: 10px; font-weight: bold;">Branch 13</h3>
-            <p style="font-size: 18px; opacity: 0.9; margin-bottom: 8px;">Leader: [Name Here]</p>
-            <p style="font-size: 14px; opacity: 0.7;">Members: [Number]</p>
-        </div>
-        
-    </div>
-    
-</div>
-        </div>
-    </section>
-
-    <section class="section-padding" style="background: var(--bg-accent);">
-        <h2>✈️ Travel & Location</h2>
-        <div style="max-width: 1000px; margin: 40px auto; height: 450px; border-radius: 20px; overflow: hidden; border: 1px solid var(--gold-leaf);">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3904.5381898748113!2d122.36214307584166!3d11.867451038166548!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33b00392f44704b1%3A0x6b8764023246f414!2sMarzon%20Hotel%20Kalibo!5e0!3m2!1sen!2sph!4v1715080000000!5m2!1sen!2sph" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-        </div>
-    </section>
 
     <footer>
-        <h2>Join the Celebration</h2>
-        <button class="rsvp-btn">ACCESS REGISTRATION FORM</button>
-        <p style="opacity: 0.5; margin-top: 50px;">© 2027 Sazon Grand Reunion | Kalibo, Aklan</p>
+        © 2027 SAZON FAMILY PRODUCTION | #SAZON2027GRANDREUNION
     </footer>
 
-    <audio id="snd-anthem" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
-    <audio id="fw-whistle" src="https://assets.mixkit.co/active_storage/sfx/2855/2855-preview.mp3"></audio>
-    <audio id="fw-high" src="https://assets.mixkit.co/active_storage/sfx/2850/2850-preview.mp3"></audio>
-
-    <script>
-        const canvas = document.getElementById('fireworks-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        let particles = [];
-        
-        function createBurst(x, y) {
-            for(let i=0; i<80; i++) {
-                particles.push({
-                    x, y,
-                    vX: (Math.random()-0.5)*20,
-                    vY: (Math.random()-0.5)*20,
-                    life: 1.5,
-                    color: Math.random() > 0.5 ? '#FFD700' : '#FF7F50',
-                    size: 2 + Math.random() * 3
-                });
-            }
-        }
-        
-        function animate() {
-            ctx.clearRect(0,0,canvas.width,canvas.height);
-            particles.forEach((p,i) => {
-                p.x += p.vX; p.y += p.vY; p.vY += 0.05; p.life -= 0.01;
-                ctx.fillStyle = p.color; ctx.globalAlpha = p.life;
-                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2); ctx.fill();
-                if(p.life <= 0) particles.splice(i, 1);
-            });
-            requestAnimationFrame(animate);
-        }
-        animate();
-
-        function runReveal() {
-            const anthem = document.getElementById('snd-anthem');
-            document.getElementById('intro-curtain').style.opacity = '0';
-            anthem.volume = 0.3; anthem.play();
-            setTimeout(() => {
-                document.getElementById('intro-curtain').style.display = 'none';
-                document.getElementById('main-banner').classList.add('active');
-                document.getElementById('mute-toggle').style.display = 'block';
-                createBurst(window.innerWidth/2, window.innerHeight/2);
-            }, 2000);
-        }
-
-        const target = new Date("July 23, 2027 08:00:00").getTime();
-        setInterval(() => {
-            const diff = target - new Date().getTime();
-            document.getElementById("days").innerText = String(Math.floor(diff / 86400000)).padStart(2,'0');
-            document.getElementById("hours").innerText = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,'0');
-            document.getElementById("mins").innerText = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
-            document.getElementById("secs").innerText = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
-        }, 1000);
-
-        function toggleMute() {
-            const anthem = document.getElementById('snd-anthem');
-            anthem.muted = !anthem.muted;
-            document.getElementById('mute-toggle').innerText = anthem.muted ? "🔇" : "🔊";
-        }
-    </script>
 </body>
 </html>
