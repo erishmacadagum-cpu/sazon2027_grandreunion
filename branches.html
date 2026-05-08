@@ -4,59 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sazon 2027 | The 13 Branches</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&family=Prata&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&family=Prata&family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #d4af37; --aqua: #7fffd4; --silver: #c0c0c0; --luminous-blue: #00e5ff; --charcoal: #121212; }
         body { margin: 0; padding: 0; background: var(--charcoal); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
 
-        /* Intro Overlay - Simple & Elegant */
+        /* Intro Overlay & Pulsing Button */
         #intro-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0a0a0a; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         .credit-line { font-family: 'Montserrat', sans-serif; font-weight: 200; letter-spacing: 5px; margin: 15px; display: none; text-transform: uppercase; }
-        #enter-btn { padding: 15px 45px; border: 1px solid var(--luminous-blue); background: transparent; color: var(--luminous-blue); font-family: 'Montserrat', sans-serif; letter-spacing: 3px; cursor: pointer; font-size: 1rem; transition: 0.5s; margin-top: 30px; }
-        #enter-btn:hover { background: var(--luminous-blue); color: black; box-shadow: 0 0 30px var(--luminous-blue); }
+        
+        #enter-btn { padding: 15px 45px; border: 1px solid var(--luminous-blue); background: transparent; color: var(--luminous-blue); font-family: 'Montserrat', sans-serif; letter-spacing: 3px; cursor: pointer; font-size: 1rem; position: relative; animation: pulseBlue 2s infinite; }
+        @keyframes pulseBlue { 0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(0, 229, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); } }
 
         /* Nav Bar - Right Aligned */
-        nav { width: 100%; padding: 25px 0; background: rgba(0,0,0,0.85); position: fixed; top: 0; z-index: 5000; display: flex; justify-content: flex-end; border-bottom: 1px solid rgba(212,175,55,0.3); }
-        nav a { color: var(--gold); text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 400; margin-right: 40px; font-size: 0.8rem; letter-spacing: 2px; }
+        nav { width: 100%; padding: 25px 0; background: rgba(0,0,0,0.85); position: fixed; top: 0; z-index: 5000; display: flex; justify-content: flex-end; border-bottom: 1px solid rgba(212,175,55,0.2); }
+        nav a { color: var(--gold); text-decoration: none; margin-right: 40px; font-size: 0.75rem; letter-spacing: 2px; }
         
-        /* Audio Control */
-        #audio-toggle { position: fixed; bottom: 20px; right: 20px; z-index: 6000; background: rgba(0,0,0,0.7); border: 1px solid var(--gold); color: var(--gold); padding: 10px 15px; cursor: pointer; font-size: 0.7rem; border-radius: 5px; }
+        #audio-toggle { position: fixed; bottom: 20px; right: 20px; z-index: 6000; background: rgba(0,0,0,0.7); border: 1px solid var(--gold); color: var(--gold); padding: 8px 12px; cursor: pointer; font-size: 0.6rem; border-radius: 4px; }
 
         /* Banner & Lowered Elders */
-        .hero-banner { position: relative; min-height: 100vh; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; padding-top: 150px; }
-        .banner-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/heritage-banner.jpg') no-repeat center center; background-size: cover; opacity: 0.3; z-index: 1; }
+        .hero-banner { position: relative; min-height: 100vh; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; padding-top: 100px; }
         
-        .elders-container { z-index: 10; display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; margin-bottom: 80px; }
-        .elder-box { width: 280px; height: 350px; border: 1px solid var(--gold); background: rgba(0,0,0,0.5); display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; box-sizing: border-box; text-align: center; backdrop-filter: blur(5px); }
-        .elder-box h2 { font-family: 'Prata', serif; color: var(--gold); margin: 0; font-size: 1.8rem; }
-        .elder-box p { font-size: 0.9rem; color: var(--silver); margin: 5px 0 0 0; }
+        /* HERITAGE BRIGHTNESS: Applied filter to brighten and set visibility */
+        .banner-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/heritage-banner.jpg') no-repeat center center; background-size: cover; opacity: 0.6; filter: brightness(1.2); z-index: 1; }
+        
+        /* Elders Hidden Strict - Fades in with Anthem */
+        #elders-reveal { display: none; opacity: 0; transition: opacity 3s ease-in; z-index: 10; gap: 40px; justify-content: center; flex-wrap: wrap; margin-bottom: 50px; }
+        .elder-box { width: 260px; height: 320px; border: 1px solid var(--gold); background: rgba(0,0,0,0.6); display: flex; flex-direction: column; justify-content: flex-end; padding: 25px; backdrop-filter: blur(5px); text-align: center; }
+        .elder-box h2 { font-family: 'Cinzel Decorative', cursive; color: var(--gold); margin: 0; font-size: 1.6rem; }
 
-        /* Branch Section (Layer 2) */
-        .branch-section { position: relative; z-index: 20; padding: 100px 20px; background: #0a0a0a; text-align: center; }
-        .branch-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1300px; margin: 0 auto; }
-        .branch-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.2); padding: 35px 20px; border-radius: 10px; text-decoration: none; transition: 0.4s; }
-        .tier-5 { flex: 1 1 calc(18% - 20px); min-width: 180px; }
-        .tier-3 { flex: 1 1 calc(30% - 20px); min-width: 300px; }
-        .branch-card:hover { transform: translateY(-10px); box-shadow: 0 0 40px var(--hover-color); border-color: var(--hover-color); background: rgba(255,255,255,0.06); }
-        .branch-card h3 { font-family: 'Prata'; color: white; margin: 0; font-size: 1.4rem; }
-        .nickname { display: block; font-size: 0.8rem; color: var(--silver); margin-top: 8px; font-style: italic; }
+        /* 5-5-3 Strict Grid (Forced Columns) */
+        .branch-section { padding: 100px 20px; background: #0a0a0a; text-align: center; z-index: 20; position: relative; }
+        
+        /* STRICT GRID - Math is forced here */
+        .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; max-width: 1250px; margin: 0 auto 20px auto; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
+        
+        .branch-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.15); padding: 30px 15px; border-radius: 8px; text-decoration: none; transition: 0.4s; text-align: center; }
+        .branch-card:hover { transform: translateY(-8px); box-shadow: 0 0 25px var(--hover-color); border-color: var(--hover-color); background: rgba(255,255,255,0.06); }
+        .branch-card h3 { font-family: 'Prata', serif; color: white; margin: 0; font-size: 1.3rem; }
+        .nickname { display: block; font-size: 0.8rem; color: var(--silver); margin-top: 5px; font-style: italic; }
 
-        /* Itinerary (Layer 3) */
-        .itinerary-section { padding: 80px 20px; background: #080808; display: flex; justify-content: center; }
-        .itinerary-card { max-width: 900px; width: 100%; border: 1px solid rgba(212,175,55,0.2); padding: 40px; background: rgba(255,255,255,0.02); border-radius: 20px; }
-        .itinerary-card h2 { font-family: 'Prata'; color: var(--gold); text-align: center; margin-bottom: 30px; letter-spacing: 3px; }
-        .day-row { margin-bottom: 25px; border-left: 2px solid var(--gold); padding-left: 20px; }
-        .day-row h4 { margin: 0; color: var(--gold); text-transform: uppercase; font-size: 0.9rem; }
-        .day-row p { margin: 5px 0 0 0; font-size: 0.85rem; color: var(--silver); line-height: 1.6; }
+        /* Itinerary Layer 3 (Lowered) */
+        .itinerary-section { padding: 120px 20px 80px 20px; background: #080808; display: flex; justify-content: center; z-index: 10; position: relative; }
+        .itinerary-card { max-width: 850px; width: 100%; border: 1px solid rgba(212,175,55,0.1); padding: 40px; background: rgba(255,255,255,0.01); border-radius: 15px; text-align: left; }
+        
+        /* Strictly Hidden Programme */
+        #programme-reveal { display: none; opacity: 0; transition: opacity 3s ease-in 1s; }
+        
+        .day-row { margin-bottom: 30px; border-left: 2px solid var(--gold); padding-left: 25px; }
+        .day-row h4 { color: var(--gold); margin: 0; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; }
+        .day-row p { color: var(--silver); font-size: 0.85rem; line-height: 1.7; margin: 8px 0 0 0; }
 
-        /* Map Section */
+        /* Map with Night Filter */
         .map-section { padding: 60px 20px; background: #050505; text-align: center; }
-        .map-container { width: 100%; max-width: 1000px; height: 450px; margin: 30px auto; border: 1px solid var(--gold); filter: grayscale(0.5) contrast(1.2); }
+        .map-container { width: 100%; max-width: 1000px; height: 400px; margin: 30px auto; border: 1px solid var(--gold); filter: invert(90%) hue-rotate(180deg) brightness(0.8) contrast(1.2); }
 
-        /* Committee Footer */
         footer { padding: 80px 20px; background: #000; border-top: 1px solid var(--gold); text-align: center; }
-        .committee-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-bottom: 50px; font-family: 'Prata'; color: var(--gold); }
-        .com-item b { display: block; color: var(--silver); font-family: 'Montserrat'; font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 5px; }
+        .committee-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-bottom: 40px; color: var(--gold); font-family: 'Prata'; }
+        .com-item b { display: block; color: var(--silver); font-family: 'Montserrat'; font-size: 0.65rem; text-transform: uppercase; margin-bottom: 4px; }
 
         #fw-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 8000; }
         #main-content { display: none; }
@@ -65,10 +71,10 @@
 <body>
 
 <div id="intro-overlay">
-    <div id="line1" class="credit-line" style="color:var(--gold);">Gikan sa Gamut, Tubtob sa Langit</div>
-    <div id="line2" class="credit-line" style="color:var(--aqua);">A Sazon Family Production</div>
-    <div id="line3" class="credit-line" style="color:var(--silver);">Marzon Hotel, Kalibo, Aklan | July 23-24, 2027</div>
-    <div id="line4" class="credit-line" style="color:var(--luminous-blue); font-weight:600;">Present</div>
+    <div id="l1" class="credit-line" style="color:var(--gold);">Gikan sa Gamut, Tubtob sa Langit</div>
+    <div id="l2" class="credit-line" style="color:var(--aqua);">A Sazon Family Production</div>
+    <div id="l3" class="credit-line" style="color:var(--silver);">Marzon Hotel, Kalibo, Aklan | July 23-24, 2027</div>
+    <div id="l4" class="credit-line" style="color:var(--luminous-blue); font-weight:600;">Present</div>
     <button id="enter-btn">CLICK TO ENTER</button>
 </div>
 
@@ -76,148 +82,155 @@
 <canvas id="fw-canvas"></canvas>
 
 <div id="main-content">
-    <nav>
-        <a href="index.html">HOME</a>
-        <a href="https://www.facebook.com/messages/t/2007378753379015">JOIN GROUP</a>
-    </nav>
+    <nav><a href="index.html">HOME</a><a href="https://www.facebook.com/messages/t/2007378753379015">JOIN GROUP</a></nav>
 
     <div class="hero-banner">
         <div class="banner-img"></div>
-        <div class="elders-container">
+        <div id="elders-reveal">
             <div class="elder-box"><h2>Tereso Sazon</h2><p>(Lolo Isok)</p></div>
             <div class="elder-box"><h2>Teofista Sazon</h2><p>(Lola Pistang)</p></div>
         </div>
     </div>
 
     <div class="branch-section">
-        <div class="branch-grid">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #ff4d4d;"><h3>Serafin</h3><span class="nickname">(Lolo Apin)</span></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #4da6ff;"><h3>Monserat</h3><span class="nickname">(Lola Monching)</span></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #4dff88;"><h3>Felomina</h3><span class="nickname">(Lola Mining)</span></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #ffcc4d;"><h3>Estrella</h3><span class="nickname">(Lola Estring)</span></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #ff4dff;"><h3>Gregorio</h3><span class="nickname">(Lolo Gorio)</span></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #00f2fe;"><h3>Regino</h3><span class="nickname">(Lolo Taba)</span></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #f6d365;"><h3>Maria</h3><span class="nickname">(Lola Maria)</span></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #a8edea;"><h3>Concepcion</h3><span class="nickname">(Lola Moret)</span></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #89f7fe;"><h3>Cezar</h3><span class="nickname">(Lolo Cezar)</span></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #667eea;"><h3>Priscilla</h3><span class="nickname">(Lola Mamay)</span></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-3" style="--hover-color: #fa709a;"><h3>Gloria</h3><span class="nickname">(Lola Goly)</span></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-3" style="--hover-color: #fee140;"><h3>Reynaldo</h3><span class="nickname">(Lolo Lope)</span></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-3" style="--hover-color: #30cfd0;"><h3>Nilda</h3><span class="nickname">(Lola Nilda)</span></a>
+        <div class="grid-5"> <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #ff4d4d;"><h3>Serafin</h3><span class="nickname">(Lolo Apin)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #4da6ff;"><h3>Monserat</h3><span class="nickname">(Lola Monching)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #4dff88;"><h3>Felomina</h3><span class="nickname">(Lola Mining)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #ffcc4d;"><h3>Estrella</h3><span class="nickname">(Lola Estring)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #ff4dff;"><h3>Gregorio</h3><span class="nickname">(Lolo Gorio)</span></a>
+        </div>
+        <div class="grid-5"> <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #00f2fe;"><h3>Regino</h3><span class="nickname">(Lolo Taba)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #f6d365;"><h3>Maria</h3><span class="nickname">(Lola Maria)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #a8edea;"><h3>Concepcion</h3><span class="nickname">(Lola Moret)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #89f7fe;"><h3>Cezar</h3><span class="nickname">(Lolo Cezar)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #667eea;"><h3>Priscilla</h3><span class="nickname">(Lola Mamay)</span></a>
+        </div>
+        <div class="grid-3"> <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #fa709a;"><h3>Gloria</h3><span class="nickname">(Lola Goly)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #fee140;"><h3>Reynaldo</h3><span class="nickname">(Lolo Lope)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #30cfd0;"><h3>Nilda</h3><span class="nickname">(Lola Nilda)</span></a>
         </div>
     </div>
 
     <div class="itinerary-section">
         <div class="itinerary-card">
-            <h2>PROGRAMME OF ACTIVITIES</h2>
-            <div class="day-row">
-                <h4>July 22: Early Arrivals</h4>
-                <p>Check-in & Pre-registration / Welcome Dinner for family arriving ahead of schedule.</p>
-            </div>
-            <div class="day-row">
-                <h4>Day 1 (July 23): The Celebration</h4>
-                <p>Registration & Breakfast / Fellowship / Opening Ceremony / Luncheon / Games / Family Presentations / Dinner Gala / Grand Fireworks Display</p>
-            </div>
-            <div class="day-row">
-                <h4>Day 2 (July 24): Thanksgiving</h4>
-                <p>Farewell Breakfast / Thanksgiving Service / Community Outreach Activity / Farewell Hugs.</p>
+            <h2 style="font-family:'Cinzel Decorative'; text-align:center;">📅 ITINERARY</h2>
+            <div id="programme-reveal">
+                <div class="day-row"><h4>🌅 July 22: Pre-Event</h4><p>Check-in & Pre-registration / Welcome Dinner.</p></div>
+                <div class="day-row"><h4>🎶 Day 1 (July 23): Grand Gala</h4><p>Fellowship / Programme / 🍴 Luncheon / Presentations / Dinner Gala / 🎇 Fireworks Display.</p></div>
+                <div class="day-row"><h4>🙏 Day 2 (July 24): Thanksgiving</h4><p>Thanksgiving Service / Outreach / Farewell.</p></div>
             </div>
         </div>
     </div>
 
     <div class="map-section">
-        <h2 style="font-family:'Prata'; color:var(--gold);">THE VENUE</h2>
-        <p style="font-size:0.8rem; color:var(--silver);">Marzon Hotel, Kalibo, Aklan</p>
-        <div class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3905.8115668953184!2d122.36873537583626!3d11.63606694270144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a3ce4608c02c63%3A0xc074092b70f20958!2sMarzon%20Hotel%20Kalibo!5e0!3m2!1sen!2sph!4v1715180000000!5m2!1sen!2sph" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-        </div>
+        <div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3896.220194689408!2d122.36630041481665!3d11.710777991689711!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33b8606411516e53%3A0x6e902df5ac742457!2sMarzon%20Hotel%20Kalibo!5e0!3m2!1sen!2sph!4v1698765432101!5m2!1sen!2sph" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
     </div>
 
     <footer>
         <div class="committee-grid">
             <div class="com-item"><b>Overall In-Charge</b>Fr. Tudd Belandres</div>
-            <div class="com-item"><b>Finance</b>TBA</div>
-            <div class="com-item"><b>Food & Catering</b>TBA</div>
-            <div class="com-item"><b>Logistics</b>TBA</div>
+            <div class="com-item"><b>Finance</b>TBA</div><div class="com-item"><b>Food</b>TBA</div><div class="com-item"><b>Logistics</b>TBA</div>
         </div>
-        <p style="font-size:0.7rem; color:var(--silver); letter-spacing:1px;">Send Photos: <a href="mailto:maemiliapalma@yahoo.com" style="color:var(--gold);">maemiliapalma@yahoo.com</a></p>
-        <p style="margin-top:20px; font-size:0.6rem; color:rgba(255,255,255,0.3);">© 2027 SAZON GRAND FAMILY REUNION | GIKAN SA GAMUT, TUBTOB SA LANGIT</p>
+        <p style="font-size:0.65rem; color:rgba(255,255,255,0.4);">© 2027 SAZON FAMILY | maemiliapalma@yahoo.com</p>
     </footer>
 </div>
 
 <script>
-    const anthem = new Audio('audio/sazon-full-anthem.mp3');
-    const swell = new Audio('audio/prelude_swell.mp3');
-    const shimmer = new Audio('audio/reveal_shimmer.mp3');
-    const bLow = new Audio('audio/firework_burst_low.mp3');
-    const bHigh = new Audio('audio/firework_burst_high.mp3');
-    const whistle = new Audio('audio/firework_whistle.mp3');
+    const sounds = {
+        swell: new Audio('audio/prelude_swell.mp3'),
+        shimmer: new Audio('audio/reveal_shimmer.mp3'),
+        anthem: new Audio('audio/sazon-full-anthem.mp3'),
+        low: new Audio('audio/firework_burst_low.mp3'),
+        high: new Audio('audio/firework_burst_high.mp3'),
+        whistle: new Audio('audio/firework_whistle.mp3')
+    };
 
-    document.getElementById('enter-btn').onclick = async function() {
+    document.getElementById('enter-btn').onclick = function() {
+        // MOBILE UNLOCK (Strict Method): Load all audio to bypass phone mute blocks
+        Object.values(sounds).forEach(s => { s.load(); });
+        
         this.style.display = 'none';
-        swell.play();
-        const lines = ['line1', 'line2', 'line3', 'line4'];
-        for(let id of lines) {
-            let el = document.getElementById(id);
-            el.style.display = 'block';
-            await new Promise(r => setTimeout(r, 2000));
-            el.style.display = 'none';
+        sounds.swell.play();
+        const lines = ['l1', 'l2', 'l3', 'l4'];
+        
+        // Use recursive timeout for strict credit sequencing
+        function playLines(index) {
+            if(index < lines.length) {
+                let el = document.getElementById(lines[index]);
+                el.style.display = 'block';
+                setTimeout(() => {
+                    el.style.display = 'none';
+                    playLines(index + 1);
+                }, 2000);
+            } else {
+                launchReveal();
+            }
         }
-        shimmer.play();
+        playLines(0);
+    };
+
+    function launchReveal() {
+        sounds.shimmer.play();
         document.getElementById('intro-overlay').style.display = 'none';
         document.getElementById('main-content').style.display = 'block';
+        
         startFireworks();
-        setTimeout(() => { stopFireworks(); anthem.play(); }, 5000);
-    };
+        
+        // ANTHEM START & STRICT REVEAL (Elders/Programme)
+        setTimeout(() => { 
+            stopFireworks();
+            // FADE IN ANTHEM
+            sounds.anthem.volume = 0; sounds.anthem.play();
+            let vol = 0;
+            const fader = setInterval(() => {
+                if(vol < 1) { vol += 0.1; sounds.anthem.volume = Math.min(vol, 1); }
+                else clearInterval(fader);
+            }, 200);
+
+            // STRICT REVEAL (Force Display & Fade)
+            const elders = document.getElementById('elders-reveal');
+            const prog = document.getElementById('programme-reveal');
+            
+            // Step 1: Force Display Block
+            elders.style.display = 'flex';
+            prog.style.display = 'block';
+            
+            // Step 2: Tiny delay to allow display to register, then trigger opacity fade
+            setTimeout(() => {
+                elders.style.opacity = '1';
+                prog.style.opacity = '1';
+            }, 50);
+        }, 5000);
+    }
 
     document.getElementById('audio-toggle').onclick = function() {
-        anthem.muted = !anthem.muted;
-        this.innerText = anthem.muted ? "UNMUTE ANTHEM" : "MUTE ANTHEM";
+        sounds.anthem.muted = !sounds.anthem.muted;
+        this.innerText = sounds.anthem.muted ? "UNMUTE ANTHEM" : "MUTE ANTHEM";
     };
 
-    // Festive Visual Fireworks Logic
+    // Fireworks Logic
     const canvas = document.getElementById('fw-canvas');
     const ctx = canvas.getContext('2d');
-    let fwActive = false;
-    let particles = [];
-
+    let fwActive = false, particles = [];
     function startFireworks() {
         fwActive = true; canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        whistle.play();
-        update();
-        const interval = setInterval(() => {
-            if(!fwActive) { clearInterval(interval); return; }
-            createBlast();
-            bLow.play(); bHigh.play();
-        }, 800);
+        sounds.whistle.play(); update();
+        setInterval(() => { if(fwActive){ sounds.low.play(); createBlast(); }}, 1000);
     }
-    function stopFireworks() { fwActive = false; particles = []; ctx.clearRect(0,0,canvas.width,canvas.height); }
-
+    function stopFireworks() { fwActive = false; }
     function createBlast() {
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * (canvas.height / 2);
-        const color = `hsl(${Math.random() * 360}, 100%, 50%)`;
-        for(let i=0; i<40; i++) {
-            particles.push({
-                x: x, y: y,
-                vx: Math.cos(i) * Math.random() * 8,
-                vy: Math.sin(i) * Math.random() * 8,
-                life: 1.0,
-                color: color
-            });
-        }
+        const x = Math.random()*canvas.width, y = Math.random()*(canvas.height/2);
+        const color = `hsl(${Math.random()*360}, 100%, 60%)`;
+        for(let i=0; i<30; i++) particles.push({x, y, vx:Math.cos(i)*Math.random()*6, vy:Math.sin(i)*Math.random()*6, life:1.0, color});
     }
-
     function update() {
-        if(!fwActive && particles.length === 0) return;
-        ctx.fillStyle = 'rgba(0,0,0,0.15)';
-        ctx.fillRect(0,0,canvas.width,canvas.height);
-        particles.forEach((p, index) => {
-            p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.life -= 0.015;
-            ctx.fillStyle = p.color;
-            ctx.globalAlpha = p.life;
-            ctx.beginPath(); ctx.arc(p.x, p.y, 4, 0, Math.PI*2); ctx.fill();
-            if(p.life <= 0) particles.splice(index, 1);
+        if(!fwActive && particles.length===0) return;
+        ctx.fillStyle = 'rgba(18,18,18,0.2)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+        particles.forEach((p,i) => {
+            p.x+=p.vx; p.y+=p.vy; p.vy+=0.04; p.life-=0.02;
+            ctx.fillStyle = p.color; ctx.globalAlpha = p.life;
+            ctx.beginPath(); ctx.arc(p.x, p.y, 3, 0, Math.PI*2); ctx.fill();
+            if(p.life<=0) particles.splice(i,1);
         });
         requestAnimationFrame(update);
     }
