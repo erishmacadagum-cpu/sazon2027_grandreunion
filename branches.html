@@ -108,10 +108,9 @@
         <div class="timer-container">
             
             
-            <div class="countdown" id="countdown">
-                <div class="time-box"><span class="time-val" id="days">00</span><span class="time-label">Days</span></div>
+           
                 <div class="time-box"><span class="time-val" id="hours">00</span><span class="time-label">Hrs</span></div>
-                <div class="time-box"><span class="time-val" id="mins">00</span><span class="time-label">Mins</span></div>
+               <div class="countdown" id="countdown" style="justify-content: center;">
                 <div class="time-box"><span class="time-val" id="secs">00</span><span class="time-label">Secs</span></div>
             </div>
         </div>
@@ -128,7 +127,7 @@
 
     <script>
         // --- COUNTDOWN LOGIC ---
-        // Set the reunion date: July 23, 2027
+        // Set the reunion date: July 23, 2027    
         const reunionDate = new Date("July 23, 2027 08:00:00").getTime();
 
         const updateCountdown = () => {
