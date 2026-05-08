@@ -17,13 +17,13 @@
         }
         body { margin: 0; padding: 0; background: var(--navy); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
 
-        /* Intro Overlay - Specific Credit Colors */
+        /* Intro Overlay */
         #intro-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000814; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; box-sizing: border-box; }
         .credit-line { font-family: 'Montserrat', sans-serif; font-weight: 200; letter-spacing: 5px; margin: 15px; display: none; text-transform: uppercase; font-size: 1.2rem; }
         #enter-btn { padding: 15px 45px; border: 2px solid var(--luminous-blue); background: transparent; color: var(--luminous-blue); font-family: 'Montserrat', sans-serif; letter-spacing: 3px; cursor: pointer; font-size: 1rem; position: relative; animation: pulseBlue 2s infinite; margin-top: 30px; }
         @keyframes pulseBlue { 0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(0, 229, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); } }
 
-        /* Nav Bar - Right Aligned */
+        /* Nav Bar */
         nav { width: 100%; padding: 25px 0; background: rgba(0, 8, 20, 0.9); position: fixed; top: 0; z-index: 5000; display: flex; justify-content: flex-end; border-bottom: 1px solid var(--gold); }
         nav a { color: var(--gold); text-decoration: none; margin-right: 40px; font-size: 0.75rem; letter-spacing: 2px; font-weight: 600; }
         #audio-toggle { position: fixed; bottom: 20px; right: 20px; z-index: 6000; background: var(--gold); color: var(--navy); border: none; padding: 10px 15px; cursor: pointer; font-size: 0.6rem; font-weight: bold; border-radius: 4px; }
@@ -32,7 +32,6 @@
         .hero-banner { position: relative; min-height: 100vh; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; padding-top: 80px; }
         .banner-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/heritage-banner.jpg') no-repeat center center; background-size: cover; opacity: 0.65; filter: brightness(1.1); z-index: 1; }
         
-        /* Elders Strict Reveal */
         #elders-reveal { display: none; opacity: 0; transition: opacity 3s ease-in; z-index: 10; gap: 30px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
         .elder-box { width: 250px; height: 320px; border: 2px solid var(--gold); background: rgba(0, 27, 58, 0.85); display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; backdrop-filter: blur(8px); text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
         .elder-box h2 { font-family: 'Cinzel Decorative', cursive; color: var(--gold); margin: 0; font-size: 1.6rem; }
@@ -41,15 +40,14 @@
         .branch-section { padding: 80px 20px; background: #001226; text-align: center; z-index: 20; position: relative; }
         .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; max-width: 1250px; margin: 0 auto 15px auto; }
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; max-width: 850px; margin: 0 auto; }
-        
-        /* Mobile Grid Adjustment */
         @media (max-width: 800px) { .grid-5, .grid-3 { grid-template-columns: repeat(2, 1fr); } }
         
-        .branch-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(212, 175, 55, 0.2); padding: 30px 10px; border-radius: 8px; text-decoration: none; transition: 0.4s; text-align: center; }
+        .branch-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(212, 175, 55, 0.2); padding: 25px 10px; border-radius: 8px; text-decoration: none; transition: 0.4s; text-align: center; color: white; }
         .branch-card:hover { transform: translateY(-10px); box-shadow: 0 0 35px var(--hover-color); border-color: var(--hover-color); background: rgba(255, 255, 255, 0.1); }
-        .branch-card h3 { font-family: 'Prata', serif; color: white; margin: 0; font-size: 1.3rem; }
+        .branch-card h3 { font-family: 'Prata', serif; margin: 0; font-size: 1.2rem; }
+        .nickname { display: block; font-size: 0.75rem; color: var(--silver); margin-top: 5px; font-style: italic; }
 
-        /* Itinerary - Crisp Contrast */
+        /* Itinerary */
         .itinerary-section { padding: 100px 20px; background: var(--fresh-white); display: flex; justify-content: center; color: var(--navy); }
         .itinerary-card { max-width: 850px; width: 100%; border: 2px solid var(--gold); padding: 50px 30px; background: white; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
         #programme-reveal { display: none; opacity: 0; transition: opacity 3s ease-in 1s; }
@@ -65,6 +63,8 @@
         /* Credits Footer */
         footer { padding: 80px 20px; background: #000814; border-top: 2px solid var(--gold); text-align: center; line-height: 2; }
         .credits-text { font-family: 'Prata', serif; color: var(--gold); font-size: 0.85rem; }
+        .credits-text b { color: white; }
+        .glory-tag { color: var(--aqua); font-family: 'Montserrat', sans-serif; letter-spacing: 3px; font-weight: 600; margin-top: 20px; display: block; }
         .copyright { font-size: 0.7rem; color: rgba(255,255,255,0.3); margin-top: 30px; letter-spacing: 2px; }
 
         #fw-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 8000; }
@@ -97,23 +97,23 @@
 
     <div class="branch-section">
         <div class="grid-5">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #ff4d4d;"><h3>Serafin</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #4da6ff;"><h3>Monserat</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #4dff88;"><h3>Felomina</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #ffcc4d;"><h3>Estrella</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #ff4dff;"><h3>Gregorio</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #ff4d4d;"><h3>Serafin</h3><span class="nickname">(Lolo Apin)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #4da6ff;"><h3>Monserat</h3><span class="nickname">(Lola Monching)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #4dff88;"><h3>Felomina</h3><span class="nickname">(Lola Mining)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #ffcc4d;"><h3>Estrella</h3><span class="nickname">(Lola Estring)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #ff4dff;"><h3>Gregorio</h3><span class="nickname">(Lolo Gorio)</span></a>
         </div>
         <div class="grid-5">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #00f2fe;"><h3>Regino</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #f6d365;"><h3>Maria</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #a8edea;"><h3>Concepcion</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #89f7fe;"><h3>Cezar</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #667eea;"><h3>Priscilla</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #00f2fe;"><h3>Regino</h3><span class="nickname">(Lolo Taba)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #f6d365;"><h3>Maria</h3><span class="nickname">(Lola Maria)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #a8edea;"><h3>Concepcion</h3><span class="nickname">(Lola Moret)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #89f7fe;"><h3>Cezar</h3><span class="nickname">(Lolo Cezar)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #667eea;"><h3>Priscilla</h3><span class="nickname">(Lola Mamay)</span></a>
         </div>
         <div class="grid-3">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #fa709a;"><h3>Gloria</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #fee140;"><h3>Reynaldo</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #30cfd0;"><h3>Nilda</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #fa709a;"><h3>Gloria</h3><span class="nickname">(Lola Goly)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #fee140;"><h3>Reynaldo</h3><span class="nickname">(Lolo Lope)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #30cfd0;"><h3>Nilda</h3><span class="nickname">(Lola Nilda)</span></a>
         </div>
     </div>
 
@@ -150,7 +150,8 @@
         <div class="credits-text">
             Overall In-Charge: <b>Fr. Tudd Belandres</b><br>
             Photos Curator: <b>maemiliapalma@yahoo.com</b><br>
-            Website Concepts: <b>Erish Sazon Macadag-om</b>
+            Website Concepts: <b>Erish Sazon Macadag-om</b><br>
+            <span class="glory-tag">TO GOD BE ALL THE GLORY</span>
         </div>
         <p class="copyright">
             © 2027 SAZON FAMILY PRODUCTION<br>
@@ -166,14 +167,11 @@
         shimmer: new Audio('audio/reveal_shimmer.mp3'),
         anthem: new Audio('audio/sazon-full-anthem.mp3'),
         low: new Audio('audio/firework_burst_low.mp3'),
-        high: new Audio('audio/firework_burst_high.mp3'),
         whistle: new Audio('audio/firework_whistle.mp3')
     };
 
     document.getElementById('enter-btn').onclick = function() {
-        // Mobile Unlock
         Object.values(sounds).forEach(s => { s.play(); s.pause(); s.currentTime = 0; });
-        
         this.style.display = 'none';
         sounds.swell.play();
         const lines = ['l1','l2','l3','l4'];
