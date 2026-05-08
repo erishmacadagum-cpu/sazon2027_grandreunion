@@ -12,59 +12,45 @@
         /* Intro Overlay & Pulsing Button */
         #intro-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0a0a0a; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         .credit-line { font-family: 'Montserrat', sans-serif; font-weight: 200; letter-spacing: 5px; margin: 15px; display: none; text-transform: uppercase; }
-        
         #enter-btn { padding: 15px 45px; border: 1px solid var(--luminous-blue); background: transparent; color: var(--luminous-blue); font-family: 'Montserrat', sans-serif; letter-spacing: 3px; cursor: pointer; font-size: 1rem; position: relative; animation: pulseBlue 2s infinite; }
         @keyframes pulseBlue { 0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(0, 229, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); } }
 
-        /* Nav Bar - Right Aligned */
+        /* Nav Bar */
         nav { width: 100%; padding: 25px 0; background: rgba(0,0,0,0.85); position: fixed; top: 0; z-index: 5000; display: flex; justify-content: flex-end; border-bottom: 1px solid rgba(212,175,55,0.2); }
         nav a { color: var(--gold); text-decoration: none; margin-right: 40px; font-size: 0.75rem; letter-spacing: 2px; }
-        
         #audio-toggle { position: fixed; bottom: 20px; right: 20px; z-index: 6000; background: rgba(0,0,0,0.7); border: 1px solid var(--gold); color: var(--gold); padding: 8px 12px; cursor: pointer; font-size: 0.6rem; border-radius: 4px; }
 
-        /* Banner & Lowered Elders */
+        /* Banner & Elders */
         .hero-banner { position: relative; min-height: 100vh; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; padding-top: 100px; }
-        
-        /* HERITAGE BRIGHTNESS: Applied filter to brighten and set visibility */
         .banner-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/heritage-banner.jpg') no-repeat center center; background-size: cover; opacity: 0.6; filter: brightness(1.2); z-index: 1; }
         
-        /* Elders Hidden Strict - Fades in with Anthem */
         #elders-reveal { display: none; opacity: 0; transition: opacity 3s ease-in; z-index: 10; gap: 40px; justify-content: center; flex-wrap: wrap; margin-bottom: 50px; }
         .elder-box { width: 260px; height: 320px; border: 1px solid var(--gold); background: rgba(0,0,0,0.6); display: flex; flex-direction: column; justify-content: flex-end; padding: 25px; backdrop-filter: blur(5px); text-align: center; }
         .elder-box h2 { font-family: 'Cinzel Decorative', cursive; color: var(--gold); margin: 0; font-size: 1.6rem; }
 
-        /* 5-5-3 Strict Grid (Forced Columns) */
+        /* 5-5-3 Grid */
         .branch-section { padding: 100px 20px; background: #0a0a0a; text-align: center; z-index: 20; position: relative; }
-        
-        /* STRICT GRID - Math is forced here */
         .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; max-width: 1250px; margin: 0 auto 20px auto; }
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
+        @media (max-width: 900px) { .grid-5, .grid-3 { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); } }
         
-        .branch-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.15); padding: 30px 15px; border-radius: 8px; text-decoration: none; transition: 0.4s; text-align: center; }
-        .branch-card:hover { transform: translateY(-8px); box-shadow: 0 0 25px var(--hover-color); border-color: var(--hover-color); background: rgba(255,255,255,0.06); }
+        .branch-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.15); padding: 30px 15px; border-radius: 8px; text-decoration: none; transition: 0.4s; }
+        .branch-card:hover { transform: translateY(-8px); box-shadow: 0 0 25px var(--hover-color); border-color: var(--hover-color); }
         .branch-card h3 { font-family: 'Prata', serif; color: white; margin: 0; font-size: 1.3rem; }
-        .nickname { display: block; font-size: 0.8rem; color: var(--silver); margin-top: 5px; font-style: italic; }
 
-        /* Itinerary Layer 3 (Lowered) */
-        .itinerary-section { padding: 120px 20px 80px 20px; background: #080808; display: flex; justify-content: center; z-index: 10; position: relative; }
-        .itinerary-card { max-width: 850px; width: 100%; border: 1px solid rgba(212,175,55,0.1); padding: 40px; background: rgba(255,255,255,0.01); border-radius: 15px; text-align: left; }
-        
-        /* Strictly Hidden Programme */
+        /* Itinerary */
+        .itinerary-section { padding: 120px 20px 80px 20px; background: #080808; display: flex; justify-content: center; }
+        .itinerary-card { max-width: 850px; width: 100%; border: 1px solid rgba(212,175,55,0.1); padding: 40px; background: rgba(255,255,255,0.01); border-radius: 15px; }
         #programme-reveal { display: none; opacity: 0; transition: opacity 3s ease-in 1s; }
-        
-        .day-row { margin-bottom: 30px; border-left: 2px solid var(--gold); padding-left: 25px; }
-        .day-row h4 { color: var(--gold); margin: 0; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; }
-        .day-row p { color: var(--silver); font-size: 0.85rem; line-height: 1.7; margin: 8px 0 0 0; }
+        .day-row { margin-bottom: 30px; border-left: 2px solid var(--gold); padding-left: 25px; text-align: left; }
+        .day-row h4 { color: var(--gold); margin: 0; font-size: 0.9rem; letter-spacing: 1px; }
 
-        /* Map with Night Filter */
+        /* Map */
         .map-section { padding: 60px 20px; background: #050505; text-align: center; }
         .map-container { width: 100%; max-width: 1000px; height: 400px; margin: 30px auto; border: 1px solid var(--gold); filter: invert(90%) hue-rotate(180deg) brightness(0.8) contrast(1.2); }
 
         footer { padding: 80px 20px; background: #000; border-top: 1px solid var(--gold); text-align: center; }
-        .committee-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-bottom: 40px; color: var(--gold); font-family: 'Prata'; }
-        .com-item b { display: block; color: var(--silver); font-family: 'Montserrat'; font-size: 0.65rem; text-transform: uppercase; margin-bottom: 4px; }
-
-        #fw-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 8000; }
+        #fw-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 8000; transform: translateZ(0); }
         #main-content { display: none; }
     </style>
 </head>
@@ -83,7 +69,6 @@
 
 <div id="main-content">
     <nav><a href="index.html">HOME</a><a href="https://www.facebook.com/messages/t/2007378753379015">JOIN GROUP</a></nav>
-
     <div class="hero-banner">
         <div class="banner-img"></div>
         <div id="elders-reveal">
@@ -91,48 +76,41 @@
             <div class="elder-box"><h2>Teofista Sazon</h2><p>(Lola Pistang)</p></div>
         </div>
     </div>
-
     <div class="branch-section">
-        <div class="grid-5"> <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #ff4d4d;"><h3>Serafin</h3><span class="nickname">(Lolo Apin)</span></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #4da6ff;"><h3>Monserat</h3><span class="nickname">(Lola Monching)</span></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #4dff88;"><h3>Felomina</h3><span class="nickname">(Lola Mining)</span></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #ffcc4d;"><h3>Estrella</h3><span class="nickname">(Lola Estring)</span></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #ff4dff;"><h3>Gregorio</h3><span class="nickname">(Lolo Gorio)</span></a>
+        <div class="grid-5">
+            <a href="#" class="branch-card" style="--hover-color: #ff4d4d;"><h3>Serafin</h3><span class="nickname">(Lolo Apin)</span></a>
+            <a href="#" class="branch-card" style="--hover-color: #4da6ff;"><h3>Monserat</h3><span class="nickname">(Lola Monching)</span></a>
+            <a href="#" class="branch-card" style="--hover-color: #4dff88;"><h3>Felomina</h3><span class="nickname">(Lola Mining)</span></a>
+            <a href="#" class="branch-card" style="--hover-color: #ffcc4d;"><h3>Estrella</h3><span class="nickname">(Lola Estring)</span></a>
+            <a href="#" class="branch-card" style="--hover-color: #ff4dff;"><h3>Gregorio</h3><span class="nickname">(Lolo Gorio)</span></a>
         </div>
-        <div class="grid-5"> <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #00f2fe;"><h3>Regino</h3><span class="nickname">(Lolo Taba)</span></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #f6d365;"><h3>Maria</h3><span class="nickname">(Lola Maria)</span></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #a8edea;"><h3>Concepcion</h3><span class="nickname">(Lola Moret)</span></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #89f7fe;"><h3>Cezar</h3><span class="nickname">(Lolo Cezar)</span></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #667eea;"><h3>Priscilla</h3><span class="nickname">(Lola Mamay)</span></a>
+        <div class="grid-5">
+            <a href="#" class="branch-card" style="--hover-color: #00f2fe;"><h3>Regino</h3><span class="nickname">(Lolo Taba)</span></a>
+            <a href="#" class="branch-card" style="--hover-color: #f6d365;"><h3>Maria</h3><span class="nickname">(Lola Maria)</span></a>
+            <a href="#" class="branch-card" style="--hover-color: #a8edea;"><h3>Concepcion</h3><span class="nickname">(Lola Moret)</span></a>
+            <a href="#" class="branch-card" style="--hover-color: #89f7fe;"><h3>Cezar</h3><span class="nickname">(Lolo Cezar)</span></a>
+            <a href="#" class="branch-card" style="--hover-color: #667eea;"><h3>Priscilla</h3><span class="nickname">(Lola Mamay)</span></a>
         </div>
-        <div class="grid-3"> <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #fa709a;"><h3>Gloria</h3><span class="nickname">(Lola Goly)</span></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #fee140;"><h3>Reynaldo</h3><span class="nickname">(Lolo Lope)</span></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card" style="--hover-color: #30cfd0;"><h3>Nilda</h3><span class="nickname">(Lola Nilda)</span></a>
+        <div class="grid-3">
+            <a href="#" class="branch-card" style="--hover-color: #fa709a;"><h3>Gloria</h3><span class="nickname">(Lola Goly)</span></a>
+            <a href="#" class="branch-card" style="--hover-color: #fee140;"><h3>Reynaldo</h3><span class="nickname">(Lolo Lope)</span></a>
+            <a href="#" class="branch-card" style="--hover-color: #30cfd0;"><h3>Nilda</h3><span class="nickname">(Lola Nilda)</span></a>
         </div>
     </div>
-
     <div class="itinerary-section">
         <div class="itinerary-card">
             <h2 style="font-family:'Cinzel Decorative'; text-align:center;">📅 ITINERARY</h2>
             <div id="programme-reveal">
-                <div class="day-row"><h4>🌅 July 22: Pre-Event</h4><p>Check-in & Pre-registration / Welcome Dinner.</p></div>
-                <div class="day-row"><h4>🎶 Day 1 (July 23): Grand Gala</h4><p>Fellowship / Programme / 🍴 Luncheon / Presentations / Dinner Gala / 🎇 Fireworks Display.</p></div>
-                <div class="day-row"><h4>🙏 Day 2 (July 24): Thanksgiving</h4><p>Thanksgiving Service / Outreach / Farewell.</p></div>
+                <div class="day-row"><h4>🌅 July 22</h4><p>Check-in & Welcome Dinner.</p></div>
+                <div class="day-row"><h4>🎶 Day 1</h4><p>🍴 Luncheon / Gala Dinner / 🎇 Fireworks.</p></div>
+                <div class="day-row"><h4>🙏 Day 2</h4><p>Thanksgiving Service / Farewell.</p></div>
             </div>
         </div>
     </div>
-
     <div class="map-section">
-        <div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3896.220194689408!2d122.36630041481665!3d11.710777991689711!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33b8606411516e53%3A0x6e902df5ac742457!2sMarzon%20Hotel%20Kalibo!5e0!3m2!1sen!2sph!4v1698765432101!5m2!1sen!2sph" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
+        <div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m1" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
     </div>
-
-    <footer>
-        <div class="committee-grid">
-            <div class="com-item"><b>Overall In-Charge</b>Fr. Tudd Belandres</div>
-            <div class="com-item"><b>Finance</b>TBA</div><div class="com-item"><b>Food</b>TBA</div><div class="com-item"><b>Logistics</b>TBA</div>
-        </div>
-        <p style="font-size:0.65rem; color:rgba(255,255,255,0.4);">© 2027 SAZON FAMILY | maemiliapalma@yahoo.com</p>
-    </footer>
+    <footer><p>© 2027 SAZON FAMILY | maemiliapalma@yahoo.com</p></footer>
 </div>
 
 <script>
@@ -141,99 +119,67 @@
         shimmer: new Audio('audio/reveal_shimmer.mp3'),
         anthem: new Audio('audio/sazon-full-anthem.mp3'),
         low: new Audio('audio/firework_burst_low.mp3'),
-        high: new Audio('audio/firework_burst_high.mp3'),
         whistle: new Audio('audio/firework_whistle.mp3')
     };
 
     document.getElementById('enter-btn').onclick = function() {
-        // MOBILE UNLOCK (Strict Method): Load all audio to bypass phone mute blocks
-        Object.values(sounds).forEach(s => { s.load(); });
-        
+        Object.values(sounds).forEach(s => s.load());
         this.style.display = 'none';
         sounds.swell.play();
-        const lines = ['l1', 'l2', 'l3', 'l4'];
-        
-        // Use recursive timeout for strict credit sequencing
-        function playLines(index) {
-            if(index < lines.length) {
-                let el = document.getElementById(lines[index]);
+        let i = 0;
+        const lines = ['l1','l2','l3','l4'];
+        function showLines() {
+            if(i < lines.length) {
+                let el = document.getElementById(lines[i]);
                 el.style.display = 'block';
-                setTimeout(() => {
-                    el.style.display = 'none';
-                    playLines(index + 1);
-                }, 2000);
-            } else {
-                launchReveal();
-            }
+                setTimeout(() => { el.style.display = 'none'; i++; showLines(); }, 2000);
+            } else { startTheShow(); }
         }
-        playLines(0);
+        showLines();
     };
 
-    function launchReveal() {
+    function startTheShow() {
         sounds.shimmer.play();
         document.getElementById('intro-overlay').style.display = 'none';
         document.getElementById('main-content').style.display = 'block';
-        
         startFireworks();
-        
-        // ANTHEM START & STRICT REVEAL (Elders/Programme)
         setTimeout(() => { 
             stopFireworks();
-            // FADE IN ANTHEM
             sounds.anthem.volume = 0; sounds.anthem.play();
             let vol = 0;
-            const fader = setInterval(() => {
-                if(vol < 1) { vol += 0.1; sounds.anthem.volume = Math.min(vol, 1); }
-                else clearInterval(fader);
-            }, 200);
-
-            // STRICT REVEAL (Force Display & Fade)
-            const elders = document.getElementById('elders-reveal');
-            const prog = document.getElementById('programme-reveal');
-            
-            // Step 1: Force Display Block
-            elders.style.display = 'flex';
-            prog.style.display = 'block';
-            
-            // Step 2: Tiny delay to allow display to register, then trigger opacity fade
-            setTimeout(() => {
-                elders.style.opacity = '1';
-                prog.style.opacity = '1';
-            }, 50);
+            const fader = setInterval(() => { if(vol<1){ vol+=0.1; sounds.anthem.volume=vol; } else clearInterval(fader); }, 200);
+            const e = document.getElementById('elders-reveal'), p = document.getElementById('programme-reveal');
+            e.style.display = 'flex'; p.style.display = 'block';
+            setTimeout(() => { e.style.opacity = '1'; p.style.opacity = '1'; }, 100);
         }, 5000);
     }
 
-    document.getElementById('audio-toggle').onclick = function() {
-        sounds.anthem.muted = !sounds.anthem.muted;
-        this.innerText = sounds.anthem.muted ? "UNMUTE ANTHEM" : "MUTE ANTHEM";
-    };
-
-    // Fireworks Logic
     const canvas = document.getElementById('fw-canvas');
     const ctx = canvas.getContext('2d');
     let fwActive = false, particles = [];
     function startFireworks() {
         fwActive = true; canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         sounds.whistle.play(); update();
-        setInterval(() => { if(fwActive){ sounds.low.play(); createBlast(); }}, 1000);
+        const blastTimer = setInterval(() => { if(fwActive){ sounds.low.play(); createBlast(); } else clearInterval(blastTimer); }, 1000);
     }
     function stopFireworks() { fwActive = false; }
     function createBlast() {
         const x = Math.random()*canvas.width, y = Math.random()*(canvas.height/2);
         const color = `hsl(${Math.random()*360}, 100%, 60%)`;
-        for(let i=0; i<30; i++) particles.push({x, y, vx:Math.cos(i)*Math.random()*6, vy:Math.sin(i)*Math.random()*6, life:1.0, color});
+        for(let i=0; i<25; i++) particles.push({x, y, vx:Math.cos(i)*Math.random()*5, vy:Math.sin(i)*Math.random()*5, life:1.0, color});
     }
     function update() {
-        if(!fwActive && particles.length===0) return;
-        ctx.fillStyle = 'rgba(18,18,18,0.2)'; ctx.fillRect(0,0,canvas.width,canvas.height);
-        particles.forEach((p,i) => {
-            p.x+=p.vx; p.y+=p.vy; p.vy+=0.04; p.life-=0.02;
+        if(!fwActive && particles.length === 0) { ctx.clearRect(0,0,canvas.width,canvas.height); return; }
+        ctx.fillStyle = 'rgba(18,18,18,0.25)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+        for(let i = particles.length-1; i>=0; i--) {
+            let p = particles[i]; p.x+=p.vx; p.y+=p.vy; p.vy+=0.04; p.life-=0.02;
             ctx.fillStyle = p.color; ctx.globalAlpha = p.life;
-            ctx.beginPath(); ctx.arc(p.x, p.y, 3, 0, Math.PI*2); ctx.fill();
-            if(p.life<=0) particles.splice(i,1);
-        });
+            ctx.beginPath(); ctx.arc(p.x, p.y, 2.5, 0, Math.PI*2); ctx.fill();
+            if(p.life <= 0) particles.splice(i, 1);
+        }
         requestAnimationFrame(update);
     }
+    document.getElementById('audio-toggle').onclick = function() { sounds.anthem.muted = !sounds.anthem.muted; };
 </script>
 </body>
 </html>
