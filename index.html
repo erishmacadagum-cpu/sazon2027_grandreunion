@@ -38,7 +38,7 @@
         .time-num { display: block; font-size: 1.5rem; font-weight: 200; color: var(--gold); }
         .time-label { font-size: 0.45rem; letter-spacing: 2px; text-transform: uppercase; }
 
-        /* The Final Beacon */
+        /* Final Beacon */
         #enter-heritage { display: none; opacity: 0; transition: opacity 2s; margin-top: 20px; padding: 20px 60px; border: 1px solid var(--luminous-blue); background: transparent; color: var(--luminous-blue); text-decoration: none; font-weight: 600; letter-spacing: 6px; animation: pulseBlue 2s infinite; text-transform: uppercase; }
         @keyframes pulseBlue { 0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); } 70% { box-shadow: 0 0 0 25px rgba(0, 229, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); } }
 
@@ -67,7 +67,6 @@
     <footer>Marzon Hotel Kalibo - Aklan | #SAZON2027GRANDREUNION</footer>
 
     <script>
-        // Points to the 30-second Teaser file
         const teaserAudio = new Audio('audio/teaser_jingle.mp3'); 
         teaserAudio.preload = 'auto';
 
@@ -78,27 +77,45 @@
         const box = document.getElementById('battlecry-box');
         const enterBtn = document.getElementById('enter-heritage');
 
-        // Cinematic Bass Drop (Digital SFX)
+        // THE UPDATED THUNDEROUS HEARTBEAT SFX
         function playCinematicBoom() {
             const context = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = context.createOscillator();
-            const gain = context.createGain();
-            oscillator.type = 'sine';
-            oscillator.frequency.setValueAtTime(80, context.currentTime);
-            oscillator.frequency.exponentialRampToValueAtTime(0.01, context.currentTime + 1.5);
-            gain.gain.setValueAtTime(0.4, context.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, context.currentTime + 1.5);
-            oscillator.connect(gain);
-            gain.connect(context.destination);
-            oscillator.start();
-            oscillator.stop(context.currentTime + 1.5);
+            const strike = (time, freq, volume) => {
+                const osc = context.createOscillator();
+                const gain = context.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, time);
+                osc.frequency.exponentialRampToValueAtTime(0.01, time + 2.5);
+                gain.gain.setValueAtTime(volume, time);
+                gain.gain.exponentialRampToValueAtTime(0.001, time + 2.5);
+                osc.connect(gain);
+                gain.connect(context.destination);
+                osc.start(time);
+                osc.stop(time + 2.5);
+            };
+
+            // Double Thump Logic
+            strike(context.currentTime, 55, 0.9); // Deepest first hit
+            strike(context.currentTime + 0.35, 35, 0.7); // Second echo hit
+            
+            // Metallic shimmer to add "edge"
+            const shimmer = context.createOscillator();
+            const shimGain = context.createGain();
+            shimmer.type = 'triangle';
+            shimmer.frequency.setValueAtTime(120, context.currentTime);
+            shimGain.gain.setValueAtTime(0.08, context.currentTime);
+            shimGain.gain.linearRampToValueAtTime(0, context.currentTime + 3);
+            shimmer.connect(shimGain);
+            shimGain.connect(context.destination);
+            shimmer.start();
+            shimmer.stop(context.currentTime + 3);
         }
 
         document.getElementById('trigger-btn').onclick = function() {
             playCinematicBoom();
             
             setTimeout(() => {
-                teaserAudio.play().catch(e => console.log("Audio failed. Check file name."));
+                teaserAudio.play().catch(e => console.log("Audio failed."));
             }, 300);
 
             trigger.style.opacity = '0';
@@ -108,7 +125,6 @@
             content.style.display = 'flex';
             runBattlecry();
 
-            // At 30 Seconds: Fade out and show the "ENTER" beacon
             setTimeout(() => {
                 bg.style.opacity = '0'; 
                 box.style.display = 'none';
