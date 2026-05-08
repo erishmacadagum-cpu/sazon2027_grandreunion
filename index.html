@@ -13,52 +13,33 @@
         }
         body, html { margin: 0; padding: 0; height: 100%; background: var(--navy); color: white; font-family: 'Montserrat', sans-serif; overflow: hidden; }
 
-        /* Stage 1: The Clarion Call Button */
+        /* Stage 1: The Initial Gate */
         #hype-trigger { position: fixed; top:0; left:0; width:100%; height:100%; z-index: 10000; background: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; transition: opacity 2s; }
-        #trigger-btn { padding: 18px 45px; background: transparent; border: 1px solid var(--gold); color: var(--gold); cursor: pointer; letter-spacing: 6px; font-family: 'Montserrat'; text-transform: uppercase; font-size: 0.85rem; transition: 0.5s; }
-        #trigger-btn:hover { background: var(--gold); color: black; box-shadow: 0 0 20px var(--gold); }
+        #trigger-btn { padding: 18px 45px; background: transparent; border: 1px solid var(--gold); color: var(--gold); cursor: pointer; letter-spacing: 6px; font-family: 'Montserrat'; text-transform: uppercase; font-size: 0.85rem; transition: 0.5s; z-index: 10001; }
+        #trigger-btn:hover { background: var(--gold); color: black; box-shadow: 0 0 30px var(--gold); }
 
-        /* Background Layer */
+        /* The Blurred Backdrop */
         .bg-overlay { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
             background: linear-gradient(to bottom, rgba(0,8,20,0.9), rgba(0,8,20,0.3), rgba(0,8,20,0.95)),
                         url('images/memories.jpg') no-repeat center center; 
             background-size: cover;
-            filter: grayscale(100%) blur(20px);
-            z-index: 1;
-            opacity: 0;
-            transition: opacity 4s ease;
+            filter: grayscale(100%) blur(25px);
+            z-index: 1; opacity: 0; transition: opacity 4s ease;
         }
 
-        /* Content Layer */
-        .content { 
-            position: relative; z-index: 10; height: 100%; 
-            display: flex; flex-direction: column; justify-content: center; 
-            align-items: center; text-align: center; 
-            display: none; 
-        }
-
-        #battlecry-box { 
-            max-width: 85%; font-family: 'Prata', serif; font-size: clamp(1.4rem, 5vw, 2.5rem); 
-            color: #ffffff; line-height: 1.5; font-style: italic; 
-            min-height: 120px; transition: opacity 1.5s ease-in-out; opacity: 0;
-        }
+        /* Battlecry & Timer Content */
+        .content { position: relative; z-index: 10; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; display: none; }
+        #battlecry-box { max-width: 85%; font-family: 'Prata', serif; font-size: clamp(1.4rem, 5vw, 2.5rem); color: #ffffff; line-height: 1.5; font-style: italic; min-height: 120px; transition: opacity 1.5s ease; opacity: 0; }
 
         /* Subtle Timer */
-        #timer { display: flex; gap: 15px; margin-bottom: 60px; opacity: 0.6; }
+        #timer { display: flex; gap: 15px; margin-bottom: 60px; opacity: 0.6; transition: opacity 2s; }
         .time-block { text-align: center; border-bottom: 1px solid var(--gold); padding: 5px; min-width: 50px; }
         .time-num { display: block; font-size: 1.5rem; font-weight: 200; color: var(--gold); }
         .time-label { font-size: 0.45rem; letter-spacing: 2px; text-transform: uppercase; }
 
-        /* Final Beacon Button */
-        #enter-heritage { 
-            display: none; opacity: 0; transition: opacity 2s; 
-            margin-top: 20px; padding: 20px 60px; border: 1px solid var(--luminous-blue); 
-            background: transparent; color: var(--luminous-blue); text-decoration: none; 
-            font-weight: 600; letter-spacing: 6px; animation: pulseBlue 2s infinite; 
-            text-transform: uppercase;
-        }
-        
+        /* The Final Beacon */
+        #enter-heritage { display: none; opacity: 0; transition: opacity 2s; margin-top: 20px; padding: 20px 60px; border: 1px solid var(--luminous-blue); background: transparent; color: var(--luminous-blue); text-decoration: none; font-weight: 600; letter-spacing: 6px; animation: pulseBlue 2s infinite; text-transform: uppercase; }
         @keyframes pulseBlue { 0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); } 70% { box-shadow: 0 0 0 25px rgba(0, 229, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); } }
 
         footer { position: absolute; bottom: 25px; width: 100%; text-align: center; font-size: 0.6rem; letter-spacing: 4px; color: rgba(255,255,255,0.2); z-index: 10; }
@@ -79,59 +60,60 @@
             <div class="time-block"><span class="time-num" id="mins">00</span><span class="time-label">Mins</span></div>
             <div class="time-block"><span class="time-num" id="secs">00</span><span class="time-label">Secs</span></div>
         </div>
-
         <div id="battlecry-box"></div>
-
         <a href="branches.html" id="enter-heritage">ENTER THE HERITAGE</a>
     </div>
 
     <footer>Marzon Hotel Kalibo - Aklan | #SAZON2027GRANDREUNION</footer>
 
     <script>
-        // Use encodeURIComponent to handle the space in the filename automatically
-        const audioPath = 'audio/' + encodeURIComponent('Gikan_sa_Gamut 30secTEASER.mp3');
-        const jingle = new Audio(audioPath);
+        // Use the simplified filename
+        const jingle = new Audio('audio/jingle.mp3'); 
         jingle.preload = 'auto';
 
-        const messages = [
-            "We have missed HOME.",
-            "We have missed FAMILY.",
-            "The time has come...",
-            "To honor the Legacy."
-        ];
-
+        const messages = ["We have missed HOME.", "We have missed FAMILY.", "The time has come...", "To honor the Legacy."];
         const trigger = document.getElementById('hype-trigger');
         const bg = document.getElementById('bg');
         const content = document.getElementById('salvo-content');
         const box = document.getElementById('battlecry-box');
         const enterBtn = document.getElementById('enter-heritage');
 
+        // Cinematic Bass Drop Effect (No file needed)
+        function playCinematicBoom() {
+            const context = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = context.createOscillator();
+            const gain = context.createGain();
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(100, context.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(0.01, context.currentTime + 2);
+            gain.gain.setValueAtTime(0.5, context.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, context.currentTime + 2);
+            oscillator.connect(gain);
+            gain.connect(context.destination);
+            oscillator.start();
+            oscillator.stop(context.currentTime + 2);
+        }
+
         document.getElementById('trigger-btn').onclick = function() {
-            // Attempt to play audio immediately on click
-            const playPromise = jingle.play();
+            playCinematicBoom(); // Instant SFX
+            
+            // Short delay to let the boom hit before jingle swells
+            setTimeout(() => {
+                jingle.play().catch(e => console.log("Audio play blocked", e));
+            }, 300);
 
-            if (playPromise !== undefined) {
-                playPromise.then(_ => {
-                    console.log("Playback started successfully");
-                }).catch(error => {
-                    console.log("Playback failed. Check if file exists in the audio folder.");
-                });
-            }
-
-            // Begin Transitions
             trigger.style.opacity = '0';
-            setTimeout(() => trigger.style.display = 'none', 2000);
+            setTimeout(() => { trigger.style.display = 'none'; }, 2000);
             
             bg.style.opacity = '1';
             content.style.display = 'flex';
-
             runBattlecry();
 
-            // Climax at 30 seconds
+            // After 30s Jingle: Final Payoff
             setTimeout(() => {
                 bg.style.opacity = '0'; 
                 box.style.display = 'none';
-                document.getElementById('timer').style.opacity = '0.2';
+                document.getElementById('timer').style.opacity = '0.1';
                 enterBtn.style.display = 'inline-block';
                 setTimeout(() => enterBtn.style.opacity = '1', 100);
             }, 30000);
@@ -148,7 +130,6 @@
             }
         }
 
-        // Countdown Logic
         const targetDate = new Date("July 23, 2027 00:00:00").getTime();
         function updateTimer() {
             const distance = targetDate - new Date().getTime();
