@@ -6,197 +6,150 @@
     <title>Sazon 2027 | The 13 Branches</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --gold-leaf: #d4af37; --silver-mist: #a8ada9; --bg-deep: #02040a; }
-        body { margin: 0; padding: 0; background: var(--bg-deep); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+        :root { --gold: #d4af37; --aqua: #7fffd4; --silver: #a8ada9; --blue: #007bff; --bg-dark: #0a0a0a; }
+        body { margin: 0; padding: 0; background: var(--bg-dark); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
 
-        /* Navigation Bar */
-        .nav-bar { width: 100%; padding: 15px 0; background: rgba(0,0,0,0.9); position: fixed; top: 0; z-index: 1000; display: flex; justify-content: center; gap: 30px; border-bottom: 1px solid var(--gold-leaf); backdrop-filter: blur(10px); }
-        .nav-bar a { color: white; text-decoration: none; font-family: 'Cinzel', serif; letter-spacing: 2px; font-size: 0.7rem; transition: 0.3s; }
-        .nav-bar a:hover { color: var(--gold-leaf); }
+        /* Intro Overlay - Dark Charcoal */
+        #intro-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #121212; z-index: 3000; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .credit-line { font-family: 'Cinzel', serif; font-size: 2rem; display: none; margin: 10px; }
+        #enter-btn { padding: 15px 30px; border: 2px solid var(--gold); background: none; color: var(--gold); font-family: 'Cinzel'; cursor: pointer; font-size: 1.2rem; transition: 0.3s; margin-top: 20px; }
+        #enter-btn:hover { background: var(--gold); color: black; }
 
-        /* Opening Credits Overlay */
-        #intro-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 2000; display: flex; justify-content: center; align-items: center; text-align: center; }
-        .credit-text { font-family: 'Cinzel', serif; font-size: 2rem; color: var(--gold-leaf); display: none; text-shadow: 0 0 20px var(--gold-leaf); padding: 20px; }
+        /* Mute Toggle */
+        #audio-control { position: fixed; top: 20px; right: 20px; z-index: 2500; background: rgba(0,0,0,0.5); border: 1px solid var(--gold); color: white; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.8rem; }
 
-        /* Fireworks Canvas */
-        #fireworks-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1500; display: none; }
-
-        /* Banner & Header Section */
-        .header-section { position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 100px 20px 40px 20px; }
-        .banner-bg { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 70%; height: 70%; background: url('images/moon.png') no-repeat center center; background-size: contain; opacity: 0.2; z-index: 1; }
+        /* Main Sections */
+        .page-content { visibility: hidden; } /* Hidden until intro ends */
+        .banner-container { position: relative; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .main-cover { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/moon.png') no-repeat center center; background-size: cover; opacity: 0.3; z-index: 1; }
         
-        .elders-container { z-index: 10; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
-        .elder-card { border: 1px solid var(--gold-leaf); padding: 20px; border-radius: 10px; background: rgba(212, 175, 55, 0.05); text-align: center; min-width: 240px; }
-        .elder-card h2 { font-family: 'Cinzel', serif; color: var(--gold-leaf); margin: 0; font-size: 1.5rem; }
-
-        /* Schedule Card */
-        .schedule-card { z-index: 10; max-width: 800px; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.3); border-radius: 15px; padding: 30px; backdrop-filter: blur(10px); margin-bottom: 50px; }
-        .schedule-card h3 { font-family: 'Cinzel', serif; color: var(--gold-leaf); text-align: center; border-bottom: 1px solid rgba(212,175,55,0.2); padding-bottom: 10px; }
-        .day-box { margin-bottom: 20px; }
-        .day-box h4 { color: var(--gold-leaf); margin-bottom: 5px; text-transform: uppercase; font-size: 0.9rem; }
-        .day-box p { font-size: 0.8rem; color: var(--silver-mist); line-height: 1.6; margin: 0; }
+        .elders-row { z-index: 10; display: flex; gap: 40px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center; }
+        .elder-card { border: 1px solid var(--gold); padding: 20px; border-radius: 10px; background: rgba(212,175,55,0.1); backdrop-filter: blur(5px); text-align: center; }
+        .elder-card h2 { font-family: 'Cinzel'; color: var(--gold); margin: 0; }
 
         /* 5-5-3 Grid */
-        .branch-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; max-width: 1200px; margin: 0 auto 60px auto; padding: 0 20px; }
-        .branch-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 215, 0, 0.15); padding: 20px; border-radius: 12px; text-decoration: none; transition: 0.4s; text-align: center; }
-        .tier-5 { flex: 1 1 calc(18% - 15px); min-width: 160px; }
+        .branch-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; max-width: 1300px; margin: 0 auto 50px auto; padding: 0 20px; z-index: 10; position: relative; }
+        .branch-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,215,0,0.2); padding: 25px; border-radius: 12px; text-decoration: none; text-align: center; transition: 0.4s; }
+        .tier-5 { flex: 1 1 calc(18% - 15px); min-width: 170px; }
         .tier-3 { flex: 1 1 calc(30% - 15px); min-width: 250px; }
-        .branch-card:hover { transform: translateY(-8px); box-shadow: 0 0 25px var(--hover-color); border-color: var(--hover-color); }
-        .branch-card h3 { font-family: 'Cinzel', serif; color: #fff; margin: 0; font-size: 1.1rem; }
-        .nickname { display: block; color: var(--silver-mist); font-size: 0.75rem; margin: 5px 0 10px 0; }
-        .reg-link { font-size: 0.65rem; color: var(--gold-leaf); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
+        .branch-card:hover { transform: translateY(-10px); box-shadow: 0 0 30px var(--hover-color); border-color: var(--hover-color); }
+        .branch-card h3 { font-family: 'Cinzel'; color: white; margin: 0; }
+        .nickname { display: block; color: var(--silver); font-size: 0.8rem; margin: 5px 0 10px 0; font-style: italic; }
 
-        /* Maps and Info */
-        .venue-section { padding: 40px 20px; background: #050812; display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; border-top: 1px solid rgba(212,175,55,0.1); }
-        .map-box { width: 100%; max-width: 500px; height: 300px; border-radius: 15px; overflow: hidden; border: 1px solid var(--gold-leaf); }
-        .advisory-box { max-width: 500px; font-size: 0.8rem; color: var(--silver-mist); line-height: 1.6; }
+        /* Fireworks Canvas */
+        #fw-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2000; }
 
-        footer { padding: 60px 20px; background: #02040a; text-align: center; font-size: 0.75rem; border-top: 1px solid rgba(212,175,55,0.2); }
-        .committee-list { color: var(--gold-leaf); margin-bottom: 20px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        /* Navigation Bar */
+        .nav-bar { width: 100%; padding: 15px 0; background: rgba(0,0,0,0.8); position: fixed; top: 0; z-index: 1000; display: flex; justify-content: center; gap: 30px; border-bottom: 1px solid var(--gold); }
+        .nav-bar a { color: white; text-decoration: none; font-family: 'Cinzel'; letter-spacing: 2px; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-    <div id="intro-overlay"><div id="text-stage" class="credit-text"></div></div>
-    <canvas id="fireworks-canvas"></canvas>
+<div id="intro-overlay">
+    <div id="line1" class="credit-line" style="color: var(--gold);">GIKAN SA GAMUT, TUBTOB SA LANGIT</div>
+    <div id="line2" class="credit-line" style="color: var(--aqua);">A SAZON FAMILY PRODUCTION</div>
+    <div id="line3" class="credit-line" style="color: var(--silver);">MARZON HOTEL, KALIBO, AKLAN | JULY 23-24, 2027</div>
+    <div id="line4" class="credit-line" style="color: var(--blue); font-weight: bold;">PRESENT</div>
+    <button id="enter-btn">CLICK TO ENTER</button>
+</div>
 
-    <nav class="nav-bar">
-        <a href="index.html">HOME</a>
-        <a href="https://www.facebook.com/messages/t/2007378753379015">JOIN GROUP</a>
-        <a href="mailto:maemiliapalma@yahoo.com">SEND PHOTOS</a>
-    </nav>
+<button id="audio-control">MUTE ANTHEM</button>
+<canvas id="fw-canvas"></canvas>
 
-    <div class="header-section">
-        <div class="banner-bg"></div>
-        <div class="elders-container">
+<div class="page-content" id="main-content">
+    <nav class="nav-bar"><a href="index.html">HOME</a><a href="mailto:maemiliapalma@yahoo.com">SEND PHOTOS</a></nav>
+
+    <div class="banner-container">
+        <div class="main-cover"></div>
+        <div class="elders-row">
             <div class="elder-card"><h2>Tereso Sazon</h2><p>(Lolo Isok)</p></div>
             <div class="elder-card"><h2>Teofista Sazon</h2><p>(Lola Pistang)</p></div>
-        </div>
-
-        <div class="schedule-card">
-            <h3>SAVE THE DATE: ITINERARY</h3>
-            <div class="day-box">
-                <h4>Pre-Event (July 22, 2027)</h4>
-                <p>Early Arrival / Check-in & Pre-registration / Welcome Dinner for Early Birds</p>
-            </div>
-            <div class="day-box">
-                <h4>Day 1 (July 23, 2027)</h4>
-                <p>Registration & Breakfast / Fellowship / Opening Programme / Luncheon / Games / Presentations / Dinner Gala / Fireworks Display & Party</p>
-            </div>
-            <div class="day-box">
-                <h4>Day 2 (July 24, 2027)</h4>
-                <p>Breakfast & Catch-ups / Thanksgiving Programme / Community Outreach / Farewell</p>
-            </div>
         </div>
     </div>
 
     <div class="branch-grid">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #ff4d4d;"><h3>Serafin</h3><span class="nickname">(Lolo Apin)</span><span class="reg-link">Register →</span></a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #4da6ff;"><h3>Monserat</h3><span class="nickname">(Lola Monching)</span><span class="reg-link">Register →</span></a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #4dff88;"><h3>Felomina</h3><span class="nickname">(Lola Mining)</span><span class="reg-link">Register →</span></a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #ffcc4d;"><h3>Estrella</h3><span class="nickname">(Lola Estring)</span><span class="reg-link">Register →</span></a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #ff4dff;"><h3>Gregorio</h3><span class="nickname">(Lolo Gorio)</span><span class="reg-link">Register →</span></a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #00f2fe;"><h3>Regino</h3><span class="nickname">(Lolo Taba)</span><span class="reg-link">Register →</span></a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #f6d365;"><h3>Maria</h3><span class="nickname">(Lola Maria)</span><span class="reg-link">Register →</span></a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #a8edea;"><h3>Concepcion</h3><span class="nickname">(Lola Moret)</span><span class="reg-link">Register →</span></a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #89f7fe;"><h3>Cezar</h3><span class="nickname">(Lolo Cezar)</span><span class="reg-link">Register →</span></a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-5" style="--hover-color: #667eea;"><h3>Priscilla</h3><span class="nickname">(Lola Mamay)</span><span class="reg-link">Register →</span></a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-3" style="--hover-color: #fa709a;"><h3>Gloria</h3><span class="nickname">(Lola Goly)</span><span class="reg-link">Register →</span></a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-3" style="--hover-color: #fee140;"><h3>Reynaldo</h3><span class="nickname">(Lolo Lope)</span><span class="reg-link">Register →</span></a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-card tier-3" style="--hover-color: #30cfd0;"><h3>Nilda</h3><span class="nickname">(Lola Nilda)</span><span class="reg-link">Register →</span></a>
+        <a href="#" class="branch-card tier-5" style="--hover-color: #ff4d4d;"><h3>Serafin</h3><span class="nickname">(Lolo Apin)</span></a>
+        <a href="#" class="branch-card tier-5" style="--hover-color: #4da6ff;"><h3>Monserat</h3><span class="nickname">(Lola Monching)</span></a>
+        <a href="#" class="branch-card tier-5" style="--hover-color: #4dff88;"><h3>Felomina</h3><span class="nickname">(Lola Mining)</span></a>
+        <a href="#" class="branch-card tier-5" style="--hover-color: #ffcc4d;"><h3>Estrella</h3><span class="nickname">(Lola Estring)</span></a>
+        <a href="#" class="branch-card tier-5" style="--hover-color: #ff4dff;"><h3>Gregorio</h3><span class="nickname">(Lolo Gorio)</span></a>
+        <a href="#" class="branch-card tier-5" style="--hover-color: #00f2fe;"><h3>Regino</h3><span class="nickname">(Lolo Taba)</span></a>
+        <a href="#" class="branch-card tier-5" style="--hover-color: #f6d365;"><h3>Maria</h3><span class="nickname">(Lola Maria)</span></a>
+        <a href="#" class="branch-card tier-5" style="--hover-color: #a8edea;"><h3>Concepcion</h3><span class="nickname">(Lola Moret)</span></a>
+        <a href="#" class="branch-card tier-5" style="--hover-color: #89f7fe;"><h3>Cezar</h3><span class="nickname">(Lolo Cezar)</span></a>
+        <a href="#" class="branch-card tier-5" style="--hover-color: #667eea;"><h3>Priscilla</h3><span class="nickname">(Lola Mamay)</span></a>
+        <a href="#" class="branch-card tier-3" style="--hover-color: #fa709a;"><h3>Gloria</h3><span class="nickname">(Lola Goly)</span></a>
+        <a href="#" class="branch-card tier-3" style="--hover-color: #fee140;"><h3>Reynaldo</h3><span class="nickname">(Lolo Lope)</span></a>
+        <a href="#" class="branch-card tier-3" style="--hover-color: #30cfd0;"><h3>Nilda</h3><span class="nickname">(Lola Nilda)</span></a>
     </div>
+</div>
 
-    <div class="venue-section">
-        <div class="map-box">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3905.772097368565!2d122.37021577464295!3d11.69123014164136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a1e94444444445%3A0x7d9f7d6a59914444!2sMarzon%20Hotel%20Kalibo!5e0!3m2!1sen!2sph!4v1715200000000!5m2!1sen!2sph" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-        </div>
-        <div class="advisory-box">
-            <h4 style="color:var(--gold-leaf); text-transform:uppercase;">Travel Advisory & Tips</h4>
-            <p>• The hotel is just 10 minutes from Kalibo International Airport (KLO).<br>
-               • For family arriving from Boracay/Caticlan, public vans are available at the Jetty Port.<br>
-               • <b>Attire:</b> Please prepare your Luminous Blue Branch T-Shirts for Day 1 Activities.</p>
-        </div>
-    </div>
+<script>
+    const btn = document.getElementById('enter-btn');
+    const anthem = new Audio('audio/sazon-full-anthem.mp3');
+    const swell = new Audio('audio/prelude_swell.mp3');
+    const shimmer = new Audio('audio/reveal_shimmer.mp3');
+    const bLow = new Audio('audio/firework_burst_low.mp3');
+    const bHigh = new Audio('audio/firework_burst_high.mp3');
+    const whistle = new Audio('audio/firework_whistle.mp3');
 
-    <footer>
-        <div class="committee-list">
-            <span>Overall In-Charge: [Name Placeholder]</span>
-            <span>Registration: [Committee Name]</span>
-            <span>Food & Logistics: [Committee Name]</span>
-        </div>
-        <p>Photos/Inquiries: <a href="mailto:maemiliapalma@yahoo.com" style="color:var(--gold-leaf);">maemiliapalma@yahoo.com</a></p>
-        <p>&copy; 2027 SAZON GRAND FAMILY REUNION | GIKAN SA GAMUT, TUBTOB SA LANGIT</p>
-    </footer>
-
-    <script>
-        const introTexts = ["GIKAN SA GAMUT, TUBTOB SA LANGIT", "SAZON FAMILY PRODUCTIONS", "MARZON HOTEL, KALIBO, AKLAN", "JULY 23-24, 2027", "PRESENTING..."];
-        const stage = document.getElementById('text-stage');
-        const overlay = document.getElementById('intro-overlay');
-        const canvas = document.getElementById('fireworks-canvas');
-        const ctx = canvas.getContext('2d');
-
-        // Audio Setup
-        const sfxIntro = new Audio('audio/prelude_swell.mp3');
-        const sfxReveal = new Audio('audio/reveal_shimmer.mp3');
-        const sfxLow = new Audio('audio/firework_burst_low.mp3');
-        const sfxHigh = new Audio('audio/firework_burst_high.mp3');
-
-        function startFireworks() {
-            canvas.style.display = 'block';
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            let particles = [];
-            
-            function createParticle(x, y) {
-                for (let i = 0; i < 50; i++) {
-                    particles.push({
-                        x, y,
-                        vx: (Math.random() - 0.5) * 10,
-                        vy: (Math.random() - 0.5) * 10,
-                        alpha: 1,
-                        color: `hsl(${Math.random() * 360}, 100%, 50%)`
-                    });
-                }
-            }
-
-            function animate() {
-                ctx.fillStyle = 'rgba(0,0,0,0.1)';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                particles.forEach((p, i) => {
-                    p.x += p.vx; p.y += p.vy; p.alpha -= 0.01;
-                    ctx.fillStyle = p.color;
-                    ctx.globalAlpha = p.alpha;
-                    ctx.fillRect(p.x, p.y, 3, 3);
-                    if (p.alpha <= 0) particles.splice(i, 1);
-                });
-                if (particles.length > 0) requestAnimationFrame(animate);
-                else canvas.style.display = 'none';
-            }
-
-            setInterval(() => {
-                if (Math.random() > 0.7) {
-                    const x = Math.random() * canvas.width;
-                    const y = Math.random() * canvas.height / 2;
-                    createParticle(x, y);
-                    (Math.random() > 0.5 ? sfxLow : sfxHigh).play();
-                }
-            }, 500);
-            animate();
+    btn.onclick = async () => {
+        btn.style.display = 'none';
+        swell.play();
+        
+        const lines = ['line1', 'line2', 'line3', 'line4'];
+        for (let id of lines) {
+            let el = document.getElementById(id);
+            el.style.display = 'block';
+            await new Promise(r => setTimeout(r, 2000));
+            el.style.display = 'none';
         }
 
-        async function runIntro() {
-            sfxIntro.play();
-            for (let text of introTexts) {
-                stage.innerText = text; stage.style.display = 'block';
-                await new Promise(r => setTimeout(r, 2000));
-                stage.style.display = 'none'; await new Promise(r => setTimeout(r, 500));
-            }
-            sfxReveal.play();
-            overlay.style.transition = "opacity 2s"; overlay.style.opacity = "0";
-            setTimeout(() => { overlay.style.display = 'none'; startFireworks(); }, 2000);
-        }
+        shimmer.play();
+        document.getElementById('intro-overlay').style.display = 'none';
+        document.getElementById('main-content').style.visibility = 'visible';
+        
+        // Fireworks Start (5 Seconds)
+        startFireworks();
+        setTimeout(() => { 
+            stopFireworks(); 
+            anthem.play(); 
+        }, 5000);
+    };
 
-        window.onclick = () => { runIntro(); window.onclick = null; };
-    </script>
+    // Mute Toggle Logic
+    document.getElementById('audio-control').onclick = (e) => {
+        anthem.muted = !anthem.muted;
+        e.target.innerText = anthem.muted ? "UNMUTE ANTHEM" : "MUTE ANTHEM";
+    };
+
+    // Fireworks Logic (Canvas)
+    const canvas = document.getElementById('fw-canvas');
+    const ctx = canvas.getContext('2d');
+    let fwActive = false;
+
+    function startFireworks() {
+        fwActive = true;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        whistle.play();
+        animateFW();
+        setInterval(() => { if(fwActive) { bLow.play(); bHigh.play(); }}, 1000);
+    }
+    function stopFireworks() { fwActive = false; ctx.clearRect(0,0,canvas.width,canvas.height); }
+    
+    function animateFW() {
+        if(!fwActive) return;
+        ctx.fillStyle = 'rgba(0,0,0,0.2)';
+        ctx.fillRect(0,0,canvas.width, canvas.height);
+        // Simple spark effect
+        for(let i=0; i<10; i++){
+            ctx.fillStyle = `hsl(${Math.random()*360}, 100%, 50%)`;
+            ctx.fillRect(Math.random()*canvas.width, Math.random()*canvas.height, 4, 4);
+        }
+        requestAnimationFrame(animateFW);
+    }
+</script>
 </body>
 </html>
