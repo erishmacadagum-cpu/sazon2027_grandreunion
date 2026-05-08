@@ -5,51 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sazon 2027 | The Grand Reunion</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-   <style>
-        :root {
-            --bg-deep: #050812;
-            --bg-accent: #0A1128;
-            --accent-vibrant: #FF7F50;
-            --gold-leaf: #FFD700;
-            --silver-mist: #F0F0F0;
-            --glass: rgba(255, 255, 255, 0.05);
-        }
-
-        body, html { margin: 0; padding: 0; background: var(--bg-deep); color: var(--silver-mist); font-family: 'Montserrat', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
-
-        .branded-moon { 
-            position: absolute !important;
-            top: 20px !important;
-            left: 20px !important;
-            width: 170px !important;
-            height: 170px !important;
-            z-index: 100 !important;
-            border-radius: 50% !important;
-            overflow: hidden !important;
-            border: none !important;
-            box-shadow: 0 0 40px var(--gold-leaf) !important;
-        }
-        .branded-moon img { width: 100%; height: 100%; object-fit: cover; }
-
-        .banner { position: relative; height: 100dvh; width: 100%; display: flex; justify-content: center; align-items: center; text-align: center; overflow: hidden; opacity: 0; animation: revealBanner 2s ease forwards; animation-delay: 1s; }
-        @keyframes revealBanner { to { opacity: 1; } }
-
-        .banner-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('images/cover.jpeg') center/cover no-repeat;
-            z-index: 1;
-            filter: brightness(0.6);
-            transform: scale(1.1);
-            transition: transform 6s ease;
-            box-shadow: inset 0 0 100px 50px rgba(0,0,0,0.8);
-        }
-
-        .timer-container { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 20px; text-transform: uppercase; letter-spacing: 4px; }
+  .branch-section { padding: 80px 20px; background: #050812; text-align: center; }
         
+        .branch-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        .branch-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            padding: 25px;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 5-5-3 Tier Logic */
+        .tier-5 { flex: 1 1 calc(18% - 20px); min-width: 180px; }
+        .tier-3 { flex: 1 1 calc(30% - 20px); min-width: 250px; }
+
+        .branch-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px var(--hover-color);
+            border-color: var(--hover-color);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .branch-card h3 { font-family: 'Cinzel', serif; color: #fff; margin: 0 0 10px 0; font-size: 1.1rem; }
+        .reg-link { font-size: 0.7rem; color: var(--gold-leaf); letter-spacing: 2px; text-transform: uppercase; }
         .legacy-title { font-family: 'Cinzel', serif; font-size: 3rem; color: var(--gold-leaf); text-shadow: 0 0 15px rgba(255, 215, 0, 0.6); margin: 0; }
         .location-sub { font-size: 1rem; color: var(--silver-mist); opacity: 0.8; margin-top: -15px; }
 
@@ -121,25 +114,26 @@
             text-transform: uppercase;
         }
 </head>
-<body>
+<section class="branch-section">
+        <h2 style="font-family: 'Cinzel', serif; font-size: 2.5rem; color: white;">The 13 Branches</h2>
+        <div class="branch-grid">
+            <a href="#" class="branch-card tier-5" style="--hover-color: #ff4d4d;"><h3>Serafin</h3><span class="reg-link">Register →</span></a>
+            <a href="#" class="branch-card tier-5" style="--hover-color: #4da6ff;"><h3>Monserat</h3><span class="reg-link">Register →</span></a>
+            <a href="#" class="branch-card tier-5" style="--hover-color: #4dff88;"><h3>Felomina</h3><span class="reg-link">Register →</span></a>
+            <a href="#" class="branch-card tier-5" style="--hover-color: #ffcc4d;"><h3>Estrella</h3><span class="reg-link">Register →</span></a>
+            <a href="#" class="branch-card tier-5" style="--hover-color: #ff4dff;"><h3>Gregorio</h3><span class="reg-link">Register →</span></a>
 
-    <div id="intro-curtain" style="position:fixed; top:0; left:0; width:100%; height:100%; background:var(--bg-deep); z-index:1000; display:flex; justify-content:center; align-items:center;">
-        <h1 id="motto-text" style="font-family:'Cinzel', serif; color:var(--gold-leaf); text-align:center; opacity:0; letter-spacing:6px;">GIKAN SA GAMUT,<br>TUBTOB SA LANGIT</h1>
-        <script>
-            // Fade-in the motto, then reveal the banner
-            window.onload = () => {
-                const motto = document.getElementById('motto-text');
-                motto.style.transition = 'opacity 3s ease, transform 3s ease';
-                motto.style.opacity = '1';
-                motto.style.transform = 'scale(1.1)';
-                
-                setTimeout(() => {
-                    document.getElementById('intro-curtain').style.display = 'none';
-                    document.getElementById('snd-anthem').play(); // Try to play audio after interaction if allowed
-                }, 4000);
-            }
-        </script>
-    </div>
+            <a href="#" class="branch-card tier-5" style="--hover-color: #00f2fe;"><h3>Regino</h3><span class="reg-link">Register →</span></a>
+            <a href="#" class="branch-card tier-5" style="--hover-color: #f6d365;"><h3>Maria</h3><span class="reg-link">Register →</span></a>
+            <a href="#" class="branch-card tier-5" style="--hover-color: #a8edea;"><h3>Concepcion</h3><span class="reg-link">Register →</span></a>
+            <a href="#" class="branch-card tier-5" style="--hover-color: #89f7fe;"><h3>Cezar</h3><span class="reg-link">Register →</span></a>
+            <a href="#" class="branch-card tier-5" style="--hover-color: #667eea;"><h3>Priscilla</h3><span class="reg-link">Register →</span></a>
+
+            <a href="#" class="branch-card tier-3" style="--hover-color: #fa709a;"><h3>Gloria</h3><span class="reg-link">Register →</span></a>
+            <a href="#" class="branch-card tier-3" style="--hover-color: #fee140;"><h3>Reynaldo</h3><span class="reg-link">Register →</span></a>
+            <a href="#" class="branch-card tier-3" style="--hover-color: #30cfd0;"><h3>Nilda</h3><span class="reg-link">Register →</span></a>
+        </div>
+    </section>
 
     <audio id="snd-anthem" src="audio/anthem.mp3" loop></audio>
     <audio id="fw-launch" src="audio/launch.mp3"></audio>
