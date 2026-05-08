@@ -71,7 +71,38 @@
         footer { background: #02040a; padding: 60px 20px; border-top: 1px solid rgba(255,215,0,0.2); text-align: center; }
         .footer-credits { font-size: 0.8rem; letter-spacing: 2px; color: var(--silver-mist); opacity: 0.6; }
         h2 { font-family: 'Cinzel', serif; color: var(--gold-leaf); }
-    </style>
+.branch-section {
+            padding: 80px 20px;
+            background: #050812;
+            text-align: center;
+        }
+        .branch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+        .branch-card {
+            background: rgba(255, 215, 0, 0.03);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .branch-card:hover {
+            border-color: var(--gold-leaf);
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+        .branch-card h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-leaf);
+            margin: 0;
+            letter-spacing: 2px;
+        }</style>
 </head>
 <body>
 
@@ -114,7 +145,26 @@
     </section>
 
     <section style="height:100vh; padding: 100px 20px; text-align: center;">
-        <h2>The 13 Branches</h2>
+        <section class="branch-section">
+        <h2 style="font-family: 'Cinzel', serif; font-size: 2.5rem; color: white;">The 13 Branches</h2>
+        <p style="color: var(--silver-mist); letter-spacing: 3px;">SELECT A BRANCH TO EXPLORE THE LINEAGE</p>
+        
+        <div class="branch-grid">
+            <div class="branch-card"><h3>Serafin</h3></div>
+            <div class="branch-card"><h3>Monserat</h3></div>
+            <div class="branch-card"><h3>Felomina</h3></div>
+            <div class="branch-card"><h3>Estrella</h3></div>
+            <div class="branch-card"><h3>Gregorio</h3></div>
+            <div class="branch-card"><h3>Regino</h3></div>
+            <div class="branch-card"><h3>Maria</h3></div>
+            <div class="branch-card"><h3>Concepcion</h3></div>
+            <div class="branch-card"><h3>Cezar</h3></div>
+            <div class="branch-card"><h3>Priscilla</h3></div>
+            <div class="branch-card"><h3>Gloria</h3></div>
+            <div class="branch-card"><h3>Reynaldo</h3></div>
+            <div class="branch-card"><h3>Nilda</h3></div>
+        </div>
+    </section>
         <p>Gikan sa Gamut, Tubtob sa Langit</p>
         </section>
 
