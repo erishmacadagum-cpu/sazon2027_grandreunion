@@ -6,51 +6,58 @@
     <title>Sazon 2027 | The 13 Branches</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&family=Prata&family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #d4af37; --aqua: #7fffd4; --silver: #c0c0c0; --luminous-blue: #00e5ff; --charcoal: #121212; }
-        body { margin: 0; padding: 0; background: var(--charcoal); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+        :root { 
+            --gold: #d4af37; 
+            --navy: #001f3f; 
+            --deep-blue: #003366; 
+            --luminous-blue: #00e5ff; 
+            --fresh-white: #f8f9fa;
+        }
+        body { margin: 0; padding: 0; background: var(--navy); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
 
-        /* Intro Overlay & Pulsing Button */
-        #intro-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0a0a0a; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        /* Intro Overlay - Pulse Animation */
+        #intro-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000b1a; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         .credit-line { font-family: 'Montserrat', sans-serif; font-weight: 200; letter-spacing: 5px; margin: 15px; display: none; text-transform: uppercase; }
-        #enter-btn { padding: 15px 45px; border: 1px solid var(--luminous-blue); background: transparent; color: var(--luminous-blue); font-family: 'Montserrat', sans-serif; letter-spacing: 3px; cursor: pointer; font-size: 1rem; position: relative; animation: pulseBlue 2s infinite; }
+        #enter-btn { padding: 15px 45px; border: 2px solid var(--luminous-blue); background: transparent; color: var(--luminous-blue); font-family: 'Montserrat', sans-serif; letter-spacing: 3px; cursor: pointer; font-size: 1rem; position: relative; animation: pulseBlue 2s infinite; }
         @keyframes pulseBlue { 0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(0, 229, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); } }
 
         /* Nav Bar */
-        nav { width: 100%; padding: 25px 0; background: rgba(0,0,0,0.85); position: fixed; top: 0; z-index: 5000; display: flex; justify-content: flex-end; border-bottom: 1px solid rgba(212,175,55,0.2); }
-        nav a { color: var(--gold); text-decoration: none; margin-right: 40px; font-size: 0.75rem; letter-spacing: 2px; }
-        #audio-toggle { position: fixed; bottom: 20px; right: 20px; z-index: 6000; background: rgba(0,0,0,0.7); border: 1px solid var(--gold); color: var(--gold); padding: 8px 12px; cursor: pointer; font-size: 0.6rem; border-radius: 4px; }
+        nav { width: 100%; padding: 25px 0; background: rgba(0, 11, 26, 0.9); position: fixed; top: 0; z-index: 5000; display: flex; justify-content: flex-end; border-bottom: 1px solid var(--gold); }
+        nav a { color: var(--gold); text-decoration: none; margin-right: 40px; font-size: 0.8rem; letter-spacing: 2px; font-weight: 600; }
+        #audio-toggle { position: fixed; bottom: 20px; right: 20px; z-index: 6000; background: var(--gold); color: var(--navy); border: none; padding: 10px 15px; cursor: pointer; font-size: 0.7rem; font-weight: bold; border-radius: 5px; }
 
-        /* Banner & Elders */
-        .hero-banner { position: relative; min-height: 100vh; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; padding-top: 100px; }
-        .banner-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/heritage-banner.jpg') no-repeat center center; background-size: cover; opacity: 0.6; filter: brightness(1.2); z-index: 1; }
+        /* Banner & Reveal Section */
+        .hero-banner { position: relative; min-height: 100vh; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; padding-top: 80px; }
+        .banner-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/heritage-banner.jpg') no-repeat center center; background-size: cover; opacity: 0.7; filter: brightness(1.1); z-index: 1; }
         
         #elders-reveal { display: none; opacity: 0; transition: opacity 3s ease-in; z-index: 10; gap: 40px; justify-content: center; flex-wrap: wrap; margin-bottom: 50px; }
-        .elder-box { width: 260px; height: 320px; border: 1px solid var(--gold); background: rgba(0,0,0,0.6); display: flex; flex-direction: column; justify-content: flex-end; padding: 25px; backdrop-filter: blur(5px); text-align: center; }
+        .elder-box { width: 260px; height: 320px; border: 2px solid var(--gold); background: rgba(0, 31, 63, 0.8); display: flex; flex-direction: column; justify-content: flex-end; padding: 25px; backdrop-filter: blur(10px); text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .elder-box h2 { font-family: 'Cinzel Decorative', cursive; color: var(--gold); margin: 0; font-size: 1.6rem; }
 
-        /* 5-5-3 Grid */
-        .branch-section { padding: 100px 20px; background: #0a0a0a; text-align: center; z-index: 20; position: relative; }
-        .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; max-width: 1250px; margin: 0 auto 20px auto; }
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
-        @media (max-width: 900px) { .grid-5, .grid-3 { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); } }
+        /* 5-5-3 Fresh Grid */
+        .branch-section { padding: 100px 20px; background: var(--deep-blue); text-align: center; z-index: 20; position: relative; }
+        .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; max-width: 1200px; margin: 0 auto 15px auto; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; max-width: 800px; margin: 0 auto; }
+        @media (max-width: 900px) { .grid-5, .grid-3 { grid-template-columns: repeat(2, 1fr); } }
         
-        .branch-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.15); padding: 30px 15px; border-radius: 8px; text-decoration: none; transition: 0.4s; }
-        .branch-card:hover { transform: translateY(-8px); box-shadow: 0 0 25px var(--hover-color); border-color: var(--hover-color); }
-        .branch-card h3 { font-family: 'Prata', serif; color: white; margin: 0; font-size: 1.3rem; }
+        .branch-card { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); padding: 25px 10px; border-radius: 5px; text-decoration: none; transition: 0.3s; }
+        .branch-card:hover { transform: scale(1.05); border-color: var(--gold); background: rgba(255, 255, 255, 0.2); }
+        .branch-card h3 { font-family: 'Prata', serif; color: white; margin: 0; font-size: 1.2rem; text-shadow: 1px 1px 2px black; }
 
-        /* Itinerary */
-        .itinerary-section { padding: 120px 20px 80px 20px; background: #080808; display: flex; justify-content: center; }
-        .itinerary-card { max-width: 850px; width: 100%; border: 1px solid rgba(212,175,55,0.1); padding: 40px; background: rgba(255,255,255,0.01); border-radius: 15px; }
+        /* Itinerary - High Contrast */
+        .itinerary-section { padding: 100px 20px; background: var(--fresh-white); display: flex; justify-content: center; color: var(--navy); }
+        .itinerary-card { max-width: 800px; width: 100%; border: 2px solid var(--gold); padding: 50px; background: white; border-radius: 10px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
         #programme-reveal { display: none; opacity: 0; transition: opacity 3s ease-in 1s; }
-        .day-row { margin-bottom: 30px; border-left: 2px solid var(--gold); padding-left: 25px; text-align: left; }
-        .day-row h4 { color: var(--gold); margin: 0; font-size: 0.9rem; letter-spacing: 1px; }
+        .day-row { margin-bottom: 30px; border-left: 4px solid var(--gold); padding-left: 20px; }
+        .day-row h4 { color: #856404; margin: 0; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; }
+        .day-row p { color: #333; font-size: 0.95rem; line-height: 1.6; margin: 10px 0 0 0; font-weight: 400; }
 
-        /* Map */
-        .map-section { padding: 60px 20px; background: #050505; text-align: center; }
-        .map-container { width: 100%; max-width: 1000px; height: 400px; margin: 30px auto; border: 1px solid var(--gold); filter: invert(90%) hue-rotate(180deg) brightness(0.8) contrast(1.2); }
+        /* Map Section */
+        .map-section { padding: 80px 20px; background: var(--navy); text-align: center; }
+        .map-container { width: 100%; max-width: 1000px; height: 450px; margin: 30px auto; border: 3px solid var(--gold); box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
 
-        footer { padding: 80px 20px; background: #000; border-top: 1px solid var(--gold); text-align: center; }
-        #fw-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 8000; transform: translateZ(0); }
+        footer { padding: 60px 20px; background: #000b1a; border-top: 2px solid var(--gold); text-align: center; }
+        #fw-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 8000; }
         #main-content { display: none; }
     </style>
 </head>
@@ -58,7 +65,7 @@
 
 <div id="intro-overlay">
     <div id="l1" class="credit-line" style="color:var(--gold);">Gikan sa Gamut, Tubtob sa Langit</div>
-    <div id="l2" class="credit-line" style="color:var(--aqua);">A Sazon Family Production</div>
+    <div id="l2" class="credit-line" style="color:var(--fresh-white);">A Sazon Family Production</div>
     <div id="l3" class="credit-line" style="color:var(--silver);">Marzon Hotel, Kalibo, Aklan | July 23-24, 2027</div>
     <div id="l4" class="credit-line" style="color:var(--luminous-blue); font-weight:600;">Present</div>
     <button id="enter-btn">CLICK TO ENTER</button>
@@ -68,7 +75,8 @@
 <canvas id="fw-canvas"></canvas>
 
 <div id="main-content">
-    <nav><a href="index.html">HOME</a><a href="https://www.facebook.com/messages/t/2007378753379015">JOIN GROUP</a></nav>
+    <nav><a href="index.html">HOME</a><a href="https://www.facebook.com/messages/t/2007378753379015" target="_blank">JOIN GROUP</a></nav>
+
     <div class="hero-banner">
         <div class="banner-img"></div>
         <div id="elders-reveal">
@@ -76,41 +84,48 @@
             <div class="elder-box"><h2>Teofista Sazon</h2><p>(Lola Pistang)</p></div>
         </div>
     </div>
+
     <div class="branch-section">
-        <div class="grid-5">
-            <a href="#" class="branch-card" style="--hover-color: #ff4d4d;"><h3>Serafin</h3><span class="nickname">(Lolo Apin)</span></a>
-            <a href="#" class="branch-card" style="--hover-color: #4da6ff;"><h3>Monserat</h3><span class="nickname">(Lola Monching)</span></a>
-            <a href="#" class="branch-card" style="--hover-color: #4dff88;"><h3>Felomina</h3><span class="nickname">(Lola Mining)</span></a>
-            <a href="#" class="branch-card" style="--hover-color: #ffcc4d;"><h3>Estrella</h3><span class="nickname">(Lola Estring)</span></a>
-            <a href="#" class="branch-card" style="--hover-color: #ff4dff;"><h3>Gregorio</h3><span class="nickname">(Lolo Gorio)</span></a>
+        <div class="grid-5"> <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #e63946;"><h3>Serafin</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #2a9d8f;"><h3>Monserat</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #e9c46a;"><h3>Felomina</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #f4a261;"><h3>Estrella</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #264653;"><h3>Gregorio</h3></a>
         </div>
         <div class="grid-5">
-            <a href="#" class="branch-card" style="--hover-color: #00f2fe;"><h3>Regino</h3><span class="nickname">(Lolo Taba)</span></a>
-            <a href="#" class="branch-card" style="--hover-color: #f6d365;"><h3>Maria</h3><span class="nickname">(Lola Maria)</span></a>
-            <a href="#" class="branch-card" style="--hover-color: #a8edea;"><h3>Concepcion</h3><span class="nickname">(Lola Moret)</span></a>
-            <a href="#" class="branch-card" style="--hover-color: #89f7fe;"><h3>Cezar</h3><span class="nickname">(Lolo Cezar)</span></a>
-            <a href="#" class="branch-card" style="--hover-color: #667eea;"><h3>Priscilla</h3><span class="nickname">(Lola Mamay)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #457b9d;"><h3>Regino</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #fb8500;"><h3>Maria</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #ffb703;"><h3>Concepcion</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #d62828;"><h3>Cezar</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #023047;"><h3>Priscilla</h3></a>
         </div>
         <div class="grid-3">
-            <a href="#" class="branch-card" style="--hover-color: #fa709a;"><h3>Gloria</h3><span class="nickname">(Lola Goly)</span></a>
-            <a href="#" class="branch-card" style="--hover-color: #fee140;"><h3>Reynaldo</h3><span class="nickname">(Lolo Lope)</span></a>
-            <a href="#" class="branch-card" style="--hover-color: #30cfd0;"><h3>Nilda</h3><span class="nickname">(Lola Nilda)</span></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #606c38;"><h3>Gloria</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #bc6c25;"><h3>Reynaldo</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #d4a373;"><h3>Nilda</h3></a>
         </div>
     </div>
+
     <div class="itinerary-section">
         <div class="itinerary-card">
-            <h2 style="font-family:'Cinzel Decorative'; text-align:center;">📅 ITINERARY</h2>
+            <h2 style="font-family:'Cinzel Decorative'; text-align:center; color:var(--navy);">📅 GRAND REUNION PROGRAMME</h2>
             <div id="programme-reveal">
-                <div class="day-row"><h4>🌅 July 22</h4><p>Check-in & Welcome Dinner.</p></div>
-                <div class="day-row"><h4>🎶 Day 1</h4><p>🍴 Luncheon / Gala Dinner / 🎇 Fireworks.</p></div>
-                <div class="day-row"><h4>🙏 Day 2</h4><p>Thanksgiving Service / Farewell.</p></div>
+                <div class="day-row"><h4>🌅 July 22</h4><p>Check-in & Registration / Welcome Dinner for Early Arrivals.</p></div>
+                <div class="day-row"><h4>🎶 Day 1 (July 23)</h4><p>Fellowship / 🍴 Luncheon / Grand Sazon Gala / 🎇 Fireworks Night.</p></div>
+                <div class="day-row"><h4>🙏 Day 2 (July 24)</h4><p>Morning Thanksgiving Service / Outreach Program / Farewell Lunch.</p></div>
             </div>
         </div>
     </div>
+
     <div class="map-section">
-        <div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m1" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
+        <h2 style="color:var(--gold); font-family:'Prata';">THE VENUE</h2>
+        <p style="color:var(--silver);">Marzon Hotel, Kalibo, Aklan</p>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3905.783404550004!2d122.36881731535492!3d11.69837969169622!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33b0068a00000001%3A0xc3b83296c0054705!2sMarzon%20Hotel%20Kalibo!5e0!3m2!1sen!2sph!4v1620000000000!5m2!1sen!2sph" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
     </div>
-    <footer><p>© 2027 SAZON FAMILY | maemiliapalma@yahoo.com</p></footer>
+
+    <footer><p>© 2027 SAZON GRAND FAMILY REUNION | OVER-ALL IN-CHARGE: FR. TUDD BELANDRES</p></footer>
 </div>
 
 <script>
@@ -166,11 +181,11 @@
     function createBlast() {
         const x = Math.random()*canvas.width, y = Math.random()*(canvas.height/2);
         const color = `hsl(${Math.random()*360}, 100%, 60%)`;
-        for(let i=0; i<25; i++) particles.push({x, y, vx:Math.cos(i)*Math.random()*5, vy:Math.sin(i)*Math.random()*5, life:1.0, color});
+        for(let i=0; i<30; i++) particles.push({x, y, vx:Math.cos(i)*Math.random()*5, vy:Math.sin(i)*Math.random()*5, life:1.0, color});
     }
     function update() {
         if(!fwActive && particles.length === 0) { ctx.clearRect(0,0,canvas.width,canvas.height); return; }
-        ctx.fillStyle = 'rgba(18,18,18,0.25)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.fillStyle = 'rgba(0, 31, 63, 0.25)'; ctx.fillRect(0,0,canvas.width,canvas.height);
         for(let i = particles.length-1; i>=0; i--) {
             let p = particles[i]; p.x+=p.vx; p.y+=p.vy; p.vy+=0.04; p.life-=0.02;
             ctx.fillStyle = p.color; ctx.globalAlpha = p.life;
