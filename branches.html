@@ -69,50 +69,28 @@
             background: #050812;
             text-align: center;
         }
-       .branch-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            max-width: 1200px;
-            margin: 40px auto;
-        }
-        /* The Tier Logic */
+      /* 5-5-3 Tier & Multi-Color Styling */
+        .branch-section { padding: 80px 20px; background: #050812; text-align: center; }
+        .branch-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1200px; margin: 40px auto; }
         .branch-card {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 215, 0, 0.3);
             padding: 25px;
             border-radius: 12px;
             text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s ease;
             text-align: center;
-            min-width: 180px;
             backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        /* Tier 1 & 2 (Groups of 5) */
-        .tier-5 { flex: 1 1 18%; }
-        /* Tier 3 (Group of 3) */
-        .tier-3 { flex: 1 1 30%; }
-
-        /* Multi-Colored Interaction */
-        .branch-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px var(--hover-color);
-            border-color: var(--hover-color);
-            background: rgba(255, 255, 255, 0.1);
-        }
-        .branch-card h3 {
-            font-family: 'Cinzel', serif;
-            color: #fff;
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-        }
-        .register-btn {
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            color: var(--gold-leaf);
-            text-transform: uppercase;
-        }
+        .tier-5 { flex: 1 1 calc(18% - 20px); min-width: 160px; }
+        .tier-3 { flex: 1 1 calc(30% - 20px); min-width: 250px; }
+        .branch-card:hover { transform: translateY(-10px); box-shadow: 0 0 30px var(--hover-color); border-color: var(--hover-color); background: rgba(255, 255, 255, 0.1); }
+        .branch-card h3 { font-family: 'Cinzel', serif; color: #fff; margin: 0 0 10px 0; font-size: 1.1rem; }
+        .reg-link { font-size: 0.7rem; color: var(--gold-leaf); letter-spacing: 2px; text-transform: uppercase; }
+    </style>
 </head>
 <section class="branch-section">
         <h2 style="font-family: 'Cinzel', serif; font-size: 2.5rem; color: white;">The 13 Branches</h2>
