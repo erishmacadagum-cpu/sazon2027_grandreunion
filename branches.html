@@ -3,232 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sazon 2027 | The 13 Branches</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&family=Prata&family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+    <title>The 13 Branches | Sazon Legacy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&family=Prata&display=swap" rel="stylesheet">
     <style>
         :root { 
             --gold: #d4af37; 
-            --navy: #001b3a; 
-            --aqua: #7fffd4;
-            --silver: #c0c0c0;
-            --blue: #007bff;
+            --navy: #000814; 
             --luminous-blue: #00e5ff; 
-            --fresh-white: #ffffff;
         }
-        body { margin: 0; padding: 0; background: var(--navy); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
-
-        /* Intro Overlay - Specific Credit Colors */
-        #intro-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000814; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; box-sizing: border-box; }
-        .credit-line { font-family: 'Montserrat', sans-serif; font-weight: 200; letter-spacing: 5px; margin: 15px; display: none; text-transform: uppercase; font-size: 1.2rem; }
-        #enter-btn { padding: 15px 45px; border: 2px solid var(--luminous-blue); background: transparent; color: var(--luminous-blue); font-family: 'Montserrat', sans-serif; letter-spacing: 3px; cursor: pointer; font-size: 1rem; position: relative; animation: pulseBlue 2s infinite; margin-top: 30px; }
-        @keyframes pulseBlue { 0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(0, 229, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); } }
-
-        /* Nav Bar - Right Aligned */
-        nav { width: 100%; padding: 25px 0; background: rgba(0, 8, 20, 0.9); position: fixed; top: 0; z-index: 5000; display: flex; justify-content: flex-end; border-bottom: 1px solid var(--gold); }
-        nav a { color: var(--gold); text-decoration: none; margin-right: 40px; font-size: 0.75rem; letter-spacing: 2px; font-weight: 600; }
-        #audio-toggle { position: fixed; bottom: 20px; right: 20px; z-index: 6000; background: var(--gold); color: var(--navy); border: none; padding: 10px 15px; cursor: pointer; font-size: 0.6rem; font-weight: bold; border-radius: 4px; }
-
-        /* Banner & Reveal Section */
-        .hero-banner { position: relative; min-height: 100vh; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; padding-top: 80px; }
-        .banner-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/heritage-banner.jpg') no-repeat center center; background-size: cover; opacity: 0.65; filter: brightness(1.1); z-index: 1; }
         
-        /* Elders Strict Reveal */
-        #elders-reveal { display: none; opacity: 0; transition: opacity 3s ease-in; z-index: 10; gap: 30px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
-        .elder-box { width: 250px; height: 320px; border: 2px solid var(--gold); background: rgba(0, 27, 58, 0.85); display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; backdrop-filter: blur(8px); text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
-        .elder-box h2 { font-family: 'Cinzel Decorative', cursive; color: var(--gold); margin: 0; font-size: 1.6rem; }
+        body { 
+            margin: 0; 
+            background: var(--navy); 
+            color: white; 
+            font-family: 'Montserrat', sans-serif;
+        }
 
-        /* 5-5-3 Multi-Color Grid */
-        .branch-section { padding: 80px 20px; background: #001226; text-align: center; z-index: 20; position: relative; }
-        .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; max-width: 1250px; margin: 0 auto 15px auto; }
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; max-width: 850px; margin: 0 auto; }
-        
-        /* Mobile Grid Adjustment */
-        @media (max-width: 800px) { .grid-5, .grid-3 { grid-template-columns: repeat(2, 1fr); } }
-        
-        .branch-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(212, 175, 55, 0.2); padding: 30px 10px; border-radius: 8px; text-decoration: none; transition: 0.4s; text-align: center; }
-        .branch-card:hover { transform: translateY(-10px); box-shadow: 0 0 35px var(--hover-color); border-color: var(--hover-color); background: rgba(255, 255, 255, 0.1); }
-        .branch-card h3 { font-family: 'Prata', serif; color: white; margin: 0; font-size: 1.3rem; }
+        header { 
+            text-align: center; 
+            padding: 80px 20px 40px; 
+        }
 
-        /* Itinerary - Crisp Contrast */
-        .itinerary-section { padding: 100px 20px; background: var(--fresh-white); display: flex; justify-content: center; color: var(--navy); }
-        .itinerary-card { max-width: 850px; width: 100%; border: 2px solid var(--gold); padding: 50px 30px; background: white; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
-        #programme-reveal { display: none; opacity: 0; transition: opacity 3s ease-in 1s; }
-        .day-row { margin-bottom: 35px; border-left: 5px solid var(--gold); padding-left: 25px; text-align: left; }
-        .day-row h4 { color: #8b6e00; margin: 0; font-size: 1.1rem; letter-spacing: 1px; }
-        .hashtag { color: #0056b3; font-size: 0.8rem; display: block; margin: 5px 0; font-weight: 600; }
-        .day-row p { color: #222; font-size: 0.9rem; line-height: 1.7; margin: 10px 0 0 0; }
+        h1 { 
+            font-family: 'Prata', serif; 
+            font-size: clamp(2.2rem, 8vw, 3.5rem); 
+            color: var(--gold); 
+            margin: 0;
+            letter-spacing: 2px;
+        }
 
-        /* Map Section */
-        .map-section { padding: 80px 20px; background: var(--navy); text-align: center; }
-        .map-container { width: 100%; max-width: 1100px; height: 450px; margin: 30px auto; border: 3px solid var(--gold); }
+        .tagline { 
+            letter-spacing: 5px; 
+            text-transform: uppercase; 
+            font-size: 0.8rem; 
+            margin-top: 15px; 
+            color: rgba(255,255,255,0.8); 
+        }
 
-        /* Credits Footer */
-        footer { padding: 80px 20px; background: #000814; border-top: 2px solid var(--gold); text-align: center; line-height: 2; }
-        .credits-text { font-family: 'Prata', serif; color: var(--gold); font-size: 0.85rem; }
-        .copyright { font-size: 0.7rem; color: rgba(255,255,255,0.3); margin-top: 30px; letter-spacing: 2px; }
+        .instruction {
+            margin-top: 25px;
+            color: var(--luminous-blue);
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
 
-        #fw-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 8000; }
-        #main-content { display: none; }
+        .branch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 40px 20px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* THE ORIGINAL PRISMATIC GLOWING BUTTONS */
+        .branch-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 110px; /* Slightly taller for Lolo/Lola names */
+            text-decoration: none;
+            color: white;
+            font-family: 'Prata', serif;
+            font-size: 1.4rem;
+            text-align: center;
+            padding: 0 15px;
+            border-radius: 15px;
+            position: relative;
+            background: var(--navy);
+            z-index: 1;
+            border: 2px solid transparent;
+            /* Animated Rainbow Border */
+            background-image: linear-gradient(var(--navy), var(--navy)), 
+                              linear-gradient(90deg, #ff00ea, #00e5ff, #7000ff, #ffcc00, #ff00ea);
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+            background-size: 200% 100%;
+            animation: rainbowFlow 4s linear infinite;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        @keyframes rainbowFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        .branch-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.4);
+        }
+
+        footer { 
+            text-align: center; 
+            padding: 60px 20px; 
+            font-size: 0.75rem; 
+            letter-spacing: 4px; 
+            color: var(--gold);
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
 
-<div id="intro-overlay">
-    <div id="l1" class="credit-line" style="color:var(--gold);">Gikan sa Gamut, Tubtob sa Langit</div>
-    <div id="l2" class="credit-line" style="color:var(--aqua);">A Sazon Family Production</div>
-    <div id="l3" class="credit-line" style="color:var(--silver);">Marzon Hotel, Kalibo, Aklan | July 23-24, 2027</div>
-    <div id="l4" class="credit-line" style="color:var(--blue); font-weight:bold;">Present</div>
-    <button id="enter-btn">CLICK TO ENTER</button>
+<header>
+    <h1>The 13 Branches</h1>
+    <p class="tagline">Gikan sa Gamut, Tubtob sa Langit</p>
+    <p class="instruction">Click your designated branch name to register your family.</p>
+</header>
+
+<div class="branch-grid">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" class="branch-link">Serafin<br>(Lolo Apin)</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" class="branch-link">Monserat<br>(Lola Monching)</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" class="branch-link">Felomina<br>(Lola Mining)</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" class="branch-link">Estrella<br>(Lola Estring)</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" class="branch-link">Gregorio<br>(Lolo Gorio)</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" class="branch-link">Regino<br>(Lolo Taba)</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" class="branch-link">Maria<br>(Lola Maria)</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" class="branch-link">Concepcion<br>(Lola Moret)</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" class="branch-link">Cezar<br>(Lolo Cezar)</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" class="branch-link">Priscilla<br>(Lola Mamay)</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" class="branch-link">Gloria<br>(Lola Goly)</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" class="branch-link">Reynaldo<br>(Lolo Lope)</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" class="branch-link">Nilda<br>(Lola Nilda)</a>
 </div>
 
-<button id="audio-toggle">MUTE ANTHEM</button>
-<canvas id="fw-canvas"></canvas>
+<footer>
+    Marzon Hotel Kalibo - Aklan | #SAZON2027GRANDREUNION
+</footer>
 
-<div id="main-content">
-    <nav><a href="index.html">HOME</a><a href="https://www.facebook.com/messages/t/2007378753379015" target="_blank">JOIN GROUP</a></nav>
-
-    <div class="hero-banner">
-        <div class="banner-img"></div>
-        <div id="elders-reveal">
-            <div class="elder-box"><h2>Tereso Sazon</h2><p>(Lolo Isok)</p></div>
-            <div class="elder-box"><h2>Teofista Sazon</h2><p>(Lola Pistang)</p></div>
-        </div>
-    </div>
-
-    <div class="branch-section">
-        <div class="grid-5">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #ff4d4d;"><h3>Serafin</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #4da6ff;"><h3>Monserat</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #4dff88;"><h3>Felomina</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #ffcc4d;"><h3>Estrella</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #ff4dff;"><h3>Gregorio</h3></a>
-        </div>
-        <div class="grid-5">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #00f2fe;"><h3>Regino</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #f6d365;"><h3>Maria</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #a8edea;"><h3>Concepcion</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #89f7fe;"><h3>Cezar</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #667eea;"><h3>Priscilla</h3></a>
-        </div>
-        <div class="grid-3">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #fa709a;"><h3>Gloria</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #fee140;"><h3>Reynaldo</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #30cfd0;"><h3>Nilda</h3></a>
-        </div>
-    </div>
-
-    <div class="itinerary-section">
-        <div class="itinerary-card">
-            <h2 style="font-family:'Cinzel Decorative'; text-align:center; color:var(--navy); margin-bottom: 40px;">📅 GRAND REUNION PROGRAMME</h2>
-            <div id="programme-reveal">
-                <div class="day-row">
-                    <h4>🌅 July 22</h4>
-                    <span class="hashtag">#SAZON2027GRANDREUNION #sazonlegacy</span>
-                    <p>Check-in & Pre-Registration / Welcome Dinner for Early Arrivals.</p>
-                </div>
-                <div class="day-row">
-                    <h4>🎶 Day 1 (July 23)</h4>
-                    <p>Ongoing Registration & Breakfast / Acquaintance Fellowship / 🍴 Luncheon / Grand Sazon Gala / 🎇 Fireworks Night.</p>
-                </div>
-                <div class="day-row">
-                    <h4>🙏 Day 2 (July 24)</h4>
-                    <p>Breakfast / Morning Thanksgiving Service / Outreach Program / Farewell Lunch.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="map-section">
-        <h2 style="color:var(--gold); font-family:'Prata';">THE VENUE</h2>
-        <p style="color:var(--silver);">Marzon Hotel, Kalibo, Aklan</p>
-        <div class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3905.783404550004!2d122.36881731535492!3d11.69837969169622!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33b0068a00000001%3A0xc3b83296c0054705!2sMarzon%20Hotel%20Kalibo!5e0!3m2!1sen!2sph!4v1620000000000!5m2!1sen!2sph" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-        </div>
-    </div>
-
-    <footer>
-        <div class="credits-text">
-            Overall In-Charge: <b>Fr. Tudd Belandres</b><br>
-            Photos Curator: <b>maemiliapalma@yahoo.com</b><br>
-            Website Concepts: <b>Erish Sazon Macadag-om</b>
-        </div>
-        <p class="copyright">
-            © 2027 SAZON FAMILY PRODUCTION<br>
-            GIKAN SA GAMUT, TUBTOB SA LANGIT<br>
-            #SAZON2027GRANDREUNION
-        </p>
-    </footer>
-</div>
-
-<script>
-    const sounds = {
-        swell: new Audio('audio/prelude_swell.mp3'),
-        shimmer: new Audio('audio/reveal_shimmer.mp3'),
-        anthem: new Audio('audio/sazon-full-anthem.mp3'),
-        low: new Audio('audio/firework_burst_low.mp3'),
-        high: new Audio('audio/firework_burst_high.mp3'),
-        whistle: new Audio('audio/firework_whistle.mp3')
-    };
-
-    document.getElementById('enter-btn').onclick = function() {
-        // Mobile Unlock
-        Object.values(sounds).forEach(s => { s.play(); s.pause(); s.currentTime = 0; });
-        
-        this.style.display = 'none';
-        sounds.swell.play();
-        const lines = ['l1','l2','l3','l4'];
-        function showLines(idx) {
-            if(idx < lines.length) {
-                let el = document.getElementById(lines[idx]);
-                el.style.display = 'block';
-                setTimeout(() => { el.style.display = 'none'; showLines(idx+1); }, 2000);
-            } else { startShow(); }
-        }
-        showLines(0);
-    };
-
-    function startShow() {
-        sounds.shimmer.play();
-        document.getElementById('intro-overlay').style.display = 'none';
-        document.getElementById('main-content').style.display = 'block';
-        startFireworks();
-        setTimeout(() => { 
-            stopFireworks();
-            sounds.anthem.volume = 0; sounds.anthem.play();
-            let vol = 0;
-            const fader = setInterval(() => { if(vol<1){ vol+=0.1; sounds.anthem.volume=vol; } else clearInterval(fader); }, 200);
-            const e = document.getElementById('elders-reveal'), p = document.getElementById('programme-reveal');
-            e.style.display = 'flex'; p.style.display = 'block';
-            setTimeout(() => { e.style.opacity = '1'; p.style.opacity = '1'; }, 100);
-        }, 5000);
-    }
-
-    const canvas = document.getElementById('fw-canvas');
-    const ctx = canvas.getContext('2d');
-    let fwActive = false, particles = [];
-    function startFireworks() {
-        fwActive = true; canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        sounds.whistle.play(); update();
-        const bTimer = setInterval(() => { if(fwActive){ sounds.low.play(); createBlast(); } else clearInterval(bTimer); }, 1000);
-    }
-    function stopFireworks() { fwActive = false; }
-    function createBlast() {
-        const x = Math.random()*canvas.width, y = Math.random()*(canvas.height/2);
-        const color = `hsl(${Math.random()*360}, 100%, 60%)`;
-        for(let i=0; i<30; i++) particles.push({x, y, vx:Math.cos(i)*Math.random()*5, vy:Math.sin(i)*Math.random()*5, life:1.0, color});
-    }
-    function update() {
-        if(!fwActive && particles.length === 0) { ctx.clearRect(0,0,canvas.width,canvas.height); return; }
-        ctx.fillStyle = 'rgba(0, 27, 58, 0.25)'; ctx.fillRect(0,0,canvas.width,canvas.height);
-        for(let i = particles.length-1; i>=0; i--) {
-            let p = particles[i]; p.x+=p.vx; p.y+=p.vy; p.vy+=0.04; p.life-=0.02;
-            ctx.fillStyle = p.color; ctx.globalAlpha = p.life;
-            ctx.beginPath(); ctx.arc(p.x, p.y, 2.5, 0, Math.PI*2); ctx.fill();
-            if(p.life <= 0) particles.splice(i, 1);
-        }
-        requestAnimationFrame(update);
-    }
-    document.getElementById('audio-toggle').onclick = function() { sounds.anthem.muted = !sounds.anthem.muted; };
-</script>
 </body>
 </html>
