@@ -3,83 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
     <link rel="icon" type="image/png" href="images/favicon.png">
-    
     <title>Sazon 2027 | The Clarion Call</title>
     <meta property="og:title" content="Sazon 2027 | The Clarion Call">
-    <meta property="og:description" content="Gikan sa Gamut, Tubtob sa Langit. The journey home begins.">
+    <meta property="og:description" content="Gikan sa Gamut, Tubtob sa Langit.">
     <meta property="og:image" content="images/memories.jpg">
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&family=Prata&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --gold: #d4af37; 
-            --navy: #000814; 
-            --luminous-blue: #00e5ff; 
-        }
+        :root { --gold: #d4af37; --navy: #000814; --luminous-blue: #00e5ff; }
         body, html { margin: 0; padding: 0; height: 100%; background: var(--navy); color: white; font-family: 'Montserrat', sans-serif; overflow: hidden; }
 
-        /* Gate Stage */
-        #hype-trigger { position: fixed; top:0; left:0; width:100%; height:100%; z-index: 10000; background: #000; display: flex; justify-content: center; align-items: center; text-align: center; }
-        #trigger-btn { padding: 15px 35px; background: transparent; border: 1px solid var(--gold); color: var(--gold); cursor: pointer; letter-spacing: 4px; text-transform: uppercase; font-size: 0.75rem; transition: 0.5s; }
+        #hype-trigger { position: fixed; top:0; left:0; width:100%; height:100%; z-index: 10000; background: #000; display: flex; justify-content: center; align-items: center; }
+        #trigger-btn { padding: 15px 35px; background: transparent; border: 1px solid var(--gold); color: var(--gold); cursor: pointer; letter-spacing: 4px; text-transform: uppercase; font-size: 0.75rem; }
 
         .bg-overlay { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            background: linear-gradient(to bottom, rgba(0,8,20,0.85), rgba(0,8,20,0.2), rgba(0,8,20,0.95)),
-                        url('images/memories.jpg') no-repeat center center; 
-            background-size: cover;
-            filter: grayscale(100%) blur(15px);
-            z-index: 1; opacity: 0; 
-            transition: opacity 4s ease, filter 25s ease-in-out; 
+            background: linear-gradient(to bottom, rgba(0,8,20,0.85), rgba(0,8,20,0.2), rgba(0,8,20,0.95)), url('images/memories.jpg') no-repeat center center; 
+            background-size: cover; filter: grayscale(100%) blur(15px); z-index: 1; opacity: 0; transition: opacity 4s ease, filter 25s ease-in-out; 
         }
 
-        .content { position: relative; z-index: 10; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; display: none; padding: 0 15px; box-sizing: border-box; }
+        .content { position: relative; z-index: 10; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
         
-        /* Mobile-Responsive Battlecry */
+        /* THE FIX: Fixed height and clear spacing to prevent overlap */
         #battlecry-box { 
-            max-width: 100%; 
+            width: 100%;
+            margin-top: 40px; /* Pushes text away from timer */
             font-family: 'Prata', serif; 
-            /* clamp(minimum, preferred, maximum) - This keeps text from breaking */
-            font-size: clamp(1.1rem, 5vw, 2.5rem); 
-            color: #ffffff; line-height: 1.5; font-style: italic; min-height: 100px; 
-            transition: opacity 1.5s ease; opacity: 0;
-            padding: 0 10px;
+            font-size: clamp(1.1rem, 5vw, 2.2rem); 
+            color: #ffffff; line-height: 1.6; font-style: italic; 
+            min-height: 3.5em; /* Reserves space so text doesn't jump */
+            transition: opacity 0.8s ease; opacity: 0;
+            display: flex; align-items: center; justify-content: center;
         }
 
-        /* Mobile-Responsive Timer */
-        #timer { display: flex; gap: clamp(8px, 2vw, 20px); margin-bottom: 30px; width: 100%; justify-content: center; }
-        .time-block { text-align: center; border-bottom: 3px solid var(--gold); padding: 5px; min-width: 18%; }
-        .time-num { display: block; font-size: clamp(1.4rem, 7vw, 3rem); font-weight: 600; color: var(--gold); }
-        .time-label { font-size: clamp(0.45rem, 1.5vw, 0.7rem); letter-spacing: 2px; text-transform: uppercase; color: white; }
+        #timer { display: flex; gap: 10px; width: 100%; justify-content: center; }
+        .time-block { text-align: center; border-bottom: 3px solid var(--gold); padding: 5px; min-width: 65px; }
+        .time-num { display: block; font-size: clamp(1.8rem, 8vw, 3rem); font-weight: 600; color: var(--gold); }
+        .time-label { font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase; }
 
-        #invitation-text { 
-            display: none; font-size: clamp(1rem, 4vw, 1.5rem); letter-spacing: 3px; color: var(--luminous-blue); 
-            margin-bottom: 20px; opacity: 0; transition: opacity 2s; line-height: 1.8;
-        }
+        #invitation-text { display: none; font-size: 1.2rem; color: var(--luminous-blue); margin-top: 20px; opacity: 0; transition: opacity 2s; line-height: 1.8; }
+        #enter-heritage { display: none; opacity: 0; transition: opacity 2s; padding: 15px 40px; border: 2px solid var(--luminous-blue); background: transparent; color: var(--luminous-blue); text-decoration: none; letter-spacing: 4px; text-transform: uppercase; font-size: 0.8rem; margin-top: 20px; }
 
-        #enter-heritage { 
-            display: none; opacity: 0; transition: opacity 2s; padding: 15px 40px; 
-            border: 2px solid var(--luminous-blue); background: transparent; 
-            color: var(--luminous-blue); text-decoration: none; font-weight: 600; 
-            letter-spacing: 4px; animation: pulseBlue 2s infinite; text-transform: uppercase; font-size: 0.8rem;
-        }
-        @keyframes pulseBlue { 0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(0, 229, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); } }
-
-        /* Improved Footer Visibility */
-        footer { 
-            position: absolute; bottom: 15px; width: 100%; text-align: center; 
-            font-size: clamp(0.55rem, 2vw, 0.8rem); letter-spacing: 3px; color: rgba(255,255,255,0.9); 
-            z-index: 10; text-shadow: 0 2px 4px black; padding: 0 10px; box-sizing: border-box;
-        }
+        footer { position: absolute; bottom: 15px; width: 100%; text-align: center; font-size: 0.65rem; letter-spacing: 2px; color: rgba(255,255,255,0.8); z-index: 10; }
     </style>
 </head>
 <body>
 
-    <div id="hype-trigger">
-        <button id="trigger-btn">The Clarion Call of Legacy</button>
-    </div>
-
+    <div id="hype-trigger"><button id="trigger-btn">The Clarion Call of Legacy</button></div>
     <div class="bg-overlay" id="bg"></div>
     
     <div class="content" id="salvo-content">
@@ -98,8 +69,6 @@
 
     <script>
         const teaserAudio = new Audio('audio/teaser_jingle.mp3'); 
-        teaserAudio.preload = 'auto';
-
         const messages = ["We have missed HOME.", "We have missed FAMILY.", "The time has come...", "To honor the Legacy."];
         const trigger = document.getElementById('hype-trigger');
         const bg = document.getElementById('bg');
@@ -113,55 +82,44 @@
             const strike = (time) => {
                 const osc = context.createOscillator();
                 const gain = context.createGain();
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(50, time);
-                osc.frequency.exponentialRampToValueAtTime(0.01, time + 0.8);
-                gain.gain.setValueAtTime(0.8, time);
-                gain.gain.exponentialRampToValueAtTime(0.001, time + 0.8);
-                osc.connect(gain);
-                gain.connect(context.destination);
-                osc.start(time);
-                osc.stop(time + 0.8);
+                osc.type = 'sine'; osc.frequency.setValueAtTime(50, time); osc.frequency.exponentialRampToValueAtTime(0.01, time + 0.8);
+                gain.gain.setValueAtTime(0.8, time); gain.gain.exponentialRampToValueAtTime(0.001, time + 0.8);
+                osc.connect(gain); gain.connect(context.destination); osc.start(time); osc.stop(time + 0.8);
             };
             strike(context.currentTime); strike(context.currentTime + 1.0); strike(context.currentTime + 2.0); strike(context.currentTime + 3.0);
         }
 
         document.getElementById('trigger-btn').onclick = function() {
             playCinematicHeartbeat();
-            setTimeout(() => { teaserAudio.play().catch(e => console.log("Audio play blocked.")); }, 4100);
+            setTimeout(() => { teaserAudio.play(); }, 4100);
             trigger.style.opacity = '0';
             setTimeout(() => { 
                 trigger.style.display = 'none'; 
-                bg.style.opacity = '1';
-                bg.style.filter = 'grayscale(100%) blur(8px)';
+                bg.style.opacity = '1'; bg.style.filter = 'grayscale(100%) blur(8px)';
                 content.style.display = 'flex';
                 runBattlecry();
-            }, 2000);
+            }, 1500);
 
             setTimeout(() => {
-                bg.style.filter = 'grayscale(100%) blur(40px)'; 
-                bg.style.opacity = '0.4';
                 box.style.display = 'none';
                 invite.innerHTML = "We are Sazon 🌳<br>See you in Kalibo! 🎭";
                 invite.style.display = 'block';
                 setTimeout(() => { 
                     invite.style.opacity = '1';
-                    setTimeout(() => {
-                        enterBtn.style.display = 'inline-block';
-                        setTimeout(() => enterBtn.style.opacity = '1', 100);
-                    }, 2000);
+                    setTimeout(() => { enterBtn.style.display = 'inline-block'; setTimeout(() => enterBtn.style.opacity = '1', 100); }, 2000);
                 }, 100);
             }, 30000);
         };
 
         async function runBattlecry() {
-            await new Promise(r => setTimeout(r, 4100)); 
+            await new Promise(r => setTimeout(r, 4500)); 
             for (let msg of messages) {
-                box.innerText = msg;
-                box.style.opacity = '1';
+                box.style.opacity = '0'; // Fade out current
+                await new Promise(r => setTimeout(r, 800)); // Wait for fade
+                box.innerText = ""; // THE FIX: Clear the text entirely
+                box.innerText = msg; // Put new text in
+                box.style.opacity = '1'; // Fade in
                 await new Promise(r => setTimeout(r, 5000)); 
-                box.style.opacity = '0';
-                await new Promise(r => setTimeout(r, 1500)); 
             }
         }
 
