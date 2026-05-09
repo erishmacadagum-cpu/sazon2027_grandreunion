@@ -17,27 +17,26 @@
         }
         body { margin: 0; padding: 0; background: var(--navy); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
 
-        /* Intro Overlay */
+        /* 1. OPENING CREDITS OVERLAY */
         #intro-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000814; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; box-sizing: border-box; }
         .credit-line { font-family: 'Montserrat', sans-serif; font-weight: 200; letter-spacing: 5px; margin: 15px; display: none; text-transform: uppercase; font-size: 1.2rem; }
         #enter-btn { padding: 15px 45px; border: 2px solid var(--luminous-blue); background: transparent; color: var(--luminous-blue); font-family: 'Montserrat', sans-serif; letter-spacing: 3px; cursor: pointer; font-size: 1rem; position: relative; animation: pulseBlue 2s infinite; margin-top: 30px; }
         @keyframes pulseBlue { 0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(0, 229, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); } }
 
-        /* Nav Bar */
+        /* 2. NAVIGATION & AUDIO */
         nav { width: 100%; padding: 25px 0; background: rgba(0, 8, 20, 0.9); position: fixed; top: 0; z-index: 5000; display: flex; justify-content: flex-end; border-bottom: 1px solid var(--gold); }
         nav a { color: var(--gold); text-decoration: none; margin-right: 40px; font-size: 0.75rem; letter-spacing: 2px; font-weight: 600; }
         #audio-toggle { position: fixed; bottom: 20px; right: 20px; z-index: 6000; background: var(--gold); color: var(--navy); border: none; padding: 10px 15px; cursor: pointer; font-size: 0.6rem; font-weight: bold; border-radius: 4px; }
 
-        /* Hero Banner */
+        /* 3. HERO BANNER & 2 ELDERS REVEAL */
         .hero-banner { position: relative; min-height: 100vh; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; padding-top: 80px; }
         .banner-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/heritage-banner.jpg') no-repeat center center; background-size: cover; opacity: 0.65; filter: brightness(1.1); z-index: 1; }
         
-        /* Elders Reveal */
         #elders-reveal { display: none; opacity: 0; transition: opacity 3s ease-in; z-index: 10; gap: 30px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
         .elder-box { width: 250px; height: 320px; border: 2px solid var(--gold); background: rgba(0, 27, 58, 0.85); display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; backdrop-filter: blur(8px); text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
         .elder-box h2 { font-family: 'Cinzel Decorative', cursive; color: var(--gold); margin: 0; font-size: 1.6rem; }
 
-        /* Branch Section */
+        /* 4. THE 13 BRANCHES GRID */
         .branch-section { padding: 80px 20px; background: #001226; text-align: center; z-index: 20; position: relative; }
         .universal-instruction { color: var(--luminous-blue); font-family: 'Prata', serif; font-size: 1.1rem; margin-bottom: 40px; letter-spacing: 1px; }
         .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; max-width: 1250px; margin: 0 auto 15px auto; }
@@ -48,7 +47,7 @@
         .branch-card:hover { transform: translateY(-10px); box-shadow: 0 0 35px var(--hover-color); border-color: var(--hover-color); background: rgba(255, 255, 255, 0.1); }
         .branch-card h3 { font-family: 'Prata', serif; color: white; margin: 0; font-size: 1.2rem; line-height: 1.4; }
 
-        /* Programme */
+        /* 5. PROGRAMME OF ACTIVITIES */
         .itinerary-section { padding: 100px 20px; background: var(--fresh-white); display: flex; justify-content: center; color: var(--navy); }
         .itinerary-card { max-width: 850px; width: 100%; border: 2px solid var(--gold); padding: 50px 30px; background: white; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
         #programme-reveal { display: none; opacity: 0; transition: opacity 3s ease-in 1s; }
@@ -56,13 +55,13 @@
         .day-row h4 { color: #8b6e00; margin: 0; font-size: 1.1rem; letter-spacing: 1px; }
         .day-row p { color: #222; font-size: 0.9rem; line-height: 1.7; margin: 10px 0 0 0; }
 
-        /* Map */
+        /* 6. GOOGLE MAPS SECTION */
         .map-section { padding: 80px 20px; background: var(--navy); text-align: center; }
         .map-container { width: 100%; max-width: 1100px; height: 450px; margin: 30px auto; border: 3px solid var(--gold); }
 
-        /* Footer */
+        /* 7. END CREDITS & UPDATED FOOTER */
         footer { padding: 80px 20px; background: #000814; border-top: 2px solid var(--gold); text-align: center; line-height: 2.2; }
-        .dedication { font-family: 'Prata', serif; color: var(--gold); font-size: 1.3rem; margin-bottom: 20px; letter-spacing: 2px; }
+        .dedication { font-family: 'Prata', serif; color: var(--gold); font-size: 1.5rem; margin-bottom: 25px; letter-spacing: 2px; font-weight: 600; }
         .credits-text { font-family: 'Montserrat', sans-serif; color: rgba(255,255,255,0.9); font-size: 0.85rem; font-weight: 200; }
         .credits-text b { color: var(--gold); font-weight: 600; }
         .copyright { font-size: 0.7rem; color: rgba(255,255,255,0.3); margin-top: 40px; letter-spacing: 2px; text-transform: uppercase; }
@@ -122,24 +121,23 @@
         <div class="itinerary-card">
             <h2 style="font-family:'Cinzel Decorative'; text-align:center; color:var(--navy); margin-bottom: 40px;">📅 GRAND REUNION PROGRAMME</h2>
             <div id="programme-reveal">
-                <div class="day-row">
-                    <h4>🌅 July 22</h4>
-                    <p>Check-in & Pre-Registration / Welcome Dinner for Early Arrivals.</p>
-                </div>
-                <div class="day-row">
-                    <h4>🎶 Day 1 (July 23)</h4>
-                    <p>Ongoing Registration & Breakfast / Acquaintance Fellowship / 🍴 Luncheon / Grand Sazon Gala / 🎇 Fireworks Night.</p>
-                </div>
-                <div class="day-row">
-                    <h4>🙏 Day 2 (July 24)</h4>
-                    <p>Breakfast / Morning Thanksgiving Service / Outreach Program / Farewell Lunch.</p>
-                </div>
+                <div class="day-row"><h4>🌅 July 22</h4><p>Check-in & Pre-Registration / Welcome Dinner for Early Arrivals.</p></div>
+                <div class="day-row"><h4>🎶 Day 1 (July 23)</h4><p>Ongoing Registration & Breakfast / Acquaintance Fellowship / 🍴 Luncheon / Grand Sazon Gala / 🎇 Fireworks Night.</p></div>
+                <div class="day-row"><h4>🙏 Day 2 (July 24)</h4><p>Breakfast / Morning Thanksgiving Service / Outreach Program / Farewell Lunch.</p></div>
             </div>
         </div>
     </div>
 
+    <div class="map-section">
+        <h2 style="color:var(--gold); font-family:'Prata';">THE VENUE</h2>
+        <p style="color:var(--silver);">Marzon Hotel, Kalibo, Aklan</p>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3904.7087611848523!2d122.3688193!3d11.6917694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33aefd759462d6d5%3A0x828e81b4006ef31b!2sMarzon%20Hotel%20Kalibo!5e0!3m2!1sen!2sph!4v1715260000000!5m2!1sen!2sph" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+
     <footer>
-        <div class="dedication">† To God Be All The Glory</div>
+        <div class="dedication">🕈 To God Be All The Glory</div>
         <div class="credits-text">
             Overall In-Charge: <b>Fr. Tudd Belandres</b><br>
             Food & Menu In-charge: <b>Ms. Myla Sazon Torralba</b><br>
