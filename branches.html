@@ -45,9 +45,9 @@
         /* Mobile Grid Adjustment */
         @media (max-width: 800px) { .grid-5, .grid-3 { grid-template-columns: repeat(2, 1fr); } }
         
-        .branch-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(212, 175, 55, 0.2); padding: 30px 10px; border-radius: 8px; text-decoration: none; transition: 0.4s; text-align: center; }
+        .branch-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(212, 175, 55, 0.2); padding: 45px 10px; border-radius: 8px; text-decoration: none; transition: 0.4s; text-align: center; }
         .branch-card:hover { transform: translateY(-10px); box-shadow: 0 0 35px var(--hover-color); border-color: var(--hover-color); background: rgba(255, 255, 255, 0.1); }
-        .branch-card h3 { font-family: 'Prata', serif; color: white; margin: 0; font-size: 1.3rem; }
+        .branch-card h3 { font-family: 'Prata', serif; color: white; margin: 0; font-size: 1.2rem; line-height: 1.4; }
 
         /* Itinerary - Crisp Contrast */
         .itinerary-section { padding: 100px 20px; background: var(--fresh-white); display: flex; justify-content: center; color: var(--navy); }
@@ -69,6 +69,14 @@
 
         #fw-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 8000; }
         #main-content { display: none; }
+
+        .universal-instruction {
+            color: var(--luminous-blue);
+            font-family: 'Prata', serif;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
@@ -96,24 +104,26 @@
     </div>
 
     <div class="branch-section">
+        <p class="universal-instruction">Click your designated branch name to register your family.</p>
+        
         <div class="grid-5">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #ff4d4d;"><h3>Serafin</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #4da6ff;"><h3>Monserat</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #4dff88;"><h3>Felomina</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #ffcc4d;"><h3>Estrella</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #ff4dff;"><h3>Gregorio</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #ff4d4d;"><h3>Serafin<br>(Lolo Apin)</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #4da6ff;"><h3>Monserat<br>(Lola Monching)</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #4dff88;"><h3>Felomina<br>(Lola Mining)</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #ffcc4d;"><h3>Estrella<br>(Lola Estring)</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #ff4dff;"><h3>Gregorio<br>(Lolo Gorio)</h3></a>
         </div>
         <div class="grid-5">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #00f2fe;"><h3>Regino</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #f6d365;"><h3>Maria</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #a8edea;"><h3>Concepcion</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #89f7fe;"><h3>Cezar</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #667eea;"><h3>Priscilla</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #00f2fe;"><h3>Regino<br>(Lolo Taba)</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #f6d365;"><h3>Maria<br>(Lola Maria)</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #a8edea;"><h3>Concepcion<br>(Lola Moret)</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #89f7fe;"><h3>Cezar<br>(Lolo Cezar)</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #667eea;"><h3>Priscilla<br>(Lola Mamay)</h3></a>
         </div>
         <div class="grid-3">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #fa709a;"><h3>Gloria</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #fee140;"><h3>Reynaldo</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=sharing&ouid=105030464306094693913" target="_blank" class="branch-card" style="--hover-color: #30cfd0;"><h3>Nilda</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #fa709a;"><h3>Gloria<br>(Lola Goly)</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #fee140;"><h3>Reynaldo<br>(Lolo Lope)</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #30cfd0;"><h3>Nilda<br>(Lola Nilda)</h3></a>
         </div>
     </div>
 
@@ -171,9 +181,7 @@
     };
 
     document.getElementById('enter-btn').onclick = function() {
-        // Mobile Unlock
         Object.values(sounds).forEach(s => { s.play(); s.pause(); s.currentTime = 0; });
-        
         this.style.display = 'none';
         sounds.swell.play();
         const lines = ['l1','l2','l3','l4'];
