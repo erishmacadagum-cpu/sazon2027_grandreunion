@@ -13,7 +13,8 @@
         body, html { margin: 0; padding: 0; height: 100%; background: var(--navy); color: white; font-family: 'Montserrat', sans-serif; overflow: hidden; touch-action: manipulation; }
 
         #hype-trigger { position: fixed; top:0; left:0; width:100%; height:100%; z-index: 10000; background: #000; display: flex; justify-content: center; align-items: center; }
-        #trigger-btn { padding: 15px 35px; background: transparent; border: 1px solid var(--gold); color: var(--gold); cursor: pointer; letter-spacing: 4px; text-transform: uppercase; font-size: 0.7rem; }
+        #trigger-btn { padding: 15px 35px; background: transparent; border: 1px solid var(--gold); color: var(--gold); cursor: pointer; letter-spacing: 4px; text-transform: uppercase; font-size: 0.7rem; transition: 0.3s; }
+        #trigger-btn:active { background: var(--gold); color: black; }
 
         .bg-overlay { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
@@ -23,9 +24,8 @@
 
         .content { position: relative; z-index: 10; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; box-sizing: border-box; }
         
-        #battlecry-box { width: 100%; margin-top: 20px; min-height: 180px; display: flex; align-items: center; justify-content: center; }
+        #battlecry-box { width: 100%; margin-top: 20px; min-height: 180px; display: flex; align-items: center; justify-content: center; position: relative; }
 
-        /* Simplified Animation: Removed translateZ to stop mobile ghosting */
         @keyframes cinematicFade {
             0% { opacity: 0; transform: scale(0.9); letter-spacing: 2px; }
             20% { opacity: 1; }
@@ -34,11 +34,12 @@
         }
 
         .cinematic-text { 
-            animation: cinematicFade 5s ease-in-out forwards; 
+            animation: cinematicFade 5.5s ease-in-out forwards; 
             text-transform: uppercase; 
             line-height: 1.4; 
             width: 100%;
             display: block;
+            position: absolute;
         }
 
         .font-nostalgia { font-family: 'Prata', serif; font-style: italic; font-weight: 200; font-size: clamp(1.4rem, 5vw, 2.5rem); }
@@ -106,25 +107,39 @@
         const timer = document.getElementById('timer');
         const finalBox = document.getElementById('final-reveal-box');
 
-        function playHeartbeat() {
-            const context = new (window.AudioContext || window.webkitAudioContext)();
+        function playHeartbeat(context) {
             const strike = (time) => {
-                const osc = context.createOscillator(); const gain = context.createGain();
-                osc.type = 'sine'; osc.frequency.setValueAtTime(45, time);
-                gain.gain.setValueAtTime(0.8, time); gain.gain.exponentialRampToValueAtTime(0.001, time + 0.6);
-                osc.connect(gain); gain.connect(context.destination); osc.start(time); osc.stop(time + 0.6);
+                const osc = context.createOscillator(); 
+                const gain = context.createGain();
+                osc.type = 'sine'; 
+                osc.frequency.setValueAtTime(45, time);
+                gain.gain.setValueAtTime(0.8, time); 
+                gain.gain.exponentialRampToValueAtTime(0.001, time + 0.6);
+                osc.connect(gain); gain.connect(context.destination); 
+                osc.start(time); osc.stop(time + 0.6);
             };
-            // STRICT 1-SECOND SPACING (5 SECONDS TOTAL)
+            // 5 BEATS AT 1-SECOND INTERVALS
             for(let i=0; i<5; i++) { strike(context.currentTime + i); }
         }
 
         document.getElementById('trigger-btn').onclick = function() {
-            playHeartbeat();
+            // Audio Context for Mobile Heartbeats
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            
+            // Prime Jingle to bypass Mobile Lock
+            teaserAudio.play().then(() => {
+                teaserAudio.pause();
+                teaserAudio.currentTime = 0;
+            }).catch(e => console.log("Priming audio..."));
+
+            playHeartbeat(audioCtx);
             trigger.style.opacity = '0';
-            // Start jingle after the 5th beat (5 seconds)
+            
+            // Wait 5 seconds for beats, then start teaser
             setTimeout(() => { 
                 trigger.style.display = 'none'; 
                 bg.style.opacity = '1';
+                teaserAudio.volume = 1.0;
                 teaserAudio.play();
                 runBattlecry();
             }, 5000);
@@ -132,11 +147,9 @@
 
         async function runBattlecry() {
             for (let msg of messages) {
-                // HARD RESET: Clear box to stop repetition
-                box.innerHTML = ""; 
+                box.innerHTML = ""; // Hard clear
                 await new Promise(r => setTimeout(r, 150)); 
                 
-                // Create element fresh each time
                 const span = document.createElement('span');
                 span.className = `cinematic-text ${msg.class}`;
                 span.innerText = msg.text;
@@ -145,7 +158,7 @@
                 await new Promise(r => setTimeout(r, 5500)); 
             }
             
-            box.innerHTML = ""; // Final clear
+            box.innerHTML = ""; 
             timer.style.opacity = '1';
             finalBox.style.display = 'block';
 
