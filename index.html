@@ -5,72 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="icon" type="image/png" href="images/favicon.png">
     <title>Sazon 2027 | The Clarion Call</title>
-    <meta property="og:title" content="Sazon 2027 | The Clarion Call">
-    <meta property="og:description" content="Gikan sa Gamut, Tubtob sa Langit.">
-    <meta property="og:image" content="images/memories.jpg">
-
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&family=Prata&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&family=Prata&family=Cinzel:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    
     <style>
         :root { --gold: #d4af37; --navy: #000814; --luminous-blue: #00e5ff; }
         body, html { margin: 0; padding: 0; height: 100%; background: var(--navy); color: white; font-family: 'Montserrat', sans-serif; overflow: hidden; }
 
         #hype-trigger { position: fixed; top:0; left:0; width:100%; height:100%; z-index: 10000; background: #000; display: flex; justify-content: center; align-items: center; }
         #trigger-btn { padding: 15px 35px; background: transparent; border: 1px solid var(--gold); color: var(--gold); cursor: pointer; letter-spacing: 4px; text-transform: uppercase; font-size: 0.75rem; transition: 0.3s; }
-        #trigger-btn:hover { background: var(--gold); color: black; }
 
         .bg-overlay { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
             background: linear-gradient(to bottom, rgba(0,8,20,0.9), rgba(0,8,20,0.3), rgba(0,8,20,0.95)), url('images/memories.jpg') no-repeat center center; 
-            background-size: cover; filter: grayscale(100%) blur(15px); z-index: 1; opacity: 0; transition: opacity 4s ease, filter 25s ease-in-out; 
+            background-size: cover; filter: grayscale(100%) blur(15px); z-index: 1; opacity: 0; transition: opacity 4s ease, filter 20s ease-in-out; 
         }
 
         .content { position: relative; z-index: 10; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
         
-        #battlecry-box { 
-            width: 100%;
-            margin-top: 40px;
-            font-family: 'Prata', serif; 
-            min-height: 4em;
-            display: flex; align-items: center; justify-content: center;
-            perspective: 1000px;
-        }
+        #battlecry-box { width: 100%; margin-top: 40px; min-height: 5em; display: flex; align-items: center; justify-content: center; perspective: 1000px; }
 
-        /* The Refined Cinematic Animation */
+        /* The 3D Breath Animation */
         @keyframes breath {
-            from { transform: scale(0.95) translateZ(0); letter-spacing: 2px; opacity: 0; }
+            from { transform: scale(0.9) translateZ(-50px); letter-spacing: 2px; opacity: 0; }
             20% { opacity: 1; }
             80% { opacity: 1; }
-            to { transform: scale(1.05) translateZ(50px); letter-spacing: 10px; opacity: 0; }
+            to { transform: scale(1.1) translateZ(100px); letter-spacing: 12px; opacity: 0; }
         }
 
-        .cinematic-text {
-            display: inline-block;
-            animation: breath 6s ease-in-out forwards;
-            text-transform: uppercase;
-            font-weight: 200;
-            color: white;
-            font-size: clamp(1.2rem, 6vw, 2.5rem);
-            line-height: 1.4;
-        }
+        .cinematic-text { display: inline-block; animation: breath 6s ease-in-out forwards; text-transform: uppercase; line-height: 1.4; }
 
-        #timer { display: flex; gap: 10px; width: 100%; justify-content: center; }
+        /* Specific Font Styles for Variety */
+        .font-nostalgia { font-family: 'Prata', serif; font-style: italic; font-weight: 200; font-size: clamp(1.5rem, 6vw, 2.8rem); }
+        .font-legacy { font-family: 'Cinzel', serif; font-weight: 700; color: var(--gold); font-size: clamp(1.2rem, 5vw, 2.5rem); }
+        .font-sazon { font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 15px; color: white; font-size: clamp(2rem, 8vw, 4rem); }
+
+        #timer { display: flex; gap: 10px; width: 100%; justify-content: center; transition: opacity 2s; opacity: 0; }
         .time-block { text-align: center; border-bottom: 2px solid var(--gold); padding: 5px; min-width: 65px; }
         .time-num { display: block; font-size: clamp(1.8rem, 8vw, 3rem); font-weight: 600; color: var(--gold); }
         .time-label { font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase; }
 
-        #invitation-text { display: none; font-size: 1.2rem; color: var(--luminous-blue); margin-top: 20px; opacity: 0; transition: opacity 2s; line-height: 1.8; font-family: 'Prata', serif; font-style: italic; }
+        #final-reveal-box { display: none; margin-top: 20px; text-align: center; }
+        .reveal-line { opacity: 0; transition: opacity 2s ease; margin: 10px 0; }
         
-        #enter-heritage { 
-            display: none; opacity: 0; transition: opacity 2s; padding: 15px 40px; 
-            border: 1px solid var(--luminous-blue); background: transparent; color: var(--luminous-blue); 
-            text-decoration: none; letter-spacing: 4px; text-transform: uppercase; font-size: 0.75rem; margin-top: 30px; 
+        .btn-link { 
+            display: inline-block; padding: 15px 40px; border: 1px solid var(--luminous-blue); 
+            background: transparent; color: var(--luminous-blue); text-decoration: none; 
+            letter-spacing: 4px; text-transform: uppercase; font-size: 0.75rem; margin-top: 20px; transition: 0.5s;
         }
+        .btn-link:hover { background: var(--luminous-blue); color: black; box-shadow: 0 0 20px var(--luminous-blue); }
 
-        #calendar-link {
-            display: none; opacity: 0; transition: opacity 2s; margin-top: 25px;
-            color: var(--gold); text-decoration: none; font-size: 0.65rem; letter-spacing: 2px;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.4); padding-bottom: 5px;
-        }
+        #calendar-link { display: block; margin-top: 20px; color: var(--gold); text-decoration: none; font-size: 0.65rem; letter-spacing: 2px; border-bottom: 1px solid rgba(212, 175, 55, 0.4); padding-bottom: 5px; }
 
         footer { position: absolute; bottom: 15px; width: 100%; text-align: center; font-size: 0.6rem; letter-spacing: 2px; color: rgba(255,255,255,0.6); z-index: 10; text-transform: uppercase; }
     </style>
@@ -87,81 +72,84 @@
             <div class="time-block"><span class="time-num" id="mins">00</span><span class="time-label">Mins</span></div>
             <div class="time-block"><span class="time-num" id="secs">00</span><span class="time-label">Secs</span></div>
         </div>
+
         <div id="battlecry-box"></div>
-        <div id="invitation-text"></div>
-        
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" id="enter-heritage" target="_blank">Register for Early Bird Updates</a>
-        <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=SAZON+2027+GRAND+FAMILY+REUNION&dates=20270723T000000Z/20270725T000000Z&details=Gikan+sa+Gamut,+Tubtob+sa+Langit.+See+you+at+the+Grand+Reunion!&location=Marzon+Hotel+Kalibo,+Aklan&sf=true&output=xml" id="calendar-link" target="_blank">📅 Add to Calendar</a>
+
+        <div id="final-reveal-box">
+            <h2 class="reveal-line font-sazon" id="line-sazon">WE ARE SAZON</h2>
+            <p class="reveal-line font-nostalgia" id="line-kalibo" style="font-size: 1.5rem; color: var(--luminous-blue);">See you in Kalibo!</p>
+            <div class="reveal-line" id="links-reveal">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" class="btn-link" target="_blank">Register for Early Bird Updates</a>
+                <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=SAZON+2027+GRAND+FAMILY+REUNION&dates=20270723T000000Z/20270725T000000Z&details=Gikan+sa+Gamut,+Tubtob+sa+Langit.&location=Marzon+Hotel+Kalibo,+Aklan&sf=true&output=xml" id="calendar-link" target="_blank">📅 Add to Calendar</a>
+            </div>
+        </div>
     </div>
 
     <footer>Marzon Hotel Kalibo - Aklan | #SAZON2027GRANDREUNION</footer>
 
     <script>
         const teaserAudio = new Audio('audio/teaser_jingle.mp3'); 
-        const messages = ["We have missed HOME.", "We have missed FAMILY.", "The time has come...", "To honor the Legacy."];
+        // Varied fonts for each line
+        const messages = [
+            { text: "We have missed HOME.", class: "font-nostalgia" },
+            { text: "We have missed FAMILY.", class: "font-nostalgia" },
+            { text: "The time has come...", class: "font-legacy" },
+            { text: "To honor the Legacy.", class: "font-legacy" }
+        ];
+
         const trigger = document.getElementById('hype-trigger');
         const bg = document.getElementById('bg');
-        const content = document.getElementById('salvo-content');
         const box = document.getElementById('battlecry-box');
-        const invite = document.getElementById('invitation-text');
-        const enterBtn = document.getElementById('enter-heritage');
-        const calLink = document.getElementById('calendar-link');
+        const timer = document.getElementById('timer');
+        const finalBox = document.getElementById('final-reveal-box');
 
-        function playCinematicHeartbeat() {
+        function playHeartbeat() {
             const context = new (window.AudioContext || window.webkitAudioContext)();
             const strike = (time) => {
-                const osc = context.createOscillator();
-                const gain = context.createGain();
-                osc.type = 'sine'; osc.frequency.setValueAtTime(50, time); osc.frequency.exponentialRampToValueAtTime(0.01, time + 0.8);
-                gain.gain.setValueAtTime(0.8, time); gain.gain.exponentialRampToValueAtTime(0.001, time + 0.8);
+                const osc = context.createOscillator(); const gain = context.createGain();
+                osc.type = 'sine'; osc.frequency.setValueAtTime(50, time);
+                gain.gain.setValueAtTime(0.6, time); gain.gain.exponentialRampToValueAtTime(0.001, time + 0.8);
                 osc.connect(gain); gain.connect(context.destination); osc.start(time); osc.stop(time + 0.8);
             };
-            strike(context.currentTime); strike(context.currentTime + 1.0); strike(context.currentTime + 2.0); strike(context.currentTime + 3.0);
+            strike(context.currentTime); strike(context.currentTime + 1.2); strike(context.currentTime + 2.4);
         }
 
         document.getElementById('trigger-btn').onclick = function() {
-            playCinematicHeartbeat();
-            setTimeout(() => { teaserAudio.play(); }, 4100);
+            playHeartbeat();
             trigger.style.opacity = '0';
             setTimeout(() => { 
                 trigger.style.display = 'none'; 
                 bg.style.opacity = '1'; bg.style.filter = 'grayscale(100%) blur(5px)';
-                content.style.display = 'flex';
+                teaserAudio.play();
                 runBattlecry();
             }, 1500);
-
-            // Reveal CTAs after cinematic finishes
-            setTimeout(() => {
-                box.style.display = 'none';
-                invite.innerHTML = "We are Sazon 🌳<br>See you in Kalibo! 🎭";
-                invite.style.display = 'block';
-                setTimeout(() => { 
-                    invite.style.opacity = '1';
-                    setTimeout(() => { 
-                        enterBtn.style.display = 'inline-block'; 
-                        calLink.style.display = 'inline-block';
-                        setTimeout(() => { 
-                            enterBtn.style.opacity = '1';
-                            calLink.style.opacity = '1';
-                        }, 100); 
-                    }, 2000);
-                }, 100);
-            }, 30000); 
         };
 
         async function runBattlecry() {
-            await new Promise(r => setTimeout(r, 4500)); 
+            // Lines 1-4 Breath Sequence
             for (let msg of messages) {
-                // Clear and add new animated span to trigger the CSS keyframes
-                box.innerHTML = `<span class="cinematic-text">${msg}</span>`;
-                await new Promise(r => setTimeout(r, 6200)); // Match the CSS animation duration
+                box.innerHTML = `<span class="cinematic-text ${msg.class}">${msg.text}</span>`;
+                await new Promise(r => setTimeout(r, 6000)); 
             }
+            
+            // THE CLIMAX: Jingle brings in the final reveal
+            box.style.display = 'none';
+            timer.style.opacity = '1';
+            finalBox.style.display = 'block';
+
+            // "We Are Sazon" Climax
+            setTimeout(() => { document.getElementById('line-sazon').style.opacity = '1'; }, 500);
+            // "See you in Kalibo" 
+            setTimeout(() => { document.getElementById('line-kalibo').style.opacity = '1'; }, 2500);
+            // Links and Buttons lock in
+            setTimeout(() => { document.getElementById('links-reveal').style.opacity = '1'; }, 4500);
         }
 
+        // Timer Logic
         const targetDate = new Date("July 23, 2027 00:00:00").getTime();
         function updateTimer() {
             const distance = targetDate - new Date().getTime();
-            if (distance < 0) { document.getElementById("timer").innerHTML = "WELCOME HOME"; return; }
+            if (distance < 0) { timer.innerHTML = "WELCOME HOME"; return; }
             document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
             document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
             document.getElementById("mins").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
