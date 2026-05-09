@@ -13,7 +13,7 @@
         body, html { margin: 0; padding: 0; height: 100%; background: var(--navy); color: white; font-family: 'Montserrat', sans-serif; overflow: hidden; touch-action: manipulation; }
 
         #hype-trigger { position: fixed; top:0; left:0; width:100%; height:100%; z-index: 10000; background: #000; display: flex; justify-content: center; align-items: center; }
-        #trigger-btn { padding: 15px 35px; background: transparent; border: 1px solid var(--gold); color: var(--gold); cursor: pointer; letter-spacing: 4px; text-transform: uppercase; font-size: 0.7rem; transition: 0.3s; }
+        #trigger-btn { padding: 15px 35px; background: transparent; border: 1px solid var(--gold); color: var(--gold); cursor: pointer; letter-spacing: 4px; text-transform: uppercase; font-size: 0.7rem; }
 
         .bg-overlay { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
@@ -23,22 +23,22 @@
 
         .content { position: relative; z-index: 10; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; box-sizing: border-box; }
         
-        #battlecry-box { width: 100%; margin-top: 20px; min-height: 150px; display: flex; align-items: center; justify-content: center; perspective: 1200px; }
+        #battlecry-box { width: 100%; margin-top: 20px; min-height: 180px; display: flex; align-items: center; justify-content: center; }
 
-        /* The Animation Fix: Added 'both' and absolute positioning to prevent overlap */
-        @keyframes breath {
-            0% { transform: scale(0.8) translateZ(-100px); letter-spacing: 2px; opacity: 0; }
-            15% { opacity: 1; }
-            85% { opacity: 1; }
-            100% { transform: scale(1.1) translateZ(150px); letter-spacing: 12px; opacity: 0; visibility: hidden; }
+        /* Simplified Animation: Removed translateZ to stop mobile ghosting */
+        @keyframes cinematicFade {
+            0% { opacity: 0; transform: scale(0.9); letter-spacing: 2px; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { opacity: 0; transform: scale(1.05); letter-spacing: 8px; }
         }
 
         .cinematic-text { 
-            position: absolute; /* Ensures lines don't push each other */
-            animation: breath 5s ease-in-out both; 
+            animation: cinematicFade 5s ease-in-out forwards; 
             text-transform: uppercase; 
             line-height: 1.4; 
-            width: 90%; 
+            width: 100%;
+            display: block;
         }
 
         .font-nostalgia { font-family: 'Prata', serif; font-style: italic; font-weight: 200; font-size: clamp(1.4rem, 5vw, 2.5rem); }
@@ -80,9 +80,9 @@
         <div id="battlecry-box"></div>
 
         <div id="final-reveal-box">
-            <div class="reveal-line font-sazon" id="line-sazon">WE ARE SAZON</div>
-            <div class="reveal-line font-nostalgia" id="line-kalibo" style="font-size: 1.3rem; color: var(--luminous-blue);">See you in Kalibo!</div>
-            <div class="reveal-line" id="links-reveal">
+            <div class="reveal-line font-sazon" id="line-sazon" style="opacity: 0;">WE ARE SAZON</div>
+            <div class="reveal-line font-nostalgia" id="line-kalibo" style="opacity: 0; font-size: 1.3rem; color: var(--luminous-blue);">See you in Kalibo!</div>
+            <div class="reveal-line" id="links-reveal" style="opacity: 0;">
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" class="btn-link" target="_blank">Register Now</a>
                 <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=SAZON+2027+GRAND+FAMILY+REUNION&dates=20270723T000000Z/20270725T000000Z&details=Gikan+sa+Gamut,+Tubtob+sa+Langit.&location=Marzon+Hotel+Kalibo,+Aklan&sf=true&output=xml" id="calendar-link" target="_blank">📅 Add to Calendar</a>
             </div>
@@ -110,42 +110,48 @@
             const context = new (window.AudioContext || window.webkitAudioContext)();
             const strike = (time) => {
                 const osc = context.createOscillator(); const gain = context.createGain();
-                osc.type = 'sine'; osc.frequency.setValueAtTime(40, time); // Deeper Thug
-                gain.gain.setValueAtTime(0.8, time); gain.gain.exponentialRampToValueAtTime(0.001, time + 0.5);
-                osc.connect(gain); gain.connect(context.destination); osc.start(time); osc.stop(time + 0.5);
+                osc.type = 'sine'; osc.frequency.setValueAtTime(45, time);
+                gain.gain.setValueAtTime(0.8, time); gain.gain.exponentialRampToValueAtTime(0.001, time + 0.6);
+                osc.connect(gain); gain.connect(context.destination); osc.start(time); osc.stop(time + 0.6);
             };
-            // 5 Distinct "Thugs"
-            for(let i=0; i<5; i++) { strike(context.currentTime + (i * 0.8)); }
+            // STRICT 1-SECOND SPACING (5 SECONDS TOTAL)
+            for(let i=0; i<5; i++) { strike(context.currentTime + i); }
         }
 
         document.getElementById('trigger-btn').onclick = function() {
             playHeartbeat();
             trigger.style.opacity = '0';
-            // Start Jingle exactly after 5th beat (approx 4 seconds)
+            // Start jingle after the 5th beat (5 seconds)
             setTimeout(() => { 
                 trigger.style.display = 'none'; 
                 bg.style.opacity = '1';
                 teaserAudio.play();
                 runBattlecry();
-            }, 4000); 
+            }, 5000);
         };
 
         async function runBattlecry() {
             for (let msg of messages) {
-                box.innerHTML = ''; // Full Purge
-                await new Promise(r => setTimeout(r, 100)); // Mobile "Breathe" room
-                box.innerHTML = `<span class="cinematic-text ${msg.class}">${msg.text}</span>`;
-                await new Promise(r => setTimeout(r, 5200)); 
+                // HARD RESET: Clear box to stop repetition
+                box.innerHTML = ""; 
+                await new Promise(r => setTimeout(r, 150)); 
+                
+                // Create element fresh each time
+                const span = document.createElement('span');
+                span.className = `cinematic-text ${msg.class}`;
+                span.innerText = msg.text;
+                box.appendChild(span);
+                
+                await new Promise(r => setTimeout(r, 5500)); 
             }
             
-            box.style.display = 'none';
+            box.innerHTML = ""; // Final clear
             timer.style.opacity = '1';
             finalBox.style.display = 'block';
 
-            // Reveal CTAs
             setTimeout(() => { document.getElementById('line-sazon').style.opacity = '1'; }, 500);
-            setTimeout(() => { document.getElementById('line-kalibo').style.opacity = '1'; }, 2000);
-            setTimeout(() => { document.getElementById('links-reveal').style.opacity = '1'; }, 4000);
+            setTimeout(() => { document.getElementById('line-kalibo').style.opacity = '1'; }, 2500);
+            setTimeout(() => { document.getElementById('links-reveal').style.opacity = '1'; }, 4500);
         }
 
         const targetDate = new Date("July 23, 2027 00:00:00").getTime();
