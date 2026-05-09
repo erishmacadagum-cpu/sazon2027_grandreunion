@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Sazon 2027 | The Clarion Call</title>
+    <meta property="og:title" content="Sazon 2027 | The Clarion Call">
+    <meta property="og:description" content="Gikan sa Gamut, Tubtob sa Langit. The journey home begins.">
+    <meta property="og:image" content="images/memories.jpg">
+
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&family=Prata&family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
     <style>
         :root { 
@@ -24,7 +29,7 @@
             background: linear-gradient(to bottom, rgba(0,8,20,0.85), rgba(0,8,20,0.2), rgba(0,8,20,0.95)),
                         url('images/memories.jpg') no-repeat center center; 
             background-size: cover;
-            filter: grayscale(100%) blur(15px); /* Starts slightly blurry per your request */
+            filter: grayscale(100%) blur(15px);
             z-index: 1; opacity: 0; 
             transition: opacity 4s ease, filter 25s ease-in-out; 
         }
@@ -83,7 +88,7 @@
         </div>
         <div id="battlecry-box"></div>
         <div id="invitation-text"></div>
-        <a href="branches.html" id="enter-heritage">ENTER THE HERITAGE</a>
+        <a href="#" id="enter-heritage">ENTER THE HERITAGE</a>
     </div>
 
     <footer>Marzon Hotel Kalibo - Aklan | #SAZON2027GRANDREUNION</footer>
@@ -100,7 +105,6 @@
         const invite = document.getElementById('invitation-text');
         const enterBtn = document.getElementById('enter-heritage');
 
-        // NEW: 4-Beat Rhythmic Heartbeat
         function playCinematicHeartbeat() {
             const context = new (window.AudioContext || window.webkitAudioContext)();
             const strike = (time) => {
@@ -116,8 +120,6 @@
                 osc.start(time);
                 osc.stop(time + 0.8);
             };
-
-            // 4 Beats, 1 second apart
             strike(context.currentTime); 
             strike(context.currentTime + 1.0);
             strike(context.currentTime + 2.0);
@@ -127,7 +129,6 @@
         document.getElementById('trigger-btn').onclick = function() {
             playCinematicHeartbeat();
             
-            // Wait for all 4 beats to finish before music starts
             setTimeout(() => {
                 teaserAudio.play().catch(e => console.log("Audio play blocked."));
             }, 4100);
@@ -136,23 +137,19 @@
             setTimeout(() => { 
                 trigger.style.display = 'none'; 
                 bg.style.opacity = '1';
-                bg.style.filter = 'grayscale(100%) blur(8px)'; /* Becomes slightly clearer over time */
+                bg.style.filter = 'grayscale(100%) blur(8px)';
                 content.style.display = 'flex';
                 runBattlecry();
             }, 2000);
 
-            // Final Invitation at 30 seconds
             setTimeout(() => {
                 bg.style.filter = 'grayscale(100%) blur(40px)'; 
                 bg.style.opacity = '0.4';
                 box.style.display = 'none';
-                
-                // Final staggered message
                 invite.innerHTML = "We are Sazon 🌳<br>See you in Kalibo! 🎭";
                 invite.style.display = 'block';
                 setTimeout(() => { 
                     invite.style.opacity = '1';
-                    // Show button 2 seconds after the text appears
                     setTimeout(() => {
                         enterBtn.style.display = 'inline-block';
                         setTimeout(() => enterBtn.style.opacity = '1', 100);
@@ -162,7 +159,7 @@
         };
 
         async function runBattlecry() {
-            await new Promise(r => setTimeout(r, 4100)); // Delay text until jingle starts
+            await new Promise(r => setTimeout(r, 4100)); 
             for (let msg of messages) {
                 box.innerText = msg;
                 box.style.opacity = '1';
