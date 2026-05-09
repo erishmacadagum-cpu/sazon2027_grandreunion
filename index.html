@@ -25,14 +25,13 @@
 
         .content { position: relative; z-index: 10; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
         
-        /* THE FIX: Fixed height and clear spacing to prevent overlap */
         #battlecry-box { 
             width: 100%;
-            margin-top: 40px; /* Pushes text away from timer */
+            margin-top: 40px;
             font-family: 'Prata', serif; 
             font-size: clamp(1.1rem, 5vw, 2.2rem); 
             color: #ffffff; line-height: 1.6; font-style: italic; 
-            min-height: 3.5em; /* Reserves space so text doesn't jump */
+            min-height: 3.5em; 
             transition: opacity 0.8s ease; opacity: 0;
             display: flex; align-items: center; justify-content: center;
         }
@@ -43,7 +42,18 @@
         .time-label { font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase; }
 
         #invitation-text { display: none; font-size: 1.2rem; color: var(--luminous-blue); margin-top: 20px; opacity: 0; transition: opacity 2s; line-height: 1.8; }
-        #enter-heritage { display: none; opacity: 0; transition: opacity 2s; padding: 15px 40px; border: 2px solid var(--luminous-blue); background: transparent; color: var(--luminous-blue); text-decoration: none; letter-spacing: 4px; text-transform: uppercase; font-size: 0.8rem; margin-top: 20px; }
+        
+        #enter-heritage { 
+            display: none; opacity: 0; transition: opacity 2s; padding: 15px 40px; 
+            border: 2px solid var(--luminous-blue); background: transparent; color: var(--luminous-blue); 
+            text-decoration: none; letter-spacing: 4px; text-transform: uppercase; font-size: 0.8rem; margin-top: 25px; 
+        }
+
+        #calendar-link {
+            display: none; opacity: 0; transition: opacity 2s; margin-top: 20px;
+            color: var(--gold); text-decoration: none; font-size: 0.7rem; letter-spacing: 2px;
+            border-bottom: 1px solid var(--gold); padding-bottom: 5px;
+        }
 
         footer { position: absolute; bottom: 15px; width: 100%; text-align: center; font-size: 0.65rem; letter-spacing: 2px; color: rgba(255,255,255,0.8); z-index: 10; }
     </style>
@@ -62,7 +72,9 @@
         </div>
         <div id="battlecry-box"></div>
         <div id="invitation-text"></div>
-        <a href="#" id="enter-heritage">ENTER THE HERITAGE</a>
+        
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" id="enter-heritage" target="_blank">REGISTER FOR EARLY BIRD UPDATES</a>
+        <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=SAZON+2027+GRAND+FAMILY+REUNION&dates=20270723T000000Z/20270725T000000Z&details=Gikan+sa+Gamut,+Tubtob+sa+Langit.+See+you+at+the+Grand+Reunion!&location=Marzon+Hotel+Kalibo,+Aklan&sf=true&output=xml" id="calendar-link" target="_blank">📅 ADD TO CALENDAR</a>
     </div>
 
     <footer>Marzon Hotel Kalibo - Aklan | #SAZON2027GRANDREUNION</footer>
@@ -76,6 +88,7 @@
         const box = document.getElementById('battlecry-box');
         const invite = document.getElementById('invitation-text');
         const enterBtn = document.getElementById('enter-heritage');
+        const calLink = document.getElementById('calendar-link');
 
         function playCinematicHeartbeat() {
             const context = new (window.AudioContext || window.webkitAudioContext)();
@@ -100,13 +113,21 @@
                 runBattlecry();
             }, 1500);
 
+            // Final Reveal sequence after messages
             setTimeout(() => {
                 box.style.display = 'none';
                 invite.innerHTML = "We are Sazon 🌳<br>See you in Kalibo! 🎭";
                 invite.style.display = 'block';
                 setTimeout(() => { 
                     invite.style.opacity = '1';
-                    setTimeout(() => { enterBtn.style.display = 'inline-block'; setTimeout(() => enterBtn.style.opacity = '1', 100); }, 2000);
+                    setTimeout(() => { 
+                        enterBtn.style.display = 'inline-block'; 
+                        calLink.style.display = 'inline-block';
+                        setTimeout(() => { 
+                            enterBtn.style.opacity = '1';
+                            calLink.style.opacity = '1';
+                        }, 100); 
+                    }, 2000);
                 }, 100);
             }, 30000);
         };
@@ -114,11 +135,10 @@
         async function runBattlecry() {
             await new Promise(r => setTimeout(r, 4500)); 
             for (let msg of messages) {
-                box.style.opacity = '0'; // Fade out current
-                await new Promise(r => setTimeout(r, 800)); // Wait for fade
-                box.innerText = ""; // THE FIX: Clear the text entirely
-                box.innerText = msg; // Put new text in
-                box.style.opacity = '1'; // Fade in
+                box.style.opacity = '0';
+                await new Promise(r => setTimeout(r, 800)); 
+                box.innerText = msg;
+                box.style.opacity = '1';
                 await new Promise(r => setTimeout(r, 5000)); 
             }
         }
