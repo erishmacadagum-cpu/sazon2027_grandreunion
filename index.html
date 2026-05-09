@@ -6,58 +6,56 @@
     <link rel="icon" type="image/png" href="images/favicon.png">
     <title>Sazon 2027 | The Clarion Call</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&family=Prata&family=Cinzel:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&family=Prata&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         :root { --gold: #d4af37; --navy: #000814; --luminous-blue: #00e5ff; }
-        body, html { margin: 0; padding: 0; height: 100%; background: var(--navy); color: white; font-family: 'Montserrat', sans-serif; overflow: hidden; }
+        body, html { margin: 0; padding: 0; height: 100%; background: var(--navy); color: white; font-family: 'Montserrat', sans-serif; overflow: hidden; touch-action: manipulation; }
 
         #hype-trigger { position: fixed; top:0; left:0; width:100%; height:100%; z-index: 10000; background: #000; display: flex; justify-content: center; align-items: center; }
-        #trigger-btn { padding: 15px 35px; background: transparent; border: 1px solid var(--gold); color: var(--gold); cursor: pointer; letter-spacing: 4px; text-transform: uppercase; font-size: 0.75rem; transition: 0.3s; }
+        #trigger-btn { padding: 15px 35px; background: transparent; border: 1px solid var(--gold); color: var(--gold); cursor: pointer; letter-spacing: 4px; text-transform: uppercase; font-size: 0.7rem; transition: 0.3s; }
 
         .bg-overlay { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
             background: linear-gradient(to bottom, rgba(0,8,20,0.9), rgba(0,8,20,0.3), rgba(0,8,20,0.95)), url('images/memories.jpg') no-repeat center center; 
-            background-size: cover; filter: grayscale(100%) blur(15px); z-index: 1; opacity: 0; transition: opacity 4s ease, filter 20s ease-in-out; 
+            background-size: cover; filter: grayscale(100%) blur(5px); z-index: 1; opacity: 0; transition: opacity 4s ease; 
         }
 
-        .content { position: relative; z-index: 10; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
+        .content { position: relative; z-index: 10; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; box-sizing: border-box; }
         
-        #battlecry-box { width: 100%; margin-top: 40px; min-height: 5em; display: flex; align-items: center; justify-content: center; perspective: 1000px; }
+        #battlecry-box { width: 100%; margin-top: 20px; min-height: 120px; display: flex; align-items: center; justify-content: center; perspective: 1200px; }
 
-        /* The 3D Breath Animation */
+        /* Fixed Animation: Forwards ensures it stays at the end state, no repetition */
         @keyframes breath {
-            from { transform: scale(0.9) translateZ(-50px); letter-spacing: 2px; opacity: 0; }
+            0% { transform: scale(0.8) translateZ(-100px); letter-spacing: 2px; opacity: 0; }
             20% { opacity: 1; }
             80% { opacity: 1; }
-            to { transform: scale(1.1) translateZ(100px); letter-spacing: 12px; opacity: 0; }
+            100% { transform: scale(1.1) translateZ(150px); letter-spacing: 12px; opacity: 0; }
         }
 
-        .cinematic-text { display: inline-block; animation: breath 6s ease-in-out forwards; text-transform: uppercase; line-height: 1.4; }
+        .cinematic-text { display: block; animation: breath 5.5s ease-in-out forwards; text-transform: uppercase; line-height: 1.4; width: 100%; }
 
-        /* Specific Font Styles for Variety */
-        .font-nostalgia { font-family: 'Prata', serif; font-style: italic; font-weight: 200; font-size: clamp(1.5rem, 6vw, 2.8rem); }
-        .font-legacy { font-family: 'Cinzel', serif; font-weight: 700; color: var(--gold); font-size: clamp(1.2rem, 5vw, 2.5rem); }
-        .font-sazon { font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 15px; color: white; font-size: clamp(2rem, 8vw, 4rem); }
+        .font-nostalgia { font-family: 'Prata', serif; font-style: italic; font-weight: 200; font-size: clamp(1.4rem, 5vw, 2.5rem); }
+        .font-legacy { font-family: 'Cinzel', serif; font-weight: 700; color: var(--gold); font-size: clamp(1.1rem, 4vw, 2.2rem); }
+        .font-sazon { font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 10px; color: white; font-size: clamp(1.8rem, 7vw, 3.5rem); }
 
-        #timer { display: flex; gap: 10px; width: 100%; justify-content: center; transition: opacity 2s; opacity: 0; }
-        .time-block { text-align: center; border-bottom: 2px solid var(--gold); padding: 5px; min-width: 65px; }
-        .time-num { display: block; font-size: clamp(1.8rem, 8vw, 3rem); font-weight: 600; color: var(--gold); }
-        .time-label { font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase; }
+        #timer { display: flex; gap: 8px; width: 100%; justify-content: center; transition: opacity 2s; opacity: 0; margin-bottom: 10px; }
+        .time-block { text-align: center; border-bottom: 2px solid var(--gold); padding: 4px; min-width: 55px; }
+        .time-num { display: block; font-size: clamp(1.5rem, 6vw, 2.5rem); font-weight: 600; color: var(--gold); }
+        .time-label { font-size: 0.5rem; letter-spacing: 1px; text-transform: uppercase; }
 
-        #final-reveal-box { display: none; margin-top: 20px; text-align: center; }
-        .reveal-line { opacity: 0; transition: opacity 2s ease; margin: 10px 0; }
+        #final-reveal-box { display: none; width: 100%; }
+        .reveal-line { opacity: 0; transition: opacity 2s ease; margin: 15px 0; }
         
         .btn-link { 
-            display: inline-block; padding: 15px 40px; border: 1px solid var(--luminous-blue); 
+            display: inline-block; padding: 14px 30px; border: 1px solid var(--luminous-blue); 
             background: transparent; color: var(--luminous-blue); text-decoration: none; 
-            letter-spacing: 4px; text-transform: uppercase; font-size: 0.75rem; margin-top: 20px; transition: 0.5s;
+            letter-spacing: 3px; text-transform: uppercase; font-size: 0.7rem; margin-top: 10px;
         }
-        .btn-link:hover { background: var(--luminous-blue); color: black; box-shadow: 0 0 20px var(--luminous-blue); }
 
-        #calendar-link { display: block; margin-top: 20px; color: var(--gold); text-decoration: none; font-size: 0.65rem; letter-spacing: 2px; border-bottom: 1px solid rgba(212, 175, 55, 0.4); padding-bottom: 5px; }
+        #calendar-link { display: block; margin-top: 15px; color: var(--gold); text-decoration: none; font-size: 0.6rem; letter-spacing: 2px; border-bottom: 1px solid rgba(212, 175, 55, 0.4); padding-bottom: 4px; width: fit-content; margin-left: auto; margin-right: auto; }
 
-        footer { position: absolute; bottom: 15px; width: 100%; text-align: center; font-size: 0.6rem; letter-spacing: 2px; color: rgba(255,255,255,0.6); z-index: 10; text-transform: uppercase; }
+        footer { position: absolute; bottom: 10px; width: 100%; text-align: center; font-size: 0.55rem; letter-spacing: 1.5px; color: rgba(255,255,255,0.5); z-index: 10; }
     </style>
 </head>
 <body>
@@ -76,20 +74,19 @@
         <div id="battlecry-box"></div>
 
         <div id="final-reveal-box">
-            <h2 class="reveal-line font-sazon" id="line-sazon">WE ARE SAZON</h2>
-            <p class="reveal-line font-nostalgia" id="line-kalibo" style="font-size: 1.5rem; color: var(--luminous-blue);">See you in Kalibo!</p>
-            <div class="reveal-line" id="links-reveal">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" class="btn-link" target="_blank">Register for Early Bird Updates</a>
+            <div class="reveal-line font-sazon" id="line-sazon" style="opacity: 0;">WE ARE SAZON</div>
+            <div class="reveal-line font-nostalgia" id="line-kalibo" style="opacity: 0; font-size: 1.3rem; color: var(--luminous-blue);">See you in Kalibo!</div>
+            <div class="reveal-line" id="links-reveal" style="opacity: 0;">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" class="btn-link" target="_blank">Register Now</a>
                 <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=SAZON+2027+GRAND+FAMILY+REUNION&dates=20270723T000000Z/20270725T000000Z&details=Gikan+sa+Gamut,+Tubtob+sa+Langit.&location=Marzon+Hotel+Kalibo,+Aklan&sf=true&output=xml" id="calendar-link" target="_blank">📅 Add to Calendar</a>
             </div>
         </div>
     </div>
 
-    <footer>Marzon Hotel Kalibo - Aklan | #SAZON2027GRANDREUNION</footer>
+    <footer>Marzon Hotel Kalibo | #SAZON2027GRANDREUNION</footer>
 
     <script>
         const teaserAudio = new Audio('audio/teaser_jingle.mp3'); 
-        // Varied fonts for each line
         const messages = [
             { text: "We have missed HOME.", class: "font-nostalgia" },
             { text: "We have missed FAMILY.", class: "font-nostalgia" },
@@ -107,11 +104,12 @@
             const context = new (window.AudioContext || window.webkitAudioContext)();
             const strike = (time) => {
                 const osc = context.createOscillator(); const gain = context.createGain();
-                osc.type = 'sine'; osc.frequency.setValueAtTime(50, time);
-                gain.gain.setValueAtTime(0.6, time); gain.gain.exponentialRampToValueAtTime(0.001, time + 0.8);
-                osc.connect(gain); gain.connect(context.destination); osc.start(time); osc.stop(time + 0.8);
+                osc.type = 'sine'; osc.frequency.setValueAtTime(45, time);
+                gain.gain.setValueAtTime(0.7, time); gain.gain.exponentialRampToValueAtTime(0.001, time + 0.6);
+                osc.connect(gain); gain.connect(context.destination); osc.start(time); osc.stop(time + 0.6);
             };
-            strike(context.currentTime); strike(context.currentTime + 1.2); strike(context.currentTime + 2.4);
+            // 5 Heartbeats Logic
+            for(let i=0; i<5; i++) { strike(context.currentTime + (i * 0.9)); }
         }
 
         document.getElementById('trigger-btn').onclick = function() {
@@ -119,33 +117,31 @@
             trigger.style.opacity = '0';
             setTimeout(() => { 
                 trigger.style.display = 'none'; 
-                bg.style.opacity = '1'; bg.style.filter = 'grayscale(100%) blur(5px)';
+                bg.style.opacity = '1';
                 teaserAudio.play();
                 runBattlecry();
-            }, 1500);
+            }, 1000);
         };
 
         async function runBattlecry() {
-            // Lines 1-4 Breath Sequence
             for (let msg of messages) {
+                // CLEAR the box entirely first to prevent mobile double-rendering
+                box.innerHTML = '';
+                await new Promise(r => setTimeout(r, 50)); 
                 box.innerHTML = `<span class="cinematic-text ${msg.class}">${msg.text}</span>`;
-                await new Promise(r => setTimeout(r, 6000)); 
+                await new Promise(r => setTimeout(r, 5500)); 
             }
             
-            // THE CLIMAX: Jingle brings in the final reveal
             box.style.display = 'none';
             timer.style.opacity = '1';
             finalBox.style.display = 'block';
 
-            // "We Are Sazon" Climax
-            setTimeout(() => { document.getElementById('line-sazon').style.opacity = '1'; }, 500);
-            // "See you in Kalibo" 
-            setTimeout(() => { document.getElementById('line-kalibo').style.opacity = '1'; }, 2500);
-            // Links and Buttons lock in
-            setTimeout(() => { document.getElementById('links-reveal').style.opacity = '1'; }, 4500);
+            // Seamless Final Reveal
+            setTimeout(() => { document.getElementById('line-sazon').style.opacity = '1'; }, 400);
+            setTimeout(() => { document.getElementById('line-kalibo').style.opacity = '1'; }, 2000);
+            setTimeout(() => { document.getElementById('links-reveal').style.opacity = '1'; }, 3800);
         }
 
-        // Timer Logic
         const targetDate = new Date("July 23, 2027 00:00:00").getTime();
         function updateTimer() {
             const distance = targetDate - new Date().getTime();
