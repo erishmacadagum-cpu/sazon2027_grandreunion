@@ -18,15 +18,15 @@
         #trigger-btn { padding: 18px 45px; background: transparent; border: 1px solid var(--gold); color: var(--gold); cursor: pointer; letter-spacing: 6px; font-family: 'Montserrat'; text-transform: uppercase; font-size: 0.85rem; transition: 0.5s; z-index: 10001; }
         #trigger-btn:hover { background: var(--gold); color: black; box-shadow: 0 0 30px var(--gold); }
 
-        /* Background - Gradual Blur Fade */
+        /* Background - Gentle Mystery Blur */
         .bg-overlay { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            background: linear-gradient(to bottom, rgba(0,8,20,0.8), rgba(0,8,20,0.2), rgba(0,8,20,0.9)),
+            background: linear-gradient(to bottom, rgba(0,8,20,0.85), rgba(0,8,20,0.2), rgba(0,8,20,0.95)),
                         url('images/memories.jpg') no-repeat center center; 
             background-size: cover;
-            filter: grayscale(100%) blur(40px); /* Start very blurry */
+            filter: grayscale(100%) blur(15px); /* Starts slightly blurry per your request */
             z-index: 1; opacity: 0; 
-            transition: opacity 4s ease, filter 25s ease-in-out; /* Slow, smooth clarity gain */
+            transition: opacity 4s ease, filter 25s ease-in-out; 
         }
 
         .content { position: relative; z-index: 10; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; display: none; }
@@ -37,32 +37,32 @@
             transition: opacity 1.5s ease; opacity: 0;
         }
 
-        /* Upgraded Timer Visibility */
-        #timer { display: flex; gap: 20px; margin-bottom: 50px; opacity: 0.9; transition: opacity 2s; }
-        .time-block { text-align: center; border-bottom: 2px solid var(--gold); padding: 10px; min-width: 70px; }
-        .time-num { display: block; font-size: 2.2rem; font-weight: 400; color: var(--gold); font-family: 'Montserrat'; }
-        .time-label { font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: white; }
+        /* The "Loud" Timer */
+        #timer { display: flex; gap: 20px; margin-bottom: 50px; opacity: 1; transition: opacity 2s; }
+        .time-block { text-align: center; border-bottom: 4px solid var(--gold); padding: 10px; min-width: 85px; }
+        .time-num { display: block; font-size: 3rem; font-weight: 600; color: var(--gold); font-family: 'Montserrat'; text-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
+        .time-label { font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; color: white; font-weight: 400; }
 
-        /* Final Invitation Text */
+        /* Finale Text Layout */
         #invitation-text { 
             display: none; font-family: 'Montserrat', sans-serif; font-weight: 200; 
-            font-size: 1.2rem; letter-spacing: 4px; color: var(--luminous-blue); 
-            margin-bottom: 25px; opacity: 0; transition: opacity 2s; 
+            font-size: 1.5rem; letter-spacing: 5px; color: var(--luminous-blue); 
+            margin-bottom: 30px; opacity: 0; transition: opacity 2s; line-height: 2;
         }
 
         #enter-heritage { 
             display: none; opacity: 0; transition: opacity 2s; padding: 20px 60px; 
-            border: 1px solid var(--luminous-blue); background: transparent; 
+            border: 2px solid var(--luminous-blue); background: transparent; 
             color: var(--luminous-blue); text-decoration: none; font-weight: 600; 
             letter-spacing: 6px; animation: pulseBlue 2s infinite; text-transform: uppercase; 
         }
         @keyframes pulseBlue { 0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); } 70% { box-shadow: 0 0 0 25px rgba(0, 229, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); } }
 
-        /* Readable Footer */
+        /* Visible Footer */
         footer { 
             position: absolute; bottom: 25px; width: 100%; text-align: center; 
-            font-size: 0.75rem; letter-spacing: 5px; color: rgba(255,255,255,0.7); /* Increased Opacity */
-            z-index: 10; font-weight: 400; text-transform: uppercase;
+            font-size: 0.85rem; letter-spacing: 5px; color: rgba(255,255,255,0.9); 
+            z-index: 10; font-weight: 400; text-transform: uppercase; text-shadow: 0 2px 4px black;
         }
     </style>
 </head>
@@ -100,63 +100,69 @@
         const invite = document.getElementById('invitation-text');
         const enterBtn = document.getElementById('enter-heritage');
 
-        function playCinematicBoom() {
+        // NEW: 4-Beat Rhythmic Heartbeat
+        function playCinematicHeartbeat() {
             const context = new (window.AudioContext || window.webkitAudioContext)();
-            const strike = (time, freq, volume, duration) => {
+            const strike = (time) => {
                 const osc = context.createOscillator();
                 const gain = context.createGain();
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(freq, time);
-                osc.frequency.exponentialRampToValueAtTime(0.01, time + duration);
-                gain.gain.setValueAtTime(volume, time);
-                gain.gain.exponentialRampToValueAtTime(0.001, time + duration);
+                osc.frequency.setValueAtTime(50, time);
+                osc.frequency.exponentialRampToValueAtTime(0.01, time + 0.8);
+                gain.gain.setValueAtTime(0.8, time);
+                gain.gain.exponentialRampToValueAtTime(0.001, time + 0.8);
                 osc.connect(gain);
                 gain.connect(context.destination);
                 osc.start(time);
-                osc.stop(time + duration);
+                osc.stop(time + 0.8);
             };
 
-            // Heavier Heartbeat - Lasts 4 seconds
-            strike(context.currentTime, 50, 0.9, 4.0); 
-            strike(context.currentTime + 0.4, 30, 0.7, 3.5);
+            // 4 Beats, 1 second apart
+            strike(context.currentTime); 
+            strike(context.currentTime + 1.0);
+            strike(context.currentTime + 2.0);
+            strike(context.currentTime + 3.0);
         }
 
         document.getElementById('trigger-btn').onclick = function() {
-            playCinematicBoom();
+            playCinematicHeartbeat();
             
-            // 4 Second Delay for Heartbeat to "Breathe" before Jingle
+            // Wait for all 4 beats to finish before music starts
             setTimeout(() => {
                 teaserAudio.play().catch(e => console.log("Audio play blocked."));
-            }, 4000);
+            }, 4100);
 
             trigger.style.opacity = '0';
             setTimeout(() => { 
                 trigger.style.display = 'none'; 
                 bg.style.opacity = '1';
-                bg.style.filter = 'grayscale(100%) blur(12px)'; /* Smoothly transitions to light blur over 25s */
+                bg.style.filter = 'grayscale(100%) blur(8px)'; /* Becomes slightly clearer over time */
                 content.style.display = 'flex';
                 runBattlecry();
             }, 2000);
 
-            // Climax Sequence (at 30 seconds)
+            // Final Invitation at 30 seconds
             setTimeout(() => {
-                bg.style.filter = 'grayscale(100%) blur(60px)'; /* Recede into mist */
-                bg.style.opacity = '0.3';
+                bg.style.filter = 'grayscale(100%) blur(40px)'; 
+                bg.style.opacity = '0.4';
                 box.style.display = 'none';
                 
-                // Show Final Sazon Message
+                // Final staggered message
                 invite.innerHTML = "We are Sazon 🌳<br>See you in Kalibo! 🎭";
                 invite.style.display = 'block';
                 setTimeout(() => { 
                     invite.style.opacity = '1';
-                    enterBtn.style.display = 'inline-block';
-                    setTimeout(() => enterBtn.style.opacity = '1', 500);
+                    // Show button 2 seconds after the text appears
+                    setTimeout(() => {
+                        enterBtn.style.display = 'inline-block';
+                        setTimeout(() => enterBtn.style.opacity = '1', 100);
+                    }, 2000);
                 }, 100);
             }, 30000);
         };
 
         async function runBattlecry() {
-            await new Promise(r => setTimeout(r, 4000)); // Sync with music start
+            await new Promise(r => setTimeout(r, 4100)); // Delay text until jingle starts
             for (let msg of messages) {
                 box.innerText = msg;
                 box.style.opacity = '1';
