@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sazon 13 Branches | Registration</title>
+    <title>Sazon 13 Branches | Legacy</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&family=Prata&display=swap" rel="stylesheet">
     <style>
         :root { 
@@ -13,67 +13,53 @@
         }
         body { margin: 0; background: var(--navy); color: white; font-family: 'Montserrat', sans-serif; }
         
-        header { text-align: center; padding: 50px 20px; background: rgba(0,0,0,0.3); }
-        h1 { font-family: 'Prata', serif; font-size: 2.5rem; color: var(--gold); margin: 0; }
-        p.tagline { letter-spacing: 3px; text-transform: uppercase; font-size: 0.8rem; margin-top: 10px; color: rgba(255,255,255,0.7); }
+        header { text-align: center; padding: 60px 20px; }
+        h1 { font-family: 'Prata', serif; font-size: 2.8rem; color: var(--gold); margin: 0; }
+        p.tagline { letter-spacing: 4px; text-transform: uppercase; font-size: 0.9rem; margin-top: 10px; color: white; opacity: 0.8; }
 
         .branch-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
             padding: 40px 20px;
-            max-width: 1300px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        .branch-card {
-            background: #000c1d;
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
+        /* THE GLOWING BUTTONS YOU LOVE */
+        .branch-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 80px;
+            text-decoration: none;
+            color: white;
+            font-family: 'Prata', serif;
+            font-size: 1.5rem;
+            border-radius: 15px;
             position: relative;
+            background: var(--navy);
             border: 2px solid transparent;
-            background-image: linear-gradient(#000c1d, #000c1d), 
-                              linear-gradient(var(--angle), #ff00ea, #00e5ff, #7000ff, #ffcc00);
+            /* Multi-color Animated Border */
+            background-image: linear-gradient(var(--navy), var(--navy)), 
+                              linear-gradient(90deg, #ff00ea, #00e5ff, #7000ff, #ffcc00);
             background-origin: border-box;
             background-clip: content-box, border-box;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: transform 0.3s ease;
+            animation: moveGlow 4s linear infinite;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        @property --angle {
-          syntax: '<angle>';
-          initial-value: 0deg;
-          inherits: false;
+        @keyframes moveGlow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
         }
 
-        .branch-card:hover { transform: translateY(-10px); }
-
-        @keyframes rotate { to { --angle: 360deg; } }
-        .branch-card { animation: 4s rotate linear infinite; }
-
-        .branch-name { font-family: 'Prata', serif; font-size: 2rem; color: white; margin-bottom: 20px; }
-
-        .reg-btn {
-            display: inline-block;
-            background: transparent;
-            border: 2px solid var(--luminous-blue);
-            color: var(--luminous-blue);
-            padding: 15px 25px;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            transition: 0.3s;
+        .branch-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.4);
         }
 
-        .reg-btn:hover { background: var(--luminous-blue); color: var(--navy); box-shadow: 0 0 20px var(--luminous-blue); }
-
-        .sub-text { display: block; font-size: 0.65rem; margin-top: 10px; color: rgba(255,255,255,0.6); font-weight: 400; text-transform: none; letter-spacing: 0; }
-
-        footer { text-align: center; padding: 40px; font-size: 0.8rem; color: var(--gold); opacity: 0.8; }
+        footer { text-align: center; padding: 50px; font-size: 0.8rem; letter-spacing: 2px; color: var(--gold); }
     </style>
 </head>
 <body>
@@ -84,19 +70,19 @@
 </header>
 
 <div class="branch-grid">
-    <div class="branch-card"><div class="branch-name">Serafin</div><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="reg-btn">Serafin Family Registration<span class="sub-text">Click here to join the 2027 Grand Reunion</span></a></div>
-    <div class="branch-card"><div class="branch-name">Monserat</div><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="reg-btn">Monserat Family Registration<span class="sub-text">Click here to join the 2027 Grand Reunion</span></a></div>
-    <div class="branch-card"><div class="branch-name">Felomina</div><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="reg-btn">Felomina Family Registration<span class="sub-text">Click here to join the 2027 Grand Reunion</span></a></div>
-    <div class="branch-card"><div class="branch-name">Estrella</div><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="reg-btn">Estrella Family Registration<span class="sub-text">Click here to join the 2027 Grand Reunion</span></a></div>
-    <div class="branch-card"><div class="branch-name">Gregorio</div><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="reg-btn">Gregorio Family Registration<span class="sub-text">Click here to join the 2027 Grand Reunion</span></a></div>
-    <div class="branch-card"><div class="branch-name">Regino</div><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="reg-btn">Regino Family Registration<span class="sub-text">Click here to join the 2027 Grand Reunion</span></a></div>
-    <div class="branch-card"><div class="branch-name">Maria</div><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="reg-btn">Maria Family Registration<span class="sub-text">Click here to join the 2027 Grand Reunion</span></a></div>
-    <div class="branch-card"><div class="branch-name">Concepcion</div><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="reg-btn">Concepcion Family Registration<span class="sub-text">Click here to join the 2027 Grand Reunion</span></a></div>
-    <div class="branch-card"><div class="branch-name">Cezar</div><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="reg-btn">Cezar Family Registration<span class="sub-text">Click here to join the 2027 Grand Reunion</span></a></div>
-    <div class="branch-card"><div class="branch-name">Priscilla</div><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="reg-btn">Priscilla Family Registration<span class="sub-text">Click here to join the 2027 Grand Reunion</span></a></div>
-    <div class="branch-card"><div class="branch-name">Gloria</div><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="reg-btn">Gloria Family Registration<span class="sub-text">Click here to join the 2027 Grand Reunion</span></a></div>
-    <div class="branch-card"><div class="branch-name">Reynaldo</div><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="reg-btn">Reynaldo Family Registration<span class="sub-text">Click here to join the 2027 Grand Reunion</span></a></div>
-    <div class="branch-card"><div class="branch-name">Nilda</div><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="reg-btn">Nilda Family Registration<span class="sub-text">Click here to join the 2027 Grand Reunion</span></a></div>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-btn">Serafin</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-btn">Monserat</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-btn">Felomina</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-btn">Estrella</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-btn">Gregorio</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-btn">Regino</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-btn">Maria</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-btn">Concepcion</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-btn">Cezar</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-btn">Priscilla</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-btn">Gloria</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-btn">Reynaldo</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" class="branch-btn">Nilda</a>
 </div>
 
 <footer>#SAZON2027 | Marzon Hotel Kalibo, Aklan</footer>
