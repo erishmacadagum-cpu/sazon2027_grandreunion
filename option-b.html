@@ -191,21 +191,20 @@
     <audio id="clickSfx" src="ui-click-ripple.mp3"></audio>
 
     <script>
-        const anthem = document.getElementById('sazonAnthem');
-        const hoverSfx = document.getElementById('hoverSfx');
-        const clickSfx = document.getElementById('clickSfx');
-        const playBtn = document.querySelector('.play-btn');
+       const anthem = document.getElementById('sazonAnthem');
+const playBtn = document.querySelector('.play-btn');
 
-        function togglePlay() {
-            if (anthem.paused) {
-                anthem.play();
-                playBtn.innerHTML = "⏸";
-                playBtn.style.background = "var(--accent-teal)";
-            } else {
-                anthem.pause();
-                playBtn.innerHTML = "▶";
-                playBtn.style.background = "var(--accent-coral)";
-            }
+function togglePlay() {
+    if (anthem.paused) {
+        anthem.play();
+        playBtn.innerHTML = "⏸";
+        playBtn.style.background = "var(--accent-teal)";
+    } else {
+        anthem.pause();
+        playBtn.innerHTML = "▶";
+        playBtn.style.background = "var(--accent-coral)";
+    }
+}
             clickSfx.currentTime = 0;
             clickSfx.play();
         }
