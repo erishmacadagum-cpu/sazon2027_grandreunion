@@ -239,12 +239,31 @@
         <span style="font-size: 0.8rem; font-weight: 600;">Sazon Reunion Anthem</span>
     </div>
 
-    <script>
-        function togglePlay() {
-            // Placeholder for your new song file
-            alert("This will trigger your Tropical Lo-Fi Piano anthem and Air-Swipe SFX!");
+    <!-- The Hidden Audio Player -->
+<audio id="sazonAnthem" loop>
+    <source src="https://drive.google.com/file/d/11-PUJWVpMK-L2ejysypOjdYDQkHpEG-v/view?usp=sharing" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<script>
+    const anthem = document.getElementById('sazonAnthem');
+    const playBtn = document.querySelector('.play-btn');
+
+    function togglePlay() {
+        if (anthem.paused) {
+            anthem.play();
+            playBtn.innerHTML = "⏸"; // Changes icon to Pause
+            playBtn.style.background = "var(--accent-teal)"; // Changes color when playing
+        } else {
+            anthem.pause();
+            playBtn.innerHTML = "▶"; // Changes icon back to Play
+            playBtn.style.background = "var(--accent-coral)";
         }
-    </script>
+    }
+
+    // Optional: Add a soft volume ramp-up for that "exquisite" feel
+    anthem.volume = 0.5; 
+</script>
 
 </body>
 </html>
