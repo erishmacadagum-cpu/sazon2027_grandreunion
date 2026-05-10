@@ -179,10 +179,10 @@
             </div>
     </div>
 
-  <div class="audio-dock">
-        <button class="play-btn" onclick="togglePlay()">▶</button>
-        <span style="font-size: 0.8rem; font-weight: 600;">Sazon Reunion Anthem</span>
-    </div>
+  <div class="audio-dock" style="position: relative; z-index: 999;">
+    <button class="play-btn" onclick="togglePlay()" style="cursor: pointer; pointer-events: auto;">▶</button>
+    <span style="font-size: 0.8rem; font-weight: 600;">Sazon Reunion Anthem</span>
+</div>
 
     <audio id="sazonAnthem" loop>
         <source src="sazon-reunion-5min.mp3" type="audio/mpeg">
