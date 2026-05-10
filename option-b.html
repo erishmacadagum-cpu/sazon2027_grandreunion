@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sazon 2027 | Grand Family Reunion</title>
+    
+    <!-- Modern Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Contemporary Family Reunion Palette */
+        :root {
+            --bg-cream: #FFFDF9;     /* Primary Base: Warm Cream */
+            --accent-coral: #FF6B6B; /* Primary Accent: Vibrant Coral */
+            --accent-teal: #4ECDC4;  /* Secondary Accent: Bright Teal */
+            --high-yellow: #FFE66D;  /* Detailing: Sunny Yellow */
+            --text-dark: #2C3E50;
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- Header Section --- */
+        header {
+            padding: 100px 20px 60px;
+            text-align: center;
+            background: linear-gradient(rgba(255, 253, 249, 0.8), rgba(255, 253, 249, 0.9)),
+                        url('https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80'); /* Scenic placeholder */
+            background-size: cover;
+            background-position: center;
+            border-bottom: 4px solid var(--high-yellow);
+        }
+
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            color: var(--accent-coral);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .tagline {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            color: var(--accent-teal);
+            font-style: italic;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* --- Bento-Box Mosaic Grid --- */
+        .container {
+            max-width: 1200px;
+            margin: -40px auto 80px;
+            padding: 0 20px;
+        }
+
+        .mosaic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-auto-rows: 220px;
+            gap: 20px;
+        }
+
+        /* Large Featured Card (Roots) */
+        .card-large {
+            grid-column: span 2;
+            grid-row: span 2;
+            background: var(--white);
+            border-radius: 30px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border: 2px solid rgba(78, 205, 196, 0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-large::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 8px; height: 100%;
+            background: var(--accent-teal);
+        }
+
+        .card-large h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--accent-teal);
+            margin: 0 0 15px 0;
+        }
+
+        /* Branch Tiles */
+        .branch-tile {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 25px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 1;
+        }
+
+        .branch-tile:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-coral);
+            box-shadow: 0 15px 30px rgba(255, 107, 107, 0.15);
+        }
+
+        .branch-tile h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin: 0;
+            color: var(--accent-coral);
+        }
+
+        .branch-tile .btn-small {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-teal);
+            border-bottom: 2px solid var(--high-yellow);
+            align-self: flex-start;
+        }
+
+        /* --- Audio Floating Controls --- */
+        .audio-dock {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 12px 25px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            z-index: 1000;
+            border: 1px solid var(--high-yellow);
+        }
+
+        .play-btn {
+            background: var(--accent-coral);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .mosaic-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
+            .card-large { grid-column: span 1; grid-row: span 1; padding: 30px; }
+            .main-title { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 class="main-title">Sazon 2027</h1>
+        <div class="tagline">Gikan sa Gamut, Tubtob sa Langit</div>
+    </header>
+
+    <div class="container">
+        <div class="mosaic-grid">
+            
+            <!-- Roots Section (Tereso & Teofista) -->
+            <div class="card-large">
+                <h2>The Roots</h2>
+                <p><strong>Tereso & Teofista Sazon</strong></p>
+                <p>Honoring the legacy that started it all. Join us as we celebrate our history and look toward our bright future in Kalibo, Aklan.</p>
+                <div style="margin-top: 20px; color: var(--accent-teal); font-weight: bold;">July 23-24, 2027</div>
+            </div>
+
+            <!-- 13 Branches (Examples) -->
+            <a href="#" class="branch-tile">
+                <h3>Serafin</h3>
+                <span class="btn-small">Explore Branch</span>
+            </a>
+
+            <a href="#" class="branch-tile">
+                <h3>Monserat</h3>
+                <span class="btn-small">Explore Branch</span>
+            </a>
+
+            <a href="#" class="branch-tile">
+                <h3>Felomina</h3>
+                <span class="btn-small">Explore Branch</span>
+            </a>
+
+            <a href="#" class="branch-tile">
+                <h3>Estrella</h3>
+                <span class="btn-small">Explore Branch</span>
+            </a>
+
+            <a href="#" class="branch-tile">
+                <h3>Gregorio</h3>
+                <span class="btn-small">Explore Branch</span>
+            </a>
+
+            <!-- Add other branches similarly: Regino, Maria, Concepcion, Cezar, Priscilla, Gloria, Reynaldo, Nilda -->
+
+        </div>
+    </div>
+
+    <!-- Contemporary Audio Dock -->
+    <div class="audio-dock">
+        <button class="play-btn" onclick="togglePlay()">▶</button>
+        <span style="font-size: 0.8rem; font-weight: 600;">Sazon Reunion Anthem</span>
+    </div>
+
+    <script>
+        function togglePlay() {
+            // Placeholder for your new song file
+            alert("This will trigger your Tropical Lo-Fi Piano anthem and Air-Swipe SFX!");
+        }
+    </script>
+
+</body>
+</html>
