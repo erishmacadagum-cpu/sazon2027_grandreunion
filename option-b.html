@@ -3,145 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sazon 2027 | The 13 Branches</title>
+    <title>Sazon 2027 | Gikan sa Gamut</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
         :root {
-            --primary-dark: #1A1A1A;
             --accent-coral: #FF6B6B;
             --accent-teal: #4ECDC4;
-            --text-light: #F7F7F7;
+            --text-dark: #2D3436;
         }
 
         body {
             margin: 0;
-            padding: 0;
-            background-color: var(--primary-dark);
-            color: var(--text-light);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background: #fff;
+            color: var(--text-dark);
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
         }
 
+        /* Hero Header with Sunset Image */
         header {
+            width: 100%;
+            height: 40vh;
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.8)), 
+                        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80'); /* Replace with your actual sunset image link */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            padding: 40px 20px;
         }
 
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-            color: var(--accent-teal);
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--accent-coral);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 5px;
         }
 
         .tagline {
             font-style: italic;
-            opacity: 0.8;
+            color: var(--accent-teal);
+            font-size: 1.2rem;
+            margin-top: 10px;
         }
 
-        /* Audio Dock Styling */
+        /* Main Content Layout */
+        .main-container {
+            display: flex;
+            gap: 20px;
+            width: 95%;
+            max-width: 1300px;
+            margin-top: -50px; /* Overlap header */
+            padding-bottom: 100px;
+        }
+
+        /* The Roots Card (Left side) */
+        .roots-card {
+            flex: 1.5;
+            background: white;
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-left: 15px solid var(--accent-teal);
+        }
+
+        .roots-card h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-teal);
+            font-size: 3rem;
+            margin-top: 0;
+        }
+
+        .roots-card h4 {
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        /* Branch Grid (Right side) */
+        .branch-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .branch-tile {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: var(--accent-coral);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            border: 1px solid #f0f0f0;
+        }
+
+        .branch-tile:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(78, 205, 196, 0.2);
+        }
+
+        .branch-tile h3 {
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .explore-text {
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 15px;
+            display: block;
+            font-weight: bold;
+            color: var(--accent-teal);
+        }
+
+        /* Floating Audio Dock */
         .audio-dock {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px 25px;
+            position: fixed;
+            bottom: 30px;
+            background: white;
+            padding: 10px 25px;
             border-radius: 50px;
             display: flex;
             align-items: center;
             gap: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid #eee;
+            z-index: 1000;
         }
 
         .play-btn {
             background: var(--accent-coral);
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             cursor: pointer;
             color: white;
-            font-size: 1.2rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: transform 0.2s, background 0.3s;
-        }
-
-        .play-btn:hover {
-            transform: scale(1.1);
-        }
-
-        /* Mosaic Grid */
-        .mosaic-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            width: 90%;
-            max-width: 1200px;
-            padding-bottom: 50px;
-        }
-
-        .branch-tile {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 30px 20px;
-            text-align: center;
-            text-decoration: none;
-            color: inherit;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .branch-tile:hover {
-            background: rgba(78, 205, 196, 0.1);
-            border-color: var(--accent-teal);
-            transform: translateY(-5px);
-        }
-
-        .branch-tile h3 {
-            margin: 0;
-            font-size: 1.4rem;
-        }
-
-        .btn-small {
-            display: inline-block;
-            margin-top: 15px;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            color: var(--accent-coral);
-            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>SAZON CLAN 2027</h1>
-        <p class="tagline">"Gikan sa Gamut, Tubtob sa Langit"</p>
+        <h1>SAZON 2027</h1>
+        <div class="tagline">Gikan sa Gamut, Tubtob sa Langit</div>
     </header>
+
+    <div class="main-container">
+        <div class="roots-card">
+            <h2>The Roots</h2>
+            <h4>Tereso & Teofista Sazon</h4>
+            <p>Honoring the legacy that started it all. Join us as we celebrate our history and look toward our bright future in Kalibo, Aklan.</p>
+            <p style="color: var(--accent-teal); font-weight: bold;">July 23-24, 2027</p>
+        </div>
+
+        <div class="branch-grid">
+            <a href="#" class="branch-tile"><h3>Serafin</h3><span class="explore-text">Explore Branch</span></a>
+            <a href="#" class="branch-tile"><h3>Monserat</h3><span class="explore-text">Explore Branch</span></a>
+            <a href="#" class="branch-tile"><h3>Felomina</h3><span class="explore-text">Explore Branch</span></a>
+            <a href="#" class="branch-tile"><h3>Estrella</h3><span class="explore-text">Explore Branch</span></a>
+            <a href="#" class="branch-tile"><h3>Gregorio</h3><span class="explore-text">Explore Branch</span></a>
+            </div>
+    </div>
 
     <div class="audio-dock">
         <button class="play-btn" onclick="togglePlay()">▶</button>
-        <span style="font-size: 0.9rem; font-weight: 600;">Sazon Reunion Anthem</span>
-    </div>
-
-    <div class="mosaic-grid">
-        <a href="#" class="branch-tile"><h3>Serafin</h3><span class="btn-small">Explore</span></a>
-        <a href="#" class="branch-tile"><h3>Monserat</h3><span class="btn-small">Explore</span></a>
-        <a href="#" class="branch-tile"><h3>Felomina</h3><span class="btn-small">Explore</span></a>
-        <a href="#" class="branch-tile"><h3>Estrella</h3><span class="btn-small">Explore</span></a>
-        <a href="#" class="branch-tile"><h3>Gregorio</h3><span class="btn-small">Explore</span></a>
-        <a href="#" class="branch-tile"><h3>Regino</h3><span class="btn-small">Explore</span></a>
-        <a href="#" class="branch-tile"><h3>Maria</h3><span class="btn-small">Explore</span></a>
-        <a href="#" class="branch-tile"><h3>Concepcion</h3><span class="btn-small">Explore</span></a>
-        <a href="#" class="branch-tile"><h3>Cezar</h3><span class="btn-small">Explore</span></a>
-        <a href="#" class="branch-tile"><h3>Priscilla</h3><span class="btn-small">Explore</span></a>
-        <a href="#" class="branch-tile"><h3>Gloria</h3><span class="btn-small">Explore</span></a>
-        <a href="#" class="branch-tile"><h3>Reynaldo</h3><span class="btn-small">Explore</span></a>
-        <a href="#" class="branch-tile"><h3>Nilda</h3><span class="btn-small">Explore</span></a>
+        <span style="font-size: 0.8rem; font-weight: 600;">Sazon Reunion Anthem</span>
     </div>
 
     <audio id="sazonAnthem" loop>
@@ -158,20 +198,18 @@
 
         function togglePlay() {
             if (anthem.paused) {
-                anthem.play().catch(e => console.error("Audio failed:", e));
+                anthem.play();
                 playBtn.innerHTML = "⏸";
-                playBtn.style.background = "#4ECDC4";
+                playBtn.style.background = "var(--accent-teal)";
             } else {
                 anthem.pause();
                 playBtn.innerHTML = "▶";
-                playBtn.style.background = "#FF6B6B";
+                playBtn.style.background = "var(--accent-coral)";
             }
-            // Trigger click sound
             clickSfx.currentTime = 0;
-            clickSfx.play().catch(e => {});
+            clickSfx.play();
         }
 
-        // Apply Hover Effects to all Tiles
         const tiles = document.querySelectorAll('.branch-tile');
         tiles.forEach(tile => {
             tile.addEventListener('mouseenter', () => {
@@ -180,11 +218,8 @@
             });
         });
 
-        // Set Default Volumes
         anthem.volume = 0.4;
         hoverSfx.volume = 0.2;
-        clickSfx.volume = 0.3;
     </script>
-
 </body>
 </html>
