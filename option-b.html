@@ -245,25 +245,52 @@
     Your browser does not support the audio element.
 </audio>
 
-<script>
-    const anthem = document.getElementById('sazonAnthem');
-    const playBtn = document.querySelector('.play-btn');
+<!-- Hidden Audio Elements for Effects -->
+    <audio id="sazonAnthem" loop>
+        <source src="https://drive.google.com/uc?export=download&id=YOUR_ID" type="audio/mpeg">
+    </audio>
+    <audio id="hoverSfx" src="branch-hover.mp3"></audio>
+    <audio id="clickSfx" src="ui-click-ripple.mp3"></audio>
 
-    function togglePlay() {
-        if (anthem.paused) {
-            anthem.play();
-            playBtn.innerHTML = "⏸"; // Changes icon to Pause
-            playBtn.style.background = "var(--accent-teal)"; // Changes color when playing
-        } else {
-            anthem.pause();
-            playBtn.innerHTML = "▶"; // Changes icon back to Play
-            playBtn.style.background = "var(--accent-coral)";
+    <script>
+        const anthem = document.getElementById('sazonAnthem');
+        const hoverSfx = document.getElementById('hoverSfx');
+        const clickSfx = document.getElementById('clickSfx');
+        const playBtn = document.querySelector('.play-btn');
+
+        // Toggle Anthem Play/Pause
+        function togglePlay() {
+            if (anthem.paused) {
+                anthem.play();
+                playBtn.innerHTML = "⏸";
+                playBtn.style.background = "var(--accent-teal)";
+            } else {
+                anthem.pause();
+                playBtn.innerHTML = "▶";
+                playBtn.style.background = "var(--accent-coral)";
+            }
+            clickSfx.currentTime = 0;
+            clickSfx.play();
         }
-    }
 
-    // Optional: Add a soft volume ramp-up for that "exquisite" feel
-    anthem.volume = 0.5; 
-</script>
+        // Branch Interaction Sounds
+        const branches = document.querySelectorAll('.branch-tile');
+        branches.forEach(branch => {
+            branch.addEventListener('mouseenter', () => {
+                hoverSfx.currentTime = 0;
+                hoverSfx.play();
+            });
+            branch.addEventListener('click', () => {
+                clickSfx.currentTime = 0;
+                clickSfx.play();
+            });
+        });
+
+        // Set Volumes
+        anthem.volume = 0.4;
+        hoverSfx.volume = 0.2;
+        clickSfx.volume = 0.3;
+    </script>
 
 </body>
 </html>
