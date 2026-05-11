@@ -22,14 +22,29 @@
         .btn:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
         .audio-dock { position: fixed; bottom: 30px; right: 30px; z-index: 10000; }
         #playBtn { width: 65px; height: 65px; border-radius: 50%; border: none; background: var(--accent-gold); cursor: pointer; font-size: 1.4rem; display: flex; align-items: center; justify-content: center; }
+        /* Festive Glow Effect */
+        .bg-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+            animation: pulse 8s infinite alternate;
+        }
+        @keyframes pulse {
+            from { opacity: 0.3; transform: scale(1); }
+            to { opacity: 0.7; transform: scale(1.1); }
+        }
+        /* Keep content above the glow */
+        .section { position: relative; z-index: 2; }
     </style>
 </head>
 <body>
 
     <div class="section">
         <h1>Dali na kita Sazon Family!</h1>
-        <p class="quote">"Sa Hulyo dos mil baynte siete! Pamilya ni Isok kag Pistang upod sa tanan nga paryente. Magtilipon kita tanan kag mag sinadya!"</p>
-    </div>
+      <p class="quote">"Sa Hulyo dos mil baynte siete! Pamilya ni Isok kag Pistang upod sa tanan nga paryente. Magtilipon kita tanan kag mag sinadya!"</p>
+</div>
 
     <div class="section" style="background: rgba(0,0,0,0.2);">
         <p class="quote">"Importante gid ang inyo presensya, kay amo ina ang magahatag kalipay sa pamilya. Sa pagtilipon naton, ang halakhak kag yuhum sang tagsa-tagsa maga palipay sa bilog nga pamilya."</p>
