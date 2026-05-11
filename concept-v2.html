@@ -19,13 +19,18 @@
             color: var(--white);
             font-family: 'Montserrat', sans-serif;
             overflow: hidden;
-            -webkit-font-smoothing: antialiased;
+            touch-action: manipulation;
         }
 
-        /* Particles Background */
-        #particle-canvas {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
-            background: radial-gradient(circle at center, #0a192f 0%, #050b14 100%);
+        /* Background Container for Marzon Hotel Image */
+        #main-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(5,11,20,0.8), rgba(5,11,20,0.6)), 
+                        url('images/marzon-hotel.jpg'); /* Ensure your file is named exactly this */
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            display: none; /* Reveals after intro */
         }
 
         /* Theatrical Overlay */
@@ -35,94 +40,112 @@
             display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
 
+        /* REFINED BUTTON: More sensitive & responsive */
+        #entry-btn {
+            background: var(--gold); 
+            border: none; 
+            color: #000; 
+            padding: 22px 50px; 
+            font-weight: 900; 
+            letter-spacing: 5px; 
+            cursor: pointer; /* Changes mouse to hand on desktop */
+            z-index: 10001; 
+            position: relative;
+            box-shadow: 0 0 25px rgba(212,175,55,0.4);
+            text-transform: uppercase;
+            transition: transform 0.2s, background 0.2s;
+            display: block;
+        }
+        #entry-btn:hover {
+            transform: scale(1.05);
+            background: #e5be47;
+        }
+
         .credit-text {
             position: absolute; font-family: 'Playfair Display', serif;
             font-size: clamp(1.2rem, 5vw, 2.5rem);
             text-align: center; width: 90%;
             opacity: 0; letter-spacing: 4px;
-            transform: scale(1.2) translateY(20px);
-            filter: blur(10px);
-            transition: all 1.5s cubic-bezier(0.21, 0.6, 0.35, 1);
+            pointer-events: none;
+            transition: all 1s ease-in-out;
+        }
+        .credit-active { opacity: 1; transform: scale(1.1); }
+
+        /* Theater Stages */
+        .theater-stage {
+            position: absolute; top: 50%; left: 50%; 
+            transform: translate(-50%, -50%);
+            width: 90%; text-align: center; 
+            z-index: 10; display: none;
         }
 
-        .credit-active {
-            opacity: 1; transform: scale(1) translateY(0); filter: blur(0);
+        .lyric-group {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.4rem, 5.5vw, 2.8rem);
+            line-height: 1.4; font-style: italic;
+            opacity: 0; transition: all 1.2s ease;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
         }
 
         /* 3D Moon Reveal */
         #logo-stage {
             position: absolute; z-index: 5; display: none;
-            text-align: center; width: 100%;
+            text-align: center; width: 100%; top: 50%; transform: translateY(-50%);
         }
-
         .moon-img {
-            width: clamp(200px, 50vw, 300px);
-            filter: drop-shadow(0 0 30px var(--luminous-blue));
+            width: clamp(200px, 45vw, 280px);
+            filter: drop-shadow(0 0 30px var(--gold));
             animation: moonPulse 4s infinite ease-in-out;
         }
-
         @keyframes moonPulse {
-            0%, 100% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 20px var(--gold)); }
-            50% { transform: scale(1.05) rotate(5deg); filter: drop-shadow(0 0 40px var(--luminous-blue)); }
-        }
-
-        /* Theater Text Styles */
-        .theater-stage {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 90%; text-align: center; z-index: 10; display: none;
-        }
-
-        .lyric-group {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.8rem, 7vw, 4rem);
-            line-height: 1.2; font-style: italic;
-            opacity: 0; transform: translateY(50px);
-            transition: all 1.2s ease-out;
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); filter: drop-shadow(0 0 40px var(--luminous-blue)); }
         }
 
         /* Finale Impact */
         #finale-stage {
             display: none; flex-direction: column; align-items: center;
             z-index: 20; position: absolute; width: 100%; top: 50%; transform: translateY(-50%);
+            text-align: center;
         }
 
-        .countdown { display: flex; gap: 10px; margin: 20px 0; }
+        .countdown { display: flex; gap: 8px; margin: 20px 0; }
         .unit { 
-            background: rgba(255,255,255,0.05); border: 1px solid var(--gold);
-            padding: 10px; border-radius: 8px; min-width: 65px; 
+            background: rgba(0,0,0,0.6); border: 1px solid var(--gold);
+            padding: 10px; border-radius: 8px; min-width: 60px; 
         }
         .num { font-size: 1.8rem; font-weight: 900; color: var(--gold); display: block; }
         .label { font-size: 0.6rem; letter-spacing: 1px; }
 
-        .btn-group { display: flex; flex-direction: column; gap: 10px; width: 80%; max-width: 300px; }
+        .btn-group { display: flex; flex-direction: column; gap: 12px; width: 280px; }
         .btn {
-            padding: 15px; text-decoration: none; font-weight: 900; text-align: center;
+            padding: 16px; text-decoration: none; font-weight: 900;
             text-transform: uppercase; letter-spacing: 2px; border-radius: 50px; font-size: 0.8rem;
         }
-        .btn-reg { background: var(--gold); color: #000; box-shadow: 0 0 20px rgba(212,175,55,0.3); }
-        .btn-cal { border: 1px solid var(--white); color: var(--white); }
+        .btn-reg { background: var(--gold); color: #000; }
+        .btn-cal { border: 1px solid var(--white); color: var(--white); background: rgba(255,255,255,0.1); }
 
         #mute-btn {
             position: fixed; bottom: 20px; left: 20px; background: none; border: 1px solid var(--gold);
-            color: var(--gold); padding: 8px; border-radius: 50%; z-index: 10001;
+            color: var(--gold); padding: 8px; border-radius: 50%; z-index: 10005; cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-    <div id="particle-canvas"></div>
+    <div id="main-bg"></div>
     <button id="mute-btn" onclick="toggleMute()">🔊</button>
 
-    <audio id="opener-snd" src="audio/branch-hover.mp3" preload="auto"></audio>
-    <audio id="jingle-snd" src="audio/teaser_jingle.mp3" preload="auto"></audio>
+    <audio id="opener-snd" src="audio/branch-hover.mp3"></audio>
+    <audio id="jingle-snd" src="audio/teaser_jingle.mp3"></audio>
 
     <div id="intro-overlay">
-        <button id="entry-btn" onclick="startTheShow()" style="background:none; border:2px solid var(--gold); color:var(--gold); padding:15px 40px; font-weight:900; letter-spacing:5px; cursor:pointer;">⚜️ OPEN INVITATION</button>
+        <button id="entry-btn" onclick="startTheShow()">⚜️ OPEN INVITATION</button>
         
         <div class="credit-text" id="cr1">A SAZON FAMILY PRODUCTION</div>
         <div class="credit-text" id="cr2" style="color:var(--luminous-blue);">MARZON HOTEL KALIBO</div>
         <div class="credit-text" id="cr3" style="color:var(--gold);">JULY 23-24, 2027</div>
-        <div class="credit-text" id="cr4" style="letter-spacing:12px;">PRESENT</div>
+        <div class="credit-text" id="cr4" style="letter-spacing:10px;">PRESENT</div>
     </div>
 
     <div id="logo-stage">
@@ -130,13 +153,16 @@
     </div>
 
     <div class="theater-stage" id="text-stage">
-        <div class="lyric-group" id="l1">"Gikan sa Gamut...<br>Tubtob sa Langit"</div>
-        <div class="lyric-group" id="l2">"Sa Hulyo 2027,<br>Magtilipon kita tanan!"</div>
-        <div class="lyric-group" id="l3">"Sinadya sa Kalibo!"</div>
+        <div class="lyric-group" id="l1">⚜️ Dali na kita Sazon Family!<br>Sa Hulyo dos mil baynte siete!</div>
+        <div class="lyric-group" id="l2">Pamilya ni Isok kag Pistang<br>upod sa tanan nga paryente.</div>
+        <div class="lyric-group" id="l3">Magtilipon kita tanan<br>kag mag sinadya!</div>
+        <div class="lyric-group" id="l4">Importante gid ang inyo presensya,<br>kay amo ina ang magahatag kalipay sa pamilya.</div>
+        <div class="lyric-group" id="l5">Ang halakhak kag yuhum sang tagsa-tagsa<br>maga palipay sa bilog nga pamilya.</div>
+        <div class="lyric-group" id="l6">Indi na mag pang duwa-duwa.<br>Preparar na kamu para sa aton sinadya!</div>
     </div>
 
     <div id="finale-stage">
-        <h1 style="color:var(--gold); font-size: 2.2rem; margin:0;">WE ARE SAZON</h1>
+        <h1 style="color:var(--gold); font-size: 2.5rem; margin:0; text-shadow: 0 0 20px #000;">WE ARE SAZON</h1>
         <div class="countdown">
             <div class="unit"><span class="num" id="d">00</span><span class="label">DAYS</span></div>
             <div class="unit"><span class="num" id="h">00</span><span class="label">HRS</span></div>
@@ -147,7 +173,7 @@
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" target="_blank" class="btn btn-reg">📝 REGISTER NOW</a>
             <a href="#" class="btn btn-cal">📅 SAVE THE DATE</a>
         </div>
-        <div style="margin-top:30px; font-weight:900; color:var(--luminous-blue); font-size:0.9rem;">📍 SEE YOU IN KALIBO !!! 🏝️</div>
+        <div style="margin-top:25px; font-weight:900; color:var(--luminous-blue); text-shadow: 0 2px 5px #000;">📍 SEE YOU IN KALIBO !!! 🏝️</div>
     </div>
 
     <script>
@@ -155,64 +181,59 @@
         const jingle = document.getElementById('jingle-snd');
 
         function startTheShow() {
-            // Mobile Audio Unlock
             opener.play();
-            jingle.play(); 
-            jingle.pause(); // Pre-warm the jingle
-            jingle.currentTime = 0;
+            jingle.play(); jingle.pause(); jingle.currentTime = 0; // Unlock mobile audio
 
             document.getElementById('entry-btn').style.display = 'none';
 
-            // 1. Cinematic Credits (5 Seconds)
+            // 1. Credits Sequence
             const credits = ['cr1', 'cr2', 'cr3', 'cr4'];
             credits.forEach((id, i) => {
                 setTimeout(() => {
                     const el = document.getElementById(id);
                     el.classList.add('credit-active');
-                    setTimeout(() => { el.classList.remove('credit-active'); el.style.opacity="0"; }, 1200);
+                    setTimeout(() => { el.classList.remove('credit-active'); }, 1000);
                 }, i * 1300);
             });
 
-            // 2. Transition to Jingle & Logo
+            // 2. Start Show
             setTimeout(() => {
-                document.getElementById('intro-overlay').style.opacity = '0';
+                document.getElementById('intro-overlay').style.display = 'none';
+                document.getElementById('main-bg').style.display = 'block';
                 jingle.play();
-                setTimeout(() => {
-                    document.getElementById('intro-overlay').remove();
-                    runTheater();
-                }, 1000);
+                runProduction();
             }, 5500);
         }
 
-        function runTheater() {
+        function runProduction() {
             const logo = document.getElementById('logo-stage');
             const theater = document.getElementById('text-stage');
             
-            // Show Logo
+            // Step 1: Moon Reveal
             logo.style.display = 'block';
-            setTimeout(() => { logo.style.opacity = '0'; logo.style.transition = '2s'; }, 4000);
+            setTimeout(() => { logo.style.opacity = '0'; logo.style.transition = '2s'; }, 3500);
 
-            // Show Group Lyrics
+            // Step 2: Ilonggo Script Scenes
             setTimeout(() => {
                 theater.style.display = 'block';
-                const groups = ['l1', 'l2', 'l3'];
-                groups.forEach((id, i) => {
+                const lines = ['l1', 'l2', 'l3', 'l4', 'l5', 'l6'];
+                lines.forEach((id, i) => {
                     setTimeout(() => {
                         const el = document.getElementById(id);
                         el.style.opacity = "1";
                         el.style.transform = "translateY(0)";
-                        if(i < 2) setTimeout(() => { el.style.opacity = "0"; el.style.display="none"; }, 2500);
-                    }, i * 3000);
+                        // Hide previous lines to keep center clean
+                        if(i < 5) setTimeout(() => { el.style.opacity = "0"; el.style.display="none"; }, 3500);
+                    }, i * 4000);
                 });
-            }, 5000);
+            }, 4500);
 
-            // 3. FINAL IMPACT - Sync this to the end of your 30s jingle
-            // Adjust this "25000" (25 seconds) to match the exact end beat of your jingle
+            // Step 3: FINALE - Precisely timed to the end of the 30s jingle
             setTimeout(() => {
                 theater.style.opacity = '0';
                 document.getElementById('finale-stage').style.display = 'flex';
                 setTimeout(() => { document.getElementById('finale-stage').style.opacity = '1'; }, 100);
-            }, 23000); 
+            }, 27500); 
         }
 
         function toggleMute() {
