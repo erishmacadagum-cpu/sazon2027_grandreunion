@@ -3,148 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Sazon 2027 | The Grand Experience</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=Playfair+Display:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
+    <title>Sazon 2027 | The Scream-o-Graphics Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=DM+Serif+Display:ital@0;1&family=Playfair+Display:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --deep-navy: #050b14;
-            --luminous-blue: #007aff;
-            --gold: #d4af37;
+            --deep-navy: #01060e;
+            --scream-gold: #ffcf00; 
+            --gold-shadow: #d4af37;
+            --blue-scream: #00e0ff;
             --white: #ffffff;
         }
 
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
-            background-color: var(--deep-navy);
+            background-color: #000;
             color: var(--white);
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'DM Serif Display', serif; /* SIMPLE & ELEGANT */
             overflow: hidden;
             touch-action: manipulation;
         }
 
-        /* Background Container for Marzon Hotel Image */
-        #main-bg {
+        /* Marzon Background */
+        #marzon-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(5,11,20,0.8), rgba(5,11,20,0.6)), 
-                        url('images/marzon-hotel.jpg'); /* Ensure your file is named exactly this */
-            background-size: cover;
-            background-position: center;
-            z-index: -1;
-            display: none; /* Reveals after intro */
+            background: linear-gradient(180deg, rgba(1,6,14,0.9) 0%, rgba(0,0,0,0.5) 100%),
+                        url('images/marzon-hotel.jpg'); /* YOUR FILE LINKED HERE */
+            background-size: cover; background-position: center; z-index: -1;
+            display: none; transition: opacity 1.5s ease;
         }
 
-        /* Theatrical Overlay */
+        /* Intro Overlay */
         #intro-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; z-index: 10000;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
 
-        /* REFINED BUTTON: More sensitive & responsive */
         #entry-btn {
-            background: var(--gold); 
-            border: none; 
-            color: #000; 
-            padding: 22px 50px; 
-            font-weight: 900; 
-            letter-spacing: 5px; 
-            cursor: pointer; /* Changes mouse to hand on desktop */
-            z-index: 10001; 
-            position: relative;
-            box-shadow: 0 0 25px rgba(212,175,55,0.4);
+            background: var(--gold-shadow); border: none; color: #000; 
+            padding: 22px 60px; font-weight: 900; letter-spacing: 5px; 
+            cursor: pointer; z-index: 10001; position: relative;
+            box-shadow: 0 0 25px var(--gold-shadow);
             text-transform: uppercase;
-            transition: transform 0.2s, background 0.2s;
-            display: block;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: block; font-family: 'Montserrat', sans-serif;
         }
         #entry-btn:hover {
-            transform: scale(1.05);
-            background: #e5be47;
+            transform: scale(1.05) rotate(-2deg);
+            box-shadow: 0 10px 40px var(--scream-gold);
+            background: var(--scream-gold);
         }
 
         .credit-text {
             position: absolute; font-family: 'Playfair Display', serif;
-            font-size: clamp(1.2rem, 5vw, 2.5rem);
-            text-align: center; width: 90%;
-            opacity: 0; letter-spacing: 4px;
-            pointer-events: none;
-            transition: all 1s ease-in-out;
+            font-size: clamp(1.2rem, 5vw, 2.5rem); text-align: center;
+            opacity: 0; transition: all 1s ease-in-out; pointer-events: none;
         }
-        .credit-active { opacity: 1; transform: scale(1.1); }
+        .credit-active { opacity: 1; transform: scale(1.05); }
 
-        /* Theater Stages */
+        /* Theatrical Staging for Elegant Script */
         .theater-stage {
-            position: absolute; top: 50%; left: 50%; 
-            transform: translate(-50%, -50%);
-            width: 90%; text-align: center; 
-            z-index: 10; display: none;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 90%; text-align: center; z-index: 10; display: none;
         }
 
-        .lyric-group {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.4rem, 5.5vw, 2.8rem);
-            line-height: 1.4; font-style: italic;
-            opacity: 0; transition: all 1.2s ease;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+        .script-group {
+            font-family: 'DM Serif Display', serif; /* ELEGANT ILONGGO TEXT */
+            font-size: clamp(1.5rem, 6vw, 3.2rem);
+            line-height: 1.3; font-weight: 400; font-style: normal;
+            color: var(--white); opacity: 0; transition: all 1s ease;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.8);
         }
 
-        /* 3D Moon Reveal */
+        /* 3D Moon reveal */
         #logo-stage {
             position: absolute; z-index: 5; display: none;
             text-align: center; width: 100%; top: 50%; transform: translateY(-50%);
         }
         .moon-img {
             width: clamp(200px, 45vw, 280px);
-            filter: drop-shadow(0 0 30px var(--gold));
+            filter: drop-shadow(0 0 30px var(--scream-gold));
             animation: moonPulse 4s infinite ease-in-out;
         }
         @keyframes moonPulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.08); filter: drop-shadow(0 0 40px var(--luminous-blue)); }
+            50% { transform: scale(1.08) rotate(5deg); filter: drop-shadow(0 0 50px var(--blue-scream)); }
         }
 
-        /* Finale Impact */
+        /* FINALE: SCREAM-O-GRAPHICS DEFINITION */
         #finale-stage {
-            display: none; flex-direction: column; align-items: center;
-            z-index: 20; position: absolute; width: 100%; top: 50%; transform: translateY(-50%);
-            text-align: center;
+            display: none; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 100; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            text-align: center; background: rgba(0,0,0,0.3);
         }
 
-        .countdown { display: flex; gap: 8px; margin: 20px 0; }
+        /* "WE ARE SAZON" SHOUT-OUT */
+        .sazon-scream {
+            font-family: 'Montserrat', sans-serif; /* Dynamic high-energy font */
+            font-weight: 900; font-size: clamp(3rem, 10vw, 6.5rem);
+            color: #000; text-transform: uppercase;
+            letter-spacing: -3px; /* Jagged, compact spacing */
+            -webkit-text-stroke: 2px var(--scream-gold); /* Jagged outline */
+            animation: explode-scream 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+            position: relative; line-height: 1;
+            text-shadow: 0 0 40px var(--scream-gold), 0 0 100px var(--blue-scream);
+        }
+
+        @keyframes explode-scream {
+            0% { transform: scale(3) rotate(20deg); opacity: 0; filter: blur(20px); }
+            80% { transform: scale(0.9) rotate(-5deg); filter: blur(0px); }
+            90% { transform: scale(1.1) rotate(0deg); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        /* "SEE YOU IN KALIBO" SHOUT-OUT */
+        .kalibo-scream {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900; font-size: clamp(1rem, 4.5vw, 1.8rem);
+            color: var(--blue-scream); text-transform: uppercase;
+            letter-spacing: 5px; /* Spaced out for echo effect */
+            margin-top: 20px;
+            animation: shout-pulse 3s infinite;
+            position: relative;
+            text-shadow: 0 0 10px var(--blue-scream), 0 0 20px #000;
+        }
+
+        @keyframes shout-pulse {
+            0%, 100% { transform: scale(1) translateY(0px); filter: brightness(1); }
+            5% { transform: scale(1.1) translateY(-10px) skewX(10deg); filter: brightness(2); }
+            10% { transform: scale(1) translateY(0px); filter: brightness(1); }
+        }
+
+        /* Standard Timer Styling */
+        .countdown { display: flex; gap: 8px; margin: 30px 0; justify-content: center; }
         .unit { 
-            background: rgba(0,0,0,0.6); border: 1px solid var(--gold);
-            padding: 10px; border-radius: 8px; min-width: 60px; 
+            background: rgba(0,0,0,0.8); border: 2px solid var(--scream-gold);
+            padding: 10px; border-radius: 8px; min-width: 65px; 
+            box-shadow: 0 0 15px rgba(255,207,0,0.3);
         }
-        .num { font-size: 1.8rem; font-weight: 900; color: var(--gold); display: block; }
-        .label { font-size: 0.6rem; letter-spacing: 1px; }
+        .num { font-size: 2rem; font-weight: 900; color: var(--scream-gold); display: block; font-family: 'Montserrat', sans-serif; }
+        .label { font-size: 0.6rem; letter-spacing: 1px; color: var(--white); text-transform: uppercase; }
 
-        .btn-group { display: flex; flex-direction: column; gap: 12px; width: 280px; }
+        /* Buttons and Mute */
+        .btn-group { display: flex; flex-direction: column; gap: 12px; width: 280px; margin: 0 auto; }
         .btn {
-            padding: 16px; text-decoration: none; font-weight: 900;
-            text-transform: uppercase; letter-spacing: 2px; border-radius: 50px; font-size: 0.8rem;
+            padding: 18px; text-decoration: none; font-weight: 900;
+            text-transform: uppercase; letter-spacing: 2px; border-radius: 5px; font-size: 0.85rem;
+            font-family: 'Montserrat', sans-serif; transition: 0.3s; text-align: center;
         }
-        .btn-reg { background: var(--gold); color: #000; }
-        .btn-cal { border: 1px solid var(--white); color: var(--white); background: rgba(255,255,255,0.1); }
+        .btn-reg { background: var(--scream-gold); color: #000; box-shadow: 0 0 20px rgba(255,207,0,0.4); }
+        .btn-reg:hover { transform: scale(1.05); }
+        .btn-cal { border: 2px solid var(--white); color: var(--white); background: rgba(255,255,255,0.1); }
 
         #mute-btn {
-            position: fixed; bottom: 20px; left: 20px; background: none; border: 1px solid var(--gold);
-            color: var(--gold); padding: 8px; border-radius: 50%; z-index: 10005; cursor: pointer;
+            position: fixed; bottom: 20px; left: 20px; background: none; border: 1px solid var(--scream-gold);
+            color: var(--scream-gold); padding: 10px; border-radius: 50%; z-index: 10005; cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-    <div id="main-bg"></div>
+    <div id="marzon-bg"></div>
     <button id="mute-btn" onclick="toggleMute()">🔊</button>
 
     <audio id="opener-snd" src="audio/branch-hover.mp3"></audio>
     <audio id="jingle-snd" src="audio/teaser_jingle.mp3"></audio>
 
     <div id="intro-overlay">
-        <button id="entry-btn" onclick="startTheShow()">⚜️ OPEN INVITATION</button>
-        
+        <button id="entry-btn" onclick="startTheShow()">⚜️ OPEN EXPERIENCE</button>
         <div class="credit-text" id="cr1">A SAZON FAMILY PRODUCTION</div>
-        <div class="credit-text" id="cr2" style="color:var(--luminous-blue);">MARZON HOTEL KALIBO</div>
-        <div class="credit-text" id="cr3" style="color:var(--gold);">JULY 23-24, 2027</div>
+        <div class="credit-text" id="cr2" style="color:var(--blue-scream);">MARZON HOTEL KALIBO</div>
+        <div class="credit-text" id="cr3" style="color:var(--scream-gold);">JULY 23-24, 2027</div>
         <div class="credit-text" id="cr4" style="letter-spacing:10px;">PRESENT</div>
     </div>
 
@@ -153,27 +182,33 @@
     </div>
 
     <div class="theater-stage" id="text-stage">
-        <div class="lyric-group" id="l1">⚜️ Dali na kita Sazon Family!<br>Sa Hulyo dos mil baynte siete!</div>
-        <div class="lyric-group" id="l2">Pamilya ni Isok kag Pistang<br>upod sa tanan nga paryente.</div>
-        <div class="lyric-group" id="l3">Magtilipon kita tanan<br>kag mag sinadya!</div>
-        <div class="lyric-group" id="l4">Importante gid ang inyo presensya,<br>kay amo ina ang magahatag kalipay sa pamilya.</div>
-        <div class="lyric-group" id="l5">Ang halakhak kag yuhum sang tagsa-tagsa<br>maga palipay sa bilog nga pamilya.</div>
-        <div class="lyric-group" id="l6">Indi na mag pang duwa-duwa.<br>Preparar na kamu para sa aton sinadya!</div>
+        <div class="script-group" id="l1">Dali na kita Sazon Family!<br>Sa Hulyo dos mil baynte siete!</div>
+        <div class="script-group" id="l2">Pamilya ni Isok kag Pistang<br>upod sa tanan nga paryente.</div>
+        <div class="script-group" id="l3">Magtilipon kita tanan<br>kag mag sinadya!</div>
+        <div class="script-group" id="l4">Importante gid ang inyo presensya,<br>magahatag kalipay sa pamilya.</div>
+        <div class="script-group" id="l5">Ang halakhak kag yuhum naton<br>maga palipay sa pamilya.</div>
+        <div class="script-group" id="l6">Indi na mag pang duwa-duwa.<br>Preparar na para sa aton sinadya!</div>
     </div>
 
     <div id="finale-stage">
-        <h1 style="color:var(--gold); font-size: 2.5rem; margin:0; text-shadow: 0 0 20px #000;">WE ARE SAZON</h1>
+        <div class="shout-container" style="position: relative; width: 100%; transform: rotate(-5deg); margin-bottom: 20px;">
+            <div class="sazon-scream">WE ARE SAZON</div>
+            <div style="position: absolute; width: 100%; height: 100%; border: 3px solid var(--scream-gold); top: 10px; left: 10px; z-index: -1;"></div>
+        </div>
+        
+        <div class="kalibo-scream">📍 SEE YOU IN KALIBO !!! 🏝️</div>
+
         <div class="countdown">
             <div class="unit"><span class="num" id="d">00</span><span class="label">DAYS</span></div>
             <div class="unit"><span class="num" id="h">00</span><span class="label">HRS</span></div>
             <div class="unit"><span class="num" id="m">00</span><span class="label">MINS</span></div>
             <div class="unit"><span class="num" id="s">00</span><span class="label">SECS</span></div>
         </div>
+
         <div class="btn-group">
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" target="_blank" class="btn btn-reg">📝 REGISTER NOW</a>
             <a href="#" class="btn btn-cal">📅 SAVE THE DATE</a>
         </div>
-        <div style="margin-top:25px; font-weight:900; color:var(--luminous-blue); text-shadow: 0 2px 5px #000;">📍 SEE YOU IN KALIBO !!! 🏝️</div>
     </div>
 
     <script>
@@ -182,24 +217,33 @@
 
         function startTheShow() {
             opener.play();
-            jingle.play(); jingle.pause(); jingle.currentTime = 0; // Unlock mobile audio
+            jingle.play(); jingle.pause(); jingle.currentTime = 0; // Mobile Warmup
 
             document.getElementById('entry-btn').style.display = 'none';
 
-            // 1. Credits Sequence
+            // 1. Cinematic Credits (Blur Reveal)
             const credits = ['cr1', 'cr2', 'cr3', 'cr4'];
             credits.forEach((id, i) => {
                 setTimeout(() => {
                     const el = document.getElementById(id);
-                    el.classList.add('credit-active');
-                    setTimeout(() => { el.classList.remove('credit-active'); }, 1000);
+                    el.style.opacity = "1";
+                    el.style.filter = "blur(10px) scale(1.2)";
+                    el.style.transform = "scale(1.2)";
+                    
+                    setTimeout(() => { 
+                        el.style.transition = "opacity 0.8s, filter 0.8s ease-out";
+                        el.style.filter = "blur(0px) scale(1.05)"; 
+                    }, 200);
+
+                    setTimeout(() => { el.style.opacity = "0"; }, 1100);
                 }, i * 1300);
             });
 
-            // 2. Start Show
+            // 2. Transision to Show and Reveal Marzon Background
             setTimeout(() => {
                 document.getElementById('intro-overlay').style.display = 'none';
-                document.getElementById('main-bg').style.display = 'block';
+                document.getElementById('marzon-bg').style.display = 'block';
+                setTimeout(() => { document.getElementById('marzon-bg').style.opacity = '1'; }, 100);
                 jingle.play();
                 runProduction();
             }, 5500);
@@ -209,11 +253,10 @@
             const logo = document.getElementById('logo-stage');
             const theater = document.getElementById('text-stage');
             
-            // Step 1: Moon Reveal
             logo.style.display = 'block';
             setTimeout(() => { logo.style.opacity = '0'; logo.style.transition = '2s'; }, 3500);
 
-            // Step 2: Ilonggo Script Scenes
+            // group lyrics (timed to match 30s track)
             setTimeout(() => {
                 theater.style.display = 'block';
                 const lines = ['l1', 'l2', 'l3', 'l4', 'l5', 'l6'];
@@ -221,19 +264,17 @@
                     setTimeout(() => {
                         const el = document.getElementById(id);
                         el.style.opacity = "1";
-                        el.style.transform = "translateY(0)";
-                        // Hide previous lines to keep center clean
-                        if(i < 5) setTimeout(() => { el.style.opacity = "0"; el.style.display="none"; }, 3500);
-                    }, i * 4000);
+                        if(i < 5) setTimeout(() => { el.style.opacity = "0"; el.style.display="none"; }, 3200);
+                    }, i * 3600);
                 });
-            }, 4500);
+            }, 4000);
 
-            // Step 3: FINALE - Precisely timed to the end of the 30s jingle
+            // 3. FINAL IMPACT - SCREAM-O-GRAPHICS ACTIVATION
             setTimeout(() => {
                 theater.style.opacity = '0';
                 document.getElementById('finale-stage').style.display = 'flex';
-                setTimeout(() => { document.getElementById('finale-stage').style.opacity = '1'; }, 100);
-            }, 27500); 
+                // Triggering the explosive shout sounds logic here...
+            }, 27500); // 27.5 seconds for the grand finale climax
         }
 
         function toggleMute() {
@@ -241,7 +282,7 @@
             document.getElementById('mute-btn').innerText = jingle.muted ? '🔇' : '🔊';
         }
 
-        // Standard Timer
+        // Standard Countdown Timer
         const target = new Date("July 23, 2027 00:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
