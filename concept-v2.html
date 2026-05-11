@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SAZON 2027 | GRAND REVEAL</title>
+    <title>SAZON 2027 | THE GRAND REVEAL</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=DM+Serif+Display&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold: #ffcf00;
-            --blue: #00e0ff;
+            --scream-yellow: #ffcf00;
+            --scream-blue: #00e0ff;
             --white: #ffffff;
         }
 
@@ -18,15 +18,29 @@
             font-family: 'Montserrat', sans-serif; overflow: hidden;
         }
 
-        /* STABLE BACKGROUND */
+        /* THE STAGE: MARZON HOTEL */
         #marzon-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 100%),
+            background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%),
                         url('marzon-hotel.jpg');
             background-size: cover; background-position: center; z-index: -1;
-            display: none; opacity: 0; transition: opacity 2s;
+            display: none; opacity: 0;
         }
 
+        /* SCREAM-O-GRAPHICS: BACKGROUND VIBRATION */
+        .vibrate-active {
+            animation: shake-bg 0.15s infinite;
+            filter: contrast(1.5) brightness(1.2);
+        }
+
+        @keyframes shake-bg {
+            0% { transform: translate(2px, 2px) rotate(0deg); }
+            25% { transform: translate(-2px, -3px) rotate(-1deg); }
+            50% { transform: translate(3px, 1px) rotate(1deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        /* INTRO OVERLAY */
         #intro-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; z-index: 10000;
@@ -34,17 +48,19 @@
         }
 
         #entry-btn {
-            background: var(--gold); border: none; color: #000; 
-            padding: 22px 50px; font-weight: 900; letter-spacing: 5px; 
-            cursor: pointer; box-shadow: 0 0 30px rgba(255,207,0,0.5);
+            background: var(--scream-yellow); border: none; color: #000; 
+            padding: 25px 60px; font-weight: 900; letter-spacing: 5px; 
+            cursor: pointer; position: relative;
+            box-shadow: 0 0 40px rgba(255,207,0,0.6);
+            transition: 0.3s;
         }
 
         .credit-text {
             position: absolute; font-family: 'DM Serif Display', serif;
-            font-size: clamp(1.2rem, 5vw, 2.5rem); opacity: 0; text-align: center;
-            transition: opacity 0.8s;
+            font-size: clamp(1.5rem, 5vw, 2.5rem); opacity: 0; text-align: center;
         }
 
+        /* ELEGANT SCRIPT STAGE */
         .theater-stage {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             width: 90%; text-align: center; z-index: 10; display: none;
@@ -52,80 +68,113 @@
 
         .script-group {
             font-family: 'DM Serif Display', serif;
-            font-size: clamp(1.3rem, 5vw, 2.5rem);
-            opacity: 0; transition: opacity 1s;
-            text-shadow: 0 0 15px #000; margin-bottom: 15px;
+            font-size: clamp(1.6rem, 6vw, 3.2rem);
+            opacity: 0; transition: all 1s ease;
+            text-shadow: 0 0 20px #000;
         }
 
-        #logo-stage {
-            position: absolute; z-index: 5; display: none;
-            text-align: center; width: 100%; top: 50%; transform: translateY(-50%);
-        }
-        .moon-img { width: 250px; filter: drop-shadow(0 0 20px var(--gold)); }
-
-        /* SCREAM-O-GRAPHICS FINALE */
+        /* FINALE: SCREAM-O-GRAPHICS TEXT PLAY */
         #finale-stage {
             display: none; flex-direction: column; align-items: center; justify-content: center;
             z-index: 100; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
         }
 
+        .scream-box {
+            position: relative; padding: 20px;
+            animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
         .shout-text {
-            font-size: clamp(3rem, 12vw, 7rem);
-            color: #000; -webkit-text-stroke: 2px var(--gold);
-            text-shadow: 8px 8px 0px var(--gold);
-            font-weight: 900; transform: rotate(-3deg);
-            animation: vibrate 0.1s infinite;
+            font-size: clamp(3.5rem, 15vw, 8rem);
+            color: #000; line-height: 0.8;
+            -webkit-text-stroke: 3px var(--scream-yellow);
+            text-shadow: 10px 10px 0px var(--scream-yellow), 15px 15px 0px var(--scream-blue);
+            font-weight: 900; transform: skew(-10deg) rotate(-5deg);
+            display: inline-block;
         }
 
-        @keyframes vibrate {
-            0% { transform: translate(2px, 2px) rotate(-3deg); }
-            50% { transform: translate(-2px, -1px) rotate(-2deg); }
-            100% { transform: translate(1px, 2px) rotate(-3deg); }
+        .shout-icon {
+            font-size: 0.5em; vertical-align: middle; 
+            display: inline-block; animation: icon-bounce 0.5s infinite;
         }
 
-        .countdown { display: flex; gap: 8px; margin: 25px 0; }
-        .unit { background: rgba(0,0,0,0.85); border: 2px solid var(--gold); padding: 10px; min-width: 60px; }
-        .num { font-size: 1.8rem; color: var(--gold); display: block; }
-        .label { font-size: 0.5rem; }
+        @keyframes icon-bounce {
+            0%, 100% { transform: scale(1) rotate(0); }
+            50% { transform: scale(1.5) rotate(20deg); color: var(--scream-yellow); }
+        }
 
-        .btn-group { display: flex; flex-direction: column; gap: 10px; width: 280px; }
-        .btn { padding: 18px; text-decoration: none; font-weight: 900; text-transform: uppercase; text-align: center; border-radius: 4px; }
-        .btn-reg { background: var(--gold); color: #000; }
-        .btn-cal { border: 1px solid #fff; color: #fff; }
+        @keyframes pop-in {
+            0% { transform: scale(0) rotate(-45deg); filter: blur(20px); }
+            100% { transform: scale(1) rotate(-5deg); filter: blur(0); }
+        }
+
+        .kalibo-shout {
+            font-size: clamp(1.2rem, 5vw, 2rem);
+            color: var(--scream-blue); font-weight: 900;
+            letter-spacing: 8px; margin-top: 30px;
+            text-shadow: 0 0 20px var(--scream-blue);
+            animation: pulse-glitch 0.2s infinite alternate;
+        }
+
+        @keyframes pulse-glitch {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0.8; transform: translateX(5px); }
+        }
+
+        /* COUNTDOWN & BUTTONS */
+        .countdown { display: flex; gap: 10px; margin: 40px 0; }
+        .unit { 
+            background: rgba(0,0,0,0.9); border: 2px solid var(--scream-yellow);
+            padding: 12px; min-width: 70px; border-radius: 2px;
+        }
+        .num { font-size: 2rem; color: var(--scream-yellow); display: block; }
+        .label { font-size: 0.6rem; color: #fff; }
+
+        .btn-group { display: flex; flex-direction: column; gap: 15px; width: 300px; }
+        .btn {
+            padding: 20px; text-decoration: none; font-weight: 900;
+            text-transform: uppercase; letter-spacing: 3px; text-align: center;
+        }
+        .btn-reg { background: var(--scream-yellow); color: #000; box-shadow: 10px 10px 0px #000; }
+        .btn-cal { border: 2px solid #fff; color: #fff; background: rgba(0,0,0,0.5); }
+
+        #mute-btn {
+            position: fixed; bottom: 20px; left: 20px; background: none; border: 1px solid var(--scream-yellow);
+            color: var(--scream-yellow); padding: 10px; border-radius: 50%; z-index: 10005; cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
     <div id="marzon-bg"></div>
+    <button id="mute-btn" onclick="toggleMute()">🔊</button>
 
-    <audio id="opener-snd" src="branch-hover.mp3"></audio>
-    <audio id="jingle-snd" src="teaser_jingle.mp3"></audio>
+    <audio id="opener-snd" src="audio/branch-hover.mp3"></audio>
+    <audio id="jingle-snd" src="audio/teaser_jingle.mp3"></audio>
 
     <div id="intro-overlay">
-        <button id="entry-btn" onclick="startTheShow()">⚜️ ENTER REVEAL</button>
+        <button id="entry-btn" onclick="startTheShow()">⚜️ OPEN THE REVEAL</button>
         <div class="credit-text" id="cr1">A SAZON FAMILY PRODUCTION</div>
-        <div class="credit-text" id="cr2" style="color:var(--blue);">MARZON HOTEL KALIBO</div>
-        <div class="credit-text" id="cr3" style="color:var(--gold);">JULY 23-24, 2027</div>
-        <div class="credit-text" id="cr4" style="letter-spacing:10px;">PRESENT</div>
-    </div>
-
-    <div id="logo-stage">
-        <img src="moon.png" class="moon-img">
+        <div class="credit-text" id="cr2" style="color:var(--scream-blue);">MARZON HOTEL KALIBO</div>
+        <div class="credit-text" id="cr3" style="color:var(--scream-yellow);">JULY 23-24, 2027</div>
+        <div class="credit-text" id="cr4" style="letter-spacing:15px;">PRESENT</div>
     </div>
 
     <div class="theater-stage" id="text-stage">
         <div class="script-group" id="l1">Dali na kita Sazon Family!<br>Sa Hulyo dos mil baynte siete!</div>
         <div class="script-group" id="l2">Pamilya ni Isok kag Pistang<br>upod sa tanan nga paryente.</div>
-        <div class="script-group" id="l3">Magtilipon kita tanan kag mag sinadya!</div>
+        <div class="script-group" id="l3">Magtilipon kita tanan<br>kag mag sinadya!</div>
         <div class="script-group" id="l4">Importante gid ang inyo presensya,<br>magahatag kalipay sa pamilya.</div>
-        <div class="script-group" id="l5">Halakhak kag yuhum sang tagsa-tagsa<br>maga palipay sa bilog nga pamilya.</div>
-        <div class="script-group" id="l6">Gani dali na kamu tanan sa amo nga petsa.<br>Indi na mag pang duwa-duwa.</div>
-        <div class="script-group" id="l7">Preparar na kamu para sa aton sinadya.</div>
+        <div class="script-group" id="l5">Halakhak kag yuhum sang tanan<br>maga palipay sa aton pamilya.</div>
+        <div class="script-group" id="l6">Preparar na kamu tanan.<br>Amo na ini ang aton sinadya!</div>
     </div>
 
     <div id="finale-stage">
-        <div class="shout-text">WE ARE SAZON 🔥</div>
-        <div style="color:var(--blue); font-weight:900; letter-spacing:5px; margin-top:10px;">📢 SEE YOU IN KALIBO !!!</div>
+        <div class="scream-box">
+            <div class="shout-text">WE ARE SAZON <span class="shout-icon">🔥</span></div>
+        </div>
+        
+        <div class="kalibo-shout">📢 SEE YOU IN KALIBO !!! 🏝️</div>
 
         <div class="countdown">
             <div class="unit"><span class="num" id="d">00</span><span class="label">DAYS</span></div>
@@ -145,66 +194,56 @@
         const jingle = document.getElementById('jingle-snd');
 
         function startTheShow() {
-            // UNLOCK AUDIO
-            opener.play().catch(e => console.log("Audio block"));
-            jingle.play().then(() => {
-                jingle.pause();
-                jingle.currentTime = 0;
-            });
-
+            opener.play();
+            jingle.play(); jingle.pause(); jingle.currentTime = 0; 
             document.getElementById('entry-btn').style.display = 'none';
 
-            // 1. CREDITS
-            const cr = ['cr1', 'cr2', 'cr3', 'cr4'];
-            cr.forEach((id, i) => {
+            const credits = ['cr1', 'cr2', 'cr3', 'cr4'];
+            credits.forEach((id, i) => {
                 setTimeout(() => {
                     const el = document.getElementById(id);
                     el.style.opacity = "1";
-                    setTimeout(() => { el.style.opacity = "0"; }, 1200);
+                    setTimeout(() => { el.style.opacity = "0"; }, 1100);
                 }, i * 1300);
             });
 
-            // 2. MAIN TRANSITION
             setTimeout(() => {
                 document.getElementById('intro-overlay').style.display = 'none';
                 const bg = document.getElementById('marzon-bg');
                 bg.style.display = 'block';
                 setTimeout(() => { bg.style.opacity = '1'; }, 100);
-                
                 jingle.play();
-                runShow();
+                runProduction();
             }, 5500);
         }
 
-        function runShow() {
-            const logo = document.getElementById('logo-stage');
+        function runProduction() {
             const theater = document.getElementById('text-stage');
+            theater.style.display = 'block';
+            const lines = ['l1', 'l2', 'l3', 'l4', 'l5', 'l6'];
+            
+            lines.forEach((id, i) => {
+                setTimeout(() => {
+                    const el = document.getElementById(id);
+                    el.style.opacity = "1";
+                    if(i < 5) setTimeout(() => { el.style.opacity = "0"; el.style.display="none"; }, 3200);
+                }, i * 3600);
+            });
 
-            logo.style.display = 'block';
-            setTimeout(() => { logo.style.opacity = '0'; }, 3000);
-
-            setTimeout(() => {
-                theater.style.display = 'block';
-                const lines = ['l1', 'l2', 'l3', 'l4', 'l5', 'l6', 'l7'];
-                lines.forEach((id, i) => {
-                    setTimeout(() => {
-                        const el = document.getElementById(id);
-                        el.style.opacity = "1";
-                        if(i < 6) {
-                            setTimeout(() => { el.style.opacity = "0"; el.style.display = 'none'; }, 3000);
-                        }
-                    }, i * 3300);
-                });
-            }, 3500);
-
-            // FINAL SHOUT
+            // THE SCREAM-O-GRAPHICS CLIMAX
             setTimeout(() => {
                 theater.style.opacity = '0';
                 document.getElementById('finale-stage').style.display = 'flex';
-            }, 27500);
+                // Trigger sensory visualization (vibrating background)
+                document.getElementById('marzon-bg').classList.add('vibrate-active');
+            }, 27500); 
         }
 
-        // TIMER
+        function toggleMute() {
+            jingle.muted = !jingle.muted;
+            document.getElementById('mute-btn').innerText = jingle.muted ? '🔇' : '🔊';
+        }
+
         const target = new Date("July 23, 2027 00:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
