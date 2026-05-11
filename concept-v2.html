@@ -2,233 +2,217 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sazon 2027 | The Cinematic Reveal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sazon 2027 | The Grand Experience</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=Playfair+Display:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --deep-navy: #0a192f;
+            --deep-navy: #050b14;
             --luminous-blue: #007aff;
             --gold: #d4af37;
-            --soft-white: #f8f9fa;
+            --white: #ffffff;
         }
 
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             background-color: var(--deep-navy);
-            color: var(--soft-white);
+            color: var(--white);
             font-family: 'Montserrat', sans-serif;
-            overflow: hidden; /* Lock scroll to control the show */
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Animated Background Gradient */
-        .bg-glow {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, #112240 0%, #0a192f 100%);
-            z-index: -1;
+        /* Particles Background */
+        #particle-canvas {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+            background: radial-gradient(circle at center, #0a192f 0%, #050b14 100%);
         }
 
-        /* Cinematic Overlay */
+        /* Theatrical Overlay */
         #intro-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; z-index: 10000;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            transition: all 1.5s ease-in-out;
         }
 
-        .credit-item {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.5rem, 5vw, 3rem);
-            position: absolute; opacity: 0; transform: scale(0.8);
-            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        .credit-text {
+            position: absolute; font-family: 'Playfair Display', serif;
+            font-size: clamp(1.2rem, 5vw, 2.5rem);
+            text-align: center; width: 90%;
+            opacity: 0; letter-spacing: 4px;
+            transform: scale(1.2) translateY(20px);
+            filter: blur(10px);
+            transition: all 1.5s cubic-bezier(0.21, 0.6, 0.35, 1);
+        }
+
+        .credit-active {
+            opacity: 1; transform: scale(1) translateY(0); filter: blur(0);
         }
 
         /* 3D Moon Reveal */
         #logo-stage {
-            display: none; perspective: 1000px;
+            position: absolute; z-index: 5; display: none;
+            text-align: center; width: 100%;
         }
+
         .moon-img {
-            width: 300px; filter: drop-shadow(0 0 30px var(--luminous-blue));
-            animation: moonFloat 4s infinite ease-in-out;
-        }
-        @keyframes moonFloat {
-            0%, 100% { transform: translateY(0) rotateY(0deg); }
-            50% { transform: translateY(-20px) rotateY(20deg); }
+            width: clamp(200px, 50vw, 300px);
+            filter: drop-shadow(0 0 30px var(--luminous-blue));
+            animation: moonPulse 4s infinite ease-in-out;
         }
 
-        /* Dynamic Typography Sections */
-        .content-stage {
-            height: 100vh; width: 100%; display: none;
-            flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; padding: 20px; box-sizing: border-box;
+        @keyframes moonPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 20px var(--gold)); }
+            50% { transform: scale(1.05) rotate(5deg); filter: drop-shadow(0 0 40px var(--luminous-blue)); }
         }
 
-        .lyrics {
+        /* Theater Text Styles */
+        .theater-stage {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 90%; text-align: center; z-index: 10; display: none;
+        }
+
+        .lyric-group {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.8rem, 6vw, 4rem);
-            color: var(--soft-white);
-            line-height: 1.2; opacity: 0; transform: translateY(30px);
-            transition: all 1s ease;
+            font-size: clamp(1.8rem, 7vw, 4rem);
+            line-height: 1.2; font-style: italic;
+            opacity: 0; transform: translateY(50px);
+            transition: all 1.2s ease-out;
         }
 
-        /* The Grand Finale Appearance */
-        #finale {
-            opacity: 0; transform: scale(0.9);
-            transition: all 2s ease;
+        /* Finale Impact */
+        #finale-stage {
+            display: none; flex-direction: column; align-items: center;
+            z-index: 20; position: absolute; width: 100%; top: 50%; transform: translateY(-50%);
         }
 
-        .countdown { display: flex; gap: 15px; margin: 30px 0; }
+        .countdown { display: flex; gap: 10px; margin: 20px 0; }
         .unit { 
             background: rgba(255,255,255,0.05); border: 1px solid var(--gold);
-            padding: 15px; border-radius: 10px; min-width: 80px; 
+            padding: 10px; border-radius: 8px; min-width: 65px; 
         }
-        .num { font-size: 2.5rem; font-weight: 900; color: var(--gold); display: block; }
-        .label { font-size: 0.7rem; letter-spacing: 2px; color: var(--soft-white); }
+        .num { font-size: 1.8rem; font-weight: 900; color: var(--gold); display: block; }
+        .label { font-size: 0.6rem; letter-spacing: 1px; }
 
-        .btn-group { display: flex; gap: 20px; }
+        .btn-group { display: flex; flex-direction: column; gap: 10px; width: 80%; max-width: 300px; }
         .btn {
-            padding: 18px 40px; text-decoration: none; font-weight: 900;
-            text-transform: uppercase; letter-spacing: 3px; border-radius: 50px;
-            transition: 0.4s;
+            padding: 15px; text-decoration: none; font-weight: 900; text-align: center;
+            text-transform: uppercase; letter-spacing: 2px; border-radius: 50px; font-size: 0.8rem;
         }
-        .btn-reg { background: var(--gold); color: #000; box-shadow: 0 0 20px rgba(212,175,55,0.4); }
-        .btn-cal { border: 2px solid var(--soft-white); color: var(--soft-white); }
-        .btn:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,122,255,0.5); }
+        .btn-reg { background: var(--gold); color: #000; box-shadow: 0 0 20px rgba(212,175,55,0.3); }
+        .btn-cal { border: 1px solid var(--white); color: var(--white); }
 
         #mute-btn {
             position: fixed; bottom: 20px; left: 20px; background: none; border: 1px solid var(--gold);
-            color: var(--gold); padding: 10px; border-radius: 50%; cursor: pointer; z-index: 10001;
+            color: var(--gold); padding: 8px; border-radius: 50%; z-index: 10001;
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-glow"></div>
+    <div id="particle-canvas"></div>
     <button id="mute-btn" onclick="toggleMute()">🔊</button>
 
-    <audio id="ripple-snd" src="audio/ui-click-ripple.mp3"></audio>
-    <audio id="jingle" src="audio/teaser_jingle.mp3"></audio>
+    <audio id="opener-snd" src="audio/branch-hover.mp3" preload="auto"></audio>
+    <audio id="jingle-snd" src="audio/teaser_jingle.mp3" preload="auto"></audio>
 
     <div id="intro-overlay">
-        <button id="start-btn" onclick="initiateShow()" style="background:none; border:2px solid var(--gold); color:var(--gold); padding:20px 50px; font-weight:900; letter-spacing:5px; cursor:pointer; font-size:1.2rem;">⚜️ ENTER EXPERIENCE</button>
+        <button id="entry-btn" onclick="startTheShow()" style="background:none; border:2px solid var(--gold); color:var(--gold); padding:15px 40px; font-weight:900; letter-spacing:5px; cursor:pointer;">⚜️ OPEN INVITATION</button>
         
-        <div id="credits-container">
-            <div class="credit-item" id="cr1">A SAZON FAMILY PRODUCTION</div>
-            <div class="credit-item" id="cr2" style="color:var(--luminous-blue);">MARZON HOTEL KALIBO</div>
-            <div class="credit-item" id="cr3" style="color:var(--gold);">JULY 23-24, 2027</div>
-            <div class="credit-item" id="cr4" style="letter-spacing:15px;">PRESENT</div>
-        </div>
+        <div class="credit-text" id="cr1">A SAZON FAMILY PRODUCTION</div>
+        <div class="credit-text" id="cr2" style="color:var(--luminous-blue);">MARZON HOTEL KALIBO</div>
+        <div class="credit-text" id="cr3" style="color:var(--gold);">JULY 23-24, 2027</div>
+        <div class="credit-text" id="cr4" style="letter-spacing:12px;">PRESENT</div>
     </div>
 
-    <div class="content-stage" id="stage-logo">
-        <div id="logo-stage">
-            <img src="images/moon.png" class="moon-img">
-        </div>
+    <div id="logo-stage">
+        <img src="images/moon.png" class="moon-img">
     </div>
 
-    <div class="content-stage" id="stage-lyrics">
-        <div class="lyrics" id="lyric-text">"Gikan sa Gamut... <br> Tubtob sa Langit"</div>
+    <div class="theater-stage" id="text-stage">
+        <div class="lyric-group" id="l1">"Gikan sa Gamut...<br>Tubtob sa Langit"</div>
+        <div class="lyric-group" id="l2">"Sa Hulyo 2027,<br>Magtilipon kita tanan!"</div>
+        <div class="lyric-group" id="l3">"Sinadya sa Kalibo!"</div>
     </div>
 
-    <div class="content-stage" id="stage-finale">
-        <div id="finale">
-            <h1 style="font-family:'Playfair Display'; color:var(--gold); font-size: 3rem;">WE ARE SAZON</h1>
-            
-            <div class="countdown">
-                <div class="unit"><span class="num" id="d">00</span><span class="label">DAYS</span></div>
-                <div class="unit"><span class="num" id="h">00</span><span class="label">HRS</span></div>
-                <div class="unit"><span class="num" id="m">00</span><span class="label">MINS</span></div>
-                <div class="unit"><span class="num" id="s">00</span><span class="label">SECS</span></div>
-            </div>
-
-            <div class="btn-group">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" target="_blank" class="btn btn-reg">📝 REGISTER NOW</a>
-                <a href="#" class="btn btn-cal">📅 SAVE DATE</a>
-            </div>
-
-            <div style="margin-top:50px; font-weight:900; color:var(--luminous-blue); letter-spacing:3px;">
-                📍 SEE YOU IN KALIBO !!! 🏝️
-            </div>
+    <div id="finale-stage">
+        <h1 style="color:var(--gold); font-size: 2.2rem; margin:0;">WE ARE SAZON</h1>
+        <div class="countdown">
+            <div class="unit"><span class="num" id="d">00</span><span class="label">DAYS</span></div>
+            <div class="unit"><span class="num" id="h">00</span><span class="label">HRS</span></div>
+            <div class="unit"><span class="num" id="m">00</span><span class="label">MINS</span></div>
+            <div class="unit"><span class="num" id="s">00</span><span class="label">SECS</span></div>
         </div>
+        <div class="btn-group">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" target="_blank" class="btn btn-reg">📝 REGISTER NOW</a>
+            <a href="#" class="btn btn-cal">📅 SAVE THE DATE</a>
+        </div>
+        <div style="margin-top:30px; font-weight:900; color:var(--luminous-blue); font-size:0.9rem;">📍 SEE YOU IN KALIBO !!! 🏝️</div>
     </div>
 
     <script>
-        const jingle = document.getElementById('jingle');
-        const ripple = document.getElementById('ripple-snd');
+        const opener = document.getElementById('opener-snd');
+        const jingle = document.getElementById('jingle-snd');
 
-        function initiateShow() {
-            ripple.play();
-            document.getElementById('start-btn').style.opacity = '0';
-            setTimeout(() => { document.getElementById('start-btn').style.display = 'none'; }, 500);
+        function startTheShow() {
+            // Mobile Audio Unlock
+            opener.play();
+            jingle.play(); 
+            jingle.pause(); // Pre-warm the jingle
+            jingle.currentTime = 0;
 
-            // 1. Credits Sequence
-            const sequence = ['cr1', 'cr2', 'cr3', 'cr4'];
-            sequence.forEach((id, i) => {
+            document.getElementById('entry-btn').style.display = 'none';
+
+            // 1. Cinematic Credits (5 Seconds)
+            const credits = ['cr1', 'cr2', 'cr3', 'cr4'];
+            credits.forEach((id, i) => {
                 setTimeout(() => {
                     const el = document.getElementById(id);
-                    el.style.opacity = "1";
-                    el.style.transform = "scale(1.1)";
-                    setTimeout(() => { el.style.opacity = "0"; el.style.transform = "scale(1.3)"; }, 1500);
-                }, i * 1800);
+                    el.classList.add('credit-active');
+                    setTimeout(() => { el.classList.remove('credit-active'); el.style.opacity="0"; }, 1200);
+                }, i * 1300);
             });
 
-            // 2. Clear Overlay & Start Music
+            // 2. Transition to Jingle & Logo
             setTimeout(() => {
                 document.getElementById('intro-overlay').style.opacity = '0';
                 jingle.play();
-                setTimeout(() => { 
-                    document.getElementById('intro-overlay').remove(); 
-                    showLogo();
-                }, 1500);
-            }, 7500);
-        }
-
-        function showLogo() {
-            const stage = document.getElementById('stage-logo');
-            stage.style.display = 'flex';
-            document.getElementById('logo-stage').style.display = 'block';
-            
-            setTimeout(() => {
-                stage.style.opacity = '0';
-                setTimeout(() => { stage.style.display = 'none'; showLyrics(); }, 1000);
-            }, 5000);
-        }
-
-        function showLyrics() {
-            const stage = document.getElementById('stage-lyrics');
-            const text = document.getElementById('lyric-text');
-            stage.style.display = 'flex';
-            
-            const verses = [
-                "Sa Hulyo dos mil baynte siete!",
-                "Pamilya ni Isok kag Pistang...",
-                "Magtilipon kita tanan kag mag sinadya!"
-            ];
-
-            verses.forEach((v, i) => {
                 setTimeout(() => {
-                    text.style.opacity = "0";
-                    setTimeout(() => {
-                        text.innerHTML = v;
-                        text.style.opacity = "1";
-                        text.style.transform = "translateY(0)";
-                    }, 500);
-                }, i * 3000);
-            });
-
-            setTimeout(() => {
-                stage.style.opacity = '0';
-                setTimeout(() => { stage.style.display = 'none'; showFinale(); }, 1000);
-            }, 10000);
+                    document.getElementById('intro-overlay').remove();
+                    runTheater();
+                }, 1000);
+            }, 5500);
         }
 
-        function showFinale() {
-            const stage = document.getElementById('stage-finale');
-            stage.style.display = 'flex';
+        function runTheater() {
+            const logo = document.getElementById('logo-stage');
+            const theater = document.getElementById('text-stage');
+            
+            // Show Logo
+            logo.style.display = 'block';
+            setTimeout(() => { logo.style.opacity = '0'; logo.style.transition = '2s'; }, 4000);
+
+            // Show Group Lyrics
             setTimeout(() => {
-                document.getElementById('finale').style.opacity = "1";
-                document.getElementById('finale').style.transform = "scale(1)";
-            }, 100);
+                theater.style.display = 'block';
+                const groups = ['l1', 'l2', 'l3'];
+                groups.forEach((id, i) => {
+                    setTimeout(() => {
+                        const el = document.getElementById(id);
+                        el.style.opacity = "1";
+                        el.style.transform = "translateY(0)";
+                        if(i < 2) setTimeout(() => { el.style.opacity = "0"; el.style.display="none"; }, 2500);
+                    }, i * 3000);
+                });
+            }, 5000);
+
+            // 3. FINAL IMPACT - Sync this to the end of your 30s jingle
+            // Adjust this "25000" (25 seconds) to match the exact end beat of your jingle
+            setTimeout(() => {
+                theater.style.opacity = '0';
+                document.getElementById('finale-stage').style.display = 'flex';
+                setTimeout(() => { document.getElementById('finale-stage').style.opacity = '1'; }, 100);
+            }, 23000); 
         }
 
         function toggleMute() {
@@ -236,7 +220,7 @@
             document.getElementById('mute-btn').innerText = jingle.muted ? '🔇' : '🔊';
         }
 
-        // Timer Logic
+        // Standard Timer
         const target = new Date("July 23, 2027 00:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
