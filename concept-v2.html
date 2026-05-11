@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sazon 2027 | Dali Na Kita!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,700&family=Inter:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --luminous-blue: #002b5c; --accent-gold: #d4af37; --glass: rgba(255, 255, 255, 0.1); }
+        body { margin: 0; background: var(--luminous-blue); color: white; font-family: 'Inter', sans-serif; text-align: center; }
+        .section { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; box-sizing: border-box; }
+        h1 { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--accent-gold); margin: 0; }
+        .quote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.4rem; line-height: 1.8; max-width: 700px; margin: 20px 0; }
+        .countdown { display: flex; gap: 15px; margin: 30px 0; }
+        .unit { background: var(--glass); padding: 15px; border-radius: 10px; border: 1px solid rgba(212,175,55,0.3); min-width: 70px; }
+        .num { font-size: 1.6rem; font-weight: 600; color: var(--accent-gold); display: block; }
+        .label { font-size: 0.7rem; text-transform: uppercase; opacity: 0.7; }
+        .btn-group { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        .btn { padding: 16px 32px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-reg { background: #ff6b6b; color: white; border: none; }
+        .btn-cal { background: transparent; border: 2px solid white; color: white; }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .audio-dock { position: fixed; bottom: 30px; right: 30px; z-index: 10000; }
+        #playBtn { width: 65px; height: 65px; border-radius: 50%; border: none; background: var(--accent-gold); cursor: pointer; font-size: 1.4rem; display: flex; align-items: center; justify-content: center; }
+    </style>
+</head>
+<body>
+
+    <div class="section">
+        <h1>Dali na kita Sazon Family!</h1>
+        <p class="quote">"Sa Hulyo dos mil baynte siete! Pamilya ni Isok kag Pistang upod sa tanan nga paryente. Magtilipon kita tanan kag mag sinadya!"</p>
+    </div>
+
+    <div class="section" style="background: rgba(0,0,0,0.2);">
+        <p class="quote">"Importante gid ang inyo presensya, kay amo ina ang magahatag kalipay sa pamilya. Sa pagtilipon naton, ang halakhak kag yuhum sang tagsa-tagsa maga palipay sa bilog nga pamilya."</p>
+    </div>
+
+    <div class="section">
+        <p class="quote">"Gani dali na kamu tanan sa amo nga petsa. Indi na mag pang duwa-duwa. Preparar na kamu para sa aton sinadya."</p>
+        <div class="countdown">
+            <div class="unit"><span class="num" id="d">00</span><span class="label">Days</span></div>
+            <div class="unit"><span class="num" id="h">00</span><span class="label">Hours</span></div>
+            <div class="unit"><span class="num" id="m">00</span><span class="label">Mins</span></div>
+            <div class="unit"><span class="num" id="s">00</span><span class="label">Secs</span></div>
+        </div>
+        <div class="btn-group">
+            <a href="#" class="btn btn-reg">Register Now</a>
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sazon+Grand+Family+Reunion+2027&dates=20270723/20270725&location=Marzon+Hotel,+Kalibo" target="_blank" class="btn btn-cal">📅 Save the Date</a>
+        </div>
+    </div>
+
+    <div class="audio-dock">
+        <button id="playBtn" onclick="toggle()">▶</button>
+    </div>
+
+    <audio id="jingle" loop><source src="audio/teaser_jingle.mp3" type="audio/mpeg"></audio>
+
+    <script>
+        const m = document.getElementById('jingle');
+        const b = document.getElementById('playBtn');
+        function toggle() {
+            if (m.paused) { m.play(); b.innerHTML = "⏸"; b.style.background = "#4ecdc4"; }
+            else { m.pause(); b.innerHTML = "▶"; b.style.background = "#d4af37"; }
+        }
+        const target = new Date("July 23, 2027 00:00:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const diff = target - now;
+            document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('s').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+        }, 1000);
+        document.body.addEventListener('click', () => { if(m.paused) toggle(); }, {once: true});
+    </script>
+</body>
+</html>
