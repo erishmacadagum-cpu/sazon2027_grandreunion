@@ -217,27 +217,53 @@
             }, 5500);
         }
 
-        function runProduction() {
-            const theater = document.getElementById('text-stage');
-            theater.style.display = 'block';
-            const lines = ['l1', 'l2', 'l3', 'l4', 'l5', 'l6'];
-            
-            lines.forEach((id, i) => {
-                setTimeout(() => {
-                    const el = document.getElementById(id);
-                    el.style.opacity = "1";
-                    if(i < 5) setTimeout(() => { el.style.opacity = "0"; el.style.display="none"; }, 3200);
-                }, i * 3600);
-            });
+        function runShow() {
+    const logo = document.getElementById('logo-stage');
+    const theater = document.getElementById('text-stage');
 
-            // THE SCREAM-O-GRAPHICS CLIMAX
+    // 1. SHOW MOON (3 Seconds)
+    logo.style.display = 'block';
+    setTimeout(() => { 
+        logo.style.transition = "opacity 1s";
+        logo.style.opacity = '0'; 
+    }, 3000);
+
+    // 2. START THE 7-LINE SEQUENCE (Starting at 4 seconds)
+    setTimeout(() => {
+        theater.style.display = 'block';
+        const lines = ['l1', 'l2', 'l3', 'l4', 'l5', 'l6', 'l7'];
+        
+        lines.forEach((id, i) => {
+            // Each line appears 3.2 seconds after the previous one
             setTimeout(() => {
-                theater.style.opacity = '0';
-                document.getElementById('finale-stage').style.display = 'flex';
-                // Trigger sensory visualization (vibrating background)
-                document.getElementById('marzon-bg').classList.add('vibrate-active');
-            }, 27500); 
-        }
+                const el = document.getElementById(id);
+                el.style.opacity = "1";
+                el.style.display = "block";
+
+                // Hide the line just before the next one starts
+                if(i < 6) {
+                    setTimeout(() => { 
+                        el.style.opacity = "0"; 
+                        setTimeout(() => { el.style.display = 'none'; }, 500);
+                    }, 2800); 
+                }
+            }, i * 3200); 
+        });
+    }, 4000);
+
+    // 3. THE GRAND FINALE (Exactly at 27.5 Seconds)
+    // This is when the music hits the climax!
+    setTimeout(() => {
+        theater.style.opacity = '0';
+        const finale = document.getElementById('finale-stage');
+        finale.style.display = 'flex';
+        
+        // Add the Scream-o-Graphics shake to the background
+        const bg = document.getElementById('marzon-bg');
+        if(bg) bg.classList.add('vibrate-active');
+        
+    }, 27500);
+}
 
         function toggleMute() {
             jingle.muted = !jingle.muted;
