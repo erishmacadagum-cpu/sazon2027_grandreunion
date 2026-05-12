@@ -2,263 +2,111 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SAZON 2027 | THE GRAND REVEAL</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sazon 2027 Grand Family Reunion</title>
     <style>
-        :root {
-            --scream-yellow: #ffcf00;
-            --scream-blue: #00e0ff;
-            --white: #ffffff;
+        /* 1. VIBRANT HD BACKGROUND SETUP */
+        #marzon-bg {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            /* High-definition gradient to make the hotel photo pop */
+            background: linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), 
+                        url('marzon-hotel.jpg') no-repeat center/cover !important;
+            z-index: -1 !important;
+            display: block !important;
         }
 
-        body, html {
-            margin: 0; padding: 0; width: 100%; height: 100%;
-            background-color: transparent; color: var(--white);
-            font-family: 'Montserrat', sans-serif; overflow: hidden;
+        /* 2. THE TRANSPARENCY FIX (CRITICAL) */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: transparent !important; /* Removed the black wall */
+            overflow-x: hidden;
+            color: white;
+            text-align: center;
         }
 
-        /* THE STAGE: MARZON HOTEL */
-     #marzon-bg {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    background-image: linear-gradient(180deg, rgba(0,0,0,0.8), rgba(0,0,0,0.4)), url('marzon-hotel.jpg') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    z-index: -1 !important;
-    display: block !important;
-    opacity: 1 !important;
-}
-        /* SCREAM-O-GRAPHICS: BACKGROUND VIBRATION */
-        .vibrate-active {
-            animation: shake-bg 0.15s infinite;
-            filter: contrast(1.5) brightness(1.2);
+        /* 3. FESTIVE ATI-ATIHAN ANIMATIONS */
+        @keyframes pulse-breathe {
+            0% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.9; }
         }
 
-        @keyframes shake-bg {
-            0% { transform: translate(2px, 2px) rotate(0deg); }
-            25% { transform: translate(-2px, -3px) rotate(-1deg); }
-            50% { transform: translate(3px, 1px) rotate(1deg); }
-            100% { transform: translate(0, 0) rotate(0deg); }
+        .festive-icon {
+            width: 60px;
+            height: auto;
+            animation: pulse-breathe 3s infinite ease-in-out;
+            margin: 10px;
         }
 
-        /* INTRO OVERLAY */
-        #intro-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 10000;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        /* 4. GRAND BUTTON STYLING */
+        .btn-container {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
         }
 
-        #entry-btn {
-            background: var(--scream-yellow); border: none; color: #000; 
-            padding: 25px 60px; font-weight: 900; letter-spacing: 5px; 
-            cursor: pointer; position: relative;
-            box-shadow: 0 0 40px rgba(255,207,0,0.6);
-            transition: 0.3s;
+        .grand-btn {
+            display: block;
+            width: 280px;
+            padding: 18px;
+            text-decoration: none;
+            color: #000;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            font-weight: bold;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            transition: transform 0.2s;
+            border: 2px solid #fff;
         }
 
-        .credit-text {
-            position: absolute; font-family: 'DM Serif Display', serif;
-            font-size: clamp(1.5rem, 5vw, 2.5rem); opacity: 0; text-align: center;
+        .grand-btn:active {
+            transform: scale(0.95);
         }
 
-        /* ELEGANT SCRIPT STAGE */
-        .theater-stage {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 90%; text-align: center; z-index: 10; display: none;
-        }
-
-        .script-group {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(1.6rem, 6vw, 3.2rem);
-            opacity: 0; transition: all 1s ease;
-            text-shadow: 0 0 20px #000;
-        }
-
-        /* FINALE: SCREAM-O-GRAPHICS TEXT PLAY */
-        #finale-stage {
-            display: none; flex-direction: column; align-items: center; justify-content: center;
-            z-index: 100; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        }
-
-        .scream-box {
-            position: relative; padding: 20px;
-            animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-
-        .shout-text {
-            font-size: clamp(3.5rem, 15vw, 8rem);
-            color: #000; line-height: 0.8;
-            -webkit-text-stroke: 3px var(--scream-yellow);
-            text-shadow: 10px 10px 0px var(--scream-yellow), 15px 15px 0px var(--scream-blue);
-            font-weight: 900; transform: skew(-10deg) rotate(-5deg);
-            display: inline-block;
-        }
-
-        .shout-icon {
-            font-size: 0.5em; vertical-align: middle; 
-            display: inline-block; animation: icon-bounce 0.5s infinite;
-        }
-
-        @keyframes icon-bounce {
-            0%, 100% { transform: scale(1) rotate(0); }
-            50% { transform: scale(1.5) rotate(20deg); color: var(--scream-yellow); }
-        }
-
-        @keyframes pop-in {
-            0% { transform: scale(0) rotate(-45deg); filter: blur(20px); }
-            100% { transform: scale(1) rotate(-5deg); filter: blur(0); }
-        }
-
-        .kalibo-shout {
-            font-size: clamp(1.2rem, 5vw, 2rem);
-            color: var(--scream-blue); font-weight: 900;
-            letter-spacing: 8px; margin-top: 30px;
-            text-shadow: 0 0 20px var(--scream-blue);
-            animation: pulse-glitch 0.2s infinite alternate;
-        }
-
-        @keyframes pulse-glitch {
-            from { opacity: 1; transform: translateX(0); }
-            to { opacity: 0.8; transform: translateX(5px); }
-        }
-
-        /* COUNTDOWN & BUTTONS */
-        .countdown { display: flex; gap: 10px; margin: 40px 0; }
-        .unit { 
-            background: rgba(0,0,0,0.9); border: 2px solid var(--scream-yellow);
-            padding: 12px; min-width: 70px; border-radius: 2px;
-        }
-        .num { font-size: 2rem; color: var(--scream-yellow); display: block; }
-        .label { font-size: 0.6rem; color: #fff; }
-
-        .btn-group { display: flex; flex-direction: column; gap: 15px; width: 300px; }
-        .btn {
-            padding: 20px; text-decoration: none; font-weight: 900;
-            text-transform: uppercase; letter-spacing: 3px; text-align: center;
-        }
-        .btn-reg { background: var(--scream-yellow); color: #000; box-shadow: 10px 10px 0px #000; }
-        .btn-cal { border: 2px solid #fff; color: #fff; background: rgba(0,0,0,0.5); }
-
-        #mute-btn {
-            position: fixed; bottom: 20px; left: 20px; background: none; border: 1px solid var(--scream-yellow);
-            color: var(--scream-yellow); padding: 10px; border-radius: 50%; z-index: 10005; cursor: pointer;
+        /* MOBILE ADJUSTMENTS */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .grand-btn { width: 85%; }
         }
     </style>
 </head>
-<body> <div id="marzon-bg"></div>
+<body>
 
-  
-    <button id="mute-btn" onclick="toggleMute()">🔊</button>
+    <div id="marzon-bg"></div>
 
-    <audio id="opener-snd" src="audio/branch-hover.mp3"></audio>
-    <audio id="jingle-snd" src="audio/teaser_jingle.mp3"></audio>
-
-    <div id="intro-overlay">
-        <button id="entry-btn" onclick="startTheShow()">⚜️ OPEN THE REVEAL</button>
-        <div class="credit-text" id="cr1">A SAZON FAMILY PRODUCTION</div>
-        <div class="credit-text" id="cr2" style="color:var(--scream-blue);">MARZON HOTEL KALIBO</div>
-        <div class="credit-text" id="cr3" style="color:var(--scream-yellow);">JULY 23-24, 2027</div>
-        <div class="credit-text" id="cr4" style="letter-spacing:15px;">PRESENT</div>
-    </div>
-
-    <div class="theater-stage" id="text-stage">
-        <div class="script-group" id="l1">Dali na kita Sazon Family!<br>Sa Hulyo dos mil baynte siete!</div>
-        <div class="script-group" id="l2">Pamilya ni Isok kag Pistang<br>upod sa tanan nga paryente.</div>
-        <div class="script-group" id="l3">Magtilipon kita tanan<br>kag mag sinadya!</div>
-        <div class="script-group" id="l4">Importante gid ang inyo presensya,<br>magahatag kalipay sa pamilya.</div>
-        <div class="script-group" id="l5">Halakhak kag yuhum sang tanan<br>maga palipay sa aton pamilya.</div>
-        <div class="script-group" id="l6">Preparar na kamu tanan.<br>Amo na ini ang aton sinadya!</div>
-    </div>
-
-    <div id="finale-stage">
-        <div class="scream-box">
-            <div class="shout-text">WE ARE SAZON <span class="shout-icon">🔥</span></div>
-        </div>
+    <div style="padding: 50px 20px;">
+        <h1 style="text-transform: uppercase; letter-spacing: 5px; color: #FFD700; text-shadow: 2px 2px 10px rgba(0,0,0,0.8);">
+            We Are Sazon
+        </h1>
         
-        <div class="kalibo-shout">📢 SEE YOU IN KALIBO !!! 🏝️</div>
+        <p style="font-size: 1.5rem; font-style: italic;">See you in Kalibo!</p>
 
-        <div class="countdown">
-            <div class="unit"><span class="num" id="d">00</span><span class="label">DAYS</span></div>
-            <div class="unit"><span class="num" id="h">00</span><span class="label">HRS</span></div>
-            <div class="unit"><span class="num" id="m">00</span><span class="label">MINS</span></div>
-            <div class="unit"><span class="num" id="s">00</span><span class="label">SECS</span></div>
+        <div>
+            <img src="drum-icon.png" class="festive-icon" alt="Ati-Atihan Drum">
+            <img src="feather-icon.png" class="festive-icon" alt="Feathers">
         </div>
 
-        <div class="btn-group">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform" target="_blank" class="btn btn-reg">📝 REGISTER NOW</a>
-            <a href="#" class="btn btn-cal">📅 SAVE THE DATE</a>
+        <div class="btn-container">
+            <a href="#" class="grand-btn">
+                SAVE THE DATE <br> <span style="font-size: 0.8rem;">July 23-24, 2027</span>
+            </a>
+
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" 
+               class="grand-btn" 
+               style="background: #fff; color: #000;">
+                REGISTER HERE
+            </a>
         </div>
     </div>
 
-    <script>
-        const opener = document.getElementById('opener-snd');
-        const jingle = document.getElementById('jingle-snd');
-
-        function startTheShow() {
-            opener.play();
-            jingle.play(); jingle.pause(); jingle.currentTime = 0; 
-            document.getElementById('entry-btn').style.display = 'none';
-
-            const credits = ['cr1', 'cr2', 'cr3', 'cr4'];
-            credits.forEach((id, i) => {
-                setTimeout(() => {
-                    const el = document.getElementById(id);
-                    el.style.opacity = "1";
-                    setTimeout(() => { el.style.opacity = "0"; }, 1100);
-                }, i * 1300);
-            });
-
-            setTimeout(() => {
-                document.getElementById('intro-overlay').style.display = 'none';
-                const bg = document.getElementById('marzon-bg');
-                bg.style.display = 'block';
-                setTimeout(() => { bg.style.opacity = '1'; }, 100);
-                jingle.play();
-                runProduction();
-            }, 5500);
-        }
-
-        function runProduction() {
-            const theater = document.getElementById('text-stage');
-            theater.style.display = 'block';
-            const lines = ['l1', 'l2', 'l3', 'l4', 'l5', 'l6'];
-            
-            lines.forEach((id, i) => {
-                setTimeout(() => {
-                    const el = document.getElementById(id);
-                    el.style.opacity = "1";
-                    if(i < 5) setTimeout(() => { el.style.opacity = "0"; el.style.display="none"; }, 3200);
-                }, i * 3600);
-            });
-
-            // THE SCREAM-O-GRAPHICS CLIMAX
-            setTimeout(() => {
-                theater.style.opacity = '0';
-                document.getElementById('finale-stage').style.display = 'flex';
-                // Trigger sensory visualization (vibrating background)
-                document.getElementById('marzon-bg').classList.add('vibrate-active');
-            }, 27500); 
-        }
-
-        function toggleMute() {
-            jingle.muted = !jingle.muted;
-            document.getElementById('mute-btn').innerText = jingle.muted ? '🔇' : '🔊';
-        }
-
-        const target = new Date("July 23, 2027 00:00:00").getTime();
-        setInterval(() => {
-            const now = new Date().getTime();
-            const diff = target - now;
-            document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-            document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById('s').innerText = Math.floor((diff % (1000 * 60)) / 1000);
-        }, 1000);
-    </script>
 </body>
 </html>
