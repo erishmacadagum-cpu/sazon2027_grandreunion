@@ -19,14 +19,13 @@
         }
 
         /* THE STAGE: MARZON HOTEL */
-        #marzon-bg {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-           background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%),
-            url('images/marzon-hotel.jpg');
-            background-size: cover; background-position: center; z-index: -1;
-           display: block; opacity: 1;
-        }
-
+      #marzon-bg {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%), url('images/marzon-hotel.jpg') no-repeat center center / cover !important;
+    z-index: -1;
+    display: block !important;
+    opacity: 1 !important;
+}
         /* SCREAM-O-GRAPHICS: BACKGROUND VIBRATION */
         .vibrate-active {
             animation: shake-bg 0.15s infinite;
