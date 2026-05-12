@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SAZON 2027 | THE GRAND REVEAL</title>
+    <title>SAZON 2027 | GRAND REVEAL</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=DM+Serif+Display&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -23,36 +24,41 @@
         #marzon-bg {
             position: fixed !important; top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background-image: linear-gradient(180deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('marzon-hotel.jpg') !important;
-            background-size: cover !important; background-position: center !important;
-            z-index: -1 !important; display: block !important; opacity: 1 !important; 
+            background: linear-gradient(180deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('marzon-hotel.jpg') no-repeat center/cover !important;
+            z-index: -1; display: block; opacity: 1; 
         }
 
-        /* REFINED SCREAM-O: FESTIVE PULSE (Slower & Stronger) */
+        /* MUTE TOGGLE */
+        #mute-btn {
+            position: fixed; top: 15px; right: 15px;
+            z-index: 100001; background: rgba(0,0,0,0.5);
+            border: 2px solid #fff; color: #fff;
+            width: 45px; height: 45px; border-radius: 50%;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        /* SCREAM-O-GRAPHICS: PULSE */
         @keyframes scream-pulse {
-            0% { transform: scale(1) rotate(0deg); }
-            25% { transform: scale(1.1) rotate(-1deg); }
-            50% { transform: scale(1) rotate(1deg); }
-            75% { transform: scale(1.1) rotate(-0.5deg); }
-            100% { transform: scale(1) rotate(0deg); }
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.07) rotate(1deg); filter: brightness(1.2); }
         }
 
         .shout-title {
-            font-size: clamp(2.8rem, 12vw, 7rem);
+            font-size: clamp(2.5rem, 12vw, 7rem);
             font-weight: 900;
             background: linear-gradient(to right, var(--scream-pink), var(--scream-orange), var(--scream-yellow), var(--scream-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(5px 5px 0px #000);
-            animation: scream-pulse 0.8s infinite ease-in-out; /* Slower, rhythmic pulse */
-            display: inline-block; line-height: 1.1;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(4px 4px 0px #000);
+            animation: scream-pulse 0.7s infinite ease-in-out;
+            display: inline-block; line-height: 1;
         }
 
         .shout-sub {
-            font-size: clamp(1.2rem, 5.5vw, 2.5rem);
+            font-size: clamp(1.2rem, 5.5vw, 2.3rem);
             font-weight: 900; color: #fff;
             text-shadow: 0 0 15px var(--scream-blue), 3px 3px 0px #000;
-            animation: scream-pulse 1s infinite reverse ease-in-out; 
+            animation: scream-pulse 0.9s infinite reverse ease-in-out; 
             margin-top: 10px; display: block;
         }
 
@@ -62,38 +68,29 @@
             z-index: 9999; text-align: center;
         }
 
-        /* POEM TEXT FIX: Mobile-Friendly & No Overlap */
+        /* POEM SETTINGS */
         #text-stage { 
-            position: absolute; top: 50%; left: 50%; 
-            transform: translate(-50%, -50%); 
-            width: 85%; /* Narrower to prevent edge-touching */
-            text-align: center; z-index: 10; display: none; pointer-events: none; 
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+            width: 85%; text-align: center; z-index: 10; display: none;
         }
-
         .script-group { 
-            font-family: 'DM Serif Display', serif; 
-            font-size: clamp(1.5rem, 6vw, 2.2rem); /* Scalable font */
-            line-height: 1.4; /* Better spacing */
-            opacity: 0; transition: all 0.8s ease; 
-            text-shadow: 2px 2px 10px #000;
-            word-wrap: break-word;
+            font-family: 'DM Serif Display', serif; font-size: clamp(1.4rem, 6vw, 2rem);
+            line-height: 1.4; opacity: 0; transition: all 0.8s ease; text-shadow: 2px 2px 10px #000;
         }
 
-        .btn-group { display: flex; flex-direction: column; gap: 12px; width: 80%; max-width: 300px; margin-top: 20px; }
-        .btn { 
-            display: flex; justify-content: center; align-items: center; height: 60px; 
-            text-decoration: none; font-weight: 900; border-radius: 12px; border: 2px solid #fff; 
-            pointer-events: auto !important; cursor: pointer;
-        }
-        .btn-reg { background: var(--scream-yellow); color: #000; box-shadow: 0 6px 0px var(--scream-orange); }
-
-        /* INTRO OVERLAY */
-        #intro-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 100000; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        /* OVERLAYS */
+        #intro-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 100000; display: flex; justify-content: center; align-items: center; }
         #entry-btn { background: var(--scream-yellow); border: 5px solid #fff; color: #000; padding: 20px 40px; font-weight: 900; cursor: pointer; border-radius: 15px; }
-        .credit-text { position: absolute; font-family: 'DM Serif Display', serif; font-size: 1.8rem; opacity: 0; text-align: center; pointer-events: none; }
+        .credit-text { position: absolute; font-family: 'DM Serif Display', serif; font-size: 1.8rem; opacity: 0; text-align: center; }
+
+        .btn-group { display: flex; flex-direction: column; gap: 10px; width: 80%; max-width: 280px; margin-top: 20px; }
+        .btn { display: flex; justify-content: center; align-items: center; height: 55px; text-decoration: none; font-weight: 900; border-radius: 10px; border: 2px solid #fff; }
+        .btn-reg { background: var(--scream-yellow); color: #000; }
     </style>
 </head>
-<body> 
+<body>
+
+    <button id="mute-btn" onclick="toggleMute()">🔊</button>
     <div id="marzon-bg"></div>
 
     <div id="intro-overlay">
@@ -122,19 +119,26 @@
         </div>
     </div>
 
-    <audio id="opener-snd" src="audio/branch-hover.mp3" preload="auto"></audio>
+    <audio id="credits-snd" src="audio/credits_sfx.mp3" preload="auto"></audio> 
     <audio id="jingle-snd" src="audio/teaser_jingle.mp3" preload="auto"></audio>
 
     <script>
-        const opener = document.getElementById('opener-snd');
+        const creditsSnd = document.getElementById('credits-snd');
         const jingle = document.getElementById('jingle-snd');
+        const muteBtn = document.getElementById('mute-btn');
+        let isMuted = false;
+
+        function toggleMute() {
+            isMuted = !isMuted;
+            creditsSnd.muted = isMuted;
+            jingle.muted = isMuted;
+            muteBtn.innerHTML = isMuted ? "🔇" : "🔊";
+        }
 
         function startTheShow() {
-            // Unlocking Audio for Mobile
-            opener.play();
-            jingle.play(); 
-            jingle.pause(); 
-            jingle.currentTime = 0;
+            // Unlock all audio for mobile
+            creditsSnd.play();
+            jingle.play(); jingle.pause(); jingle.currentTime = 0;
 
             document.getElementById('entry-btn').style.display = 'none';
 
@@ -159,22 +163,23 @@
             theater.style.display = 'block';
             const lines = ['l1', 'l2', 'l3', 'l4', 'l5', 'l6'];
             
-            // Speed up the poem transitions slightly to reach the jingle climax
             lines.forEach((id, i) => {
                 setTimeout(() => {
                     const el = document.getElementById(id);
-                    el.style.opacity = "1";
+                    if(el) el.style.opacity = "1";
                     if(i < 5) setTimeout(() => { el.style.opacity = "0"; }, 2800);
                 }, i * 3200);
             });
 
-            // TIMING PRECISION: 
-            // If the text still appears too late, decrease 19500. 
-            // If too early, increase 19500.
-            setTimeout(() => {
-                theater.style.display = 'none';
-                document.getElementById('finale-stage').style.display = 'flex';
-            }, 19500); 
+            // --- PRECISION SYNC ENGINE ---
+            // Adjust the number 19.8 if the text is slightly off from the singing
+            const syncCheck = setInterval(() => {
+                if (jingle.currentTime >= 19.8) {
+                    theater.style.display = 'none';
+                    document.getElementById('finale-stage').style.display = 'flex';
+                    clearInterval(syncCheck);
+                }
+            }, 50);
         }
     </script>
 </body>
