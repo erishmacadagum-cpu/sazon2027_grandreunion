@@ -7,102 +7,91 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=DM+Serif+Display&display=swap" rel="stylesheet">
     <style>
         :root {
-            --ati-yellow: #ffcf00;
-            --ati-blue: #00e0ff;
-            --ati-red: #ff3131;
-            --ati-green: #39ff14;
+            --scream-yellow: #fff200;
+            --scream-cyan: #00f2ff;
+            --scream-magenta: #ff00ff;
             --white: #ffffff;
         }
 
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
-            background-color: transparent; color: var(--white);
+            background-color: #000; color: var(--white);
             font-family: 'Montserrat', sans-serif; overflow: hidden;
+            touch-action: manipulation;
         }
 
-        /* VIBRANT HD BACKGROUND */
+        /* HD VIBRANT BACKGROUND */
         #marzon-bg {
-            position: fixed !important; top: 0 !important; left: 0 !important;
-            width: 100vw !important; height: 100vh !important;
-            /* Lightened gradient for HD Eye-Candy vibrancy */
-            background-image: linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.1)), url('marzon-hotel.jpg') !important;
-            background-size: cover !important; background-position: center !important;
-            background-repeat: no-repeat !important; z-index: -1 !important;
-            display: block !important; opacity: 1 !important;
+            position: fixed !important; top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: linear-gradient(180deg, rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url('marzon-hotel.jpg') no-repeat center/cover !important;
+            z-index: -1; display: none; opacity: 0; transition: opacity 1s;
         }
 
-        .vibrate-active {
-            animation: shake-bg 0.1s infinite;
-            filter: contrast(1.4) brightness(1.1) saturate(1.5);
+        /* THE MOBILE-FIXED ENTRY BUTTON */
+        #intro-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 99999; /* Highest priority */
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
 
-        @keyframes shake-bg {
-            0% { transform: translate(1px, 1px); }
-            50% { transform: translate(-1px, -1px); }
-            100% { transform: translate(0, 0); }
+        #entry-btn {
+            background: var(--scream-yellow); border: 4px solid #fff; color: #000; 
+            padding: 30px 50px; font-weight: 900; letter-spacing: 3px; 
+            font-size: 1.2rem; cursor: pointer; border-radius: 15px;
+            box-shadow: 0 0 50px rgba(255,242,0,0.8);
+            animation: button-pulse 1.5s infinite;
+            pointer-events: all !important; /* FORCES MOBILE CLICKS */
         }
 
-        /* SCREAM-O-GRAPHICS TEXT & ICONS */
-        .shout-text {
-            font-size: clamp(3rem, 15vw, 7rem);
-            font-weight: 900; line-height: 0.85;
-            text-transform: uppercase;
-            /* Multi-color gradient for that festive feel */
-            background: linear-gradient(to bottom, var(--ati-yellow), var(--ati-red), var(--ati-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(5px 5px 0px #000);
-            transform: skew(-10deg) rotate(-2deg);
-            margin-bottom: 10px;
+        @keyframes button-pulse {
+            0% { transform: scale(1); box-shadow: 0 0 20px rgba(255,242,0,0.5); }
+            50% { transform: scale(1.05); box-shadow: 0 0 60px rgba(255,242,0,0.9); }
+            100% { transform: scale(1); box-shadow: 0 0 20px rgba(255,242,0,0.5); }
         }
 
-        .pulsating-icon {
-            font-size: 3.5rem; display: inline-block;
-            animation: breathe 1.5s infinite ease-in-out;
-            filter: drop-shadow(0 0 15px var(--ati-yellow));
-            margin: 0 15px;
+        /* SCREAM-O-GRAPHICS ANIMATIONS */
+        .scream-text {
+            font-size: clamp(3.5rem, 18vw, 8rem);
+            font-weight: 900; text-transform: uppercase;
+            background: linear-gradient(to bottom, var(--scream-yellow), var(--scream-cyan));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(8px 8px 0px #000);
+            animation: scream-vibration 0.2s infinite;
+            display: inline-block;
         }
 
-        @keyframes breathe {
-            0%, 100% { transform: scale(1); opacity: 0.9; }
-            50% { transform: scale(1.3); opacity: 1; color: var(--ati-green); }
+        @keyframes scream-vibration {
+            0% { transform: translate(2px, 1px) rotate(0deg) scale(1); }
+            20% { transform: translate(-1px, -2px) rotate(-1deg) scale(1.02); }
+            40% { transform: translate(-3px, 0px) rotate(1deg); }
+            60% { transform: translate(3px, 2px) rotate(0deg) scale(1.01); }
+            80% { transform: translate(-1px, -1px) rotate(-1deg); }
+            100% { transform: translate(1px, 2px) rotate(0deg); }
         }
 
-        /* BUTTONS: ANYWHERE-CLICK & MOBILE OPTIMIZED */
-        .btn-group { display: flex; flex-direction: column; gap: 18px; width: 320px; align-items: center; }
-        
-        .btn {
-            display: flex; justify-content: center; align-items: center;
-            width: 100%; height: 70px; /* Large touch target for mobile */
-            text-decoration: none; font-weight: 900; border-radius: 12px;
-            text-transform: uppercase; letter-spacing: 2px;
-            transition: transform 0.1s ease;
+        .icon-bounce {
+            font-size: 4rem; display: inline-block;
+            animation: icon-rhythm 0.6s infinite alternate;
         }
 
-        .btn:active { transform: scale(0.96); }
-
-        .btn-reg { 
-            background: linear-gradient(45deg, var(--ati-yellow), #ffae00); 
-            color: #000; border: 4px solid #fff;
-            box-shadow: 0 8px 0px #8b6500, 0 15px 30px rgba(0,0,0,0.4);
+        @keyframes icon-rhythm {
+            from { transform: translateY(0) scale(1); filter: hue-rotate(0deg); }
+            to { transform: translateY(-20px) scale(1.3); filter: hue-rotate(90deg); }
         }
 
-        .btn-cal { 
-            border: 3px solid var(--white); color: var(--white); 
-            background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);
-        }
-
-        /* ORIGINAL STYLES FOR INTRO (DO NOT TOUCH) */
-        #intro-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 10000; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        #entry-btn { background: var(--ati-yellow); border: none; padding: 25px 60px; font-weight: 900; cursor: pointer; letter-spacing: 5px; box-shadow: 0 0 40px rgba(255,207,0,0.6); }
-        .credit-text { position: absolute; font-family: 'DM Serif Display', serif; font-size: 2rem; opacity: 0; text-align: center; }
+        /* LAYOUT STUFF */
+        .credit-text { position: absolute; font-family: 'DM Serif Display', serif; font-size: 2rem; opacity: 0; text-align: center; transition: 0.5s; }
         .theater-stage { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; text-align: center; z-index: 10; display: none; }
-        .script-group { font-family: 'DM Serif Display', serif; font-size: 1.8rem; opacity: 0; transition: all 1s ease; text-shadow: 0 0 20px #000; }
+        .script-group { font-family: 'DM Serif Display', serif; font-size: 2rem; opacity: 0; transition: all 1s ease; text-shadow: 0 0 20px #000; }
         #finale-stage { display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 100; position: fixed; top: 0; left: 0; width: 100%; height: 100%; }
-        .countdown { display: flex; gap: 10px; margin: 20px 0; }
-        .unit { background: rgba(0,0,0,0.9); border: 2px solid var(--ati-yellow); padding: 10px; min-width: 65px; border-radius: 5px; }
-        .num { font-size: 1.8rem; color: var(--ati-yellow); display: block; }
-        #mute-btn { position: fixed; bottom: 20px; left: 20px; background: none; border: 1px solid var(--ati-yellow); color: var(--ati-yellow); padding: 10px; border-radius: 50%; z-index: 10005; cursor: pointer; }
+        
+        .btn-group { display: flex; flex-direction: column; gap: 15px; width: 85%; max-width: 350px; margin-top: 20px; }
+        .btn { display: block; padding: 20px; text-decoration: none; font-weight: 900; text-align: center; border-radius: 12px; pointer-events: all; }
+        .btn-reg { background: var(--scream-yellow); color: #000; border: 3px solid #fff; box-shadow: 0 10px 0px #8b6500; }
+        .btn-cal { border: 2px solid #fff; color: #fff; background: rgba(0,0,0,0.6); }
+        
+        #mute-btn { position: fixed; bottom: 20px; left: 20px; background: none; border: 1px solid var(--scream-yellow); color: var(--scream-yellow); padding: 10px; border-radius: 50%; z-index: 100005; }
     </style>
 </head>
 <body> 
@@ -115,8 +104,8 @@
     <div id="intro-overlay">
         <button id="entry-btn" onclick="startTheShow()">⚜️ OPEN THE REVEAL</button>
         <div class="credit-text" id="cr1">A SAZON FAMILY PRODUCTION</div>
-        <div class="credit-text" id="cr2" style="color:var(--ati-blue);">MARZON HOTEL KALIBO</div>
-        <div class="credit-text" id="cr3" style="color:var(--ati-yellow);">JULY 23-24, 2027</div>
+        <div class="credit-text" id="cr2" style="color:var(--scream-cyan);">MARZON HOTEL KALIBO</div>
+        <div class="credit-text" id="cr3" style="color:var(--scream-yellow);">JULY 23-24, 2027</div>
         <div class="credit-text" id="cr4" style="letter-spacing:15px;">PRESENT</div>
     </div>
 
@@ -130,29 +119,17 @@
     </div>
 
     <div id="finale-stage">
-        <div>
-            <span class="pulsating-icon">🥁</span>
-            <span class="pulsating-icon">🪶</span>
-        </div>
+        <div class="icon-bounce">🥁</div>
+        <div class="scream-text">WE ARE SAZON</div>
+        <div class="icon-bounce">🪶</div>
         
-        <div class="shout-text">WE ARE SAZON</div>
-        
-        <div style="color: var(--ati-blue); font-weight: 900; letter-spacing: 5px; text-shadow: 0 0 15px var(--ati-blue); margin-bottom: 10px;">
+        <div style="color: #fff; font-weight: 900; letter-spacing: 3px; font-size: 1.2rem; background: #000; padding: 5px 15px;">
             📢 SEE YOU IN KALIBO !!! 🏝️
-        </div>
-
-        <div class="countdown">
-            <div class="unit"><span class="num" id="d">00</span><span class="label" style="font-size:0.6rem;">DAYS</span></div>
-            <div class="unit"><span class="num" id="h">00</span><span class="label" style="font-size:0.6rem;">HRS</span></div>
-            <div class="unit"><span class="num" id="m">00</span><span class="label" style="font-size:0.6rem;">MINS</span></div>
-            <div class="unit"><span class="num" id="s">00</span><span class="label" style="font-size:0.6rem;">SECS</span></div>
         </div>
 
         <div class="btn-group">
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" 
-               target="_blank" class="btn btn-reg">
-               📝 REGISTER HERE
-            </a>
+               target="_blank" class="btn btn-reg">📝 REGISTER HERE</a>
             <a href="#" class="btn btn-cal">📅 SAVE THE DATE</a>
         </div>
     </div>
@@ -162,8 +139,11 @@
         const jingle = document.getElementById('jingle-snd');
 
         function startTheShow() {
-            opener.play();
-            jingle.play(); jingle.pause(); jingle.currentTime = 0; 
+            // Fix for mobile audio activation
+            opener.play().catch(e => console.log("Audio wait"));
+            jingle.play().catch(e => console.log("Audio wait"));
+            jingle.pause();
+            
             document.getElementById('entry-btn').style.display = 'none';
 
             const credits = ['cr1', 'cr2', 'cr3', 'cr4'];
@@ -177,6 +157,8 @@
 
             setTimeout(() => {
                 document.getElementById('intro-overlay').style.display = 'none';
+                document.getElementById('marzon-bg').style.display = 'block';
+                setTimeout(() => { document.getElementById('marzon-bg').style.opacity = '1'; }, 100);
                 jingle.play();
                 runProduction();
             }, 5500);
@@ -191,31 +173,20 @@
                 setTimeout(() => {
                     const el = document.getElementById(id);
                     el.style.opacity = "1";
-                    if(i < 5) setTimeout(() => { el.style.opacity = "0"; el.style.display="none"; }, 3200);
+                    if(i < 5) setTimeout(() => { el.style.opacity = "0"; }, 3200);
                 }, i * 3600);
             });
 
             setTimeout(() => {
-                theater.style.opacity = '0';
+                theater.style.display = 'none';
                 document.getElementById('finale-stage').style.display = 'flex';
-                document.getElementById('marzon-bg').classList.add('vibrate-active');
-            }, 27200); 
+            }, 23500); 
         }
 
         function toggleMute() {
             jingle.muted = !jingle.muted;
             document.getElementById('mute-btn').innerText = jingle.muted ? '🔇' : '🔊';
         }
-
-        const target = new Date("July 23, 2027 00:00:00").getTime();
-        setInterval(() => {
-            const now = new Date().getTime();
-            const diff = target - now;
-            document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-            document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById('s').innerText = Math.floor((diff % (1000 * 60)) / 1000);
-        }, 1000);
     </script>
 </body>
 </html>
