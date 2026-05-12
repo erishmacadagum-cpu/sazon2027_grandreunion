@@ -28,7 +28,6 @@
             z-index: -1; display: block; opacity: 1; 
         }
 
-        /* MUTE TOGGLE */
         #mute-btn {
             position: fixed; top: 15px; right: 15px;
             z-index: 100001; background: rgba(0,0,0,0.5);
@@ -38,7 +37,6 @@
             font-size: 1.2rem;
         }
 
-        /* SCREAM-O-GRAPHICS: PULSE */
         @keyframes scream-pulse {
             0%, 100% { transform: scale(1) rotate(0deg); }
             50% { transform: scale(1.07) rotate(1deg); filter: brightness(1.2); }
@@ -52,6 +50,7 @@
             filter: drop-shadow(4px 4px 0px #000);
             animation: scream-pulse 0.7s infinite ease-in-out;
             display: inline-block; line-height: 1;
+            opacity: 0; /* Hidden initially for the sync */
         }
 
         .shout-sub {
@@ -60,6 +59,7 @@
             text-shadow: 0 0 15px var(--scream-blue), 3px 3px 0px #000;
             animation: scream-pulse 0.9s infinite reverse ease-in-out; 
             margin-top: 10px; display: block;
+            opacity: 0; /* Hidden initially for the sync */
         }
 
         #finale-stage {
@@ -68,22 +68,14 @@
             z-index: 9999; text-align: center;
         }
 
-        /* POEM SETTINGS */
-        #text-stage { 
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            width: 85%; text-align: center; z-index: 10; display: none;
-        }
-        .script-group { 
-            font-family: 'DM Serif Display', serif; font-size: clamp(1.4rem, 6vw, 2rem);
-            line-height: 1.4; opacity: 0; transition: all 0.8s ease; text-shadow: 2px 2px 10px #000;
-        }
+        #text-stage { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; text-align: center; z-index: 10; display: none; }
+        .script-group { font-family: 'DM Serif Display', serif; font-size: clamp(1.4rem, 6vw, 2rem); line-height: 1.4; opacity: 0; transition: all 0.8s ease; text-shadow: 2px 2px 10px #000; }
 
-        /* OVERLAYS */
         #intro-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 100000; display: flex; justify-content: center; align-items: center; }
         #entry-btn { background: var(--scream-yellow); border: 5px solid #fff; color: #000; padding: 20px 40px; font-weight: 900; cursor: pointer; border-radius: 15px; }
         .credit-text { position: absolute; font-family: 'DM Serif Display', serif; font-size: 1.8rem; opacity: 0; text-align: center; }
 
-        .btn-group { display: flex; flex-direction: column; gap: 10px; width: 80%; max-width: 280px; margin-top: 20px; }
+        .btn-group { display: none; flex-direction: column; gap: 10px; width: 80%; max-width: 280px; margin-top: 20px; }
         .btn { display: flex; justify-content: center; align-items: center; height: 55px; text-decoration: none; font-weight: 900; border-radius: 10px; border: 2px solid #fff; }
         .btn-reg { background: var(--scream-yellow); color: #000; }
     </style>
@@ -111,9 +103,9 @@
     </div>
 
     <div id="finale-stage">
-        <div class="shout-title">🥁 WE ARE SAZON 🪶</div>
-        <div class="shout-sub">🏝️ SEE YOU IN KALIBO !!! 🏝️</div>
-        <div class="btn-group">
+        <div class="shout-title" id="finale-main">🥁 WE ARE SAZON 🪶</div>
+        <div class="shout-sub" id="finale-sub">🏝️ SEE YOU IN KALIBO !!! 🏝️</div>
+        <div class="btn-group" id="finale-btns">
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="btn btn-reg">📝 REGISTER HERE</a>
             <a href="#" class="btn" style="color:#fff;">📅 SAVE THE DATE</a>
         </div>
@@ -136,12 +128,9 @@
         }
 
         function startTheShow() {
-            // Unlock all audio for mobile
             creditsSnd.play();
             jingle.play(); jingle.pause(); jingle.currentTime = 0;
-
             document.getElementById('entry-btn').style.display = 'none';
-
             const credits = ['cr1', 'cr2', 'cr3', 'cr4'];
             credits.forEach((id, i) => {
                 setTimeout(() => {
@@ -150,7 +139,6 @@
                     setTimeout(() => { el.style.opacity = "0"; }, 1100);
                 }, i * 1300);
             });
-
             setTimeout(() => {
                 document.getElementById('intro-overlay').style.display = 'none';
                 jingle.play();
@@ -162,7 +150,6 @@
             const theater = document.getElementById('text-stage');
             theater.style.display = 'block';
             const lines = ['l1', 'l2', 'l3', 'l4', 'l5', 'l6'];
-            
             lines.forEach((id, i) => {
                 setTimeout(() => {
                     const el = document.getElementById(id);
@@ -171,12 +158,18 @@
                 }, i * 3200);
             });
 
-            // --- PRECISION SYNC ENGINE ---
-            // Adjust the number 19.8 if the text is slightly off from the singing
+            // --- THE PRECISION TWO-STEP SYNC ---
             const syncCheck = setInterval(() => {
-                if (jingle.currentTime >= 19.8) {
+                // BEAT 1: "WE ARE SAZON"
+                if (jingle.currentTime >= 18.5) { 
                     theater.style.display = 'none';
                     document.getElementById('finale-stage').style.display = 'flex';
+                    document.getElementById('finale-main').style.opacity = '1';
+                }
+                // BEAT 2: "SEE YOU IN KALIBO" + Buttons
+                if (jingle.currentTime >= 20.2) {
+                    document.getElementById('finale-sub').style.opacity = '1';
+                    document.getElementById('finale-btns').style.display = 'flex';
                     clearInterval(syncCheck);
                 }
             }, 50);
