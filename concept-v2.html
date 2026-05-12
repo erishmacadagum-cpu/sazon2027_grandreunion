@@ -22,7 +22,7 @@
         #marzon-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%),
-                        url('images/marzon-hotel.jpg');
+                        url('marzon-hotel.jpg');
             background-size: cover; background-position: center; z-index: -1;
             display: none; opacity: 0;
         }
@@ -149,8 +149,9 @@
     <div id="marzon-bg"></div>
     <button id="mute-btn" onclick="toggleMute()">🔊</button>
 
-    <audio id="opener-snd" src="branch-hover.mp3"></audio>
-    <audio id="jingle-snd" src="teaser_jingle.mp3"></audio>
+    <audio id="opener-snd" src="audio/branch-hover.mp3"></audio>
+    <audio id="jingle-snd" src="audio/teaser_jingle.mp3"></audio>
+
     <div id="intro-overlay">
         <button id="entry-btn" onclick="startTheShow()">⚜️ OPEN THE REVEAL</button>
         <div class="credit-text" id="cr1">A SAZON FAMILY PRODUCTION</div>
@@ -159,20 +160,15 @@
         <div class="credit-text" id="cr4" style="letter-spacing:15px;">PRESENT</div>
     </div>
 
-   <div class="theater-stage" id="text-stage">
-    <div class="script-group" id="l1">Dali na kita Sazon Family!<br>Sa Hulyo dos mil baynte siete!</div>
-    <div class="script-group" id="l2">Pamilya ni Isok kag Pistang<br>upod sa tanan nga paryente.</div>
-    <div class="script-group" id="l3">Magtilipon kita tanan kag mag sinadya!</div>
-    <div class="script-group" id="l4">Importante gid ang inyo presensya,<br>kay amo ina ang magahatag kalipay sa pamilya.</div>
-    <div class="script-group" id="l5">Ang halakhak kag yuhum sang tagsa-tagsa<br>maga palipay sa bilog nga pamilya.</div>
-    <div class="script-group" id="l6">Gani dali na kamu tanan sa amo nga petsa.<br>Indi na mag pang duwa-duwa.</div>
-    <div class="script-group" id="l7">Preparar na kamu para sa aton sinadya.</div>
-</div>
-<div id="logo-stage" style="display:none; text-align:center; width:100%; position:absolute; top:50%; transform:translateY(-50%); z-index:5;">
-    <div id="logo-stage" style="display:none; text-align:center; width:100%; position:absolute; top:50%; transform:translateY(-50%); z-index:5;">
-    <img src="moon.png" class="moon-img" style="width:250px;">
-</div>
-</div>
+    <div class="theater-stage" id="text-stage">
+        <div class="script-group" id="l1">Dali na kita Sazon Family!<br>Sa Hulyo dos mil baynte siete!</div>
+        <div class="script-group" id="l2">Pamilya ni Isok kag Pistang<br>upod sa tanan nga paryente.</div>
+        <div class="script-group" id="l3">Magtilipon kita tanan<br>kag mag sinadya!</div>
+        <div class="script-group" id="l4">Importante gid ang inyo presensya,<br>magahatag kalipay sa pamilya.</div>
+        <div class="script-group" id="l5">Halakhak kag yuhum sang tanan<br>maga palipay sa aton pamilya.</div>
+        <div class="script-group" id="l6">Preparar na kamu tanan.<br>Amo na ini ang aton sinadya!</div>
+    </div>
+
     <div id="finale-stage">
         <div class="scream-box">
             <div class="shout-text">WE ARE SAZON <span class="shout-icon">🔥</span></div>
@@ -221,53 +217,27 @@
             }, 5500);
         }
 
-        function runShow() {
-    const logo = document.getElementById('logo-stage');
-    const theater = document.getElementById('text-stage');
+        function runProduction() {
+            const theater = document.getElementById('text-stage');
+            theater.style.display = 'block';
+            const lines = ['l1', 'l2', 'l3', 'l4', 'l5', 'l6'];
+            
+            lines.forEach((id, i) => {
+                setTimeout(() => {
+                    const el = document.getElementById(id);
+                    el.style.opacity = "1";
+                    if(i < 5) setTimeout(() => { el.style.opacity = "0"; el.style.display="none"; }, 3200);
+                }, i * 3600);
+            });
 
-    // 1. SHOW MOON (3 Seconds)
-    logo.style.display = 'block';
-    setTimeout(() => { 
-        logo.style.transition = "opacity 1s";
-        logo.style.opacity = '0'; 
-    }, 3000);
-
-    // 2. START THE 7-LINE SEQUENCE (Starting at 4 seconds)
-    setTimeout(() => {
-        theater.style.display = 'block';
-        const lines = ['l1', 'l2', 'l3', 'l4', 'l5', 'l6', 'l7'];
-        
-        lines.forEach((id, i) => {
-            // Each line appears 3.2 seconds after the previous one
+            // THE SCREAM-O-GRAPHICS CLIMAX
             setTimeout(() => {
-                const el = document.getElementById(id);
-                el.style.opacity = "1";
-                el.style.display = "block";
-
-                // Hide the line just before the next one starts
-                if(i < 6) {
-                    setTimeout(() => { 
-                        el.style.opacity = "0"; 
-                        setTimeout(() => { el.style.display = 'none'; }, 500);
-                    }, 2800); 
-                }
-            }, i * 3200); 
-        });
-    }, 4000);
-
-    // 3. THE GRAND FINALE (Exactly at 27.5 Seconds)
-    // This is when the music hits the climax!
-    setTimeout(() => {
-        theater.style.opacity = '0';
-        const finale = document.getElementById('finale-stage');
-        finale.style.display = 'flex';
-        
-        // Add the Scream-o-Graphics shake to the background
-        const bg = document.getElementById('marzon-bg');
-        if(bg) bg.classList.add('vibrate-active');
-        
-    }, 27500);
-}
+                theater.style.opacity = '0';
+                document.getElementById('finale-stage').style.display = 'flex';
+                // Trigger sensory visualization (vibrating background)
+                document.getElementById('marzon-bg').classList.add('vibrate-active');
+            }, 27500); 
+        }
 
         function toggleMute() {
             jingle.muted = !jingle.muted;
