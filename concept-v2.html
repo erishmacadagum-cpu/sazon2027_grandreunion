@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SAZON 2027 | GRAND REVEAL</title>
-    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=DM+Serif+Display&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -16,7 +18,8 @@
 
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
-            background-color: #000; 
+            /* RESTORED TRANSPARENT BACKGROUND */
+            background-color: transparent !important; 
             color: #fff; font-family: 'Montserrat', sans-serif; overflow: hidden;
             touch-action: manipulation;
         }
@@ -28,7 +31,6 @@
             z-index: -1; display: block; opacity: 1; 
         }
 
-        /* MUTE TOGGLE */
         #mute-btn {
             position: fixed; top: 15px; right: 15px;
             z-index: 100001; background: rgba(0,0,0,0.5);
@@ -38,7 +40,6 @@
             font-size: 1.2rem;
         }
 
-        /* SCREAM-O-GRAPHICS */
         @keyframes scream-pulse {
             0%, 100% { transform: scale(1) rotate(0deg); }
             50% { transform: scale(1.07) rotate(1deg); filter: brightness(1.2); }
@@ -52,7 +53,7 @@
             filter: drop-shadow(4px 4px 0px #000);
             animation: scream-pulse 0.7s infinite ease-in-out;
             display: inline-block; line-height: 1;
-            opacity: 0; transition: opacity 0.3s ease;
+            opacity: 0;
         }
 
         .shout-sub {
@@ -61,7 +62,7 @@
             text-shadow: 0 0 15px var(--scream-blue), 3px 3px 0px #000;
             animation: scream-pulse 0.9s infinite reverse ease-in-out; 
             margin-top: 10px; display: block;
-            opacity: 0; transition: opacity 0.3s ease;
+            opacity: 0;
         }
 
         #finale-stage {
@@ -70,7 +71,6 @@
             z-index: 9999; text-align: center;
         }
 
-        /* POEM STAGE */
         #text-stage { 
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
             width: 90%; text-align: center; z-index: 10; display: none;
@@ -81,10 +81,9 @@
             position: absolute; width: 100%; left: 0; top: 0;
         }
 
-        /* INTRO OVERLAYS */
         #intro-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 100000; display: flex; justify-content: center; align-items: center; }
         #entry-btn { background: var(--scream-yellow); border: 5px solid #fff; color: #000; padding: 20px 40px; font-weight: 900; cursor: pointer; border-radius: 15px; font-size: 1.1rem; }
-        .credit-text { position: absolute; font-family: 'DM Serif Display', serif; font-size: 1.8rem; opacity: 0; text-align: center; transition: opacity 0.8s ease; }
+        .credit-text { position: absolute; font-family: 'DM Serif Display', serif; font-size: 1.8rem; opacity: 0; text-align: center; }
 
         .btn-group { display: none; flex-direction: column; gap: 10px; width: 80%; max-width: 280px; margin-top: 25px; }
         .btn { display: flex; justify-content: center; align-items: center; height: 55px; text-decoration: none; font-weight: 900; border-radius: 10px; border: 2px solid #fff; }
@@ -141,13 +140,10 @@
         }
 
         function startTheShow() {
-            // Unlock audio
             creditsSnd.play();
             jingle.play(); jingle.pause(); jingle.currentTime = 0;
-
             document.getElementById('entry-btn').style.display = 'none';
 
-            // Intro Credits Sequence (5.5s total)
             const credits = ['cr1', 'cr2', 'cr3', 'cr4'];
             credits.forEach((id, i) => {
                 setTimeout(() => {
@@ -169,7 +165,6 @@
             theater.style.display = 'block';
             const lines = ['l1', 'l2', 'l3', 'l4', 'l5', 'l6', 'l7', 'l8'];
             
-            // Pace: 2.3 seconds per line to fit the build-up
             lines.forEach((id, i) => {
                 setTimeout(() => {
                     const el = document.getElementById(id);
@@ -180,11 +175,9 @@
                 }, i * 2300); 
             });
 
-            // THE PRECISION TWO-STEP SYNC
             const syncCheck = setInterval(() => {
                 const time = jingle.currentTime;
 
-                // BEAT 1: "WE ARE SAZON"
                 if (time >= 18.8) {
                     theater.style.display = 'none'; 
                     const finale = document.getElementById('finale-stage');
@@ -192,7 +185,6 @@
                     document.getElementById('finale-main').style.opacity = '1';
                 }
 
-                // BEAT 2: "SEE YOU IN KALIBO"
                 if (time >= 20.8) {
                     document.getElementById('finale-sub').style.opacity = '1';
                     document.getElementById('finale-btns').style.display = 'flex';
