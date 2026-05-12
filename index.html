@@ -3,181 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <title>Sazon 2027 | The Clarion Call</title>
+    <title>SAZON 2027 | GRAND REVEAL</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&family=Prata&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="favicon.png">
     
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=DM+Serif+Display&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #d4af37; --navy: #000814; --luminous-blue: #00e5ff; }
-        body, html { margin: 0; padding: 0; height: 100%; background: var(--navy); color: white; font-family: 'Montserrat', sans-serif; overflow: hidden; touch-action: manipulation; }
-
-        #hype-trigger { position: fixed; top:0; left:0; width:100%; height:100%; z-index: 10000; background: #000; display: flex; justify-content: center; align-items: center; }
-        #trigger-btn { padding: 15px 35px; background: transparent; border: 1px solid var(--gold); color: var(--gold); cursor: pointer; letter-spacing: 4px; text-transform: uppercase; font-size: 0.7rem; transition: 0.3s; }
-        #trigger-btn:active { background: var(--gold); color: black; }
-
-        .bg-overlay { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            background: linear-gradient(to bottom, rgba(0,8,20,0.9), rgba(0,8,20,0.3), rgba(0,8,20,0.95)), url('images/memories.jpg') no-repeat center center; 
-            background-size: cover; filter: grayscale(100%) blur(5px); z-index: 1; opacity: 0; transition: opacity 4s ease; 
+        :root {
+            --scream-pink: #ff00ea;
+            --scream-orange: #ff6600;
+            --scream-yellow: #fff200;
+            --scream-blue: #00e0ff;
         }
 
-        .content { position: relative; z-index: 10; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; box-sizing: border-box; }
-        
-        #battlecry-box { width: 100%; margin-top: 20px; min-height: 180px; display: flex; align-items: center; justify-content: center; position: relative; }
-
-        @keyframes cinematicFade {
-            0% { opacity: 0; transform: scale(0.9); letter-spacing: 2px; }
-            20% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { opacity: 0; transform: scale(1.05); letter-spacing: 8px; }
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background-color: transparent !important; 
+            color: #fff; font-family: 'Montserrat', sans-serif; overflow: hidden;
+            touch-action: manipulation;
         }
 
-        .cinematic-text { 
-            animation: cinematicFade 5.5s ease-in-out forwards; 
-            text-transform: uppercase; 
-            line-height: 1.4; 
-            width: 100%;
-            display: block;
-            position: absolute;
+        #marzon-bg {
+            position: fixed; top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2)), url('marzon-hotel.jpg') no-repeat center/cover;
+            z-index: -1; display: block; opacity: 1; 
         }
 
-        .font-nostalgia { font-family: 'Prata', serif; font-style: italic; font-weight: 200; font-size: clamp(1.4rem, 5vw, 2.5rem); }
-        .font-legacy { font-family: 'Cinzel', serif; font-weight: 700; color: var(--gold); font-size: clamp(1.1rem, 4vw, 2.2rem); }
-        .font-sazon { font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 10px; color: white; font-size: clamp(1.8rem, 7vw, 3.5rem); }
-
-        #timer { display: flex; gap: 8px; width: 100%; justify-content: center; transition: opacity 2s; opacity: 0; margin-bottom: 10px; }
-        .time-block { text-align: center; border-bottom: 2px solid var(--gold); padding: 4px; min-width: 55px; }
-        .time-num { display: block; font-size: clamp(1.5rem, 6vw, 2.5rem); font-weight: 600; color: var(--gold); }
-        .time-label { font-size: 0.5rem; letter-spacing: 1px; text-transform: uppercase; }
-
-        #final-reveal-box { display: none; width: 100%; }
-        .reveal-line { opacity: 0; transition: opacity 2s ease; margin: 15px 0; }
-        
-        .btn-link { 
-            display: inline-block; padding: 14px 30px; border: 1px solid var(--luminous-blue); 
-            background: transparent; color: var(--luminous-blue); text-decoration: none; 
-            letter-spacing: 3px; text-transform: uppercase; font-size: 0.7rem; margin-top: 10px;
+        #mute-btn {
+            position: fixed; top: 15px; right: 15px;
+            z-index: 100001; background: rgba(0,0,0,0.5);
+            border: 2px solid #fff; color: #fff;
+            width: 45px; height: 45px; border-radius: 50%;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
         }
 
-        #calendar-link { display: block; margin-top: 15px; color: var(--gold); text-decoration: none; font-size: 0.6rem; letter-spacing: 2px; border-bottom: 1px solid rgba(212, 175, 55, 0.4); padding-bottom: 4px; width: fit-content; margin-left: auto; margin-right: auto; }
+        footer {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            color: rgba(255, 255, 255, 0.9);
+            font-size: clamp(0.55rem, 2vw, 0.7rem);
+            text-align: center; padding: 15px 0;
+            letter-spacing: 1.2px; text-transform: uppercase;
+            z-index: 10000; border-top: 1px solid rgba(255,255,255,0.15);
+        }
 
-        footer { position: absolute; bottom: 10px; width: 100%; text-align: center; font-size: 0.55rem; letter-spacing: 1.5px; color: rgba(255,255,255,0.5); z-index: 10; }
+        @keyframes scream-pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.07) rotate(1deg); filter: brightness(1.2); }
+        }
+
+        .shout-title {
+            font-size: clamp(2.5rem, 12vw, 7rem);
+            font-weight: 900;
+            background: linear-gradient(to right, var(--scream-pink), var(--scream-orange), var(--scream-yellow), var(--scream-blue));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(4px 4px 0px #000);
+            animation: scream-pulse 0.7s infinite ease-in-out;
+            display: inline-block; line-height: 1; opacity: 0;
+        }
+
+        .shout-sub {
+            font-size: clamp(1.2rem, 5.5vw, 2.3rem);
+            font-weight: 900; color: #fff;
+            text-shadow: 0 0 15px var(--scream-blue), 3px 3px 0px #000;
+            animation: scream-pulse 0.9s infinite reverse ease-in-out; 
+            margin-top: 10px; display: block; opacity: 0;
+        }
+
+        #finale-stage {
+            display: none; flex-direction: column; align-items: center; justify-content: center;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 9999; text-align: center;
+        }
+
+        #text-stage { 
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+            width: 90%; text-align: center; z-index: 10; display: none;
+        }
+        .script-group { 
+            font-family: 'DM Serif Display', serif; font-size: clamp(1.3rem, 5.5vw, 2.2rem);
+            line-height: 1.4; opacity: 0; transition: all 0.8s ease; text-shadow: 2px 2px 10px #000;
+            position: absolute; width: 100%; left: 0; top: 0;
+        }
+
+        #intro-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 100000; display: flex; justify-content: center; align-items: center; }
+        #entry-btn { background: var(--scream-yellow); border: 5px solid #fff; color: #000; padding: 20px 40px; font-weight: 900; cursor: pointer; border-radius: 15px; font-size: 1.1rem; }
+        .credit-text { position: absolute; font-family: 'DM Serif Display', serif; font-size: 1.8rem; opacity: 0; text-align: center; }
+
+        .btn-group { display: none; flex-direction: column; gap: 10px; width: 80%; max-width: 280px; margin-top: 25px; margin-bottom: 60px; }
+        .btn { display: flex; justify-content: center; align-items: center; height: 55px; text-decoration: none; font-weight: 900; border-radius: 10px; border: 2px solid #fff; }
+        .btn-reg { background: var(--scream-yellow); color: #000; }
     </style>
 </head>
 <body>
 
-    <div id="hype-trigger"><button id="trigger-btn">The Clarion Call of Legacy</button></div>
-    <div class="bg-overlay" id="bg"></div>
-    
-    <div class="content" id="salvo-content">
-        <div id="timer">
-            <div class="time-block"><span class="time-num" id="days">00</span><span class="time-label">Days</span></div>
-            <div class="time-block"><span class="time-num" id="hours">00</span><span class="time-label">Hrs</span></div>
-            <div class="time-block"><span class="time-num" id="mins">00</span><span class="time-label">Mins</span></div>
-            <div class="time-block"><span class="time-num" id="secs">00</span><span class="time-label">Secs</span></div>
-        </div>
+    <button id="mute-btn" onclick="toggleMute()">🔊</button>
+    <div id="marzon-bg"></div>
 
-        <div id="battlecry-box"></div>
+    <div id="intro-overlay">
+        <button id="entry-btn" onclick="startTheShow()">⚜️ OPEN THE REVEAL</button>
+        <div class="credit-text" id="cr1">A SAZON FAMILY PRODUCTION</div>
+        <div class="credit-text" id="cr2">MARZON HOTEL KALIBO</div>
+        <div class="credit-text" id="cr3">JULY 23-24, 2027</div>
+        <div class="credit-text" id="cr4" style="letter-spacing:10px;">PRESENT</div>
+    </div>
 
-        <div id="final-reveal-box">
-            <div class="reveal-line font-sazon" id="line-sazon" style="opacity: 0;">WE ARE SAZON</div>
-            <div class="reveal-line font-nostalgia" id="line-kalibo" style="opacity: 0; font-size: 1.3rem; color: var(--luminous-blue);">See you in Kalibo!</div>
-            <div class="reveal-line" id="links-reveal" style="opacity: 0;">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" class="btn-link" target="_blank">Register Now</a>
-                <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=SAZON+2027+GRAND+FAMILY+REUNION&dates=20270723T000000Z/20270725T000000Z&details=Gikan+sa+Gamut,+Tubtob+sa+Langit.&location=Marzon+Hotel+Kalibo,+Aklan&sf=true&output=xml" id="calendar-link" target="_blank">📅 Add to Calendar</a>
-            </div>
+    <div id="text-stage">
+        <div class="script-group" id="l1">📢 Dali na kita Sazon Family<br>sa Hulyo dos mil baynte siete! 🗓️</div>
+        <div class="script-group" id="l2">👨‍👩‍👧‍👦 Pamilya ni Isok kag Pistang<br>upod ang tanan nga paryente. ❤️</div>
+        <div class="script-group" id="l3">🤝 Magtilipon kita kag mag sinadya!<br>Importante gid ang inyo presensya... ✨</div>
+        <div class="script-group" id="l4">...kay amo ina ang magahatag<br>kalipay sa pamilya. 😊</div>
+        <div class="script-group" id="l5">☀️ Sa pag tilipon naton, ang halakhak<br>kag yuhum sang tagsa-tagsa... 😂</div>
+        <div class="script-group" id="l6">...maga palipay sa bilog nga pamilya.<br>Gani dali na kamu tanan... 🏃‍♂️</div>
+        <div class="script-group" id="l7">...sa amo nga petsa. 📍<br>Indi na mag pang duwa-duwa. 🙅‍♂️</div>
+        <div class="script-group" id="l8">🎭 Preparar na kamu<br>para sa aton sinadya! 🎉</div>
+    </div>
+
+    <div id="finale-stage">
+        <div class="shout-title" id="finale-main">🥁 WE ARE SAZON 🪶</div>
+        <div class="shout-sub" id="finale-sub">🏝️ SEE YOU IN KALIBO !!! 🏝️</div>
+        <div class="btn-group" id="finale-btns">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="btn btn-reg">📝 REGISTER HERE</a>
+            <a href="#" class="btn" style="color:#fff;">📅 SAVE THE DATE</a>
         </div>
     </div>
 
-    <footer>Marzon Hotel Kalibo | #SAZON2027GRANDREUNION</footer>
+    <footer>
+        Marzon Hotel Kalibo | #SAZON2027GRANDREUNION | Sazon Family Production | COPYRIGHT 2027
+    </footer>
+
+    <audio id="credits-snd" src="audio/credits_sfx.mp3" preload="auto"></audio> 
+    <audio id="jingle-snd" src="audio/teaser_jingle.mp3" preload="auto"></audio>
 
     <script>
-        const teaserAudio = new Audio('audio/teaser_jingle.mp3'); 
-        const messages = [
-            { text: "We have missed HOME.", class: "font-nostalgia" },
-            { text: "We have missed FAMILY.", class: "font-nostalgia" },
-            { text: "The time has come...", class: "font-legacy" },
-            { text: "To honor the Legacy.", class: "font-legacy" }
-        ];
+        const creditsSnd = document.getElementById('credits-snd');
+        const jingle = document.getElementById('jingle-snd');
+        const muteBtn = document.getElementById('mute-btn');
+        let isMuted = false;
 
-        const trigger = document.getElementById('hype-trigger');
-        const bg = document.getElementById('bg');
-        const box = document.getElementById('battlecry-box');
-        const timer = document.getElementById('timer');
-        const finalBox = document.getElementById('final-reveal-box');
-
-        function playHeartbeat(context) {
-            const strike = (time) => {
-                const osc = context.createOscillator(); 
-                const gain = context.createGain();
-                osc.type = 'sine'; 
-                osc.frequency.setValueAtTime(45, time);
-                gain.gain.setValueAtTime(0.8, time); 
-                gain.gain.exponentialRampToValueAtTime(0.001, time + 0.6);
-                osc.connect(gain); gain.connect(context.destination); 
-                osc.start(time); osc.stop(time + 0.6);
-            };
-            // 5 BEATS AT 1-SECOND INTERVALS
-            for(let i=0; i<5; i++) { strike(context.currentTime + i); }
+        function toggleMute() {
+            isMuted = !isMuted;
+            creditsSnd.muted = isMuted;
+            jingle.muted = isMuted;
+            muteBtn.innerHTML = isMuted ? "🔇" : "🔊";
         }
 
-        document.getElementById('trigger-btn').onclick = function() {
-            // Audio Context for Mobile Heartbeats
-            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            
-            // Prime Jingle to bypass Mobile Lock
-            teaserAudio.play().then(() => {
-                teaserAudio.pause();
-                teaserAudio.currentTime = 0;
-            }).catch(e => console.log("Priming audio..."));
+        function startTheShow() {
+            creditsSnd.play();
+            jingle.play(); jingle.pause(); jingle.currentTime = 0;
+            document.getElementById('entry-btn').style.display = 'none';
 
-            playHeartbeat(audioCtx);
-            trigger.style.opacity = '0';
-            
-            // Wait 5 seconds for beats, then start teaser
-            setTimeout(() => { 
-                trigger.style.display = 'none'; 
-                bg.style.opacity = '1';
-                teaserAudio.volume = 1.0;
-                teaserAudio.play();
-                runBattlecry();
-            }, 5000);
-        };
+            const credits = ['cr1', 'cr2', 'cr3', 'cr4'];
+            credits.forEach((id, i) => {
+                setTimeout(() => {
+                    const el = document.getElementById(id);
+                    el.style.opacity = "1";
+                    setTimeout(() => { el.style.opacity = "0"; }, 1100);
+                }, i * 1300);
+            });
 
-        async function runBattlecry() {
-            for (let msg of messages) {
-                box.innerHTML = ""; // Hard clear
-                await new Promise(r => setTimeout(r, 150)); 
-                
-                const span = document.createElement('span');
-                span.className = `cinematic-text ${msg.class}`;
-                span.innerText = msg.text;
-                box.appendChild(span);
-                
-                await new Promise(r => setTimeout(r, 5500)); 
-            }
-            
-            box.innerHTML = ""; 
-            timer.style.opacity = '1';
-            finalBox.style.display = 'block';
-
-            setTimeout(() => { document.getElementById('line-sazon').style.opacity = '1'; }, 500);
-            setTimeout(() => { document.getElementById('line-kalibo').style.opacity = '1'; }, 2500);
-            setTimeout(() => { document.getElementById('links-reveal').style.opacity = '1'; }, 4500);
+            setTimeout(() => {
+                document.getElementById('intro-overlay').style.display = 'none';
+                jingle.play();
+                runProduction();
+            }, 5500);
         }
 
-        const targetDate = new Date("July 23, 2027 00:00:00").getTime();
-        function updateTimer() {
-            const distance = targetDate - new Date().getTime();
-            if (distance < 0) { timer.innerHTML = "WELCOME HOME"; return; }
-            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-            document.getElementById("mins").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-            document.getElementById("secs").innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        function runProduction() {
+            const theater = document.getElementById('text-stage');
+            theater.style.display = 'block';
+            const lines = ['l1', 'l2', 'l3', 'l4', 'l5', 'l6', 'l7', 'l8'];
+            
+            lines.forEach((id, i) => {
+                setTimeout(() => {
+                    const el = document.getElementById(id);
+                    if(el) el.style.opacity = "1";
+                    if(i < 7) { 
+                        setTimeout(() => { if(el) el.style.opacity = "0"; }, 2000);
+                    }
+                }, i * 2300); 
+            });
+
+            const syncCheck = setInterval(() => {
+                const time = jingle.currentTime;
+
+                if (time >= 18.8) {
+                    theater.style.display = 'none'; 
+                    const finale = document.getElementById('finale-stage');
+                    finale.style.display = 'flex';
+                    document.getElementById('finale-main').style.opacity = '1';
+                }
+
+                if (time >= 20.8) {
+                    document.getElementById('finale-sub').style.opacity = '1';
+                    document.getElementById('finale-btns').style.display = 'flex';
+                    clearInterval(syncCheck);
+                }
+            }, 50);
         }
-        setInterval(updateTimer, 1000);
-        updateTimer();
     </script>
 </body>
 </html>
