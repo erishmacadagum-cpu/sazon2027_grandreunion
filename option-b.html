@@ -28,7 +28,7 @@
             width: 100%;
             height: 40vh;
             background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.8)), 
-                        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80'); /* Replace with your actual sunset image link */
+                        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -152,6 +152,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                margin-top: 20px;
+            }
+            h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
@@ -176,14 +186,13 @@
             <a href="#" class="branch-tile"><h3>Felomina</h3><span class="explore-text">Explore Branch</span></a>
             <a href="#" class="branch-tile"><h3>Estrella</h3><span class="explore-text">Explore Branch</span></a>
             <a href="#" class="branch-tile"><h3>Gregorio</h3><span class="explore-text">Explore Branch</span></a>
-            </div>
+        </div>
     </div>
 
-  <div class="audio-dock" style="position: relative; z-index: 9999; margin-top: 20px; display: flex; align-items: center;">
-    <button class="play-btn" onclick="togglePlay()" style="cursor: pointer; pointer-events: auto; background: #FF6B6B; border: none; border-radius: 50%; width: 45px; height: 45px; color: white; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">▶</button>
-    <span style="font-size: 0.8rem; font-weight: 600; margin-left: 10px; color: white;">Sazon Reunion Anthem</span>
-</div>
-</div>
+    <div class="audio-dock">
+        <button class="play-btn" onclick="togglePlay()">▶</button>
+        <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-dark);">Sazon Reunion Anthem</span>
+    </div>
 
     <audio id="sazonAnthem" loop>
         <source src="sazon-reunion-5min.mp3" type="audio/mpeg">
@@ -192,34 +201,48 @@
     <audio id="clickSfx" src="ui-click-ripple.mp3"></audio>
 
     <script>
-       const anthem = document.getElementById('sazonAnthem');
-const playBtn = document.querySelector('.play-btn');
+        const anthem = document.getElementById('sazonAnthem');
+        const playBtn = document.querySelector('.play-btn');
+        const hoverSfx = document.getElementById('hoverSfx');
+        const clickSfx = document.getElementById('clickSfx');
 
-function togglePlay() {
-    if (anthem.paused) {
-        anthem.play();
-        playBtn.innerHTML = "⏸";
-        playBtn.style.background = "var(--accent-teal)";
-    } else {
-        anthem.pause();
-        playBtn.innerHTML = "▶";
-        playBtn.style.background = "var(--accent-coral)";
-    }
-}
-            clickSfx.currentTime = 0;
-            clickSfx.play();
+        // Set Initial Volumes
+        anthem.volume = 0.4;
+        if (hoverSfx) hoverSfx.volume = 0.2;
+        if (clickSfx) clickSfx.volume = 0.3;
+
+        function togglePlay() {
+            // Play UI Click Sound
+            if (clickSfx) {
+                clickSfx.currentTime = 0;
+                clickSfx.play().catch(e => console.log("Click sound blocked"));
+            }
+
+            // Toggle Anthem Music
+            if (anthem.paused) {
+                anthem.play().catch(e => {
+                    console.log("Autoplay blocked by browser");
+                    alert("Please click again to play the anthem!");
+                });
+                playBtn.innerHTML = "⏸";
+                playBtn.style.background = "var(--accent-teal)";
+            } else {
+                anthem.pause();
+                playBtn.innerHTML = "▶";
+                playBtn.style.background = "var(--accent-coral)";
+            }
         }
 
+        // Add hover effects to all tiles
         const tiles = document.querySelectorAll('.branch-tile');
         tiles.forEach(tile => {
             tile.addEventListener('mouseenter', () => {
-                hoverSfx.currentTime = 0;
-                hoverSfx.play().catch(e => {});
+                if (hoverSfx) {
+                    hoverSfx.currentTime = 0;
+                    hoverSfx.play().catch(e => {});
+                }
             });
         });
-
-        anthem.volume = 0.4;
-        hoverSfx.volume = 0.2;
     </script>
 </body>
 </html>
