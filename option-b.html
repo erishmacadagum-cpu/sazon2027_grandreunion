@@ -16,17 +16,14 @@
             overflow-x: hidden;
         }
 
-        /* 1. Header & Moon Video Fix */
         header {
             position: relative;
             width: 100%;
-            height: 35vh; /* Sleek cinematic height */
+            height: 40vh;
             overflow: hidden;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
             background: #000;
         }
 
@@ -47,89 +44,89 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.5);
             z-index: 1;
         }
 
-        /* 2. Main Container (No Overlap) */
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            letter-spacing: 5px;
+            color: #D4AF37;
+            text-transform: uppercase;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
         .main-container {
             display: flex;
-            gap: 30px;
-            width: 95%;
-            max-width: 1300px;
-            margin: 60px auto 100px; /* Pushes content DOWN from the video */
+            gap: 40px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 80px auto;
             position: relative;
             z-index: 10;
         }
 
         .roots-card {
-            flex: 1.5;
+            flex: 1;
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
             padding: 40px;
-            border-radius: 30px;
+            border-radius: 20px;
             border: 1px solid rgba(212, 175, 55, 0.3);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
         }
 
         .branch-grid {
+            flex: 2;
             display: flex;
             flex-wrap: wrap;
-            justify-content: center; /* Centers Nilda at the bottom */
             gap: 20px;
-            flex: 2;
+            justify-content: center;
         }
 
-        /* 3. Branch Tiles & Golden Reveal */
         .branch-tile {
+            flex: 1 1 calc(33% - 20px);
+            min-width: 150px;
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 15px;
-            padding: 25px 15px;
+            padding: 20px;
+            border-radius: 12px;
             text-align: center;
             text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            flex: 1 1 calc(23% - 15px);
-            min-width: 160px;
-            max-width: 300px;
+            transition: 0.4s;
             animation: branchEntrance 0.8s ease-out backwards;
         }
 
         .branch-tile:hover {
-            transform: translateY(-10px) scale(1.05);
-            background: rgba(212, 175, 55, 0.15);
+            transform: translateY(-10px);
+            background: rgba(212, 175, 55, 0.1);
             border-color: #D4AF37;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
         }
 
         .branch-tile h3 {
             color: #D4AF37;
             margin: 0;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            font-size: 1.1rem;
         }
 
-        .explore-text {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-top: 10px;
-            font-style: italic;
-        }
-
-        /* 4. Animation Wave */
         @keyframes branchEntrance {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* The Wave Effect */
         .branch-tile:nth-child(1) { animation-delay: 0.1s; }
         .branch-tile:nth-child(2) { animation-delay: 0.2s; }
         .branch-tile:nth-child(3) { animation-delay: 0.3s; }
@@ -146,13 +143,45 @@
 
         @media (max-width: 768px) {
             .main-container { flex-direction: column; }
-            header { height: 30vh; }
+            h1 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
+
     <header>
         <video autoplay muted loop playsinline class="header-video">
             <source src="Moon.mp4" type="video/mp4">
         </video>
         <div class="header-overlay"></div>
+        <div class="header-content">
+            <h1>Sazon 2027</h1>
+            <p class="tagline">Gikan sa Gamut, Tubtob sa Langit</p>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="roots-card">
+            <h2 style="color: #D4AF37;">The Roots</h2>
+            <p>Dedicated to Tereso and Teofista Sazon, the patriarch and matriarch of our clan.</p>
+        </div>
+
+        <div class="branch-grid">
+            <a href="#" class="branch-tile"><h3>Serafin</h3></a>
+            <a href="#" class="branch-tile"><h3>Monserat</h3></a>
+            <a href="#" class="branch-tile"><h3>Felomina</h3></a>
+            <a href="#" class="branch-tile"><h3>Estrella</h3></a>
+            <a href="#" class="branch-tile"><h3>Gregorio</h3></a>
+            <a href="#" class="branch-tile"><h3>Regino</h3></a>
+            <a href="#" class="branch-tile"><h3>Maria</h3></a>
+            <a href="#" class="branch-tile"><h3>Concepcion</h3></a>
+            <a href="#" class="branch-tile"><h3>Cezar</h3></a>
+            <a href="#" class="branch-tile"><h3>Priscilla</h3></a>
+            <a href="#" class="branch-tile"><h3>Gloria</h3></a>
+            <a href="#" class="branch-tile"><h3>Reynaldo</h3></a>
+            <a href="#" class="branch-tile"><h3>Nilda</h3></a>
+        </div>
+    </div>
+
+</body>
+</html>
