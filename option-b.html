@@ -119,22 +119,26 @@
         }
 
         .branch-tile {
-            background: white;
-            padding: 30px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            color: var(--accent-coral);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            transition: 0.3s;
-            border: 1px solid #f0f0f0;
-        }
+    background: rgba(255, 255, 255, 0.05); /* Faint glass */
+    backdrop-filter: blur(10px); /* Frosted effect */
+    -webkit-backdrop-filter: blur(10px);
+    padding: 30px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    color: #ffffff; /* White text for the dark background */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    transition: 0.3s;
+    border: 1px solid rgba(212, 175, 55, 0.3); /* Thin Gold border */
+}
 
-        .branch-tile:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(78, 205, 196, 0.2);
-        }
+       .branch-tile:hover {
+    transform: translateY(-5px);
+    background: rgba(212, 175, 55, 0.1); /* Subtle gold tint on hover */
+    border-color: #D4AF37; /* Bright gold edge */
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); /* Gold neon glow */
+}
 
-        .branch-tile h3 {
+        color: #D4AF37;
             font-family: 'Playfair Display', serif;
             margin: 0;
             font-size: 1.5rem;
