@@ -80,16 +80,17 @@
         }
 
         /* Main Content Layout */
-       .main-container {
-    display: flex;
-    gap: 30px;
-    width: 95%;
-    max-width: 1300px;
-    margin: -80px auto 100px; /* Centers and lifts tiles over the video */
-    background: transparent; /* No more white background! */
-    position: relative;
-    z-index: 10;
-}
+     .main-container {
+            display: flex;
+            gap: 30px;
+            width: 95%;
+            max-width: 1300px;
+            /* Change the -80px to a positive 40px to push the content DOWN */
+            margin: 40px auto 100px; 
+            background: transparent;
+            position: relative;
+            z-index: 10;
+        }
 
         /* The Roots Card (Left side) */
         .roots-card {
