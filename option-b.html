@@ -115,77 +115,93 @@
 
         /* Branch Grid (Right side) */
         .branch-grid {
-            flex: 1;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+    flex: 2; /* Gives the grid more room next to the Roots card */
+}
 
         .branch-tile {
-    background: rgba(255, 255, 255, 0.05); /* Faint glass */
-    backdrop-filter: blur(10px); /* Frosted effect */
+    background: rgba(255, 255, 255, 0.03); /* Ultra-faint glass */
+    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    padding: 30px 20px;
-    border-radius: 20px;
+    border: 1px solid rgba(212, 175, 55, 0.2); /* Faint gold border */
+    border-radius: 15px;
+    padding: 25px 15px;
+    text-align: center;
     text-decoration: none;
-    color: #ffffff; /* White text for the dark background */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    transition: 0.3s;
-    border: 1px solid rgba(212, 175, 55, 0.3); /* Thin Gold border */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-       .branch-tile:hover {
-    transform: translateY(-5px);
-    background: rgba(212, 175, 55, 0.1); /* Subtle gold tint on hover */
+      .branch-tile:hover {
+    transform: translateY(-10px) scale(1.05);
+    background: rgba(212, 175, 55, 0.1); /* Glows gold */
     border-color: #D4AF37; /* Bright gold edge */
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); /* Gold neon glow */
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.4); /* Neon aura */
 }
 
-        color: #D4AF37;
-            font-family: 'Playfair Display', serif;
-            margin: 0;
-            font-size: 1.5rem;
-        }
+       color: #D4AF37; /* The signature Sazon Gold */
+        font-family: 'Montserrat', sans-serif; /* Cleaner, more futuristic */
+        margin: 0;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 2px; /* Adds that high-end luxury spacing */
+        text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 
         .explore-text {
-            font-size: 0.7rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-top: 15px;
-            display: block;
-            font-weight: bold;
-            color: var(--accent-teal);
-        }
+        font-size: 0.65rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-top: 15px;
+        display: block;
+        color: rgba(255, 255, 255, 0.5); /* Faded white so the Gold name stands out */
+        font-weight: 400;
+    }
 
         /* Floating Audio Dock */
         .audio-dock {
-            position: fixed;
-            bottom: 30px;
-            background: white;
-            padding: 10px 25px;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border: 1px solid #eee;
-            z-index: 1000;
-        }
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%); /* Centers the dock on the screen */
+        background: rgba(10, 14, 23, 0.85); /* Deep midnight glass */
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        padding: 12px 30px;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        border: 1px solid rgba(212, 175, 55, 0.3); /* Gold border */
+        box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        z-index: 1000;
+    }
 
         .play-btn {
-            background: var(--accent-coral);
-            border: none;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            cursor: pointer;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: 0.3s;
-        }
+        background: #D4AF37; /* Sazon Gold */
+        border: none;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        color: #0a0e17; /* Dark icon on gold button */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+    }
+
+    .play-btn:hover {
+        transform: scale(1.1) rotate(5deg);
+        box-shadow: 0 0 25px rgba(212, 175, 55, 0.7);
+        background: #f1c40f; /* Brighter gold on hover */
+    }
 
         @media (max-width: 768px) {
             .main-container {
