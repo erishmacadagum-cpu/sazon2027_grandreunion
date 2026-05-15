@@ -4,16 +4,118 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sazon 2027 | Gikan sa Gamut</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
-
-        :root {
-            --accent-coral: #FF6B6B;
-            --accent-teal: #4ECDC4;
-            --text-dark: #2D3436;
+   <style>
+        /* 1. The Video Banner Fix */
+        header {
+            position: relative;
+            width: 100%;
+            height: 35vh; /* Sleek cinematic height */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: #000;
         }
 
-        body {
+        .header-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        /* 2. Main Container Spacing (Fixes the Overlap) */
+        .main-container {
+            display: flex;
+            gap: 30px;
+            width: 95%;
+            max-width: 1300px;
+            margin: 60px auto 100px; /* Positive 60px pushes branches DOWN */
+            background: transparent;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* 3. The 13 Branches Grid */
+        .branch-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Centers Nilda at the bottom */
+            gap: 20px;
+            flex: 2;
+        }
+
+        .branch-tile {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 15px;
+            padding: 25px 15px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1 1 calc(23% - 20px);
+            min-width: 160px;
+            max-width: 300px;
+            
+            /* Initial state for animation */
+            animation: branchEntrance 0.8s ease-out backwards;
+        }
+
+        .branch-tile h3 {
+            color: #D4AF37; /* Sazon Gold */
+            margin: 0;
+            font-size: 1.4rem;
+        }
+
+        .explore-text {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        /* 4. The Hover Effect (Golden Reveal) */
+        .branch-tile:hover {
+            transform: translateY(-10px) scale(1.05);
+            background: rgba(212, 175, 55, 0.15);
+            border-color: #D4AF37;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+        }
+
+        /* 5. The Animation Logic (The Staggered Flex) */
+        @keyframes branchEntrance {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .branch-tile:nth-child(1) { animation-delay: 0.1s; }
+        .branch-tile:nth-child(2) { animation-delay: 0.2s; }
+        .branch-tile:nth-child(3) { animation-delay: 0.3s; }
+        .branch-tile:nth-child(4) { animation-delay: 0.4s; }
+        .branch-tile:nth-child(5) { animation-delay: 0.5s; }
+        .branch-tile:nth-child(6) { animation-delay: 0.6s; }
+        .branch-tile:nth-child(7) { animation-delay: 0.7s; }
+        .branch-tile:nth-child(8) { animation-delay: 0.8s; }
+        .branch-tile:nth-child(9) { animation-delay: 0.9s; }
+        .branch-tile:nth-child(10) { animation-delay: 1.0s; }
+        .branch-tile:nth-child(11) { animation-delay: 1.1s; }
+        .branch-tile:nth-child(12) { animation-delay: 1.2s; }
+        .branch-tile:nth-child(13) { animation-delay: 1.3s; }
+
+    </style>
+</head>
     font-family: 'Montserrat', sans-serif;
     background-color: #05070a; /* Deep midnight black */
     color: #ffffff;
