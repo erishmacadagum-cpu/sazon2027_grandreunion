@@ -114,28 +114,35 @@
         }
 
         /* Branch Grid (Right side) */
-        .branch-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 15px;
-    flex: 2; /* Gives the grid more room next to the Roots card */
+       .branch-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* This centers the 13th box at the bottom */
+    gap: 20px; /* Increased from 15px for a more high-end gallery feel */
+    flex: 2;
+}
 }
 
-        .branch-tile {
-    background: rgba(255, 255, 255, 0.03); /* Ultra-faint glass */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(212, 175, 55, 0.2); /* Faint gold border */
-    border-radius: 15px;
-    padding: 25px 15px;
-    text-align: center;
-    text-decoration: none;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
+       .branch-tile {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 15px;
+            padding: 25px 15px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            
+            /* The Balance Secret: */
+            flex: 1 1 calc(23% - 15px); /* Allows 4 per row, but lets them grow to fill space */
+            min-width: 160px; /* Keeps them from getting too squashed */
+            max-width: 300px; /* Keeps them from getting too wide */
+        }
 
       .branch-tile:hover {
     transform: translateY(-10px) scale(1.05);
