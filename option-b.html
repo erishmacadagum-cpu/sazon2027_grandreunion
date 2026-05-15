@@ -4,29 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sazon Grand Family Reunion 2027</title>
-   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">">
-   <style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* 1. Global Setup */
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #05070a;
+            background-color: #030508; /* Ultra-deep space black */
             color: #ffffff;
             margin: 0;
             padding: 0;
-            line-height: 1.6;
+            line-height: 1.8;
             overflow-x: hidden;
         }
 
-        /* 1. Cinematic Header */
+        /* 2. Immersive Full-Screen Hero Showcase */
         header {
             position: relative;
             width: 100%;
-            height: 38vh; /* Restoring your preferred banner height */
-            overflow: hidden;
+            height: 100vh; /* Takes up 100% of the screen opening */
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
+            overflow: hidden;
             background: #000;
         }
 
@@ -47,112 +46,145 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 70%, #030508 100%);
             z-index: 1;
         }
 
         .header-content {
             position: relative;
             z-index: 2;
+            text-align: center;
+            padding: 0 20px;
         }
 
         h1 {
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 10vw, 6rem);
             margin: 0;
-            letter-spacing: 8px;
-            color: #D4AF37;
+            letter-spacing: 12px;
             text-transform: uppercase;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 4px 15px rgba(212, 175, 55, 0.4));
         }
 
         .tagline {
-            font-size: 1.1rem;
-            letter-spacing: 3px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1rem, 3vw, 1.4rem);
+            font-weight: 300;
+            letter-spacing: 6px;
             color: rgba(255, 255, 255, 0.8);
-            margin-top: 10px;
+            margin-top: 20px;
+            text-transform: uppercase;
         }
 
-        /* 2. Layout Fix (Spacing between Header & Content) */
-        .main-container {
-            display: flex;
-            gap: 40px;
-            width: 95%;
-            max-width: 1400px;
-            margin: 60px auto 100px;
+        /* 3. Open Floating Tribute (The Roots) */
+        .roots-section {
+            max-width: 900px;
+            margin: 120px auto 80px;
+            text-align: center;
+            padding: 0 30px;
             position: relative;
             z-index: 10;
         }
 
-        .roots-card {
-            flex: 1.2;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 40px;
-            border-radius: 25px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
-            height: fit-content;
+        .roots-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #D4AF37;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
         }
 
-        /* 3. The 13 Branches Grid (Centering Nilda) */
+        .roots-section p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.75);
+            font-style: italic;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* 4. Full-Width Premium Constellation Grid */
+        .constellation-container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto 150px;
+            position: relative;
+            z-index: 10;
+        }
+
         .branch-grid {
-            flex: 2.5;
             display: flex;
             flex-wrap: wrap;
-            justify-content: center; /* This ensures Nilda sits in the center */
-            gap: 20px;
+            justify-content: center; /* Ensures Nilda centers beautifully at the bottom */
+            gap: 25px;
         }
 
+        /* 5. Deep Premium Glass Tiles */
         .branch-tile {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(212, 175, 55, 0.15);
-            border-radius: 15px;
-            padding: 30px 20px;
+            border-radius: 20px;
+            padding: 40px 20px;
             text-align: center;
             text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            flex: 1 1 calc(30% - 20px); /* Restoring the 3-column desktop look */
-            min-width: 180px;
-            max-width: 280px;
-            animation: branchEntrance 0.8s ease-out backwards;
+            flex: 1 1 calc(22% - 25px); /* Clean 4-column layout layout on large screens */
+            min-width: 220px;
+            max-width: 320px;
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            animation: branchEntrance 1s ease-out backwards;
         }
 
-       .branch-tile::after {
-    content: 'View Lineage →';
-    font-size: 0.7rem;
-    color: #D4AF37;
-    opacity: 0;
-    transition: 0.3s;
-    margin-top: 10px;
-}
+        .branch-tile:hover {
+            transform: translateY(-15px);
+            background: rgba(212, 175, 55, 0.08);
+            border-color: #D4AF37;
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.25);
+        }
 
-.branch-tile:hover::after {
-    opacity: 1;
-}
+        .branch-tile h3 {
+            font-family: 'Playfair Display', serif;
+            color: #ffffff;
+            margin: 0;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
 
-       /* Add this to your h1 and branch-tile h3 styles */
-h1, .branch-tile h3 {
-    font-family: 'Playfair Display', serif;
-    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3));
-}
+        .branch-tile:hover h3 {
+            color: #D4AF37;
+        }
 
-        /* 5. The Wave Animation */
+        .branch-tile::after {
+            content: 'Explore Lineage →';
+            font-size: 0.75rem;
+            color: #D4AF37;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 15px;
+            opacity: 0;
+            transform: translateY(5px);
+            transition: all 0.3s ease;
+        }
+
+        .branch-tile:hover::after {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered Animation Wave */
         @keyframes branchEntrance {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Delay logic for all 13 branches */
         .branch-tile:nth-child(1) { animation-delay: 0.1s; }
         .branch-tile:nth-child(2) { animation-delay: 0.2s; }
         .branch-tile:nth-child(3) { animation-delay: 0.3s; }
@@ -167,14 +199,14 @@ h1, .branch-tile h3 {
         .branch-tile:nth-child(12) { animation-delay: 1.2s; }
         .branch-tile:nth-child(13) { animation-delay: 1.3s; }
 
+        /* Responsive Layouts */
         @media (max-width: 1024px) {
-            .branch-tile { flex: 1 1 calc(45% - 20px); }
+            .branch-tile { flex: 1 1 calc(31% - 25px); } /* 3 columns on tablet */
         }
 
         @media (max-width: 768px) {
-            .main-container { flex-direction: column; align-items: center; }
-            .branch-tile { flex: 1 1 100%; max-width: 400px; }
-            header { height: 30vh; }
+            .branch-tile { flex: 1 1 calc(45% - 25px); } /* 2 columns on mobile devices */
+            h1 { letter-spacing: 6px; }
         }
     </style>
 </head>
@@ -182,7 +214,7 @@ h1, .branch-tile h3 {
 
     <header>
         <video autoplay muted loop playsinline class="header-video">
-            <source src="Moon.mp4" type="video/mp4">
+            <source src="SazonLogoOrbit2.mp4" type="video/mp4">
         </video>
         <div class="header-overlay"></div>
         <div class="header-content">
@@ -191,12 +223,12 @@ h1, .branch-tile h3 {
         </div>
     </header>
 
-    <div class="main-container">
-        <div class="roots-card">
-            <h2 style="color: #D4AF37;">The Roots</h2>
-            <p>Dedicated to Tereso and Teofista Sazon, the patriarch and matriarch of our clan.</p>
-        </div>
+    <div class="roots-section">
+        <h2>The Roots</h2>
+        <p>In profound honor of Tereso and Teofista Sazon, the eternal patriarch and matriarch of our clan. From their deep foundation, our branches flourish.</p>
+    </div>
 
+    <div class="constellation-container">
         <div class="branch-grid">
             <a href="#" class="branch-tile"><h3>Serafin</h3></a>
             <a href="#" class="branch-tile"><h3>Monserat</h3></a>
