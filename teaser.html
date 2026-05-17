@@ -52,7 +52,7 @@
             transform: scale(1.05);
         }
 
-        /* 3. Opening Credit Text (Timeline 0:00 - 0:05) */
+       /* 3. Opening Credit Text (Timeline 0:00 - 0:05) */
         #opening-credits {
             position: fixed;
             top: 50%;
@@ -63,14 +63,56 @@
             opacity: 0;
             display: none;
             pointer-events: none;
+            width: 90%;
+            max-width: 800px;
         }
 
-        .credit-text {
+        /* Base styling for all elegant lines */
+        .credit-line {
             font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 15px 0;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            display: block;
+        }
+
+        /* Line 1: Sazon Family Production (Soft Pastel Rose Gold) */
+        .credit-sazon {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            background: linear-gradient(135deg, #ffccd5, #fbc4b6, #e8b0b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Line 2: Marzon Hotel Kalibo (Soft Pastel Mint/Sage) */
+        .credit-hotel {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
             font-style: italic;
-            letter-spacing: 3px;
-            background: linear-gradient(to right, #bf953f, #fcf6ba, #aa771c);
+            text-transform: none; /* Keeps it in an elegant script style */
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9, #b2dfdb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Line 3: July 23-24, 2027 (Soft Pastel Lavender/Blue) */
+        .credit-date {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            font-weight: 400;
+            letter-spacing: 6px;
+            background: linear-gradient(135deg, #e1f5fe, #e8eaf6, #e1bee7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Line 4: PRESENT (Soft Pastel Gold - Bold & Piercing) */
+        .credit-present {
+            font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+            font-weight: 900;
+            letter-spacing: 12px;
+            margin-top: 30px !important;
+            background: linear-gradient(135deg, #fff9c4, #f0e693, #ffe082);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -292,9 +334,12 @@
             
             sfx.play().catch(e => console.log("Audio play blocked", e));
             
-            // Fade In Opening Credits
-            credits.style.display = 'block';
-            setTimeout(() => credits.style.opacity = '1', 500);
+           <div id="opening-credits">
+        <span class="credit-line credit-sazon">A Sazon Family Production</span>
+        <span class="credit-line credit-hotel">Marzon Hotel Kalibo</span>
+        <span class="credit-line credit-date">July 23-24, 2027</span>
+        <span class="credit-line credit-present">PRESENT</span>
+    </div>
 
             // 0:05 - Main Reveal (Fade credits, trigger 30s jingle, show graphics)
             setTimeout(() => {
