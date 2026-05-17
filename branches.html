@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sazon 2027 | The 13 Branches</title>
+    <title>Sazon 2027 | The 17 Branches</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&family=Prata&family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
     <style>
         :root { 
@@ -18,7 +18,7 @@
         body { margin: 0; padding: 0; background: var(--navy); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
 
         /* 1. OPENING CREDITS OVERLAY */
-        #intro-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000814; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; box-sizing: border-box; }
+        #intro-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000814; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; box-sizing: border-box; transition: opacity 0.8s ease; }
         .credit-line { font-family: 'Montserrat', sans-serif; font-weight: 200; letter-spacing: 5px; margin: 15px; display: none; text-transform: uppercase; font-size: 1.2rem; }
         #enter-btn { padding: 15px 45px; border: 2px solid var(--luminous-blue); background: transparent; color: var(--luminous-blue); font-family: 'Montserrat', sans-serif; letter-spacing: 3px; cursor: pointer; font-size: 1rem; position: relative; animation: pulseBlue 2s infinite; margin-top: 30px; }
         @keyframes pulseBlue { 0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(0, 229, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); } }
@@ -33,23 +33,28 @@
         .banner-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/heritage-banner.jpg') no-repeat center center; background-size: cover; opacity: 0.65; filter: brightness(1.1); z-index: 1; }
         
         #elders-reveal { display: none; opacity: 0; transition: opacity 3s ease-in; z-index: 10; gap: 30px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
-        .elder-box { width: 250px; height: 320px; border: 2px solid var(--gold); background: rgba(0, 27, 58, 0.85); display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; backdrop-filter: blur(8px); text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+        .elder-box { width: 250px; height: 320px; border: 2px solid var(--gold); background: rgba(0, 27, 58, 0.85); display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; backdrop-filter: blur(8px); text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.5); box-sizing: border-box; }
         .elder-box h2 { font-family: 'Cinzel Decorative', cursive; color: var(--gold); margin: 0; font-size: 1.6rem; }
 
-        /* 4. THE 13 BRANCHES GRID */
+        /* 4. THE 17 BRANCHES SYSTEM - BALANCED GRID */
         .branch-section { padding: 80px 20px; background: #001226; text-align: center; z-index: 20; position: relative; }
         .universal-instruction { color: var(--luminous-blue); font-family: 'Prata', serif; font-size: 1.1rem; margin-bottom: 40px; letter-spacing: 1px; }
-        .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; max-width: 1250px; margin: 0 auto 15px auto; }
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; max-width: 850px; margin: 0 auto; }
-        @media (max-width: 800px) { .grid-5, .grid-3 { grid-template-columns: repeat(2, 1fr); } }
         
-        .branch-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(212, 175, 55, 0.2); padding: 45px 10px; border-radius: 8px; text-decoration: none; transition: 0.4s; text-align: center; }
+        .grid-row-6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px; max-width: 1350px; margin: 0 auto 15px auto; }
+        .grid-row-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; max-width: 1125px; margin: 0 auto; }
+        
+        /* Mobile Responsive Fallbacks for 17 Cards */
+        @media (max-width: 1100px) { .grid-row-6, .grid-row-5 { grid-template-columns: repeat(3, 1fr); max-width: 900px; } }
+        @media (max-width: 768px) { .grid-row-6, .grid-row-5 { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 480px) { .grid-row-6, .grid-row-5 { grid-template-columns: 1fr; } }
+        
+        .branch-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(212, 175, 55, 0.2); padding: 45px 10px; border-radius: 8px; text-decoration: none; transition: 0.4s; text-align: center; display: block; }
         .branch-card:hover { transform: translateY(-10px); box-shadow: 0 0 35px var(--hover-color); border-color: var(--hover-color); background: rgba(255, 255, 255, 0.1); }
         .branch-card h3 { font-family: 'Prata', serif; color: white; margin: 0; font-size: 1.2rem; line-height: 1.4; }
 
         /* 5. PROGRAMME OF ACTIVITIES */
         .itinerary-section { padding: 100px 20px; background: var(--fresh-white); display: flex; justify-content: center; color: var(--navy); }
-        .itinerary-card { max-width: 850px; width: 100%; border: 2px solid var(--gold); padding: 50px 30px; background: white; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+        .itinerary-card { max-width: 850px; width: 100%; border: 2px solid var(--gold); padding: 50px 30px; background: white; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); box-sizing: border-box; }
         #programme-reveal { display: none; opacity: 0; transition: opacity 3s ease-in 1s; }
         .day-row { margin-bottom: 35px; border-left: 5px solid var(--gold); padding-left: 25px; text-align: left; }
         .day-row h4 { color: #8b6e00; margin: 0; font-size: 1.1rem; letter-spacing: 1px; }
@@ -96,24 +101,31 @@
 
     <div class="branch-section">
         <p class="universal-instruction">Click your designated branch name to register your family.</p>
-        <div class="grid-5">
+        
+        <div class="grid-row-6">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #e67e22;"><h3>Teodorico Sr.<br>(Lolo Ekong)</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #2ecc71;"><h3>Porferio<br>(Lolo Periong)</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #9b59b6;"><h3>Isabel<br>(Lola Sabel)</h3></a>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #ff4d4d;"><h3>Serafin<br>(Lolo Apin)</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #4da6ff;"><h3>Monserat<br>(Lola Monching)</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #4da6ff;"><h3>Monserat<br>(Lola Monsing)</h3></a>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #4dff88;"><h3>Felomina<br>(Lola Mining)</h3></a>
+        </div>
+
+        <div class="grid-row-6">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #f6d365;"><h3>Maria<br>(Lola Maria)</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #fa709a;"><h3>Gloria<br>(Lola Goly)</h3></a>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #ffcc4d;"><h3>Estrella<br>(Lola Estring)</h3></a>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #ff4dff;"><h3>Gregorio<br>(Lolo Gorio)</h3></a>
-        </div>
-        <div class="grid-5">
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #00f2fe;"><h3>Regino<br>(Lolo Taba)</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #f6d365;"><h3>Maria<br>(Lola Maria)</h3></a>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #a8edea;"><h3>Concepcion<br>(Lola Moret)</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #89f7fe;"><h3>Cezar<br>(Lolo Cezar)</h3></a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #667eea;"><h3>Priscilla<br>(Lola Mamay)</h3></a>
         </div>
-        <div class="grid-3">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #fa709a;"><h3>Gloria<br>(Lola Goly)</h3></a>
+
+        <div class="grid-row-5">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #667eea;"><h3>Priscilla<br>(Lola Mamay)</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #89f7fe;"><h3>Cezar<br>(Lolo Cezar)</h3></a>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #fee140;"><h3>Reynaldo<br>(Lolo Lope)</h3></a>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #30cfd0;"><h3>Nilda<br>(Lola Nilda)</h3></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="branch-card" style="--hover-color: #34495e;"><h3>Nolasco<br>(Lolo Onas)</h3></a>
         </div>
     </div>
 
@@ -132,7 +144,7 @@
         <h2 style="color:var(--gold); font-family:'Prata';">THE VENUE</h2>
         <p style="color:var(--silver);">Marzon Hotel, Kalibo, Aklan</p>
         <div class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3904.7087611848523!2d122.3688193!3d11.6917694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33aefd759462d6d5%3A0x828e81b4006ef31b!2sMarzon%20Hotel%20Kalibo!5e0!3m2!1sen!2sph!4v1715260000000!5m2!1sen!2sph" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <iframe src="https://maps.google.com/maps?q=Marzon%20Hotel%20Kalibo&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
     </div>
 
@@ -168,9 +180,13 @@
     };
 
     document.getElementById('enter-btn').onclick = function() {
-        Object.values(sounds).forEach(s => { s.play(); s.pause(); s.currentTime = 0; });
+        Object.values(sounds).forEach(s => { 
+            s.play().then(() => { s.pause(); s.currentTime = 0; }).catch(err => console.log("Audio warm-up note:", err.message)); 
+        });
+        
         this.style.display = 'none';
-        sounds.swell.play();
+        sounds.swell.play().catch(e => console.log(e));
+        
         const lines = ['l1','l2','l3','l4'];
         function showLines(idx) {
             if(idx < lines.length) {
@@ -183,15 +199,19 @@
     };
 
     function startShow() {
-        sounds.shimmer.play();
-        document.getElementById('intro-overlay').style.display = 'none';
+        sounds.shimmer.play().catch(e => console.log(e));
+        document.getElementById('intro-overlay').style.opacity = '0';
+        setTimeout(() => { document.getElementById('intro-overlay').style.display = 'none'; }, 800);
         document.getElementById('main-content').style.display = 'block';
+        
         startFireworks();
+        
         setTimeout(() => { 
             stopFireworks();
-            sounds.anthem.volume = 0; sounds.anthem.play();
+            sounds.anthem.volume = 0; 
+            sounds.anthem.play().catch(e => console.log(e));
             let vol = 0;
-            const fader = setInterval(() => { if(vol<1){ vol+=0.1; sounds.anthem.volume=vol; } else clearInterval(fader); }, 200);
+            const fader = setInterval(() => { if(vol<1){ vol+=0.1; if(vol > 1) vol = 1; sounds.anthem.volume=vol; } else clearInterval(fader); }, 200);
             const e = document.getElementById('elders-reveal'), p = document.getElementById('programme-reveal');
             e.style.display = 'flex'; p.style.display = 'block';
             setTimeout(() => { e.style.opacity = '1'; p.style.opacity = '1'; }, 100);
@@ -200,21 +220,41 @@
 
     const canvas = document.getElementById('fw-canvas');
     const ctx = canvas.getContext('2d');
-    let fwActive = false, particles = [];
+    let fwActive = false, particles = [], bTimer = null;
+    
     function startFireworks() {
-        fwActive = true; canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        sounds.whistle.play(); update();
-        const bTimer = setInterval(() => { if(fwActive){ sounds.low.play(); createBlast(); } else clearInterval(bTimer); }, 1000);
+        fwActive = true; 
+        canvas.width = window.innerWidth; 
+        canvas.height = window.innerHeight;
+        sounds.whistle.play().catch(e => console.log(e)); 
+        update();
+        
+        bTimer = setInterval(() => { 
+            if(fwActive){ 
+                sounds.low.play().catch(e => console.log(e)); 
+                createBlast(); 
+            } else {
+                clearInterval(bTimer);
+            }
+        }, 1000);
     }
-    function stopFireworks() { fwActive = false; }
+    
+    function stopFireworks() { fwActive = false; if(bTimer) clearInterval(bTimer); }
+    
     function createBlast() {
         const x = Math.random()*canvas.width, y = Math.random()*(canvas.height/2);
         const color = `hsl(${Math.random()*360}, 100%, 60%)`;
         for(let i=0; i<30; i++) particles.push({x, y, vx:Math.cos(i)*Math.random()*5, vy:Math.sin(i)*Math.random()*5, life:1.0, color});
     }
+    
     function update() {
-        if(!fwActive && particles.length === 0) { ctx.clearRect(0,0,canvas.width,canvas.height); return; }
-        ctx.fillStyle = 'rgba(0, 27, 58, 0.25)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+        if(!fwActive && particles.length === 0) { 
+            ctx.clearRect(0,0,canvas.width,canvas.height); 
+            return; 
+        }
+        ctx.fillStyle = 'rgba(0, 27, 58, 0.25)'; 
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+        
         for(let i = particles.length-1; i>=0; i--) {
             let p = particles[i]; p.x+=p.vx; p.y+=p.vy; p.vy+=0.04; p.life-=0.02;
             ctx.fillStyle = p.color; ctx.globalAlpha = p.life;
@@ -223,7 +263,9 @@
         }
         requestAnimationFrame(update);
     }
+    
     document.getElementById('audio-toggle').onclick = function() { sounds.anthem.muted = !sounds.anthem.muted; };
+    window.addEventListener('resize', () => { if(fwActive) { canvas.width = window.innerWidth; canvas.height = window.innerHeight; } });
 </script>
 </body>
 </html>
