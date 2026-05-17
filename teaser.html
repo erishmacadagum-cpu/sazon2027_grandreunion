@@ -6,7 +6,7 @@
     <title>Sazon 2027 - Exclusive Cinematic Teaser</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:ital,wght=0,700;1,400&display=swap" rel="stylesheet">
     <style>
-        /* 1. Global Setup & Reset */
+        /* 1. Global Setup */
         html, body {
             margin: 0;
             padding: 0;
@@ -16,7 +16,6 @@
             overflow-x: hidden;
             scroll-behavior: smooth;
             width: 100%;
-            height: 100%;
         }
 
         /* 2. Audio Interactive Curtain Gate */
@@ -54,7 +53,7 @@
             transform: scale(1.05);
         }
 
-        /* 3. Sequential Opening Credits (0:00 - 0:05) */
+        /* 3. Sequential Opening Credits Container (0:00 - 0:05) */
         #opening-credits {
             position: fixed;
             top: 50%;
@@ -94,9 +93,6 @@
             display: none;
             transition: opacity 1.5s ease;
             width: 100%;
-            min-height: 100%;
-            display: flex;
-            flex-direction: column;
         }
 
         .hero-banner {
@@ -104,6 +100,7 @@
             margin: 0;
             padding: 0;
             display: block;
+            transition: opacity 1s ease;
         }
 
         .hero-banner img {
@@ -115,7 +112,7 @@
         .marzon-showcase {
             position: relative;
             width: 100%;
-            flex: 1; /* Smooth bottom push layout alignment */
+            min-height: 100vh;
             background-image: url('marzon-hotel.jpg'); 
             background-size: cover;
             background-position: center;
@@ -124,7 +121,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 40px 15px;
+            padding: 80px 20px;
             box-sizing: border-box;
         }
 
@@ -143,7 +140,7 @@
         }
 
         .karaoke-line {
-            font-size: clamp(1.5rem, 4.5vw, 2.6rem);
+            font-size: clamp(1.6rem, 4.5vw, 2.8rem);
             font-weight: 800;
             color: #ffffff;
             text-shadow: 0 4px 15px #000000;
@@ -167,10 +164,9 @@
         #climax-hub {
             display: none; 
             width: 100%;
-            max-width: 620px;
-            margin: 10px auto;
+            max-width: 650px;
+            margin: 0 auto;
             z-index: 10;
-            box-sizing: border-box;
         }
 
         .frosted-glass-card {
@@ -178,17 +174,17 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: 40px;
-            padding: 30px 20px;
+            padding: 35px 25px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
 
-        /* Waving Cute Cartoon Coconut Graphic */
+        /* Waving Cartoon Coconut Graphic */
         .coconut-wrapper {
-            width: 85px;
-            height: 85px;
-            margin: 0 auto 5px auto;
+            width: 75px;
+            height: 75px;
+            margin: 0 auto 10px auto;
         }
 
         @keyframes waveHand {
@@ -198,30 +194,21 @@
         }
         .wave-arm { transform-origin: bottom left; animation: waveHand 0.6s infinite ease-in-out; }
 
-        /* ==========================================
-           SCREAM-O-GRAPHICS ANIMATION ENGINES
-        ========================================== */
+        /* Typography */
         .title-magtipon {
-            font-size: clamp(2.3rem, 6.5vw, 3.8rem);
+            font-size: clamp(2.5rem, 7vw, 4rem);
             font-weight: 900;
-            margin: 0 auto;
+            margin: 0;
             line-height: 1.1;
             background: linear-gradient(135deg, #ff8a8a, #ffbebe, #ff7373);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: cutePulsate 1.8s infinite ease-in-out;
-            display: inline-block;
-        }
-        @keyframes cutePulsate {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.06) rotate(-1deg); }
-            100% { transform: scale(1); }
         }
 
         .script-coz {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-weight: 700;
+            font-weight: 400;
             color: #26e6e2; 
             font-size: clamp(1.3rem, 3.5vw, 1.8rem);
             margin: 8px 0 2px 0;
@@ -230,45 +217,31 @@
         .massive-sazon {
             color: #e5b842; 
             font-weight: 900;
-            font-size: clamp(3.3rem, 8.5vw, 5.2rem);
+            font-size: clamp(3.5rem, 9vw, 5.5rem);
             text-transform: uppercase;
             margin: 0;
             letter-spacing: -1px;
             line-height: 0.95;
             text-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            animation: breatheWave 2.5s infinite ease-in-out;
-            display: block;
-        }
-        @keyframes breatheWave {
-            0% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-5px) scale(1.03); }
-            100% { transform: translateY(0px) scale(1); }
         }
 
         .sub-kalibo {
             color: #ebd084;
             font-weight: 800;
-            font-size: clamp(1.2rem, 3.8vw, 1.9rem);
-            margin: 12px 0 20px 0;
+            font-size: clamp(1.3rem, 4vw, 2rem);
+            margin: 10px 0 20px 0;
             letter-spacing: 1px;
             text-transform: uppercase;
-            animation: cuteScreamVibrate 0.15s infinite alternate linear;
-            display: inline-block;
-        }
-        @keyframes cuteScreamVibrate {
-            0% { transform: translate(0.8px, 0.8px) rotate(0.5deg); }
-            100% { transform: translate(-0.8px, -0.8px) rotate(-0.5deg); }
         }
 
         /* ==========================================
-           FOUR INDEPENDENT SEPARATED LUGGAGE TAGS
+           FIXED: BALANCED LUGGAGE TAGS COUNTDOWN
         ========================================== */
         .countdown-container {
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin: 15px auto;
-            max-width: 100%;
+            margin: 20px auto;
         }
 
         .luggage-tag {
@@ -293,13 +266,14 @@
             border: 2px solid rgba(255,255,255,0.2);
         }
 
+        /* Individual tag styles for clean, non-crowded separation */
         .tag-red { background-color: #ff5e62; color: #ffffff; }
         .tag-teal { background-color: #12b0ad; color: #ffffff; }
         .tag-gold-min { background-color: #e5b842; color: #1a1a1a; }
         .tag-gold-sec { background-color: #f7cb54; color: #1a1a1a; }
 
         .count-number {
-            font-size: clamp(1.4rem, 4.5vw, 2.3rem);
+            font-size: clamp(1.6rem, 5vw, 2.5rem);
             font-weight: 900;
             line-height: 1;
             margin: 8px 0 0 0;
@@ -314,106 +288,73 @@
             opacity: 0.9;
         }
 
-        /* ==========================================
-           ACTION HOVER CAPSULE HUB DESIGN
-        ========================================== */
+        /* Climax Action Buttons Space */
         #climax-action-reveal {
             display: none; 
             margin-top: 25px;
-            width: 100%;
         }
 
-        .action-layout-container {
+        .button-group {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             justify-content: center;
-            align-items: center;
             flex-wrap: wrap;
-            width: 100%;
         }
 
-        .calendar-capsule {
-            display: flex;
-            align-items: center;
-            border: 2px solid #e5b842;
-            border-radius: 50px;
-            overflow: hidden;
-            background: transparent;
-            transition: all 0.3s ease;
-        }
-
-        .capsule-btn {
-            background: transparent;
-            color: #e5b842;
-            border: none;
-            padding: 14px 18px;
-            font-size: clamp(0.8rem, 2.2vw, 0.95rem);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: background 0.2s ease;
-            white-space: nowrap;
-        }
-        .capsule-btn:hover {
-            background: rgba(229, 184, 66, 0.15);
-        }
-
-        .capsule-divider {
-            width: 1px;
-            height: 22px;
-            background-color: rgba(229, 184, 66, 0.5);
-        }
-
-        .btn-register {
-            background: #e5b842;
-            color: #030508;
-            border: 2px solid #e5b842;
+        .cta-btn {
             padding: 14px 28px;
-            font-size: clamp(0.8rem, 2.2vw, 0.95rem);
+            font-size: 0.95rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             text-decoration: none;
             border-radius: 50px;
-            cursor: pointer;
             transition: all 0.3s ease;
-            white-space: nowrap;
-            box-shadow: 0 5px 15px rgba(229, 184, 66, 0.3);
-        }
-        .btn-register:hover {
-            background: #fffbf0;
-            border-color: #fffbf0;
-            transform: scale(1.03);
+            box-sizing: border-box;
+            cursor: pointer;
         }
 
-        /* ==========================================
-           LOWERED STABLE FOOTER
-        ========================================== */
+        /* Button Variant Updates */
+        .btn-save { background: transparent; color: #e5b842; border: 2px solid #e5b842; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .btn-save:hover { background-color: rgba(229, 184, 66, 0.15); }
+        
+        .btn-google { background: transparent; color: #4285F4; border: 2px solid #4285F4; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .btn-google:hover { background-color: rgba(66, 133, 244, 0.15); }
+
+        .btn-register { background: #e5b842; color: #030508; border: 2px solid #e5b842; box-shadow: 0 5px 15px rgba(229, 184, 66, 0.3); }
+        .btn-register:hover { background: #fffbf0; transform: scale(1.04); }
+
+        /* Footer Layout CSS */
         .sazon-teaser-footer {
             width: 100%;
-            background: rgba(3, 5, 8, 0.95);
+            background: rgba(3, 5, 8, 0.9);
             border-top: 1px solid rgba(212, 175, 55, 0.3);
-            padding: 20px 10px;
+            padding: 25px 10px;
             text-align: center;
             box-sizing: border-box;
-            margin-top: auto; 
             position: relative;
             z-index: 10;
         }
 
-        .footer-content { 
-            font-size: clamp(0.75rem, 1.8vw, 0.95rem); 
-            font-weight: 600; 
-            letter-spacing: 1.5px; 
-            color: #e0e0e0; 
-            line-height: 1.6; 
-        }
+        .footer-content { font-size: clamp(0.8rem, 2vw, 1rem); font-weight: 600; letter-spacing: 2px; color: #e0e0e0; line-height: 1.8; }
         .footer-highlight { color: #D4AF37; font-family: 'Playfair Display', serif; font-style: italic; font-weight: 700; }
 
+        /* Animation Framework Engines */
         .scream-burst { animation: dynamicBurst 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-        @keyframes dynamicBurst { 0% { opacity: 0; transform: scale(0.95) translateY(15px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+        @keyframes dynamicBurst { 0% { opacity: 0; transform: scale(0.8) translateY(20px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+
+        .scream-beat { animation: heartBeat 0.5s infinite alternate cubic-bezier(0.25, 0.8, 0.25, 1); display: inline-block; }
+        @keyframes heartBeat { 0% { transform: scale(0.96); } 100% { transform: scale(1.04); } }
+
+        .scream-vibrate { animation: heavyVibrate 0.1s infinite linear; display: inline-block; }
+        @keyframes heavyVibrate {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            20% { transform: translate(-1px, -1px) rotate(-0.5deg); }
+            40% { transform: translate(-0.5px, 1px) rotate(0.5deg); }
+            60% { transform: translate(1px, -0.5px) rotate(0deg); }
+            80% { transform: translate(-0.5px, 1px) rotate(-0.5deg); }
+            100% { transform: translate(0.5px, -0.5px) rotate(0.5deg); }
+        }
     </style>
 </head>
 <body>
@@ -468,10 +409,10 @@
                         </svg>
                     </div>
 
-                    <h1 class="title-magtipon">Magtipon Kita! 🥥</h1>
+                    <h1 class="title-magtipon">MAGTIPON KITA!</h1>
                     <div class="script-coz">Coz we are</div>
-                    <h2 class="massive-sazon">SAZON! 🖐️</h2>
-                    <div class="sub-kalibo">See you in Kalibo! 📍</div>
+                    <h2 class="massive-sazon">SAZON!</h2>
+                    <div class="sub-kalibo scream-vibrate">See you in Kalibo!</div>
 
                     <div class="countdown-container">
                         <div class="luggage-tag tag-red">
@@ -484,25 +425,22 @@
                         </div>
                         <div class="luggage-tag tag-gold-min">
                             <p id="timer-mins" class="count-number">00</p>
-                            <p class="label">Min</p>
+                            <p class="label">Mins</p>
                         </div>
                         <div class="luggage-tag tag-gold-sec">
                             <p id="timer-secs" class="count-number">00</p>
-                            <p class="label">Sec</p>
+                            <p class="label">Secs</p>
                         </div>
                     </div>
 
                     <div id="climax-action-reveal" class="scream-burst">
-                        <div class="action-layout-container">
+                        <h2 class="scream-beat" style="color: #e5b842; font-size: clamp(1.6rem, 5vw, 2.2rem); margin-bottom: 20px; font-weight:900;">ARE YOU READY?</h2>
+                        <div class="button-group">
+                            <button class="cta-btn btn-save" onclick="downloadIcsFile()">Save The Date</button>
                             
-                            <div class="calendar-capsule">
-                                <button class="capsule-btn" onclick="downloadIcsFile()">Save The Date</button>
-                                <div class="capsule-divider"></div>
-                                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sazon+Grand+Family+Reunion+2027&dates=20270723T000000Z/20270724T090000Z&details=Magtipon+Kita!+Coz+we+are+SAZON!+Welcome+to+our+2027+Grand+Homecoming.&location=Marzon+Hotel+Kalibo,+Aklan,+Philippines" target="_blank" class="capsule-btn">+ Google Cal</a>
-                            </div>
-
-                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="btn-register">Register Here</a>
-                       
+                            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sazon+Grand+Family+Reunion+2027&dates=20270723T000000Z/20270724T090000Z&details=Magtipon+Kita!+Coz+we+are+SAZON!+Welcome+to+our+2027+Grand+Homecoming.&location=Marzon+Hotel+Kalibo,+Aklan,+Philippines" target="_blank" class="cta-btn btn-google">+ Google Cal</a>
+                            
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="cta-btn btn-register">Register Here</a>
                         </div>
                     </div>
 
@@ -522,19 +460,18 @@
     </div>
 
     <script>
-        // Restored complete layout sequence tracking up to 110s
         const lyricsTimeline = [
             { time: 14.0, text: "👋 Dali na kita Sazon Family, sa Hulyo dos mil baynte siete!" },
             { time: 21.0, text: "👨‍👩‍👧‍👦 Pamilya ni Isok kag Pistang upod ang tanan nga paryente." },
             { time: 28.0, text: "🎉 Magtilipon kita tanan kag mag sinadya!" },
             { time: 32.0, text: "✨ Importante gid ang inyo presensya" },
             { time: 37.0, text: "❤️ kay amo ina ang magahatag kalipay sa pamilya." },
-            { time: 46.0, text: "🤝 Sa pag tilipon naton," },
-            { time: 49.0, text: "😊 ang halakhak kag yuhum sang tagsa-tagsa" },
+            { time: 45.0, text: "🤝 Sa pag tilipon naton," },
+            { time: 48.0, text: "😊 ang halakhak kag yuhum sang tagsa-tagsa" },
             { time: 53.0, text: "🌟 maga palipay sa bilog nga pamilya." },
-            { time: 102.0, text: "📅 Gani dali na kamu tanan sa amo nga petsa." },
-            { time: 107.0, text: "🛑 Indi na mag pang duwa-duwa." },
-            { time: 110.0, text: "🥳 Preparar na kamu para sa aton sinadya." }
+            { time: 58.0, text: "📅 Gani dali na kamu tanan sa amo nga petsa." },
+            { time: 63.0, text: "🛑 Indi na mag pang duwa-duwa." },
+            { time: 67.0, text: "🥳 Preparar na kamu para sa aton sinadya." }
         ];
 
         function forceShowEndGame() {
@@ -547,6 +484,7 @@
             if (action) action.style.display = 'block';
         }
 
+        // DYNAMIC IN-BROWSER ICS GENERATION ENGINE
         function downloadIcsFile() {
             const icsData = [
                 "BEGIN:VCALENDAR",
@@ -555,8 +493,8 @@
                 "BEGIN:VEVENT",
                 "UID:sazon-reunion-2027-grand-homecoming",
                 "DTSTAMP:20260517T000000Z",
-                "DTSTART:20270723T080000",
-                "DTEND:20270724T170000",
+                "DTSTART:20270723T080000",  // July 23, 2027 at 8:00 AM
+                "DTEND:20270724T170000",    // July 24, 2027 at 5:00 PM
                 "SUMMARY:Sazon Grand Family Reunion 2027",
                 "LOCATION:Marzon Hotel Kalibo, Aklan, Philippines",
                 "DESCRIPTION:Magtipon Kita! Coz we are SAZON! Welcome to our 2027 Grand Homecoming.",
@@ -567,7 +505,7 @@
             const blob = new Blob([icsData], { type: "text/calendar;charset=utf-8;" });
             const link = document.createElement("a");
             
-            if (navigator.msSaveBlob) { 
+            if (navigator.msSaveBlob) { // IE 10+
                 navigator.msSaveBlob(blob, "Sazon_Reunion_2027.ics");
             } else {
                 link.href = URL.createObjectURL(blob);
@@ -578,6 +516,7 @@
             }
         }
 
+        // Live Dynamic Tracking Countdown Engine
         function initializeCountdownTimer() {
             const targetDate = new Date("July 23, 2027 08:00:00").getTime();
 
@@ -618,7 +557,7 @@
 
             if (sfx) {
                 sfx.muted = false; sfx.volume = 1.0; sfx.currentTime = 0;
-                sfx.play().catch(e => console.log("Audio block handled:", e));
+                sfx.play().catch(e => console.log("SFX autoplay block:", e));
             }
 
             if (curtain) {
@@ -634,7 +573,7 @@
                 setTimeout(() => document.getElementById('line-4').classList.add('visible'), 3200);
             }
 
-            // 0:05 - Jingle Commences
+            // 0:05 - Act I Transitions
             setTimeout(() => {
                 if (credits) {
                     credits.style.opacity = '0';
@@ -642,15 +581,15 @@
                 }
                 if (jingle) {
                     jingle.muted = false; jingle.volume = 1.0; jingle.currentTime = 0;
-                    jingle.play().catch(e => console.log("Audio exception handled:", e));
+                    jingle.play().catch(e => console.log("Jingle execution error:", e));
                 }
                 if (mainContent) {
-                    mainContent.style.display = 'flex';
+                    mainContent.style.display = 'block';
                     setTimeout(() => mainContent.style.opacity = '1', 100);
                 }
             }, 5000);
 
-            // 0:15 - Core Canvas Entry State
+            // 0:15 - Act II Setup
             setTimeout(() => {
                 if (cover) {
                     cover.style.opacity = '0';
@@ -671,7 +610,7 @@
                 initializeCountdownTimer();
             }, 15000);
 
-            // Audio Runtime Track Execution Engine
+            // Live Core Time Track Listeners
             if (jingle) {
                 jingle.addEventListener('timeupdate', () => {
                     const currentTime = jingle.currentTime;
@@ -689,19 +628,17 @@
                         }
                     });
 
-                    /* =========================================================
-                       RECALIBRATED CLIMAX TIMING TRIGGERS
-                       Safe thresholds pushed past 112s to allow the final 
-                       three lyrics lines to run perfectly in the center stage.
-                    ========================================================= */
-                    if (timelinePosition >= 113.5 && hub && hub.style.display !== 'block') {
+                    // Trigger Frosted Card Countdown Hub at exactly 72 seconds
+                    if (timelinePosition >= 72.0 && hub && hub.style.display !== 'block') {
                         const lBox = document.getElementById('lyric-box');
                         if (lBox) lBox.style.display = 'none'; 
                         hub.style.display = 'block';
                     }
 
-                    if (timelinePosition >= 115.5 && action && action.style.display !== 'block') {
+                    // Trigger Action Buttons inside Card at 76 seconds
+                    if (timelinePosition >= 76.0 && action && action.style.display !== 'block') {
                         action.style.display = 'block';
+                        action.scrollIntoView({ behavior: 'smooth' });
                     }
                 });
 
