@@ -316,7 +316,7 @@
     </div>
 
     <script>
-        // COMPRESSED TIMELINE: Brought the last 3 lines forward to cleanly fit standard track runtimes!
+        // COMPRESSED TIMELINE: Re-timed the final 3 lines to follow line 8 smoothly
         const lyricsTimeline = [
             { time: 14.0, text: "👋 Dali na kita Sazon Family, sa Hulyo dos mil baynte siete!" },
             { time: 21.0, text: "👨‍👩‍👧‍👦 Pamilya ni Isok kag Pistang upod ang tanan nga paryente." },
@@ -338,13 +338,7 @@
             
             if (lBox) lBox.style.display = 'none'; 
             if (hype) hype.style.display = 'block';
-            
-            setTimeout(() => {
-                if (climax) {
-                    climax.style.display = 'block';
-                    climax.scrollIntoView({ behavior: 'smooth' });
-                }
-            }, 4000);
+            if (climax) climax.style.display = 'block';
         }
 
         function startTeaserCommercial() {
@@ -358,18 +352,12 @@
             const sfx = document.getElementById('sfx-opening');
             const jingle = document.getElementById('family-jingle');
 
-            // BROWSER POLICY BYPASS: Force plays and primes BOTH files inside the click action stack
+            // BROWSER POLICIES OVERRIDE: Unmute and trigger files directly inside the tap event block
             if (sfx) {
                 sfx.muted = false;
                 sfx.volume = 1.0;
-                sfx.play().catch(e => console.log("SFX Blocked:", e));
-            }
-            if (jingle) {
-                jingle.preload = "auto";
-                jingle.play().then(() => {
-                    jingle.pause(); // Soft freeze it so it waits for the 5s intro credits to clear
-                    jingle.currentTime = 0;
-                }).catch(e => console.log("Jingle primed background status."));
+                sfx.currentTime = 0;
+                sfx.play().catch(e => console.log("SFX autoplay block:", e));
             }
 
             // 0:00 - Hide Curtain Gate
@@ -387,7 +375,7 @@
                 setTimeout(() => document.getElementById('line-4').classList.add('visible'), 3200);
             }
 
-            // 0:05 - Act I: Clear Credits & Fire Jingle
+            // 0:05 - Act I: Switch Credits Out & Play Music Jingle Track
             setTimeout(() => {
                 if (credits) {
                     credits.style.opacity = '0';
@@ -396,7 +384,8 @@
                 if (jingle) {
                     jingle.muted = false;
                     jingle.volume = 1.0;
-                    jingle.play().catch(e => console.log("Jingle play error:", e));
+                    jingle.currentTime = 0;
+                    jingle.play().catch(e => console.log("Jingle execution error:", e));
                 }
                 if (mainContent) {
                     mainContent.style.display = 'block';
@@ -424,7 +413,7 @@
                 }
             }, 15000);
 
-            // Live Time Tracking Logic Engine
+            // Live Playback Engine Track Listeners
             if (jingle) {
                 jingle.addEventListener('timeupdate', () => {
                     const currentTime = jingle.currentTime;
@@ -442,21 +431,21 @@
                         }
                     });
 
-                    // Trigger Hype Layout smoothly 5 seconds after line 11 drops
+                    // Trigger Hype Graphic Section at 72 seconds
                     if (timelinePosition >= 72.0 && hype && hype.style.display !== 'block') {
                         const lBox = document.getElementById('lyric-box');
                         if (lBox) lBox.style.display = 'none'; 
                         hype.style.display = 'block';
                     }
 
-                    // Trigger Final Action buttons at the 78 second mark
-                    if (timelinePosition >= 78.0 && climax && climax.style.display !== 'block') {
+                    // Trigger Registration Button Layout Section at 76 seconds
+                    if (timelinePosition >= 76.0 && climax && climax.style.display !== 'block') {
                         climax.style.display = 'block';
                         climax.scrollIntoView({ behavior: 'smooth' });
                     }
                 });
 
-                // THE FAIL-SAFE: If the song ends naturally, immediately throw everything onto the screen!
+                // THE ULTIMATE FAIL-SAFE: If song ends early, immediately fire all ending assets!
                 jingle.addEventListener('ended', () => {
                     forceShowEndGame();
                 });
