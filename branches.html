@@ -180,15 +180,19 @@
     };
 
     document.getElementById('enter-btn').onclick = function() {
-        // Safe play initialization (catches missing file rejections cleanly)
+        // 1. Instantly force-start the prelude swell sound effect right at the click
+        sounds.swell.currentTime = 0;
+        sounds.swell.play().catch(e => console.log("Swell audio playback failed:", e));
+        
+        // 2. Warm up the other tracks, but skip 'swell' so it keeps playing beautifully
         Object.values(sounds).forEach(s => { 
-            s.play().then(() => { s.pause(); s.currentTime = 0; }).catch(err => console.log("Audio warm-up note:", err.message)); 
+            if (s !== sounds.swell) {
+                s.play().then(() => { s.pause(); s.currentTime = 0; }).catch(err => console.log("Audio warm-up note:", err.message)); 
+            }
         });
         
+        // 3. Hide the click button
         this.style.display = 'none';
-        
-        // 🔊 TRIGGER 1: Play the prelude swell immediately when clicking enter
-        sounds.swell.play().catch(e => console.log(e));
         
         const lines = ['l1','l2','l3','l4'];
         function showLines(idx) {
