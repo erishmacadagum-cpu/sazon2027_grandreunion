@@ -112,16 +112,16 @@
         .marzon-showcase {
             position: relative;
             width: 100%;
-            min-height: 100vh;
+            min-height: 85vh; /* Adjusted downward to prevent viewport over-stretching */
             background-image: url('marzon-hotel.jpg'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: center; /* Centers layout content dynamically */
             align-items: center;
-            padding: 80px 20px;
+            padding: 40px 20px;
             box-sizing: border-box;
         }
 
@@ -174,7 +174,7 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: 40px;
-            padding: 35px 25px;
+            padding: 30px 25px;
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
@@ -194,7 +194,7 @@
         }
         .wave-arm { transform-origin: bottom left; animation: waveHand 0.6s infinite ease-in-out; }
 
-        /* Typography */
+        /* Typography & Scream-o-graphics Engine */
         .title-magtipon {
             font-size: clamp(2.5rem, 7vw, 4rem);
             font-weight: 900;
@@ -203,6 +203,7 @@
             background: linear-gradient(135deg, #ff8a8a, #ffbebe, #ff7373);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: screamPulse 2s infinite ease-in-out alternate;
         }
 
         .script-coz {
@@ -223,6 +224,7 @@
             letter-spacing: -1px;
             line-height: 0.95;
             text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: screamBreathe 3s infinite ease-in-out alternate;
         }
 
         .sub-kalibo {
@@ -234,9 +236,18 @@
             text-transform: uppercase;
         }
 
-        /* ==========================================
-           FIXED: BALANCED LUGGAGE TAGS COUNTDOWN
-        ========================================== */
+        /* Scream-o-graphics Keyframes */
+        @keyframes screamPulse {
+            0% { transform: scale(0.97); filter: drop-shadow(0 2px 5px rgba(255,115,115,0.2)); }
+            100% { transform: scale(1.04); filter: drop-shadow(0 0 20px rgba(255,115,115,0.6)); }
+        }
+
+        @keyframes screamBreathe {
+            0% { transform: scale(0.95); letter-spacing: -2px; }
+            100% { transform: scale(1.02); letter-spacing: 1px; text-shadow: 0 0 25px rgba(229,184,66,0.5); }
+        }
+
+        /* Balanced Luggage Tags Countdown Layout */
         .countdown-container {
             display: flex;
             justify-content: center;
@@ -266,7 +277,6 @@
             border: 2px solid rgba(255,255,255,0.2);
         }
 
-        /* Individual tag styles for clean, non-crowded separation */
         .tag-red { background-color: #ff5e62; color: #ffffff; }
         .tag-teal { background-color: #12b0ad; color: #ffffff; }
         .tag-gold-min { background-color: #e5b842; color: #1a1a1a; }
@@ -314,7 +324,6 @@
             cursor: pointer;
         }
 
-        /* Button Variant Updates */
         .btn-save { background: transparent; color: #e5b842; border: 2px solid #e5b842; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
         .btn-save:hover { background-color: rgba(229, 184, 66, 0.15); }
         
@@ -324,8 +333,9 @@
         .btn-register { background: #e5b842; color: #030508; border: 2px solid #e5b842; box-shadow: 0 5px 15px rgba(229, 184, 66, 0.3); }
         .btn-register:hover { background: #fffbf0; transform: scale(1.04); }
 
-        /* Footer Layout CSS */
+        /* Footer Layout CSS - Hidden Initially via Script Logic */
         .sazon-teaser-footer {
+            display: none;
             width: 100%;
             background: rgba(3, 5, 8, 0.9);
             border-top: 1px solid rgba(212, 175, 55, 0.3);
@@ -334,6 +344,7 @@
             box-sizing: border-box;
             position: relative;
             z-index: 10;
+            margin-top: 20px;
         }
 
         .footer-content { font-size: clamp(0.8rem, 2vw, 1rem); font-weight: 600; letter-spacing: 2px; color: #e0e0e0; line-height: 1.8; }
@@ -449,7 +460,7 @@
 
         </div>
 
-        <footer class="sazon-teaser-footer">
+        <footer id="dynamic-footer" class="sazon-teaser-footer">
             <div class="footer-content">
                 Sazon Family Production &nbsp;|&nbsp; Marzon Hotel Kalibo &nbsp;|&nbsp; 
                 <span class="footer-highlight">#Sazon2027GrandReunion</span> &nbsp;|&nbsp; 
@@ -478,13 +489,14 @@
             const lBox = document.getElementById('lyric-box');
             const hub = document.getElementById('climax-hub');
             const action = document.getElementById('climax-action-reveal');
+            const footer = document.getElementById('dynamic-footer');
             
             if (lBox) lBox.style.display = 'none'; 
             if (hub) hub.style.display = 'block';
             if (action) action.style.display = 'block';
+            if (footer) footer.style.display = 'block'; // Footer only turns on at final card
         }
 
-        // DYNAMIC IN-BROWSER ICS GENERATION ENGINE
         function downloadIcsFile() {
             const icsData = [
                 "BEGIN:VCALENDAR",
@@ -493,8 +505,8 @@
                 "BEGIN:VEVENT",
                 "UID:sazon-reunion-2027-grand-homecoming",
                 "DTSTAMP:20260517T000000Z",
-                "DTSTART:20270723T080000",  // July 23, 2027 at 8:00 AM
-                "DTEND:20270724T170000",    // July 24, 2027 at 5:00 PM
+                "DTSTART:20270723T080000",
+                "DTEND:20270724T170000",
                 "SUMMARY:Sazon Grand Family Reunion 2027",
                 "LOCATION:Marzon Hotel Kalibo, Aklan, Philippines",
                 "DESCRIPTION:Magtipon Kita! Coz we are SAZON! Welcome to our 2027 Grand Homecoming.",
@@ -505,7 +517,7 @@
             const blob = new Blob([icsData], { type: "text/calendar;charset=utf-8;" });
             const link = document.createElement("a");
             
-            if (navigator.msSaveBlob) { // IE 10+
+            if (navigator.msSaveBlob) { 
                 navigator.msSaveBlob(blob, "Sazon_Reunion_2027.ics");
             } else {
                 link.href = URL.createObjectURL(blob);
@@ -516,7 +528,6 @@
             }
         }
 
-        // Live Dynamic Tracking Countdown Engine
         function initializeCountdownTimer() {
             const targetDate = new Date("July 23, 2027 08:00:00").getTime();
 
@@ -551,13 +562,14 @@
             const cover = document.getElementById('disappearing-cover');
             const hub = document.getElementById('climax-hub');
             const action = document.getElementById('climax-action-reveal');
+            const footer = document.getElementById('dynamic-footer');
             
             const sfx = document.getElementById('sfx-opening');
             const jingle = document.getElementById('family-jingle');
 
             if (sfx) {
                 sfx.muted = false; sfx.volume = 1.0; sfx.currentTime = 0;
-                sfx.play().catch(e => console.log("SFX autoplay block:", e));
+                sfx.play().catch(e => console.log("SFX Blocked:", e));
             }
 
             if (curtain) {
@@ -581,7 +593,7 @@
                 }
                 if (jingle) {
                     jingle.muted = false; jingle.volume = 1.0; jingle.currentTime = 0;
-                    jingle.play().catch(e => console.log("Jingle execution error:", e));
+                    jingle.play().catch(e => console.log("Jingle Blocked:", e));
                 }
                 if (mainContent) {
                     mainContent.style.display = 'block';
@@ -628,17 +640,17 @@
                         }
                     });
 
-                    // Trigger Frosted Card Countdown Hub at exactly 72 seconds
+                    // Trigger Grand Finale card & footer safely AFTER lyrics complete (72.0 seconds)
                     if (timelinePosition >= 72.0 && hub && hub.style.display !== 'block') {
                         const lBox = document.getElementById('lyric-box');
                         if (lBox) lBox.style.display = 'none'; 
                         hub.style.display = 'block';
+                        if (footer) footer.style.display = 'block';
                     }
 
-                    // Trigger Action Buttons inside Card at 76 seconds
-                    if (timelinePosition >= 76.0 && action && action.style.display !== 'block') {
+                    // Trigger Action Buttons inside Card smoothly at 75 seconds
+                    if (timelinePosition >= 75.0 && action && action.style.display !== 'block') {
                         action.style.display = 'block';
-                        action.scrollIntoView({ behavior: 'smooth' });
                     }
                 });
 
