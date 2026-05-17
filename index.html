@@ -584,9 +584,11 @@
             const action = document.getElementById('climax-action-reveal');
             const footer = document.getElementById('dynamic-footer');
             const sfx = document.getElementById('sfx-opening');
-            const jingle = document.getElementById('family-jingle');
+           const jingle = document.getElementById('family-jingle');
 
-            if (sfx) { sfx.muted = false; sfx.volume = 1.0; sfx.currentTime = 0; sfx.play().catch(e => console.log(e)); }
+        // 🔄 FORCE RESET FOR REPEATED REPLAYS: 
+        if (sfx) { sfx.pause(); sfx.currentTime = 0; sfx.muted = false; sfx.volume = 1.0; sfx.play().catch(e => console.log(e)); }
+        if (jingle) { jingle.pause(); jingle.currentTime = 0; }
             if (curtain) { curtain.style.opacity = '0'; setTimeout(() => curtain.style.display = 'none', 800); }
             if (credits) {
                 credits.style.display = 'block';
