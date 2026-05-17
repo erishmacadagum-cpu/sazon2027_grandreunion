@@ -180,11 +180,14 @@
     };
 
     document.getElementById('enter-btn').onclick = function() {
+        // Safe play initialization (catches missing file rejections cleanly)
         Object.values(sounds).forEach(s => { 
             s.play().then(() => { s.pause(); s.currentTime = 0; }).catch(err => console.log("Audio warm-up note:", err.message)); 
         });
         
         this.style.display = 'none';
+        
+        // 🔊 TRIGGER 1: Play the prelude swell immediately when clicking enter
         sounds.swell.play().catch(e => console.log(e));
         
         const lines = ['l1','l2','l3','l4'];
@@ -199,19 +202,25 @@
     };
 
     function startShow() {
+        // 🔊 TRIGGER 2: Play the reveal shimmer right as the black overlay fades out
         sounds.shimmer.play().catch(e => console.log(e));
+        
         document.getElementById('intro-overlay').style.opacity = '0';
         setTimeout(() => { document.getElementById('intro-overlay').style.display = 'none'; }, 800);
         document.getElementById('main-content').style.display = 'block';
         
+        // 🔊 TRIGGER 3: Start fireworks canvas (this automatically fires the firework_whistle)
         startFireworks();
         
         setTimeout(() => { 
             stopFireworks();
             sounds.anthem.volume = 0; 
+            
+            // 🔊 TRIGGER 4: Smoothly fade in the main family anthem
             sounds.anthem.play().catch(e => console.log(e));
             let vol = 0;
             const fader = setInterval(() => { if(vol<1){ vol+=0.1; if(vol > 1) vol = 1; sounds.anthem.volume=vol; } else clearInterval(fader); }, 200);
+            
             const e = document.getElementById('elders-reveal'), p = document.getElementById('programme-reveal');
             e.style.display = 'flex'; p.style.display = 'block';
             setTimeout(() => { e.style.opacity = '1'; p.style.opacity = '1'; }, 100);
@@ -226,11 +235,14 @@
         fwActive = true; 
         canvas.width = window.innerWidth; 
         canvas.height = window.innerHeight;
+        
+        // 🔊 TRIGGER 5: Play the launching whistle track when fireworks start
         sounds.whistle.play().catch(e => console.log(e)); 
         update();
         
         bTimer = setInterval(() => { 
             if(fwActive){ 
+                // 🔊 TRIGGER 6: Play the low explosion sound on every new firework blast
                 sounds.low.play().catch(e => console.log(e)); 
                 createBlast(); 
             } else {
