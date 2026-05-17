@@ -15,6 +15,7 @@
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
             scroll-behavior: smooth;
+            width: 100%;
         }
 
         /* 2. Audio Interactive Curtain */
@@ -22,8 +23,8 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             background: #000000;
             z-index: 9999;
             display: flex;
@@ -52,7 +53,7 @@
             transform: scale(1.05);
         }
 
-       /* 3. Opening Credit Text (Timeline 0:00 - 0:05) */
+        /* 3. Opening Credit Text (Timeline 0:00 - 0:05) */
         #opening-credits {
             position: fixed;
             top: 50%;
@@ -67,7 +68,6 @@
             max-width: 800px;
         }
 
-        /* Base styling for all elegant lines */
         .credit-line {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
@@ -77,7 +77,6 @@
             display: block;
         }
 
-        /* Line 1: Sazon Family Production (Soft Pastel Rose Gold) */
         .credit-sazon {
             font-size: clamp(1.8rem, 4vw, 2.8rem);
             background: linear-gradient(135deg, #ffccd5, #fbc4b6, #e8b0b8);
@@ -85,18 +84,16 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Line 2: Marzon Hotel Kalibo (Soft Pastel Mint/Sage) */
         .credit-hotel {
             font-size: clamp(1.2rem, 3vw, 1.8rem);
             font-style: italic;
-            text-transform: none; /* Keeps it in an elegant script style */
+            text-transform: none;
             letter-spacing: 2px;
             background: linear-gradient(135deg, #e8f5e9, #c8e6c9, #b2dfdb);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* Line 3: July 23-24, 2027 (Soft Pastel Lavender/Blue) */
         .credit-date {
             font-size: clamp(1rem, 2.5vw, 1.5rem);
             font-weight: 400;
@@ -106,7 +103,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Line 4: PRESENT (Soft Pastel Gold - Bold & Piercing) */
         .credit-present {
             font-size: clamp(1.5rem, 3.5vw, 2.2rem);
             font-weight: 900;
@@ -117,20 +113,21 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* 4. Main Teaser Container */
+        /* 4. Main Teaser Canvas Container */
         #main-content {
             opacity: 0;
             display: none;
             transition: opacity 1.5s ease;
+            width: 100%;
         }
 
-       /* 5. Pure Hero Banner Cover (Adjusted & Framed) */
+        /* 5. Full Edge-to-Edge Cover Banner (Gaps Completely Eliminated) */
         .hero-banner {
-            width: 100%;
-            max-width: 1200px; /* Limits how wide it can get on desktop */
-            margin: 0 auto;    /* Centers the banner perfectly on the screen */
-            background-color: #030508;
-            border-bottom: 3px solid #D4AF37; /* Adds an elegant gold boundary line */
+            width: 100vw;
+            margin: 0;
+            padding: 0;
+            display: block;
+            transition: opacity 1s ease, transform 1s ease;
         }
 
         .hero-banner img {
@@ -139,24 +136,23 @@
             display: block;
         }
 
-        /* 6. Marzon Hotel Visual Wall */
+        /* 6. Immersive Full-Screen Marzon Background Visual Wall */
         .marzon-showcase {
             position: relative;
             width: 100%;
-            min-height: 80vh;
-           background-image: url('images/marzon-hotel.jpg');
+            min-height: 100vh;
+            background-image: url('images/marzon-hotel.jpg'); 
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Parallax Effect */
+            background-attachment: fixed;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 80px 20px;
+            padding: 100px 20px;
             box-sizing: border-box;
         }
 
-        /* CORRECTED: Completely transparent layer to allow pure image to show */
         .marzon-showcase::before {
             content: '';
             position: absolute;
@@ -168,7 +164,7 @@
             z-index: 1;
         }
 
-        /* 7. Scream-O-Graphics Groups over Background */
+        /* 7. Scream-O-Graphics Component Groups */
         .scream-group {
             position: relative;
             z-index: 2;
@@ -185,12 +181,12 @@
             margin: 0;
         }
 
-        /* 8. The Climax Section (Timeline 0:25 - 0:30) */
+        /* 8. The Climax Grand Finale Drop (Timeline 0:25) */
         .climax-section {
             position: relative;
             z-index: 2;
             text-align: center;
-            margin-top: 60px;
+            margin-top: 40px;
             display: none; 
         }
 
@@ -217,6 +213,7 @@
             background: transparent;
             color: #D4AF37;
             border: 2px solid #D4AF37;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
         .btn-register {
@@ -226,33 +223,41 @@
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
         }
 
-        /* Scream-O-Graphics Keyframes */
-        .scream-beat {
-            animation: heartBeat 0.6s infinite alternate cubic-bezier(0.25, 0.8, 0.25, 1);
-            display: inline-block;
-            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+        /* 9. Premium Production Footer Styling */
+        .sazon-teaser-footer {
+            width: 100%;
+            background: rgba(3, 5, 8, 0.85);
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 25px 10px;
+            text-align: center;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 10;
         }
 
-        @keyframes heartBeat {
-            0% { transform: scale(0.95); filter: brightness(0.9); }
-            100% { transform: scale(1.15); filter: brightness(1.3); }
+        .footer-content {
+            font-size: clamp(0.85rem, 2vw, 1.1rem);
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #e0e0e0;
+            line-height: 1.8;
         }
 
-        .scream-bounce {
-            animation: rapidBounce 0.4s infinite ease-in-out alternate;
-            display: inline-block;
+        .footer-highlight {
+            color: #D4AF37;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 700;
         }
 
-        @keyframes rapidBounce {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-20px); }
-        }
+        /* Scream-O-Graphics Engines */
+        .scream-beat { animation: heartBeat 0.6s infinite alternate cubic-bezier(0.25, 0.8, 0.25, 1); display: inline-block; }
+        @keyframes heartBeat { 0% { transform: scale(0.95); } 100% { transform: scale(1.15); } }
 
-        .scream-vibrate {
-            animation: heavyVibrate 0.15s infinite linear;
-            display: inline-block;
-        }
+        .scream-bounce { animation: rapidBounce 0.4s infinite ease-in-out alternate; display: inline-block; }
+        @keyframes rapidBounce { 0% { transform: translateY(0); } 100% { transform: translateY(-20px); } }
 
+        .scream-vibrate { animation: heavyVibrate 0.15s infinite linear; display: inline-block; }
         @keyframes heavyVibrate {
             0% { transform: translate(2px, 1px) rotate(0deg); }
             10% { transform: translate(-1px, -2px) rotate(-1deg); }
@@ -261,20 +266,11 @@
             40% { transform: translate(1px, -1px) rotate(1deg); }
             50% { transform: translate(-1px, 2px) rotate(-1deg); }
             60% { transform: translate(-3px, 1px) rotate(0deg); }
-            70% { transform: translate(2px, 1px) rotate(-1deg); }
-            80% { transform: translate(-1px, -1px) rotate(1deg); }
-            90% { transform: translate(2px, 2px) rotate(0deg); }
             100% { transform: translate(1px, -2px) rotate(-1deg); }
         }
 
-        .scream-burst {
-            animation: dynamicBurst 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-
-        @keyframes dynamicBurst {
-            0% { opacity: 0; transform: scale(0.4); }
-            100% { opacity: 1; transform: scale(1); }
-        }
+        .scream-burst { animation: dynamicBurst 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        @keyframes dynamicBurst { 0% { opacity: 0; transform: scale(0.4); } 100% { opacity: 1; transform: scale(1); } }
     </style>
 </head>
 <body>
@@ -286,31 +282,31 @@
         <button class="enter-btn" onclick="startTeaserCommercial()">Experience The Reveal</button>
     </div>
 
-    <div id="opening-credits"> 
-    <span class="credit-line credit-sazon">A Sazon Family Production</span>
-    <span class="credit-line credit-hotel">Marzon Hotel Kalibo</span>
-    <span class="credit-line credit-date">July 23-24, 2027</span>
-    <span class="credit-line credit-present">PRESENT</span>
-</div>
+    <div id="opening-credits">
+        <span class="credit-line credit-sazon">A Sazon Family Production</span>
+        <span class="credit-line credit-hotel">at Marzon Hotel Kalibo</span>
+        <span class="credit-line credit-date">July 23-24, 2027</span>
+        <span class="credit-line credit-present">PRESENT</span>
+    </div>
 
     <div id="main-content">
         
-        <div class="hero-banner">
-           <img src="images/teaser-cover.jpg" alt="Sazon 2027 Grand Reunion Banner">
+        <div id="disappearing-cover" class="hero-banner">
+            <img src="images/teaser-cover.jpg" alt="Sazon 2027 Grand Reunion Banner">
         </div>
 
         <div class="marzon-showcase">
             
             <div class="scream-group">
-                <h2 class="scream-vibrate" style="color: #ffffff; text-shadow: 0 4px 15px rgba(0,0,0,0.8);">The Grand Reunion</h2>
+                <h2 class="scream-vibrate" style="color: #ffffff; text-shadow: 0 4px 20px rgba(0,0,0,0.95);">The Grand Reunion</h2>
             </div>
 
             <div class="scream-group">
-                <h2 class="scream-bounce" style="color: #fcf6ba; text-shadow: 0 4px 15px rgba(0,0,0,0.8);">Kalibo, Aklan</h2>
+                <h2 class="scream-bounce" style="color: #fcf6ba; text-shadow: 0 4px 20px rgba(0,0,0,0.95);">Kalibo, Aklan</h2>
             </div>
 
             <div id="climax-reveal" class="climax-section scream-burst">
-                <h2 class="scream-beat" style="color: #D4AF37;">ARE YOU READY?</h2>
+                <h2 class="scream-beat" style="color: #D4AF37; text-shadow: 0 4px 20px rgba(0,0,0,0.95);">ARE YOU READY?</h2>
                 
                 <div class="button-group">
                     <a href="#" class="cta-btn btn-save">Save The Date</a>
@@ -319,55 +315,61 @@
             </div>
 
         </div>
+
+        <footer class="sazon-teaser-footer">
+            <div class="footer-content">
+                Sazon Family Production &nbsp;|&nbsp; Marzon Hotel Kalibo &nbsp;|&nbsp; 
+                <span class="footer-highlight">#Sazon2027GrandReunion</span> &nbsp;|&nbsp; 
+                <span class="footer-highlight">Gikan sa Gamut, Tubtob sa Langit</span> &nbsp;|&nbsp; 
+                To God Be All The Glory
+            </div>
+        </footer>
     </div>
 
-   <script>
+    <script>
         function startTeaserCommercial() {
             const curtain = document.getElementById('curtain');
             const credits = document.getElementById('opening-credits');
             const mainContent = document.getElementById('main-content');
+            const cover = document.getElementById('disappearing-cover');
             const climax = document.getElementById('climax-reveal');
             
             const sfx = document.getElementById('sfx-opening');
             const jingle = document.getElementById('family-jingle');
 
-            // 1. Hide the Curtain Gate smoothly
+            // 0:00 - Close Curtain & Fire Sweeping SFX
             if (curtain) {
                 curtain.style.opacity = '0';
                 setTimeout(() => curtain.style.display = 'none', 1000);
             }
-            
-            // 2. Play the beautiful sweeping SFX immediately
-            if (sfx) {
-                sfx.play().catch(e => console.log("Audio play blocked", e));
-            }
-            
-            // 3. Bring up the Elegant Pastel Opening Credits
+            if (sfx) sfx.play().catch(e => console.log(e));
             if (credits) {
                 credits.style.display = 'block';
                 setTimeout(() => credits.style.opacity = '1', 200);
             }
 
-            // 4. Timeline at 0:05 - The Main Reveal (Fade credits, trigger jingle, show banner)
+            // 0:05 - The Main Reveal (Credits disappear, Cover shows, Music kicks in)
             setTimeout(() => {
                 if (credits) {
                     credits.style.opacity = '0';
                     setTimeout(() => credits.style.display = 'none', 1000);
                 }
-                
-                // Fire Main 30s Jingle
-                if (jingle) {
-                    jingle.play().catch(e => console.log("Jingle play blocked", e));
-                }
-                
-                // Reveal Banner and Transparent Hotel Backdrop
+                if (jingle) jingle.play().catch(e => console.log(e));
                 if (mainContent) {
                     mainContent.style.display = 'block';
                     setTimeout(() => mainContent.style.opacity = '1', 100);
                 }
             }, 5000);
 
-            // 5. Timeline at 0:25 - The Climax Drop (Bounce/Beat registration buttons)
+            // 0:12 - Cover Banner Disappears cleanly to expose full-screen background
+            setTimeout(() => {
+                if (cover) {
+                    cover.style.opacity = '0';
+                    setTimeout(() => cover.style.display = 'none', 1000);
+                }
+            }, 12000);
+
+            // 0:25 - The Climax Drop (Reveal Registration Action)
             setTimeout(() => {
                 if (climax) {
                     climax.style.display = 'block';
