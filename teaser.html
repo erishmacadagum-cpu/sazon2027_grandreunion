@@ -82,10 +82,13 @@
             transition: opacity 1.5s ease;
         }
 
-        /* 5. Pure Hero Banner Cover (No overlapping elements) */
+       /* 5. Pure Hero Banner Cover (Adjusted & Framed) */
         .hero-banner {
             width: 100%;
-            display: block;
+            max-width: 1200px; /* Limits how wide it can get on desktop */
+            margin: 0 auto;    /* Centers the banner perfectly on the screen */
+            background-color: #030508;
+            border-bottom: 3px solid #D4AF37; /* Adds an elegant gold boundary line */
         }
 
         .hero-banner img {
