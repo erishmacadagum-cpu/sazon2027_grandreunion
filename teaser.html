@@ -112,14 +112,14 @@
         .marzon-showcase {
             position: relative;
             width: 100%;
-            min-height: 85vh; /* Adjusted downward to prevent viewport over-stretching */
+            min-height: 85vh; 
             background-image: url('marzon-hotel.jpg'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Centers layout content dynamically */
+            justify-content: center; 
             align-items: center;
             padding: 40px 20px;
             box-sizing: border-box;
@@ -247,7 +247,7 @@
             100% { transform: scale(1.02); letter-spacing: 1px; text-shadow: 0 0 25px rgba(229,184,66,0.5); }
         }
 
-        /* Balanced Luggage Tags Countdown Layout */
+        /* Luggage Tags Countdown Layout */
         .countdown-container {
             display: flex;
             justify-content: center;
@@ -322,6 +322,7 @@
             transition: all 0.3s ease;
             box-sizing: border-box;
             cursor: pointer;
+            display: inline-block;
         }
 
         .btn-save { background: transparent; color: #e5b842; border: 2px solid #e5b842; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
@@ -333,7 +334,7 @@
         .btn-register { background: #e5b842; color: #030508; border: 2px solid #e5b842; box-shadow: 0 5px 15px rgba(229, 184, 66, 0.3); }
         .btn-register:hover { background: #fffbf0; transform: scale(1.04); }
 
-        /* Footer Layout CSS - Hidden Initially via Script Logic */
+        /* Footer Layout CSS */
         .sazon-teaser-footer {
             display: none;
             width: 100%;
@@ -494,7 +495,7 @@
             if (lBox) lBox.style.display = 'none'; 
             if (hub) hub.style.display = 'block';
             if (action) action.style.display = 'block';
-            if (footer) footer.style.display = 'block'; // Footer only turns on at final card
+            if (footer) footer.style.display = 'block'; 
         }
 
         function downloadIcsFile() {
@@ -640,7 +641,7 @@
                         }
                     });
 
-                    // Trigger Grand Finale card & footer safely AFTER lyrics complete (72.0 seconds)
+                    // Reveal Grand Finale card & footer safely at the closing credits threshold (72.0 seconds)
                     if (timelinePosition >= 72.0 && hub && hub.style.display !== 'block') {
                         const lBox = document.getElementById('lyric-box');
                         if (lBox) lBox.style.display = 'none'; 
