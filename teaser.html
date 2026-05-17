@@ -110,12 +110,12 @@
             display: block;
         }
 
-        /* Full Screen Background Matrix */
+        /* Full Screen Background Matrix - FIXED PATH HERE */
         .marzon-showcase {
             position: relative;
             width: 100%;
             min-height: 100vh;
-            background-image: url('images/marzon-hotel.jpg'); 
+            background-image: url('marzon-hotel.jpg'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -125,6 +125,17 @@
             align-items: center;
             padding: 80px 20px;
             box-sizing: border-box;
+        }
+
+        .marzon-showcase::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent; 
+            z-index: 1;
         }
 
         /* 5. Dynamic Interactive Karaoke Subtitle Overlay */
@@ -157,7 +168,7 @@
         .karaoke-line.active {
             opacity: 1;
             transform: scale(1.05);
-            color: #fcf6ba; /* Soft highlighted pastel lyric hue */
+            color: #fcf6ba; 
             text-shadow: 0 0 20px rgba(212, 175, 55, 0.6), 0 4px 10px #000;
         }
 
@@ -250,8 +261,8 @@
 </head>
 <body>
 
-    <audio id="sfx-opening" src="audio/credits_sfx.mp3" preload="auto"></audio>
-    <audio id="family-jingle" src="audio/teaser-jingle.mp3" preload="auto"></audio>
+    <audio id="sfx-opening" src="credits_sfx.mp3" preload="auto"></audio>
+    <audio id="family-jingle" src="teaser-jingle.mp3" preload="auto"></audio>
 
     <div id="curtain">
         <button class="enter-btn" onclick="startTeaserCommercial()">Experience The Reveal</button>
@@ -267,7 +278,7 @@
     <div id="main-content">
         
         <div id="disappearing-cover" class="hero-banner">
-            <img src="images/teaser-cover.jpg" alt="Sazon 2027 Grand Reunion Banner">
+            <img src="teaser-cover.jpg" alt="Sazon 2027 Grand Reunion Banner">
         </div>
 
         <div class="marzon-showcase">
@@ -366,29 +377,29 @@
                 }
                 // Generate and initialize live tracking karaoke node elements
                 const lyricBox = document.getElementById('lyric-box');
-                lyricsTimeline.forEach((item, index) => {
-                    const span = document.createElement('span');
-                    span.id = `lyric-line-${index}`;
-                    span.className = 'karaoke-line';
-                    span.innerText = item.text;
-                    lyricBox.appendChild(span);
-                });
+                if (lyricBox) {
+                    lyricBox.innerHTML = ''; // Clear out any previous clones
+                    lyricsTimeline.forEach((item, index) => {
+                        const span = document.createElement('span');
+                        span.id = `lyric-line-${index}`;
+                        span.className = 'karaoke-line';
+                        span.innerText = item.text;
+                        lyricBox.appendChild(span);
+                    });
+                }
             }, 15000);
 
             // Connect real-time tracking engine listening directly to audio runtime playback clock
             if (jingle) {
                 jingle.addEventListener('timeupdate', () => {
                     const currentTime = jingle.currentTime;
-                    // Offset by 5 seconds because track begins playing at the 5-second mark of timeline
                     const timelinePosition = currentTime + 5; 
 
                     lyricsTimeline.forEach((item, index) => {
                         const targetSpan = document.getElementById(`lyric-line-${index}`);
                         if (targetSpan) {
-                            // Display the correct line if track position matches timeline parameters
                             if (timelinePosition >= item.time && (index === lyricsTimeline.length - 1 || timelinePosition < lyricsTimeline[index + 1].time)) {
                                 if (!targetSpan.classList.contains('active')) {
-                                    // Remove active status from sibling text layers
                                     document.querySelectorAll('.karaoke-line').forEach(el => el.classList.remove('active'));
                                     targetSpan.classList.add('active');
                                 }
@@ -400,7 +411,8 @@
 
             // 1:20 - Act III: The Crescendo Hype Layer Initialization
             setTimeout(() => {
-                document.getElementById('lyric-box').style.display = 'none'; // Fade lyrics away
+                const lBox = document.getElementById('lyric-box');
+                if (lBox) lBox.style.display = 'none'; 
                 if (hype) hype.style.display = 'block';
             }, 80000);
 
