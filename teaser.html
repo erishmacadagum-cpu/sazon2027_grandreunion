@@ -17,7 +17,7 @@
             scroll-behavior: smooth;
         }
 
-        /* 2. Audio Interactive Curtain (Ensures sound plays) */
+        /* 2. Audio Interactive Curtain */
         #curtain {
             position: fixed;
             top: 0;
@@ -75,7 +75,7 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* 4. Main Teaser Container (Hidden until 0:05) */
+        /* 4. Main Teaser Container */
         #main-content {
             opacity: 0;
             display: none;
@@ -99,7 +99,7 @@
             position: relative;
             width: 100%;
             min-height: 80vh;
-            background-image: url('YOUR_MARZON_HOTEL_FILENAME.jpg'); /* REPLACE WITH YOUR IMAGE FILENAME */
+            background-image: url('marzon-hotel.jpg'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed; /* Parallax Effect */
@@ -111,7 +111,7 @@
             box-sizing: border-box;
         }
 
-        /* Tint matrix to keep text legible over the photo */
+        /* CORRECTED: Changed overlay from #000 (dark black) to transparent */
         .marzon-showcase::before {
             content: '';
             position: absolute;
@@ -119,7 +119,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(3, 5, 8, 0.6);
+            background: transparent; 
             z-index: 1;
         }
 
@@ -146,7 +146,7 @@
             z-index: 2;
             text-align: center;
             margin-top: 60px;
-            display: none; /* Injected dynamically by timeline */
+            display: none; 
         }
 
         .button-group {
@@ -181,9 +181,7 @@
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
         }
 
-        /* ==========================================
-           SCREAM-O-GRAPHICS ANIMATION KEYFRAMES
-           ========================================== */
+        /* Scream-O-Graphics Keyframes */
         .scream-beat {
             animation: heartBeat 0.6s infinite alternate cubic-bezier(0.25, 0.8, 0.25, 1);
             display: inline-block;
@@ -236,8 +234,8 @@
 </head>
 <body>
 
-    <audio id="sfx-opening" src="YOUR_SFX_FILENAME.mp3" preload="auto"></audio>
-    <audio id="family-jingle" src="YOUR_JINGLE_FILENAME.mp3" preload="auto"></audio>
+    <audio id="sfx-opening" src="intro-sfx.mp3" preload="auto"></audio>
+    <audio id="family-jingle" src="sazon-jingle.mp3" preload="auto"></audio>
 
     <div id="curtain">
         <button class="enter-btn" onclick="startTeaserCommercial()">Experience The Reveal</button>
@@ -250,7 +248,7 @@
     <div id="main-content">
         
         <div class="hero-banner">
-            <img src="YOUR_BANNER_FILENAME.jpg" alt="Sazon 2027 Grand Reunion Banner">
+            <img src="teaser-cover.jpg" alt="Sazon 2027 Grand Reunion Banner">
         </div>
 
         <div class="marzon-showcase">
@@ -277,7 +275,6 @@
 
     <script>
         function startTeaserCommercial() {
-            // Get media elements
             const curtain = document.getElementById('curtain');
             const credits = document.getElementById('opening-credits');
             const mainContent = document.getElementById('main-content');
@@ -312,7 +309,6 @@
             // 0:25 - The Climax Drop (Reveal Grand Finale Actions & Pulsating Text)
             setTimeout(() => {
                 climax.style.display = 'block';
-                // Automatically smooth-scroll family directly down to the buttons
                 climax.scrollIntoView({ behavior: 'smooth' });
             }, 25000);
         }
