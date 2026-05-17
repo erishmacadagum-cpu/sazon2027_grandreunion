@@ -115,7 +115,7 @@
         .marzon-showcase {
             position: relative;
             width: 100%;
-            flex: 1; /* Pushes footer naturally downward without dead space */
+            flex: 1; /* Smooth bottom push layout alignment */
             background-image: url('marzon-hotel.jpg'); 
             background-size: cover;
             background-position: center;
@@ -124,7 +124,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 40px 15px; /* Keeps card beautifully padded away from headers */
+            padding: 40px 15px;
             box-sizing: border-box;
         }
 
@@ -132,7 +132,7 @@
         .karaoke-box {
             position: relative;
             z-index: 5;
-            min-height: 120px;
+            min-height: 140px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -186,8 +186,8 @@
 
         /* Waving Cute Cartoon Coconut Graphic */
         .coconut-wrapper {
-            width: 80px;
-            height: 80px;
+            width: 85px;
+            height: 85px;
             margin: 0 auto 5px auto;
         }
 
@@ -199,10 +199,8 @@
         .wave-arm { transform-origin: bottom left; animation: waveHand 0.6s infinite ease-in-out; }
 
         /* ==========================================
-           SCREAM-O-GRAPHICS ANIMATION FRAMEWORKS
+           SCREAM-O-GRAPHICS ANIMATION ENGINES
         ========================================== */
-        
-        /* 1. Magtipon Kita! - Pulsates, dances, and breathes dynamically */
         .title-magtipon {
             font-size: clamp(2.3rem, 6.5vw, 3.8rem);
             font-weight: 900;
@@ -211,16 +209,15 @@
             background: linear-gradient(135deg, #ff8a8a, #ffbebe, #ff7373);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: cutePulsate 2s infinite ease-in-out;
+            animation: cutePulsate 1.8s infinite ease-in-out;
             display: inline-block;
         }
         @keyframes cutePulsate {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05) rotate(1deg); }
+            50% { transform: scale(1.06) rotate(-1deg); }
             100% { transform: scale(1); }
         }
 
-        /* 2. Coz we are SAZON! - Soft breathing wave effect */
         .script-coz {
             font-family: 'Playfair Display', serif;
             font-style: italic;
@@ -239,16 +236,15 @@
             letter-spacing: -1px;
             line-height: 0.95;
             text-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            animation: breatheWave 3s infinite ease-in-out;
+            animation: breatheWave 2.5s infinite ease-in-out;
             display: block;
         }
         @keyframes breatheWave {
             0% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-4px) scale(1.02); }
+            50% { transform: translateY(-5px) scale(1.03); }
             100% { transform: translateY(0px) scale(1); }
         }
 
-        /* 3. See you in Kalibo! - High energy cute vibration scream */
         .sub-kalibo {
             color: #ebd084;
             font-weight: 800;
@@ -256,16 +252,16 @@
             margin: 12px 0 20px 0;
             letter-spacing: 1px;
             text-transform: uppercase;
-            animation: cuteScreamVibrate 0.3s infinite alternate ease-in-out;
+            animation: cuteScreamVibrate 0.15s infinite alternate linear;
             display: inline-block;
         }
         @keyframes cuteScreamVibrate {
-            0% { transform: translate(0.5px, 0.5px) rotate(0.5deg); }
-            100% { transform: translate(-0.5px, -0.5px) rotate(-0.5deg); }
+            0% { transform: translate(0.8px, 0.8px) rotate(0.5deg); }
+            100% { transform: translate(-0.8px, -0.8px) rotate(-0.5deg); }
         }
 
         /* ==========================================
-           BALANCED LUGGAGE TAGS COUNTDOWN
+           FOUR INDEPENDENT SEPARATED LUGGAGE TAGS
         ========================================== */
         .countdown-container {
             display: flex;
@@ -303,7 +299,7 @@
         .tag-gold-sec { background-color: #f7cb54; color: #1a1a1a; }
 
         .count-number {
-            font-size: clamp(1.5rem, 4.5vw, 2.3rem);
+            font-size: clamp(1.4rem, 4.5vw, 2.3rem);
             font-weight: 900;
             line-height: 1;
             margin: 8px 0 0 0;
@@ -319,7 +315,7 @@
         }
 
         /* ==========================================
-           UX ARCHITECT: MOCKUP ACTION BUTTONS
+           ACTION HOVER CAPSULE HUB DESIGN
         ========================================== */
         #climax-action-reveal {
             display: none; 
@@ -336,7 +332,6 @@
             width: 100%;
         }
 
-        /* Left Combined Shared Calendar Capsule Layout */
         .calendar-capsule {
             display: flex;
             align-items: center;
@@ -371,7 +366,6 @@
             background-color: rgba(229, 184, 66, 0.5);
         }
 
-        /* Right Golden Registration Button */
         .btn-register {
             background: #e5b842;
             color: #030508;
@@ -404,7 +398,7 @@
             padding: 20px 10px;
             text-align: center;
             box-sizing: border-box;
-            margin-top: auto; /* Permanently snaps footer to absolute bottom */
+            margin-top: auto; 
             position: relative;
             z-index: 10;
         }
@@ -418,7 +412,6 @@
         }
         .footer-highlight { color: #D4AF37; font-family: 'Playfair Display', serif; font-style: italic; font-weight: 700; }
 
-        /* General Load Utility Animations */
         .scream-burst { animation: dynamicBurst 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
         @keyframes dynamicBurst { 0% { opacity: 0; transform: scale(0.95) translateY(15px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
     </style>
@@ -529,18 +522,19 @@
     </div>
 
     <script>
+        // Restored complete layout sequence tracking up to 110s
         const lyricsTimeline = [
             { time: 14.0, text: "👋 Dali na kita Sazon Family, sa Hulyo dos mil baynte siete!" },
             { time: 21.0, text: "👨‍👩‍👧‍👦 Pamilya ni Isok kag Pistang upod ang tanan nga paryente." },
             { time: 28.0, text: "🎉 Magtilipon kita tanan kag mag sinadya!" },
             { time: 32.0, text: "✨ Importante gid ang inyo presensya" },
             { time: 37.0, text: "❤️ kay amo ina ang magahatag kalipay sa pamilya." },
-            { time: 45.0, text: "🤝 Sa pag tilipon naton," },
-            { time: 48.0, text: "😊 ang halakhak kag yuhum sang tagsa-tagsa" },
+            { time: 46.0, text: "🤝 Sa pag tilipon naton," },
+            { time: 49.0, text: "😊 ang halakhak kag yuhum sang tagsa-tagsa" },
             { time: 53.0, text: "🌟 maga palipay sa bilog nga pamilya." },
-            { time: 58.0, text: "📅 Gani dali na kamu tanan sa amo nga petsa." },
-            { time: 63.0, text: "🛑 Indi na mag pang duwa-duwa." },
-            { time: 67.0, text: "🥳 Preparar na kamu para sa aton sinadya." }
+            { time: 102.0, text: "📅 Gani dali na kamu tanan sa amo nga petsa." },
+            { time: 107.0, text: "🛑 Indi na mag pang duwa-duwa." },
+            { time: 110.0, text: "🥳 Preparar na kamu para sa aton sinadya." }
         ];
 
         function forceShowEndGame() {
@@ -553,7 +547,6 @@
             if (action) action.style.display = 'block';
         }
 
-        // Dynamic In-Browser .ics Generator Execution Engine
         function downloadIcsFile() {
             const icsData = [
                 "BEGIN:VCALENDAR",
@@ -585,7 +578,6 @@
             }
         }
 
-        // Live Dynamic Tracking Countdown Engine
         function initializeCountdownTimer() {
             const targetDate = new Date("July 23, 2027 08:00:00").getTime();
 
@@ -626,7 +618,7 @@
 
             if (sfx) {
                 sfx.muted = false; sfx.volume = 1.0; sfx.currentTime = 0;
-                sfx.play().catch(e => console.log("SFX Block handled:", e));
+                sfx.play().catch(e => console.log("Audio block handled:", e));
             }
 
             if (curtain) {
@@ -642,7 +634,7 @@
                 setTimeout(() => document.getElementById('line-4').classList.add('visible'), 3200);
             }
 
-            // 0:05 - Production Jingle Transitions
+            // 0:05 - Jingle Commences
             setTimeout(() => {
                 if (credits) {
                     credits.style.opacity = '0';
@@ -650,7 +642,7 @@
                 }
                 if (jingle) {
                     jingle.muted = false; jingle.volume = 1.0; jingle.currentTime = 0;
-                    jingle.play().catch(e => console.log("Jingle audio path handled:", e));
+                    jingle.play().catch(e => console.log("Audio exception handled:", e));
                 }
                 if (mainContent) {
                     mainContent.style.display = 'flex';
@@ -658,7 +650,7 @@
                 }
             }, 5000);
 
-            // 0:15 - Cover Image Drop & Karaoke Init
+            // 0:15 - Core Canvas Entry State
             setTimeout(() => {
                 if (cover) {
                     cover.style.opacity = '0';
@@ -679,7 +671,7 @@
                 initializeCountdownTimer();
             }, 15000);
 
-            // Audio Runtime Monitor
+            // Audio Runtime Track Execution Engine
             if (jingle) {
                 jingle.addEventListener('timeupdate', () => {
                     const currentTime = jingle.currentTime;
@@ -697,15 +689,18 @@
                         }
                     });
 
-                    // Reveal Climax Frosted Glass Card Hub at 72 seconds
-                    if (timelinePosition >= 72.0 && hub && hub.style.display !== 'block') {
+                    /* =========================================================
+                       RECALIBRATED CLIMAX TIMING TRIGGERS
+                       Safe thresholds pushed past 112s to allow the final 
+                       three lyrics lines to run perfectly in the center stage.
+                    ========================================================= */
+                    if (timelinePosition >= 113.5 && hub && hub.style.display !== 'block') {
                         const lBox = document.getElementById('lyric-box');
                         if (lBox) lBox.style.display = 'none'; 
                         hub.style.display = 'block';
                     }
 
-                    // Reveal Interactive Dynamic Button Layout Group at 76 seconds
-                    if (timelinePosition >= 76.0 && action && action.style.display !== 'block') {
+                    if (timelinePosition >= 115.5 && action && action.style.display !== 'block') {
                         action.style.display = 'block';
                     }
                 });
