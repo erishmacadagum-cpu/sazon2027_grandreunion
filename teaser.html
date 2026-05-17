@@ -3,292 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sazon 2027 Grand Reunion</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:ital,wght=0,700;1,700&display=swap" rel="stylesheet">
+    <title>Sazon 2027 - Exclusive Cinematic Teaser</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:ital,wght=0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
-        /* 1. Reset & Global Setup */
+        /* ==========================================
+           1. GLOBAL & BACKGROUND CANVAS SETUP 
+        ========================================== */
         html, body {
             margin: 0;
             padding: 0;
-            height: 100%;
+            background-color: #030508;
+            color: #ffffff;
             font-family: 'Montserrat', sans-serif;
-            box-sizing: border-box;
-            overflow: hidden; /* We want the main card locked in the center */
+            overflow-x: hidden;
+            width: 100%;
+            height: 100%;
         }
 
-        /* 2. Background Layer - Aerial Sunset View */
-        body {
-            background-color: #333; /* Fallback */
-            /* Crucial: You will need to upload an aerial image to your repo for this to work.
-               For now, this code creates the exact layout. We will link the image in the next step. */
-            background-image: url('YOUR_AERIAL_IMAGE_FILENAME_HERE.jpg');
+        /* Full Screen Background Matrix */
+        .marzon-showcase {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            background-image: url('marzon-hotel.jpg'); 
             background-size: cover;
-            background-position: center bottom;
-            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
             display: flex;
             flex-direction: column;
-            justify-content: space-between; /* Pushes card center, footer bottom */
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
         }
 
-        /* 3. Main Central Glass Container */
-        .master-container {
+        /* ==========================================
+           2. INTERACTIVE CURTAIN GATE (0:00)
+        ========================================== */
+        #curtain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000000;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease;
+        }
+
+        .enter-btn {
+            background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            color: #000000;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .enter-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* ==========================================
+           3. SEQUENTIAL OPENING CREDITS (0:00 - 0:05)
+        ========================================== */
+        #opening-credits {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 999;
+            width: 90%;
+            max-width: 800px;
+            display: none;
+            transition: opacity 0.6s ease;
+        }
+
+        .credit-line {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            margin: 15px 0;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            opacity: 0;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            transform: translateY(10px);
+            display: block;
+        }
+
+        .credit-line.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .credit-sazon { background: linear-gradient(135deg, #ffccd5, #fbc4b6, #e8b0b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: clamp(1.8rem, 4vw, 2.8rem); }
+        .credit-hotel { background: linear-gradient(135deg, #e8f5e9, #c8e6c9, #b2dfdb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: clamp(1.2rem, 3vw, 1.8rem); font-style: italic; text-transform: none; }
+        .credit-date { background: linear-gradient(135deg, #e1f5fe, #e8eaf6, #e1bee7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: clamp(1.0rem, 2.5vw, 1.5rem); font-weight: 400; }
+        .credit-present { background: linear-gradient(135deg, #fff9c4, #f0e693, #ffe082); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: clamp(1.5rem, 3.5vw, 2.2rem); font-weight: 900; letter-spacing: 12px; margin-top: 30px !important; }
+
+        /* ==========================================
+           4. MAIN CONTENT & KARAOKE LIVE TRACKER 
+        ========================================== */
+        #main-content {
+            opacity: 0;
+            display: none;
+            transition: opacity 1.5s ease;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .karaoke-box {
+            min-height: 180px;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-grow: 1; /* Occupies central space */
-            padding: 20px;
+            text-align: center;
+            width: 90%;
+            max-width: 900px;
+            margin: auto;
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .karaoke-line {
+            font-size: clamp(1.8rem, 5vw, 3.2rem);
+            font-weight: 800;
+            color: #ffffff;
+            text-shadow: 0 4px 15px #000000;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.4s ease-in-out;
+            position: absolute;
+            width: 100%;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.4;
+        }
+
+        .karaoke-line.active {
+            opacity: 1;
+            transform: scale(1.05);
+            color: #fcf6ba; 
+            text-shadow: 0 0 25px rgba(212, 175, 55, 0.7), 0 4px 12px #000;
+        }
+
+        /* ==========================================
+           5. THE GRAND CLIMAX COUNTDOWN CARD HUB
+        ========================================== */
+        .master-card-container {
+            display: none; /* Injected at 115 seconds */
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 60px 20px;
+            box-sizing: border-box;
         }
 
         .frosted-glass-card {
-            background: rgba(255, 255, 255, 0.2); /* Semi-transparent */
-            backdrop-filter: blur(15px); /* The "Glass" effect */
-            border-radius: 40px;
-            padding: 50px 30px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 45px;
+            padding: 40px 30px;
             text-align: center;
-            width: 90%;
-            max-width: 800px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            max-width: 680px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            animation: cardBurst 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
-        /* 4. Text Styling - Main Titles */
-        .title-top {
-            font-family: 'Montserrat', sans-serif; /* Placeholder for 'happy' puff font */
+        @keyframes cardBurst {
+            0% { opacity: 0; transform: scale(0.7) translateY(30px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* Animated Waving Coconut Graphic Node */
+        .coconut-wrapper {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px auto;
+        }
+
+        /* ==========================================
+           6. HIGH-VELOCITY SCREAM-O-GRAPHICS TEXTS
+        ========================================== */
+        .title-magtipon {
+            font-size: clamp(2.4rem, 6vw, 3.8rem);
             font-weight: 900;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            line-height: 1.1;
             margin: 0;
-            /* Placeholder wavy/puff styling: colorful wavy gradient */
-            background: linear-gradient(90deg, #ff7e5f, #feb47b, #ff7e5f, #7f7fd5, #86a8e7, #91eae4);
-            background-size: 200% auto;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ff8a8a, #ffbebe, #ff7373);
             -webkit-background-clip: text;
-            background-clip: text;
             -webkit-text-fill-color: transparent;
-            /* Animation to make the wave effect active */
-            animation: waveFlow 4s linear infinite;
+            letter-spacing: 1px;
         }
 
-        @keyframes waveFlow {
-            0% { background-position: 200% center; }
-            100% { background-position: 0% center; }
-        }
-
-        .leading-script {
+        .script-coz {
             font-family: 'Playfair Display', serif;
             font-style: italic;
             font-weight: 400;
-            color: #4ac9c6; /* Electric Teal */
-            font-size: 1.5rem;
-            margin-top: 15px;
-            margin-bottom: 5px;
+            color: #26e6e2; /* Electric Teal */
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            margin: 10px 0 2px 0;
         }
 
-        .gold-block-text {
-            color: #d4af37; /* Sunwashed Gold */
+        .massive-sazon {
+            color: #e5b842; /* Sunwashed Gold */
             font-weight: 900;
-            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-size: clamp(3.8rem, 10vw, 5.8rem);
             text-transform: uppercase;
             margin: 0;
-            letter-spacing: -2px;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            letter-spacing: -1px;
+            line-height: 0.95;
+            text-shadow: 0 6px 15px rgba(0,0,0,0.3);
         }
 
-        .gold-sub-block {
-            color: #d4af37;
+        .sub-kalibo {
+            color: #ebd084;
+            font-weight: 800;
+            font-size: clamp(1.4rem, 4vw, 2.2rem);
+            margin: 12px 0 25px 0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ==========================================
+           7. THEMATIC COUNTDOWN LUGGAGE TAGS
+        ========================================== */
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 25px auto;
+            max-width: 520px;
+        }
+
+        .luggage-tag {
+            border-radius: 18px;
+            padding: 12px 5px;
+            text-align: center;
+            flex: 1;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        }
+
+        .luggage-tag::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.15);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .tag-red { background-color: #ff5e62; color: #ffffff; }
+        .tag-teal { background-color: #12b0ad; color: #ffffff; }
+        .tag-gold { background-color: #e5b842; color: #1a1a1a; }
+
+        .count-number {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin: 10px 0 0 0;
+        }
+
+        .label {
+            font-size: clamp(0.65rem, 2vw, 0.8rem);
+            text-transform: uppercase;
             font-weight: 700;
-            font-size: 1.2rem;
-            margin-top: 10px;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
+            margin: 2px 0 0 0;
+            opacity: 0.9;
         }
 
-        /* 5. Icon Stack Styling */
-        .icons-stack {
+        /* ==========================================
+           8. ACTION CLIMAX BUTTON GROUP
+        ========================================== */
+        .buttons-group {
             display: flex;
             justify-content: center;
             gap: 15px;
             margin-top: 30px;
-            margin-bottom: 30px;
-        }
-
-        /* Basic SVG placeholder support until custom icons are added */
-        .svg-icon {
-            width: 50px;
-            height: 50px;
-            fill: #d4af37; /* Gold */
-        }
-
-        /* 6. Countdown Section - Luggage Tags */
-        .countdown-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .luggage-tag {
-            border-radius: 20px;
-            padding: 20px;
-            text-align: center;
-            min-width: 130px;
-            position: relative; /* for tag details */
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-
-        /* Luggage Tag Details (loop hole) */
-        .luggage-tag::before {
-            content: '';
-            position: absolute;
-            top: 20px;
-            left: 10px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(0,0,0,0.1);
-            border: 2px solid rgba(255,255,255,0.3);
-        }
-
-        .tag-red {
-            background-color: #ff6f61; /* Bright Coral/Red */
-            color: white;
-        }
-        .tag-turquoise {
-            background-color: #4ac9c6; /* Electric Teal */
-            color: white;
-        }
-        .tag-gold {
-            background-color: #d4af37; /* Sunwashed Gold */
-            color: #333;
-        }
-
-        .count-number {
-            font-size: 4rem;
-            font-weight: 900;
-            line-height: 1;
-            margin: 0;
-            letter-spacing: -2px;
-        }
-
-        .combined-fields {
-            font-size: 2.5rem; /* Min/Sec smaller in same tag */
-            font-weight: 700;
-        }
-
-        .label {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 2px;
-            margin-top: 5px;
-            opacity: 0.8;
-        }
-
-        /* 7. Action Buttons Section */
-        .buttons-group {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
+            flex-wrap: wrap;
         }
 
         .cta-button {
             border-radius: 50px;
-            padding: 15px 40px;
-            font-size: 1.1rem;
+            padding: 14px 35px;
+            font-size: 0.95rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 2px;
             text-decoration: none;
             transition: all 0.3s ease;
             cursor: pointer;
+            box-sizing: border-box;
         }
 
         .btn-save {
-            border: 3px solid #d4af37; /* Gold Outline */
-            color: #d4af37;
+            border: 2.5px solid #e5b842;
+            color: #e5b842;
             background: transparent;
         }
 
         .btn-save:hover {
-            background-color: rgba(212, 175, 55, 0.1);
-        }
-
-        .btn-register {
-            background-color: #d4af37; /* Solid Gold */
-            color: #333;
-            border: 3px solid #d4af37;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-        }
-
-        .btn-register:hover {
-            transform: scale(1.05);
-            background-color: #e5c14d;
-        }
-
-        /* 8. Thematic Black Footer */
-        .footer-bar {
-            background-color: #000;
-            color: white;
-            text-align: center;
-            padding: 15px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .footer-highlight {
-            color: #d4af37; /* Gold highlighting */
-        }
-    </style>
-</head>
-<body>
-
-    <div class="master-container">
-        
-        <div class="frosted-glass-card">
-            
-            <h1 class="title-top">MAGTIPON KITA!</h1>
-
-            <div class=" leading-script">Coz we are</div>
-            <h2 class="gold-block-text">SAZON!</h2>
-            <div class="gold-sub-block">SEE YOU IN KALIBO!</div>
-
-            <div class="icons-stack">
-                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M11 11h-1l-.5-1.5L8 9v1l-1-1v1l-.5-.5L5 11h1l.5-1.5L8 13v-1l1 1v-1l.5.5L11 11zm11 11h-1l-.5-1.5L18 20v1l-1-1v1l-.5-.5L15 22h1l.5-1.5L18 24v-1l1 1v-1l.5.5L22 22z"/></svg>
-                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5z"/></svg>
-                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
-                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2v2m0 16v2M2 12h2m16 0h2m-4.41-5.59l1.41-1.41m-9.17 9.17l-1.41 1.41"/></svg>
-                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 3.34 5 5v14c0 1.66 3.13 3 7 3s7-1.34 7-3V5c0-1.66-3.13-3-7-3z"/></svg>
-            </div>
-
-            <div class="countdown-container">
-                <div class="luggage-tag tag-red">
-                    <p class="count-number">19</p>
-                    <p class="label">DAYS</p>
-                </div>
-                <div class="luggage-tag tag-turquoise">
-                    <p class="count-number">15</p>
-                    <p class="label">HOURS</p>
-                </div>
-                <div class="luggage-tag tag-gold">
-                    <p class="count-number combined-fields">36:23</p>
-                    <p class="label">MIN / SEC</p>
-                </div>
-            </div>
-
-            <div class="buttons-group">
-                <a href="#" class="cta-button btn-save">Save The Date</a>
-                <a href="#" class="cta-btn btn-register">Register Here</a>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="footer-bar">
-        Sazon Family Production | Marzon Hotel Kalibo | 
-        <span class="footer-highlight">#Sazon2027GrandReunion</span> | 
-        <span class="footer-highlight">Gikan sa Gamut, Tubtob sa Langit</span> | 
-        To God Be All The Glory
-    </div>
-
-</body>
-</html>
+            background-color: rgba(229
