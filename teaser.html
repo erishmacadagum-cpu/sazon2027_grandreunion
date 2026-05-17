@@ -110,7 +110,7 @@
             display: block;
         }
 
-        /* Full Screen Background Matrix - FIXED PATH HERE */
+        /* Full Screen Background Matrix */
         .marzon-showcase {
             position: relative;
             width: 100%;
@@ -142,7 +142,7 @@
         .karaoke-box {
             position: relative;
             z-index: 5;
-            min-height: 120px;
+            min-height: 140px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -153,7 +153,7 @@
         }
 
         .karaoke-line {
-            font-size: clamp(1.8rem, 5vw, 3.2rem);
+            font-size: clamp(1.6rem, 4.5vw, 2.8rem);
             font-weight: 800;
             color: #ffffff;
             text-shadow: 0 4px 15px #000000;
@@ -163,6 +163,7 @@
             position: absolute;
             width: 100%;
             font-family: 'Playfair Display', serif;
+            line-height: 1.4;
         }
 
         .karaoke-line.active {
@@ -223,6 +224,7 @@
 
         .btn-save { background: transparent; color: #D4AF37; border: 2px solid #D4AF37; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
         .btn-register { background: #D4AF37; color: #030508; border: 2px solid #D4AF37; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+        .btn-register:hover { background: #fffbf0; transform: scale(1.05); }
 
         /* 8. Production Master Footer */
         .sazon-teaser-footer {
@@ -270,7 +272,7 @@
 
     <div id="opening-credits">
         <span id="line-1" class="credit-line credit-sazon">A Sazon Family Production</span>
-        <span id="line-2" class="credit-line credit-hotel">Marzon Hotel Kalibo</span>
+        <span id="line-2" class="credit-line credit-hotel">at Marzon Hotel Kalibo</span>
         <span id="line-3" class="credit-line credit-date">July 23-24, 2027</span>
         <span id="line-4" class="credit-line credit-present">PRESENT</span>
     </div>
@@ -297,7 +299,7 @@
                 
                 <div class="button-group">
                     <a href="#" class="cta-btn btn-save">Save The Date</a>
-                    <a href="#" class="cta-btn btn-register">Register Here</a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEJ7OYVdgZjF3eB7isXCkfIVfjnVz8eZB2zT37pBvHx8JhWg/viewform?usp=dialog" target="_blank" class="cta-btn btn-register">Register Here</a>
                 </div>
             </div>
 
@@ -314,8 +316,7 @@
     </div>
 
     <script>
-        // 100% Verified Accurate Lyrics Tracking Array with Thematic Icons
-        // ADJUST THE "time" NUMBERS BELOW TO FINE-TUNE THE PERFECT SYNC
+        // Calibrated Lyrics Tracking Array with Icons & Perfect Timeline Sync Points
         const lyricsTimeline = [
             { time: 14.0, text: "👋 Dali na kita Sazon Family, sa Hulyo dos mil baynte siete!" },
             { time: 21.0, text: "👨‍👩‍👧‍👦 Pamilya ni Isok kag Pistang upod ang tanan nga paryente." },
@@ -324,7 +325,7 @@
             { time: 41.5, text: "❤️ kay amo ina ang magahatag kalipay sa pamilya." },
             { time: 49.0, text: "🤝 Sa pag tilipon naton," },
             { time: 56.0, text: "😊 ang halakhak kag yuhum sang tagsa-tagsa" },
-            { time: 63.5, text: "🌟 maga palipay sa bilog nga pamilya." },
+            { time: 63.5, text: "🌟 maga palipay sa bilog nga pamillya." },
             { time: 71.0, text: "📅 Gani dali na kamu tanan sa amo nga petsa." },
             { time: 78.5, text: "🛑 Indi na mag pang duwa-duwa." },
             { time: 86.0, text: "🥳 Preparar na kamu para sa aton sinadya." }
@@ -379,7 +380,7 @@
                 // Generate and initialize live tracking karaoke node elements
                 const lyricBox = document.getElementById('lyric-box');
                 if (lyricBox) {
-                    lyricBox.innerHTML = ''; // Clear out any previous clones
+                    lyricBox.innerHTML = ''; 
                     lyricsTimeline.forEach((item, index) => {
                         const span = document.createElement('span');
                         span.id = `lyric-line-${index}`;
@@ -410,14 +411,14 @@
                 });
             }
 
-            // 1:20 - Act III: The Crescendo Hype Layer Initialization
+            // 1:20 - Act III: Transition to Scream-O-Graphics
             setTimeout(() => {
                 const lBox = document.getElementById('lyric-box');
                 if (lBox) lBox.style.display = 'none'; 
                 if (hype) hype.style.display = 'block';
             }, 80000);
 
-            // 1:30 - The Grand Finale Climax (Drop buttons & lock text into multi-colored frenzy)
+            // 1:30 - The Grand Finale Button Climax Anchor Drop
             setTimeout(() => {
                 if (climax) {
                     climax.style.display = 'block';
